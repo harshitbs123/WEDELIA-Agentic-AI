@@ -222,11 +222,23 @@
       align-items: center;
       padding: 1rem 1.5rem;
       border-bottom: 1px solid var(--border);
-      transition: background-color 0.15s ease;
+      position: relative;
       cursor: pointer;
+      transition: none;
     }
-    .ledger-row:hover {
-      background-color: #f7f7f7;
+    .ledger-row:hover, .ledger-row.selected {
+      background-color: #000000;
+      color: #ffffff;
+    }
+    .ledger-row:hover .sub, .ledger-row.selected .sub {
+      color: #aaaaaa;
+    }
+    .ledger-row:hover .ledger-spec, .ledger-row.selected .ledger-spec {
+      color: #dddddd;
+    }
+    .ledger-row:hover .ledger-tariff, .ledger-row.selected .ledger-tariff {
+      color: #ffffff;
+      font-weight: 700;
     }
     .ledger-row:last-child {
       border-bottom: none;
@@ -642,7 +654,7 @@
         align-items: flex-start;
       }
     }
-    /* Signature Mechanical Registry Cut Transition Overlay */
+    /* Refined Mechanical Registry Shift Overlay */
     .ledger-shift-overlay {
       position: fixed;
       inset: 0;
@@ -657,52 +669,73 @@
       transform: scaleX(0);
       transform-origin: left center;
       font-family: 'Space Mono', monospace;
+      border-left: 2px solid #ffffff;
+      border-right: 2px solid #ffffff;
+    }
+    .ledger-shift-box {
+      border: 1px solid #333333;
+      padding: 3rem 4rem;
+      background: #050505;
+      text-align: center;
     }
     .ledger-shift-code {
       font-family: 'Syne', sans-serif;
       font-size: clamp(2.5rem, 6vw, 5rem);
       font-weight: 800;
       letter-spacing: -0.04em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
     .ledger-shift-meta {
       font-size: 0.75rem;
       letter-spacing: 0.25em;
       color: #888888;
     }
-    .mechanical-reindex-btn {
+    /* Refined System Registry Switch */
+    .system-registry-switch {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
       z-index: 9000;
       background: #000000;
       color: #ffffff;
-      border: 2px solid #000000;
-      padding: 0.65rem 1.25rem;
+      border: 1px solid #000000;
+      padding: 0.55rem 1rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      box-shadow: 4px 4px 0px rgba(0,0,0,1);
-      transition: transform 0.1s, box-shadow 0.1s;
+      gap: 0.75rem;
+      box-shadow: 4px 4px 0px #000000;
+      transition: none;
     }
-    .mechanical-reindex-btn:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0px rgba(0,0,0,1);
+    .system-registry-switch:hover {
+      background: #ffffff;
+      color: #000000;
+      outline: 2px solid #000000;
     }
-    .mechanical-reindex-btn:active {
+    .system-registry-switch:active {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0px rgba(0,0,0,1);
+      box-shadow: 2px 2px 0px #000000;
+    }
+    .sys-badge {
+      background: #ffffff;
+      color: #000000;
+      padding: 0.15rem 0.4rem;
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+    .system-registry-switch:hover .sys-badge {
+      background: #000000;
+      color: #ffffff;
     }
     @media (max-width: 640px) {
-      .mechanical-reindex-btn {
+      .system-registry-switch {
         bottom: 1rem;
         right: 1rem;
-        padding: 0.5rem 0.85rem;
+        padding: 0.45rem 0.75rem;
         font-size: 0.65rem;
       }
     }
@@ -1363,13 +1396,15 @@
 
     <!-- Signature Mechanical Registry Shift Overlay -->
     <div class="ledger-shift-overlay" id="ledgerShiftOverlay">
-      <div class="ledger-shift-code" id="ledgerShiftCode">LEDGER_CALIBRATION</div>
-      <div class="ledger-shift-meta">STATUS: RE-INDEXING 9 CAMPUS SPHERES // LATENCY: 12ms</div>
+      <div class="ledger-shift-box">
+        <div class="ledger-shift-code" id="ledgerShiftCode">LEDGER_CALIBRATION</div>
+        <div class="ledger-shift-meta">STATUS: RE-INDEXING 9 CAMPUS SPHERES // LATENCY: 12ms</div>
+      </div>
     </div>
 
-    <!-- Floating Re-Index Control Button -->
-    <button class="mechanical-reindex-btn" id="reindexBtn">
-      <span>[SYS]</span>
+    <!-- System Registry Switch -->
+    <button class="system-registry-switch" id="reindexBtn">
+      <span class="sys-badge">SYS_EXEC</span>
       <span>RE-INDEX REGISTRY</span>
     </button>
 
@@ -1513,15 +1548,15 @@
         .set(overlay, { transformOrigin: 'left center', scaleX: 0 })
         .to(overlay, {
           scaleX: 1,
-          duration: 0.28,
+          duration: 0.22,
           ease: 'power4.inOut'
         })
         .to(overlay, {
           scaleX: 0,
           transformOrigin: 'right center',
-          duration: 0.28,
+          duration: 0.22,
           ease: 'power4.inOut',
-          delay: 0.18
+          delay: 0.16
         });
     }
 

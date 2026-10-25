@@ -131,13 +131,17 @@
     .oversized-bleed-title {
       font-family: 'Anton', sans-serif;
       font-size: clamp(5.5rem, 18vw, 17rem);
-      line-height: 0.78;
+      line-height: 0.82;
       letter-spacing: -0.04em;
       text-transform: uppercase;
       color: var(--bone);
       margin-left: -0.04em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       user-select: none;
+    }
+    .huge-split-name span {
+      display: inline-block;
+      will-change: transform;
     }
     .oversized-bleed-title span.blue {
       color: var(--electric-blue);
@@ -579,12 +583,11 @@
         justify-content: space-between;
       }
     }
-    /* Signature Spatial Displacement Transition Overlay */
+    /* Refined Spatial Displace Overlay — Architectural & Minimal */
     .spatial-displace-overlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(15, 56, 255, 0.45) 0%, rgba(7, 7, 9, 0.95) 100%);
-      backdrop-filter: blur(12px);
+      background: rgba(7, 7, 9, 0.94);
       z-index: 10000;
       pointer-events: none;
       display: flex;
@@ -593,66 +596,73 @@
       align-items: center;
       opacity: 0;
       font-family: 'Space Mono', monospace;
-    }
-    .displace-hud-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
       border: 1px solid var(--electric-blue);
-      padding: 3rem;
-      background: rgba(13, 13, 18, 0.85);
-      box-shadow: 0 0 60px rgba(15, 56, 255, 0.4);
     }
-    .displace-hud-title {
-      grid-column: 1 / -1;
+    .displace-frame-box {
+      border: 1px solid rgba(244, 243, 238, 0.15);
+      padding: 3rem 4rem;
+      background: #000000;
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+    }
+    .displace-monument-title {
       font-family: 'Anton', sans-serif;
       font-size: clamp(2.5rem, 6vw, 5rem);
       letter-spacing: -0.02em;
       color: #ffffff;
-      text-align: center;
-      line-height: 0.95;
+      line-height: 0.92;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
     }
-    .displace-hud-val {
-      font-size: 0.78rem;
+    .displace-coord-strip {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.25rem;
+      font-size: 0.72rem;
       color: var(--electric-blue);
-      text-align: center;
       letter-spacing: 0.15em;
     }
-    .spatial-teleport-btn {
+    /* Refined Spatial Coordinate Anchor Node */
+    .spatial-coordinate-node {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
       z-index: 9000;
-      background: #0f1226;
-      color: #ffffff;
+      background: #000000;
+      color: var(--bone);
       border: 1px solid var(--electric-blue);
-      padding: 0.65rem 1.25rem;
+      padding: 0.5rem 1rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 0 20px rgba(15, 56, 255, 0.35);
-      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+      gap: 0.75rem;
+      transition: background 0.2s, color 0.2s;
     }
-    .spatial-teleport-btn:hover {
+    .spatial-coordinate-node:hover {
       background: var(--electric-blue);
-      box-shadow: 0 0 30px rgba(15, 56, 255, 0.7);
-      transform: translateY(-2px);
+      color: #ffffff;
+    }
+    .node-marker {
+      color: var(--electric-blue);
+      font-size: 0.85rem;
+    }
+    .spatial-coordinate-node:hover .node-marker {
+      color: #ffffff;
     }
     @media (max-width: 640px) {
-      .spatial-teleport-btn {
+      .spatial-coordinate-node {
         bottom: 1rem;
         right: 1rem;
-        padding: 0.5rem 0.85rem;
+        padding: 0.45rem 0.75rem;
         font-size: 0.65rem;
       }
-      .displace-hud-grid {
-        padding: 1.5rem;
-        gap: 1rem;
+      .displace-frame-box {
+        padding: 2rem 1.5rem;
       }
     }
   </style>
@@ -687,8 +697,9 @@
     
     <!-- 1. Bleeding Typographic Title (Breaks Viewport Bounds) -->
     <header class="bleeding-type-hero">
-      <h1 class="oversized-bleed-title">
-        WEDE<span class="blue">LIA.</span>
+      <h1 class="oversized-bleed-title huge-split-name">
+        <span class="line-1">WEDE</span><br>
+        <span class="line-2 blue">LIA.</span>
       </h1>
       <div class="bleed-sub-manifesto">
         <div>
@@ -957,31 +968,22 @@
       </div>
     </footer>
 
-  </div>
-
     <!-- Signature Spatial Displacement Overlay -->
     <div class="spatial-displace-overlay" id="spatialOverlay">
-      <div class="displace-hud-grid">
-        <div class="displace-hud-title">SPATIAL DISPLACEMENT</div>
-        <div>
-          <div class="displace-hud-val">COORD_X: 144.29°</div>
-          <div style="font-size: 0.65rem; color: #888888; text-align: center;">SHIBUYA SECTOR</div>
-        </div>
-        <div>
-          <div class="displace-hud-val">COORD_Y: 77.10°</div>
-          <div style="font-size: 0.65rem; color: #888888; text-align: center;">DELHI NCR NODE</div>
-        </div>
-        <div>
-          <div class="displace-hud-val">Z_DEPTH: 0.884</div>
-          <div style="font-size: 0.65rem; color: #888888; text-align: center;">NON-EUCLIDEAN</div>
+      <div class="displace-frame-box">
+        <div class="displace-monument-title">SPATIAL DISPLACEMENT</div>
+        <div class="displace-coord-strip">
+          <span>X: 144.29° // TOKYO</span>
+          <span>Y: 77.10° // DELHI</span>
+          <span>Z: 0.884 NON-EUCLIDEAN</span>
         </div>
       </div>
     </div>
 
-    <!-- Floating Spatial Teleport Trigger -->
-    <button class="spatial-teleport-btn" id="spatialTeleportBtn">
-      <span>⟐</span>
-      <span>DISPLACE</span>
+    <!-- Spatial Coordinate Anchor Node -->
+    <button class="spatial-coordinate-node" id="spatialTeleportBtn">
+      <span class="node-marker">⟐</span>
+      <span>COORD // DISPLACE</span>
     </button>
 
   </div>
@@ -1041,11 +1043,11 @@
       if (splitLines.length >= 2) {
         // Line 1 drifts left, Line 2 drifts right with subtle rotation
         gsap.to(splitLines[0], {
-          xPercent: -10,
-          rotationZ: -1.5,
+          xPercent: -8,
+          rotationZ: -1.2,
           ease: 'none',
           scrollTrigger: {
-            trigger: '.spatial-masthead',
+            trigger: '.bleeding-type-hero',
             start: 'top top',
             end: 'bottom top',
             scrub: 1.2
@@ -1053,11 +1055,11 @@
         });
 
         gsap.to(splitLines[1], {
-          xPercent: 12,
-          rotationZ: 1.8,
+          xPercent: 10,
+          rotationZ: 1.5,
           ease: 'none',
           scrollTrigger: {
-            trigger: '.spatial-masthead',
+            trigger: '.bleeding-type-hero',
             start: 'top top',
             end: 'bottom top',
             scrub: 1.2
@@ -1131,30 +1133,28 @@
 
       displaceTl
         .to(canvas, {
-          scale: 0.94,
-          rotationY: 8,
-          filter: 'hue-rotate(60deg) brightness(1.2)',
-          duration: 0.35,
-          ease: 'power4.inOut'
+          scale: 0.96,
+          rotationY: 6,
+          duration: 0.32,
+          ease: 'power3.inOut'
         })
         .to(overlay, {
           opacity: 1,
-          duration: 0.25,
+          duration: 0.22,
           ease: 'power2.out'
         }, '<')
         .to(overlay, {
           opacity: 0,
-          duration: 0.35,
-          delay: 0.25,
+          duration: 0.28,
+          delay: 0.18,
           ease: 'power2.in'
         })
         .to(canvas, {
           scale: 1,
           rotationY: 0,
-          filter: 'none',
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.4)'
-        }, '-=0.2');
+          duration: 0.38,
+          ease: 'power3.out'
+        }, '-=0.15');
     }
 
     if (teleportBtn) {

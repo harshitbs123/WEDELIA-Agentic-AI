@@ -157,7 +157,17 @@
       letter-spacing: 0.15em;
       color: var(--muted);
       margin-bottom: 1.25rem;
-      display: block;
+      display: flex;
+      align-items: center;
+    }
+    .jp-stamp {
+      display: inline-block;
+      border: 1px solid currentColor;
+      padding: 0.1rem 0.45rem;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.68rem;
+      margin-left: 0.75rem;
+      letter-spacing: 0.12em;
     }
     .cover-title {
       font-family: 'Shippori Mincho', serif;
@@ -253,11 +263,24 @@
       border-bottom: 1px solid var(--line);
       text-decoration: none;
       color: inherit;
-      transition: background-color 0.2s ease, padding-left 0.2s ease;
+      position: relative;
+      transition: background-color 0.25s ease, padding-left 0.25s ease;
     }
     .index-row:hover {
-      background-color: var(--paper);
-      padding-left: 1rem;
+      background-color: rgba(238, 236, 228, 0.7);
+      padding-left: 1.25rem;
+    }
+    .index-row:hover .index-serial {
+      color: var(--fg);
+      font-weight: 700;
+    }
+    .index-row:hover .index-name-en {
+      color: #1a1917;
+    }
+    .index-row:hover .index-tariff::after {
+      content: ' ⟶';
+      display: inline-block;
+      margin-left: 0.35rem;
     }
     @media (max-width: 768px) {
       .index-row {
@@ -682,11 +705,11 @@
       letter-spacing: 0.2em;
       color: var(--muted);
     }
-    /* Signature Page-Turn Wipe Transition Overlay */
+    /* Refined Double-Spread Page-Turn Overlay */
     .page-turn-overlay {
       position: fixed;
       inset: 0;
-      background: #ede9e1;
+      background: linear-gradient(90deg, #ede9e1 0%, #e3ded5 49%, #cec8bd 50%, #ede9e1 51%, #ede9e1 100%);
       z-index: 10000;
       pointer-events: none;
       display: flex;
@@ -694,14 +717,21 @@
       justify-content: center;
       align-items: center;
       clip-path: inset(0 100% 0 0);
-      border-left: 2px solid var(--fg);
-      box-shadow: -20px 0 50px rgba(0, 0, 0, 0.12);
+      border-left: 1px solid var(--fg);
+      box-shadow: -25px 0 60px rgba(0, 0, 0, 0.15);
+    }
+    .page-turn-inner {
+      text-align: center;
+      padding: 3rem 4rem;
+      border: 1px solid rgba(46, 43, 38, 0.25);
+      background: rgba(245, 244, 239, 0.75);
+      backdrop-filter: blur(6px);
     }
     .page-turn-kanji {
       font-family: 'Shippori Mincho', serif;
-      font-size: clamp(2rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
       font-weight: 700;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.35em;
       margin-bottom: 1rem;
       color: var(--fg);
     }
@@ -711,34 +741,44 @@
       letter-spacing: 0.25em;
       color: var(--muted);
     }
-    .turn-page-btn {
+    /* Refined Publication Folio Control */
+    .publication-folio-control {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
       z-index: 9000;
-      background: var(--fg);
-      color: var(--bg);
+      background: rgba(245, 244, 239, 0.95);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--fg);
-      padding: 0.65rem 1.25rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      cursor: pointer;
+      padding: 0.55rem 1rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: background 0.2s, transform 0.2s;
+      gap: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      color: var(--fg);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
     }
-    .turn-page-btn:hover {
-      background: #3b3935;
+    .publication-folio-control:hover {
+      background: var(--fg);
+      color: var(--bg);
       transform: translateY(-2px);
     }
+    .publication-folio-control .folio-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.8rem;
+      border-left: 1px solid currentColor;
+      padding-left: 0.65rem;
+      letter-spacing: 0.1em;
+    }
     @media (max-width: 640px) {
-      .turn-page-btn {
+      .publication-folio-control {
         bottom: 1rem;
         right: 1rem;
-        padding: 0.5rem 0.85rem;
+        padding: 0.45rem 0.75rem;
         font-size: 0.65rem;
       }
     }
@@ -791,7 +831,10 @@
       <!-- Main Cover Content -->
       <div class="cover-main-content">
         <div>
-          <span class="cover-issue-tag">ISSUE 26 // CAMPUS NIGHTLIFE EDITORIAL</span>
+          <span class="cover-issue-tag">
+            <span>ISSUE 26 // CAMPUS NIGHTLIFE EDITORIAL</span>
+            <span class="jp-stamp">秋期特輯</span>
+          </span>
           <h1 class="cover-title">
             WEDELIA
             <span class="subtitle-italic">Rent the Look for the Moment.</span>
@@ -1116,14 +1159,17 @@
 
     <!-- Signature Page-Turn Transition Overlay -->
     <div class="page-turn-overlay" id="pageTurnOverlay">
-      <div class="page-turn-kanji">特装第二輯 展開</div>
-      <div class="page-turn-sub">SPREAD SEQUENCE // EDITORIAL WIPE</div>
+      <div class="page-turn-inner">
+        <div class="page-turn-kanji">特装第二輯 展開</div>
+        <div class="page-turn-sub">FOLIO SPREAD SEQUENCE // EDITORIAL WIPE</div>
+      </div>
     </div>
 
-    <!-- Interactive Page Turn Button -->
-    <button class="turn-page-btn" id="turnPageBtn">
-      <span>TURN SPREAD</span>
-      <span>→</span>
+    <!-- Editorial Folio Control -->
+    <button class="publication-folio-control" id="turnPageBtn">
+      <span>FOLIO 26</span>
+      <span>TURN SPREAD ⟶</span>
+      <span class="folio-kanji">次頁</span>
     </button>
 
   </div>
@@ -1278,14 +1324,14 @@
         .set(overlay, { clipPath: 'inset(0 100% 0 0)' })
         .to(overlay, {
           clipPath: 'inset(0 0% 0 0)',
-          duration: 0.65,
-          ease: 'power3.inOut'
+          duration: 0.8,
+          ease: 'power2.inOut'
         })
         .to(overlay, {
           clipPath: 'inset(0 0 0 100%)',
-          duration: 0.65,
-          ease: 'power3.inOut',
-          delay: 0.15
+          duration: 0.8,
+          ease: 'power2.inOut',
+          delay: 0.18
         });
     }
 

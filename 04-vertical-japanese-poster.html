@@ -218,6 +218,8 @@
       background: #e2ddd3;
       border: 1px solid var(--fg);
       margin: 1.5rem 0;
+      position: relative;
+      box-shadow: inset 0 0 0 8px var(--paper);
     }
     .tall-image-strip img {
       width: 100%;
@@ -468,11 +470,11 @@
       margin: 0 auto 3rem;
       line-height: 1.8;
     }
-    /* Signature Sliding Exhibition Panel Transition Overlay */
+    /* Refined Sliding Exhibition Panel Overlay */
     .washi-scroll-overlay {
       position: fixed;
       inset: 0;
-      background: var(--paper);
+      background: linear-gradient(180deg, #ede9e1 0%, #e2ddd3 50%, #d8d3c7 100%);
       z-index: 10000;
       pointer-events: none;
       display: flex;
@@ -481,53 +483,77 @@
       align-items: center;
       clip-path: inset(100% 0 0 0);
       border-bottom: 2px solid var(--fg);
-      box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.12);
+    }
+    .washi-inner-box {
+      border: 1px solid rgba(25, 24, 22, 0.25);
+      padding: 3rem 4rem;
+      background: rgba(244, 240, 232, 0.75);
+      backdrop-filter: blur(4px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .washi-scroll-kanji {
       writing-mode: vertical-rl;
       font-family: 'Shippori Mincho', serif;
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: 900;
-      letter-spacing: 0.35em;
+      letter-spacing: 0.4em;
       color: var(--fg);
       margin-bottom: 1.5rem;
     }
     .washi-scroll-meta {
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
       color: var(--vermilion);
+      font-weight: 700;
     }
-    .exhibit-shift-btn {
+    /* Refined Exhibition Catalogue Seal Tab */
+    .exhibition-catalogue-seal {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
       z-index: 9000;
-      background: var(--fg);
-      color: var(--bg);
+      background: rgba(244, 240, 232, 0.94);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--fg);
-      padding: 0.65rem 1.25rem;
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.15em;
-      font-weight: 700;
+      padding: 0.5rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: background 0.25s, transform 0.25s;
+      gap: 0.75rem;
+      color: var(--fg);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
     }
-    .exhibit-shift-btn:hover {
-      background: #3b3732;
+    .exhibition-catalogue-seal:hover {
+      background: var(--fg);
+      color: var(--bg);
       transform: translateY(-2px);
     }
+    .seal-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.82rem;
+      font-weight: 900;
+      border-right: 1px solid currentColor;
+      padding-right: 0.65rem;
+      color: var(--vermilion);
+    }
+    .exhibition-catalogue-seal:hover .seal-kanji {
+      color: var(--bg);
+    }
     @media (max-width: 640px) {
-      .exhibit-shift-btn {
+      .exhibition-catalogue-seal {
         bottom: 1rem;
         right: 1rem;
-        padding: 0.5rem 0.85rem;
-        font-size: 0.72rem;
+        padding: 0.45rem 0.75rem;
+        font-size: 0.65rem;
       }
     }
   </style>
@@ -882,18 +908,18 @@
       </div>
     </section>
 
-  </div>
-
     <!-- Signature Sliding Exhibition Panel Overlay -->
     <div class="washi-scroll-overlay" id="washiOverlay">
-      <div class="washi-scroll-kanji">次号展覧・開帳</div>
-      <div class="washi-scroll-meta">EXHIBITION PANEL SLIDE // WASHI COUTURE ARCHIVE</div>
+      <div class="washi-inner-box">
+        <div class="washi-scroll-kanji">次号展覧・開帳</div>
+        <div class="washi-scroll-meta">EXHIBITION PANEL SLIDE // WASHI COUTURE ARCHIVE</div>
+      </div>
     </div>
 
-    <!-- Floating Exhibition Shift Trigger -->
-    <button class="exhibit-shift-btn" id="exhibitShiftBtn">
-      <span>展覧目録</span>
-      <span>⟶</span>
+    <!-- Exhibition Catalogue Seal Tab -->
+    <button class="exhibition-catalogue-seal" id="exhibitShiftBtn">
+      <span class="seal-kanji">目録</span>
+      <span>NEXT EXHIBIT ⟶</span>
     </button>
 
   </div>
@@ -1016,14 +1042,14 @@
         .set(overlay, { clipPath: 'inset(100% 0 0 0)' })
         .to(overlay, {
           clipPath: 'inset(0% 0 0 0)',
-          duration: 0.7,
-          ease: 'power3.inOut'
+          duration: 0.85,
+          ease: 'power2.inOut'
         })
         .to(overlay, {
           clipPath: 'inset(0 0 100% 0)',
-          duration: 0.7,
-          ease: 'power3.inOut',
-          delay: 0.18
+          duration: 0.85,
+          ease: 'power2.inOut',
+          delay: 0.2
         });
     }
 

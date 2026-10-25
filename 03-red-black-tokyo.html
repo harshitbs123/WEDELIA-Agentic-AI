@@ -312,16 +312,33 @@
     .campaign-poster-card {
       border: 2px solid var(--fg);
       background: #ffffff;
-      padding: 2rem 1.5rem;
+      padding: 2.25rem 1.75rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
-      transition: all 0.2s ease;
+      transition: none;
     }
     .campaign-poster-card:hover {
       border-color: var(--red);
-      transform: translateY(-3px);
+      background: #0d0d0d;
+      color: #ffffff;
+    }
+    .campaign-poster-card:hover .poster-huge-name {
+      color: var(--red) !important;
+    }
+    .campaign-poster-card:hover .poster-kanji-sub {
+      color: #ffffff !important;
+    }
+    .campaign-poster-card:hover .poster-desc-text {
+      color: #cccccc !important;
+    }
+    .campaign-poster-card:hover .poster-bottom-rate {
+      border-top-color: #333333;
+      color: #aaaaaa;
+    }
+    .campaign-poster-card:hover .poster-bottom-rate .price {
+      color: #ffffff;
     }
     .poster-red-tag {
       font-family: 'Space Mono', monospace;
@@ -519,7 +536,12 @@
       margin-bottom: 2rem;
     }
     .closing-huge-type span.red {
-      color: var(--red);
+      background: var(--red);
+      color: #ffffff;
+      padding: 0.05em 0.3em;
+      display: inline-block;
+      letter-spacing: -0.01em;
+      margin-top: 0.25rem;
     }
     .closing-jp {
       font-family: 'Shippori Mincho', serif;
@@ -547,7 +569,7 @@
         align-items: baseline;
       }
     }
-    /* Signature Vermilion Poster Snap Transition Overlay */
+    /* Refined Vermilion Poster Snap Transition Overlay */
     .vermilion-snap-overlay {
       position: fixed;
       inset: 0;
@@ -561,49 +583,86 @@
       align-items: center;
       clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
       font-family: 'Anton', sans-serif;
+      border: 12px solid #000000;
+    }
+    .snap-inner-box {
+      border: 2px solid #ffffff;
+      padding: 3rem 4rem;
+      background: rgba(0, 0, 0, 0.4);
+      text-align: center;
     }
     .snap-title {
       font-size: clamp(3rem, 8vw, 7rem);
       letter-spacing: -0.02em;
       line-height: 0.9;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
     }
     .snap-meta {
       font-family: 'Space Mono', monospace;
       font-size: 0.8rem;
       letter-spacing: 0.25em;
-      color: rgba(255, 255, 255, 0.85);
+      color: #ffffff;
     }
-    .vermilion-snap-btn {
+    /* Refined Campaign Snap Control */
+    .campaign-snap-control {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
       z-index: 9000;
-      background: var(--red);
+      background: #0d0d0d;
       color: #ffffff;
-      border: 2px solid var(--red);
-      padding: 0.65rem 1.25rem;
+      border: 1px solid var(--red);
+      padding: 0.55rem 1rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      box-shadow: 4px 4px 0px rgba(0,0,0,1);
-      transition: background 0.15s, transform 0.15s;
+      gap: 0.75rem;
+      box-shadow: 4px 4px 0px var(--red);
+      transition: none;
     }
-    .vermilion-snap-btn:hover {
-      background: #b0000e;
-      transform: translateY(-2px);
+    .campaign-snap-control:hover {
+      background: var(--red);
+      color: #ffffff;
+      box-shadow: 4px 4px 0px #000000;
+    }
+    .campaign-snap-control:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000000;
+    }
+    .campaign-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+      display: inline-block;
+    }
+    .campaign-snap-control:hover .campaign-live-dot {
+      background: #ffffff;
+      box-shadow: 0 0 8px #ffffff;
+    }
+    .snap-badge {
+      background: var(--red);
+      color: #ffffff;
+      padding: 0.15rem 0.45rem;
+      font-size: 0.65rem;
+      font-weight: 900;
+    }
+    .campaign-snap-control:hover .snap-badge {
+      background: #ffffff;
+      color: #000000;
     }
     @media (max-width: 640px) {
-      .vermilion-snap-btn {
+      .campaign-snap-control {
         bottom: 1rem;
         right: 1rem;
-        padding: 0.5rem 0.85rem;
+        padding: 0.45rem 0.75rem;
         font-size: 0.65rem;
       }
     }
@@ -948,18 +1007,19 @@
       </div>
     </footer>
 
-  </div>
-
     <!-- Signature Vermilion Snap Overlay -->
     <div class="vermilion-snap-overlay" id="vermilionOverlay">
-      <div class="snap-title">SHIBUYA 23:47</div>
-      <div class="snap-meta">+ + + REDLINE CAMPAIGN SNAP PROTOCOL + + +</div>
+      <div class="snap-inner-box">
+        <div class="snap-title">SHIBUYA 23:47</div>
+        <div class="snap-meta">+ + + REDLINE CAMPAIGN SNAP PROTOCOL + + +</div>
+      </div>
     </div>
 
-    <!-- Floating Vermilion Snap Trigger -->
-    <button class="vermilion-snap-btn" id="vermilionSnapBtn">
-      <span>⚡</span>
-      <span>CAMPAIGN SNAP</span>
+    <!-- Campaign Snap Control -->
+    <button class="campaign-snap-control" id="vermilionSnapBtn">
+      <span class="campaign-live-dot"></span>
+      <span>SHIBUYA 23:47</span>
+      <span class="snap-badge">SNAP</span>
     </button>
 
   </div>
@@ -1121,14 +1181,14 @@
         .set(overlay, { clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)' })
         .to(overlay, {
           clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-          duration: 0.24,
+          duration: 0.2,
           ease: 'expo.inOut'
         })
         .to(overlay, {
           clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
-          duration: 0.24,
+          duration: 0.2,
           ease: 'expo.inOut',
-          delay: 0.12
+          delay: 0.1
         });
     }
 
