@@ -393,6 +393,219 @@
       text-transform: uppercase;
       letter-spacing: -0.02em;
     }
+
+    /* MIDNIGHT CAMPAIGN LOOK DROP STAGE */
+    .featured-night-drop-stage {
+      background: #000000;
+      color: #ffffff;
+      border: 2px solid var(--red);
+      padding: 2rem 1.5rem;
+      margin-bottom: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      position: relative;
+      box-shadow: 0 0 35px rgba(255, 42, 20, 0.25);
+    }
+    @media (min-width: 900px) {
+      .featured-night-drop-stage {
+        grid-template-columns: 1.15fr 1fr;
+        padding: 3rem 2.5rem;
+        gap: 3.5rem;
+      }
+    }
+    .night-drop-poster-frame {
+      position: relative;
+      background: #0d0d0d;
+      border: 1px solid #333333;
+      padding: 1rem;
+    }
+    .night-drop-img-box {
+      width: 100%;
+      aspect-ratio: 4/5.4;
+      overflow: hidden;
+      position: relative;
+      background: #151515;
+      border: 1px solid var(--red);
+    }
+    .night-drop-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+      filter: contrast(110%);
+    }
+    .night-drop-stencil-badge {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      background: var(--red);
+      color: #ffffff;
+      font-family: 'Anton', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.75rem;
+      line-height: 1;
+      z-index: 3;
+      box-shadow: 0 0 15px rgba(255, 42, 20, 0.6);
+    }
+    .night-drop-reticle-strip {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: #aaaaaa;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.65rem;
+    }
+    .night-drop-control-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.75rem;
+      padding-top: 0.65rem;
+      border-top: 1px dashed #333333;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: #888888;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .drop-lens-pills {
+      display: flex;
+      gap: 0.3rem;
+    }
+    .drop-lens-btn {
+      background: #181818;
+      border: 1px solid #333333;
+      color: #cccccc;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      padding: 0.2rem 0.45rem;
+      cursor: pointer;
+    }
+    .drop-lens-btn.active {
+      background: var(--red);
+      color: #ffffff;
+      border-color: var(--red);
+    }
+    .night-drop-prose-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .night-drop-clock-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--red);
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .night-drop-hero-name {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.8rem;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      color: #ffffff;
+    }
+    .night-drop-hero-sub {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 1.25rem;
+    }
+    .night-drop-story {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #cccccc;
+      margin-bottom: 1.75rem;
+    }
+    .night-drop-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 1.5rem;
+      border-top: 1px solid #333333;
+      border-bottom: 1px solid #333333;
+      padding: 1rem 0;
+      margin-bottom: 1.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+    }
+    .night-meta-cell strong {
+      display: block;
+      color: #777777;
+      font-size: 0.6rem;
+      margin-bottom: 0.15rem;
+    }
+    .night-drop-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .slam-next-drop-btn {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid var(--red);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+    }
+    .slam-next-drop-btn:hover {
+      background: rgba(255, 42, 20, 0.2);
+    }
+    .lock-terminal-drop-btn {
+      background: var(--red);
+      color: #ffffff;
+      border: 1px solid var(--red);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .lock-terminal-drop-btn:hover {
+      background: #cc1b06;
+      box-shadow: 0 0 20px rgba(255, 42, 20, 0.5);
+    }
+    .campaign-poster-card .card-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 4/4.5;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      border: 1px solid #333333;
+      position: relative;
+    }
+    .campaign-poster-card .card-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .campaign-poster-card:hover .card-thumb-wrap img {
+      transform: scale(1.05);
+    }
+    .campaign-poster-card.active-drop {
+      border-color: var(--red) !important;
+      background: #000000 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 25px rgba(255, 42, 20, 0.35);
+    }
+
     .occasion-posters-stack {
       display: grid;
       grid-template-columns: 1fr;
@@ -1219,23 +1432,98 @@
       </div>
     </section>
 
-    <!-- COMPOSITION 3: OCCASION CAMPAIGN POSTERS -->
+    <!-- COMPOSITION 3: THE MIDNIGHT CAMPAIGN LOOK DROP (深夜投下 // 4 NIGHT POSTER SLAMMERS) -->
     <div class="section-title-strip">
-      <h2>OCCASION CAMPAIGN // 4 POSTER FRAMES</h2>
+      <h2>MIDNIGHT CAMPAIGN // 4 NIGHT LOOK DROPS</h2>
       <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red);">
-        TARGET: UNIVERSITY OF DELHI / IIT / NIFT / ASHOKA
+        SHIBUYA 23:47 • DELHI 20:17 // LIMITED NIGHT ROTATION
       </div>
     </div>
 
-    <div class="occasion-posters-stack">
-      <!-- Poster 1 -->
-      <div class="campaign-poster-card">
+    <!-- FEATURED NIGHT DROP STAGE -->
+    <section class="featured-night-drop-stage" id="featuredNightDropStage">
+      <!-- Left Column: Raw Street Poster Visual -->
+      <div class="night-drop-poster-frame">
+        <div class="night-drop-stencil-badge" id="nightDropStencilBadge">DROP 01 // CONCERT</div>
+        <div class="night-drop-reticle-strip">
+          <span id="nightDropCodeLabel">STREET ARCHIVE // WDL-DROP-CONCERT</span>
+          <span>✦ DUAL-SIZE DISPATCH PROTOCOL</span>
+        </div>
+        <div class="night-drop-img-box">
+          <img id="featuredDropActiveImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Featured Midnight Fashion Drop">
+        </div>
+        <div class="night-drop-control-strip">
+          <div>OPTICAL SCAN:</div>
+          <div class="drop-lens-pills" id="dropLensPillCluster">
+            <button class="drop-lens-btn active" data-scale="1" data-y="0%">01 STREET FULL</button>
+            <button class="drop-lens-btn" data-scale="1.35" data-y="18%">02 DRAPE WEAVE</button>
+            <button class="drop-lens-btn" data-scale="1.65" data-y="-12%">03 HARDWARE DETAIL</button>
+          </div>
+          <div>₹0 EMBEDDED SPILL SHIELD</div>
+        </div>
+      </div>
+
+      <!-- Right Column: High-Energy Night Story & Action -->
+      <div class="night-drop-prose-col">
         <div>
-          <div class="poster-red-tag">CAMPAIGN POSTER // 01</div>
-          <h3 class="poster-huge-name">FESTIVAL</h3>
-          <div class="poster-kanji-sub">祝祭 (COLLEGE FEST)</div>
+          <div class="night-drop-clock-tag" id="nightDropClockTag">
+            CALL TIME // 22:45 IST • IIT ARENA / NIFT HAUZ KHAS
+          </div>
+          <h3 class="night-drop-hero-name" id="nightDropHeroName">
+            Strobe Kinetic Multi-Pocket Wrap
+          </h3>
+          <div class="night-drop-hero-sub" id="nightDropHeroSub">
+            響宴 // HIGH-VOLTAGE SOUNDSTAGE ARMOR
+          </div>
+          <p class="night-drop-story" id="nightDropStory">
+            Built for arena soundstages and blinding strobe frequencies. Tailored from high-sheen polymer metallic knit with functional cargo drapery that reflects flash photography from 50 yards across the stadium mosh pit. When you step into the venue at midnight, you become the visual epicenter of the crowd.
+          </p>
+
+          <div class="night-drop-meta-grid">
+            <div class="night-meta-cell">
+              <strong>OCCASION SUITABILITY:</strong>
+              <span id="nightOccasionVal">CAMPUS CONCERT & ARENA TOUR</span>
+            </div>
+            <div class="night-meta-cell">
+              <strong>COURIER DISPATCH HUB:</strong>
+              <span id="nightHubVal">NORTH CAMPUS / HAUZ KHAS (32 MIN)</span>
+            </div>
+            <div class="night-meta-cell">
+              <strong>REDUNDANCY SIZING:</strong>
+              <span id="nightSizingVal">UK 6 (PRIMARY) + UK 8 (SEALED SISTER)</span>
+            </div>
+            <div class="night-meta-cell">
+              <strong>DISPATCH TARIFF:</strong>
+              <span id="nightTariffVal" style="font-weight: 700; color: var(--red);">₹1,699 / 3 NIGHTS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="night-drop-actions">
+          <button class="slam-next-drop-btn" id="slamNextDropBtn">
+            <span>SLAM NEXT NIGHT DROP // 次の投下</span>
+          </button>
+          <button class="lock-terminal-drop-btn" id="lockTerminalDropBtn">
+            <span>LOCK INTO NIGHT-DROP TERMINAL</span>
+            <span style="font-size: 0.8rem;">⟶</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 CAMPAIGN POSTER CARDS -->
+    <div class="occasion-posters-stack" id="occasionPostersStack">
+      <!-- Poster 1: CONCERT -->
+      <div class="campaign-poster-card active-drop" data-index="0" data-event="CONCERT" data-price="1699" data-look="KINETIC MULTI-POCKET WRAP" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">
+        <div class="card-thumb-wrap">
+          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Concert Drop">
+        </div>
+        <div>
+          <div class="poster-red-tag">NIGHT DROP // 01</div>
+          <h3 class="poster-huge-name">CONCERT</h3>
+          <div class="poster-kanji-sub">響宴 (ARENA CIRCUIT)</div>
           <p class="poster-desc-text">
-            Electric, loud, strobe-reactive. Kinetic wraps and metallic lurex designed to reflect concert stadium spotlights from 50 yards away.
+            Strobe-reactive kinetic wraps reflecting concert stadium spotlights. Includes sister backup size.
           </p>
         </div>
         <div class="poster-bottom-rate">
@@ -1244,14 +1532,36 @@
         </div>
       </div>
 
-      <!-- Poster 2 -->
-      <div class="campaign-poster-card" style="border-color: var(--red);">
+      <!-- Poster 2: FAREWELL -->
+      <div class="campaign-poster-card" data-index="1" data-event="FAREWELL" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">
+        <div class="card-thumb-wrap">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Farewell Drop">
+        </div>
         <div>
-          <div class="poster-red-tag" style="color: var(--red);">CAMPAIGN POSTER // 02</div>
+          <div class="poster-red-tag" style="color: var(--red);">NIGHT DROP // 02</div>
           <h3 class="poster-huge-name" style="color: var(--red);">FAREWELL</h3>
           <div class="poster-kanji-sub" style="color: var(--red);">門出 (SENIOR BALL)</div>
           <p class="poster-desc-text">
-            Sharp, formal, monumental contrast. High-neck corsetry and sweeping floor-length faille skirts that command the departmental stage.
+            Heavy black silk faille peplum gown commanding departmental auditoriums.
+          </p>
+        </div>
+        <div class="poster-bottom-rate">
+          <span>LEASE TARIFF</span>
+          <span class="price">₹2,999 / 3D</span>
+        </div>
+      </div>
+
+      <!-- Poster 3: FESTIVAL -->
+      <div class="campaign-poster-card" data-index="2" data-event="FESTIVAL" data-price="2899" data-look="PLEATED DUET GOWN" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">
+        <div class="card-thumb-wrap">
+          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Festival Drop">
+        </div>
+        <div>
+          <div class="poster-red-tag">NIGHT DROP // 03</div>
+          <h3 class="poster-huge-name">FESTIVAL</h3>
+          <div class="poster-kanji-sub">祝祭 (CAMPUS FEST)</div>
+          <p class="poster-desc-text">
+            Fluid hand-pleated silk chiffon catching terrace winds under twilight lanterns.
           </p>
         </div>
         <div class="poster-bottom-rate">
@@ -1260,35 +1570,22 @@
         </div>
       </div>
 
-      <!-- Poster 3 -->
-      <div class="campaign-poster-card">
-        <div>
-          <div class="poster-red-tag">CAMPAIGN POSTER // 03</div>
-          <h3 class="poster-huge-name">CONCERT</h3>
-          <div class="poster-kanji-sub">響宴 (ARENA CIRCUIT)</div>
-          <p class="poster-desc-text">
-            Raw silhouettes, heavy hardware accents, oversized tailoring. Crafted for arena acoustics and flash photography in low light.
-          </p>
+      <!-- Poster 4: FRESHERS -->
+      <div class="campaign-poster-card" data-index="3" data-event="FRESHERS" data-price="2499" data-look="ROBE LONGUE COLUMN" data-img="/assets/editorial/robe-longue-1983-12-1-1.jpg">
+        <div class="card-thumb-wrap">
+          <img src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Freshers Drop">
         </div>
-        <div class="poster-bottom-rate">
-          <span>LEASE TARIFF</span>
-          <span class="price">₹1,499 / 3D</span>
-        </div>
-      </div>
-
-      <!-- Poster 4 -->
-      <div class="campaign-poster-card">
         <div>
-          <div class="poster-red-tag">CAMPAIGN POSTER // 04</div>
+          <div class="poster-red-tag">NIGHT DROP // 04</div>
           <h3 class="poster-huge-name">FRESHERS</h3>
           <div class="poster-kanji-sub">新歓 (INDUCTION)</div>
           <p class="poster-desc-text">
-            Clean lines, sculptural asymmetry, effortless cool. The defining look of your university entrance that establishes your aesthetic standard.
+            Architectural bias-cut column establishing your arrival standard with zero polyester noise.
           </p>
         </div>
         <div class="poster-bottom-rate">
           <span>LEASE TARIFF</span>
-          <span class="price">₹1,299 / 3D</span>
+          <span class="price">₹2,499 / 3D</span>
         </div>
       </div>
     </div>
@@ -1926,6 +2223,185 @@
         isolateClause(idx);
       });
     });
+
+    // 7.5 THE MIDNIGHT CAMPAIGN LOOK DROP INTERACTIVE SYSTEM
+    const campaignDrops = [
+      {
+        badge: 'DROP 01 // CONCERT',
+        code: 'STREET ARCHIVE // WDL-DROP-CONCERT',
+        img: '/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg',
+        clock: 'CALL TIME // 22:45 IST • IIT ARENA / NIFT HAUZ KHAS',
+        heroName: 'Strobe Kinetic Multi-Pocket Wrap',
+        heroSub: '響宴 // HIGH-VOLTAGE SOUNDSTAGE ARMOR',
+        story: 'Built for arena soundstages and blinding strobe frequencies. Tailored from high-sheen polymer metallic knit with functional cargo drapery that reflects flash photography from 50 yards across the stadium mosh pit. When you step into the venue at midnight, you become the visual epicenter of the crowd.',
+        occasion: 'CAMPUS CONCERT & ARENA TOUR',
+        hub: 'NORTH CAMPUS / HAUZ KHAS (32 MIN)',
+        sizing: 'UK 6 (PRIMARY) + UK 8 (SEALED SISTER)',
+        tariff: '₹1,699 / 3 NIGHTS',
+        price: 1699,
+        eventKey: 'CONCERT',
+        lookTitle: 'KINETIC MULTI-POCKET WRAP',
+        curator: 'TOKYO STREETWEAR ARCHIVE'
+      },
+      {
+        badge: 'DROP 02 // FAREWELL',
+        code: 'ATELIER PATRIMONY // WDL-DROP-FAREWELL',
+        img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg',
+        clock: 'CALL TIME // 19:30 IST • MIRANDA / STEPHENS / LSR PORCH',
+        heroName: 'Zemire Obsidian Silk Faille',
+        heroSub: '門出 // MONUMENTAL VALEDICTORY ARCHITECTURE',
+        story: 'Cut on sovereign lines from 1,480g pure silk faille. A sculptural peplum silhouette designed for senior farewell banquets and departmental red carpets where you permanently author the photographic record of your graduation night.',
+        occasion: 'SENIOR FAREWELL BALL & VALEDICTORY GALA',
+        hub: 'MIRANDA / STEPHENS (24 MIN)',
+        sizing: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
+        tariff: '₹2,999 / 3 NIGHTS',
+        price: 2999,
+        eventKey: 'FAREWELL',
+        lookTitle: 'ZEMIRE OBSIDIAN FAILLE',
+        curator: 'PARIS HAUTE COUTURE 1954'
+      },
+      {
+        badge: 'DROP 03 // FESTIVAL',
+        code: 'FLUID CHREIA // WDL-DROP-FESTIVAL',
+        img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg',
+        clock: 'CALL TIME // 20:15 IST • UNIVERSITY LAWNS & STAGE',
+        heroName: 'Pleated Duet Chiffon Gown',
+        heroSub: '祝祭 // TERRACE WINDBLOWN SCULPTURE',
+        story: 'Hand-pleated silk chiffon drape from the Jean Dessès Paris atelier. Under twilight fest lanterns and outdoor college amphitheaters, this gown catches every ambient draft, creating fluid sculptural lines that make fast fashion look cheap and disposable.',
+        occasion: 'COLLEGE ANNUAL FESTIVAL & NIGHT LAWNS',
+        hub: 'SOUTH CAMPUS / LSR ARCH (38 MIN)',
+        sizing: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
+        tariff: '₹2,899 / 3 NIGHTS',
+        price: 2899,
+        eventKey: 'FESTIVAL',
+        lookTitle: 'PLEATED DUET GOWN',
+        curator: 'JEAN DESSÈS PARIS 1951'
+      },
+      {
+        badge: 'DROP 04 // FRESHERS',
+        code: 'ARCHIVE COLUMN // WDL-DROP-FRESHERS',
+        img: '/assets/editorial/robe-longue-1983-12-1-1.jpg',
+        clock: 'CALL TIME // 18:00 IST • INDUCTION SOCIAL & NIGHT',
+        heroName: 'Sculptural Longue Silk Column',
+        heroSub: '新歓 // MINIMALIST ARRIVAL DOMINANCE',
+        story: 'Pure bias-cut silk crêpe de chine designed by Paul Poiret atelier archives. Establishes your aesthetic authority on day one of university life without shouting. Seamless flow, zero synthetic noise, completely immune to drink spills under our ₹0 protection shield.',
+        occasion: 'COLLEGE INDUCTION & FRESHERS SOCIAL',
+        hub: 'ASHOKA RESIDENCE / DU NORTH (42 MIN)',
+        sizing: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
+        tariff: '₹2,499 / 3 NIGHTS',
+        price: 2499,
+        eventKey: 'FRESHERS',
+        lookTitle: 'ROBE LONGUE COLUMN',
+        curator: 'PAUL POIRET 1983 RE-EDITION'
+      }
+    ];
+
+    let currentCampaignDropIndex = 0;
+    const campaignCards = document.querySelectorAll('#occasionPostersStack .campaign-poster-card');
+    const featuredDropBadge = document.getElementById('nightDropStencilBadge');
+    const featuredDropCode = document.getElementById('nightDropCodeLabel');
+    const featuredDropImg = document.getElementById('featuredDropActiveImg');
+    const featuredDropClock = document.getElementById('nightDropClockTag');
+    const featuredDropName = document.getElementById('nightDropHeroName');
+    const featuredDropSub = document.getElementById('nightDropHeroSub');
+    const featuredDropStory = document.getElementById('nightDropStory');
+    const featuredOccasionVal = document.getElementById('nightOccasionVal');
+    const featuredHubVal = document.getElementById('nightHubVal');
+    const featuredSizingVal = document.getElementById('nightSizingVal');
+    const featuredTariffVal = document.getElementById('nightTariffVal');
+    const slamNextDropBtn = document.getElementById('slamNextDropBtn');
+    const lockTerminalDropBtn = document.getElementById('lockTerminalDropBtn');
+    const dropLensBtns = document.querySelectorAll('#dropLensPillCluster .drop-lens-btn');
+
+    function renderCampaignDrop(idx) {
+      currentCampaignDropIndex = idx;
+      const drop = campaignDrops[idx];
+      campaignCards.forEach((c, i) => {
+        c.classList.toggle('active-drop', i === idx);
+      });
+
+      if (!prefersReducedMotion) {
+        gsap.timeline()
+          .to('#featuredNightDropStage', { filter: 'invert(100%)', scale: 0.99, duration: 0.12 })
+          .call(() => {
+            if (featuredDropBadge) featuredDropBadge.textContent = drop.badge;
+            if (featuredDropCode) featuredDropCode.textContent = drop.code;
+            if (featuredDropImg) featuredDropImg.src = drop.img;
+            if (featuredDropClock) featuredDropClock.textContent = drop.clock;
+            if (featuredDropName) featuredDropName.textContent = drop.heroName;
+            if (featuredDropSub) featuredDropSub.textContent = drop.heroSub;
+            if (featuredDropStory) featuredDropStory.textContent = drop.story;
+            if (featuredOccasionVal) featuredOccasionVal.textContent = drop.occasion;
+            if (featuredHubVal) featuredHubVal.textContent = drop.hub;
+            if (featuredSizingVal) featuredSizingVal.textContent = drop.sizing;
+            if (featuredTariffVal) featuredTariffVal.textContent = drop.tariff;
+          })
+          .to('#featuredNightDropStage', { filter: 'invert(0%)', scale: 1, duration: 0.25, ease: 'power2.out' });
+      } else {
+        if (featuredDropBadge) featuredDropBadge.textContent = drop.badge;
+        if (featuredDropCode) featuredDropCode.textContent = drop.code;
+        if (featuredDropImg) featuredDropImg.src = drop.img;
+        if (featuredDropClock) featuredDropClock.textContent = drop.clock;
+        if (featuredDropName) featuredDropName.textContent = drop.heroName;
+        if (featuredDropSub) featuredDropSub.textContent = drop.heroSub;
+        if (featuredDropStory) featuredDropStory.textContent = drop.story;
+        if (featuredOccasionVal) featuredOccasionVal.textContent = drop.occasion;
+        if (featuredHubVal) featuredHubVal.textContent = drop.hub;
+        if (featuredSizingVal) featuredSizingVal.textContent = drop.sizing;
+        if (featuredTariffVal) featuredTariffVal.textContent = drop.tariff;
+      }
+    }
+
+    campaignCards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        renderCampaignDrop(i);
+        const stage = document.getElementById('featuredNightDropStage');
+        if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    if (slamNextDropBtn) {
+      slamNextDropBtn.addEventListener('click', () => {
+        const nextIdx = (currentCampaignDropIndex + 1) % campaignDrops.length;
+        renderCampaignDrop(nextIdx);
+      });
+    }
+
+    // Drop Lens buttons
+    dropLensBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        dropLensBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const scale = parseFloat(btn.dataset.scale);
+        const y = btn.dataset.y;
+        if (featuredDropActiveImg) {
+          gsap.to(featuredDropActiveImg, { scale: scale, y: y, duration: 0.45, ease: 'power2.out' });
+        }
+      });
+    });
+
+    // Lock Look into Night-Drop Terminal
+    if (lockTerminalDropBtn) {
+      lockTerminalDropBtn.addEventListener('click', () => {
+        const drop = campaignDrops[currentCampaignDropIndex];
+        currentDropBase = drop.price;
+        currentDropEvent = drop.eventKey;
+        if (ticketEventTitle) ticketEventTitle.textContent = `${drop.eventKey} DISPATCH`;
+        if (nightLookTitle) nightLookTitle.textContent = drop.lookTitle;
+        if (nightCuratorTag) nightCuratorTag.textContent = `ARCHIVE // ${drop.curator}`;
+        if (nightDropImg) nightDropImg.src = drop.img;
+        updateTicketPrice();
+
+        const term = document.getElementById('nightDropSection');
+        if (term) {
+          term.scrollIntoView({ behavior: 'smooth' });
+          gsap.fromTo('#nightTicketCard', 
+            { boxShadow: '0 0 50px rgba(255, 42, 20, 0.8)' },
+            { boxShadow: '0 0 20px rgba(255, 42, 20, 0.2)', duration: 1.2 }
+          );
+        }
+      });
+    }
 
     // 8. SIGNATURE TRANSITION PROTOTYPE: VERMILION POSTER SNAP
     const snapBtn = document.getElementById('vermilionSnapBtn');

@@ -436,54 +436,216 @@
       padding-top: 0.75rem;
     }
 
-    /* 4. LOOK INSTALLATION (Varying Scales & Viewport Bleed) */
+    /* 4. LOOK INSTALLATION (SPATIAL GARMENT OBJECT FIELD) */
     .look-installation-section {
       border-top: 1px solid var(--border-dark);
       padding-top: 5rem;
       margin-bottom: 9rem;
-    }
-    .installation-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
-    }
-    @media (min-width: 1024px) {
-      .installation-grid {
-        grid-template-columns: 1.3fr 0.9fr;
-        align-items: start;
-        gap: 4rem;
-      }
-    }
-    .spatial-look-card {
-      border: 1px solid var(--border-dark);
-      background: var(--panel-dark);
       position: relative;
     }
-    .spatial-look-card img {
+    .spatial-vector-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .vector-tab-btn {
+      background: #090912;
+      border: 1px solid var(--border-dark);
+      color: var(--dim);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.45rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .vector-tab-btn.active, .vector-tab-btn:hover {
+      background: #050510;
+      border-color: var(--electric-blue);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(0, 102, 255, 0.3);
+    }
+    .spatial-object-stage {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      background: #030308;
+      border: 1px solid var(--border-dark);
+      padding: 1.5rem;
+      position: relative;
+      margin-bottom: 3.5rem;
+    }
+    @media (min-width: 1024px) {
+      .spatial-object-stage {
+        grid-template-columns: 1.2fr 1fr;
+        padding: 3rem;
+        gap: 3.5rem;
+      }
+    }
+    .spatial-monolith-frame {
+      position: relative;
+      background: #06060c;
+      border: 1px solid var(--electric-blue);
+      box-shadow: 0 0 35px rgba(0, 102, 255, 0.2);
+      padding: 1rem;
+    }
+    .spatial-monolith-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/5.2;
+      overflow: hidden;
+      position: relative;
+      background: #010103;
+    }
+    .spatial-monolith-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .spatial-coordinate-badge {
+      position: absolute;
+      top: -0.9rem;
+      left: 1.5rem;
+      background: #020205;
+      border: 1px solid var(--electric-blue);
+      color: var(--electric-blue);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.25rem 0.65rem;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      z-index: 3;
+    }
+    .spatial-dossier-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .spatial-tensor-heading {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.5rem;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: var(--bone);
+    }
+    .spatial-occasion-vector-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--electric-blue);
+      border: 1px solid var(--electric-blue);
+      background: rgba(0, 102, 255, 0.08);
+      padding: 0.35rem 0.65rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+    .spatial-object-prose {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #999990;
+      margin-bottom: 1.75rem;
+    }
+    .spatial-specs-matrix {
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+    }
+    .spatial-spec-cell strong {
+      display: block;
+      color: var(--dim);
+      font-size: 0.6rem;
+      margin-bottom: 0.15rem;
+    }
+    .spatial-object-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .collapse-coords-btn {
+      background: var(--electric-blue);
+      color: #000000;
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .collapse-coords-btn:hover {
+      background: #3385ff;
+      box-shadow: 0 0 25px rgba(0, 102, 255, 0.6);
+    }
+    .next-vector-btn {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid var(--border-dark);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+    }
+    .next-vector-btn:hover {
+      border-color: var(--electric-blue);
+      color: var(--electric-blue);
+    }
+    .orbital-looks-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    @media (min-width: 900px) {
+      .orbital-looks-strip {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .orbital-look-card {
+      border: 1px solid var(--border-dark);
+      background: #06060c;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .orbital-look-card:hover, .orbital-look-card.active {
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 15px rgba(0, 102, 255, 0.35);
+      transform: translateY(-4px);
+    }
+    .orbital-thumb {
       width: 100%;
       aspect-ratio: 4/5;
       object-fit: cover;
       display: block;
-      filter: contrast(110%);
+      margin-bottom: 0.65rem;
+      filter: contrast(105%);
     }
-    .spatial-look-overlay {
-      padding: 1.5rem;
-      border-top: 1px solid var(--border-dark);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    .spatial-look-overlay .title {
+    .orbital-title {
       font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: -0.02em;
+      font-size: 1.1rem;
       text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
     }
-    .spatial-look-overlay .rate {
+    .orbital-rate {
       font-family: 'Space Mono', monospace;
-      font-size: 1.25rem;
+      font-size: 0.68rem;
       color: var(--electric-blue);
-      font-weight: 700;
     }
 
     /* 5. FLOATING RENTAL OBJECT (Patent / Spatial Blueprint) */
@@ -1117,48 +1279,97 @@
       </div>
     </section>
 
-    <!-- 4. LOOK INSTALLATION (Varying Scales) -->
-    <section class="look-installation-section">
-      <div style="font-size: 0.72rem; color: var(--dim); margin-bottom: 2.5rem; letter-spacing: 0.12em;">
-        03 // SPATIAL LOOK OBJECTS — ASYMMETRIC SCALE
+    <!-- 4. LOOK INSTALLATION (SPATIAL GARMENT OBJECT FIELD) -->
+    <section class="look-installation-section" id="spatialLookObjectsSection">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 0.72rem; color: var(--dim); margin-bottom: 2rem; letter-spacing: 0.12em; flex-wrap: wrap; gap: 0.5rem;">
+        <span>03 // SPATIAL LOOK OBJECTS — NON-EUCLIDEAN COORDINATES</span>
+        <span style="color: var(--electric-blue);">TENSOR PROJECTION: ACTIVE</span>
       </div>
 
-      <div class="installation-grid">
-        <!-- Monumental Look -->
-        <div class="spatial-look-card">
-          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Paris Atelier Gown">
-          <div class="spatial-look-overlay">
-            <div>
-              <div style="font-size: 0.68rem; color: var(--dim);">ARCHIVE SPECIMEN 029 // PARIS ATELIER 1951</div>
-              <h3 class="title">PLEATED DUET GOWN</h3>
-            </div>
-            <div class="rate">₹2,899</div>
+      <!-- Spatial Vector Tabs -->
+      <div class="spatial-vector-tabs" id="spatialVectorTabs">
+        <button class="vector-tab-btn active" data-index="0">VECTOR α // [142.8 // KINETIC DRAPE]</button>
+        <button class="vector-tab-btn" data-index="1">VECTOR β // [210.4 // ZEMIRE FAILLE]</button>
+        <button class="vector-tab-btn" data-index="2">VECTOR γ // [088.1 // DUET PLEAT]</button>
+        <button class="vector-tab-btn" data-index="3">VECTOR δ // [330.0 // BROCADE ROBE]</button>
+      </div>
+
+      <!-- Spatial Object Stage -->
+      <div class="spatial-object-stage" id="spatialObjectStage">
+        <!-- Left: Floating Garment Monolith -->
+        <div class="spatial-monolith-frame">
+          <div class="spatial-coordinate-badge" id="spatialCoordinateBadge">VECTOR α // COORD: X:142.8 Y:891.2 Z:04.0</div>
+          <div class="spatial-monolith-img-wrap">
+            <img id="spatialActiveLookImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Spatial Fashion Object">
           </div>
         </div>
 
-        <!-- Secondary Look Objects -->
-        <div style="display: flex; flex-direction: column; gap: 2rem;">
-          <div class="spatial-look-card">
-            <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Custo Barcelona Summer Edition" style="aspect-ratio: 16/11;">
-            <div class="spatial-look-overlay">
-              <div>
-                <div style="font-size: 0.68rem; color: var(--dim);">RUNWAY SPECIMEN 041 // SUMMER EDITION</div>
-                <h3 class="title" style="font-size: 1.4rem;">KINETIC SHIFT</h3>
+        <!-- Right: Spatial Dossier & Collapsing Mechanism -->
+        <div class="spatial-dossier-col">
+          <div>
+            <div class="spatial-occasion-vector-tag" id="spatialOccasionVectorTag">
+              OCCASION VECTOR // COLLEGE FESTIVAL ARENA & CONCERT STAGE
+            </div>
+            <h3 class="spatial-tensor-heading" id="spatialTensorHeading">
+              Kinetic Multi-Pocket Wrap
+            </h3>
+            <p class="spatial-object-prose" id="spatialObjectProse">
+              A floating kinetic silhouette crafted from high-voltage metallic polymer weave. Suspended at the intersection of collegiate rave culture and avant-garde couture draping. Engineered for outdoor festival soundstages where flash photography and laser beams illuminate the garment's reflective filament from across the field.
+            </p>
+
+            <div class="spatial-specs-matrix">
+              <div class="spatial-spec-cell">
+                <strong>ATELIER TENSOR:</strong>
+                <span id="spatialAtelierVal">CUSTO SUMMER ARCHIVE (2010)</span>
               </div>
-              <div class="rate">₹1,699</div>
+              <div class="spatial-spec-cell">
+                <strong>FIBER COMPOSITION:</strong>
+                <span id="spatialFiberVal">STRUCTURED POLYMER & SILK KNIT (920g)</span>
+              </div>
+              <div class="spatial-spec-cell">
+                <strong>DUAL-FIT REDUNDANCY:</strong>
+                <span id="spatialDualFitVal">UK 6 (PRIMARY) + UK 8 (SEALED SISTER)</span>
+              </div>
+              <div class="spatial-spec-cell">
+                <strong>DIMENSIONAL LEASE:</strong>
+                <span id="spatialTariffVal" style="color: var(--electric-blue); font-weight: 700;">₹1,699 / 3 DAYS (₹0 DAMAGE SHIELD)</span>
+              </div>
             </div>
           </div>
 
-          <div class="spatial-look-card">
-            <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Dress" style="aspect-ratio: 16/11;">
-            <div class="spatial-look-overlay">
-              <div>
-                <div style="font-size: 0.68rem; color: var(--dim);">MUSEUM SPECIMEN 053 // GILDED JACQUARD</div>
-                <h3 class="title" style="font-size: 1.4rem;">GOLD BROCADE ROBE</h3>
-              </div>
-              <div class="rate">₹3,899</div>
-            </div>
+          <div class="spatial-object-actions">
+            <button class="collapse-coords-btn" id="collapseCoordsBtn">
+              <span>COLLAPSE SPATIAL COORDINATES TO LEASE</span>
+              <span>⟶</span>
+            </button>
+            <button class="next-vector-btn" id="nextVectorBtn">
+              <span>TRANSLATE TO NEXT VECTOR</span>
+            </button>
           </div>
+        </div>
+      </div>
+
+      <!-- Secondary Orbital Look Strip -->
+      <div class="orbital-looks-strip" id="orbitalLooksStrip">
+        <div class="orbital-look-card active" data-index="0">
+          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Wrap" class="orbital-thumb">
+          <div class="orbital-title">KINETIC DRAPE</div>
+          <div class="orbital-rate">VECTOR α // ₹1,699</div>
+        </div>
+        <div class="orbital-look-card" data-index="1">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Faille" class="orbital-thumb">
+          <div class="orbital-title">ZEMIRE FAILLE</div>
+          <div class="orbital-rate">VECTOR β // ₹2,999</div>
+        </div>
+        <div class="orbital-look-card" data-index="2">
+          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Duet Pleat" class="orbital-thumb">
+          <div class="orbital-title">DUET PLEAT</div>
+          <div class="orbital-rate">VECTOR γ // ₹2,899</div>
+        </div>
+        <div class="orbital-look-card" data-index="3">
+          <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade" class="orbital-thumb">
+          <div class="orbital-title">COURT BROCADE</div>
+          <div class="orbital-rate">VECTOR δ // ₹3,899</div>
         </div>
       </div>
     </section>
@@ -1522,6 +1733,170 @@
         }
       });
     });
+
+    // 3.5 THE SPATIAL GARMENT OBJECT FIELD SYSTEM
+    const spatialVectorsData = [
+      {
+        coord: 'VECTOR α // COORD: X:142.8 Y:891.2 Z:04.0',
+        img: '/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg',
+        occTag: 'OCCASION VECTOR // COLLEGE FESTIVAL ARENA & CONCERT STAGE',
+        heading: 'Kinetic Multi-Pocket Wrap',
+        prose: 'A floating kinetic silhouette crafted from high-voltage metallic polymer weave. Suspended at the intersection of collegiate rave culture and avant-garde couture draping. Engineered for outdoor festival soundstages where flash photography and laser beams illuminate the garment\'s reflective filament from across the field.',
+        atelier: 'CUSTO SUMMER ARCHIVE (2010)',
+        fiber: 'STRUCTURED POLYMER & SILK KNIT (920g)',
+        dualFit: 'UK 6 (PRIMARY) + UK 8 (SEALED SISTER)',
+        tariff: '₹1,699 / 3 DAYS (₹0 DAMAGE SHIELD)',
+        price: 1699,
+        eventKey: 'FESTIVAL',
+        lookTitle: 'KINETIC MULTI-POCKET DRAPE',
+        vectorCode: 'X: 142.8 // Y: 891.2 // Z: 04.0'
+      },
+      {
+        coord: 'VECTOR β // COORD: X:210.4 Y:418.0 Z:12.0',
+        img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg',
+        occTag: 'OCCASION VECTOR // SENIOR VALEDICTORY BALL & FORMAL GALA',
+        heading: 'Zemire Obsidian Faille Gown',
+        prose: 'A monumental architectural sculpture tailored from dense 1,480g black silk faille. Cut on historical Dior proportions with an authoritative peplum that anchors your presence on the valedictory stage. Designed for the student whose graduation photograph must permanently author the room.',
+        atelier: 'CHRISTIAN DIOR HAUTE COUTURE (1954)',
+        fiber: '100% HEAVY SILK FAILLE (1,480g)',
+        dualFit: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
+        tariff: '₹2,999 / 3 DAYS (₹0 DAMAGE SHIELD)',
+        price: 2999,
+        eventKey: 'FAREWELL',
+        lookTitle: 'ZEMIRE OBSIDIAN FAILLE',
+        vectorCode: 'X: 210.4 // Y: 418.0 // Z: 12.0'
+      },
+      {
+        coord: 'VECTOR γ // COORD: X:088.1 Y:992.5 Z:02.0',
+        img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg',
+        occTag: 'OCCASION VECTOR // TERRACE CONCERT & LAWN SOIRÉE',
+        heading: 'Pleated Duet Chiffon Gown',
+        prose: 'Hand-pleated silk chiffon draping from the Jean Dessès Paris atelier. Under twilight fest lanterns and outdoor campus terraces, the fluid classical folds respond to every ambient breeze, creating living cinematic ripples that outshine ordinary fast fashion.',
+        atelier: 'JEAN DESSÈS PARIS (1951)',
+        fiber: 'FLUID SILK CHIFFON DRAPE (1,140g)',
+        dualFit: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
+        tariff: '₹2,899 / 3 DAYS (₹0 DAMAGE SHIELD)',
+        price: 2899,
+        eventKey: 'CONCERT',
+        lookTitle: 'PLEATED DUET CHIFFON',
+        vectorCode: 'X: 088.1 // Y: 992.5 // Z: 02.0'
+      },
+      {
+        coord: 'VECTOR δ // COORD: X:330.0 Y:112.4 Z:08.0',
+        img: '/assets/editorial/court-dress.jpg',
+        occTag: 'OCCASION VECTOR // SOCIETY CONVOCATION & FORMAL BANQUET',
+        heading: 'Gilded Court Brocade Robe',
+        prose: 'Regal side-pannier volume and metallic gold thread jacquard. Sourced from court collection archives for grand Model UN valedictories and society banquets where commanding historic grandeur silences the dining hall upon entrance.',
+        atelier: 'MET HISTORIC ATELIER (CA. 1750)',
+        fiber: 'METALLIC GOLD BROCADE (1,620g)',
+        dualFit: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
+        tariff: '₹3,899 / 3 DAYS (₹0 DAMAGE SHIELD)',
+        price: 3899,
+        eventKey: 'BANQUET',
+        lookTitle: 'GOLD BROCADE ROBE',
+        vectorCode: 'X: 330.0 // Y: 112.4 // Z: 08.0'
+      }
+    ];
+
+    let currentVectorIndex = 0;
+    const vectorTabBtns = document.querySelectorAll('#spatialVectorTabs .vector-tab-btn');
+    const orbitalCards = document.querySelectorAll('#orbitalLooksStrip .orbital-look-card');
+    const spatialCoordBadge = document.getElementById('spatialCoordinateBadge');
+    const spatialActiveImg = document.getElementById('spatialActiveLookImg');
+    const spatialOccTag = document.getElementById('spatialOccasionVectorTag');
+    const spatialHeading = document.getElementById('spatialTensorHeading');
+    const spatialProse = document.getElementById('spatialObjectProse');
+    const spatialAtelier = document.getElementById('spatialAtelierVal');
+    const spatialFiber = document.getElementById('spatialFiberVal');
+    const spatialDualFit = document.getElementById('spatialDualFitVal');
+    const spatialTariff = document.getElementById('spatialTariffVal');
+    const collapseCoordsBtn = document.getElementById('collapseCoordsBtn');
+    const nextVectorBtn = document.getElementById('nextVectorBtn');
+
+    function renderSpatialVector(idx) {
+      currentVectorIndex = idx;
+      const data = spatialVectorsData[idx];
+
+      vectorTabBtns.forEach((b, i) => b.classList.toggle('active', i === idx));
+      orbitalCards.forEach((c, i) => c.classList.toggle('active', i === idx));
+
+      if (!prefersReducedMotion) {
+        gsap.timeline()
+          .to('#spatialObjectStage', { opacity: 0.5, scale: 0.98, duration: 0.15 })
+          .call(() => {
+            if (spatialCoordBadge) spatialCoordBadge.textContent = data.coord;
+            if (spatialActiveImg) spatialActiveImg.src = data.img;
+            if (spatialOccTag) spatialOccTag.textContent = data.occTag;
+            if (spatialHeading) spatialHeading.textContent = data.heading;
+            if (spatialProse) spatialProse.textContent = data.prose;
+            if (spatialAtelier) spatialAtelier.textContent = data.atelier;
+            if (spatialFiber) spatialFiber.textContent = data.fiber;
+            if (spatialDualFit) spatialDualFit.textContent = data.dualFit;
+            if (spatialTariff) spatialTariff.textContent = data.tariff;
+          })
+          .to('#spatialObjectStage', { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
+      } else {
+        if (spatialCoordBadge) spatialCoordBadge.textContent = data.coord;
+        if (spatialActiveImg) spatialActiveImg.src = data.img;
+        if (spatialOccTag) spatialOccTag.textContent = data.occTag;
+        if (spatialHeading) spatialHeading.textContent = data.heading;
+        if (spatialProse) spatialProse.textContent = data.prose;
+        if (spatialAtelier) spatialAtelier.textContent = data.atelier;
+        if (spatialFiber) spatialFiber.textContent = data.fiber;
+        if (spatialDualFit) spatialDualFit.textContent = data.dualFit;
+        if (spatialTariff) spatialTariff.textContent = data.tariff;
+      }
+    }
+
+    vectorTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index, 10);
+        renderSpatialVector(idx);
+      });
+    });
+
+    orbitalCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.dataset.index, 10);
+        renderSpatialVector(idx);
+        const stage = document.getElementById('spatialObjectStage');
+        if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    if (nextVectorBtn) {
+      nextVectorBtn.addEventListener('click', () => {
+        const nextIdx = (currentVectorIndex + 1) % spatialVectorsData.length;
+        renderSpatialVector(nextIdx);
+      });
+    }
+
+    // Collapse Spatial Coordinates directly to Chamber
+    if (collapseCoordsBtn) {
+      collapseCoordsBtn.addEventListener('click', () => {
+        const data = spatialVectorsData[currentVectorIndex];
+        const chamberCoordDisplay = document.getElementById('chamberCoordDisplay');
+        const monolithImg = document.getElementById('monolithImg');
+        const monolithLookTitle = document.getElementById('monolithLookTitle');
+        const chamberPriceDisplay = document.getElementById('chamberPriceDisplay');
+        const telemetryEvent = document.getElementById('telemetryEvent');
+
+        if (chamberCoordDisplay) chamberCoordDisplay.textContent = data.vectorCode;
+        if (monolithImg) monolithImg.src = data.img;
+        if (monolithLookTitle) monolithLookTitle.textContent = data.lookTitle;
+        if (chamberPriceDisplay) chamberPriceDisplay.textContent = `₹${data.price.toLocaleString('en-IN')}`;
+        if (telemetryEvent) telemetryEvent.textContent = data.eventKey;
+
+        const chamberSection = document.getElementById('spatialChamberSection');
+        if (chamberSection) {
+          chamberSection.scrollIntoView({ behavior: 'smooth' });
+          gsap.fromTo('#chamberStage', 
+            { boxShadow: '0 0 50px rgba(0, 102, 255, 0.7)' }, 
+            { boxShadow: '0 0 20px rgba(0, 102, 255, 0.2)', duration: 1.2 }
+          );
+        }
+      });
+    }
 
     // 4. EXPERIMENT 10-D: BLUEPRINT NODE WIREFRAME DISSECTION TOGGLE
     const blueprintBtns = document.querySelectorAll('.blueprint-mode-btn');

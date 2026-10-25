@@ -585,60 +585,230 @@
       color: var(--fg);
     }
 
-    /* COMPOSITION 6: REVOLVING LOOK ARCHIVE (Double Spreads) */
+    /* COMPOSITION 6: THE EDITORIAL FASHION PLATE (OVERSIZED MAGAZINE SPREAD REVEAL) */
     .revolving-archive-section {
       margin-bottom: 8rem;
       border-bottom: 1px solid var(--line);
       padding-bottom: 5rem;
+      position: relative;
     }
-    .archive-double-spread {
+    .fashion-plate-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--fg);
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .fashion-plate-tabs {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .plate-tab-btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.35rem 0.65rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .plate-tab-btn:hover, .plate-tab-btn.active {
+      background: var(--fg);
+      color: var(--paper);
+      border-color: var(--fg);
+    }
+    .fashion-plate-stage {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3rem;
-      margin-bottom: 4rem;
+      gap: 2.5rem;
+      background: #faf8f5;
+      border: 1px solid var(--line);
+      box-shadow: 8px 8px 0px rgba(220, 215, 205, 0.45);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
     }
-    @media (min-width: 768px) {
-      .archive-double-spread {
-        grid-template-columns: 1fr 1fr;
+    @media (min-width: 900px) {
+      .fashion-plate-stage {
+        grid-template-columns: 1.15fr 1fr;
+        padding: 3rem;
         gap: 3.5rem;
       }
     }
-    .archive-item-card {
-      display: flex;
-      flex-direction: column;
-    }
-    .archive-item-visual {
+    .plate-visual-box {
       position: relative;
       background: var(--paper);
-      border: 1px solid var(--line);
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
+      border: 1px solid var(--fg);
+      padding: 1rem;
     }
-    .archive-item-visual img {
+    .plate-img-frame {
       width: 100%;
-      aspect-ratio: 4/5.2;
+      aspect-ratio: 4/5.4;
+      overflow: hidden;
+      position: relative;
+      background: #eeeae4;
+      border: 1px solid var(--line);
+    }
+    .plate-img-frame img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .archive-item-title {
+    .plate-look-num-stamp {
+      position: absolute;
+      top: -1.2rem;
+      left: 1.5rem;
       font-family: 'Shippori Mincho', serif;
-      font-size: 1.65rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--fg);
+      background: var(--paper);
+      padding: 0 0.65rem;
+      line-height: 1;
+      border: 1px solid var(--fg);
+      box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.08);
+      z-index: 3;
+    }
+    .plate-marginalia-top {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-    }
-    .archive-item-title .price-pill {
       font-family: 'Space Mono', monospace;
-      font-size: 0.88rem;
-      color: var(--fg);
-      font-weight: 700;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+      padding-top: 0.5rem;
     }
-    .archive-item-prose {
-      font-size: 0.9rem;
-      color: #4b4842;
-      line-height: 1.7;
+    .plate-marginalia-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px dashed var(--line);
+    }
+    .plate-crop-toggle {
+      display: flex;
+      gap: 0.3rem;
+    }
+    .plate-crop-btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      padding: 0.15rem 0.4rem;
+      cursor: pointer;
+    }
+    .plate-crop-btn.active {
+      background: var(--fg);
+      color: var(--paper);
+    }
+    .plate-editorial-text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .plate-vertical-kanji-rubi {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #7a1f18;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .plate-title-en {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 2.1rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .plate-occasion-badge {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #7a1f18;
+      background: #fbf0ee;
+      border: 1px solid #e0c8c5;
+      padding: 0.25rem 0.65rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+    .plate-prose {
+      font-size: 0.95rem;
+      color: #3f3c36;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .plate-specs-ledger {
+      border-top: 1px solid var(--fg);
+      border-bottom: 1px solid var(--fg);
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+    }
+    .plate-spec-item strong {
+      display: block;
+      color: var(--muted);
+      font-size: 0.6rem;
+      margin-bottom: 0.15rem;
+    }
+    .plate-actions-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .turn-plate-btn {
+      background: var(--fg);
+      color: var(--paper);
+      border: 1px solid var(--fg);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+    }
+    .turn-plate-btn:hover {
+      background: #333330;
+      transform: translateX(3px);
+    }
+    .pin-to-slip-btn {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--fg);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+    }
+    .pin-to-slip-btn:hover {
+      background: #ebe6df;
     }
 
     /* COMPOSITION 7: STYLE NOTES & CAMPUS PROTOCOL */
@@ -1568,41 +1738,88 @@
       </div>
     </section>
 
-    <!-- COMPOSITION 6: REVOLVING LOOK ARCHIVE (Double Spreads) -->
-    <section class="revolving-archive-section">
-      <div class="index-header-bar">
-        <span>02 // REVOLVING LOOK ARCHIVE — CURRENT ROTATION</span>
-        <span>SELECT TO DISPATCH FOR THIS WEEKEND</span>
+    <!-- COMPOSITION 6: THE EDITORIAL FASHION PLATE (OVERSIZED MAGAZINE SPREAD REVEAL) -->
+    <section class="revolving-archive-section" id="editorialFashionPlateSection">
+      <div class="fashion-plate-nav-bar">
+        <div>
+          <span style="font-weight: 700;">FOLIO P. 42–47 // 意匠図版 LOOKBOOK PLATES</span>
+          <span style="margin-left: 0.75rem; color: var(--muted);">PUBLISHED ROTATION FOR THE AUTUMN / SPRING SEASON</span>
+        </div>
+        <div class="fashion-plate-tabs" id="plateTabCluster">
+          <button class="plate-tab-btn active" data-index="0">01 // LOOK 014 (FAILLE)</button>
+          <button class="plate-tab-btn" data-index="1">02 // LOOK 029 (DUET)</button>
+          <button class="plate-tab-btn" data-index="2">03 // LOOK 053 (BROCADE)</button>
+        </div>
       </div>
 
-      <div class="archive-double-spread">
-        <!-- Item 1 -->
-        <article class="archive-item-card">
-          <div class="archive-item-visual">
-            <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Duet Gown">
+      <div class="fashion-plate-stage" id="fashionPlateStage">
+        <!-- Visual Column with Look Number Stamp -->
+        <div class="plate-visual-box">
+          <div class="plate-look-num-stamp" id="plateLookStamp">LOOK 014</div>
+          <div class="plate-marginalia-top">
+            <span id="plateAtelierRef">PARIS ATELIER ARCHIVE // FALL 1954</span>
+            <span id="plateDualNotice">✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)</span>
           </div>
-          <h4 class="archive-item-title">
-            <span>Pleated Duet Gown (1951)</span>
-            <span class="price-pill">₹2,899 / 3D</span>
-          </h4>
-          <p class="archive-item-prose">
-            Hand-pleated silk chiffon drape from the Jean Desses Paris atelier. Perfect for senior farewell banquets where fluid movement across terraces creates timeless photographs. Includes primary + backup size.
-          </p>
-        </article>
+          <div class="plate-img-frame" id="plateImgFrame">
+            <img id="plateActiveImg" src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Editorial Fashion Plate">
+          </div>
+          <div class="plate-marginalia-bottom">
+            <div>CROP LENS:</div>
+            <div class="plate-crop-toggle" id="plateCropToggle">
+              <button class="plate-crop-btn active" data-scale="1" data-y="0%">SILHOUETTE</button>
+              <button class="plate-crop-btn" data-scale="1.4" data-y="20%">DRAPE DETAIL</button>
+              <button class="plate-crop-btn" data-scale="1.75" data-y="-15%">ATELIER WEAVE</button>
+            </div>
+            <div>₹0 DAMAGE SHIELD ACTIVE</div>
+          </div>
+        </div>
 
-        <!-- Item 2 -->
-        <article class="archive-item-card">
-          <div class="archive-item-visual">
-            <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Silhouette">
+        <!-- Editorial Prose Column -->
+        <div class="plate-editorial-text-col">
+          <div>
+            <div class="plate-vertical-kanji-rubi" id="plateKanjiRubi">
+              一回きりの夜に放つ、沈黙のオートクチュール。
+            </div>
+            <h3 class="plate-title-en" id="plateTitleEn">
+              Zemire Obsidian Silk Faille
+            </h3>
+            <span class="plate-occasion-badge" id="plateOccasionBadge">
+              OCCASION: SENIOR FAREWELL BALL & FORMAL VALEDICTORY
+            </span>
+            <p class="plate-prose" id="plateProse">
+              When you step into the university auditorium at 19:30, fast fashion collapses into synthetic anonymity. The Christian Dior 'Zémire' architectural faille peplum gown absorbs the ambient tungsten lighting, establishing an unshakeable presence. A sovereign silhouette cut for the graduating student who refuses to look like everyone else in the yearbook photograph.
+            </p>
+
+            <div class="plate-specs-ledger">
+              <div class="plate-spec-item">
+                <strong>ATELIER COMPOSITION:</strong>
+                <span id="plateFiberVal">100% HEAVY SILK FAILLE (1,480g)</span>
+              </div>
+              <div class="plate-spec-item">
+                <strong>OCCASION TIMING:</strong>
+                <span id="plateTimingVal">19:30 IST // VALEDICTORY ENTRANCE</span>
+              </div>
+              <div class="plate-spec-item">
+                <strong>HISTORICAL VALUATION:</strong>
+                <span id="plateValuationVal">₹48,000 ARCHIVAL RECORD</span>
+              </div>
+              <div class="plate-spec-item">
+                <strong>TEMPORARY LEASE:</strong>
+                <span id="plateTariffVal" style="font-weight: 700; color: #7a1f18;">₹2,999 / 3 DAYS (2 SIZES)</span>
+              </div>
+            </div>
           </div>
-          <h4 class="archive-item-title">
-            <span>Gold Brocade Robe</span>
-            <span class="price-pill">₹3,899 / 3D</span>
-          </h4>
-          <p class="archive-item-prose">
-            Historical metallic stomacher and gilded brocade jacquard. Sourced for formal Model UN dinners, society convocations, and dramatic themed cultural balls. Retail valuation ₹65,000.
-          </p>
-        </article>
+
+          <div class="plate-actions-row">
+            <button class="turn-plate-btn" id="turnPlateBtn">
+              <span>TURN THE PAGE // 次の図版 (LOOK 029)</span>
+              <span>⟶</span>
+            </button>
+            <button class="pin-to-slip-btn" id="pinToSlipBtn">
+              <span>PIN TO ORDER SLIP // 注文票へ転写</span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2100,6 +2317,178 @@
         }
       });
     });
+
+    // 7.5 THE EDITORIAL FASHION PLATE INTERACTIVE SYSTEM
+    const platesData = [
+      {
+        lookNum: 'LOOK 014',
+        atelierRef: 'PARIS ATELIER ARCHIVE // FALL 1954',
+        dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
+        img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg',
+        kanjiRubi: '一回きりの夜に放つ、沈黙のオートクチュール。',
+        titleEn: 'Zemire Obsidian Silk Faille',
+        occasionBadge: 'OCCASION: SENIOR FAREWELL BALL & FORMAL VALEDICTORY',
+        prose: "When you step into the university auditorium at 19:30, fast fashion collapses into synthetic anonymity. The Christian Dior 'Zémire' architectural faille peplum gown absorbs the ambient tungsten lighting, establishing an unshakeable presence. A sovereign silhouette cut for the graduating student who refuses to look like everyone else in the yearbook photograph.",
+        fiber: '100% HEAVY SILK FAILLE (1,480g)',
+        timing: '19:30 IST // VALEDICTORY ENTRANCE',
+        valuation: '₹48,000 ARCHIVAL RECORD',
+        tariff: '₹2,999 / 3 DAYS (2 SIZES)',
+        price: 2999,
+        slipName: 'LOOK 014: DIOR ZEMIRE FAILLE',
+        nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 029)'
+      },
+      {
+        lookNum: 'LOOK 029',
+        atelierRef: 'JEAN DESSÈS PARIS // SPRING 1951',
+        dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
+        img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg',
+        kanjiRubi: '夜の芝生を流れる、古代ギリシアのプリーツ。',
+        titleEn: 'Pleated Duet Chiffon Gown',
+        occasionBadge: 'OCCASION: COLLEGE FESTIVAL & STADIUM NIGHT',
+        prose: "Hand-pleated silk chiffon drape from the Jean Dessès Paris atelier. Under the concert floodlights and terrace evening breeze, this gown catches every atmospheric draft, creating fluid sculptural motion across university lawns. Includes primary size plus a sealed sister size.",
+        fiber: 'FLUID SILK CHIFFON DRAPE (1,140g)',
+        timing: '20:15 IST // STADIUM FESTIVAL',
+        valuation: '₹54,000 ARCHIVAL RECORD',
+        tariff: '₹2,899 / 3 DAYS (2 SIZES)',
+        price: 2899,
+        slipName: 'LOOK 029: JEAN DESSES PLEATED DUET',
+        nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 053)'
+      },
+      {
+        lookNum: 'LOOK 053',
+        atelierRef: 'ROYAL HERITAGE ATELIER // HISTORICAL RECORD',
+        dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
+        img: '/assets/editorial/court-dress.jpg',
+        kanjiRubi: '金糸の威厳を纏い、壇上を統べる。',
+        titleEn: 'Gilded Court Brocade Robe',
+        occasionBadge: 'OCCASION: SOCIETY CONVOCATION & VALEDICTORY DINNER',
+        prose: "Architectural side panniers and metallic gold thread jacquard. Sourced for formal society convocations and Model UN valedictory dinners where regal historic proportion commands immediate silence across the dining hall. Retail valuation ₹65,000.",
+        fiber: 'METALLIC GOLD BROCADE (1,620g)',
+        timing: '18:45 IST // SOCIETY CONVOCATION',
+        valuation: '₹65,000 ARCHIVAL RECORD',
+        tariff: '₹3,899 / 3 DAYS (2 SIZES)',
+        price: 3899,
+        slipName: 'LOOK 053: GILDED COURT BROCADE',
+        nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 014)'
+      }
+    ];
+
+    let activePlateIndex = 0;
+    const plateTabBtns = document.querySelectorAll('#plateTabCluster .plate-tab-btn');
+    const plateLookStamp = document.getElementById('plateLookStamp');
+    const plateAtelierRef = document.getElementById('plateAtelierRef');
+    const plateDualNotice = document.getElementById('plateDualNotice');
+    const plateActiveImg = document.getElementById('plateActiveImg');
+    const plateKanjiRubi = document.getElementById('plateKanjiRubi');
+    const plateTitleEn = document.getElementById('plateTitleEn');
+    const plateOccasionBadge = document.getElementById('plateOccasionBadge');
+    const plateProse = document.getElementById('plateProse');
+    const plateFiberVal = document.getElementById('plateFiberVal');
+    const plateTimingVal = document.getElementById('plateTimingVal');
+    const plateValuationVal = document.getElementById('plateValuationVal');
+    const plateTariffVal = document.getElementById('plateTariffVal');
+    const turnPlateBtn = document.getElementById('turnPlateBtn');
+    const pinToSlipBtn = document.getElementById('pinToSlipBtn');
+    const plateCropBtns = document.querySelectorAll('#plateCropToggle .plate-crop-btn');
+
+    function renderPlate(index) {
+      activePlateIndex = index;
+      const data = platesData[index];
+      plateTabBtns.forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+
+      if (!prefersReducedMotion) {
+        gsap.timeline()
+          .to('#fashionPlateStage', { opacity: 0.5, y: 4, duration: 0.15 })
+          .call(() => {
+            if (plateLookStamp) plateLookStamp.textContent = data.lookNum;
+            if (plateAtelierRef) plateAtelierRef.textContent = data.atelierRef;
+            if (plateDualNotice) plateDualNotice.textContent = data.dualNotice;
+            if (plateActiveImg) plateActiveImg.src = data.img;
+            if (plateKanjiRubi) plateKanjiRubi.textContent = data.kanjiRubi;
+            if (plateTitleEn) plateTitleEn.textContent = data.titleEn;
+            if (plateOccasionBadge) plateOccasionBadge.textContent = data.occasionBadge;
+            if (plateProse) plateProse.textContent = data.prose;
+            if (plateFiberVal) plateFiberVal.textContent = data.fiber;
+            if (plateTimingVal) plateTimingVal.textContent = data.timing;
+            if (plateValuationVal) plateValuationVal.textContent = data.valuation;
+            if (plateTariffVal) plateTariffVal.textContent = data.tariff;
+            if (turnPlateBtn) {
+              const labelEl = turnPlateBtn.querySelector('span:first-child');
+              if (labelEl) labelEl.textContent = data.nextLabel;
+            }
+          })
+          .to('#fashionPlateStage', { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
+      } else {
+        if (plateLookStamp) plateLookStamp.textContent = data.lookNum;
+        if (plateAtelierRef) plateAtelierRef.textContent = data.atelierRef;
+        if (plateDualNotice) plateDualNotice.textContent = data.dualNotice;
+        if (plateActiveImg) plateActiveImg.src = data.img;
+        if (plateKanjiRubi) plateKanjiRubi.textContent = data.kanjiRubi;
+        if (plateTitleEn) plateTitleEn.textContent = data.titleEn;
+        if (plateOccasionBadge) plateOccasionBadge.textContent = data.occasionBadge;
+        if (plateProse) plateProse.textContent = data.prose;
+        if (plateFiberVal) plateFiberVal.textContent = data.fiber;
+        if (plateTimingVal) plateTimingVal.textContent = data.timing;
+        if (plateValuationVal) plateValuationVal.textContent = data.valuation;
+        if (plateTariffVal) plateTariffVal.textContent = data.tariff;
+        if (turnPlateBtn) {
+          const labelEl = turnPlateBtn.querySelector('span:first-child');
+          if (labelEl) labelEl.textContent = data.nextLabel;
+        }
+      }
+    }
+
+    plateTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index, 10);
+        renderPlate(idx);
+      });
+    });
+
+    if (turnPlateBtn) {
+      turnPlateBtn.addEventListener('click', () => {
+        const nextIdx = (activePlateIndex + 1) % platesData.length;
+        renderPlate(nextIdx);
+      });
+    }
+
+    // Plate Crop Toggle
+    plateCropBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        plateCropBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const scale = btn.dataset.scale;
+        const y = btn.dataset.y;
+        if (plateActiveImg) {
+          gsap.to(plateActiveImg, {
+            scale: parseFloat(scale),
+            y: y,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+        }
+      });
+    });
+
+    // Pin to Order Slip
+    if (pinToSlipBtn) {
+      pinToSlipBtn.addEventListener('click', () => {
+        const currentData = platesData[activePlateIndex];
+        selectedLook = currentData.slipName;
+        currentBasePrice = currentData.price;
+        if (slipTitle) slipTitle.textContent = selectedLook;
+        if (slipThumb) slipThumb.src = currentData.img;
+        updateSlipCalculations();
+
+        const slipTarget = document.getElementById('editorialOrderSlipSection');
+        if (slipTarget) {
+          slipTarget.scrollIntoView({ behavior: 'smooth' });
+          gsap.fromTo('#magazineOrderSlip', { boxShadow: '0 0 35px rgba(122, 31, 24, 0.35)' }, { boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)', duration: 1.2 });
+        }
+      });
+    }
 
     // 8. SIGNATURE TRANSITION PROTOTYPE: 3D PHYSICAL SPREAD FOLD (EXPERIMENT 01-A)
     const turnBtn = document.getElementById('turnPageBtn');

@@ -396,6 +396,29 @@
     }
 
     /* POSTER 003: LOOK EXHIBITION POSTER */
+    .scroll-curator-tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--fg);
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .scroll-curator-btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s ease;
+    }
+    .scroll-curator-btn.active, .scroll-curator-btn:hover {
+      background: var(--fg);
+      color: var(--paper);
+      border-color: var(--fg);
+    }
     .look-exhibit-layout {
       display: grid;
       grid-template-columns: 1fr;
@@ -403,7 +426,7 @@
     }
     @media (min-width: 1024px) {
       .look-exhibit-layout {
-        grid-template-columns: 1fr 180px 1fr;
+        grid-template-columns: 1.15fr 180px 1.2fr;
         gap: 3rem;
         align-items: center;
       }
@@ -411,12 +434,92 @@
     .look-exhibit-visual {
       border: 1px solid var(--fg);
       position: relative;
+      background: var(--paper);
     }
-    .look-exhibit-visual img {
+    .scroll-accession-tag {
+      position: absolute;
+      top: -0.85rem;
+      left: 1rem;
+      background: var(--paper);
+      border: 1px solid var(--fg);
+      padding: 0.15rem 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      z-index: 2;
+    }
+    .scroll-img-inner {
       width: 100%;
-      aspect-ratio: 4/5.5;
+      aspect-ratio: 4/5.6;
+      overflow: hidden;
+      position: relative;
+    }
+    .scroll-img-inner img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .scroll-hanging-rod {
+      background: #191816;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.5rem;
+    }
+    .rod-end-knob {
+      width: 8px;
+      height: 14px;
+      background: #b8b2a4;
+      border-radius: 1px;
+    }
+    .rod-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: #b8b2a4;
+      letter-spacing: 0.1em;
+    }
+    .scroll-action-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .unroll-next-btn {
+      background: var(--fg);
+      color: var(--paper);
+      border: 1px solid var(--fg);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+    }
+    .unroll-next-btn:hover {
+      background: #33312c;
+    }
+    .attach-cert-btn {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--fg);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+    }
+    .attach-cert-btn:hover {
+      background: #efebe4;
     }
     .look-vertical-specs {
       display: flex;
@@ -1089,15 +1192,31 @@
     </section>
 
     <!-- POSTER 003: LOOK EXHIBITION POSTER -->
-    <section class="exhibit-poster">
+    <section class="exhibit-poster" id="lookExhibitionPoster">
       <div class="poster-id-tag">
-        <span>POSTER NO. 003 // ATELIER SPECIMEN STUDY</span>
+        <span>POSTER NO. 003 // ATELIER SPECIMEN STUDY (特別掛軸展覧)</span>
         <span class="vermilion-stamp">第三号 造形考証</span>
       </div>
 
-      <div class="look-exhibit-layout">
+      <!-- Curatorial Scroll Switcher Tabs -->
+      <div class="scroll-curator-tabs" id="scrollCuratorTabs">
+        <button class="scroll-curator-btn active" data-index="0">巻一 // ROBE LONGUE (1983)</button>
+        <button class="scroll-curator-btn" data-index="1">巻二 // ZÉMIRE FAILLE (1954)</button>
+        <button class="scroll-curator-btn" data-index="2">巻三 // DESSÈS DUET (1951)</button>
+      </div>
+
+      <div class="look-exhibit-layout" id="lookExhibitStage">
+        <!-- Hanging Scroll Visual with Real Weighted Rod -->
         <div class="look-exhibit-visual" id="lookExhibitVisual">
-          <img id="lookExhibitImg" src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Robe Longue Sculptural Column">
+          <div class="scroll-accession-tag" id="scrollAccessionTag">ACCESSION NO. EX-1983-POI // TIER A+</div>
+          <div class="scroll-img-inner">
+            <img id="lookExhibitImg" src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Robe Longue Sculptural Column">
+          </div>
+          <div class="scroll-hanging-rod">
+            <span class="rod-end-knob"></span>
+            <span class="rod-text">掛軸本紙 // WEIGHTED ATELIER ROD 380g</span>
+            <span class="rod-end-knob"></span>
+          </div>
         </div>
 
         <div class="look-vertical-specs" id="lookVerticalSpecs">
@@ -1113,22 +1232,32 @@
         </div>
 
         <div class="look-curatorial-text">
-          <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem;">
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem;" id="curatorialDossierTag">
             ARCHIVE DOSSIER // ROBE LONGUE COLUMN
           </div>
-          <!-- Experiment 04-D: Curatorial Specimen Crop Shift Toggle -->
+          <!-- Curatorial Specimen Crop Shift Toggle -->
           <div class="curator-lens-toggle" id="curatorLensToggle">
-            <button class="curator-lens-btn active" data-zoom="1" data-y="0%" data-year="一九八三年 パリアトリエ制作。" data-mat="絹クレープ・ド・シーン百パーセント。立体裁断による直線的なドレープ。">01 全体像 SILHOUETTE</button>
-            <button class="curator-lens-btn" data-zoom="1.45" data-y="18%" data-year="極上の織目 拡大考証。" data-mat="クレープ織の表面張力。光を吸収する黒鉛シルク。">02 織目 DRAPE DETAIL</button>
-            <button class="curator-lens-btn" data-zoom="1.8" data-y="-25%" data-year="アトリエ手縫い 縫製記録。" data-mat="四十四年前の熟練職人による手縫い縫製線。">03 縫製 ATELIER STITCH</button>
+            <button class="curator-lens-btn active" data-zoom="1" data-y="0%">01 全体像 SILHOUETTE</button>
+            <button class="curator-lens-btn" data-zoom="1.45" data-y="18%">02 織目 DRAPE DETAIL</button>
+            <button class="curator-lens-btn" data-zoom="1.8" data-y="-25%">03 縫製 ATELIER STITCH</button>
           </div>
           <h2 class="curatorial-title" id="curatorialHeading">THE ARCHITECTURE OF SILENT AUTHORITY.</h2>
-          <p style="font-size: 0.92rem; line-height: 1.8; color: #333333; margin-bottom: 2rem;">
+          <p style="font-size: 0.92rem; line-height: 1.8; color: #333333; margin-bottom: 1.75rem;" id="curatorialProse">
             Purchased fast fashion shouts with polyester glitter and synthetic sheen. Archival couture speaks in weight, gravity, and pure silk crêpe de chine that catches the ambient tungsten light of campus auditoriums. When you step onto the valedictory stage in this gown, you do not look like a student playing dress-up. You look like the author of the room.
           </p>
-          <div style="border-top: 1px solid var(--line); padding-top: 1.25rem; font-family: 'Space Mono', monospace; font-size: 0.75rem;">
-            <strong>MUSEUM VALUATION:</strong> ₹38,000<br>
-            <strong>WEDELIA LEASE:</strong> ₹2,499 / 3 DAYS (TWO SIZES DISPATCHED)
+          <div style="border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1rem 0; font-family: 'Space Mono', monospace; font-size: 0.75rem; margin-bottom: 1.5rem;" id="curatorialTariffBlock">
+            <div><strong>MUSEUM VALUATION:</strong> <span id="curatorialValuation">₹38,000 ARCHIVAL BENCHMARK</span></div>
+            <div style="margin-top: 0.35rem;"><strong>WEDELIA LEASE:</strong> <span id="curatorialLeaseRate" style="color: var(--vermilion); font-weight: 700;">₹2,499 / 3 DAYS (2 SIZES DISPATCHED)</span></div>
+          </div>
+
+          <div class="scroll-action-row">
+            <button class="unroll-next-btn" id="unrollNextBtn">
+              <span>UNROLL NEXT EXHIBIT // 次号掛軸開帳</span>
+              <span>⟶</span>
+            </button>
+            <button class="attach-cert-btn" id="attachCertBtn">
+              <span>TRANSFER TO LEASE CERTIFICATE</span>
+            </button>
           </div>
         </div>
       </div>
@@ -1581,6 +1710,139 @@
         }
       });
     });
+
+    // 4.5 THE CURATED EXHIBITION HANGING SCROLL SYSTEM
+    const exhibitionScrolls = [
+      {
+        tag: 'ACCESSION NO. EX-1983-POI // TIER A+',
+        img: '/assets/editorial/robe-longue-1983-12-1-1.jpg',
+        year: '一九八三年 パリアトリエ制作。',
+        material: '絹クレープ・ド・シーン百パーセント。立体裁断による直線的なドレープ。',
+        dispatch: '学生証提示により三日間の特別貸出適用。',
+        dossierTag: 'ARCHIVE DOSSIER // ROBE LONGUE COLUMN',
+        heading: 'THE ARCHITECTURE OF SILENT AUTHORITY.',
+        prose: 'Purchased fast fashion shouts with polyester glitter and synthetic sheen. Archival couture speaks in weight, gravity, and pure silk crêpe de chine that catches the ambient tungsten light of campus auditoriums. When you step onto the valedictory stage in this gown, you do not look like a student playing dress-up. You look like the author of the room.',
+        valuation: '₹38,000 ARCHIVAL BENCHMARK',
+        lease: '₹2,499 / 3 DAYS (2 SIZES DISPATCHED)',
+        certTitle: '第〇八三号 意匠借用証書 // ROBE LONGUE',
+        nextScrollLabel: 'UNROLL NEXT EXHIBIT // 次号掛軸開帳 (ZÉMIRE)'
+      },
+      {
+        tag: 'ACCESSION NO. EX-1954-CD // TIER S',
+        img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg',
+        year: '一九五四年 ディオール アトリエ制作。',
+        material: '重厚なる漆黒シルクファイユ千四百八十グラム。彫刻的ペプラム造形。',
+        dispatch: '卒業祝宴・正装晩餐会向け特別出納仕様。',
+        dossierTag: 'ARCHIVE DOSSIER // ZÉMIRE EVENING FAILLE',
+        heading: 'MONUMENTAL GEOMETRY OF THE PEPLUM.',
+        prose: 'The Zémire silhouette stands as Christian Dior’s definitive mastery of architectural tailoring. Cut from dense black silk faille that holds sculptural form under motion, the peplum flares into regal volume above a column skirt. Designed for senior farewell banquets where commanding dignity is non-negotiable.',
+        valuation: '₹48,000 ARCHIVAL BENCHMARK',
+        lease: '₹2,999 / 3 DAYS (2 SIZES DISPATCHED)',
+        certTitle: '第〇一四号 意匠借用証書 // ZÉMIRE FAILLE',
+        nextScrollLabel: 'UNROLL NEXT EXHIBIT // 次号掛軸開帳 (DESSÈS DUET)'
+      },
+      {
+        tag: 'ACCESSION NO. EX-1951-JD // TIER A+',
+        img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg',
+        year: '一九五一年 ジャン・デッセ パリ制作。',
+        material: '極薄絹シフォンの手仕事プリーツ。古代ギリシア彫像の流麗なる陰影。',
+        dispatch: '学園祭典・野外祝祭向け特別貸出認可。',
+        dossierTag: 'ARCHIVE DOSSIER // PLEATED DUET GOWN',
+        heading: 'CLASSICAL GRECO-EGYPTIAN DRAPERY.',
+        prose: 'Jean Dessès was the unmatched architect of fluid chiffon drapery. Under outdoor amphitheater winds and evening festival lanterns, the hand-pleated chiffon expands and ripples, producing an ethereal, unreplicable cinematic presence that photographs with timeless grain.',
+        valuation: '₹54,000 ARCHIVAL BENCHMARK',
+        lease: '₹2,899 / 3 DAYS (2 SIZES DISPATCHED)',
+        certTitle: '第〇二九号 意匠借用証書 // PLEATED DUET',
+        nextScrollLabel: 'UNROLL NEXT EXHIBIT // 次号掛軸開帳 (ROBE LONGUE)'
+      }
+    ];
+
+    let currentScrollIndex = 0;
+    const scrollCuratorBtns = document.querySelectorAll('#scrollCuratorTabs .scroll-curator-btn');
+    const scrollAccessionTag = document.getElementById('scrollAccessionTag');
+    const curatorialDossierTag = document.getElementById('curatorialDossierTag');
+    const curatorialHeading = document.getElementById('curatorialHeading');
+    const curatorialProse = document.getElementById('curatorialProse');
+    const curatorialValuation = document.getElementById('curatorialValuation');
+    const curatorialLeaseRate = document.getElementById('curatorialLeaseRate');
+    const unrollNextBtn = document.getElementById('unrollNextBtn');
+    const attachCertBtn = document.getElementById('attachCertBtn');
+
+    function renderScrollExhibit(idx) {
+      currentScrollIndex = idx;
+      const data = exhibitionScrolls[idx];
+      scrollCuratorBtns.forEach((b, i) => {
+        b.classList.toggle('active', i === idx);
+      });
+
+      if (!prefersReducedMotion) {
+        gsap.timeline()
+          .to('#lookExhibitStage', { opacity: 0.5, y: 6, duration: 0.15 })
+          .call(() => {
+            if (scrollAccessionTag) scrollAccessionTag.textContent = data.tag;
+            if (lookExhibitImg) lookExhibitImg.src = data.img;
+            if (lookSpecYear) lookSpecYear.textContent = data.year;
+            if (lookSpecMaterial) lookSpecMaterial.textContent = data.material;
+            if (curatorialDossierTag) curatorialDossierTag.textContent = data.dossierTag;
+            if (curatorialHeading) curatorialHeading.textContent = data.heading;
+            if (curatorialProse) curatorialProse.textContent = data.prose;
+            if (curatorialValuation) curatorialValuation.textContent = data.valuation;
+            if (curatorialLeaseRate) curatorialLeaseRate.textContent = data.lease;
+            if (unrollNextBtn) {
+              const span = unrollNextBtn.querySelector('span:first-child');
+              if (span) span.textContent = data.nextScrollLabel;
+            }
+          })
+          .to('#lookExhibitStage', { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
+      } else {
+        if (scrollAccessionTag) scrollAccessionTag.textContent = data.tag;
+        if (lookExhibitImg) lookExhibitImg.src = data.img;
+        if (lookSpecYear) lookSpecYear.textContent = data.year;
+        if (lookSpecMaterial) lookSpecMaterial.textContent = data.material;
+        if (curatorialDossierTag) curatorialDossierTag.textContent = data.dossierTag;
+        if (curatorialHeading) curatorialHeading.textContent = data.heading;
+        if (curatorialProse) curatorialProse.textContent = data.prose;
+        if (curatorialValuation) curatorialValuation.textContent = data.valuation;
+        if (curatorialLeaseRate) curatorialLeaseRate.textContent = data.lease;
+        if (unrollNextBtn) {
+          const span = unrollNextBtn.querySelector('span:first-child');
+          if (span) span.textContent = data.nextScrollLabel;
+        }
+      }
+    }
+
+    scrollCuratorBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index, 10);
+        renderScrollExhibit(idx);
+      });
+    });
+
+    if (unrollNextBtn) {
+      unrollNextBtn.addEventListener('click', () => {
+        const nextIdx = (currentScrollIndex + 1) % exhibitionScrolls.length;
+        renderScrollExhibit(nextIdx);
+      });
+    }
+
+    // Attach to Lease Certificate
+    if (attachCertBtn) {
+      attachCertBtn.addEventListener('click', () => {
+        const data = exhibitionScrolls[currentScrollIndex];
+        const certTitleEl = document.querySelector('.cert-title-kanji');
+        if (certTitleEl) {
+          certTitleEl.textContent = data.certTitle;
+        }
+        const certPanel = document.querySelector('.custody-certificate-panel');
+        if (certPanel) {
+          certPanel.scrollIntoView({ behavior: 'smooth' });
+          gsap.fromTo(certPanel, 
+            { outline: '4px solid var(--vermilion)' }, 
+            { outline: '2px double var(--fg)', duration: 1.2 }
+          );
+        }
+      });
+    }
 
     // 5. GALLERY OVERLAPPING EXHIBITION CHOREOGRAPHY (POSTER 006)
     if (!prefersReducedMotion) {
