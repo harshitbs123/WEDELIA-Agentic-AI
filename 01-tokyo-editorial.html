@@ -454,6 +454,8 @@
       background: #faf9f5;
       border: 1px solid var(--line);
       padding: 2.5rem 1.5rem;
+      max-width: 100%;
+      overflow: hidden;
     }
     @media (min-width: 1024px) {
       .specimen-grid {
@@ -467,6 +469,8 @@
       border: 1px solid var(--line);
       background: #ffffff;
       padding: 1.25rem;
+      max-width: 100%;
+      overflow: hidden;
     }
     .specimen-img-col img {
       width: 100%;
@@ -782,6 +786,94 @@
         font-size: 0.65rem;
       }
     }
+    /* Experiment 1: 3D Paper Leaf Fold Overlay */
+    .page-turn-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(90deg, #ede9e1 0%, #e3ded5 49%, #cec8bd 50%, #ede9e1 51%, #ede9e1 100%);
+      z-index: 10000;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      perspective: 1800px;
+      clip-path: inset(0 100% 0 0);
+      box-shadow: -35px 0 70px rgba(0, 0, 0, 0.2);
+    }
+    .page-leaf-turning {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    /* Experiment 2: Decoupled Editorial Print Layers */
+    .cover-visual-frame {
+      overflow: hidden;
+    }
+    .cover-visual-frame img {
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+    .cover-visual-frame .caption-box {
+      will-change: transform;
+      position: relative;
+    }
+
+    /* Experiment 3: Art Director Registration Loupe */
+    .print-loupe-marker {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--fg);
+      background: rgba(245, 244, 239, 0.92);
+      border: 1px solid var(--fg);
+      padding: 0.25rem 0.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: opacity 0.2s ease;
+      transform: translate(12px, 12px);
+    }
+    .print-loupe-marker .crosshair {
+      font-size: 0.85rem;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    /* Experiment 5: Archival Fashion Plate Crop Selector */
+    .specimen-crop-toolbar {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+    }
+    .crop-toggle-btn {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 0.35rem 0.65rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+    }
+    .crop-toggle-btn:hover, .crop-toggle-btn.active {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
   </style>
 </head>
 <body>
@@ -999,9 +1091,18 @@
     <!-- COMPOSITION 5: FASHION SPECIMEN STUDY (Museum Documentation) -->
     <section class="specimen-study-section">
       <div class="specimen-grid">
-        <div class="specimen-img-col">
+        <div class="specimen-img-col" id="specimenImgContainer">
           <span class="specimen-registration-mark">[SPECIMEN REF: WDL-014]</span>
-          <img src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Sculptural Longue Column Specimen">
+          <div class="print-loupe-marker" id="loupeMarker">
+            <span class="crosshair">+</span>
+            <span class="loupe-readout">PROOF 014 // <span id="loupeCoords">X:00 Y:00</span></span>
+          </div>
+          <img id="specimenImage" src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Sculptural Longue Column Specimen">
+          <div class="specimen-crop-toolbar">
+            <button class="crop-toggle-btn active" data-crop="full">01 SILHOUETTE</button>
+            <button class="crop-toggle-btn" data-crop="detail">02 DRAPE DETAIL</button>
+            <button class="crop-toggle-btn" data-crop="tag">03 ATELIER ARCHIVE</button>
+          </div>
         </div>
 
         <div class="specimen-sheet">
@@ -1157,11 +1258,13 @@
       </div>
     </footer>
 
-    <!-- Signature Page-Turn Transition Overlay -->
+    <!-- Signature 3D Page-Turn Transition Overlay -->
     <div class="page-turn-overlay" id="pageTurnOverlay">
-      <div class="page-turn-inner">
-        <div class="page-turn-kanji">特装第二輯 展開</div>
-        <div class="page-turn-sub">FOLIO SPREAD SEQUENCE // EDITORIAL WIPE</div>
+      <div class="page-leaf-turning">
+        <div class="page-turn-inner">
+          <div class="page-turn-kanji">特装第二輯 展開</div>
+          <div class="page-turn-sub">FOLIO SPREAD SEQUENCE // EDITORIAL WIPE</div>
+        </div>
       </div>
     </div>
 
@@ -1305,9 +1408,74 @@
       }, { passive: true });
     }
 
-    // 5. SIGNATURE TRANSITION PROTOTYPE: EDITORIAL PAGE-TURN WIPE
+    // 5. DECOUPLED EDITORIAL PRINT HANDLING (EXPERIMENT 01-B)
+    const coverFrame = document.querySelector('.cover-visual-frame');
+    if (coverFrame && !prefersReducedMotion) {
+      const coverImg = coverFrame.querySelector('img');
+      const caption = coverFrame.querySelector('.caption-box');
+      const xToImg = gsap.quickTo(coverImg, 'x', { duration: 0.6, ease: 'power2.out' });
+      const yToImg = gsap.quickTo(coverImg, 'y', { duration: 0.6, ease: 'power2.out' });
+      const xToCap = gsap.quickTo(caption, 'x', { duration: 0.6, ease: 'power2.out' });
+      
+      coverFrame.addEventListener('mousemove', (e) => {
+        const rect = coverFrame.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+        xToImg(relX * 16);
+        yToImg(relY * 16);
+        xToCap(-relX * 8);
+      });
+      coverFrame.addEventListener('mouseleave', () => {
+        xToImg(0);
+        yToImg(0);
+        xToCap(0);
+      });
+    }
+
+    // 6. ART DIRECTOR REGISTRATION LOUPE (EXPERIMENT 01-C)
+    const specimenContainer = document.getElementById('specimenImgContainer');
+    const loupe = document.getElementById('loupeMarker');
+    const loupeCoords = document.getElementById('loupeCoords');
+    if (specimenContainer && loupe) {
+      specimenContainer.addEventListener('mouseenter', () => { loupe.style.opacity = '1'; });
+      specimenContainer.addEventListener('mouseleave', () => { loupe.style.opacity = '0'; });
+      specimenContainer.addEventListener('mousemove', (e) => {
+        const rect = specimenContainer.getBoundingClientRect();
+        const x = Math.round(e.clientX - rect.left);
+        const y = Math.round(e.clientY - rect.top);
+        loupe.style.transform = `translate(${x + 12}px, ${y + 12}px)`;
+        if (loupeCoords) loupeCoords.textContent = `X:${x} Y:${y}`;
+      });
+    }
+
+    // 7. ARCHIVAL FASHION PLATE CROP SELECTOR (EXPERIMENT 01-E)
+    const cropBtns = document.querySelectorAll('.crop-toggle-btn');
+    const specImg = document.getElementById('specimenImage');
+    const cropStates = {
+      full: { scale: 1, objectPosition: 'center center' },
+      detail: { scale: 1.45, objectPosition: 'center 30%' },
+      tag: { scale: 2.1, objectPosition: 'center 15%' }
+    };
+    cropBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        cropBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const crop = btn.dataset.crop;
+        if (specImg && cropStates[crop]) {
+          gsap.to(specImg, {
+            scale: cropStates[crop].scale,
+            objectPosition: cropStates[crop].objectPosition,
+            duration: 0.7,
+            ease: 'power3.inOut'
+          });
+        }
+      });
+    });
+
+    // 8. SIGNATURE TRANSITION PROTOTYPE: 3D PHYSICAL SPREAD FOLD (EXPERIMENT 01-A)
     const turnBtn = document.getElementById('turnPageBtn');
     const overlay = document.getElementById('pageTurnOverlay');
+    const turningLeaf = document.querySelector('.page-leaf-turning');
 
     let isWiping = false;
     function triggerPageTurn() {
@@ -1322,16 +1490,22 @@
 
       wipeTl
         .set(overlay, { clipPath: 'inset(0 100% 0 0)' })
+        .set(turningLeaf, { rotateY: -75, transformOrigin: 'left center' })
         .to(overlay, {
           clipPath: 'inset(0 0% 0 0)',
-          duration: 0.8,
+          duration: 0.85,
           ease: 'power2.inOut'
         })
+        .to(turningLeaf, {
+          rotateY: 0,
+          duration: 0.85,
+          ease: 'power2.out'
+        }, '<')
         .to(overlay, {
           clipPath: 'inset(0 0 0 100%)',
           duration: 0.8,
           ease: 'power2.inOut',
-          delay: 0.18
+          delay: 0.2
         });
     }
 

@@ -739,6 +739,93 @@
         font-size: 0.65rem;
       }
     }
+    /* Experiment 02-A: Scanner Cursor Bar */
+    .archive-scanner-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1.25rem;
+      background: #f0f0f0;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+    }
+    .scanner-live-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #000000;
+      margin: 0 0.35rem;
+    }
+
+    /* Experiment 02-D: Category Re-Indexing Filters */
+    .archive-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .filter-label {
+      font-weight: 700;
+      color: var(--muted);
+      margin-right: 0.5rem;
+    }
+    .filter-tab {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.65rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: none;
+    }
+    .filter-tab:hover, .filter-tab.active {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    /* Experiment 02-B: In-Place Archive Inspection Mode */
+    .catalog-cell.inspecting {
+      outline: 4px solid #000000;
+      z-index: 50;
+      background: #fafafa;
+    }
+    .catalog-cell.inspecting .catalog-cell-top {
+      background: #000000;
+      color: #ffffff;
+      padding: 0.5rem;
+      margin: -1.75rem -1.75rem 1.5rem -1.75rem;
+    }
+
+    /* Experiment 02-C: Interactive Gate Pass Voucher Input */
+    .interactive-voucher-select {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.6rem;
+      margin-top: 0.35rem;
+      width: 100%;
+      cursor: pointer;
+    }
+    .stamp-verified {
+      display: inline-block;
+      border: 2px solid #000000;
+      padding: 0.2rem 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      margin-top: 0.75rem;
+    }
   </style>
 </head>
 <body>
@@ -940,39 +1027,56 @@
       <span>CLICK ROW TO JUMP TO DETAILED SPECIMEN</span>
     </div>
 
+    <!-- Scanner Cursor Bar (Experiment 02-A) -->
+    <div class="archive-scanner-bar" id="archiveScannerBar">
+      <div>SCANNER: <span class="scanner-live-dot"></span> <span id="scannerStatus">ACTIVE SCAN</span></div>
+      <div id="scannerCoordinates">SHELF: -- // BAY: -- // RECORD: NONE</div>
+      <div>FREQUENCY: 60Hz // RACK BUS</div>
+    </div>
+
+    <!-- Category Re-Indexing Filters (Experiment 02-D) -->
+    <div class="archive-filter-row" id="archiveFilters">
+      <span class="filter-label">RE-INDEX SECTOR:</span>
+      <button class="filter-tab active" data-filter="ALL">ALL [06]</button>
+      <button class="filter-tab" data-filter="FAREWELL">FAREWELL [03]</button>
+      <button class="filter-tab" data-filter="FEST">COLLEGE FEST [01]</button>
+      <button class="filter-tab" data-filter="BALL">SOCIETY BALL [01]</button>
+      <button class="filter-tab" data-filter="PHOTO">PHOTOSHOOT [01]</button>
+    </div>
+
     <!-- Master Numbered Quick Directory -->
     <div class="master-numbered-ledger">
-      <div class="ledger-row">
+      <div class="ledger-row" data-sector="FAREWELL" data-shelf="01" data-bay="A">
         <span class="ledger-serial">001</span>
         <div class="ledger-name">ZEMIRE EVENING FAILLE <span class="sub">1952 PARIS ATELIER // WDL-01-DOR</span></div>
         <div class="ledger-spec col-hide-mobile">SENIOR FAREWELL & FORMAL GALA</div>
         <div class="ledger-tariff">₹2,999 / 3D</div>
       </div>
-      <div class="ledger-row">
+      <div class="ledger-row" data-sector="FAREWELL" data-shelf="02" data-bay="A">
         <span class="ledger-serial">002</span>
         <div class="ledger-name">PLEATED DUET GOWN <span class="sub">1951 PARIS DUET // WDL-02-DES</span></div>
         <div class="ledger-spec col-hide-mobile">COLLEGE FAREWELL & DEBATE BALL</div>
         <div class="ledger-tariff">₹2,899 / 3D</div>
       </div>
-      <div class="ledger-row">
+      <div class="ledger-row" data-sector="FEST" data-shelf="03" data-bay="B">
         <span class="ledger-serial">003</span>
         <div class="ledger-name">KINETIC SHIFT & WRAP <span class="sub">SUMMER RUNWAY // WDL-03-CST</span></div>
         <div class="ledger-spec col-hide-mobile">COLLEGE FEST STAR NIGHT</div>
         <div class="ledger-tariff">₹1,699 / 3D</div>
       </div>
-      <div class="ledger-row">
+      <div class="ledger-row" data-sector="BALL" data-shelf="04" data-bay="C">
         <span class="ledger-serial">004</span>
         <div class="ledger-name">GOLD BROCADE ROBE <span class="sub">PALATIAL ARCHIVE // WDL-04-CRT</span></div>
         <div class="ledger-spec col-hide-mobile">SOCIETY BALL & THEME BANQUET</div>
         <div class="ledger-tariff">₹3,899 / 3D</div>
       </div>
-      <div class="ledger-row">
+      <div class="ledger-row" data-sector="FAREWELL" data-shelf="05" data-bay="A">
         <span class="ledger-serial">005</span>
         <div class="ledger-name">SCULPTURAL LONGUE COLUMN <span class="sub">1983 ATELIER // WDL-05-ROB</span></div>
         <div class="ledger-spec col-hide-mobile">VALEDICTORY NIGHT & AUDITORIUM</div>
         <div class="ledger-tariff">₹2,499 / 3D</div>
       </div>
-      <div class="ledger-row">
+      <div class="ledger-row" data-sector="PHOTO" data-shelf="06" data-bay="D">
         <span class="ledger-serial">006</span>
         <div class="ledger-name">STRAPLESS HOOP ARCHITECTURE <span class="sub">MID-CENTURY // WDL-06-STR</span></div>
         <div class="ledger-spec col-hide-mobile">PORTFOLIO PHOTOSHOOT & DRAMA</div>
@@ -1313,8 +1417,15 @@
             </div>
 
             <div class="doc-field-group">
-              <span class="doc-label">CAMPUS NODE & DESTINATION GATE</span>
-              <div class="doc-value">MIRANDA HOUSE, GATE 2 RESIDENTIAL CORRIDOR, UNIVERSITY OF DELHI NORTH CAMPUS</div>
+              <span class="doc-label">CAMPUS NODE & DESTINATION GATE (DISPATCH CALIBRATOR)</span>
+              <select class="interactive-voucher-select" id="campusGateSelector">
+                <option value="MIRANDA_02">MIRANDA HOUSE, GATE 2 // RESIDENTIAL CORRIDOR [NORTH CAMPUS]</option>
+                <option value="LSR_MAIN">LADY SHRI RAM COLLEGE, MAIN ARCHWAY [SOUTH CAMPUS]</option>
+                <option value="STEPHENS_01">ST. STEPHEN'S COLLEGE, RESIDENTS PORCH [NORTH CAMPUS]</option>
+                <option value="ASHOKA_QUAD">ASHOKA UNIVERSITY, RESIDENCE HALL 4 [SONIPAT]</option>
+                <option value="JMC_GATE">JESUS & MARY COLLEGE, RECEPTION ROTUNDA [CHANAKYAPURI]</option>
+              </select>
+              <div class="stamp-verified" id="gatePassStamp">NODE ROUTE: VERIFIED // GATE DISPATCH #7729</div>
             </div>
 
             <div class="doc-field-group">
@@ -1504,11 +1615,35 @@
       });
     }
 
-    // 4. INVENTORY ROW SELECTION & SNAP INTERACTION
+    // 4. EXPERIMENT 02-A: SCANNER CURSOR BAR TELEMETRY
+    const scannerCoordinates = document.getElementById('scannerCoordinates');
+    const scannerStatus = document.getElementById('scannerStatus');
     const ledgerRows = document.querySelectorAll('.ledger-row');
     const catalogCells = document.querySelectorAll('.catalog-cell');
 
     ledgerRows.forEach((row, index) => {
+      row.addEventListener('mouseenter', () => {
+        const shelf = row.dataset.shelf || '00';
+        const bay = row.dataset.bay || 'X';
+        const nameEl = row.querySelector('.ledger-name');
+        const name = nameEl ? nameEl.childNodes[0].textContent.trim() : 'SPECIMEN';
+        if (scannerCoordinates) {
+          scannerCoordinates.textContent = `SHELF: ${shelf} // BAY: ${bay} // RECORD: ${name}`;
+        }
+        if (scannerStatus) {
+          scannerStatus.textContent = `TARGET LOCKED [BAY ${bay}]`;
+        }
+      });
+
+      row.addEventListener('mouseleave', () => {
+        if (scannerCoordinates) {
+          scannerCoordinates.textContent = 'SHELF: -- // BAY: -- // RECORD: AWAITING QUERY';
+        }
+        if (scannerStatus) {
+          scannerStatus.textContent = 'ACTIVE SCAN';
+        }
+      });
+
       row.addEventListener('click', () => {
         ledgerRows.forEach(r => r.classList.remove('selected'));
         row.classList.add('selected');
@@ -1516,14 +1651,108 @@
         if (catalogCells[index]) {
           catalogCells[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
           gsap.fromTo(catalogCells[index], 
-            { outline: '3px solid #000000', backgroundColor: '#f0f0f0' },
+            { outline: '4px solid #000000', backgroundColor: '#f0f0f0' },
             { outline: '1px solid #000000', backgroundColor: '#ffffff', duration: 0.6, ease: 'power2.out' }
           );
         }
       });
     });
 
-    // 5. SIGNATURE TRANSITION PROTOTYPE: MECHANICAL REGISTRY CUT
+    // 5. EXPERIMENT 02-B: CATEGORY RE-INDEXING MECHANICAL FILTER
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    filterTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filterVal = tab.dataset.filter;
+        ledgerRows.forEach((row) => {
+          const rowSector = row.dataset.sector;
+          if (filterVal === 'ALL' || rowSector === filterVal) {
+            row.style.display = 'flex';
+            if (!prefersReducedMotion) {
+              gsap.fromTo(row, { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.25, ease: 'power2.out' });
+            }
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 6. EXPERIMENT 02-C: IN-PLACE SPECIMEN INSPECTION MODE
+    catalogCells.forEach((cell) => {
+      cell.addEventListener('click', (e) => {
+        // If clicking a duration pill, ignore inspection toggle
+        if (e.target.closest('.dur-pill')) return;
+        const isInspecting = cell.classList.contains('inspecting');
+        catalogCells.forEach(c => c.classList.remove('inspecting'));
+        if (!isInspecting) {
+          cell.classList.add('inspecting');
+          if (!prefersReducedMotion) {
+            gsap.fromTo(cell, { scale: 0.99 }, { scale: 1, duration: 0.2, ease: 'power3.out' });
+          }
+        }
+      });
+    });
+
+    // 7. EXPERIMENT 02-D: DURATION TARIFF MECHANICAL STEP TOGGLES
+    const tariffMap = {
+      '0': { '3': '₹2,999', '5': '₹3,799', '7': '₹4,499' },
+      '1': { '3': '₹2,899', '5': '₹3,699', '7': '₹4,299' },
+      '2': { '3': '₹1,699', '5': '₹2,199', '7': '₹2,699' },
+      '3': { '3': '₹3,899', '5': '₹4,899', '7': '₹5,799' },
+      '4': { '3': '₹2,499', '5': '₹3,199', '7': '₹3,799' },
+      '5': { '3': '₹3,199', '5': '₹3,999', '7': '₹4,799' }
+    };
+
+    catalogCells.forEach((cell, cellIdx) => {
+      const pills = cell.querySelectorAll('.dur-pill');
+      const tariffEl = cell.querySelector('.price-tag-row .tariff');
+      pills.forEach((pill) => {
+        pill.addEventListener('click', (e) => {
+          e.stopPropagation();
+          pills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+
+          const daysMatch = pill.textContent.match(/(\d)\s*DAYS/);
+          const days = daysMatch ? daysMatch[1] : '3';
+          const newTariff = tariffMap[cellIdx] ? tariffMap[cellIdx][days] : pill.textContent;
+
+          if (tariffEl && newTariff) {
+            tariffEl.textContent = newTariff;
+            if (!prefersReducedMotion) {
+              gsap.fromTo(tariffEl, { opacity: 0.2, y: -4 }, { opacity: 1, y: 0, duration: 0.2, ease: 'steps(3)' });
+            }
+          }
+        });
+      });
+    });
+
+    // 8. EXPERIMENT 02-E: INTERACTIVE GATE PASS VOUCHER & STAMP SLAM
+    const campusGateSelector = document.getElementById('campusGateSelector');
+    const gatePassStamp = document.getElementById('gatePassStamp');
+    const docBarcode = document.querySelector('.doc-barcode');
+
+    if (campusGateSelector && gatePassStamp) {
+      campusGateSelector.addEventListener('change', () => {
+        const selectedVal = campusGateSelector.value;
+        const randomToken = Math.floor(1000 + Math.random() * 9000);
+        gatePassStamp.textContent = `NODE ROUTE: [${selectedVal}] // AUTH TOKEN #${randomToken}`;
+        if (docBarcode) {
+          docBarcode.innerHTML = `||| | ||||| |||| || | |||| || |||||||| | ||||| ||| ||<br>WDL-${randomToken}-${selectedVal}-2026-TOKEN`;
+        }
+
+        if (!prefersReducedMotion) {
+          gsap.fromTo(gatePassStamp,
+            { scale: 1.25, rotate: -3, backgroundColor: '#000000', color: '#ffffff' },
+            { scale: 1, rotate: 0, backgroundColor: 'transparent', color: '#000000', duration: 0.35, ease: 'back.out(2)' }
+          );
+        }
+      });
+    }
+
+    // 9. SIGNATURE TRANSITION PROTOTYPE: MECHANICAL REGISTRY CUT
     const reindexBtn = document.getElementById('reindexBtn');
     const overlay = document.getElementById('ledgerShiftOverlay');
     const codeTag = document.getElementById('ledgerShiftCode');

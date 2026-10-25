@@ -251,6 +251,7 @@
     /* Right Bleeding Image Installation */
     .stage-bleed-image {
       position: relative;
+      perspective: 1200px;
     }
     .bleed-photo-frame {
       width: 100%;
@@ -259,6 +260,7 @@
       background: #111116;
       border: 1px solid var(--border-dark);
       position: relative;
+      transform-style: preserve-3d;
     }
     .bleed-photo-frame img {
       width: 100%;
@@ -277,6 +279,7 @@
       padding: 0.75rem 1.25rem;
       font-size: 0.72rem;
       letter-spacing: 0.1em;
+      transform: translateZ(30px);
     }
     .image-spatial-badge span.price {
       color: var(--electric-blue);
@@ -284,6 +287,50 @@
       font-size: 1.1rem;
       display: block;
       margin-top: 0.25rem;
+    }
+
+    /* Experiment 10-B: Strange Architectural Crosshair */
+    .strange-hud-crosshair {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      z-index: 9998;
+    }
+    .strange-hud-crosshair::before, .strange-hud-crosshair::after {
+      content: '';
+      position: absolute;
+      background: var(--electric-blue);
+    }
+    .strange-hud-crosshair::before {
+      top: 15px; left: 0; right: 0; height: 1px;
+    }
+    .strange-hud-crosshair::after {
+      left: 15px; top: 0; bottom: 0; width: 1px;
+    }
+
+    /* Experiment 10-D: Blueprint Mode Toggle */
+    .blueprint-mode-toggle {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .blueprint-mode-btn {
+      background: transparent;
+      border: 1px solid var(--border-dark);
+      color: var(--dim);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      transition: none;
+    }
+    .blueprint-mode-btn:hover, .blueprint-mode-btn.active {
+      border-color: var(--electric-blue);
+      color: var(--bone);
+      background: rgba(15, 56, 255, 0.15);
     }
 
     /* 3. SCATTERED OCCASION SPACE (Non-Euclidean Layout) */
@@ -866,7 +913,15 @@
     <!-- 5. FLOATING RENTAL OBJECT (Blueprint / Patent Filing) -->
     <section class="blueprint-section">
       <div class="blueprint-header">
-        <span>PATENT FILING // WDL-SYS-LEASE-2026</span>
+        <div>
+          <span>PATENT FILING // WDL-SYS-LEASE-2026</span>
+          <!-- Experiment 10-D: Blueprint Mode Toggle -->
+          <div class="blueprint-mode-toggle" id="blueprintModeToggle">
+            <button class="blueprint-mode-btn active" data-mode="ARCH">01 TOPOLOGY</button>
+            <button class="blueprint-mode-btn" data-mode="TELEMETRY">02 TELEMETRY</button>
+            <button class="blueprint-mode-btn" data-mode="ESCROW">03 ESCROW</button>
+          </div>
+        </div>
         <span>SCHEMATIC: FOUR-COORDINATE REVOLVING ACCESS</span>
       </div>
 
@@ -986,6 +1041,9 @@
       <span>COORD // DISPLACE</span>
     </button>
 
+    <!-- Experiment 10-B: Strange Architectural Crosshair -->
+    <div class="strange-hud-crosshair" id="strangeHudCrosshair"></div>
+
   </div>
 
   <script type="module">
@@ -995,14 +1053,28 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Live Mouse Coordinate Tracking on Left Rail
+    // Experiment 10-B: Live Architectural Raycast Math on Left Rail & Crosshair
     const coordStamp = document.querySelector('.rail-coord-stamp');
-    if (coordStamp) {
+    const hudCrosshair = document.getElementById('strangeHudCrosshair');
+
+    if (hudCrosshair) {
+      const xTo = gsap.quickTo(hudCrosshair, 'x', { duration: 0.1, ease: 'power2.out' });
+      const yTo = gsap.quickTo(hudCrosshair, 'y', { duration: 0.1, ease: 'power2.out' });
+
       window.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth * 100).toFixed(1);
-        const y = (e.clientY / window.innerHeight * 100).toFixed(1);
-        coordStamp.textContent = `COORD: X:${x} Y:${y} // Z:0.44`;
+        xTo(e.clientX);
+        yTo(e.clientY);
+        gsap.to(hudCrosshair, { opacity: 0.7, duration: 0.15 });
+
+        if (coordStamp) {
+          const zDepth = ((e.clientY / window.innerHeight) * 2.5).toFixed(2);
+          coordStamp.textContent = `COORD: X:${Math.round(e.clientX)} Y:${Math.round(e.clientY)} // Z:${zDepth}`;
+        }
       }, { passive: true });
+
+      window.addEventListener('mouseleave', () => {
+        gsap.to(hudCrosshair, { opacity: 0, duration: 0.2 });
+      });
     }
 
     // 1. SPATIAL ENTRANCE CHOREOGRAPHY
@@ -1023,13 +1095,12 @@
           duration: 1.2,
           ease: 'power4.out'
         }, '-=0.4')
-        .from('.spatial-desc-col, .spatial-pillars', {
+        .from('.stage-narrative', {
           y: 35,
           opacity: 0,
-          duration: 0.8,
-          stagger: 0.15
+          duration: 0.8
         }, '-=0.6')
-        .from('.spatial-bleed-frame', {
+        .from('.bleed-photo-frame', {
           scale: 0.9,
           opacity: 0,
           duration: 1,
@@ -1037,14 +1108,15 @@
         }, '-=0.7');
     }
 
-    // 2. TYPOGRAPHIC SPATIAL DISPLACEMENT ON SCROLL
+    // 2. EXPERIMENT 10-A: SPLIT REALITY DETACHMENT & SNAPPING ON SCROLL
     if (!prefersReducedMotion) {
       const splitLines = document.querySelectorAll('.huge-split-name span');
       if (splitLines.length >= 2) {
-        // Line 1 drifts left, Line 2 drifts right with subtle rotation
+        // Line 1 ('WEDE') drifts left and tilts down
         gsap.to(splitLines[0], {
-          xPercent: -8,
-          rotationZ: -1.2,
+          xPercent: -16,
+          yPercent: -10,
+          rotationZ: -2.5,
           ease: 'none',
           scrollTrigger: {
             trigger: '.bleeding-type-hero',
@@ -1054,9 +1126,11 @@
           }
         });
 
+        // Line 2 ('LIA.') drifts right and tilts up
         gsap.to(splitLines[1], {
-          xPercent: 10,
-          rotationZ: 1.5,
+          xPercent: 18,
+          yPercent: 14,
+          rotationZ: 3,
           ease: 'none',
           scrollTrigger: {
             trigger: '.bleeding-type-hero',
@@ -1083,38 +1157,122 @@
       );
     }
 
-    // 3. SPATIAL OBJECT & SCHEMATIC MOVEMENT
-    if (!prefersReducedMotion) {
-      // Occasion Spatial Cards 3D elevation
-      gsap.utils.toArray('.occasion-spatial-card').forEach((card, i) => {
-        gsap.from(card, {
-          y: 50,
-          opacity: 0,
-          duration: 0.9,
-          delay: (i % 2) * 0.15,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%'
-          }
-        });
+    // 3. EXPERIMENT 10-C: NON-EUCLIDEAN GRAVITATIONAL REPULSION IN SCATTER GRID
+    const scatterBoxes = document.querySelectorAll('.scatter-box');
+    scatterBoxes.forEach((box, i) => {
+      box.addEventListener('mouseenter', () => {
+        if (!prefersReducedMotion) {
+          gsap.to(box, { scale: 1.03, borderColor: '#0f38ff', duration: 0.25, ease: 'power2.out' });
+          scatterBoxes.forEach((otherBox, otherIdx) => {
+            if (otherBox !== box) {
+              const dir = otherIdx < i ? -14 : 14;
+              gsap.to(otherBox, { x: dir, opacity: 0.55, duration: 0.3, ease: 'power3.out' });
+            }
+          });
+        }
       });
 
-      // Patent Blueprint crosshair rotation
-      gsap.to('.patent-spec-row', {
-        x: -15,
-        stagger: 0.05,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.schematic-section',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.5
+      box.addEventListener('mouseleave', () => {
+        if (!prefersReducedMotion) {
+          gsap.to(scatterBoxes, { scale: 1, x: 0, opacity: 1, duration: 0.35, ease: 'power3.out' });
+        }
+      });
+    });
+
+    // 4. EXPERIMENT 10-D: BLUEPRINT NODE WIREFRAME DISSECTION TOGGLE
+    const blueprintBtns = document.querySelectorAll('.blueprint-mode-btn');
+    const blueprintNodes = document.querySelectorAll('.blueprint-node');
+
+    const blueprintContent = {
+      'ARCH': [
+        { code: 'COORD 01 // DISPATCH', title: '24H PRIOR', text: 'Sealed temperature-controlled carton delivered to campus gate or hostel desk 24 hours prior to entrance.' },
+        { code: 'COORD 02 // SIZING', title: 'DUAL FIT', text: 'Primary size + sealed complimentary backup size included automatically. Zero sizing hesitation.' },
+        { code: 'COORD 03 // LIABILITY', title: '₹0 SHIELD', text: 'Accidental drink spills, dancefloor scuffs, and normal seam tension are 100% insured. Zero penalty fear.' },
+        { code: 'COORD 04 // RETURN', title: 'ZERO LAUNDRY', text: 'Slip unwashed garments into the prepaid return pouch. Handover at hostel desk Monday morning.' }
+      ],
+      'TELEMETRY': [
+        { code: 'NODE 01 // NORTH DU', title: 'MIRANDA GATE 2', text: 'Delivery Corridor: Chhatra Marg. Transit time: 14 mins from Kamla Nagar hub.' },
+        { code: 'NODE 02 // SOUTH DU', title: 'LSR ARCHWAY', text: 'Delivery Corridor: Lala Lajpat Rai Rd. Secure locker handover option active.' },
+        { code: 'NODE 03 // SONIPAT', title: 'ASHOKA QUAD', text: 'Delivery Corridor: Rajiv Gandhi Education City. Direct courier gate drop.' },
+        { code: 'NODE 04 // CHANAKYA', title: 'JMC ROTUNDA', text: 'Delivery Corridor: San Martin Marg. Dispatch window: 07:00 - 21:00 IST.' }
+      ],
+      'ESCROW': [
+        { code: 'SMART ESCROW // 01', title: '₹1,500 HOLD', text: 'Temporary authorization hold via UPI. Zero immediate debit from student account.' },
+        { code: 'SMART ESCROW // 02', title: 'TOKEN AUTH', text: 'Cryptographic tamper barcode scanned at hostel gate handover.' },
+        { code: 'SMART ESCROW // 03', title: 'INSTANT RELEASE', text: 'Automatic deposit release within 12 hours of courier pickup scan.' },
+        { code: 'SMART ESCROW // 04', title: 'DAMAGE ABSORB', text: '100% coverage on champagne splashes, grass stains, and seam elasticity.' }
+      ]
+    };
+
+    blueprintBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        blueprintBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const mode = btn.dataset.mode;
+        const data = blueprintContent[mode];
+
+        if (data && blueprintNodes.length >= 4) {
+          blueprintNodes.forEach((node, idx) => {
+            const item = data[idx];
+            if (item) {
+              const codeEl = node.querySelector('.node-code');
+              const titleEl = node.querySelector('.node-title');
+              const textEl = node.querySelector('.node-text');
+
+              if (!prefersReducedMotion) {
+                gsap.fromTo(node,
+                  { borderColor: '#0f38ff', opacity: 0.4 },
+                  { borderColor: 'var(--border-dark)', opacity: 1, duration: 0.35, delay: idx * 0.05, ease: 'power2.out' }
+                );
+              }
+
+              if (codeEl) codeEl.textContent = item.code;
+              if (titleEl) titleEl.textContent = item.title;
+              if (textEl) textEl.textContent = item.text;
+            }
+          });
+        }
+      });
+    });
+
+    // 5. EXPERIMENT 10-E: MULTI-DEPTH 3D PARALLAX ON HERO IMAGE INSTALLATION
+    const bleedFrame = document.querySelector('.bleed-photo-frame');
+    const spatialBadge = document.querySelector('.image-spatial-badge');
+    const stageBleedImage = document.querySelector('.stage-bleed-image');
+
+    if (stageBleedImage && bleedFrame && !prefersReducedMotion) {
+      stageBleedImage.addEventListener('mousemove', (e) => {
+        const rect = stageBleedImage.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        gsap.to(bleedFrame, {
+          rotateY: x * 10,
+          rotateX: -y * 8,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+
+        if (spatialBadge) {
+          gsap.to(spatialBadge, {
+            x: x * 20,
+            y: y * 15,
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+        }
+      });
+
+      stageBleedImage.addEventListener('mouseleave', () => {
+        gsap.to(bleedFrame, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power3.out' });
+        if (spatialBadge) {
+          gsap.to(spatialBadge, { x: 0, y: 0, duration: 0.5, ease: 'power3.out' });
         }
       });
     }
 
-    // 4. SIGNATURE TRANSITION PROTOTYPE: SPATIAL DISPLACEMENT
+    // 6. SIGNATURE TRANSITION PROTOTYPE: SPATIAL DISPLACEMENT
     const teleportBtn = document.getElementById('spatialTeleportBtn');
     const overlay = document.getElementById('spatialOverlay');
     const canvas = document.querySelector('.strange-canvas');

@@ -171,6 +171,8 @@
       background: #0d0d0d;
       border: 2px solid var(--fg);
       overflow: hidden;
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .monument-image-frame img {
       width: 100%;
@@ -203,6 +205,98 @@
       padding: 0.4rem 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      z-index: 10;
+    }
+
+    /* Experiment 03-A: Interactive Campaign Poster Flyer Swapper */
+    .poster-flyer-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-family: 'Space Mono', monospace;
+    }
+    .flyer-tab-btn {
+      background: #ffffff;
+      color: var(--fg);
+      border: 1px solid var(--fg);
+      padding: 0.35rem 0.65rem;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.68rem;
+      transition: none;
+    }
+    .flyer-tab-btn:hover, .flyer-tab-btn.active {
+      background: var(--red);
+      color: #ffffff;
+      border-color: var(--red);
+    }
+    .poster-razor-wipe {
+      position: absolute;
+      inset: 0;
+      background: var(--red);
+      z-index: 20;
+      pointer-events: none;
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    }
+
+    /* Experiment 03-C: Real-Time Laser Reticle Crosshair */
+    .laser-reticle {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--red);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      z-index: 25;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .laser-reticle::before {
+      content: '+';
+      color: var(--red);
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .laser-telemetry-badge {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      background: rgba(0,0,0,0.85);
+      color: var(--red);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      padding: 0.2rem 0.5rem;
+      z-index: 15;
+    }
+
+    /* Experiment 03-D: Tokyo Night Clock & Ambience Time-Lapse */
+    .night-time-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      font-family: 'Space Mono', monospace;
+    }
+    .night-time-pill {
+      background: transparent;
+      border: 1px solid #444444;
+      color: #aaaaaa;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.7rem;
+      font-family: 'Space Mono', monospace;
+      cursor: pointer;
+      transition: none;
+    }
+    .night-time-pill:hover, .night-time-pill.active {
+      border-color: var(--red);
+      background: var(--red);
+      color: #ffffff;
+      font-weight: 700;
     }
 
     /* COMPOSITION 2: TOKYO NIGHT FILE (AFTER DARK 23:47 SHIBUYA) */
@@ -740,19 +834,28 @@
       </div>
 
       <div class="poster-right">
-        <div class="monument-image-frame">
+        <!-- Flyer Tabs (Experiment 03-A) -->
+        <div class="poster-flyer-tabs" id="flyerTabs">
+          <button class="flyer-tab-btn active" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" data-tag="PLATE 03: DIOR ATELIER ZEMIRE FAILLE" data-price="VALUATION: ₹48,000 // RENT: ₹2,999" data-callout="03 // NIGHT">01 DIOR FAILLE</button>
+          <button class="flyer-tab-btn" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" data-tag="PLATE 04: JEAN DESSÈS PLEATED CHIFFON" data-price="VALUATION: ₹42,000 // RENT: ₹2,899" data-callout="04 // DUET">02 DESSÈS CHIFFON</button>
+          <button class="flyer-tab-btn" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" data-tag="PLATE 05: RUNWAY KINETIC WRAP" data-price="VALUATION: ₹26,000 // RENT: ₹1,699" data-callout="05 // KINETIC">03 RUNWAY WRAP</button>
+        </div>
+        <div class="monument-image-frame" id="heroMonumentFrame">
           <div class="photo-red-annotation">DISPATCH STATUS: ACTIVE</div>
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Faille">
+          <div class="poster-razor-wipe" id="posterRazorWipe"></div>
+          <div class="laser-reticle" id="laserReticle"></div>
+          <div class="laser-telemetry-badge" id="laserTelemetry">TARGET: SHIBUYA GATE // 35MM ISO 3200</div>
+          <img id="heroMonumentImg" src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Faille">
         </div>
         <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted);">
-          <span>PLATE 03: DIOR ATELIER ZEMIRE FAILLE</span>
-          <span>VALUATION: ₹48,000 // RENT: ₹2,999</span>
+          <span id="heroPlateTag">PLATE 03: DIOR ATELIER ZEMIRE FAILLE</span>
+          <span id="heroPriceTag">VALUATION: ₹48,000 // RENT: ₹2,999</span>
         </div>
       </div>
     </section>
 
     <!-- COMPOSITION 2: TOKYO NIGHT FILE (AFTER DARK 23:47 SHIBUYA) -->
-    <section class="night-file-section">
+    <section class="night-file-section" id="nightFileSection">
       <div class="night-header">
         <h2 class="night-title">AFTER DARK // 23:47 SHIBUYA</h2>
         <div style="font-size: 0.72rem; color: var(--red); font-weight: 700;">
@@ -762,13 +865,19 @@
 
       <div class="night-grid">
         <div>
-          <div class="time-stamp-monument">23:47</div>
-          <div style="font-family: 'Space Mono', monospace; font-size: 0.85rem; margin-bottom: 1.5rem; color: #ffffff;">
+          <div class="time-stamp-monument" id="nightTimeMonument">23:47</div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.85rem; margin-bottom: 1.5rem; color: #ffffff;" id="nightLocationTag">
             STREET RECORD // SHIBUYA CROSSING × NORTH CAMPUS DEL
           </div>
-          <p style="font-size: 0.92rem; line-height: 1.75; color: #cccccc;">
+          <p style="font-size: 0.92rem; line-height: 1.75; color: #cccccc;" id="nightStoryText">
             The clock hits 23:47. The festival headline act just concluded at the college sports grounds. The entire crowd floods the streets, catching late-night autos toward Hudson Lane and Majnu ka Tilla. You are not wearing an ordinary Zara polyester slip that tears at the seam. You are wearing a sculpted runway silhouette with 1,200 grams of structured faille drape.
           </p>
+          <!-- Experiment 03-D: Tokyo Night Time-Lapse Clock Pills -->
+          <div class="night-time-pills" id="nightTimePills">
+            <button class="night-time-pill active" data-time="23:47" data-loc="STREET RECORD // SHIBUYA CROSSING × NORTH CAMPUS DEL" data-story="The clock hits 23:47. The festival headline act just concluded at the college sports grounds. The crowd floods late-night autos toward Hudson Lane and Majnu ka Tilla in authentic runway faille.">23:47 SHIBUYA</button>
+            <button class="night-time-pill" data-time="01:14" data-loc="BASEMENT RECORD // ROPPONGI UNDERPASS × HAUZ KHAS" data-story="01:14 AM. Speakeasy basement after-party. Laser beams reflect off metallic knit mesh. The ₹0 damage shield means zero hesitation on the packed dancefloor.">01:14 UNDERPASS</button>
+            <button class="night-time-pill" data-time="03:30" data-loc="GATE RECORD // AOYAMA DAWN CALL × RESIDENCE CORRIDOR" data-story="03:30 AM. First light breaking over campus trees. Return satchel already pre-labeled on your desk. Drop it at the gate desk with zero dry-cleaning needed.">03:30 DAWN CALL</button>
+          </div>
         </div>
 
         <div class="night-photo-box">
@@ -1090,8 +1199,31 @@
         }, '-=0.4');
     }
 
-    // 2. TYPOGRAPHY MOVEMENT SYSTEMS
+    // 2. TYPOGRAPHY COLLISION MOVEMENT SYSTEMS (Experiment 03-B)
     if (!prefersReducedMotion) {
+      // Two-speed counter-directional scrub collision on hero typography
+      gsap.to('.brand-name', {
+        x: -45,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.poster-hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.5
+        }
+      });
+
+      gsap.to('.tokyo-sub', {
+        x: 40,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.poster-hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.5
+        }
+      });
+
       // Monumental closing headline split translation
       gsap.fromTo('.closing-huge-type', 
         { letterSpacing: '-0.06em' },
@@ -1124,7 +1256,126 @@
       });
     }
 
-    // 3. OCCASION POSTER CHOREOGRAPHY
+    // 3. EXPERIMENT 03-A: INTERACTIVE CAMPAIGN POSTER FLYER SWAPPER
+    const flyerBtns = document.querySelectorAll('.flyer-tab-btn');
+    const heroMonumentImg = document.getElementById('heroMonumentImg');
+    const posterRazorWipe = document.getElementById('posterRazorWipe');
+    const heroPlateTag = document.getElementById('heroPlateTag');
+    const heroPriceTag = document.getElementById('heroPriceTag');
+
+    flyerBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        flyerBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const newImg = btn.dataset.img;
+        const newTag = btn.dataset.tag;
+        const newPrice = btn.dataset.price;
+
+        if (posterRazorWipe && heroMonumentImg) {
+          if (!prefersReducedMotion) {
+            const wipeTl = gsap.timeline();
+            wipeTl
+              .set(posterRazorWipe, { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)' })
+              .to(posterRazorWipe, {
+                clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+                duration: 0.16,
+                ease: 'power4.in',
+                onComplete: () => {
+                  heroMonumentImg.src = newImg;
+                  if (heroPlateTag) heroPlateTag.textContent = newTag;
+                  if (heroPriceTag) heroPriceTag.textContent = newPrice;
+                }
+              })
+              .to(posterRazorWipe, {
+                clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+                duration: 0.18,
+                ease: 'power4.out'
+              })
+              .fromTo(heroMonumentImg, 
+                { scale: 1.06, rotate: -0.5 },
+                { scale: 1, rotate: 0, duration: 0.35, ease: 'power3.out' },
+                '-=0.1'
+              );
+          } else {
+            heroMonumentImg.src = newImg;
+            if (heroPlateTag) heroPlateTag.textContent = newTag;
+            if (heroPriceTag) heroPriceTag.textContent = newPrice;
+          }
+        }
+      });
+    });
+
+    // 4. EXPERIMENT 03-C: REAL-TIME LASER RETICLE CROSSHAIR TRACKING
+    const heroMonumentFrame = document.getElementById('heroMonumentFrame');
+    const laserReticle = document.getElementById('laserReticle');
+    const laserTelemetry = document.getElementById('laserTelemetry');
+
+    if (heroMonumentFrame && laserReticle) {
+      const xTo = gsap.quickTo(laserReticle, 'x', { duration: 0.15, ease: 'power2.out' });
+      const yTo = gsap.quickTo(laserReticle, 'y', { duration: 0.15, ease: 'power2.out' });
+
+      heroMonumentFrame.addEventListener('mouseenter', () => {
+        gsap.to(laserReticle, { opacity: 1, duration: 0.15 });
+      });
+
+      heroMonumentFrame.addEventListener('mousemove', (e) => {
+        const rect = heroMonumentFrame.getBoundingClientRect();
+        const relX = e.clientX - rect.left;
+        const relY = e.clientY - rect.top;
+        xTo(relX);
+        yTo(relY);
+
+        if (laserTelemetry) {
+          laserTelemetry.textContent = `TARGET: [X:${Math.round(relX)} Y:${Math.round(relY)}] // ISO 3200 // SHIBUYA GATE`;
+        }
+      });
+
+      heroMonumentFrame.addEventListener('mouseleave', () => {
+        gsap.to(laserReticle, { opacity: 0, duration: 0.2 });
+        if (laserTelemetry) {
+          laserTelemetry.textContent = 'TARGET: SHIBUYA GATE // 35MM ISO 3200';
+        }
+      });
+    }
+
+    // 5. EXPERIMENT 03-D: TOKYO NIGHT CLOCK & AMBIENCE TIME-LAPSE
+    const nightTimePills = document.querySelectorAll('.night-time-pill');
+    const nightTimeMonument = document.getElementById('nightTimeMonument');
+    const nightLocationTag = document.getElementById('nightLocationTag');
+    const nightStoryText = document.getElementById('nightStoryText');
+    const nightFileSection = document.getElementById('nightFileSection');
+
+    nightTimePills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        nightTimePills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const newTime = pill.dataset.time;
+        const newLoc = pill.dataset.loc;
+        const newStory = pill.dataset.story;
+
+        if (nightTimeMonument) nightTimeMonument.textContent = newTime;
+        if (nightLocationTag) nightLocationTag.textContent = newLoc;
+        if (nightStoryText) nightStoryText.textContent = newStory;
+
+        if (!prefersReducedMotion) {
+          gsap.fromTo(nightTimeMonument,
+            { scale: 1.18, color: '#ffffff' },
+            { scale: 1, color: 'var(--red)', duration: 0.35, ease: 'steps(3)' }
+          );
+
+          if (nightFileSection) {
+            gsap.fromTo(nightFileSection,
+              { backgroundColor: '#1a0507' },
+              { backgroundColor: '#0a0a0c', duration: 0.45, ease: 'power2.out' }
+            );
+          }
+        }
+      });
+    });
+
+    // 6. OCCASION POSTER CHOREOGRAPHY (Experiment 03-E: Contrast Slam)
     if (!prefersReducedMotion) {
       gsap.utils.toArray('.campaign-poster-card').forEach((card, i) => {
         gsap.from(card, {
@@ -1139,7 +1390,7 @@
           }
         });
 
-        // Micro-flash on hover
+        // Tactile flash & invert slam on hover
         card.addEventListener('mouseenter', () => {
           gsap.fromTo(card, 
             { filter: 'invert(100%)' },
