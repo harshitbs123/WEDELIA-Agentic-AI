@@ -658,39 +658,96 @@
       font-size: 0.72rem;
       color: var(--muted);
     }
-    .protocol-three-columns {
+    /* COMPOSITION 7: ASYMMETRIC JAPANESE COVENANT FOLIO */
+    .protocol-editorial-section {
+      margin-bottom: 7rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5rem;
+    }
+    .covenant-folio-layout {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      gap: 3rem;
     }
-    @media (min-width: 768px) {
-      .protocol-three-columns {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 3.5rem;
+    @media (min-width: 900px) {
+      .covenant-folio-layout {
+        grid-template-columns: 1fr 1.4fr;
+        gap: 4.5rem;
+        align-items: start;
       }
     }
-    .protocol-pillar {
-      border-top: 2px solid var(--fg);
-      padding-top: 1.5rem;
+    .covenant-side-lead {
+      border-left: 2px solid var(--fg);
+      padding-left: 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .protocol-pillar-num {
+    .covenant-kanji-pillar {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .covenant-lead-quote {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #2b2926;
+      margin-bottom: 2rem;
+    }
+    .covenant-editorial-notes {
       font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.68rem;
       color: var(--muted);
+      line-height: 1.8;
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+    .covenant-clauses-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .covenant-clause-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.25rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1.5rem;
+      position: relative;
+    }
+    @media (max-width: 600px) {
+      .covenant-clause-item {
+        grid-template-columns: 32px 1fr;
+        gap: 0.75rem;
+      }
+    }
+    .clause-kanji-num {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #111111;
+      line-height: 1;
+    }
+    .clause-content-heading {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+    .clause-content-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
       margin-bottom: 0.75rem;
     }
-    .protocol-pillar-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      line-height: 1.25;
-    }
-    .protocol-pillar-text {
-      font-size: 0.9rem;
+    .clause-content-body {
+      font-size: 0.92rem;
       line-height: 1.75;
       color: #3e3b36;
     }
@@ -1549,42 +1606,66 @@
       </div>
     </section>
 
-    <!-- COMPOSITION 7: STYLE NOTES & CAMPUS PROTOCOL -->
+    <!-- COMPOSITION 7: ASYMMETRIC JAPANESE COVENANT FOLIO -->
     <section class="protocol-editorial-section">
       <div class="protocol-title-row">
-        <span>03 // THE WEDELIA PROTOCOL — LOGISTICAL COVENANT</span>
-        <span>ZERO LAUNDRY • ZERO SIZING ANXIETY</span>
+        <span>03 // THE WEDELIA PROTOCOL — 三箇条の規約</span>
+        <span>ZERO LAUNDRY • ZERO SIZING ANXIETY • P. 84</span>
       </div>
 
-      <div class="protocol-three-columns">
-        <div class="protocol-pillar">
+      <div class="covenant-folio-layout">
+        <!-- Left Side: Editorial Lead & Japanese Statement -->
+        <div class="covenant-side-lead">
           <div>
-            <div class="protocol-pillar-num">01 / DUAL SIZING</div>
-            <h4 class="protocol-pillar-title">Two Sizes in Every Carton.</h4>
-            <p class="protocol-pillar-text">
-              We eliminate fitting stress. Select your estimated size; our automated dispatch system includes the adjacent complementary size sealed in the same delivery at zero surcharge.
+            <div class="covenant-kanji-pillar">三箇条の約束</div>
+            <p class="covenant-lead-quote">
+              "We strip the anxiety from high fashion. You rent the moment; we absorb the liability, the sizing redundancy, and the maintenance."
             </p>
+          </div>
+          <div class="covenant-editorial-notes">
+            PROTOCOL REF: #TOKYO-NCR-COVENANT-2026<br>
+            DISPATCH STANDARD: STERILIZED ATELIER TRANSIT<br>
+            COLOPHON STAMP: 装苑特装 編集部 承認済
           </div>
         </div>
 
-        <div class="protocol-pillar">
-          <div>
-            <div class="protocol-pillar-num">02 / DAMAGE SHIELD</div>
-            <h4 class="protocol-pillar-title">₹0 Accident Liability.</h4>
-            <p class="protocol-pillar-text">
-              Dancefloor champagne spills, minor heel snags on grass lawns, and broken seam tension are 100% absorbed by our embedded damage shield. Wear it with total freedom.
-            </p>
-          </div>
-        </div>
+        <!-- Right Side: Staggered Numbered Covenants -->
+        <div class="covenant-clauses-stack">
+          <!-- Clause 1 -->
+          <article class="covenant-clause-item">
+            <div class="clause-kanji-num">一</div>
+            <div>
+              <h4 class="clause-content-heading">Two Sizes in Every Carton.</h4>
+              <div class="clause-content-sub">CLAUSE 01 // DUAL SIZING REDUNDANCY (二重寸法保証)</div>
+              <p class="clause-content-body">
+                We eliminate fitting stress before it begins. Select your estimated size; our automated dispatch system packages the adjacent complementary size sealed in the same delivery at zero surcharge. Try both in your hostel room; wear the winner.
+              </p>
+            </div>
+          </article>
 
-        <div class="protocol-pillar">
-          <div>
-            <div class="protocol-pillar-num">03 / ZERO LAUNDRY</div>
-            <h4 class="protocol-pillar-title">Return Completely Unwashed.</h4>
-            <p class="protocol-pillar-text">
-              Strictly do not dry clean or iron. After your night concludes, slip both silhouettes into the pre-paid satchel. Hand it over to your hostel desk on Monday morning.
-            </p>
-          </div>
+          <!-- Clause 2 -->
+          <article class="covenant-clause-item">
+            <div class="clause-kanji-num">二</div>
+            <div>
+              <h4 class="clause-content-heading">₹0 Accident Liability Shield.</h4>
+              <div class="clause-content-sub">CLAUSE 02 // EMBEDDED DAMAGE WAIVER (損害免責零円)</div>
+              <p class="clause-content-body">
+                Dancefloor champagne spills, minor heel snags on grass lawns, and broken seam tension are 100% absorbed by our embedded damage shield. Wear genuine couture with absolute physical freedom.
+              </p>
+            </div>
+          </article>
+
+          <!-- Clause 3 -->
+          <article class="covenant-clause-item">
+            <div class="clause-kanji-num">三</div>
+            <div>
+              <h4 class="clause-content-heading">Return Completely Unwashed.</h4>
+              <div class="clause-content-sub">CLAUSE 03 // ZERO LAUNDRY RETURN (洗濯不要返送)</div>
+              <p class="clause-content-body">
+                Strictly do not dry clean or iron. When the night concludes, slip both silhouettes into the pre-paid odor-lock satchel. Hand it over to your hostel desk on Monday morning. Campus laundry is an obsolete chore.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1872,6 +1953,21 @@
             trigger: row,
             start: 'top 90%',
             toggleActions: 'play none none none'
+          }
+        });
+      });
+
+      // Asymmetric Japanese Covenant Folio Clauses
+      gsap.utils.toArray('.covenant-clause-item').forEach((item, i) => {
+        gsap.from(item, {
+          y: 24,
+          opacity: 0,
+          duration: 0.8,
+          delay: i * 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 88%'
           }
         });
       });

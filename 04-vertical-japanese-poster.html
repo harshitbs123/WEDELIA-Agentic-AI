@@ -683,7 +683,7 @@
     @media (min-width: 768px) {
       .strip-archive-grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        gap: 1.25rem;
       }
     }
     .strip-archive-item {
@@ -692,12 +692,16 @@
       position: relative;
       background: var(--paper);
       border: 1px solid var(--fg);
-      padding: 1rem;
+      box-shadow: 5px 5px 0px rgba(184, 178, 164, 0.45);
+      padding: 0.85rem;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, box-shadow 0.4s ease;
     }
     @media (min-width: 1024px) {
+      .strip-archive-item:nth-child(1) {
+        transform: translateY(-10px);
+      }
       .strip-archive-item:nth-child(2) {
-        transform: translateY(25px);
+        transform: translateY(30px);
         z-index: 2;
       }
       .strip-archive-item:nth-child(3) {
@@ -705,22 +709,53 @@
         z-index: 3;
       }
       .strip-archive-item:nth-child(4) {
-        transform: translateY(15px);
+        transform: translateY(20px);
         z-index: 4;
       }
     }
     .strip-archive-item:hover {
-      transform: translateY(-10px) scale(1.02) !important;
+      transform: translateY(-12px) scale(1.02) !important;
       z-index: 10 !important;
       box-shadow: 0 20px 45px rgba(25, 24, 22, 0.16);
     }
+    .strip-archive-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .strip-chop-seal {
+      display: inline-block;
+      border: 1px solid var(--vermilion);
+      color: var(--vermilion);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.62rem;
+      padding: 0.05rem 0.25rem;
+      line-height: 1.1;
+      font-weight: 700;
+    }
     .strip-archive-img {
       width: 100%;
-      aspect-ratio: 1/1.9;
+      aspect-ratio: 1/1.85;
       object-fit: cover;
       border: 1px solid var(--line);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       display: block;
+    }
+    .strip-archive-item:nth-child(2) .strip-archive-img {
+      aspect-ratio: 1/2.05;
+    }
+    .strip-archive-item:nth-child(3) .strip-archive-img {
+      aspect-ratio: 1/1.75;
+    }
+    .strip-archive-item:nth-child(4) .strip-archive-img {
+      aspect-ratio: 1/2.0;
     }
     .strip-caption-vertical {
       writing-mode: vertical-rl;
@@ -728,8 +763,22 @@
       font-size: 0.85rem;
       letter-spacing: 0.25em;
       line-height: 1.8;
-      height: 140px;
+      height: 150px;
       color: var(--fg);
+      margin-bottom: 0.75rem;
+    }
+    .strip-archive-footer {
+      border-top: 1px dashed var(--line);
+      padding-top: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+      line-height: 1.5;
+      letter-spacing: 0.05em;
+    }
+    .strip-archive-footer strong {
+      color: var(--fg);
+      font-weight: 700;
     }
 
     /* POSTER 007: FINAL EXHIBITION POSTER */
@@ -1246,30 +1295,66 @@
 
       <div class="strip-archive-grid">
         <div class="strip-archive-item">
+          <div class="strip-archive-header">
+            <span>ACCESSION: EX-1951-JD</span>
+            <span class="strip-chop-seal">選定印</span>
+          </div>
           <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Duet Gown" class="strip-archive-img">
           <div class="strip-caption-vertical">
-            一九五一年 ジャン・デッセ オートクチュール。
+            一九五一年 ジャン・デッセ オートクチュール。流麗なる絹プリーツ。
+          </div>
+          <div class="strip-archive-footer">
+            <div><strong>適合:</strong> 卒業祝宴 // GALA</div>
+            <div><strong>仕様:</strong> SILK CHIFFON DRAPERY</div>
+            <div><strong>等級:</strong> TOKYO VAULT TIER-A</div>
           </div>
         </div>
 
         <div class="strip-archive-item">
+          <div class="strip-archive-header">
+            <span>ACCESSION: EX-1949-CB</span>
+            <span class="strip-chop-seal">所蔵印</span>
+          </div>
           <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Silhouette" class="strip-archive-img">
           <div class="strip-caption-vertical">
-            宮廷金糸錦織 ローブ・モンタント。
+            宮廷金糸錦織 ローブ・モンタント。厳格なる建築的コルセット。
+          </div>
+          <div class="strip-archive-footer">
+            <div><strong>適合:</strong> 式典 // COMMENCEMENT</div>
+            <div><strong>仕様:</strong> METALLIC BROCADE</div>
+            <div><strong>等級:</strong> IMPERIAL ARCHIVE TIER-S</div>
           </div>
         </div>
 
         <div class="strip-archive-item">
+          <div class="strip-archive-header">
+            <span>ACCESSION: EX-1952-CD</span>
+            <span class="strip-chop-seal">特選印</span>
+          </div>
           <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Faille" class="strip-archive-img">
           <div class="strip-caption-vertical">
-            一九五二年 ディオール ゼミール シルクファイユ。
+            一九五二年 ディオール ゼミール。漆黒シルクファイユの威厳。
+          </div>
+          <div class="strip-archive-footer">
+            <div><strong>適合:</strong> 舞踏会 // SOIREE</div>
+            <div><strong>仕様:</strong> HEAVY SILK FAILLE</div>
+            <div><strong>等級:</strong> COUTURE PATRIMONY TIER-A</div>
           </div>
         </div>
 
         <div class="strip-archive-item">
+          <div class="strip-archive-header">
+            <span>ACCESSION: EX-1954-SK</span>
+            <span class="strip-chop-seal">認可印</span>
+          </div>
           <img src="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg" alt="Strapless Hoop Gown" class="strip-archive-img">
           <div class="strip-caption-vertical">
-            構造的クリノリン フープスカート造形。
+            構造的クリノリン フープスカート造形。身体を拡張する空間性。
+          </div>
+          <div class="strip-archive-footer">
+            <div><strong>適合:</strong> 晩餐会 // FORMAL GALA</div>
+            <div><strong>仕様:</strong> STEEL HOOP ARCHITECTURE</div>
+            <div><strong>等級:</strong> SCULPTURAL EDITION TIER-A</div>
           </div>
         </div>
       </div>

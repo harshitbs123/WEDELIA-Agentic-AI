@@ -683,43 +683,70 @@
       margin-top: 1.5rem;
     }
 
-    /* Technical Rules Grid */
-    .rules-grid {
+    /* Institutional Logistics Ledger */
+    .repository-logistics-ledger {
+      border-bottom: 2px solid var(--border);
+      background: #ffffff;
+      font-family: 'Space Mono', monospace;
+    }
+    .logistics-row {
       display: grid;
       grid-template-columns: 1fr;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      align-items: stretch;
+      transition: background 0.15s ease;
+    }
+    .logistics-row:last-child {
+      border-bottom: none;
+    }
+    .logistics-row:hover {
+      background: #f4f4f4;
     }
     @media (min-width: 768px) {
-      .rules-grid {
-        grid-template-columns: repeat(4, 1fr);
+      .logistics-row {
+        grid-template-columns: 180px 140px 1fr 140px;
       }
     }
-    .rule-cell {
-      padding: 2rem 1.5rem;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    .logistics-cell {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--hairline);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     @media (min-width: 768px) {
-      .rule-cell { border-bottom: none; }
-      .rule-cell:last-child { border-right: none; }
+      .logistics-cell {
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+      }
+      .logistics-cell:last-child {
+        border-right: none;
+      }
     }
-    .rule-num {
+    .logistics-code {
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+    }
+    .logistics-time {
       font-family: 'Syne', sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.15rem;
       font-weight: 800;
-      line-height: 1;
-      margin-bottom: 0.5rem;
+      color: #111111;
     }
-    .rule-cell strong {
-      display: block;
-      margin-bottom: 0.75rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
+    .logistics-desc {
+      font-size: 0.76rem;
+      line-height: 1.6;
+      color: #222222;
     }
-    .rule-cell p {
-      font-size: 0.74rem;
-      color: #333333;
-      line-height: 1.55;
+    .logistics-status {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+    @media (max-width: 767px) {
+      .logistics-status { text-align: left; margin-top: 0.5rem; }
     }
 
     /* Technical Colophon Footer */
@@ -1628,27 +1655,80 @@
       </div>
     </section>
 
-    <!-- Technical Rules Footer Grid -->
-    <div class="rules-grid">
-      <div class="rule-cell">
-        <div class="rule-num">01</div>
-        <strong>SELECT EVENT & DATES</strong>
-        <p>Book 36 hours before your campus fest, farewell, or date night. Choose your primary size; an adjacent backup size is packaged automatically at ₹0 cost.</p>
+    <!-- Section Bar: Technical Repository Logistics Schedule -->
+    <div class="catalog-section-bar">
+      <span>05 // LOGISTICAL OPERATIONS PROTOCOL — RUNTIME SCHEDULE</span>
+      <span>DISPATCH ARCHITECTURE: ZERO-SURCHARGE NCR NETWORK</span>
+    </div>
+
+    <!-- Institutional Logistics Ledger -->
+    <div class="repository-logistics-ledger">
+      <div class="logistics-row">
+        <div class="logistics-cell">
+          <span class="logistics-code">PROTOCOL // 01</span>
+          <span style="font-size: 0.65rem; color: var(--muted);">RESERVATION INGEST</span>
+        </div>
+        <div class="logistics-cell">
+          <span class="logistics-time">T-36 HRS</span>
+        </div>
+        <div class="logistics-cell">
+          <strong style="margin-bottom: 0.25rem;">AUTOMATED DUAL-SIZE CALIBRATION</strong>
+          <span class="logistics-desc">Book 36 hours prior to entrance. The archive system queries physical inventory and packages your primary size plus a sealed adjacent sister size at zero fee.</span>
+        </div>
+        <div class="logistics-cell">
+          <span class="logistics-status" style="color: #276749;">[ACTIVE_INGEST]</span>
+        </div>
       </div>
-      <div class="rule-cell">
-        <div class="rule-num">02</div>
-        <strong>HOSTEL GATE ARRIVAL</strong>
-        <p>Our dedicated temperature-regulated courier drops the tamper-evident garment case directly to your hostel gate 24 hours before your entrance.</p>
+
+      <div class="logistics-row">
+        <div class="logistics-cell">
+          <span class="logistics-code">PROTOCOL // 02</span>
+          <span style="font-size: 0.65rem; color: var(--muted);">TRANSIT CORRIDOR</span>
+        </div>
+        <div class="logistics-cell">
+          <span class="logistics-time">T-24 HRS</span>
+        </div>
+        <div class="logistics-cell">
+          <strong style="margin-bottom: 0.25rem;">HOSTEL GATEWAY COURIER DROP</strong>
+          <span class="logistics-desc">Temperature-regulated dedicated courier drops the tamper-evident security case directly to your residential hostel gate 24 hours before your call time.</span>
+        </div>
+        <div class="logistics-cell">
+          <span class="logistics-status" style="color: #276749;">[GATE_CLEARED]</span>
+        </div>
       </div>
-      <div class="rule-cell">
-        <div class="rule-num">03</div>
-        <strong>WEAR, DANCE, PHOTOGRAPH</strong>
-        <p>Accidental cocktail spills, grass stains on college lawns, and seam tension are 100% absorbed by our built-in ₹0 damage shield.</p>
+
+      <div class="logistics-row">
+        <div class="logistics-cell">
+          <span class="logistics-code">PROTOCOL // 03</span>
+          <span style="font-size: 0.65rem; color: var(--muted);">EVENT DURATION</span>
+        </div>
+        <div class="logistics-cell">
+          <span class="logistics-time">T-00 CALL</span>
+        </div>
+        <div class="logistics-cell">
+          <strong style="margin-bottom: 0.25rem;">EMBEDDED ₹0 DAMAGE SHIELD</strong>
+          <span class="logistics-desc">Accidental champagne spills, dancefloor heel snags, and normal seam tension are 100% absorbed by our built-in liability waiver. Possess the room without fear.</span>
+        </div>
+        <div class="logistics-cell">
+          <span class="logistics-status" style="color: #276749;">[SHIELD_100%]</span>
+        </div>
       </div>
-      <div class="rule-cell">
-        <div class="rule-num">04</div>
-        <strong>UNWASHED HANDOVER</strong>
-        <p>Pack the gown unwashed into the pre-paid courier pouch. Hand it over to the hostel desk on Monday morning. Zero dry-cleaning required.</p>
+
+      <div class="logistics-row">
+        <div class="logistics-cell">
+          <span class="logistics-code">PROTOCOL // 04</span>
+          <span style="font-size: 0.65rem; color: var(--muted);">ARCHIVE RECOVERY</span>
+        </div>
+        <div class="logistics-cell">
+          <span class="logistics-time">T+72 HRS</span>
+        </div>
+        <div class="logistics-cell">
+          <strong style="margin-bottom: 0.25rem;">ZERO-LAUNDRY RETURN HANDOVER</strong>
+          <span class="logistics-desc">Pack both silhouettes unwashed into the pre-paid odor-lock satchel. Hand it over to the hostel gate desk on Monday morning. Zero dry-cleaning required.</span>
+        </div>
+        <div class="logistics-cell">
+          <span class="logistics-status" style="color: #276749;">[RETURN_READY]</span>
+        </div>
       </div>
     </div>
 

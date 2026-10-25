@@ -997,17 +997,60 @@
       color: #ffffff;
       font-weight: 700;
     }
-    .ticket-campus-select {
-      width: 100%;
+    /* Night-Drop Radar Cluster */
+    .night-radar-cluster {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+    }
+    @media (min-width: 600px) {
+      .night-radar-cluster {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .radar-pad-btn {
       background: #111111;
-      border: 1px solid var(--red);
-      color: #ffffff;
+      border: 1px solid #333333;
+      color: #bbbbbb;
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      padding: 0.55rem;
-      max-width: 100%;
+      font-size: 0.65rem;
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      transition: all 0.2s ease;
       box-sizing: border-box;
-      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .radar-pad-btn:hover, .radar-pad-btn.active {
+      background: #000000;
+      border-color: var(--red);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(255, 42, 20, 0.35);
+    }
+    .radar-pad-top {
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .radar-pad-btn.active .radar-pad-top {
+      color: var(--red);
+    }
+    .radar-pad-telemetry {
+      font-size: 0.58rem;
+      color: #777777;
+      letter-spacing: 0.05em;
+    }
+    .radar-active-vector-bar {
+      margin-top: 0.45rem;
+      background: #150808;
+      border-left: 2px solid var(--red);
+      padding: 0.4rem 0.65rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: #ff9988;
+      letter-spacing: 0.08em;
     }
     .secure-ticket-btn {
       background: var(--red);
@@ -1469,16 +1512,30 @@
               </div>
             </div>
 
-            <!-- Campus Node Select -->
+            <!-- Tactical Campus Drop Radar Hub -->
             <div class="ticket-controls-group">
-              <span class="ticket-control-label">DESTINATION CAMPUS GATE:</span>
-              <select class="ticket-campus-select" id="ticketCampusSelect">
-                <option value="MIRANDA_GATE2">MIRANDA HOUSE // GATE 2 PORCH [NORTH CAMPUS]</option>
-                <option value="LSR_ARCH">LADY SHRI RAM COLLEGE // MAIN ARCHWAY [SOUTH CAMPUS]</option>
-                <option value="STEPHENS_PORCH">ST. STEPHEN'S COLLEGE // RESIDENTS PORCH [NORTH CAMPUS]</option>
-                <option value="ASHOKA_QUAD">ASHOKA UNIVERSITY // RESIDENCE HALL 4 [SONIPAT]</option>
-                <option value="NIFT_MAIN">NIFT DELHI // HAUZ KHAS DESIGN WING</option>
-              </select>
+              <span class="ticket-control-label">TACTICAL CAMPUS DROP RADAR (目的地選択):</span>
+              <div class="night-radar-cluster" id="nightRadarCluster">
+                <button class="radar-pad-btn active" data-campus="MIRANDA_GATE2" data-lat="28.69°N // 77.21°E" data-drop="MIRANDA HOUSE, GATE 2 PORCH [NORTH CAMPUS]" data-eta="38 MIN">
+                  <span class="radar-pad-top">MIRANDA HOUSE [02]</span>
+                  <span class="radar-pad-telemetry">28.69°N • ETA: 38 MIN</span>
+                </button>
+                <button class="radar-pad-btn" data-campus="LSR_ARCH" data-lat="28.56°N // 77.24°E" data-drop="LADY SHRI RAM COLLEGE, MAIN ARCHWAY [SOUTH CAMPUS]" data-eta="44 MIN">
+                  <span class="radar-pad-top">LADY SHRI RAM [LSR]</span>
+                  <span class="radar-pad-telemetry">28.56°N • ETA: 44 MIN</span>
+                </button>
+                <button class="radar-pad-btn" data-campus="STEPHENS_PORCH" data-lat="28.68°N // 77.20°E" data-drop="ST. STEPHEN'S COLLEGE, RESIDENTS PORCH [NORTH CAMPUS]" data-eta="32 MIN">
+                  <span class="radar-pad-top">ST. STEPHEN'S [RES]</span>
+                  <span class="radar-pad-telemetry">28.68°N • ETA: 32 MIN</span>
+                </button>
+                <button class="radar-pad-btn" data-campus="ASHOKA_QUAD" data-lat="28.98°N // 77.10°E" data-drop="ASHOKA UNIVERSITY, HALL 4 QUAD [SONIPAT]" data-eta="55 MIN">
+                  <span class="radar-pad-top">ASHOKA UNIV [HALL 4]</span>
+                  <span class="radar-pad-telemetry">28.98°N • ETA: 55 MIN</span>
+                </button>
+              </div>
+              <div class="radar-active-vector-bar" id="radarActiveVectorBar">
+                TARGET VECTOR: [MIRANDA HOUSE, GATE 2 PORCH] // COLD-STORAGE TAMPER POUCH ASSIGNED // ETA: 38 MIN
+              </div>
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px dashed var(--red); padding-top: 0.75rem; margin-top: 1rem;">
@@ -1980,6 +2037,25 @@
         btn.classList.add('active');
         currentDropAdder = parseInt(btn.dataset.adder, 10);
         updateTicketPrice();
+      });
+    });
+
+    // Campus Drop Radar pad switch
+    const radarPadBtns = document.querySelectorAll('#nightRadarCluster .radar-pad-btn');
+    const radarActiveVectorBar = document.getElementById('radarActiveVectorBar');
+
+    radarPadBtns.forEach((pad) => {
+      pad.addEventListener('click', () => {
+        radarPadBtns.forEach(p => p.classList.remove('active'));
+        pad.classList.add('active');
+        const drop = pad.dataset.drop;
+        const eta = pad.dataset.eta;
+        if (radarActiveVectorBar) {
+          radarActiveVectorBar.textContent = `TARGET VECTOR: [${drop}] // COLD-STORAGE TAMPER POUCH ASSIGNED // ETA: ${eta}`;
+          if (!prefersReducedMotion) {
+            gsap.fromTo(radarActiveVectorBar, { backgroundColor: '#44110a' }, { backgroundColor: '#150808', duration: 0.45 });
+          }
+        }
       });
     });
 
