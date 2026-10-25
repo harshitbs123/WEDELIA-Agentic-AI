@@ -468,6 +468,68 @@
       margin: 0 auto 3rem;
       line-height: 1.8;
     }
+    /* Signature Sliding Exhibition Panel Transition Overlay */
+    .washi-scroll-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--paper);
+      z-index: 10000;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      clip-path: inset(100% 0 0 0);
+      border-bottom: 2px solid var(--fg);
+      box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.1);
+    }
+    .washi-scroll-kanji {
+      writing-mode: vertical-rl;
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: 0.35em;
+      color: var(--fg);
+      margin-bottom: 1.5rem;
+    }
+    .washi-scroll-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--vermilion);
+    }
+    .exhibit-shift-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9000;
+      background: var(--fg);
+      color: var(--bg);
+      border: 1px solid var(--fg);
+      padding: 0.65rem 1.25rem;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: background 0.25s, transform 0.25s;
+    }
+    .exhibit-shift-btn:hover {
+      background: #3b3732;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 640px) {
+      .exhibit-shift-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.72rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -822,21 +884,152 @@
 
   </div>
 
-  <script>
-    // Gallery Exhibition Micro-Interactions
-    document.addEventListener('DOMContentLoaded', () => {
-      const posters = document.querySelectorAll('.exhibit-poster');
-      posters.forEach(poster => {
-        poster.style.transition = 'border-color 0.3s ease, box-shadow 0.3s ease';
-        poster.addEventListener('mouseenter', () => {
-          poster.style.borderColor = '#111111';
-        });
-        poster.addEventListener('mouseleave', () => {
-          poster.style.borderColor = '#cdc7ba';
+    <!-- Signature Sliding Exhibition Panel Overlay -->
+    <div class="washi-scroll-overlay" id="washiOverlay">
+      <div class="washi-scroll-kanji">次号展覧・開帳</div>
+      <div class="washi-scroll-meta">EXHIBITION PANEL SLIDE // WASHI COUTURE ARCHIVE</div>
+    </div>
+
+    <!-- Floating Exhibition Shift Trigger -->
+    <button class="exhibit-shift-btn" id="exhibitShiftBtn">
+      <span>展覧目録</span>
+      <span>⟶</span>
+    </button>
+
+  </div>
+
+  <script type="module">
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. DELIBERATE PHYSICAL ENTRANCE
+    if (!prefersReducedMotion) {
+      const enterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      enterTl
+        .from('.poster-topbar', {
+          y: -25,
+          opacity: 0,
+          duration: 0.8
+        })
+        .from('.poster-col-manifesto .v-text-stream', {
+          y: -30,
+          opacity: 0,
+          duration: 1.1,
+          stagger: 0.18,
+          ease: 'power3.out'
+        }, '-=0.4')
+        .from('.poster-title', {
+          y: 30,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power4.out'
+        }, '-=0.8')
+        .from('.tall-image-strip', {
+          clipPath: 'inset(0 0 100% 0)',
+          duration: 1.4,
+          ease: 'power2.inOut'
+        }, '-=0.7')
+        .from('.tall-image-strip img', {
+          scale: 1.1,
+          duration: 1.6,
+          ease: 'power2.out'
+        }, '<')
+        .from('.v-number-block', {
+          x: 25,
+          opacity: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: 'power3.out'
+        }, '-=0.8');
+    }
+
+    // 2. VERTICAL TYPOGRAPHY PARALLAX & INDEPENDENT DRIFT
+    if (!prefersReducedMotion) {
+      // Independent vertical drift on Japanese vertical text streams
+      gsap.utils.toArray('.v-text-stream').forEach(stream => {
+        gsap.to(stream, {
+          yPercent: -12,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: stream.closest('.exhibit-poster'),
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.4
+          }
         });
       });
-    });
-  </script>
 
+      // Kanji pillars in Poster 002
+      gsap.utils.toArray('.occasion-vertical-pillar').forEach((pillar, i) => {
+        gsap.from(pillar, {
+          y: 40,
+          opacity: 0,
+          duration: 0.9,
+          delay: (i % 2) * 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: pillar,
+            start: 'top 85%'
+          }
+        });
+      });
+    }
+
+    // 3. TRIPTYCH MULTI-STRIP REVEAL
+    if (!prefersReducedMotion) {
+      gsap.utils.toArray('.strip-archive-item').forEach((item, i) => {
+        gsap.from(item, {
+          y: 50,
+          opacity: 0,
+          duration: 0.9,
+          delay: (i % 4) * 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: item.closest('.exhibit-poster'),
+            start: 'top 80%'
+          }
+        });
+      });
+    }
+
+    // 4. SIGNATURE TRANSITION PROTOTYPE: SLIDING EXHIBITION PANEL
+    const shiftBtn = document.getElementById('exhibitShiftBtn');
+    const overlay = document.getElementById('washiOverlay');
+
+    let isShifting = false;
+
+    function triggerExhibitionShift() {
+      if (isShifting) return;
+      isShifting = true;
+
+      const shiftTl = gsap.timeline({
+        onComplete: () => {
+          isShifting = false;
+        }
+      });
+
+      shiftTl
+        .set(overlay, { clipPath: 'inset(100% 0 0 0)' })
+        .to(overlay, {
+          clipPath: 'inset(0% 0 0 0)',
+          duration: 0.7,
+          ease: 'power3.inOut'
+        })
+        .to(overlay, {
+          clipPath: 'inset(0 0 100% 0)',
+          duration: 0.7,
+          ease: 'power3.inOut',
+          delay: 0.18
+        });
+    }
+
+    if (shiftBtn) {
+      shiftBtn.addEventListener('click', triggerExhibitionShift);
+    }
+  </script>
 </body>
 </html>

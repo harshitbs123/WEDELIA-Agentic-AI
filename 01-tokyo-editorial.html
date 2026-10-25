@@ -682,6 +682,66 @@
       letter-spacing: 0.2em;
       color: var(--muted);
     }
+    /* Signature Page-Turn Wipe Transition Overlay */
+    .page-turn-overlay {
+      position: fixed;
+      inset: 0;
+      background: #ede9e1;
+      z-index: 10000;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      clip-path: inset(0 100% 0 0);
+      border-left: 2px solid var(--fg);
+      box-shadow: -20px 0 50px rgba(0, 0, 0, 0.12);
+    }
+    .page-turn-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+      color: var(--fg);
+    }
+    .page-turn-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+    }
+    .turn-page-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9000;
+      background: var(--fg);
+      color: var(--bg);
+      border: 1px solid var(--fg);
+      padding: 0.65rem 1.25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .turn-page-btn:hover {
+      background: #3b3935;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 640px) {
+      .turn-page-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.65rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1054,27 +1114,184 @@
       </div>
     </footer>
 
+    <!-- Signature Page-Turn Transition Overlay -->
+    <div class="page-turn-overlay" id="pageTurnOverlay">
+      <div class="page-turn-kanji">特装第二輯 展開</div>
+      <div class="page-turn-sub">SPREAD SEQUENCE // EDITORIAL WIPE</div>
+    </div>
+
+    <!-- Interactive Page Turn Button -->
+    <button class="turn-page-btn" id="turnPageBtn">
+      <span>TURN SPREAD</span>
+      <span>→</span>
+    </button>
+
   </div>
 
-  <script>
-    // Restrained Editorial Interactions
-    document.addEventListener('DOMContentLoaded', () => {
-      // Spine reading progress
-      const spine = document.querySelector('.vertical-spine');
-      if (spine) {
-        window.addEventListener('scroll', () => {
-          const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-          spine.style.opacity = (0.6 + scrollPct * 0.4).toFixed(2);
-        }, { passive: true });
-      }
+  <script type="module">
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
 
-      // Smooth subtle hover tracking on specimen images
-      const images = document.querySelectorAll('.specimen-img-col img, .cover-visual-frame img');
-      images.forEach(img => {
-        img.addEventListener('mouseenter', () => { img.style.filter = 'contrast(112%) brightness(1.02)'; });
-        img.addEventListener('mouseleave', () => { img.style.filter = 'contrast(105%) brightness(1)'; });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. ENTRANCE CHOREOGRAPHY
+    if (!prefersReducedMotion) {
+      const enterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      enterTl
+        .from('.pub-topbar, .cover-issue-tag', {
+          y: -20,
+          autoAlpha: 0,
+          duration: 0.8,
+          stagger: 0.1
+        })
+        .from('.vertical-spine', {
+          scaleY: 0,
+          transformOrigin: 'top center',
+          duration: 1.2,
+          ease: 'power3.inOut'
+        }, '-=0.5')
+        .from('.cover-title', {
+          yPercent: 35,
+          autoAlpha: 0,
+          duration: 1.1,
+          ease: 'power4.out'
+        }, '-=0.9')
+        .from('.manifesto-col, .cover-meta-strip', {
+          y: 24,
+          autoAlpha: 0,
+          duration: 0.8,
+          stagger: 0.12
+        }, '-=0.7')
+        .from('.cover-visual-frame', {
+          clipPath: 'inset(100% 0 0 0)',
+          duration: 1.3,
+          ease: 'power3.inOut'
+        }, '-=1.0')
+        .from('.cover-visual-frame img', {
+          scale: 1.12,
+          duration: 1.6,
+          ease: 'power2.out'
+        }, '<');
+    }
+
+    // 2. TYPOGRAPHY MOVEMENT SYSTEMS
+    if (!prefersReducedMotion) {
+      // Split/horizontal drift on oversized crossing headline
+      gsap.to('.crossing-headline', {
+        xPercent: -5,
+        letterSpacing: '0.03em',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.spread-hero-frame',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.2
+        }
       });
-    });
+
+      // Editorial pullquote horizontal drift
+      gsap.from('.essay-pullquote', {
+        x: -40,
+        autoAlpha: 0.3,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.essay-spread',
+          start: 'top 85%',
+          end: 'top 45%',
+          scrub: 1
+        }
+      });
+
+      // Occasion rows reveal with deliberate staggering
+      gsap.utils.toArray('.occasion-row').forEach((row, i) => {
+        gsap.from(row, {
+          x: -30,
+          autoAlpha: 0,
+          duration: 0.8,
+          delay: (i % 2) * 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: row,
+            start: 'top 90%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+    }
+
+    // 3. IMAGE MOVEMENT & PHOTOGRAPHIC REVEALS
+    if (!prefersReducedMotion) {
+      // Museum specimen card image unmask
+      gsap.from('.specimen-img-col img', {
+        clipPath: 'inset(100% 0 0 0)',
+        scale: 1.1,
+        duration: 1.4,
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: '.specimen-study-card',
+          start: 'top 75%'
+        }
+      });
+
+      // Look duo subtle vertical parallax
+      gsap.utils.toArray('.look-frame img').forEach(img => {
+        gsap.to(img, {
+          yPercent: -6,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img.closest('.look-frame'),
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5
+          }
+        });
+      });
+    }
+
+    // 4. SPINE READING PROGRESSION
+    const spine = document.querySelector('.vertical-spine');
+    if (spine) {
+      window.addEventListener('scroll', () => {
+        const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        spine.style.opacity = (0.55 + Math.min(scrollPct * 0.45, 0.45)).toFixed(2);
+      }, { passive: true });
+    }
+
+    // 5. SIGNATURE TRANSITION PROTOTYPE: EDITORIAL PAGE-TURN WIPE
+    const turnBtn = document.getElementById('turnPageBtn');
+    const overlay = document.getElementById('pageTurnOverlay');
+
+    let isWiping = false;
+    function triggerPageTurn() {
+      if (isWiping) return;
+      isWiping = true;
+
+      const wipeTl = gsap.timeline({
+        onComplete: () => {
+          isWiping = false;
+        }
+      });
+
+      wipeTl
+        .set(overlay, { clipPath: 'inset(0 100% 0 0)' })
+        .to(overlay, {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 0.65,
+          ease: 'power3.inOut'
+        })
+        .to(overlay, {
+          clipPath: 'inset(0 0 0 100%)',
+          duration: 0.65,
+          ease: 'power3.inOut',
+          delay: 0.15
+        });
+    }
+
+    if (turnBtn) {
+      turnBtn.addEventListener('click', triggerPageTurn);
+    }
   </script>
 
 </body>

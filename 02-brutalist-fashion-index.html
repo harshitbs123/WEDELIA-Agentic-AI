@@ -642,6 +642,70 @@
         align-items: flex-start;
       }
     }
+    /* Signature Mechanical Registry Cut Transition Overlay */
+    .ledger-shift-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      color: #ffffff;
+      z-index: 10000;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: scaleX(0);
+      transform-origin: left center;
+      font-family: 'Space Mono', monospace;
+    }
+    .ledger-shift-code {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .ledger-shift-meta {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: #888888;
+    }
+    .mechanical-reindex-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9000;
+      background: #000000;
+      color: #ffffff;
+      border: 2px solid #000000;
+      padding: 0.65rem 1.25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 4px 4px 0px rgba(0,0,0,1);
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .mechanical-reindex-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px rgba(0,0,0,1);
+    }
+    .mechanical-reindex-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px rgba(0,0,0,1);
+    }
+    @media (max-width: 640px) {
+      .mechanical-reindex-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.65rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1297,7 +1361,173 @@
       </div>
     </footer>
 
+    <!-- Signature Mechanical Registry Shift Overlay -->
+    <div class="ledger-shift-overlay" id="ledgerShiftOverlay">
+      <div class="ledger-shift-code" id="ledgerShiftCode">LEDGER_CALIBRATION</div>
+      <div class="ledger-shift-meta">STATUS: RE-INDEXING 9 CAMPUS SPHERES // LATENCY: 12ms</div>
+    </div>
+
+    <!-- Floating Re-Index Control Button -->
+    <button class="mechanical-reindex-btn" id="reindexBtn">
+      <span>[SYS]</span>
+      <span>RE-INDEX REGISTRY</span>
+    </button>
+
   </div>
 
+  <script type="module">
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. MECHANICAL ENTRANCE SEQUENCE
+    if (!prefersReducedMotion) {
+      const enterTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+      enterTl
+        .from('.header-grid .h-cell', {
+          opacity: 0,
+          y: -15,
+          duration: 0.4,
+          stagger: 0.08
+        })
+        .from('.brand-title', {
+          yPercent: 100,
+          duration: 0.6,
+          ease: 'power4.out'
+        }, '-=0.2')
+        .from('.spec-table tr', {
+          x: -20,
+          opacity: 0,
+          duration: 0.35,
+          stagger: 0.04
+        }, '-=0.3')
+        .from('.hero-crop-frame', {
+          scaleX: 0.95,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'steps(3)'
+        }, '-=0.3')
+        .from('.ledger-row', {
+          xPercent: -6,
+          opacity: 0,
+          duration: 0.4,
+          stagger: 0.04,
+          ease: 'power3.out'
+        }, '-=0.2');
+    }
+
+    // 2. MECHANICAL TYPOGRAPHY & SERIAL NUMBER MOVEMENT
+    if (!prefersReducedMotion) {
+      // Step-indexed movement for huge serial numbers in catalog cells
+      gsap.utils.toArray('.huge-serial').forEach((serial) => {
+        gsap.from(serial, {
+          x: -35,
+          opacity: 0.2,
+          duration: 0.5,
+          ease: 'steps(4)',
+          scrollTrigger: {
+            trigger: serial.closest('.catalog-cell'),
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+
+      // Occasion Matrix Table rows mechanical horizontal slide
+      gsap.utils.toArray('.matrix-table tbody tr').forEach((tr, i) => {
+        gsap.from(tr, {
+          x: -20,
+          opacity: 0,
+          duration: 0.35,
+          delay: (i % 3) * 0.05,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: tr,
+            start: 'top 92%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+    }
+
+    // 3. IMAGE MOVEMENT: PHOTOGRAM CELLS ON WALL
+    if (!prefersReducedMotion) {
+      gsap.utils.toArray('.wall-photo-frame img').forEach((img) => {
+        gsap.from(img, {
+          scale: 1.15,
+          filter: 'contrast(140%) brightness(0.9)',
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: img.closest('.wall-photo-frame'),
+            start: 'top 85%'
+          }
+        });
+      });
+    }
+
+    // 4. INVENTORY ROW SELECTION & SNAP INTERACTION
+    const ledgerRows = document.querySelectorAll('.ledger-row');
+    const catalogCells = document.querySelectorAll('.catalog-cell');
+
+    ledgerRows.forEach((row, index) => {
+      row.addEventListener('click', () => {
+        ledgerRows.forEach(r => r.classList.remove('selected'));
+        row.classList.add('selected');
+
+        if (catalogCells[index]) {
+          catalogCells[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          gsap.fromTo(catalogCells[index], 
+            { outline: '3px solid #000000', backgroundColor: '#f0f0f0' },
+            { outline: '1px solid #000000', backgroundColor: '#ffffff', duration: 0.6, ease: 'power2.out' }
+          );
+        }
+      });
+    });
+
+    // 5. SIGNATURE TRANSITION PROTOTYPE: MECHANICAL REGISTRY CUT
+    const reindexBtn = document.getElementById('reindexBtn');
+    const overlay = document.getElementById('ledgerShiftOverlay');
+    const codeTag = document.getElementById('ledgerShiftCode');
+
+    const codes = ['WDL-SYS-CALIBRATE', 'REGISTRY_SYNC_DU', 'ROSTER_VERIFIED', 'LEDGER_READY'];
+    let isCutting = false;
+
+    function triggerRegistryCut() {
+      if (isCutting) return;
+      isCutting = true;
+
+      const randomCode = codes[Math.floor(Math.random() * codes.length)];
+      codeTag.textContent = randomCode;
+
+      const cutTl = gsap.timeline({
+        onComplete: () => {
+          isCutting = false;
+        }
+      });
+
+      cutTl
+        .set(overlay, { transformOrigin: 'left center', scaleX: 0 })
+        .to(overlay, {
+          scaleX: 1,
+          duration: 0.28,
+          ease: 'power4.inOut'
+        })
+        .to(overlay, {
+          scaleX: 0,
+          transformOrigin: 'right center',
+          duration: 0.28,
+          ease: 'power4.inOut',
+          delay: 0.18
+        });
+    }
+
+    if (reindexBtn) {
+      reindexBtn.addEventListener('click', triggerRegistryCut);
+    }
+  </script>
 </body>
 </html>

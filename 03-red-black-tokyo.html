@@ -19,7 +19,7 @@
       --hairline: #e5e5e5;
     }
 
-    body {
+    html, body {
       background: var(--bg);
       color: var(--fg);
       font-family: 'Space Grotesk', sans-serif;
@@ -27,6 +27,7 @@
       padding-top: 48px;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      max-width: 100vw;
     }
 
     /* Switcher Navigation */
@@ -169,6 +170,7 @@
       position: relative;
       background: #0d0d0d;
       border: 2px solid var(--fg);
+      overflow: hidden;
     }
     .monument-image-frame img {
       width: 100%;
@@ -255,6 +257,7 @@
     .night-photo-box {
       position: relative;
       border: 2px solid #ffffff;
+      overflow: hidden;
     }
     .night-photo-box img {
       width: 100%;
@@ -542,6 +545,66 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: baseline;
+      }
+    }
+    /* Signature Vermilion Poster Snap Transition Overlay */
+    .vermilion-snap-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--red);
+      color: #ffffff;
+      z-index: 10000;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      font-family: 'Anton', sans-serif;
+    }
+    .snap-title {
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: -0.02em;
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .snap-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .vermilion-snap-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9000;
+      background: var(--red);
+      color: #ffffff;
+      border: 2px solid var(--red);
+      padding: 0.65rem 1.25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 4px 4px 0px rgba(0,0,0,1);
+      transition: background 0.15s, transform 0.15s;
+    }
+    .vermilion-snap-btn:hover {
+      background: #b0000e;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 640px) {
+      .vermilion-snap-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.65rem;
       }
     }
   </style>
@@ -887,21 +950,191 @@
 
   </div>
 
-  <script>
-    // Live Shibuya / Delhi Time Protocol
-    document.addEventListener('DOMContentLoaded', () => {
-      const stamp = document.querySelector('.red-stamp');
-      if (stamp) {
-        setInterval(() => {
-          const now = new Date();
-          const jstH = (now.getUTCHours() + 9) % 24;
-          const jstM = String(now.getUTCMinutes()).padStart(2, '0');
-          const jstS = String(now.getUTCSeconds()).padStart(2, '0');
-          stamp.textContent = `SHIBUYA ${String(jstH).padStart(2, '0')}:${jstM}:${jstS}`;
-        }, 1000);
-      }
-    });
-  </script>
+    <!-- Signature Vermilion Snap Overlay -->
+    <div class="vermilion-snap-overlay" id="vermilionOverlay">
+      <div class="snap-title">SHIBUYA 23:47</div>
+      <div class="snap-meta">+ + + REDLINE CAMPAIGN SNAP PROTOCOL + + +</div>
+    </div>
 
+    <!-- Floating Vermilion Snap Trigger -->
+    <button class="vermilion-snap-btn" id="vermilionSnapBtn">
+      <span>⚡</span>
+      <span>CAMPAIGN SNAP</span>
+    </button>
+
+  </div>
+
+  <script type="module">
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Live Shibuya Clock
+    const stamp = document.querySelector('.red-stamp');
+    if (stamp) {
+      setInterval(() => {
+        const now = new Date();
+        const jstH = (now.getUTCHours() + 9) % 24;
+        const jstM = String(now.getUTCMinutes()).padStart(2, '0');
+        const jstS = String(now.getUTCSeconds()).padStart(2, '0');
+        stamp.textContent = `SHIBUYA ${String(jstH).padStart(2, '0')}:${jstM}:${jstS}`;
+      }, 1000);
+    }
+
+    // 1. AGGRESSIVE CAMPAIGN ENTRANCE
+    if (!prefersReducedMotion) {
+      const enterTl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+
+      enterTl
+        .from('.top-lead', {
+          y: -25,
+          opacity: 0,
+          duration: 0.5
+        })
+        .from('.brand-name', {
+          xPercent: -50,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'expo.out'
+        }, '-=0.2')
+        .from('.tokyo-sub', {
+          xPercent: 30,
+          opacity: 0,
+          duration: 0.6
+        }, '-=0.4')
+        .from('.japanese-lead, .body-copy', {
+          y: 20,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.1
+        }, '-=0.3')
+        .from('.monument-image-frame', {
+          scale: 1.15,
+          clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+          duration: 0.8,
+          ease: 'power4.out'
+        }, '-=0.5')
+        .to('.monument-image-frame', {
+          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+          duration: 0.8,
+          ease: 'power4.out'
+        }, '<')
+        .from('.poster-left ul li', {
+          x: -25,
+          opacity: 0,
+          duration: 0.45,
+          stagger: 0.05,
+          ease: 'power3.out'
+        }, '-=0.4');
+    }
+
+    // 2. TYPOGRAPHY MOVEMENT SYSTEMS
+    if (!prefersReducedMotion) {
+      // Monumental closing headline split translation
+      gsap.fromTo('.closing-huge-type', 
+        { letterSpacing: '-0.06em' },
+        { 
+          letterSpacing: '0.02em',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.closing-monument',
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 1
+          }
+        }
+      );
+
+      // Slogan items in Redline Protocol
+      gsap.utils.toArray('.protocol-item').forEach((item, i) => {
+        gsap.from(item, {
+          y: 35,
+          opacity: 0,
+          duration: 0.6,
+          delay: (i % 2) * 0.1,
+          ease: 'expo.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 88%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+    }
+
+    // 3. OCCASION POSTER CHOREOGRAPHY
+    if (!prefersReducedMotion) {
+      gsap.utils.toArray('.campaign-poster-card').forEach((card, i) => {
+        gsap.from(card, {
+          y: 40,
+          opacity: 0,
+          duration: 0.6,
+          delay: (i % 2) * 0.12,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          }
+        });
+
+        // Micro-flash on hover
+        card.addEventListener('mouseenter', () => {
+          gsap.fromTo(card, 
+            { filter: 'invert(100%)' },
+            { filter: 'invert(0%)', duration: 0.2, ease: 'power2.out' }
+          );
+        });
+      });
+
+      // Night file photo scale on scroll
+      gsap.from('.night-photo-box img', {
+        scale: 1.15,
+        filter: 'contrast(130%) brightness(0.85)',
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.night-file-section',
+          start: 'top 70%'
+        }
+      });
+    }
+
+    // 4. SIGNATURE TRANSITION PROTOTYPE: VERMILION POSTER SNAP
+    const snapBtn = document.getElementById('vermilionSnapBtn');
+    const overlay = document.getElementById('vermilionOverlay');
+
+    let isSnapping = false;
+
+    function triggerVermilionSnap() {
+      if (isSnapping) return;
+      isSnapping = true;
+
+      const snapTl = gsap.timeline({
+        onComplete: () => {
+          isSnapping = false;
+        }
+      });
+
+      snapTl
+        .set(overlay, { clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)' })
+        .to(overlay, {
+          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+          duration: 0.24,
+          ease: 'expo.inOut'
+        })
+        .to(overlay, {
+          clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
+          duration: 0.24,
+          ease: 'expo.inOut',
+          delay: 0.12
+        });
+    }
+
+    if (snapBtn) {
+      snapBtn.addEventListener('click', triggerVermilionSnap);
+    }
+  </script>
 </body>
 </html>
