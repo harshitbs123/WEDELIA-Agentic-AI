@@ -15,6 +15,10 @@
       --fg: #000000;
       --border: #000000;
       --muted: #555555;
+      --surface: #f7f7f7;
+      --surface-dark: #000000;
+      --hairline: #e0e0e0;
+      --highlight: #000000;
     }
 
     body {
@@ -28,7 +32,7 @@
       overflow-x: hidden;
     }
 
-    /* Switcher Navigation */
+    /* Switcher Top Navigation */
     .switch-nav {
       position: fixed;
       top: 0;
@@ -58,7 +62,7 @@
     .switch-pill.active { background: var(--fg); color: #ffffff; font-weight: 700; }
     @media (max-width: 768px) {
       .switch-nav .dir-label { display: none; }
-      .switch-nav { padding: 0 0.75rem; }
+      .switch-nav { padding: 0 1rem; }
       .switch-pills { gap: 2px; }
       .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
     }
@@ -67,8 +71,10 @@
     .index-container {
       border-left: 2px solid var(--border);
       border-right: 2px solid var(--border);
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 0 auto;
+      width: 100%;
+      overflow-x: hidden;
     }
 
     /* Top Grid Header */
@@ -79,7 +85,7 @@
     }
     @media (min-width: 768px) {
       .header-grid {
-        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-columns: 2fr 1.2fr 1fr;
       }
     }
     .h-cell {
@@ -95,7 +101,7 @@
     }
     .brand-title {
       font-family: 'Syne', sans-serif;
-      font-size: 3rem;
+      font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 800;
       letter-spacing: -0.05em;
       line-height: 0.85;
@@ -103,13 +109,13 @@
     }
     .kanji-header {
       font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 900;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       margin-top: 0.5rem;
     }
 
-    /* Brutalist Hero Row */
+    /* Hero Catalog Row */
     .hero-catalog-row {
       display: grid;
       grid-template-columns: 1fr;
@@ -117,7 +123,7 @@
     }
     @media (min-width: 1024px) {
       .hero-catalog-row {
-        grid-template-columns: 80px 1.2fr 1fr;
+        grid-template-columns: 70px 1.25fr 1fr;
       }
     }
     .index-sidebar-num {
@@ -128,9 +134,9 @@
       justify-content: space-between;
       align-items: center;
       writing-mode: vertical-rl;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      background: #fafafa;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      background: var(--surface);
     }
     .hero-text-block {
       padding: 2.5rem;
@@ -141,12 +147,12 @@
     }
     .hero-big-statement {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-size: clamp(2.2rem, 4.2vw, 4rem);
       font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
     .spec-table {
       width: 100%;
@@ -154,19 +160,21 @@
       margin-top: 2rem;
     }
     .spec-table td {
-      padding: 0.6rem 0;
-      border-bottom: 1px solid #e0e0e0;
-      font-size: 0.75rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--hairline);
+      font-size: 0.72rem;
     }
     .spec-table td.key {
       font-weight: 700;
-      width: 45%;
+      width: 42%;
+      color: var(--fg);
     }
     .hero-crop-frame {
       padding: 2rem;
-      background: #f5f5f5;
+      background: #f0f0f0;
       position: relative;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
@@ -179,23 +187,101 @@
       border: 1px solid var(--border);
       filter: contrast(110%);
     }
-
-    /* Archive Table Grid */
-    .catalog-section-bar {
-      padding: 1rem 1.5rem;
+    .crop-meta-tag {
+      position: absolute;
+      top: 2.75rem;
+      right: 2.75rem;
       background: #000000;
       color: #ffffff;
-      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Section Division Bar */
+    .catalog-section-bar {
+      padding: 0.9rem 1.5rem;
+      background: #000000;
+      color: #ffffff;
+      font-size: 0.72rem;
       letter-spacing: 0.15em;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--border);
     }
+
+    /* MASTER OCCASION MATRIX */
+    .matrix-wrapper {
+      overflow-x: auto;
+      border-bottom: 2px solid var(--border);
+    }
+    .matrix-table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+      font-size: 0.74rem;
+    }
+    .matrix-table th {
+      background: #f0f0f0;
+      text-align: left;
+      padding: 0.85rem 1.25rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 0.68rem;
+    }
+    .matrix-table th:last-child { border-right: none; }
+    .matrix-table td {
+      padding: 0.9rem 1.25rem;
+      border-right: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+      vertical-align: middle;
+    }
+    .matrix-table td:last-child { border-right: none; }
+    .matrix-table tr:hover {
+      background: #fcf8eb;
+    }
+    .matrix-table td.code-cell {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      border-right: 1px solid var(--border);
+    }
+    .matrix-table td.name-cell {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .matrix-table td.kanji-cell {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 900;
+      color: #333333;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.15rem 0.45rem;
+      border: 1px solid var(--border);
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .status-badge.active { background: #000000; color: #ffffff; }
+
+    /* DENSE LOOK DATABASE */
     .catalog-grid {
       display: grid;
       grid-template-columns: 1fr;
+      border-bottom: 2px solid var(--border);
     }
     @media (min-width: 768px) {
+      .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1200px) {
       .catalog-grid {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -203,13 +289,17 @@
     .catalog-cell {
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 1.5rem;
+      padding: 1.75rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
+      background: #ffffff;
     }
-    @media (min-width: 768px) {
+    @media (min-width: 768px) and (max-width: 1199px) {
+      .catalog-cell:nth-child(2n) { border-right: none; }
+    }
+    @media (min-width: 1200px) {
       .catalog-cell:nth-child(3n) { border-right: none; }
     }
     .catalog-cell-top {
@@ -225,31 +315,220 @@
       line-height: 0.8;
       letter-spacing: -0.05em;
     }
+    .cell-img-wrap {
+      position: relative;
+      margin-bottom: 1.5rem;
+      background: #f0f0f0;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
     .cell-img {
       width: 100%;
-      aspect-ratio: 1/1.2;
+      aspect-ratio: 1/1.22;
       object-fit: cover;
-      margin-bottom: 1.5rem;
-      border: 1px solid var(--border);
+      display: block;
+      filter: contrast(105%);
+    }
+    .cell-overlay-grid {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      background: rgba(0,0,0,0.85);
+      color: #ffffff;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
     }
     .cell-name {
       font-family: 'Syne', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
+      font-size: 1.35rem;
+      font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
+      line-height: 1.05;
     }
-    .price-tag {
-      font-size: 1.1rem;
+    .item-specs-subtable {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.7rem;
+    }
+    .item-specs-subtable td {
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed var(--hairline);
+    }
+    .item-specs-subtable td.prop {
+      color: var(--muted);
+      width: 45%;
+    }
+    .price-tag-row {
+      font-size: 1.05rem;
       font-weight: 700;
-      margin-top: 1rem;
-      padding-top: 0.5rem;
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
       border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
+      align-items: baseline;
+    }
+    .price-tag-row .tariff {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+    .duration-pills {
+      display: flex;
+      gap: 0.25rem;
+      margin-top: 0.75rem;
+    }
+    .dur-pill {
+      flex: 1;
+      text-align: center;
+      padding: 0.35rem 0;
+      border: 1px solid var(--border);
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: #ffffff;
+      cursor: pointer;
+    }
+    .dur-pill.active {
+      background: #000000;
+      color: #ffffff;
     }
 
-    /* Technical Rules Footer */
+    /* ARCHIVE WALL: Photographs breaking through rigid grid */
+    .archive-wall-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 2px solid var(--border);
+      background: #f8f8f8;
+    }
+    @media (min-width: 1024px) {
+      .archive-wall-row {
+        grid-template-columns: 1.3fr 1fr;
+      }
+    }
+    .wall-large-visual {
+      padding: 2.5rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .wall-large-visual img {
+      width: 100%;
+      max-height: 600px;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .wall-dossier {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #ffffff;
+    }
+    .dossier-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .dossier-code-block {
+      background: #f2f2f2;
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      font-size: 0.72rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* BRUTALIST RENTAL RECORD / SPEC SHEET DOCUMENT */
+    .document-section {
+      padding: 3rem 2rem;
+      background: #ffffff;
+      border-bottom: 2px solid var(--border);
+    }
+    @media (min-width: 1024px) {
+      .document-section { padding: 4rem 3.5rem; }
+    }
+    .document-card {
+      border: 2px solid var(--border);
+      background: #ffffff;
+      max-width: 1080px;
+      margin: 0 auto;
+      outline: 2px solid var(--border);
+      outline-offset: 4px;
+    }
+    .doc-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000000;
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+    }
+    .doc-inner-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 768px) {
+      .doc-inner-grid {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+    .doc-col {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (min-width: 768px) {
+      .doc-col {
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+      }
+      .doc-col:last-child { border-right: none; }
+    }
+    .doc-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .doc-field-group {
+      margin-bottom: 1.25rem;
+    }
+    .doc-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    .doc-value {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .doc-barcode {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      padding: 0.75rem;
+      background: #f4f4f4;
+      border: 1px dashed var(--border);
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    /* Technical Rules Grid */
     .rules-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -261,7 +540,7 @@
       }
     }
     .rule-cell {
-      padding: 1.5rem;
+      padding: 2rem 1.5rem;
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
@@ -269,16 +548,46 @@
       .rule-cell { border-bottom: none; }
       .rule-cell:last-child { border-right: none; }
     }
+    .rule-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
     .rule-cell strong {
       display: block;
-      margin-bottom: 0.5rem;
-      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+    }
+    .rule-cell p {
+      font-size: 0.74rem;
+      color: #333333;
+      line-height: 1.55;
+    }
+
+    /* Technical Colophon Footer */
+    .index-footer {
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      font-size: 0.72rem;
+      background: #fafafa;
+    }
+    @media (min-width: 768px) {
+      .index-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Switcher Top Bar -->
+  <!-- Switcher Top Bar (5 Active Directions Only) -->
   <nav class="switch-nav">
     <div>
       <a href="index.html">← INDEX</a>
@@ -290,11 +599,6 @@
       <a href="02-brutalist-fashion-index.html" class="switch-pill active">02</a>
       <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
       <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
-      <a href="05-fashion-newspaper.html" class="switch-pill">05</a>
-      <a href="06-white-void.html" class="switch-pill">06</a>
-      <a href="07-tokyo-street-contact-sheet.html" class="switch-pill">07</a>
-      <a href="08-fashion-terminal.html" class="switch-pill">08</a>
-      <a href="09-collage-cut-paper.html" class="switch-pill">09</a>
       <a href="10-the-strange-one.html" class="switch-pill">10</a>
     </div>
   </nav>
@@ -305,19 +609,19 @@
     <header class="header-grid">
       <div class="h-cell">
         <h1 class="brand-title">WEDELIA</h1>
-        <div class="kanji-header">瞬間貸出仕様技術目録 // 2026</div>
+        <div class="kanji-header">瞬間貸出仕様技術目録 // 2026 ARCHIVE</div>
       </div>
       <div class="h-cell">
         <strong>ARCHIVE_PROTOCOL</strong><br>
-        TYPE: HAUTE RENTAL<br>
-        TIER: CAMPUS ACCESS<br>
-        LOC: DELHI / TOKYO
+        TYPE: HAUTE RENTAL LEDGER<br>
+        TIER: CAMPUS NIGHTLIFE ACCESS<br>
+        NODES: DELHI NCR / TOKYO CENTRAL
       </div>
       <div class="h-cell">
-        <strong>CURRENT_STATUS</strong><br>
-        SYSTEM: 100% OPERATIONAL<br>
-        INSPECTION: VERIFIED<br>
-        DEPOSIT: ₹1,500 ESCROW
+        <strong>OPERATIONAL_SPECS</strong><br>
+        LEDGER STATUS: 100% OPERATIONAL<br>
+        FIBER INSPECTION: STERILIZED<br>
+        ESCROW: ₹1,500 REFUNDABLE
       </div>
     </header>
 
@@ -325,133 +629,568 @@
     <section class="hero-catalog-row">
       <aside class="index-sidebar-num">
         <span>ARCHIVE_SERIES_2026</span>
-        <span>SECTION_A // FORMAL_EXPERIMENT</span>
+        <span>SECTION_A // FORMAL_CATALOGUE</span>
       </aside>
 
       <div class="hero-text-block">
         <div>
           <div style="font-size: 0.7rem; color: var(--muted); margin-bottom: 0.75rem;">
-            [ CATALOGUE MANIFESTO // 001 ]
+            [ CATALOGUE MANIFESTO // WDL-SYS-01 ]
           </div>
           <h2 class="hero-big-statement">
             RENT THE LOOK<br>
             FOR THE MOMENT.
           </h2>
-          <p style="font-size: 0.85rem; color: #333333; max-width: 500px; line-height: 1.6;">
-            A rigorous technical index of couture garments available for 3-day, 5-day, and 7-day moments. No permanent ownership. Two sizes dispatched to student residential corridors 24h before call time.
+          <p style="font-size: 0.85rem; color: #222222; max-width: 520px; line-height: 1.65;">
+            A rigorous technical index of museum-tier and runway evening garments available for 3-day, 5-day, and 7-day college moments. Zero permanent ownership. Two complementary sizes dispatched directly to student residential corridors 24 hours prior to call time.
           </p>
         </div>
 
         <table class="spec-table">
           <tr>
             <td class="key">SECTOR COVERAGE</td>
-            <td>DU NORTH, DU SOUTH, IIT, NIFT, ASHOKA</td>
+            <td>DU NORTH, DU SOUTH, IIT DELHI, NIFT, ASHOKA, ST. XAVIER'S</td>
           </tr>
           <tr>
-            <td class="key">SIZE INTEGRITY</td>
-            <td>1ST CHOICE + 2ND COMPLIMENTARY BACKUP</td>
+            <td class="key">SIZE REDUNDANCY</td>
+            <td>PRIMARY CHOICE + COMPLIMENTARY ADJACENT BACKUP SIZE</td>
           </tr>
           <tr>
-            <td class="key">ACCIDENTAL DAMAGE</td>
-            <td>₹0 LIABILITY SHIELD EMBEDDED</td>
+            <td class="key">DAMAGE LIABILITY</td>
+            <td>₹0 SHIELD EMBEDDED (SPILLS, BEAD LOSS, NORMAL TENSION)</td>
           </tr>
           <tr>
-            <td class="key">MAINTENANCE</td>
-            <td>ZERO LAUNDRY (DISPATCH RETURN UNWASHED)</td>
+            <td class="key">RETURN CONDITION</td>
+            <td>STRICT ZERO-LAUNDRY RULE (DISPATCH BACK UNWASHED IN ODOR-LOCK POUCH)</td>
           </tr>
         </table>
       </div>
 
       <div class="hero-crop-frame">
+        <div class="crop-meta-tag">PLATE_01 // ARCHIVE SPECIMEN</div>
         <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Obsidian Faille Silhouette">
       </div>
     </section>
 
-    <!-- Catalog Bar -->
+    <!-- Section Bar: Master Occasion Matrix -->
     <div class="catalog-section-bar">
-      <span>INDEX // ARCHIVE ENTRIES [ 001 — 003 ]</span>
-      <span>SELECT TO DISPATCH FOR 3D / 5D / 7D</span>
+      <span>01 // MASTER OCCASION MATRIX — 9 CAMPUS SPHERES</span>
+      <span>TABLE REF: WDL-MTX-2026</span>
     </div>
 
-    <!-- Catalog Grid -->
+    <!-- Master Occasion Matrix Table -->
+    <div class="matrix-wrapper">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>CODE</th>
+            <th>OCCASION SPHERE</th>
+            <th>KANJI</th>
+            <th>RECOMMENDED SILHOUETTE</th>
+            <th>HOURS</th>
+            <th>TARIFF (3D)</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="code-cell">OC-01</td>
+            <td class="name-cell">COLLEGE FEST</td>
+            <td class="kanji-cell">祝祭 (FESTIVAL)</td>
+            <td>Kinetic wrap, reflective knit, multi-pocket modular drape</td>
+            <td>18:00 – 02:00</td>
+            <td>₹1,499 – ₹1,899</td>
+            <td><span class="status-badge active">DISPATCHING</span></td>
+          </tr>
+          <tr>
+            <td class="code-cell">OC-02</td>
+            <td class="name-cell">FRESHERS INDUCTION</td>
+            <td class="kanji-cell">新歓 (FRESHERS)</td>
+            <td>Minimalist structured crepe, asymmetric sculpted halter</td>
+            <td>15:00 – 21:00</td>
+            <td>₹1,199 – ₹1,599</td>
+            <td><span class="status-badge active">IN_STOCK</span></td>
+          </tr>
+          <tr>
+            <td class="code-cell">OC-03</td>
+            <td class="name-cell">SENIOR FAREWELL</td>
+            <td class="kanji-cell">門出 (FAREWELL)</td>
+            <td>Floor-length faille, pleated duchesse, sweeping trailing hem</td>
+            <td>17:00 – 23:00</td>
+            <td>₹2,499 – ₹3,299</td>
+            <td><span class="status-badge active">HIGH_DEMAND</span></td>
+          </tr>
+          <tr>
+            <td class="code-cell">OC-04</td>
+            <td class="name-cell">MUSIC CONCERT</td>
+            <td class="kanji-cell">音響 (CONCERT)</td>
+            <td>Strobe-reactive metallic mesh, oversized tailored blazer crop</td>
+            <td>19:00 – 01:00</td>
+            <td>₹1,399 – ₹1,799</td>
+            <td><span class="status-badge">RESERVED</span></td>
+          </tr>
+          <tr>
+            <td class="code-cell">OC-05</td>
+            <td class="name-cell">AFTER DARK PARTY</td>
+            <td class="kanji-cell">深夜 (NIGHT OUT)</td>
+            <td>Cut-out fluid viscose, obsidian micro-corset, liquid drape</td>
+            <td>21:00 – 04:00</td>
+            <td>₹1,299 – ₹1,899</td>
+            <td><span class="status-badge active">DISPATCHING</span></td>
+          </tr>
+          <tr>
+            <td class="code-cell">OC-06</td>
+            <td class="name-cell">PRIVATE DATE</td>
+            <td class="kanji-cell">密会 (DATE NIGHT)</td>
+            <td>Bias-cut washed heavy silk, ribbed backless midi column</td>
+            <td>19:30 – 23:30</td>
+            <td>₹999 – ₹1,499</td>
+            <td><span class="status-badge active">IN_STOCK</span></td>
+          </tr>
+          <tr>
+            <td class="code-cell">OC-07</td>
+            <td class="name-cell">MILESTONE BIRTHDAY</td>
+            <td class="kanji-cell">生誕 (BIRTHDAY)</td>
+            <td>Gilded brocade bustier, dramatic sculptural volume sleeve</td>
+            <td>18:00 – 02:00</td>
+            <td>₹1,699 – ₹2,299</td>
+            <td><span class="status-badge active">IN_STOCK</span></td>
+          </tr>
+          <tr>
+            <td class="code-cell">OC-08</td>
+            <td class="name-cell">SOCIETY / MUN GALA</td>
+            <td class="kanji-cell">舞踏 (SOCIETY)</td>
+            <td>Atelier tailored peak-lapel gown, sovereign structured velvet</td>
+            <td>16:00 – 22:00</td>
+            <td>₹2,199 – ₹3,499</td>
+            <td><span class="status-badge">BOOKED_DU</span></td>
+          </tr>
+          <tr>
+            <td class="code-cell">OC-09</td>
+            <td class="name-cell">PORTFOLIO SHOOT</td>
+            <td class="kanji-cell">写真 (PHOTOSHOOT)</td>
+            <td>Historical hoop volume, high-contrast archival couture silhouette</td>
+            <td>08:00 – 18:00</td>
+            <td>₹1,899 – ₹2,699</td>
+            <td><span class="status-badge active">DISPATCHING</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section Bar: Dense Look Database -->
+    <div class="catalog-section-bar">
+      <span>02 // DENSE LOOK DATABASE — 6 REGISTERED SPECIMENS</span>
+      <span>DISPATCH DURATION: 3 DAYS / 5 DAYS / 7 DAYS</span>
+    </div>
+
+    <!-- Dense Look Database Grid -->
     <div class="catalog-grid">
-      <!-- Item 1 -->
+      
+      <!-- Specimen 01 -->
       <article class="catalog-cell">
         <div class="catalog-cell-top">
           <span class="huge-serial">01</span>
-          <span style="font-size: 0.68rem; text-align: right;">SPEC: MATTE SILK<br>CODE: WDL-01-FLW</span>
+          <div style="font-size: 0.68rem; text-align: right;">
+            <div>LOOK 014 // WDL-01-DOR</div>
+            <div style="color: var(--muted);">ERA: 1952 FALL ATELIER</div>
+          </div>
         </div>
-        <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Pleated Duet Gown" class="cell-img">
-        <h3 class="cell-name">Pleated Duet Gown</h3>
-        <p style="font-size: 0.72rem; color: var(--muted);">
-          OCCASION: FAREWELL BALL & BLACK TIE<br>
-          WEIGHT: 1,140g // CHRONO: 1951 ATELIER<br>
-          RETAIL VAL: ₹42,000
-        </p>
-        <div class="price-tag">
-          <span>RENTAL TARIFF</span>
-          <span>₹2,899 / 3D</span>
+        <div class="cell-img-wrap">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Obsidian Faille" class="cell-img">
+          <div class="cell-overlay-grid">FIBER: 100% SILK FAILLE // 1,480g</div>
+        </div>
+        <h3 class="cell-name">Zemire Evening Faille</h3>
+        <table class="item-specs-subtable">
+          <tr>
+            <td class="prop">OCCASION</td>
+            <td>SENIOR FAREWELL & FORMAL GALA</td>
+          </tr>
+          <tr>
+            <td class="prop">DIMENSIONS</td>
+            <td>BUST 34" // WAIST 26" // LENGTH 58"</td>
+          </tr>
+          <tr>
+            <td class="prop">RETAIL VAL</td>
+            <td>₹48,000 ARCHIVAL VALUATION</td>
+          </tr>
+          <tr>
+            <td class="prop">BACKUP SIZE</td>
+            <td>UK 8 + UK 10 SEALED SHIPMENT</td>
+          </tr>
+        </table>
+        <div class="duration-pills">
+          <div class="dur-pill active">3 DAYS (₹2,999)</div>
+          <div class="dur-pill">5 DAYS (₹3,799)</div>
+          <div class="dur-pill">7 DAYS (₹4,499)</div>
+        </div>
+        <div class="price-tag-row">
+          <span>DISPATCH TARIFF</span>
+          <span class="tariff">₹2,999</span>
         </div>
       </article>
 
-      <!-- Item 2 -->
+      <!-- Specimen 02 -->
       <article class="catalog-cell">
         <div class="catalog-cell-top">
           <span class="huge-serial">02</span>
-          <span style="font-size: 0.68rem; text-align: right;">SPEC: LUREX KNIT<br>CODE: WDL-02-FST</span>
+          <div style="font-size: 0.68rem; text-align: right;">
+            <div>LOOK 029 // WDL-02-DES</div>
+            <div style="color: var(--muted);">ERA: 1951 PARIS DUET</div>
+          </div>
         </div>
-        <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Graphic Kinetic Shift" class="cell-img">
-        <h3 class="cell-name">Kinetic Shift & Wrap</h3>
-        <p style="font-size: 0.72rem; color: var(--muted);">
-          OCCASION: COLLEGE FEST STAR NIGHT<br>
-          WEIGHT: 680g // RUNWAY FLASH REFLECTION<br>
-          RETAIL VAL: ₹22,000
-        </p>
-        <div class="price-tag">
-          <span>RENTAL TARIFF</span>
-          <span>₹1,699 / 3D</span>
+        <div class="cell-img-wrap">
+          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Pleated Duet Gown" class="cell-img">
+          <div class="cell-overlay-grid">FIBER: SILK CHIFFON DRAPE // 1,140g</div>
+        </div>
+        <h3 class="cell-name">Pleated Duet Gown</h3>
+        <table class="item-specs-subtable">
+          <tr>
+            <td class="prop">OCCASION</td>
+            <td>COLLEGE FAREWELL & DEBATE BALL</td>
+          </tr>
+          <tr>
+            <td class="prop">DIMENSIONS</td>
+            <td>BUST 33" // WAIST 25" // LENGTH 56"</td>
+          </tr>
+          <tr>
+            <td class="prop">RETAIL VAL</td>
+            <td>₹42,000 ARCHIVAL VALUATION</td>
+          </tr>
+          <tr>
+            <td class="prop">BACKUP SIZE</td>
+            <td>UK 6 + UK 8 SEALED SHIPMENT</td>
+          </tr>
+        </table>
+        <div class="duration-pills">
+          <div class="dur-pill active">3 DAYS (₹2,899)</div>
+          <div class="dur-pill">5 DAYS (₹3,599)</div>
+          <div class="dur-pill">7 DAYS (₹4,299)</div>
+        </div>
+        <div class="price-tag-row">
+          <span>DISPATCH TARIFF</span>
+          <span class="tariff">₹2,899</span>
         </div>
       </article>
 
-      <!-- Item 3 -->
+      <!-- Specimen 03 -->
       <article class="catalog-cell">
         <div class="catalog-cell-top">
           <span class="huge-serial">03</span>
-          <span style="font-size: 0.68rem; text-align: right;">SPEC: BROCADE GOLD<br>CODE: WDL-03-GAL</span>
+          <div style="font-size: 0.68rem; text-align: right;">
+            <div>LOOK 041 // WDL-03-CST</div>
+            <div style="color: var(--muted);">ERA: SUMMER EDITION RUNWAY</div>
+          </div>
         </div>
-        <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Silhouette" class="cell-img">
-        <h3 class="cell-name">Gold Brocade Robe</h3>
-        <p style="font-size: 0.72rem; color: var(--muted);">
-          OCCASION: GILDED IMPERIAL GALA<br>
-          WEIGHT: 2,400g // METALLIC STOMACHER<br>
-          RETAIL VAL: ₹65,000
-        </p>
-        <div class="price-tag">
-          <span>RENTAL TARIFF</span>
-          <span>₹3,899 / 3D</span>
+        <div class="cell-img-wrap">
+          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Graphic Kinetic Shift" class="cell-img">
+          <div class="cell-overlay-grid">FIBER: METALLIC LUREX KNIT // 680g</div>
+        </div>
+        <h3 class="cell-name">Kinetic Shift & Wrap</h3>
+        <table class="item-specs-subtable">
+          <tr>
+            <td class="prop">OCCASION</td>
+            <td>COLLEGE FEST STAR NIGHT</td>
+          </tr>
+          <tr>
+            <td class="prop">DIMENSIONS</td>
+            <td>BUST 35" // WAIST 28" // LENGTH 42"</td>
+          </tr>
+          <tr>
+            <td class="prop">RETAIL VAL</td>
+            <td>₹22,000 RUNWAY VALUATION</td>
+          </tr>
+          <tr>
+            <td class="prop">BACKUP SIZE</td>
+            <td>UK 8 + UK 10 SEALED SHIPMENT</td>
+          </tr>
+        </table>
+        <div class="duration-pills">
+          <div class="dur-pill active">3 DAYS (₹1,699)</div>
+          <div class="dur-pill">5 DAYS (₹2,199)</div>
+          <div class="dur-pill">7 DAYS (₹2,699)</div>
+        </div>
+        <div class="price-tag-row">
+          <span>DISPATCH TARIFF</span>
+          <span class="tariff">₹1,699</span>
         </div>
       </article>
+
+      <!-- Specimen 04 -->
+      <article class="catalog-cell">
+        <div class="catalog-cell-top">
+          <span class="huge-serial">04</span>
+          <div style="font-size: 0.68rem; text-align: right;">
+            <div>LOOK 053 // WDL-04-CRT</div>
+            <div style="color: var(--muted);">ERA: HISTORIC PALATIAL ARCHIVE</div>
+          </div>
+        </div>
+        <div class="cell-img-wrap">
+          <img src="/assets/editorial/court-dress.jpg" alt="Gold Brocade Silhouette" class="cell-img">
+          <div class="cell-overlay-grid">FIBER: GILDED METALLIC JACQUARD // 2,400g</div>
+        </div>
+        <h3 class="cell-name">Gold Brocade Robe</h3>
+        <table class="item-specs-subtable">
+          <tr>
+            <td class="prop">OCCASION</td>
+            <td>SOCIETY BALL & THEME BANQUET</td>
+          </tr>
+          <tr>
+            <td class="prop">DIMENSIONS</td>
+            <td>BUST 36" // WAIST 27" // LENGTH 60"</td>
+          </tr>
+          <tr>
+            <td class="prop">RETAIL VAL</td>
+            <td>₹65,000 ARCHIVAL VALUATION</td>
+          </tr>
+          <tr>
+            <td class="prop">BACKUP SIZE</td>
+            <td>UK 10 + UK 12 SEALED SHIPMENT</td>
+          </tr>
+        </table>
+        <div class="duration-pills">
+          <div class="dur-pill active">3 DAYS (₹3,899)</div>
+          <div class="dur-pill">5 DAYS (₹4,899)</div>
+          <div class="dur-pill">7 DAYS (₹5,699)</div>
+        </div>
+        <div class="price-tag-row">
+          <span>DISPATCH TARIFF</span>
+          <span class="tariff">₹3,899</span>
+        </div>
+      </article>
+
+      <!-- Specimen 05 -->
+      <article class="catalog-cell">
+        <div class="catalog-cell-top">
+          <span class="huge-serial">05</span>
+          <div style="font-size: 0.68rem; text-align: right;">
+            <div>LOOK 067 // WDL-05-ROB</div>
+            <div style="color: var(--muted);">ERA: 1983 ARCHIVAL COLUMN</div>
+          </div>
+        </div>
+        <div class="cell-img-wrap">
+          <img src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Robe Longue Sculptural" class="cell-img">
+          <div class="cell-overlay-grid">FIBER: CREPE DE CHINE SILK // 890g</div>
+        </div>
+        <h3 class="cell-name">Sculptural Longue Column</h3>
+        <table class="item-specs-subtable">
+          <tr>
+            <td class="prop">OCCASION</td>
+            <td>FAREWELL NIGHT & CULTURAL AUDITORIUM</td>
+          </tr>
+          <tr>
+            <td class="prop">DIMENSIONS</td>
+            <td>BUST 34" // WAIST 26" // LENGTH 57"</td>
+          </tr>
+          <tr>
+            <td class="prop">RETAIL VAL</td>
+            <td>₹38,000 ARCHIVAL VALUATION</td>
+          </tr>
+          <tr>
+            <td class="prop">BACKUP SIZE</td>
+            <td>UK 8 + UK 10 SEALED SHIPMENT</td>
+          </tr>
+        </table>
+        <div class="duration-pills">
+          <div class="dur-pill active">3 DAYS (₹2,499)</div>
+          <div class="dur-pill">5 DAYS (₹3,199)</div>
+          <div class="dur-pill">7 DAYS (₹3,799)</div>
+        </div>
+        <div class="price-tag-row">
+          <span>DISPATCH TARIFF</span>
+          <span class="tariff">₹2,499</span>
+        </div>
+      </article>
+
+      <!-- Specimen 06 -->
+      <article class="catalog-cell">
+        <div class="catalog-cell-top">
+          <span class="huge-serial">06</span>
+          <div style="font-size: 0.68rem; text-align: right;">
+            <div>LOOK 082 // WDL-06-STR</div>
+            <div style="color: var(--muted);">ERA: MID-CENTURY STRUCTURE</div>
+          </div>
+        </div>
+        <div class="cell-img-wrap">
+          <img src="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg" alt="Strapless Hoop Silhouette" class="cell-img">
+          <div class="cell-overlay-grid">FIBER: BONED CORSETRY & TAFFETA // 1,920g</div>
+        </div>
+        <h3 class="cell-name">Strapless Hoop Architecture</h3>
+        <table class="item-specs-subtable">
+          <tr>
+            <td class="prop">OCCASION</td>
+            <td>PORTFOLIO PHOTOSHOOT & DRAMA BALL</td>
+          </tr>
+          <tr>
+            <td class="prop">DIMENSIONS</td>
+            <td>BUST 33" // WAIST 24" // LENGTH 54"</td>
+          </tr>
+          <tr>
+            <td class="prop">RETAIL VAL</td>
+            <td>₹52,000 ARCHIVAL VALUATION</td>
+          </tr>
+          <tr>
+            <td class="prop">BACKUP SIZE</td>
+            <td>UK 6 + UK 8 SEALED SHIPMENT</td>
+          </tr>
+        </table>
+        <div class="duration-pills">
+          <div class="dur-pill active">3 DAYS (₹3,199)</div>
+          <div class="dur-pill">5 DAYS (₹3,999)</div>
+          <div class="dur-pill">7 DAYS (₹4,799)</div>
+        </div>
+        <div class="price-tag-row">
+          <span>DISPATCH TARIFF</span>
+          <span class="tariff">₹3,199</span>
+        </div>
+      </article>
+
     </div>
+
+    <!-- Section Bar: Archive Wall -->
+    <div class="catalog-section-bar">
+      <span>03 // ARCHIVE WALL — SPECIMEN PHOTOGRAMS BREAKING GRID</span>
+      <span>DOSSIER: WDL-EXP-088</span>
+    </div>
+
+    <!-- Archive Wall Section -->
+    <section class="archive-wall-row">
+      <div class="wall-large-visual">
+        <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Obsidian Wall Study">
+        <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--muted);">
+          <span>SPECIMEN NO. 014 // OBSIDIAN SILK FAILLE</span>
+          <span>CAMPUS COURIER DIRECT COLD STORAGE</span>
+        </div>
+      </div>
+      <div class="wall-dossier">
+        <div>
+          <div style="font-size: 0.68rem; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 0.75rem;">
+            TECHNICAL ARCHIVE REPORT
+          </div>
+          <h2 class="dossier-heading">THE ERADICATION OF SINGLE-USE FAST FASHION.</h2>
+          <p style="font-size: 0.82rem; line-height: 1.7; color: #2b2b2b; margin-bottom: 1.5rem;">
+            University calendars are punctuated by hyper-visible aesthetic apexes: Freshers Week, the Annual Cultural Fest, the Department Farewell Ball, and society convocations. Standard fast-fashion retail forces young women to purchase poorly fabricated polyester pieces for ₹4,000–₹8,000 that photograph once and remain permanent deadstock in hostel cupboards.
+          </p>
+          <div class="dossier-code-block">
+            <strong>WEDELIA LOGISTICAL COVENANT:</strong><br>
+            1. Every piece is sourced from haute couture, runway, or museum-grade atelier collections.<br>
+            2. Two sizes are dispatched in a tamper-sealed security carton 24 hours prior.<br>
+            3. ₹0 accidental spill and wear insurance is pre-baked into every reservation.<br>
+            4. Unwashed return: No dry cleaning fees, no campus laundry hassle.
+          </div>
+        </div>
+        <div style="border-top: 1px solid var(--border); padding-top: 1.25rem; font-size: 0.72rem;">
+          SYSTEM CONTACT: <a href="mailto:dispatch@wedelia.jp" style="color: #000000; font-weight: 700;">DISPATCH@WEDELIA.JP</a> // CAMPUS GATE HOTLINE
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Bar: Brutalist Rental Record / Spec Sheet Document -->
+    <div class="catalog-section-bar">
+      <span>04 // SPECIMEN DISPATCH MANIFEST — FORM WDL-REQ-8891</span>
+      <span>STUDENT RESIDENTIAL GATEWAY</span>
+    </div>
+
+    <!-- Brutalist Rental Record Document -->
+    <section class="document-section">
+      <div class="document-card">
+        <div class="doc-top-bar">
+          <span>WEDELIA DISPATCH DOCUMENT // REF #WDL-REQ-8891-NCR</span>
+          <span>CAMPUS COURIER GATE PROTOCOL</span>
+        </div>
+        <div class="doc-inner-grid">
+          <div class="doc-col">
+            <h3 class="doc-title">RESERVATION VOUCHER</h3>
+            <div style="font-size: 0.72rem; color: var(--muted); margin-bottom: 1.5rem;">
+              PRESENT DIGITAL BARCODE AT HOSTEL GATEWAY COURIER DROP
+            </div>
+
+            <div class="doc-field-group">
+              <span class="doc-label">DESIGNATED RECIPIENT</span>
+              <div class="doc-value">AADHYA SHARMA // ROLL NO. 23/ECO/088</div>
+            </div>
+
+            <div class="doc-field-group">
+              <span class="doc-label">CAMPUS NODE & DESTINATION GATE</span>
+              <div class="doc-value">MIRANDA HOUSE, GATE 2 RESIDENTIAL CORRIDOR, UNIVERSITY OF DELHI NORTH CAMPUS</div>
+            </div>
+
+            <div class="doc-field-group">
+              <span class="doc-label">RESERVED ATELIER SPECIMEN</span>
+              <div class="doc-value">LOOK 014: CHRISTIAN DIOR ZEMIRE FAILLE GOWN</div>
+            </div>
+
+            <div class="doc-field-group">
+              <span class="doc-label">DUAL-SIZE DISPATCH VERIFICATION</span>
+              <div class="doc-value">PRIMARY SIZE: UK 8 // COMPLIMENTARY BACKUP: UK 10 (SEALED)</div>
+            </div>
+          </div>
+
+          <div class="doc-col" style="background: #fafafa;">
+            <div class="doc-field-group">
+              <span class="doc-label">MOMENT CALL TIME & OCCASION</span>
+              <div class="doc-value">ANNUAL FAREWELL BALL — 18:30 IST</div>
+            </div>
+
+            <div class="doc-field-group">
+              <span class="doc-label">ESCROW DEPOSIT STATUS</span>
+              <div class="doc-value">₹1,500 HOLD AUTHORIZED (AUTOMATIC RELEASE UPON RETURN)</div>
+            </div>
+
+            <div class="doc-field-group">
+              <span class="doc-label">DAMAGE WAIVER CLAUSE</span>
+              <div class="doc-value">₹0 LIABILITY SHIELD ACTIVE (SPILL & HEEL TENSION COVERED)</div>
+            </div>
+
+            <div class="doc-field-group">
+              <span class="doc-label">MAINTENANCE OBLIGATION</span>
+              <div class="doc-value">STRICTLY DO NOT WASH. SEAL INTO RETURN SATCHEL UNWASHED.</div>
+            </div>
+
+            <div class="doc-barcode">
+              ||| | ||||| |||| || | |||| || |||||||| | ||||| ||| ||<br>
+              WDL-8891-DELHI-NCR-2026-TOKEN
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Technical Rules Footer Grid -->
     <div class="rules-grid">
       <div class="rule-cell">
-        <strong>01 // SELECTION</strong>
-        Input event dates 36h before campus fest or farewell ball. Choose primary + backup size.
+        <div class="rule-num">01</div>
+        <strong>SELECT EVENT & DATES</strong>
+        <p>Book 36 hours before your campus fest, farewell, or date night. Choose your primary size; an adjacent backup size is packaged automatically at ₹0 cost.</p>
       </div>
       <div class="rule-cell">
-        <strong>02 // DISPATCH</strong>
-        Campus courier arrives at hostel gate 24 hours prior to entrance. Both sizes sealed.
+        <div class="rule-num">02</div>
+        <strong>HOSTEL GATE ARRIVAL</strong>
+        <p>Our dedicated temperature-regulated courier drops the tamper-evident garment case directly to your hostel gate 24 hours before your entrance.</p>
       </div>
       <div class="rule-cell">
-        <strong>03 // WEAR & SHOOT</strong>
-        Accidental cocktail spills and dancefloor tears 100% insured under ₹0 damage protocol.
+        <div class="rule-num">03</div>
+        <strong>WEAR, DANCE, PHOTOGRAPH</strong>
+        <p>Accidental cocktail spills, grass stains on college lawns, and seam tension are 100% absorbed by our built-in ₹0 damage shield.</p>
       </div>
       <div class="rule-cell">
-        <strong>04 // ZERO CLEAN</strong>
-        Pack unwashed into pre-paid return satchel. Handover at hostel desk Monday morning.
+        <div class="rule-num">04</div>
+        <strong>UNWASHED HANDOVER</strong>
+        <p>Pack the gown unwashed into the pre-paid courier pouch. Hand it over to the hostel desk on Monday morning. Zero dry-cleaning required.</p>
       </div>
     </div>
+
+    <!-- Colophon and Ledger Registry -->
+    <footer class="index-footer">
+      <div>
+        <strong>WEDELIA BRUTALIST FASHION LEDGER // TOKYO × DELHI</strong><br>
+        <span style="color: var(--muted);">ARCHIVE REPOSITORY SYSTEM V2.6 // ALL RIGHTS RESERVED</span>
+      </div>
+      <div>
+        DELHI HUBS: NORTH CAMPUS / SOUTH CAMPUS / NOIDA SECTOR 62 / ASHOKA SONIPAT<br>
+        SYSTEM ARCHITECTURE: STATIC BRUTALIST INDEX // MONOSPACE DATA INTERFACE
+      </div>
+    </footer>
 
   </div>
 

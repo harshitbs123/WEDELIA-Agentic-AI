@@ -31,3 +31,5 @@ blob-report/
 playwright/.cache/
 *.png
 *.tsbuildinfo
+.taste-skill/
+assets

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEDELIA — 10 Art Direction Explorations</title>
+  <title>WEDELIA — 5 Selected Art Directions</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
@@ -14,12 +14,12 @@
       padding: 0;
     }
     body {
-      background-color: #0c0c0e;
+      background-color: #0b0b0d;
       color: #eae8e3;
       font-family: 'Space Grotesk', -apple-system, sans-serif;
       min-height: 100vh;
-      padding: 3rem 1.5rem 5rem;
-      line-height: 1.4;
+      padding: 3rem 1.5rem 6rem;
+      line-height: 1.45;
       -webkit-font-smoothing: antialiased;
     }
     @media (min-width: 768px) {
@@ -65,7 +65,6 @@
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
       color: #8a8882;
-      text-align: left;
     }
     @media (min-width: 768px) {
       .header-meta {
@@ -81,7 +80,6 @@
       color: #b0ada6;
       margin-bottom: 4rem;
       line-height: 1.6;
-      font-weight: 400;
     }
     .statement strong {
       color: #ffffff;
@@ -97,7 +95,7 @@
     .grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 1.75rem;
     }
     @media (min-width: 768px) {
       .grid {
@@ -106,40 +104,34 @@
       }
     }
     .card {
-      display: block;
-      background: #141418;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #131317;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 2rem;
+      padding: 2.25rem 2rem;
       text-decoration: none;
       color: inherit;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: transparent;
-      transition: background 0.2s ease;
     }
     .card:hover {
-      background: #191920;
-      border-color: rgba(255, 255, 255, 0.25);
+      background: #18181f;
+      border-color: rgba(255, 255, 255, 0.3);
       transform: translateY(-2px);
     }
-    .card:hover::before {
-      background: #eae8e3;
+    .card.highlight {
+      border-color: rgba(15, 56, 255, 0.4);
+    }
+    .card.highlight:hover {
+      border-color: #0f38ff;
     }
     .card-num {
       font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       letter-spacing: 0.15em;
       color: #7a7872;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -150,17 +142,17 @@
       color: #9c9990;
     }
     .card-title {
-      font-size: 1.5rem;
+      font-size: 1.65rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 0.75rem;
       color: #ffffff;
     }
     .card-desc {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: #99968e;
-      line-height: 1.5;
-      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
     }
     .card-tags {
       display: flex;
@@ -201,177 +193,112 @@
     <header>
       <div>
         <h1 class="brand">WEDELIA</h1>
-        <span class="brand-sub">ART DIRECTION EXPLORATIONS // 10 RADICAL DIRECTIONS</span>
+        <span class="brand-sub">EXPANDED ART DIRECTIONS // 5 SELECTED WORLDS</span>
       </div>
       <div class="header-meta">
         PROJECT: <span>WEDELIA (AI)</span><br>
-        REFERENCES: <span>UNITED ATHLE / THE FASHION POST / DROPTOKYO</span><br>
-        STATUS: <span>READY FOR CREATIVE SELECTION</span>
+        STATUS: <span>5 EXPANDED EXPERIENCES</span><br>
+        STAGE: <span>FINAL CONCEPT SELECTION</span>
       </div>
     </header>
 
     <p class="statement">
-      Ten completely different, purely static editorial directions for WEDELIA. 
-      Each direction explores a distinct typographic personality, spatial tension, navigation structure, and Japanese fashion-magazine art direction. 
-      <strong>Review each prototype, test on mobile/desktop, and pick the visual direction for WEDELIA.</strong>
-      <span class="jp">日本のファッション雑誌と実験的デジタルスタジオの交差点。10の視覚的プロトタイプ。</span>
+      Five deeply expanded, completely independent editorial worlds for WEDELIA. 
+      Each world has its own unique DOM architecture, distinct typographic personality, and complete information design.
+      <span class="jp">選ばれた5つの視覚世界。雑誌社説、技術目録、夜間宣伝、縦型ポスター、そして異形の空間。</span>
     </p>
 
     <div class="grid">
       <!-- 01 -->
       <a href="01-tokyo-editorial.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 01</span>
-          <span class="card-kanji">東京エディトリアル</span>
+        <div>
+          <div class="card-num">
+            <span>DIRECTION 01</span>
+            <span class="card-kanji">東京エディトリアル</span>
+          </div>
+          <h2 class="card-title">Tokyo Editorial</h2>
+          <p class="card-desc">Warm off-white publication canvas. Editorial covers, vertical Japanese spine, asymmetric layout spreads, Style Notes, and Popeye/Droptokyo-style breathing room.</p>
         </div>
-        <h2 class="card-title">Tokyo Editorial</h2>
-        <p class="card-desc">Off-white background, black serif typography, huge titles, tiny Japanese metadata, asymmetrical off-grid photography, and Popeye/Droptokyo-style vertical breathing room.</p>
         <div class="card-tags">
-          <span class="tag">Warm Off-White</span>
-          <span class="tag">Mincho Serif</span>
-          <span class="tag">Asymmetric Whitespace</span>
+          <span class="tag">#f5f4ef Off-White</span>
+          <span class="tag">Shippori Mincho</span>
+          <span class="tag">Publication Architecture</span>
         </div>
       </a>
 
       <!-- 02 -->
       <a href="02-brutalist-fashion-index.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 02</span>
-          <span class="card-kanji">技術目録</span>
+        <div>
+          <div class="card-num">
+            <span>DIRECTION 02</span>
+            <span class="card-kanji">技術目録</span>
+          </div>
+          <h2 class="card-title">Brutalist Fashion Index</h2>
+          <p class="card-desc">Full fashion database and archive. Pure white, rigid 1px hairline grid, monospaced metadata, matrix relationship tables, document-style rental records, and image breaks.</p>
         </div>
-        <h2 class="card-title">Brutalist Fashion Index</h2>
-        <p class="card-desc">Experimental archive catalog. Pure white background, razor-sharp 1px black borders, monospaced metadata tables, oversized numbers breaking grid cells, and strict utilitarian elegance.</p>
         <div class="card-tags">
-          <span class="tag">1px Hairline Grid</span>
-          <span class="tag">Monospace Data</span>
-          <span class="tag">Archive Catalog</span>
+          <span class="tag">Hairline Grid</span>
+          <span class="tag">Archive Database</span>
+          <span class="tag">Document Records</span>
         </div>
       </a>
 
       <!-- 03 -->
       <a href="03-red-black-tokyo.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 03</span>
-          <span class="card-kanji">紅と黒</span>
+        <div>
+          <div class="card-num">
+            <span>DIRECTION 03</span>
+            <span class="card-kanji">紅と黒</span>
+          </div>
+          <h2 class="card-title">Red / Black Tokyo</h2>
+          <p class="card-desc">High-voltage Tokyo night campaign. Intense vermilion red (#e60012) used strictly as an editorial marking pen across Tokyo Night Files, Occasion Campaigns, and campus cultural stories.</p>
         </div>
-        <h2 class="card-title">Red / Black Tokyo</h2>
-        <p class="card-desc">High-contrast Tokyo after-dark editorial. Pure white and dense obsidian black punctuated by a single intense vermilion red used strictly as an editorial marking pen.</p>
         <div class="card-tags">
-          <span class="tag">Vermilion Red</span>
-          <span class="tag">Ikko Tanaka Tribute</span>
-          <span class="tag">Heavy Display Sans</span>
+          <span class="tag">Vermilion Red Marker</span>
+          <span class="tag">Tokyo Night File</span>
+          <span class="tag">Anton Display</span>
         </div>
       </a>
 
       <!-- 04 -->
       <a href="04-vertical-japanese-poster.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 04</span>
-          <span class="card-kanji">縦型ポスター</span>
+        <div>
+          <div class="card-num">
+            <span>DIRECTION 04</span>
+            <span class="card-kanji">縦型ポスター</span>
+          </div>
+          <h2 class="card-title">Vertical Japanese Poster</h2>
+          <p class="card-desc">A digital poster exhibition on parchment cream (#ede9e1). Sequence of continuous exhibition posters featuring true vertical typography, oversized kanji anchors, and printed gallery composition.</p>
         </div>
-        <h2 class="card-title">Vertical Japanese Poster</h2>
-        <p class="card-desc">Built like a series of exhibition posters. Vertical typography (writing-mode: vertical-rl), narrow image banners, oversized kanji graphic anchors, and Ginza gallery paper composition.</p>
         <div class="card-tags">
-          <span class="tag">Vertical Writing-Mode</span>
+          <span class="tag">writing-mode: vertical-rl</span>
           <span class="tag">Parchment Cream</span>
-          <span class="tag">Poster Layout</span>
-        </div>
-      </a>
-
-      <!-- 05 -->
-      <a href="05-fashion-newspaper.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 05</span>
-          <span class="card-kanji">新聞社説</span>
-        </div>
-        <h2 class="card-title">Fashion Newspaper</h2>
-        <p class="card-desc">High-end fashion broadsheet chronicle. Multi-column journalistic layout, editorial drop caps, classified rental index, double-ruled frames, and sophisticated cultural essaying.</p>
-        <div class="card-tags">
-          <span class="tag">Broadsheet Columns</span>
-          <span class="tag">Editorial Headlines</span>
-          <span class="tag">Classified Rental Index</span>
-        </div>
-      </a>
-
-      <!-- 06 -->
-      <a href="06-white-void.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 06</span>
-          <span class="card-kanji">空白の美</span>
-        </div>
-        <h2 class="card-title">White Void</h2>
-        <p class="card-desc">Extreme luxury minimalism. 85%+ screen void, tiny corner metadata, one colossal monolithic photograph, and the words "WEAR THE MOMENT". Expensive attitude without visual noise.</p>
-        <div class="card-tags">
-          <span class="tag">Extreme Whitespace</span>
-          <span class="tag">Kenya Hara Influence</span>
-          <span class="tag">Monolithic Scale</span>
-        </div>
-      </a>
-
-      <!-- 07 -->
-      <a href="07-tokyo-street-contact-sheet.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 07</span>
-          <span class="card-kanji">コンタクトシート</span>
-        </div>
-        <h2 class="card-title">Tokyo Street Contact Sheet</h2>
-        <p class="card-desc">Fashion photographer's working darkroom proof sheet. 35mm film rebate frames, exposure stamps, Shibuya coordinates, hand-marked grease pencil crop frames, and raw documentation.</p>
-        <div class="card-tags">
-          <span class="tag">Darkroom Emulsion</span>
-          <span class="tag">35mm Film Frames</span>
-          <span class="tag">Grease Pencil Marks</span>
-        </div>
-      </a>
-
-      <!-- 08 -->
-      <a href="08-fashion-terminal.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 08</span>
-          <span class="card-kanji">電脳端末</span>
-        </div>
-        <h2 class="card-title">Fashion Terminal</h2>
-        <p class="card-desc">Japanese fashion magazine meets retro-futuristic mainframe terminal. Phosphor bone text on dark obsidian, text indexes, bracket navigation, and ASCII coordinate windows. Not cyberpunk.</p>
-        <div class="card-tags">
-          <span class="tag">Monospace Terminal</span>
-          <span class="tag">Bracket Interface</span>
-          <span class="tag">Coordinate Systems</span>
-        </div>
-      </a>
-
-      <!-- 09 -->
-      <a href="09-collage-cut-paper.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 09</span>
-          <span class="card-kanji">切り絵コラージュ</span>
-        </div>
-        <h2 class="card-title">Collage / Cut Paper</h2>
-        <p class="card-desc">Tactile art director's pasteboard. Overlapping image crops, typography crossing photography boundaries, intentional misalignment, raw paper tones, and avant-garde zine pacing.</p>
-        <div class="card-tags">
-          <span class="tag">Paper Cut Geometry</span>
-          <span class="tag">Overlapping Planes</span>
-          <span class="tag">Zine Aesthetic</span>
+          <span class="tag">Poster Exhibition</span>
         </div>
       </a>
 
       <!-- 10 -->
-      <a href="10-the-strange-one.html" class="card">
-        <div class="card-num">
-          <span>PROTOTYPE 10</span>
-          <span class="card-kanji">異形の空間</span>
+      <a href="10-the-strange-one.html" class="card highlight" style="grid-column: 1 / -1;">
+        <div>
+          <div class="card-num">
+            <span>DIRECTION 10</span>
+            <span class="card-kanji" style="color: #0f38ff;">異形の空間 — THE STRANGE ONE</span>
+          </div>
+          <h2 class="card-title">The Strange One</h2>
+          <p class="card-desc">Defiantly non-Euclidean digital fashion installation. Fixed spatial viewport rail navigation, colossal WE-DE-LIA typography overflowing across the screen, electric blue (#0f38ff), scattered intentional occasion coordinates, and floating rental objects.</p>
         </div>
-        <h2 class="card-title">The Strange One</h2>
-        <p class="card-desc">Defiantly unconventional. Rotated edge-running vertical navigation, oversized typography partially bleeding outside the viewport, spatial installation pillars, and unforgettable art-gallery tension.</p>
         <div class="card-tags">
+          <span class="tag" style="border-color: #0f38ff; color: #ffffff;">Spatial Rail Nav</span>
+          <span class="tag">Electric Blue #0f38ff</span>
+          <span class="tag">Installation Canvas</span>
           <span class="tag">Viewport Bleed</span>
-          <span class="tag">Edge Navigation</span>
-          <span class="tag">Non-Euclidean Spatial Grid</span>
         </div>
       </a>
     </div>
 
     <footer>
-      <div>WEDELIA ARCHIVE // TOKYO & DELHI // SELECTION GATE</div>
-      <div>NO ANIMATION ENGINES ACTIVE // PURE VISUAL EXPLORATION</div>
+      <div>WEDELIA ARCHIVE // 5 EXPANDED EDITORIAL WORLDS</div>
+      <div>PURE STATIC ART DIRECTION // GSAP ENGINE AT FINAL STAGE</div>
     </footer>
   </div>
 </body>

@@ -16,7 +16,9 @@
       --dim: #7a7974;
       --electric-blue: #0f38ff;
       --acid: #d4ff00;
-      --border-dark: #1b1b20;
+      --border-dark: #1b1b22;
+      --panel-dark: #0d0d12;
+      --glow: rgba(15, 56, 255, 0.15);
     }
 
     body {
@@ -29,7 +31,7 @@
       overflow-x: hidden;
     }
 
-    /* Switcher Navigation */
+    /* Switcher Top Navigation */
     .switch-nav {
       position: fixed;
       top: 0;
@@ -59,18 +61,18 @@
     .switch-pill.active { background: var(--electric-blue); color: #ffffff; font-weight: 700; border-color: var(--electric-blue); }
     @media (max-width: 768px) {
       .switch-nav .dir-label { display: none; }
-      .switch-nav { padding: 0 0.75rem; }
+      .switch-nav { padding: 0 1rem; }
       .switch-pills { gap: 2px; }
       .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
     }
 
-    /* Strange Layout: Fixed Left Vertical Spatial Rail */
+    /* Left Vertical Spatial Rail */
     .viewport-rail {
       position: fixed;
       left: 0;
       top: 48px;
       bottom: 0;
-      width: 64px;
+      width: 68px;
       background: #050507;
       border-right: 1px solid var(--border-dark);
       z-index: 100;
@@ -79,7 +81,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 2rem 0;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
     }
     @media (min-width: 1024px) {
       .viewport-rail {
@@ -89,67 +91,95 @@
     .rail-vertical-text {
       writing-mode: vertical-rl;
       text-orientation: mixed;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.35em;
       color: var(--dim);
-      font-size: 0.68rem;
+      font-size: 0.65rem;
     }
     .rail-num-active {
       font-family: 'Anton', sans-serif;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       color: var(--electric-blue);
+    }
+    .rail-coord-stamp {
+      font-size: 0.6rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+      writing-mode: vertical-rl;
     }
 
     /* Main Experimental Canvas */
     .strange-canvas {
       margin-left: 0;
-      padding: 2.5rem 1.5rem 8rem;
+      padding: 2.5rem 1rem 8rem;
       position: relative;
     }
     @media (min-width: 1024px) {
       .strange-canvas {
-        margin-left: 64px;
-        padding: 4rem 3.5rem 10rem;
+        margin-left: 68px;
+        padding: 3.5rem 3.5rem 10rem;
       }
     }
 
-    /* Bleeding Oversized Typographic Masthead */
+    /* 1. BLEEDING OVERSIZED TYPOGRAPHIC MASTHEAD */
     .bleeding-type-hero {
       position: relative;
-      margin-bottom: 6rem;
+      margin-bottom: 5rem;
       overflow: visible;
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 2rem;
     }
     .oversized-bleed-title {
       font-family: 'Anton', sans-serif;
-      font-size: clamp(5rem, 20vw, 19rem);
+      font-size: clamp(5.5rem, 18vw, 17rem);
       line-height: 0.78;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.04em;
       text-transform: uppercase;
       color: var(--bone);
-      margin-left: -0.05em;
-      margin-bottom: 2rem;
+      margin-left: -0.04em;
+      margin-bottom: 1.5rem;
       user-select: none;
     }
     .oversized-bleed-title span.blue {
       color: var(--electric-blue);
     }
+    .bleed-sub-manifesto {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+    @media (min-width: 768px) {
+      .bleed-sub-manifesto {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+    }
+    .spatial-coord-pill {
+      display: inline-block;
+      border: 1px solid var(--electric-blue);
+      color: var(--electric-blue);
+      padding: 0.2rem 0.6rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+    }
 
-    /* Asymmetric Spatial Stage */
+    /* 2. ASYMMETRIC SPATIAL STAGE */
     .spatial-stage-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 3.5rem;
       align-items: center;
       position: relative;
       margin-bottom: 8rem;
     }
     @media (min-width: 1024px) {
       .spatial-stage-grid {
-        grid-template-columns: 1fr 1.3fr;
-        gap: 4rem;
+        grid-template-columns: 1fr 1.25fr;
+        gap: 5rem;
       }
     }
-
-    /* Left Narrative Column */
     .stage-narrative {
       display: flex;
       flex-direction: column;
@@ -157,25 +187,23 @@
     }
     .kanji-banner {
       font-family: 'Shippori Mincho', serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
       font-weight: 900;
       color: var(--bone);
       line-height: 1.2;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
       letter-spacing: 0.05em;
     }
     .stage-thesis {
       font-size: 0.95rem;
-      line-height: 1.7;
-      color: #b0ada6;
+      line-height: 1.75;
+      color: #b5b3aa;
       max-width: 520px;
       margin-bottom: 2.5rem;
     }
     .stage-thesis strong {
       color: #ffffff;
     }
-
-    /* Spatial Navigation Pillars */
     .spatial-pillars {
       display: grid;
       grid-template-columns: 1fr;
@@ -191,7 +219,7 @@
     .pillar-box {
       border: 1px solid var(--border-dark);
       padding: 1.25rem 1rem;
-      background: #0d0d12;
+      background: var(--panel-dark);
       position: relative;
     }
     .pillar-box:hover {
@@ -220,11 +248,6 @@
     .stage-bleed-image {
       position: relative;
     }
-    @media (min-width: 1024px) {
-      .stage-bleed-image {
-        margin-right: -4rem; /* Intentionally breaks screen margin */
-      }
-    }
     .bleed-photo-frame {
       width: 100%;
       aspect-ratio: 4/5.4;
@@ -242,9 +265,9 @@
     }
     .image-spatial-badge {
       position: absolute;
-      bottom: 2rem;
-      right: 2rem;
-      background: #000000;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: rgba(0,0,0,0.9);
       border: 1px solid var(--electric-blue);
       color: #ffffff;
       padding: 0.75rem 1.25rem;
@@ -254,75 +277,291 @@
     .image-spatial-badge span.price {
       color: var(--electric-blue);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 1.1rem;
       display: block;
       margin-top: 0.25rem;
     }
 
-    /* Section 2: Non-Euclidean Archival Row */
-    .non-euclidean-row {
+    /* 3. SCATTERED OCCASION SPACE (Non-Euclidean Layout) */
+    .scattered-occasion-section {
       border-top: 1px solid var(--border-dark);
       padding-top: 5rem;
       margin-bottom: 8rem;
+      position: relative;
     }
-    .row-meta-header {
+    .scattered-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 3.5rem;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--dim);
     }
-    .gallery-grid-strange {
+    .scatter-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 2rem;
     }
     @media (min-width: 768px) {
-      .gallery-grid-strange {
-        grid-template-columns: 1.2fr 0.8fr 1fr;
-        gap: 3.5rem;
-        align-items: end;
+      .scatter-grid {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
-    .strange-card {
+    .scatter-box {
+      border: 1px solid var(--border-dark);
+      background: #09090e;
+      padding: 2rem 1.5rem;
+      position: relative;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
     }
-    .strange-card img {
-      width: 100%;
-      object-fit: cover;
-      display: block;
-      border: 1px solid var(--border-dark);
+    .scatter-box.offset-down {
+      margin-top: 0;
+    }
+    @media (min-width: 768px) {
+      .scatter-box.offset-down {
+        margin-top: 3rem;
+      }
+    }
+    .scatter-box.offset-up {
+      margin-top: 0;
+    }
+    @media (min-width: 768px) {
+      .scatter-box.offset-up {
+        margin-top: -2rem;
+      }
+    }
+    .scatter-box.blue-border {
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 25px rgba(15, 56, 255, 0.1);
+    }
+    .scatter-tag {
+      font-size: 0.65rem;
+      color: var(--electric-blue);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+    }
+    .scatter-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .scatter-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.1rem;
+      color: var(--dim);
+      margin-bottom: 1rem;
+    }
+    .scatter-desc {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #8c8a82;
       margin-bottom: 1.5rem;
     }
-    .strange-card.c1 img { aspect-ratio: 4/5; }
-    .strange-card.c2 img { aspect-ratio: 3/4.5; }
-    .strange-card.c3 img { aspect-ratio: 4/3.8; }
-    .strange-card-title {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      margin-bottom: 0.35rem;
-    }
-    .strange-card-meta {
-      font-size: 0.7rem;
-      color: var(--dim);
+    .scatter-foot {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid var(--border-dark);
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.75rem;
+      font-size: 0.72rem;
+      border-top: 1px solid var(--border-dark);
+      padding-top: 0.75rem;
     }
 
-    /* Strange Colophon */
+    /* 4. LOOK INSTALLATION (Varying Scales & Viewport Bleed) */
+    .look-installation-section {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 5rem;
+      margin-bottom: 9rem;
+    }
+    .installation-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+    }
+    @media (min-width: 1024px) {
+      .installation-grid {
+        grid-template-columns: 1.3fr 0.9fr;
+        align-items: start;
+        gap: 4rem;
+      }
+    }
+    .spatial-look-card {
+      border: 1px solid var(--border-dark);
+      background: var(--panel-dark);
+      position: relative;
+    }
+    .spatial-look-card img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      filter: contrast(110%);
+    }
+    .spatial-look-overlay {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .spatial-look-overlay .title {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .spatial-look-overlay .rate {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.25rem;
+      color: var(--electric-blue);
+      font-weight: 700;
+    }
+
+    /* 5. FLOATING RENTAL OBJECT (Patent / Spatial Blueprint) */
+    .blueprint-section {
+      border: 1px solid var(--electric-blue);
+      background: #090912;
+      padding: 3rem 2rem;
+      margin-bottom: 8rem;
+      position: relative;
+      box-shadow: 0 0 40px rgba(15, 56, 255, 0.08);
+    }
+    @media (min-width: 1024px) {
+      .blueprint-section {
+        padding: 4rem 3.5rem;
+      }
+    }
+    .blueprint-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px dashed var(--electric-blue);
+      padding-bottom: 1.25rem;
+      margin-bottom: 3rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+    }
+    .blueprint-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .blueprint-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .blueprint-node {
+      border: 1px solid var(--border-dark);
+      background: #06060a;
+      padding: 1.5rem;
+      position: relative;
+    }
+    .blueprint-node::before {
+      content: '+';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      color: var(--electric-blue);
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .node-code {
+      font-size: 0.68rem;
+      color: var(--electric-blue);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+    .node-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .node-text {
+      font-size: 0.78rem;
+      color: #8c8a82;
+      line-height: 1.6;
+    }
+
+    /* 6. STRANGE INDEX: RADICAL DIRECTORY */
+    .strange-index-section {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 4rem;
+      margin-bottom: 8rem;
+    }
+    .strange-index-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.75rem;
+    }
+    .strange-index-table tr {
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .strange-index-table tr:hover {
+      background: #0f1226;
+    }
+    .strange-index-table td {
+      padding: 1.25rem 0.75rem;
+      vertical-align: middle;
+    }
+    .strange-index-table td.code {
+      color: var(--electric-blue);
+      font-weight: 700;
+      width: 12%;
+    }
+    .strange-index-table td.name {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .strange-index-table td.val {
+      text-align: right;
+      font-weight: 700;
+      color: var(--bone);
+    }
+
+    /* 7. NON-TRADITIONAL INSTALLATION ENDING */
+    .spatial-colophon-exit {
+      border-top: 1px solid var(--border-dark);
+      padding: 5rem 1rem 3rem;
+      text-align: center;
+    }
+    .exit-huge-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(3.5rem, 12vw, 11rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: rgba(244, 243, 238, 0.25);
+      text-shadow: 0 0 1px rgba(244, 243, 238, 0.4);
+      margin-bottom: 2rem;
+      transition: color 0.3s ease;
+    }
+    .exit-huge-title:hover {
+      color: var(--electric-blue);
+    }
+    .exit-notes {
+      font-size: 0.82rem;
+      color: var(--dim);
+      max-width: 580px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    /* Footer */
     footer.strange-footer {
       border-top: 1px solid var(--border-dark);
-      padding-top: 2.5rem;
+      padding-top: 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.25rem;
       font-size: 0.7rem;
       color: var(--dim);
     }
@@ -336,7 +575,7 @@
 </head>
 <body>
 
-  <!-- Switcher Top Bar -->
+  <!-- Switcher Top Bar (5 Active Directions) -->
   <nav class="switch-nav">
     <div>
       <a href="index.html">← INDEX</a>
@@ -348,11 +587,6 @@
       <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
       <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
       <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
-      <a href="05-fashion-newspaper.html" class="switch-pill">05</a>
-      <a href="06-white-void.html" class="switch-pill">06</a>
-      <a href="07-tokyo-street-contact-sheet.html" class="switch-pill">07</a>
-      <a href="08-fashion-terminal.html" class="switch-pill">08</a>
-      <a href="09-collage-cut-paper.html" class="switch-pill">09</a>
       <a href="10-the-strange-one.html" class="switch-pill active">10</a>
     </div>
   </nav>
@@ -360,21 +594,30 @@
   <!-- Left Vertical Spatial Rail -->
   <aside class="viewport-rail">
     <div class="rail-num-active">10</div>
-    <div class="rail-vertical-text">WEDELIA // 異形の空間 // SPATIAL INSTALLATION</div>
-    <div style="color: var(--dim);">2026</div>
+    <div class="rail-vertical-text">WEDELIA // 異形の空間 // SPATIAL ARCHIVE</div>
+    <div class="rail-coord-stamp">COORD: 28.5983° N // 77.2281° E</div>
   </aside>
 
   <!-- Main Canvas -->
   <div class="strange-canvas">
     
-    <!-- Bleeding Typographic Title (Breaks Viewport Bounds) -->
+    <!-- 1. Bleeding Typographic Title (Breaks Viewport Bounds) -->
     <header class="bleeding-type-hero">
       <h1 class="oversized-bleed-title">
         WEDE<span class="blue">LIA.</span>
       </h1>
+      <div class="bleed-sub-manifesto">
+        <div>
+          <span class="spatial-coord-pill">SECTOR 01 // TOKYO × NCR</span>
+          <span style="margin-left: 0.75rem;">SPATIAL REVOLUTION OF LEASED LUXURY</span>
+        </div>
+        <div>
+          AUTONOMOUS CAMPUS COURIER GATE PROTOCOL // ACTIVE
+        </div>
+      </div>
     </header>
 
-    <!-- Asymmetric Spatial Stage -->
+    <!-- 2. Asymmetric Spatial Stage -->
     <section class="spatial-stage-grid">
       
       <!-- Left Narrative Column -->
@@ -398,12 +641,12 @@
           <div class="pillar-box">
             <div class="pillar-num">02</div>
             <div class="pillar-label">FAREWELL BALL</div>
-            <div class="pillar-sub">OBSIDIAN FAILLE</div>
+            <div class="pillar-sub">FAILLE SILK PLEATS</div>
           </div>
           <div class="pillar-box">
             <div class="pillar-num">03</div>
-            <div class="pillar-label">CONCERT CRAWL</div>
-            <div class="pillar-sub">KINETIC JACQUARD</div>
+            <div class="pillar-label">CONCERT CIRCUIT</div>
+            <div class="pillar-sub">STROBE REFLECTION</div>
           </div>
         </div>
       </div>
@@ -411,70 +654,221 @@
       <!-- Right Bleeding Image Installation -->
       <div class="stage-bleed-image">
         <div class="bleed-photo-frame">
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Gown Spatial Installation">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Archive Silhouette">
           <div class="image-spatial-badge">
-            <span>INSTALLATION PIECE 01</span>
-            <span class="price">₹2,499 / 3 DAYS</span>
+            <div>SPECIMEN 01 // ZEMIRE FAILLE</div>
+            <span class="price">₹2,999 / 3 DAYS</span>
           </div>
         </div>
       </div>
 
     </section>
 
-    <!-- Non-Euclidean Archival Row -->
-    <section class="non-euclidean-row">
-      <div class="row-meta-header">
-        <div>[ ARCHIVAL GALLERY // ASYMMETRIC CADENCE ]</div>
-        <div>TWO SIZES DISPATCHED PER ORDER // 100% DAMAGE SHIELD</div>
+    <!-- 3. SCATTERED OCCASION SPACE (Non-Euclidean Layout) -->
+    <section class="scattered-occasion-section">
+      <div class="scattered-header">
+        <span>02 // NON-EUCLIDEAN OCCASION SPACE</span>
+        <span>COORDINATES: CAMPUS SPHERES</span>
       </div>
 
-      <div class="gallery-grid-strange">
-        <!-- Item 01 -->
-        <article class="strange-card c1">
-          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Pleated Duet Gown">
-          <h3 class="strange-card-title">Pleated Duet Gown</h3>
-          <div class="strange-card-meta">
-            <span>MICRO-PLEATED CHIFFON</span>
-            <span style="color: var(--electric-blue); font-weight: 700;">₹2,899 / 3D</span>
+      <div class="scatter-grid">
+        <!-- Occasion 1: FESTIVAL -->
+        <div class="scatter-box blue-border">
+          <div>
+            <div class="scatter-tag">NODE 01 // HIGH VOLTAGE</div>
+            <h3 class="scatter-title">FESTIVAL</h3>
+            <div class="scatter-kanji">祝祭 (COLLEGE FEST)</div>
+            <p class="scatter-desc">
+              15,000 students filling the sports field under arena truss towers. Kinetic lurex and reflective shift garments engineered to strobe in darkness.
+            </p>
           </div>
-          <p style="font-size: 0.78rem; color: var(--dim);">
-            Engineered for the final ballroom exit. Asymmetrical draped shoulder train.
-          </p>
-        </article>
-
-        <!-- Item 02 -->
-        <article class="strange-card c2">
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Shift">
-          <h3 class="strange-card-title">Kinetic Shift</h3>
-          <div class="strange-card-meta">
-            <span>LUREX JACQUARD</span>
+          <div class="scatter-foot">
+            <span style="color: var(--dim);">LEASE DURATION</span>
             <span style="color: var(--electric-blue); font-weight: 700;">₹1,699 / 3D</span>
           </div>
-          <p style="font-size: 0.78rem; color: var(--dim);">
-            Concert festival shift reflecting direct flash camera illumination.
-          </p>
-        </article>
+        </div>
 
-        <!-- Item 03 -->
-        <article class="strange-card c3">
-          <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Robe">
-          <h3 class="strange-card-title">Imperial Brocade</h3>
-          <div class="strange-card-meta">
-            <span>METALLIC GOLD BROCADE</span>
-            <span style="color: var(--electric-blue); font-weight: 700;">₹3,899 / 3D</span>
+        <!-- Occasion 2: FAREWELL -->
+        <div class="scatter-box offset-down">
+          <div>
+            <div class="scatter-tag">NODE 02 // VALEDICTORY</div>
+            <h3 class="scatter-title">FAREWELL</h3>
+            <div class="scatter-kanji">門出 (SENIOR BALL)</div>
+            <p class="scatter-desc">
+              The departmental apex. Sweeping floor-length silk faille and sculpted pleats that mark your closing university chapter with museum-grade severity.
+            </p>
           </div>
-          <p style="font-size: 0.78rem; color: var(--dim);">
-            Heavy gold thread woven on pure silk damask. Wide-pannier architecture.
+          <div class="scatter-foot">
+            <span style="color: var(--dim);">LEASE DURATION</span>
+            <span style="color: var(--bone); font-weight: 700;">₹2,899 / 3D</span>
+          </div>
+        </div>
+
+        <!-- Occasion 3: CONCERT -->
+        <div class="scatter-box offset-up">
+          <div>
+            <div class="scatter-tag">NODE 03 // ACOUSTIC SUB</div>
+            <h3 class="scatter-title">CONCERT</h3>
+            <div class="scatter-kanji">響宴 (ARENA CIRCUIT)</div>
+            <p class="scatter-desc">
+              Bass-heavy club tours and stadium shows. Tailored micro-corsets and oversized blazer structures built for motion, heat, and flash photography.
+            </p>
+          </div>
+          <div class="scatter-foot">
+            <span style="color: var(--dim);">LEASE DURATION</span>
+            <span style="color: var(--electric-blue); font-weight: 700;">₹1,499 / 3D</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. LOOK INSTALLATION (Varying Scales) -->
+    <section class="look-installation-section">
+      <div style="font-size: 0.72rem; color: var(--dim); margin-bottom: 2.5rem; letter-spacing: 0.12em;">
+        03 // SPATIAL LOOK OBJECTS — ASYMMETRIC SCALE
+      </div>
+
+      <div class="installation-grid">
+        <!-- Monumental Look -->
+        <div class="spatial-look-card">
+          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Paris Atelier Gown">
+          <div class="spatial-look-overlay">
+            <div>
+              <div style="font-size: 0.68rem; color: var(--dim);">ARCHIVE SPECIMEN 029 // PARIS ATELIER 1951</div>
+              <h3 class="title">PLEATED DUET GOWN</h3>
+            </div>
+            <div class="rate">₹2,899</div>
+          </div>
+        </div>
+
+        <!-- Narrow Look Object -->
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          <div class="spatial-look-card">
+            <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Custo Barcelona Summer Edition" style="aspect-ratio: 16/11;">
+            <div class="spatial-look-overlay">
+              <div>
+                <div style="font-size: 0.68rem; color: var(--dim);">RUNWAY SPECIMEN 041 // SUMMER EDITION</div>
+                <h3 class="title" style="font-size: 1.4rem;">KINETIC SHIFT</h3>
+              </div>
+              <div class="rate">₹1,699</div>
+            </div>
+          </div>
+
+          <div class="spatial-look-card">
+            <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Dress" style="aspect-ratio: 16/11;">
+            <div class="spatial-look-overlay">
+              <div>
+                <div style="font-size: 0.68rem; color: var(--dim);">MUSEUM SPECIMEN 053 // GILDED JACQUARD</div>
+                <h3 class="title" style="font-size: 1.4rem;">GOLD BROCADE ROBE</h3>
+              </div>
+              <div class="rate">₹3,899</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FLOATING RENTAL OBJECT (Blueprint / Patent Filing) -->
+    <section class="blueprint-section">
+      <div class="blueprint-header">
+        <span>PATENT FILING // WDL-SYS-LEASE-2026</span>
+        <span>SCHEMATIC: FOUR-COORDINATE REVOLVING ACCESS</span>
+      </div>
+
+      <div class="blueprint-grid">
+        <div class="blueprint-node">
+          <div class="node-code">COORD 01 // DISPATCH</div>
+          <h4 class="node-title">24H PRIOR</h4>
+          <p class="node-text">
+            Sealed temperature-controlled carton delivered to campus gate or hostel desk 24 hours prior to entrance.
           </p>
-        </article>
+        </div>
+
+        <div class="blueprint-node">
+          <div class="node-code">COORD 02 // SIZING</div>
+          <h4 class="node-title">DUAL FIT</h4>
+          <p class="node-text">
+            Primary size + sealed complimentary backup size included automatically. Zero sizing hesitation.
+          </p>
+        </div>
+
+        <div class="blueprint-node">
+          <div class="node-code">COORD 03 // LIABILITY</div>
+          <h4 class="node-title">₹0 SHIELD</h4>
+          <p class="node-text">
+            Accidental drink spills, dancefloor scuffs, and normal seam tension are 100% insured. Zero penalty fear.
+          </p>
+        </div>
+
+        <div class="blueprint-node">
+          <div class="node-code">COORD 04 // RETURN</div>
+          <h4 class="node-title">ZERO LAUNDRY</h4>
+          <p class="node-text">
+            Slip unwashed garments into the prepaid return pouch. Handover at hostel desk Monday morning.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. STRANGE INDEX: RADICAL DIRECTORY -->
+    <section class="strange-index-section">
+      <div style="font-size: 0.72rem; color: var(--dim); margin-bottom: 2rem; letter-spacing: 0.12em;">
+        04 // RADICAL DIRECTORY — CAMPUS DISPATCH ROSTER
+      </div>
+
+      <table class="strange-index-table">
+        <tbody>
+          <tr>
+            <td class="code">WDL-014</td>
+            <td class="name">ZEMIRE SILK FAILLE</td>
+            <td style="color: var(--dim);">FAREWELL BALL</td>
+            <td style="color: var(--dim);">DU NORTH / MIRANDA HOUSE</td>
+            <td class="val">₹2,999 / 3D</td>
+          </tr>
+          <tr>
+            <td class="code">WDL-029</td>
+            <td class="name">PLEATED DUET GOWN</td>
+            <td style="color: var(--dim);">DEBATE GALA</td>
+            <td style="color: var(--dim);">ST. STEPHEN'S / HINDU</td>
+            <td class="val">₹2,899 / 3D</td>
+          </tr>
+          <tr>
+            <td class="code">WDL-041</td>
+            <td class="name">KINETIC SHIFT & WRAP</td>
+            <td style="color: var(--dim);">COLLEGE FEST</td>
+            <td style="color: var(--dim);">IIT DELHI / NIFT</td>
+            <td class="val">₹1,699 / 3D</td>
+          </tr>
+          <tr>
+            <td class="code">WDL-053</td>
+            <td class="name">GOLD BROCADE ROBE</td>
+            <td style="color: var(--dim);">SOCIETY BANQUET</td>
+            <td style="color: var(--dim);">ASHOKA UNIVERSITY</td>
+            <td class="val">₹3,899 / 3D</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 7. NON-TRADITIONAL INSTALLATION ENDING -->
+    <section class="spatial-colophon-exit">
+      <h2 class="exit-huge-title">WEDELIA.</h2>
+      <div class="exit-notes">
+        THE EXHIBITION CLOSES AS THE NIGHT BEGINS. STEP OUT INTO THE DARKNESS WEARING SOMETHING MONUMENTAL.
+      </div>
+      <div style="font-size: 0.72rem; color: var(--dim); letter-spacing: 0.2em;">
+        INSTALLATION COMPLETE // TOKYO × DELHI NCR
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="strange-footer">
-      <div>WEDELIA // THE STRANGE ONE PROTOTYPE 10</div>
-      <div>DELHI NCR • TOKYO SHIBUYA // AVANT-GARDE FASHION ARCHIVE</div>
-      <div>NO TEMPLATES • NO PRECEDENT</div>
+      <div>
+        <strong>WEDELIA SPATIAL INSTALLATION</strong> // TOKYO ARCHIVE SYSTEM
+      </div>
+      <div>
+        CAMPUS GATE PROTOCOL // DELHI NCR
+      </div>
     </footer>
 
   </div>
