@@ -1,27 +1,26 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
+import { resolve } from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
   server: {
     port: 5173,
     host: true,
   },
   build: {
     rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor_three: ['three'],
-          vendor_gsap: ['gsap', '@gsap/react'],
-          vendor_react: ['react', 'react-dom'],
-        },
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        p01: resolve(__dirname, '01-tokyo-editorial.html'),
+        p02: resolve(__dirname, '02-brutalist-fashion-index.html'),
+        p03: resolve(__dirname, '03-red-black-tokyo.html'),
+        p04: resolve(__dirname, '04-vertical-japanese-poster.html'),
+        p05: resolve(__dirname, '05-fashion-newspaper.html'),
+        p06: resolve(__dirname, '06-white-void.html'),
+        p07: resolve(__dirname, '07-tokyo-street-contact-sheet.html'),
+        p08: resolve(__dirname, '08-fashion-terminal.html'),
+        p09: resolve(__dirname, '09-collage-cut-paper.html'),
+        p10: resolve(__dirname, '10-the-strange-one.html'),
       },
     },
-    chunkSizeWarningLimit: 600,
   },
 });

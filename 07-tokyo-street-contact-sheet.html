@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEDELIA // 07 Tokyo Street Contact Sheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --darkroom: #101012;
+      --paper: #1c1c20;
+      --border: #2a2a30;
+      --text: #eae8e1;
+      --muted: #85837d;
+      --yellow: #ffe600; /* Grease pencil selection yellow */
+      --red: #ff3b30;    /* Exposure grease pencil red */
+    }
+
+    body {
+      background: var(--darkroom);
+      color: var(--text);
+      font-family: 'Courier Prime', monospace;
+      line-height: 1.45;
+      padding-top: 48px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Switcher Navigation */
+    .switch-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: #09090a;
+      border-bottom: 1px solid var(--border);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+    }
+    .switch-nav a { color: var(--text); text-decoration: none; }
+    .switch-pills { display: flex; gap: 0.25rem; }
+    .switch-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--muted);
+    }
+    .switch-pill.active { background: var(--yellow); color: #000000; font-weight: 700; border-color: var(--yellow); }
+    @media (max-width: 768px) {
+      .switch-nav .dir-label { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
+      .switch-pills { gap: 2px; }
+      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+    }
+
+    /* Contact Sheet Canvas */
+    .sheet-wrapper {
+      max-width: 1420px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 8rem;
+    }
+    @media (min-width: 1024px) {
+      .sheet-wrapper { padding: 4rem 3.5rem 10rem; }
+    }
+
+    /* Darkroom Film Rebate Header */
+    .film-header {
+      border: 1px dashed var(--border);
+      padding: 1.5rem 2rem;
+      background: var(--paper);
+      margin-bottom: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .film-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    .film-title-block {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+    .film-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .film-stamp {
+      font-size: 0.75rem;
+      color: var(--yellow);
+      background: rgba(255, 230, 0, 0.1);
+      border: 1px solid var(--yellow);
+      padding: 0.2rem 0.5rem;
+    }
+    .film-tech-data {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Photographer's Working Board Grid */
+    .contact-board {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+    @media (min-width: 768px) {
+      .contact-board {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1100px) {
+      .contact-board {
+        grid-template-columns: 1.2fr 0.8fr 1fr;
+        grid-template-rows: auto auto;
+      }
+    }
+
+    /* Contact Frame Styling */
+    .contact-frame {
+      background: #000000;
+      border: 1px solid var(--border);
+      padding: 1rem 1rem 1.25rem;
+      position: relative;
+    }
+    .frame-rebate {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      padding: 0 0.25rem;
+      letter-spacing: 0.1em;
+    }
+    .frame-rebate span.frame-no {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .frame-photo {
+      width: 100%;
+      background: #0d0d0f;
+      overflow: hidden;
+      display: block;
+    }
+    .frame-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(110%);
+    }
+    .frame-notes {
+      margin-top: 0.85rem;
+      font-size: 0.75rem;
+      color: #b5b3aa;
+      line-height: 1.5;
+      padding-top: 0.75rem;
+      border-top: 1px solid #1a1a20;
+    }
+    .frame-notes strong {
+      color: #ffffff;
+    }
+
+    /* Grease Pencil Markings (Editorial Selection) */
+    .contact-frame.marked-hero {
+      border: 2px solid var(--yellow);
+    }
+    .contact-frame.marked-hero::before {
+      content: '[ SELECTED FOR CAMPUS DISPATCH ]';
+      position: absolute;
+      top: -12px;
+      right: 15px;
+      background: var(--yellow);
+      color: #000000;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    .contact-frame.marked-red {
+      border: 2px solid var(--red);
+    }
+    .contact-frame.marked-red::before {
+      content: '[ 2ND BACKUP SIZE INCLUDED ]';
+      position: absolute;
+      top: -12px;
+      left: 15px;
+      background: var(--red);
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+    }
+
+    /* Span 2 rows for large contact frame */
+    @media (min-width: 1100px) {
+      .frame-span-2 {
+        grid-row: span 2;
+      }
+    }
+
+    /* Photographer's Log Strip */
+    .photographer-log {
+      border-top: 1px dashed var(--border);
+      border-bottom: 1px dashed var(--border);
+      padding: 2.5rem 0;
+      margin-bottom: 5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .photographer-log {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+      }
+    }
+    .log-col h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      color: var(--yellow);
+      margin-bottom: 0.75rem;
+    }
+    .log-col p {
+      font-size: 0.8rem;
+      color: #a09e96;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer.contact-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    @media (min-width: 768px) {
+      footer.contact-footer {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Switcher Top Bar -->
+  <nav class="switch-nav">
+    <div>
+      <a href="index.html">← INDEX</a>
+      <span class="dir-label" style="margin: 0 0.5rem; opacity: 0.4;">/</span>
+      <span class="dir-label" style="font-weight: 700;">DIR 07: TOKYO STREET CONTACT SHEET</span>
+    </div>
+    <div class="switch-pills">
+      <a href="01-tokyo-editorial.html" class="switch-pill">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
+      <a href="05-fashion-newspaper.html" class="switch-pill">05</a>
+      <a href="06-white-void.html" class="switch-pill">06</a>
+      <a href="07-tokyo-street-contact-sheet.html" class="switch-pill active">07</a>
+      <a href="08-fashion-terminal.html" class="switch-pill">08</a>
+      <a href="09-collage-cut-paper.html" class="switch-pill">09</a>
+      <a href="10-the-strange-one.html" class="switch-pill">10</a>
+    </div>
+  </nav>
+
+  <div class="sheet-wrapper">
+    
+    <!-- Film Rebate Header -->
+    <header class="film-header">
+      <div class="film-title-block">
+        <h1 class="film-title">WEDELIA</h1>
+        <span class="film-stamp">PROOF SHEET // ROLL 400TX</span>
+      </div>
+      <div class="film-tech-data">
+        LOCATION: SHIBUYA / DELHI HOSTEL CORRIDORS<br>
+        EMULSION: KODAK TRI-X 400 RATED AT 1600<br>
+        CURATOR: PROOF BOARD ARCHIVE 2026
+      </div>
+    </header>
+
+    <!-- Main Contact Proof Board -->
+    <main class="contact-board">
+      
+      <!-- Frame 01: Hero Marked Frame -->
+      <article class="contact-frame marked-hero frame-span-2">
+        <div class="frame-rebate">
+          <span>KODAK TX 5063</span>
+          <span class="frame-no">▶ 18A</span>
+          <span>EXP +1.5</span>
+        </div>
+        <div class="frame-photo" style="aspect-ratio: 4/5.8;">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Faille Gown Contact Frame">
+        </div>
+        <div class="frame-notes">
+          <strong>FRAME 18A // FAREWELL BALL ARCHIVE</strong><br>
+          Subject: Obsidian matte silk faille peplum.<br>
+          Campus Tariff: ₹2,499 / 3 Days.<br>
+          Note: "Shot under cold street strobes. The peplum flare holds structural hourglass geometry without needing heavy petticoats."
+        </div>
+      </article>
+
+      <!-- Frame 02 -->
+      <article class="contact-frame">
+        <div class="frame-rebate">
+          <span>KODAK TX 5063</span>
+          <span class="frame-no">▶ 19</span>
+          <span>F/2.8 1/250s</span>
+        </div>
+        <div class="frame-photo" style="aspect-ratio: 4/3.2;">
+          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Concert Runway Kinetic Movement">
+        </div>
+        <div class="frame-notes">
+          <strong>FRAME 19 // CONCERT RUNWAY KINETIC</strong><br>
+          Subject: Lurex & stretch jacquard shift. Rate: ₹1,699/3D.<br>
+          Note: "Direct 35mm flash reflection. Perfect crowd energy."
+        </div>
+      </article>
+
+      <!-- Frame 03: Marked Red Frame -->
+      <article class="contact-frame marked-red">
+        <div class="frame-rebate">
+          <span>KODAK TX 5063</span>
+          <span class="frame-no">▶ 20</span>
+          <span>ISO 1600</span>
+        </div>
+        <div class="frame-photo" style="aspect-ratio: 4/4.5;">
+          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Micro-pleated Grecian Duet Gown">
+        </div>
+        <div class="frame-notes">
+          <strong>FRAME 20 // GRECIAN DUET GOWN</strong><br>
+          Subject: Micro-pleated pure silk chiffon. Rate: ₹2,899/3D.<br>
+          Note: "Two sizes dispatched to hostel room. Zero fit risk."
+        </div>
+      </article>
+
+      <!-- Frame 04 -->
+      <article class="contact-frame">
+        <div class="frame-rebate">
+          <span>KODAK TX 5063</span>
+          <span class="frame-no">▶ 21A</span>
+          <span>EXP +1.0</span>
+        </div>
+        <div class="frame-photo" style="aspect-ratio: 4/3.5;">
+          <img src="/assets/editorial/court-dress.jpg" alt="Gilded Brocade Detail Frame">
+        </div>
+        <div class="frame-notes">
+          <strong>FRAME 21A // GILDED BROCADE ROBE</strong><br>
+          Subject: Heavy gold metallic brocade. Rate: ₹3,899/3D.<br>
+          Note: "Pannier waist architecture for imperial college balls."
+        </div>
+      </article>
+
+      <!-- Frame 05 -->
+      <article class="contact-frame">
+        <div class="frame-rebate">
+          <span>KODAK TX 5063</span>
+          <span class="frame-no">▶ 22</span>
+          <span>F/4 1/60s</span>
+        </div>
+        <div class="frame-photo" style="aspect-ratio: 4/3.5;">
+          <img src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Metallic Column Detail Frame">
+        </div>
+        <div class="frame-notes">
+          <strong>FRAME 22 // METALLIC LIQUID COLUMN</strong><br>
+          Subject: Bias-cut fluid metallic knit. Rate: ₹2,199/3D.<br>
+          Note: "Minimal drape, maximum night-time radiance."
+        </div>
+      </article>
+
+    </main>
+
+    <!-- Photographer's Working Log -->
+    <section class="photographer-log">
+      <div class="log-col">
+        <h3>LOG 01 // DISPATCH LOGISTICS</h3>
+        <p>
+          Parcels are dispatched in custom water-sealed proof bags directly to campus reception desks. Both primary and secondary sizes are inspected by hand under tungsten light before sealing.
+        </p>
+      </div>
+
+      <div class="log-col">
+        <h3>LOG 02 // ₹0 DAMAGE PROTOCOL</h3>
+        <p>
+          Real life happens on the dancefloor. Beverage spills, cosmetic dust, and heel snags are 100% absorbed by our zero-liability protocol. No deduction from security deposit.
+        </p>
+      </div>
+
+      <div class="log-col">
+        <h3>LOG 03 // RETURN PROTOCOL</h3>
+        <p>
+          Never dry-clean. Place both outfits back in the pre-addressed return satchel. Our campus courier collects directly on Monday morning.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="contact-footer">
+      <div>WEDELIA // TOKYO STREET CONTACT SHEET PROTOTYPE 07</div>
+      <div>PHOTOGRAPHIC PROOF REBATE SYSTEM // TOKYO & DELHI</div>
+      <div>AUTHENTIC DARKROOM WORKING BOARD</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

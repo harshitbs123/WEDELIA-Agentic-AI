@@ -1,17 +1,378 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth bg-[#0a0a0c] text-[#f4f4f6]">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WEDELIA — Rent the Look for the Moment</title>
-    <meta name="description" content="Premium fashion rental for college fests, concerts, farewells, and main character moments. Rent expressive archive looks for 3, 5, or 7 days." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  </head>
-  <body class="selection:bg-[#d4ff00] selection:text-black antialiased overflow-x-hidden">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEDELIA — 10 Art Direction Explorations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0c0c0e;
+      color: #eae8e3;
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 3rem 1.5rem 5rem;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+    @media (min-width: 768px) {
+      body {
+        padding: 5rem 4rem 8rem;
+      }
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 2.5rem;
+      margin-bottom: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+    .brand {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .brand-sub {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8a8882;
+      margin-top: 0.75rem;
+    }
+    .header-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: #8a8882;
+      text-align: left;
+    }
+    @media (min-width: 768px) {
+      .header-meta {
+        text-align: right;
+      }
+    }
+    .header-meta span {
+      color: #eae8e3;
+    }
+    .statement {
+      font-size: 1.15rem;
+      max-width: 720px;
+      color: #b0ada6;
+      margin-bottom: 4rem;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .statement strong {
+      color: #ffffff;
+      font-weight: 500;
+    }
+    .statement .jp {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.95em;
+      color: #7d7a72;
+      display: block;
+      margin-top: 0.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+    }
+    .card {
+      display: block;
+      background: #141418;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: transparent;
+      transition: background 0.2s ease;
+    }
+    .card:hover {
+      background: #191920;
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+    .card:hover::before {
+      background: #eae8e3;
+    }
+    .card-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: #7a7872;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.9rem;
+      color: #9c9990;
+    }
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+    .card-desc {
+      font-size: 0.9rem;
+      color: #99968e;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.25rem 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #88857e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    footer {
+      margin-top: 6rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: #66645e;
+    }
+    @media (min-width: 768px) {
+      footer {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1 class="brand">WEDELIA</h1>
+        <span class="brand-sub">ART DIRECTION EXPLORATIONS // 10 RADICAL DIRECTIONS</span>
+      </div>
+      <div class="header-meta">
+        PROJECT: <span>WEDELIA (AI)</span><br>
+        REFERENCES: <span>UNITED ATHLE / THE FASHION POST / DROPTOKYO</span><br>
+        STATUS: <span>READY FOR CREATIVE SELECTION</span>
+      </div>
+    </header>
+
+    <p class="statement">
+      Ten completely different, purely static editorial directions for WEDELIA. 
+      Each direction explores a distinct typographic personality, spatial tension, navigation structure, and Japanese fashion-magazine art direction. 
+      <strong>Review each prototype, test on mobile/desktop, and pick the visual direction for WEDELIA.</strong>
+      <span class="jp">日本のファッション雑誌と実験的デジタルスタジオの交差点。10の視覚的プロトタイプ。</span>
+    </p>
+
+    <div class="grid">
+      <!-- 01 -->
+      <a href="01-tokyo-editorial.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 01</span>
+          <span class="card-kanji">東京エディトリアル</span>
+        </div>
+        <h2 class="card-title">Tokyo Editorial</h2>
+        <p class="card-desc">Off-white background, black serif typography, huge titles, tiny Japanese metadata, asymmetrical off-grid photography, and Popeye/Droptokyo-style vertical breathing room.</p>
+        <div class="card-tags">
+          <span class="tag">Warm Off-White</span>
+          <span class="tag">Mincho Serif</span>
+          <span class="tag">Asymmetric Whitespace</span>
+        </div>
+      </a>
+
+      <!-- 02 -->
+      <a href="02-brutalist-fashion-index.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 02</span>
+          <span class="card-kanji">技術目録</span>
+        </div>
+        <h2 class="card-title">Brutalist Fashion Index</h2>
+        <p class="card-desc">Experimental archive catalog. Pure white background, razor-sharp 1px black borders, monospaced metadata tables, oversized numbers breaking grid cells, and strict utilitarian elegance.</p>
+        <div class="card-tags">
+          <span class="tag">1px Hairline Grid</span>
+          <span class="tag">Monospace Data</span>
+          <span class="tag">Archive Catalog</span>
+        </div>
+      </a>
+
+      <!-- 03 -->
+      <a href="03-red-black-tokyo.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 03</span>
+          <span class="card-kanji">紅と黒</span>
+        </div>
+        <h2 class="card-title">Red / Black Tokyo</h2>
+        <p class="card-desc">High-contrast Tokyo after-dark editorial. Pure white and dense obsidian black punctuated by a single intense vermilion red used strictly as an editorial marking pen.</p>
+        <div class="card-tags">
+          <span class="tag">Vermilion Red</span>
+          <span class="tag">Ikko Tanaka Tribute</span>
+          <span class="tag">Heavy Display Sans</span>
+        </div>
+      </a>
+
+      <!-- 04 -->
+      <a href="04-vertical-japanese-poster.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 04</span>
+          <span class="card-kanji">縦型ポスター</span>
+        </div>
+        <h2 class="card-title">Vertical Japanese Poster</h2>
+        <p class="card-desc">Built like a series of exhibition posters. Vertical typography (writing-mode: vertical-rl), narrow image banners, oversized kanji graphic anchors, and Ginza gallery paper composition.</p>
+        <div class="card-tags">
+          <span class="tag">Vertical Writing-Mode</span>
+          <span class="tag">Parchment Cream</span>
+          <span class="tag">Poster Layout</span>
+        </div>
+      </a>
+
+      <!-- 05 -->
+      <a href="05-fashion-newspaper.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 05</span>
+          <span class="card-kanji">新聞社説</span>
+        </div>
+        <h2 class="card-title">Fashion Newspaper</h2>
+        <p class="card-desc">High-end fashion broadsheet chronicle. Multi-column journalistic layout, editorial drop caps, classified rental index, double-ruled frames, and sophisticated cultural essaying.</p>
+        <div class="card-tags">
+          <span class="tag">Broadsheet Columns</span>
+          <span class="tag">Editorial Headlines</span>
+          <span class="tag">Classified Rental Index</span>
+        </div>
+      </a>
+
+      <!-- 06 -->
+      <a href="06-white-void.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 06</span>
+          <span class="card-kanji">空白の美</span>
+        </div>
+        <h2 class="card-title">White Void</h2>
+        <p class="card-desc">Extreme luxury minimalism. 85%+ screen void, tiny corner metadata, one colossal monolithic photograph, and the words "WEAR THE MOMENT". Expensive attitude without visual noise.</p>
+        <div class="card-tags">
+          <span class="tag">Extreme Whitespace</span>
+          <span class="tag">Kenya Hara Influence</span>
+          <span class="tag">Monolithic Scale</span>
+        </div>
+      </a>
+
+      <!-- 07 -->
+      <a href="07-tokyo-street-contact-sheet.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 07</span>
+          <span class="card-kanji">コンタクトシート</span>
+        </div>
+        <h2 class="card-title">Tokyo Street Contact Sheet</h2>
+        <p class="card-desc">Fashion photographer's working darkroom proof sheet. 35mm film rebate frames, exposure stamps, Shibuya coordinates, hand-marked grease pencil crop frames, and raw documentation.</p>
+        <div class="card-tags">
+          <span class="tag">Darkroom Emulsion</span>
+          <span class="tag">35mm Film Frames</span>
+          <span class="tag">Grease Pencil Marks</span>
+        </div>
+      </a>
+
+      <!-- 08 -->
+      <a href="08-fashion-terminal.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 08</span>
+          <span class="card-kanji">電脳端末</span>
+        </div>
+        <h2 class="card-title">Fashion Terminal</h2>
+        <p class="card-desc">Japanese fashion magazine meets retro-futuristic mainframe terminal. Phosphor bone text on dark obsidian, text indexes, bracket navigation, and ASCII coordinate windows. Not cyberpunk.</p>
+        <div class="card-tags">
+          <span class="tag">Monospace Terminal</span>
+          <span class="tag">Bracket Interface</span>
+          <span class="tag">Coordinate Systems</span>
+        </div>
+      </a>
+
+      <!-- 09 -->
+      <a href="09-collage-cut-paper.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 09</span>
+          <span class="card-kanji">切り絵コラージュ</span>
+        </div>
+        <h2 class="card-title">Collage / Cut Paper</h2>
+        <p class="card-desc">Tactile art director's pasteboard. Overlapping image crops, typography crossing photography boundaries, intentional misalignment, raw paper tones, and avant-garde zine pacing.</p>
+        <div class="card-tags">
+          <span class="tag">Paper Cut Geometry</span>
+          <span class="tag">Overlapping Planes</span>
+          <span class="tag">Zine Aesthetic</span>
+        </div>
+      </a>
+
+      <!-- 10 -->
+      <a href="10-the-strange-one.html" class="card">
+        <div class="card-num">
+          <span>PROTOTYPE 10</span>
+          <span class="card-kanji">異形の空間</span>
+        </div>
+        <h2 class="card-title">The Strange One</h2>
+        <p class="card-desc">Defiantly unconventional. Rotated edge-running vertical navigation, oversized typography partially bleeding outside the viewport, spatial installation pillars, and unforgettable art-gallery tension.</p>
+        <div class="card-tags">
+          <span class="tag">Viewport Bleed</span>
+          <span class="tag">Edge Navigation</span>
+          <span class="tag">Non-Euclidean Spatial Grid</span>
+        </div>
+      </a>
+    </div>
+
+    <footer>
+      <div>WEDELIA ARCHIVE // TOKYO & DELHI // SELECTION GATE</div>
+      <div>NO ANIMATION ENGINES ACTIVE // PURE VISUAL EXPLORATION</div>
+    </footer>
+  </div>
+</body>
 </html>

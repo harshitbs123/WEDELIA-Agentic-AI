@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEDELIA // 10 The Strange One</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Shippori+Mincho:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void-bg: #070709;
+      --bone: #f4f3ee;
+      --dim: #7a7974;
+      --electric-blue: #0f38ff;
+      --acid: #d4ff00;
+      --border-dark: #1b1b20;
+    }
+
+    body {
+      background: var(--void-bg);
+      color: var(--bone);
+      font-family: 'Space Mono', monospace;
+      line-height: 1.4;
+      padding-top: 48px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Switcher Navigation */
+    .switch-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: #000000;
+      border-bottom: 1px solid var(--border-dark);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      font-size: 0.7rem;
+    }
+    .switch-nav a { color: var(--bone); text-decoration: none; }
+    .switch-pills { display: flex; gap: 0.25rem; }
+    .switch-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--dim);
+    }
+    .switch-pill.active { background: var(--electric-blue); color: #ffffff; font-weight: 700; border-color: var(--electric-blue); }
+    @media (max-width: 768px) {
+      .switch-nav .dir-label { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
+      .switch-pills { gap: 2px; }
+      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+    }
+
+    /* Strange Layout: Fixed Left Vertical Spatial Rail */
+    .viewport-rail {
+      position: fixed;
+      left: 0;
+      top: 48px;
+      bottom: 0;
+      width: 64px;
+      background: #050507;
+      border-right: 1px solid var(--border-dark);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 0;
+      font-size: 0.7rem;
+    }
+    @media (min-width: 1024px) {
+      .viewport-rail {
+        display: flex;
+      }
+    }
+    .rail-vertical-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      letter-spacing: 0.3em;
+      color: var(--dim);
+      font-size: 0.68rem;
+    }
+    .rail-num-active {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.6rem;
+      color: var(--electric-blue);
+    }
+
+    /* Main Experimental Canvas */
+    .strange-canvas {
+      margin-left: 0;
+      padding: 2.5rem 1.5rem 8rem;
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .strange-canvas {
+        margin-left: 64px;
+        padding: 4rem 3.5rem 10rem;
+      }
+    }
+
+    /* Bleeding Oversized Typographic Masthead */
+    .bleeding-type-hero {
+      position: relative;
+      margin-bottom: 6rem;
+      overflow: visible;
+    }
+    .oversized-bleed-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(5rem, 20vw, 19rem);
+      line-height: 0.78;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      color: var(--bone);
+      margin-left: -0.05em;
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+    .oversized-bleed-title span.blue {
+      color: var(--electric-blue);
+    }
+
+    /* Asymmetric Spatial Stage */
+    .spatial-stage-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      margin-bottom: 8rem;
+    }
+    @media (min-width: 1024px) {
+      .spatial-stage-grid {
+        grid-template-columns: 1fr 1.3fr;
+        gap: 4rem;
+      }
+    }
+
+    /* Left Narrative Column */
+    .stage-narrative {
+      display: flex;
+      flex-direction: column;
+      z-index: 5;
+    }
+    .kanji-banner {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--bone);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+    .stage-thesis {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #b0ada6;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+    .stage-thesis strong {
+      color: #ffffff;
+    }
+
+    /* Spatial Navigation Pillars */
+    .spatial-pillars {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      border-top: 1px solid var(--border-dark);
+      padding-top: 2rem;
+    }
+    @media (min-width: 600px) {
+      .spatial-pillars {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .pillar-box {
+      border: 1px solid var(--border-dark);
+      padding: 1.25rem 1rem;
+      background: #0d0d12;
+      position: relative;
+    }
+    .pillar-box:hover {
+      border-color: var(--electric-blue);
+    }
+    .pillar-num {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.8rem;
+      color: var(--electric-blue);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .pillar-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--bone);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .pillar-sub {
+      font-size: 0.65rem;
+      color: var(--dim);
+    }
+
+    /* Right Bleeding Image Installation */
+    .stage-bleed-image {
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .stage-bleed-image {
+        margin-right: -4rem; /* Intentionally breaks screen margin */
+      }
+    }
+    .bleed-photo-frame {
+      width: 100%;
+      aspect-ratio: 4/5.4;
+      overflow: hidden;
+      background: #111116;
+      border: 1px solid var(--border-dark);
+      position: relative;
+    }
+    .bleed-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(115%) grayscale(20%);
+    }
+    .image-spatial-badge {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      background: #000000;
+      border: 1px solid var(--electric-blue);
+      color: #ffffff;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+    }
+    .image-spatial-badge span.price {
+      color: var(--electric-blue);
+      font-weight: 700;
+      font-size: 1rem;
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    /* Section 2: Non-Euclidean Archival Row */
+    .non-euclidean-row {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 5rem;
+      margin-bottom: 8rem;
+    }
+    .row-meta-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3.5rem;
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+    .gallery-grid-strange {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    @media (min-width: 768px) {
+      .gallery-grid-strange {
+        grid-template-columns: 1.2fr 0.8fr 1fr;
+        gap: 3.5rem;
+        align-items: end;
+      }
+    }
+    .strange-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .strange-card img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--border-dark);
+      margin-bottom: 1.5rem;
+    }
+    .strange-card.c1 img { aspect-ratio: 4/5; }
+    .strange-card.c2 img { aspect-ratio: 3/4.5; }
+    .strange-card.c3 img { aspect-ratio: 4/3.8; }
+    .strange-card-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.35rem;
+    }
+    .strange-card-meta {
+      font-size: 0.7rem;
+      color: var(--dim);
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Strange Colophon */
+    footer.strange-footer {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      font-size: 0.7rem;
+      color: var(--dim);
+    }
+    @media (min-width: 768px) {
+      footer.strange-footer {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Switcher Top Bar -->
+  <nav class="switch-nav">
+    <div>
+      <a href="index.html">← INDEX</a>
+      <span class="dir-label" style="margin: 0 0.5rem; opacity: 0.4;">/</span>
+      <span class="dir-label" style="font-weight: 700;">DIR 10: THE STRANGE ONE</span>
+    </div>
+    <div class="switch-pills">
+      <a href="01-tokyo-editorial.html" class="switch-pill">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
+      <a href="05-fashion-newspaper.html" class="switch-pill">05</a>
+      <a href="06-white-void.html" class="switch-pill">06</a>
+      <a href="07-tokyo-street-contact-sheet.html" class="switch-pill">07</a>
+      <a href="08-fashion-terminal.html" class="switch-pill">08</a>
+      <a href="09-collage-cut-paper.html" class="switch-pill">09</a>
+      <a href="10-the-strange-one.html" class="switch-pill active">10</a>
+    </div>
+  </nav>
+
+  <!-- Left Vertical Spatial Rail -->
+  <aside class="viewport-rail">
+    <div class="rail-num-active">10</div>
+    <div class="rail-vertical-text">WEDELIA // 異形の空間 // SPATIAL INSTALLATION</div>
+    <div style="color: var(--dim);">2026</div>
+  </aside>
+
+  <!-- Main Canvas -->
+  <div class="strange-canvas">
+    
+    <!-- Bleeding Typographic Title (Breaks Viewport Bounds) -->
+    <header class="bleeding-type-hero">
+      <h1 class="oversized-bleed-title">
+        WEDE<span class="blue">LIA.</span>
+      </h1>
+    </header>
+
+    <!-- Asymmetric Spatial Stage -->
+    <section class="spatial-stage-grid">
+      
+      <!-- Left Narrative Column -->
+      <div class="stage-narrative">
+        <h2 class="kanji-banner">
+          一回きりの夜に、<br>
+          常識を脱ぎ捨てる。
+        </h2>
+
+        <p class="stage-thesis">
+          You have somewhere to go. Don't spend ₹35,000 on an outfit you will only ever photograph once. <strong>WEDELIA</strong> is a digital fashion installation operating as a revolving archive. High-voltage couture silhouettes rented for 3, 5, or 7 days with direct campus hostel delivery.
+        </p>
+
+        <!-- Spatial Occasion Pillars -->
+        <div class="spatial-pillars">
+          <div class="pillar-box">
+            <div class="pillar-num">01</div>
+            <div class="pillar-label">STAR NIGHTS</div>
+            <div class="pillar-sub">STAGE METALLICS</div>
+          </div>
+          <div class="pillar-box">
+            <div class="pillar-num">02</div>
+            <div class="pillar-label">FAREWELL BALL</div>
+            <div class="pillar-sub">OBSIDIAN FAILLE</div>
+          </div>
+          <div class="pillar-box">
+            <div class="pillar-num">03</div>
+            <div class="pillar-label">CONCERT CRAWL</div>
+            <div class="pillar-sub">KINETIC JACQUARD</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Bleeding Image Installation -->
+      <div class="stage-bleed-image">
+        <div class="bleed-photo-frame">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Gown Spatial Installation">
+          <div class="image-spatial-badge">
+            <span>INSTALLATION PIECE 01</span>
+            <span class="price">₹2,499 / 3 DAYS</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Non-Euclidean Archival Row -->
+    <section class="non-euclidean-row">
+      <div class="row-meta-header">
+        <div>[ ARCHIVAL GALLERY // ASYMMETRIC CADENCE ]</div>
+        <div>TWO SIZES DISPATCHED PER ORDER // 100% DAMAGE SHIELD</div>
+      </div>
+
+      <div class="gallery-grid-strange">
+        <!-- Item 01 -->
+        <article class="strange-card c1">
+          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Pleated Duet Gown">
+          <h3 class="strange-card-title">Pleated Duet Gown</h3>
+          <div class="strange-card-meta">
+            <span>MICRO-PLEATED CHIFFON</span>
+            <span style="color: var(--electric-blue); font-weight: 700;">₹2,899 / 3D</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--dim);">
+            Engineered for the final ballroom exit. Asymmetrical draped shoulder train.
+          </p>
+        </article>
+
+        <!-- Item 02 -->
+        <article class="strange-card c2">
+          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Shift">
+          <h3 class="strange-card-title">Kinetic Shift</h3>
+          <div class="strange-card-meta">
+            <span>LUREX JACQUARD</span>
+            <span style="color: var(--electric-blue); font-weight: 700;">₹1,699 / 3D</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--dim);">
+            Concert festival shift reflecting direct flash camera illumination.
+          </p>
+        </article>
+
+        <!-- Item 03 -->
+        <article class="strange-card c3">
+          <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Robe">
+          <h3 class="strange-card-title">Imperial Brocade</h3>
+          <div class="strange-card-meta">
+            <span>METALLIC GOLD BROCADE</span>
+            <span style="color: var(--electric-blue); font-weight: 700;">₹3,899 / 3D</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--dim);">
+            Heavy gold thread woven on pure silk damask. Wide-pannier architecture.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="strange-footer">
+      <div>WEDELIA // THE STRANGE ONE PROTOTYPE 10</div>
+      <div>DELHI NCR • TOKYO SHIBUYA // AVANT-GARDE FASHION ARCHIVE</div>
+      <div>NO TEMPLATES • NO PRECEDENT</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

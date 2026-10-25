@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEDELIA // 02 Brutalist Fashion Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --fg: #000000;
+      --border: #000000;
+      --muted: #555555;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      padding-top: 48px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Switcher Navigation */
+    .switch-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: #ffffff;
+      border-bottom: 2px solid var(--border);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      font-size: 0.7rem;
+    }
+    .switch-nav a { color: var(--fg); text-decoration: none; }
+    .switch-pills { display: flex; gap: 0.25rem; }
+    .switch-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--border);
+      color: var(--fg);
+    }
+    .switch-pill.active { background: var(--fg); color: #ffffff; font-weight: 700; }
+    @media (max-width: 768px) {
+      .switch-nav .dir-label { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
+      .switch-pills { gap: 2px; }
+      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+    }
+
+    /* Layout Wrapper */
+    .index-container {
+      border-left: 2px solid var(--border);
+      border-right: 2px solid var(--border);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Top Grid Header */
+    .header-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 2px solid var(--border);
+    }
+    @media (min-width: 768px) {
+      .header-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+    .h-cell {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (min-width: 768px) {
+      .h-cell {
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+      }
+      .h-cell:last-child { border-right: none; }
+    }
+    .brand-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.85;
+      text-transform: uppercase;
+    }
+    .kanji-header {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      margin-top: 0.5rem;
+    }
+
+    /* Brutalist Hero Row */
+    .hero-catalog-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 2px solid var(--border);
+    }
+    @media (min-width: 1024px) {
+      .hero-catalog-row {
+        grid-template-columns: 80px 1.2fr 1fr;
+      }
+    }
+    .index-sidebar-num {
+      padding: 1.5rem 0.5rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      writing-mode: vertical-rl;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      background: #fafafa;
+    }
+    .hero-text-block {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+    }
+    .hero-big-statement {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+    .spec-table td {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 0.75rem;
+    }
+    .spec-table td.key {
+      font-weight: 700;
+      width: 45%;
+    }
+    .hero-crop-frame {
+      padding: 2rem;
+      background: #f5f5f5;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-crop-frame img {
+      width: 100%;
+      height: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--border);
+      filter: contrast(110%);
+    }
+
+    /* Archive Table Grid */
+    .catalog-section-bar {
+      padding: 1rem 1.5rem;
+      background: #000000;
+      color: #ffffff;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 768px) {
+      .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .catalog-cell {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .catalog-cell:nth-child(3n) { border-right: none; }
+    }
+    .catalog-cell-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    .huge-serial {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 0.8;
+      letter-spacing: -0.05em;
+    }
+    .cell-img {
+      width: 100%;
+      aspect-ratio: 1/1.2;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+    .cell-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .price-tag {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Technical Rules Footer */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 2px solid var(--border);
+    }
+    @media (min-width: 768px) {
+      .rules-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .rule-cell {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    @media (min-width: 768px) {
+      .rule-cell { border-bottom: none; }
+      .rule-cell:last-child { border-right: none; }
+    }
+    .rule-cell strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Switcher Top Bar -->
+  <nav class="switch-nav">
+    <div>
+      <a href="index.html">← INDEX</a>
+      <span class="dir-label" style="margin: 0 0.5rem;">/</span>
+      <span class="dir-label" style="font-weight: 700;">DIR 02: BRUTALIST FASHION INDEX</span>
+    </div>
+    <div class="switch-pills">
+      <a href="01-tokyo-editorial.html" class="switch-pill">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill active">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
+      <a href="05-fashion-newspaper.html" class="switch-pill">05</a>
+      <a href="06-white-void.html" class="switch-pill">06</a>
+      <a href="07-tokyo-street-contact-sheet.html" class="switch-pill">07</a>
+      <a href="08-fashion-terminal.html" class="switch-pill">08</a>
+      <a href="09-collage-cut-paper.html" class="switch-pill">09</a>
+      <a href="10-the-strange-one.html" class="switch-pill">10</a>
+    </div>
+  </nav>
+
+  <div class="index-container">
+    
+    <!-- Header Grid Cell Structure -->
+    <header class="header-grid">
+      <div class="h-cell">
+        <h1 class="brand-title">WEDELIA</h1>
+        <div class="kanji-header">瞬間貸出仕様技術目録 // 2026</div>
+      </div>
+      <div class="h-cell">
+        <strong>ARCHIVE_PROTOCOL</strong><br>
+        TYPE: HAUTE RENTAL<br>
+        TIER: CAMPUS ACCESS<br>
+        LOC: DELHI / TOKYO
+      </div>
+      <div class="h-cell">
+        <strong>CURRENT_STATUS</strong><br>
+        SYSTEM: 100% OPERATIONAL<br>
+        INSPECTION: VERIFIED<br>
+        DEPOSIT: ₹1,500 ESCROW
+      </div>
+    </header>
+
+    <!-- Brutalist Hero Row -->
+    <section class="hero-catalog-row">
+      <aside class="index-sidebar-num">
+        <span>ARCHIVE_SERIES_2026</span>
+        <span>SECTION_A // FORMAL_EXPERIMENT</span>
+      </aside>
+
+      <div class="hero-text-block">
+        <div>
+          <div style="font-size: 0.7rem; color: var(--muted); margin-bottom: 0.75rem;">
+            [ CATALOGUE MANIFESTO // 001 ]
+          </div>
+          <h2 class="hero-big-statement">
+            RENT THE LOOK<br>
+            FOR THE MOMENT.
+          </h2>
+          <p style="font-size: 0.85rem; color: #333333; max-width: 500px; line-height: 1.6;">
+            A rigorous technical index of couture garments available for 3-day, 5-day, and 7-day moments. No permanent ownership. Two sizes dispatched to student residential corridors 24h before call time.
+          </p>
+        </div>
+
+        <table class="spec-table">
+          <tr>
+            <td class="key">SECTOR COVERAGE</td>
+            <td>DU NORTH, DU SOUTH, IIT, NIFT, ASHOKA</td>
+          </tr>
+          <tr>
+            <td class="key">SIZE INTEGRITY</td>
+            <td>1ST CHOICE + 2ND COMPLIMENTARY BACKUP</td>
+          </tr>
+          <tr>
+            <td class="key">ACCIDENTAL DAMAGE</td>
+            <td>₹0 LIABILITY SHIELD EMBEDDED</td>
+          </tr>
+          <tr>
+            <td class="key">MAINTENANCE</td>
+            <td>ZERO LAUNDRY (DISPATCH RETURN UNWASHED)</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="hero-crop-frame">
+        <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Obsidian Faille Silhouette">
+      </div>
+    </section>
+
+    <!-- Catalog Bar -->
+    <div class="catalog-section-bar">
+      <span>INDEX // ARCHIVE ENTRIES [ 001 — 003 ]</span>
+      <span>SELECT TO DISPATCH FOR 3D / 5D / 7D</span>
+    </div>
+
+    <!-- Catalog Grid -->
+    <div class="catalog-grid">
+      <!-- Item 1 -->
+      <article class="catalog-cell">
+        <div class="catalog-cell-top">
+          <span class="huge-serial">01</span>
+          <span style="font-size: 0.68rem; text-align: right;">SPEC: MATTE SILK<br>CODE: WDL-01-FLW</span>
+        </div>
+        <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Pleated Duet Gown" class="cell-img">
+        <h3 class="cell-name">Pleated Duet Gown</h3>
+        <p style="font-size: 0.72rem; color: var(--muted);">
+          OCCASION: FAREWELL BALL & BLACK TIE<br>
+          WEIGHT: 1,140g // CHRONO: 1951 ATELIER<br>
+          RETAIL VAL: ₹42,000
+        </p>
+        <div class="price-tag">
+          <span>RENTAL TARIFF</span>
+          <span>₹2,899 / 3D</span>
+        </div>
+      </article>
+
+      <!-- Item 2 -->
+      <article class="catalog-cell">
+        <div class="catalog-cell-top">
+          <span class="huge-serial">02</span>
+          <span style="font-size: 0.68rem; text-align: right;">SPEC: LUREX KNIT<br>CODE: WDL-02-FST</span>
+        </div>
+        <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Graphic Kinetic Shift" class="cell-img">
+        <h3 class="cell-name">Kinetic Shift & Wrap</h3>
+        <p style="font-size: 0.72rem; color: var(--muted);">
+          OCCASION: COLLEGE FEST STAR NIGHT<br>
+          WEIGHT: 680g // RUNWAY FLASH REFLECTION<br>
+          RETAIL VAL: ₹22,000
+        </p>
+        <div class="price-tag">
+          <span>RENTAL TARIFF</span>
+          <span>₹1,699 / 3D</span>
+        </div>
+      </article>
+
+      <!-- Item 3 -->
+      <article class="catalog-cell">
+        <div class="catalog-cell-top">
+          <span class="huge-serial">03</span>
+          <span style="font-size: 0.68rem; text-align: right;">SPEC: BROCADE GOLD<br>CODE: WDL-03-GAL</span>
+        </div>
+        <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Silhouette" class="cell-img">
+        <h3 class="cell-name">Gold Brocade Robe</h3>
+        <p style="font-size: 0.72rem; color: var(--muted);">
+          OCCASION: GILDED IMPERIAL GALA<br>
+          WEIGHT: 2,400g // METALLIC STOMACHER<br>
+          RETAIL VAL: ₹65,000
+        </p>
+        <div class="price-tag">
+          <span>RENTAL TARIFF</span>
+          <span>₹3,899 / 3D</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Technical Rules Footer Grid -->
+    <div class="rules-grid">
+      <div class="rule-cell">
+        <strong>01 // SELECTION</strong>
+        Input event dates 36h before campus fest or farewell ball. Choose primary + backup size.
+      </div>
+      <div class="rule-cell">
+        <strong>02 // DISPATCH</strong>
+        Campus courier arrives at hostel gate 24 hours prior to entrance. Both sizes sealed.
+      </div>
+      <div class="rule-cell">
+        <strong>03 // WEAR & SHOOT</strong>
+        Accidental cocktail spills and dancefloor tears 100% insured under ₹0 damage protocol.
+      </div>
+      <div class="rule-cell">
+        <strong>04 // ZERO CLEAN</strong>
+        Pack unwashed into pre-paid return satchel. Handover at hostel desk Monday morning.
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEDELIA // 09 Collage / Cut Paper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;900&family=Syne:wght@700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper-bg: #f4f2eb;
+      --ink: #161616;
+      --cardboard: #e3ded4;
+      --vermilion: #d03b29;
+      --muted: #6e6b62;
+      --white-card: #ffffff;
+    }
+
+    body {
+      background: var(--paper-bg);
+      color: var(--ink);
+      font-family: 'Space Mono', monospace;
+      line-height: 1.45;
+      padding-top: 48px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Switcher Navigation */
+    .switch-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: rgba(244, 242, 235, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--cardboard);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      font-size: 0.7rem;
+    }
+    .switch-nav a { color: var(--ink); text-decoration: none; }
+    .switch-pills { display: flex; gap: 0.25rem; }
+    .switch-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--cardboard);
+      color: var(--muted);
+    }
+    .switch-pill.active { background: var(--ink); color: #ffffff; font-weight: 700; border-color: var(--ink); }
+    @media (max-width: 768px) {
+      .switch-nav .dir-label { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
+      .switch-pills { gap: 2px; }
+      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+    }
+
+    /* Collage Canvas */
+    .collage-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 8rem;
+    }
+    @media (min-width: 1024px) {
+      .collage-wrapper { padding: 4rem 3.5rem 10rem; }
+    }
+
+    /* Top Strip */
+    .collage-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 1rem;
+      margin-bottom: 4rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .cut-stamp {
+      background: var(--ink);
+      color: #ffffff;
+      padding: 0.2rem 0.5rem;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    /* Layered Pasteboard Spread */
+    .pasteboard-spread {
+      position: relative;
+      margin-bottom: 8rem;
+    }
+
+    /* Giant Title Overlapping the Background and Image */
+    .collage-headline-block {
+      position: relative;
+      z-index: 10;
+      margin-bottom: -3rem;
+    }
+    .giant-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.8rem, 11vw, 9rem);
+      font-weight: 800;
+      line-height: 0.82;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .giant-subline {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--vermilion);
+      display: block;
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Overlapping Image & Info Plane Structure */
+    .collage-grid-planes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .collage-grid-planes {
+        grid-template-columns: 1.1fr 1fr;
+        gap: 0;
+        align-items: start;
+      }
+    }
+
+    /* Plane A: The Main Overlapping Runway Image */
+    .plane-image {
+      background: var(--white-card);
+      border: 1px solid var(--ink);
+      padding: 1.25rem;
+      position: relative;
+      z-index: 5;
+    }
+    @media (min-width: 1024px) {
+      .plane-image {
+        margin-right: -4rem;
+        margin-top: 2rem;
+      }
+    }
+    .plane-image img {
+      width: 100%;
+      aspect-ratio: 4/5.2;
+      object-fit: cover;
+      display: block;
+      filter: contrast(105%);
+    }
+    .plane-image-caption {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--muted);
+      border-top: 1px solid var(--cardboard);
+      padding-top: 0.5rem;
+    }
+
+    /* Plane B: The Offset Manifesto Pasteboard */
+    .plane-manifesto {
+      background: var(--cardboard);
+      border: 1px solid var(--ink);
+      padding: 3rem 2.5rem;
+      position: relative;
+      z-index: 4;
+    }
+    @media (min-width: 1024px) {
+      .plane-manifesto {
+        margin-left: 2rem;
+        margin-top: 6rem;
+        padding: 4rem 3.5rem;
+      }
+    }
+    .paste-badge {
+      display: inline-block;
+      background: var(--vermilion);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .manifesto-quote {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+    .manifesto-text {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #383630;
+      margin-bottom: 2rem;
+    }
+    .paste-data-list {
+      border-top: 1px solid var(--ink);
+      padding-top: 1.25rem;
+      list-style: none;
+    }
+    .paste-data-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      font-size: 0.72rem;
+    }
+
+    /* Secondary Cut-Paper Spread */
+    .cut-cards-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 6rem;
+    }
+    @media (min-width: 768px) {
+      .cut-cards-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+      }
+    }
+    .cut-card {
+      background: var(--white-card);
+      border: 1px solid var(--ink);
+      padding: 1.5rem;
+      position: relative;
+    }
+    .cut-card.offset-down {
+      transform: translateY(1.5rem);
+    }
+    .cut-card-num {
+      position: absolute;
+      top: -18px;
+      left: 15px;
+      background: var(--ink);
+      color: #ffffff;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      line-height: 1;
+    }
+    .cut-card img {
+      width: 100%;
+      aspect-ratio: 3/3.8;
+      object-fit: cover;
+      margin-bottom: 1.25rem;
+      margin-top: 0.5rem;
+      border: 1px solid var(--cardboard);
+    }
+    .cut-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .cut-card-price {
+      font-weight: 700;
+      color: var(--vermilion);
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .cut-card p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer.collage-footer {
+      border-top: 2px solid var(--ink);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    @media (min-width: 768px) {
+      footer.collage-footer {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Switcher Top Bar -->
+  <nav class="switch-nav">
+    <div>
+      <a href="index.html">← INDEX</a>
+      <span class="dir-label" style="margin: 0 0.5rem; opacity: 0.4;">/</span>
+      <span class="dir-label" style="font-weight: 700;">DIR 09: COLLAGE / CUT PAPER</span>
+    </div>
+    <div class="switch-pills">
+      <a href="01-tokyo-editorial.html" class="switch-pill">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
+      <a href="05-fashion-newspaper.html" class="switch-pill">05</a>
+      <a href="06-white-void.html" class="switch-pill">06</a>
+      <a href="07-tokyo-street-contact-sheet.html" class="switch-pill">07</a>
+      <a href="08-fashion-terminal.html" class="switch-pill">08</a>
+      <a href="09-collage-cut-paper.html" class="switch-pill active">09</a>
+      <a href="10-the-strange-one.html" class="switch-pill">10</a>
+    </div>
+  </nav>
+
+  <div class="collage-wrapper">
+    
+    <!-- Top Strip -->
+    <header class="collage-topbar">
+      <div>
+        <span class="cut-stamp">ZINE_ISSUE_09</span>
+        <span style="margin-left: 0.75rem;">WEDELIA PASTEBOARD ARCHIVE</span>
+      </div>
+      <div>
+        瞬間変容 // TOKYO & DELHI
+      </div>
+    </header>
+
+    <!-- Pasteboard Spread -->
+    <section class="pasteboard-spread">
+      
+      <!-- Headline Overlapping Layers -->
+      <div class="collage-headline-block">
+        <h1 class="giant-title">WEDELIA</h1>
+        <span class="giant-subline">その夜だけの主人公になる。/ RENT THE MOMENT.</span>
+      </div>
+
+      <!-- Overlapping Planes -->
+      <div class="collage-grid-planes">
+        
+        <!-- Plane A: Image Plane -->
+        <div class="plane-image">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Silhouette on Cut Paper Frame">
+          <div class="plane-image-caption">
+            <span>PLATE 01 // FAREWELL BALL SILHOUETTE</span>
+            <span>RENTAL RATE: ₹2,499 / 3D</span>
+          </div>
+        </div>
+
+        <!-- Plane B: Manifesto Cardboard Plane -->
+        <div class="plane-manifesto">
+          <span class="paste-badge">CUT PAPER EDITORIAL // 2026</span>
+          <div class="manifesto-quote">
+            "Don't spend ₹35,000 on an outfit you will be photographed in once."
+          </div>
+          <p class="manifesto-text">
+            College fests, annual farewell balls, music concerts, and debut dinners. WEDELIA dispenses revolving designer archives for 3, 5, or 7 days with direct campus hostel delivery.
+          </p>
+
+          <ul class="paste-data-list">
+            <li class="paste-data-item">
+              <span>BACKUP FIT ASSURANCE</span>
+              <strong>COMPLIMENTARY 2ND SIZE</strong>
+            </li>
+            <li class="paste-data-item">
+              <span>ACCIDENTAL SPILL INSURANCE</span>
+              <strong>₹0 LIABILITY SHIELD</strong>
+            </li>
+            <li class="paste-data-item">
+              <span>POST-EVENT CLEANING</span>
+              <strong>DISPATCH RETURN UNWASHED</strong>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Secondary Cut Cards Row -->
+    <section class="cut-cards-row">
+      <article class="cut-card">
+        <span class="cut-card-num">01</span>
+        <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Pleated Duet Gown">
+        <h3 class="cut-card-title">Pleated Duet Gown</h3>
+        <span class="cut-card-price">₹2,899 / 3 DAYS</span>
+        <p>Micro-pleated Grecian chiffon drape designed for department farewell ceremonies.</p>
+      </article>
+
+      <article class="cut-card offset-down">
+        <span class="cut-card-num">02</span>
+        <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Shift">
+        <h3 class="cut-card-title">Kinetic Shift</h3>
+        <span class="cut-card-price">₹1,699 / 3 DAYS</span>
+        <p>Lurex knit micro-shift reflecting stage lighting and 35mm party photography.</p>
+      </article>
+
+      <article class="cut-card">
+        <span class="cut-card-num">03</span>
+        <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Robe">
+        <h3 class="cut-card-title">Gilded Brocade</h3>
+        <span class="cut-card-price">₹3,899 / 3 DAYS</span>
+        <p>Metallic gold thread woven on pure silk damask ground for imperial college balls.</p>
+      </article>
+    </section>
+
+    <!-- Footer -->
+    <footer class="collage-footer">
+      <div>WEDELIA // COLLAGE CUT PAPER PROTOTYPE 09</div>
+      <div>PRINTED ZINE AESTHETIC // TACTILE PASTEBOARD</div>
+      <div>AUTUMN / SPRING 2026</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

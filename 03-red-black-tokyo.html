@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEDELIA // 03 Red / Black Tokyo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Shippori+Mincho:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --fg: #0d0d0d;
+      --red: #e60012; /* Pure Tokyo Vermilion Editorial Red */
+      --muted: #666666;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.4;
+      padding-top: 48px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Switcher Navigation */
+    .switch-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: #0d0d0d;
+      color: #ffffff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+    }
+    .switch-nav a { color: #ffffff; text-decoration: none; }
+    .switch-pills { display: flex; gap: 0.25rem; }
+    .switch-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #aaaaaa;
+    }
+    .switch-pill.active { background: var(--red); color: #ffffff; font-weight: 700; border-color: var(--red); }
+    @media (max-width: 768px) {
+      .switch-nav .dir-label { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
+      .switch-pills { gap: 2px; }
+      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+    }
+
+    /* Page Canvas */
+    .editorial-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 8rem;
+    }
+    @media (min-width: 1024px) {
+      .editorial-wrap { padding: 4rem 3.5rem 10rem; }
+    }
+
+    /* Top Strip */
+    .top-lead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      border-bottom: 2px solid var(--fg);
+      padding-bottom: 1rem;
+    }
+    .red-marker {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      margin-right: 0.5rem;
+    }
+    .red-stamp {
+      display: inline-block;
+      border: 2px solid var(--red);
+      color: var(--red);
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Asymmetric Hero Poster Spread */
+    .poster-hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 6rem;
+    }
+    @media (min-width: 1024px) {
+      .poster-hero {
+        grid-template-columns: 1fr 1.1fr;
+        gap: 5rem;
+        align-items: start;
+      }
+    }
+
+    .poster-left {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(4.5rem, 11vw, 9.5rem);
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .tokyo-sub {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 0.9;
+      color: var(--fg);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .tokyo-sub span.red-text {
+      color: var(--red);
+    }
+    .japanese-lead {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      padding-left: 1.25rem;
+      border-left: 3px solid var(--red);
+    }
+    .body-copy {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #333333;
+      max-width: 480px;
+      margin-bottom: 3rem;
+    }
+
+    /* Red Editorial Pen Occasion Index */
+    .occasion-index-vertical {
+      list-style: none;
+      border-top: 2px solid var(--fg);
+      padding-top: 1.5rem;
+    }
+    .occasion-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #eeeeee;
+      font-family: 'Anton', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .occasion-item .jp-tag {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: normal;
+    }
+    .occasion-item.marked {
+      color: var(--red);
+    }
+    .occasion-item.marked .red-circle {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--red);
+      margin-right: 0.5rem;
+    }
+
+    /* Right Column: Monumental High-Contrast Image */
+    .poster-right {
+      position: relative;
+    }
+    .monument-image-frame {
+      position: relative;
+      background: #0d0d0d;
+    }
+    .monument-image-frame img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4/5.5;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) contrast(125%);
+    }
+    .monument-image-frame::after {
+      content: '03 // 27';
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-family: 'Anton', sans-serif;
+      font-size: 3rem;
+      color: #ffffff;
+      line-height: 1;
+    }
+    .photo-red-annotation {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background: var(--red);
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .photo-caption-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Dual Editorial Cards (Red accent rule) */
+    .dual-editorial-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      border-top: 2px solid var(--fg);
+      padding-top: 4rem;
+      margin-top: 4rem;
+    }
+    @media (min-width: 768px) {
+      .dual-editorial-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+    }
+    .dual-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .dual-card img {
+      width: 100%;
+      aspect-ratio: 16/11;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(115%);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--fg);
+    }
+    .dual-card-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .dual-card-title span.price {
+      font-size: 1.25rem;
+      color: var(--red);
+      font-family: 'Space Mono', monospace;
+    }
+    .dual-card p {
+      font-size: 0.88rem;
+      color: #444444;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer.red-footer {
+      border-top: 2px solid var(--fg);
+      padding-top: 2rem;
+      margin-top: 6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    @media (min-width: 768px) {
+      footer.red-footer {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Switcher Top Bar -->
+  <nav class="switch-nav">
+    <div>
+      <a href="index.html">← INDEX</a>
+      <span class="dir-label" style="margin: 0 0.5rem; opacity: 0.4;">/</span>
+      <span class="dir-label" style="font-weight: 700;">DIR 03: RED / BLACK TOKYO</span>
+    </div>
+    <div class="switch-pills">
+      <a href="01-tokyo-editorial.html" class="switch-pill">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill active">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
+      <a href="05-fashion-newspaper.html" class="switch-pill">05</a>
+      <a href="06-white-void.html" class="switch-pill">06</a>
+      <a href="07-tokyo-street-contact-sheet.html" class="switch-pill">07</a>
+      <a href="08-fashion-terminal.html" class="switch-pill">08</a>
+      <a href="09-collage-cut-paper.html" class="switch-pill">09</a>
+      <a href="10-the-strange-one.html" class="switch-pill">10</a>
+    </div>
+  </nav>
+
+  <div class="editorial-wrap">
+    
+    <!-- Top Metadata Bar -->
+    <div class="top-lead">
+      <div>
+        <span class="red-marker"></span>
+        WEDELIA TOKYO // RED ARCHIVE 2026
+      </div>
+      <div>
+        <span class="red-stamp">貸出可能 — AVAILABLE</span>
+      </div>
+      <div>
+        DELHI NCR / SHIBUYA 03:00 AM
+      </div>
+    </div>
+
+    <!-- Main Asymmetric Poster Spread -->
+    <section class="poster-hero">
+      
+      <div class="poster-left">
+        <h1 class="brand-name">WEDELIA</h1>
+        <h2 class="tokyo-sub">
+          TOKYO <br>
+          AFTER <br>
+          <span class="red-text">DARK.</span>
+        </h2>
+
+        <div class="japanese-lead">
+          一度きりの夜に、記憶を刻む。<br>
+          三万五千円の使い捨てドレスは過去のもの。
+        </div>
+
+        <p class="body-copy">
+          You have somewhere to go tonight. A concert star night, an annual department farewell, a debut dinner. Rent the defining silhouette for 3, 5, or 7 days with zero dry cleaning chores. Delivered directly to your campus hostel with a complimentary secondary backup size.
+        </p>
+
+        <!-- Vertical Red Marked Occasion List -->
+        <ul class="occasion-index-vertical">
+          <li class="occasion-item marked">
+            <div><span class="red-circle"></span>FESTIVAL STAR NIGHT</div>
+            <span class="jp-tag">祝祭の光</span>
+          </li>
+          <li class="occasion-item">
+            <div>FAREWELL GALA & BALL</div>
+            <span class="jp-tag">訣別の宴</span>
+          </li>
+          <li class="occasion-item">
+            <div>CONCERT & AFTER-HOURS</div>
+            <span class="jp-tag">深夜狂騒</span>
+          </li>
+          <li class="occasion-item">
+            <div>FRESHERS DEBUT</div>
+            <span class="jp-tag">新風初陣</span>
+          </li>
+          <li class="occasion-item">
+            <div>MIDNIGHT OCCASION</div>
+            <span class="jp-tag">零時装飾</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="poster-right">
+        <div class="monument-image-frame">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Silhouette in High Contrast Monochrome">
+          <div class="photo-red-annotation">DISPATCH PROTOCOL // 24H DELIVERY</div>
+        </div>
+        <div class="photo-caption-row">
+          <span>ATELIER ARCHIVE NOIR // SPEC: SILK FAILLE</span>
+          <span>CAMPUS RATE: ₹2,499 / 3 DAYS</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Dual High-Contrast Editorial Cards -->
+    <section class="dual-editorial-row">
+      <article class="dual-card">
+        <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Pleated Duet Gown">
+        <div class="dual-card-title">
+          <span>01 // Pleated Duet Gown</span>
+          <span class="price">₹2,899 / 3D</span>
+        </div>
+        <p>
+          Micro-pleated Grecian chiffon silhouette for department farewell nights. Two sizes dispatched to hostel gates. 100% insured against accidental spills.
+        </p>
+      </article>
+
+      <article class="dual-card">
+        <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Shift">
+        <div class="dual-card-title">
+          <span>02 // Kinetic Shift Wrap</span>
+          <span class="price">₹1,699 / 3D</span>
+        </div>
+        <p>
+          Reflective lurex knit engineered for concert stage lights and 35mm flash cameras. High-exposure crowd energy with zero dry-cleaning return chores.
+        </p>
+      </article>
+    </section>
+
+    <!-- Red Colophon Footer -->
+    <footer class="red-footer">
+      <div>WEDELIA // RED / BLACK TOKYO PROTOTYPE 03</div>
+      <div>CAMPUS DISPATCH CONCIERGE: DU • IIT • NIFT • ASHOKA • ST. XAVIER'S</div>
+      <div>DESIGN: ART-DIRECTED FASHION ARCHIVE</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

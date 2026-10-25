@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEDELIA // 04 Vertical Japanese Poster</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ede9e1;
+      --fg: #191816;
+      --line: #cdc7ba;
+      --vermilion: #b83a2d;
+      --muted: #6b675e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.5;
+      padding-top: 48px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Switcher Navigation */
+    .switch-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: rgba(237, 233, 225, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+    }
+    .switch-nav a { color: var(--fg); text-decoration: none; }
+    .switch-pills { display: flex; gap: 0.25rem; }
+    .switch-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+    .switch-pill.active { background: var(--fg); color: var(--bg); font-weight: 700; border-color: var(--fg); }
+    @media (max-width: 768px) {
+      .switch-nav .dir-label { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
+      .switch-pills { gap: 2px; }
+      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+    }
+
+    /* Main Poster Spread */
+    .poster-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 8rem;
+    }
+    @media (min-width: 1024px) {
+      .poster-container { padding: 4rem 3.5rem 10rem; }
+    }
+
+    /* Masthead Banner */
+    .poster-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid var(--fg);
+      padding-bottom: 1.5rem;
+      margin-bottom: 3.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .poster-topbar .seal {
+      display: inline-block;
+      border: 1px solid var(--vermilion);
+      color: var(--vermilion);
+      padding: 0.15rem 0.5rem;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Poster Gallery Grid */
+    .poster-board {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      border-bottom: 2px solid var(--fg);
+      padding-bottom: 5rem;
+      margin-bottom: 6rem;
+    }
+    @media (min-width: 1024px) {
+      .poster-board {
+        grid-template-columns: 240px 1fr 340px 180px;
+        gap: 3rem;
+        align-items: stretch;
+      }
+    }
+
+    /* Column 1: Vertical Japanese Manifesto */
+    .poster-col-manifesto {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 1.5rem;
+      border-right: 1px solid var(--line);
+      padding-right: 2rem;
+    }
+    .v-text-stream {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1rem;
+      letter-spacing: 0.35em;
+      line-height: 2.2;
+      color: var(--fg);
+    }
+    .v-text-stream.bold {
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: var(--fg);
+    }
+    .v-text-stream.muted {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Column 2: Central Tall Narrow Image Strip */
+    .poster-col-visual {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .poster-brand-block {
+      margin-bottom: 2rem;
+    }
+    .poster-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+    .poster-title-en {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      display: block;
+    }
+    .tall-image-strip {
+      width: 100%;
+      height: 580px;
+      overflow: hidden;
+      background: #e2ddd3;
+      border: 1px solid var(--fg);
+    }
+    .tall-image-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: contrast(108%);
+    }
+    .strip-meta-box {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* Column 3: The Vertical Numbered Occasions */
+    .poster-col-occasions {
+      border-left: 1px solid var(--line);
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .v-number-block {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+    }
+    .v-number-block:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .big-v-num {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--fg);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+    .big-v-num span.v-kanji {
+      font-size: 1.1rem;
+      color: var(--vermilion);
+    }
+    .v-number-block h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .v-number-block p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Column 4: Narrow End Strip */
+    .poster-col-end {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .poster-col-end {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-left: 1px solid var(--line);
+        padding-left: 1.5rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.68rem;
+        color: var(--muted);
+      }
+    }
+
+    /* Secondary Poster Triptych */
+    .poster-triptych {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 768px) {
+      .poster-triptych {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+      }
+    }
+    .triptych-card {
+      border: 1px solid var(--fg);
+      padding: 1.5rem;
+      background: #f4f0e8;
+    }
+    .triptych-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      margin-bottom: 1.25rem;
+      filter: contrast(105%);
+    }
+    .triptych-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .triptych-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .triptych-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Colophon Footer */
+    footer.poster-footer {
+      margin-top: 6rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    @media (min-width: 768px) {
+      footer.poster-footer {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Switcher Top Bar -->
+  <nav class="switch-nav">
+    <div>
+      <a href="index.html">← INDEX</a>
+      <span class="dir-label" style="margin: 0 0.5rem; color: var(--muted);">/</span>
+      <span class="dir-label" style="font-weight: 700;">DIR 04: VERTICAL JAPANESE POSTER</span>
+    </div>
+    <div class="switch-pills">
+      <a href="01-tokyo-editorial.html" class="switch-pill">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill active">04</a>
+      <a href="05-fashion-newspaper.html" class="switch-pill">05</a>
+      <a href="06-white-void.html" class="switch-pill">06</a>
+      <a href="07-tokyo-street-contact-sheet.html" class="switch-pill">07</a>
+      <a href="08-fashion-terminal.html" class="switch-pill">08</a>
+      <a href="09-collage-cut-paper.html" class="switch-pill">09</a>
+      <a href="10-the-strange-one.html" class="switch-pill">10</a>
+    </div>
+  </nav>
+
+  <div class="poster-container">
+    
+    <!-- Masthead Topbar -->
+    <header class="poster-topbar">
+      <div>
+        <span>WEDELIA POSTER ARCHIVE // 2026 EDITION</span>
+      </div>
+      <div>
+        <span class="seal">瞬間変容 — WEDELIA</span>
+      </div>
+      <div>
+        CAMPUS HOSTEL DISPATCH GATE
+      </div>
+    </header>
+
+    <!-- Main 4-Column Poster Board -->
+    <section class="poster-board">
+      
+      <!-- Col 1: Vertical Japanese Typography Stream -->
+      <div class="poster-col-manifesto">
+        <div class="v-text-stream bold">
+          一晩限りの主人公になる。
+        </div>
+        <div class="v-text-stream">
+          一度しか写真に撮られない服に、三万五千円を払う必要などない。
+        </div>
+        <div class="v-text-stream muted">
+          大学祭、卒業謝恩会、音楽祭、深夜の歓談。二つのサイズを部屋までお届けし、洗濯不要でご返却いただく。
+        </div>
+      </div>
+
+      <!-- Col 2: Central Tall Narrow Image Strip -->
+      <div class="poster-col-visual">
+        <div class="poster-brand-block">
+          <h1 class="poster-title">
+            WEDELIA
+          </h1>
+          <span class="poster-title-en">HAUTE RENTAL ARCHIVE FOR CAMPUS MOMENTS</span>
+        </div>
+
+        <div class="tall-image-strip">
+          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Draped Couture Silhouettes in Vertical Crop">
+        </div>
+
+        <div class="strip-meta-box">
+          <span>SILHOUETTE NO. 01 // PLEATED DUET</span>
+          <span>CAMPUS TARIFF: ₹2,899 / 3D</span>
+        </div>
+      </div>
+
+      <!-- Col 3: Vertical Numbered Occasions -->
+      <div class="poster-col-occasions">
+        <div class="v-number-block">
+          <div class="big-v-num">
+            <span>01</span>
+            <span class="v-kanji">祝祭</span>
+          </div>
+          <h3>Star Night & Concerts</h3>
+          <p>Engineered for high-intensity movement, stage strobes, and direct 35mm flash cameras with zero wrinkle anxiety.</p>
+        </div>
+
+        <div class="v-number-block">
+          <div class="big-v-num">
+            <span>02</span>
+            <span class="v-kanji">訣別</span>
+          </div>
+          <h3>Farewell Gala & Ball</h3>
+          <p>Architectural faille peplums and micro-pleated Grecian trains designed for the final unforgettable departure.</p>
+        </div>
+
+        <div class="v-number-block">
+          <div class="big-v-num">
+            <span>03</span>
+            <span class="v-kanji">初陣</span>
+          </div>
+          <h3>Debut Society Events</h3>
+          <p>Classical silhouette authority for college freshers debut nights. Two sizes dispatched to ensure effortless fit.</p>
+        </div>
+      </div>
+
+      <!-- Col 4: End Details -->
+      <aside class="poster-col-end">
+        <div>
+          <strong>PROTOCOL</strong><br><br>
+          DELIVERY: 24H BEFORE CALL<br>
+          BACKUP: COMPLIMENTARY<br>
+          DAMAGE: 100% INSURED<br>
+          LAUNDRY: ZERO CHORES
+        </div>
+        <div>
+          <strong>SECTORS</strong><br><br>
+          DELHI NCR<br>
+          DU NORTH/SOUTH<br>
+          IIT • NIFT<br>
+          ASHOKA • XAVIER'S
+        </div>
+      </aside>
+
+    </section>
+
+    <!-- Secondary Poster Triptych -->
+    <section class="poster-triptych">
+      <article class="triptych-card">
+        <div class="triptych-header">
+          <span>ENTRY 01</span>
+          <span>₹2,499 / 3D</span>
+        </div>
+        <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Obsidian Faille Slip">
+        <h3 class="triptych-title">Obsidian Sculpted Slip</h3>
+        <p class="triptych-desc">
+          Structured hourglass waist with flare train in heavyweight matte silk faille.
+        </p>
+      </article>
+
+      <article class="triptych-card">
+        <div class="triptych-header">
+          <span>ENTRY 02</span>
+          <span>₹1,699 / 3D</span>
+        </div>
+        <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Shift">
+        <h3 class="triptych-title">Graphic Kinetic Shift</h3>
+        <p class="triptych-desc">
+          Lurex knit with contrasting metallic print panels engineered for concerts.
+        </p>
+      </article>
+
+      <article class="triptych-card">
+        <div class="triptych-header">
+          <span>ENTRY 03</span>
+          <span>₹3,899 / 3D</span>
+        </div>
+        <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Robe">
+        <h3 class="triptych-title">Gilded Brocade Robe</h3>
+        <p class="triptych-desc">
+          Metallic gold thread woven on pure silk damask for imperial college galas.
+        </p>
+      </article>
+    </section>
+
+    <!-- Colophon Footer -->
+    <footer class="poster-footer">
+      <div>WEDELIA // VERTICAL JAPANESE POSTER PROTOTYPE 04</div>
+      <div>PRINTED VISUAL INSPIRATION // GINZA POSTER TRADITION</div>
+      <div>AUTUMN / SPRING 2026</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
