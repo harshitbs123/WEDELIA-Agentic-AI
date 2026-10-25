@@ -71,6 +71,12 @@
       max-width: 1440px;
       margin: 0 auto;
       padding: 2.5rem 1.5rem 8rem;
+      overflow-x: hidden;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    @media (max-width: 768px) {
+      .editorial-wrap { padding: 1.5rem 0.75rem 6rem; }
     }
     @media (min-width: 1024px) {
       .editorial-wrap { padding: 3.5rem 3.5rem 10rem; }
@@ -826,6 +832,216 @@
         font-size: 0.65rem;
       }
     }
+
+    /* COMPOSITION 6.5: NIGHT-DROP DISPATCH TERMINAL */
+    .night-drop-section {
+      background: #000000;
+      color: #ffffff;
+      border-top: 3px solid var(--red);
+      border-bottom: 3px solid var(--red);
+      padding: 4.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+    .night-drop-header {
+      max-width: 1200px;
+      margin: 0 auto 2.5rem;
+    }
+    .night-drop-question {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .night-drop-triggers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .drop-trigger-btn {
+      background: #111111;
+      border: 1px solid #333333;
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.65rem 1.25rem;
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      transition: all 0.2s ease;
+    }
+    .drop-trigger-btn:hover, .drop-trigger-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(255, 42, 20, 0.4);
+    }
+
+    .night-drop-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 900px) {
+      .night-drop-grid {
+        grid-template-columns: 1fr 1.2fr;
+      }
+    }
+
+    .drop-look-preview {
+      border: 2px solid #222222;
+      background: #080808;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-sizing: border-box;
+    }
+    .drop-look-img-frame {
+      width: 100%;
+      height: 380px;
+      background: #000000;
+      border: 1px solid #333333;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    .drop-look-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(110%);
+    }
+
+    .night-dispatch-ticket {
+      border: 2px solid var(--red);
+      background: #0c0808;
+      padding: 2rem 1.75rem;
+      position: relative;
+      box-shadow: 0 0 30px rgba(255, 42, 20, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    @media (max-width: 600px) {
+      .night-dispatch-ticket {
+        padding: 1.25rem 1rem;
+      }
+    }
+    .ticket-top-tag {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      border-bottom: 1px dashed var(--red);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.12em;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .ticket-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height: 1;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+    .ticket-meta-specs {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: #aaaaaa;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .ticket-controls-group {
+      margin-bottom: 1.25rem;
+    }
+    .ticket-control-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: #888888;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .ticket-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .ticket-pill-btn {
+      background: #1a1a1a;
+      border: 1px solid #444444;
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.35rem 0.65rem;
+      cursor: pointer;
+    }
+    .ticket-pill-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .ticket-campus-select {
+      width: 100%;
+      background: #111111;
+      border: 1px solid var(--red);
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.55rem;
+      max-width: 100%;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+    }
+    .secure-ticket-btn {
+      background: var(--red);
+      color: #ffffff;
+      border: none;
+      padding: 1rem 1.25rem;
+      font-family: 'Anton', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1rem;
+      transition: transform 0.1s ease, background 0.2s ease;
+    }
+    .secure-ticket-btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+    .secure-ticket-btn:active {
+      transform: scale(0.98);
+    }
+    .ticket-stamp-confirmed {
+      display: none;
+      border: 2px solid var(--red);
+      background: rgba(255, 42, 20, 0.15);
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      letter-spacing: 0.1em;
+    }
   </style>
 </head>
 <body>
@@ -1172,6 +1388,116 @@
         </p>
       </div>
     </div>
+
+    <!-- COMPOSITION 6.5: THE NIGHT-DROP DISPATCH TERMINAL // SECURE THE MOMENT -->
+    <section class="night-drop-section" id="nightDropSection">
+      <div class="night-drop-header">
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red); letter-spacing: 0.15em; margin-bottom: 0.5rem;">
+          // DISPATCH PROTOCOL: SAME-NIGHT CAMPUS DROP
+        </div>
+        <h2 class="night-drop-question">
+          WHERE ARE YOU GOING TONIGHT?
+        </h2>
+        <div style="font-family: 'Noto Sans JP', sans-serif; font-size: 0.95rem; color: #888888; margin-bottom: 1rem;">
+          夜の目的地を選択せよ — 瞬間を所有するためのナイトドロップ発注。
+        </div>
+
+        <div class="night-drop-triggers" id="nightDropTriggers">
+          <button class="drop-trigger-btn active" data-event="CONCERT" data-look="STROBE-REACTIVE METALLIC KNIT" data-price="1699" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" data-curator="SUMMER RUNWAY EDITION">CONCERT</button>
+          <button class="drop-trigger-btn" data-event="FESTIVAL" data-look="KINETIC MULTI-POCKET WRAP GOWN" data-price="1899" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" data-curator="TOKYO TECHNO RUNWAY">FESTIVAL</button>
+          <button class="drop-trigger-btn" data-event="FAREWELL" data-look="JEAN DESSES PLEATED CHIFFON" data-price="2899" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" data-curator="1951 PARIS ATELIER">FAREWELL</button>
+          <button class="drop-trigger-btn" data-event="FRESHERS" data-look="ASYMMETRIC SCULPTED HALTER" data-price="1499" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" data-curator="MINIMALIST SCULPTED CREPE">FRESHERS</button>
+          <button class="drop-trigger-btn" data-event="AFTER-PARTY" data-look="OBSIDIAN LIQUID VISCOSE" data-price="1799" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" data-curator="MIDNIGHT CORSET DRAPE">AFTER-PARTY</button>
+        </div>
+      </div>
+
+      <div class="night-drop-grid">
+        <!-- Recommended Look Visual Preview -->
+        <div class="drop-look-preview">
+          <div class="drop-look-img-frame">
+            <img id="nightDropImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Selected Night Silhouette">
+          </div>
+          <div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--red); letter-spacing: 0.1em;" id="nightCuratorTag">
+              ARCHIVE // SUMMER RUNWAY EDITION
+            </div>
+            <h3 id="nightLookTitle" style="font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase; margin: 0.35rem 0;">
+              STROBE-REACTIVE METALLIC KNIT
+            </h3>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #888888;">
+              ₹0 DAMAGE SHIELD PRE-LOADED • RETURN STRICTLY UNWASHED
+            </div>
+          </div>
+        </div>
+
+        <!-- Nightclub Dispatch Backstage Ticket -->
+        <div class="night-dispatch-ticket" id="nightTicketCard">
+          <div class="ticket-top-tag">
+            <span>WEDELIA NIGHT DISPATCH // 00:00 ENTRY</span>
+            <span style="color: var(--red);">REF: #SHIBUYA-NCR-7719</span>
+          </div>
+
+          <div>
+            <div class="ticket-title" id="ticketEventTitle">CONCERT DISPATCH</div>
+            <div class="ticket-meta-specs">
+              EVENT CALL TIME: 20:30 IST // CAMPUS DROP: 18:00 IST<br>
+              DUAL FIT GUARANTEE: PRIMARY SIZE + SEALED BACKUP SIZE<br>
+              SAME-NIGHT DEADLINE: <span style="color: var(--red); font-weight: 700;">14H 21M REMAINING</span>
+            </div>
+
+            <!-- Sizing Controls -->
+            <div class="ticket-controls-group">
+              <span class="ticket-control-label">PRIMARY SIZE & SISTER REDUNDANCY:</span>
+              <div class="ticket-pills-row" id="ticketSizeRow">
+                <button class="ticket-pill-btn" data-size="UK 6 (XS)" data-backup="UK 8">UK 6 (XS)</button>
+                <button class="ticket-pill-btn active" data-size="UK 8 (S)" data-backup="UK 10">UK 8 (S)</button>
+                <button class="ticket-pill-btn" data-size="UK 10 (M)" data-backup="UK 12">UK 10 (M)</button>
+                <button class="ticket-pill-btn" data-size="UK 12 (L)" data-backup="UK 14">UK 12 (L)</button>
+              </div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 0.62rem; color: #ff8877; margin-top: 0.35rem;" id="ticketBackupNote">
+                + SISTER BACKUP SIZE UK 10 INCLUDED IN TAMPER-EVIDENT POUCH (₹0).
+              </div>
+            </div>
+
+            <!-- Duration Controls -->
+            <div class="ticket-controls-group">
+              <span class="ticket-control-label">RENTAL DURATION:</span>
+              <div class="ticket-pills-row" id="ticketDurationRow">
+                <button class="ticket-pill-btn active" data-nights="3" data-adder="0">3 NIGHTS</button>
+                <button class="ticket-pill-btn" data-nights="5" data-adder="500">5 NIGHTS (+₹500)</button>
+                <button class="ticket-pill-btn" data-nights="7" data-adder="900">7 NIGHTS (+₹900)</button>
+              </div>
+            </div>
+
+            <!-- Campus Node Select -->
+            <div class="ticket-controls-group">
+              <span class="ticket-control-label">DESTINATION CAMPUS GATE:</span>
+              <select class="ticket-campus-select" id="ticketCampusSelect">
+                <option value="MIRANDA_GATE2">MIRANDA HOUSE // GATE 2 PORCH [NORTH CAMPUS]</option>
+                <option value="LSR_ARCH">LADY SHRI RAM COLLEGE // MAIN ARCHWAY [SOUTH CAMPUS]</option>
+                <option value="STEPHENS_PORCH">ST. STEPHEN'S COLLEGE // RESIDENTS PORCH [NORTH CAMPUS]</option>
+                <option value="ASHOKA_QUAD">ASHOKA UNIVERSITY // RESIDENCE HALL 4 [SONIPAT]</option>
+                <option value="NIFT_MAIN">NIFT DELHI // HAUZ KHAS DESIGN WING</option>
+              </select>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px dashed var(--red); padding-top: 0.75rem; margin-top: 1rem;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: #aaaaaa;">DISPATCH TARIFF:</span>
+              <span id="ticketTariffVal" style="font-family: 'Anton', sans-serif; font-size: 2rem; color: var(--red);">₹1,699</span>
+            </div>
+          </div>
+
+          <div>
+            <button class="secure-ticket-btn" id="secureNightTicketBtn">
+              SECURE NIGHT-DROP TICKET
+            </button>
+            <div class="ticket-stamp-confirmed" id="ticketConfirmedStamp">
+              ✓ TICKET SECURED // DISPATCH MANIFEST #7719 ISSUED // TAMPER-EVIDENT CARTON PREPARED FOR 18:00 IST COURIER RUN.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- COMPOSITION 7: FINAL MONUMENTAL TYPOGRAPHIC STATEMENT -->
     <section class="closing-monument">
@@ -1577,6 +1903,116 @@
 
     if (snapBtn) {
       snapBtn.addEventListener('click', triggerVermilionSnap);
+    }
+
+    // 9. THE NIGHT-DROP DISPATCH TERMINAL LOGIC
+    let currentDropBase = 1699;
+    let currentDropAdder = 0;
+    let currentDropEvent = 'CONCERT';
+    let currentDropSize = 'UK 8 (S)';
+    let currentDropBackup = 'UK 10';
+
+    const dropTriggerBtns = document.querySelectorAll('.drop-trigger-btn');
+    const nightDropImg = document.getElementById('nightDropImg');
+    const nightCuratorTag = document.getElementById('nightCuratorTag');
+    const nightLookTitle = document.getElementById('nightLookTitle');
+    const ticketEventTitle = document.getElementById('ticketEventTitle');
+    const ticketTariffVal = document.getElementById('ticketTariffVal');
+    const ticketSizeBtns = document.querySelectorAll('#ticketSizeRow .ticket-pill-btn');
+    const ticketDurationBtns = document.querySelectorAll('#ticketDurationRow .ticket-pill-btn');
+    const ticketBackupNote = document.getElementById('ticketBackupNote');
+    const secureNightTicketBtn = document.getElementById('secureNightTicketBtn');
+    const ticketConfirmedStamp = document.getElementById('ticketConfirmedStamp');
+    const nightTicketCard = document.getElementById('nightTicketCard');
+
+    function updateTicketPrice() {
+      const total = currentDropBase + currentDropAdder;
+      if (ticketTariffVal) ticketTariffVal.textContent = `₹${total.toLocaleString('en-IN')}`;
+    }
+
+    // Occasion event switch
+    dropTriggerBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        dropTriggerBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        currentDropEvent = btn.dataset.event;
+        currentDropBase = parseInt(btn.dataset.price, 10);
+        const look = btn.dataset.look;
+        const img = btn.dataset.img;
+        const curator = btn.dataset.curator;
+
+        if (ticketEventTitle) ticketEventTitle.textContent = `${currentDropEvent} DISPATCH`;
+        if (nightLookTitle) nightLookTitle.textContent = look;
+        if (nightCuratorTag) nightCuratorTag.textContent = `ARCHIVE // ${curator}`;
+
+        if (nightDropImg) {
+          if (!prefersReducedMotion) {
+            gsap.timeline()
+              .to(nightDropImg, { opacity: 0.2, scale: 0.96, duration: 0.15 })
+              .call(() => { nightDropImg.src = img; })
+              .to(nightDropImg, { opacity: 1, scale: 1, duration: 0.3, ease: 'power2.out' });
+          } else {
+            nightDropImg.src = img;
+          }
+        }
+        updateTicketPrice();
+      });
+    });
+
+    // Sizing selection
+    ticketSizeBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        ticketSizeBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentDropSize = btn.dataset.size;
+        currentDropBackup = btn.dataset.backup;
+        if (ticketBackupNote) {
+          ticketBackupNote.textContent = `+ SISTER BACKUP SIZE ${currentDropBackup} INCLUDED IN TAMPER-EVIDENT POUCH (₹0).`;
+        }
+      });
+    });
+
+    // Duration selection
+    ticketDurationBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        ticketDurationBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentDropAdder = parseInt(btn.dataset.adder, 10);
+        updateTicketPrice();
+      });
+    });
+
+    // Secure ticket confirmation
+    let ticketSecured = false;
+    if (secureNightTicketBtn && nightTicketCard) {
+      secureNightTicketBtn.addEventListener('click', () => {
+        if (ticketSecured) return;
+        ticketSecured = true;
+
+        if (!prefersReducedMotion) {
+          gsap.timeline()
+            .to(nightTicketCard, {
+              boxShadow: '0 0 50px rgba(255, 42, 20, 0.5)',
+              x: 2,
+              duration: 0.1
+            })
+            .to(nightTicketCard, { x: -2, duration: 0.1 })
+            .to(nightTicketCard, { x: 0, duration: 0.1 })
+            .call(() => {
+              secureNightTicketBtn.style.background = '#276749';
+              secureNightTicketBtn.textContent = '✓ TICKET SECURED // 18:00 COURIER RUN';
+              if (ticketConfirmedStamp) {
+                ticketConfirmedStamp.style.display = 'block';
+                gsap.from(ticketConfirmedStamp, { opacity: 0, y: 8, duration: 0.3 });
+              }
+            });
+        } else {
+          secureNightTicketBtn.style.background = '#276749';
+          secureNightTicketBtn.textContent = '✓ TICKET SECURED // 18:00 COURIER RUN';
+          if (ticketConfirmedStamp) ticketConfirmedStamp.style.display = 'block';
+        }
+      });
     }
   </script>
 </body>

@@ -459,27 +459,40 @@
       margin-bottom: 1.5rem;
     }
 
-    /* POSTER 005: CALLIGRAPHIC MAKIMONO SCROLL DOCUMENT */
+    /* POSTER 005: CALLIGRAPHIC MAKIMONO SCROLL DOCUMENT & LOAN CERTIFICATE */
     .lease-scroll-layout {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 2rem;
       background: #faf8f3;
       border: 1px solid var(--fg);
       padding: 2.5rem 1.5rem;
       position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      max-width: 100%;
     }
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       .lease-scroll-layout {
-        grid-template-columns: repeat(4, 1fr);
-        padding: 3.5rem 2rem;
-        gap: 1.5rem;
+        grid-template-columns: 1.15fr 1fr;
+        padding: 3rem 2.5rem;
+        gap: 2.5rem;
+      }
+    }
+    .makimono-pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 600px) {
+      .makimono-pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
     .scroll-vertical-column {
       background: var(--paper);
       border: 1px solid var(--line);
-      padding: 2rem 1.25rem 1.5rem;
+      padding: 1.75rem 1.25rem 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -500,21 +513,143 @@
       font-weight: 700;
     }
     .scroll-vertical-column:hover {
-      transform: translateY(-8px);
+      transform: translateY(-5px);
       border-color: var(--fg);
-      box-shadow: 0 16px 35px rgba(25, 24, 22, 0.12);
+      box-shadow: 0 12px 28px rgba(25, 24, 22, 0.1);
       z-index: 5;
     }
-    @media (min-width: 768px) {
-      .scroll-vertical-column:nth-child(2) {
-        margin-top: 1.5rem;
-      }
-      .scroll-vertical-column:nth-child(3) {
-        margin-top: -1rem;
-      }
-      .scroll-vertical-column:nth-child(4) {
-        margin-top: 1rem;
-      }
+
+    /* Interactive Exhibition Loan Certificate Panel */
+    .custody-certificate-panel {
+      border: 2px double var(--fg);
+      background: #fdfbf7;
+      padding: 2rem 1.5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+    .cert-corner-seal {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: 2px solid var(--vermilion);
+      color: var(--vermilion);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.68rem;
+      font-weight: 900;
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.1em;
+    }
+    .cert-title-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.35rem;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.35rem;
+    }
+    .cert-sub-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .cert-control-group {
+      margin-bottom: 1.25rem;
+    }
+    .cert-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.4rem;
+      display: block;
+      text-transform: uppercase;
+    }
+    .cert-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .cert-pill-btn {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      color: var(--fg);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.35rem 0.65rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    .cert-pill-btn:hover, .cert-pill-btn.active {
+      background: var(--fg);
+      color: #ffffff;
+      border-color: var(--fg);
+    }
+    .loan-seal-btn {
+      width: 100%;
+      background: #191816;
+      color: #ffffff;
+      border: 1px solid #191816;
+      padding: 0.85rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 1.25rem;
+      transition: background 0.2s ease;
+    }
+    .loan-seal-btn:hover {
+      background: var(--vermilion);
+      border-color: var(--vermilion);
+    }
+    .cert-hanko-seal {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2rem;
+      width: 110px;
+      height: 110px;
+      border: 3px double var(--vermilion);
+      border-radius: 50%;
+      color: var(--vermilion);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 900;
+      text-align: center;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(2) rotate(10deg);
+      z-index: 10;
+      mix-blend-mode: multiply;
+      background: rgba(209, 48, 40, 0.05);
+      padding: 0.4rem;
+    }
+    .cert-confirmed-banner {
+      display: none;
+      margin-top: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--vermilion);
+      font-weight: 700;
+      border: 1px solid var(--vermilion);
+      padding: 0.45rem 0.65rem;
+      background: #fff8f7;
     }
     .scroll-big-kanji {
       font-family: 'Shippori Mincho', serif;
@@ -974,43 +1109,129 @@
       </div>
     </section>
 
-    <!-- POSTER 005: VERTICAL CALLIGRAPHIC LEASE SCROLL -->
+    <!-- POSTER 005: VERTICAL CALLIGRAPHIC LEASE SCROLL & EXHIBITION LOAN CERTIFICATE -->
     <section class="exhibit-poster">
       <div class="poster-id-tag">
-        <span>POSTER NO. 005 // TECHNICAL LEASE PARAMETERS</span>
-        <span class="vermilion-stamp">第五号 貸出規約</span>
+        <span>POSTER NO. 005 // TECHNICAL LEASE & EXHIBITION LOAN CERTIFICATE</span>
+        <span class="vermilion-stamp">第五号 貸出規約・受託証書</span>
       </div>
 
       <div class="lease-scroll-layout">
-        <div class="scroll-vertical-column">
-          <div>
-            <div class="scroll-big-kanji">三日</div>
-            <h4 class="scroll-term-title">03 DAYS LEASE</h4>
-            <p class="scroll-term-body">Delivered 24 hours prior to entrance. Gives you a relaxed evening before, event night, and a stress-free morning for return handover.</p>
+        <!-- Left: Makimono Pillars Grid -->
+        <div class="makimono-pillars-grid">
+          <div class="scroll-vertical-column">
+            <div>
+              <div class="scroll-big-kanji">三日</div>
+              <h4 class="scroll-term-title">03 DAYS LEASE</h4>
+              <p class="scroll-term-body">Delivered 24 hours prior to entrance. Gives you a relaxed evening before, event night, and a stress-free morning for return handover.</p>
+            </div>
+          </div>
+
+          <div class="scroll-vertical-column">
+            <div>
+              <div class="scroll-big-kanji">二着</div>
+              <h4 class="scroll-term-title">DUAL SIZES DISPATCHED</h4>
+              <p class="scroll-term-body">Your primary choice plus an adjacent complimentary backup size sealed in every delivery. Zero fitting anxiety on the big day.</p>
+            </div>
+          </div>
+
+          <div class="scroll-vertical-column">
+            <div>
+              <div class="scroll-big-kanji">零円</div>
+              <h4 class="scroll-term-title">₹0 DAMAGE LIABILITY</h4>
+              <p class="scroll-term-body">Dancefloor drink spills, minor hem wear, and bead loosening are 100% absorbed under our built-in insurance shield.</p>
+            </div>
+          </div>
+
+          <div class="scroll-vertical-column">
+            <div>
+              <div class="scroll-big-kanji">無洗</div>
+              <h4 class="scroll-term-title">ZERO LAUNDRY RETURN</h4>
+              <p class="scroll-term-body">Strictly do not dry clean or iron. Slip both pieces into the pre-paid return satchel unwashed. Handover at campus gate.</p>
+            </div>
           </div>
         </div>
 
-        <div class="scroll-vertical-column">
-          <div>
-            <div class="scroll-big-kanji">二着</div>
-            <h4 class="scroll-term-title">DUAL SIZES DISPATCHED</h4>
-            <p class="scroll-term-body">Your primary choice plus an adjacent complimentary backup size sealed in every delivery. Zero fitting anxiety on the big day.</p>
+        <!-- Right: Interactive Certificate of Temporary Custody -->
+        <div class="custody-certificate-panel" id="custodyCertificatePanel">
+          <div class="cert-corner-seal">京都・東京</div>
+          <!-- Hanko Vermilion Seal -->
+          <div class="cert-hanko-seal" id="certHankoSeal">
+            <span style="font-size: 1.5rem; line-height: 1;">受託済</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.5rem; margin-top: 3px;">WEDELIA CUSTODY</span>
+            <span style="font-size: 0.48rem; letter-spacing: 0.05em;">2026 ARCHIVE</span>
           </div>
-        </div>
 
-        <div class="scroll-vertical-column">
           <div>
-            <div class="scroll-big-kanji">零円</div>
-            <h4 class="scroll-term-title">₹0 DAMAGE LIABILITY</h4>
-            <p class="scroll-term-body">Dancefloor drink spills, minor hem wear, and bead loosening are 100% absorbed under our built-in insurance shield.</p>
+            <div class="cert-title-kanji">一時保管受託証書</div>
+            <div class="cert-sub-tag">
+              CERTIFICATE OF TEMPORARY CUSTODY // LOAN REF: KYOTO-TOKYO-8820
+            </div>
+
+            <!-- Selector 1: Garment Specimen -->
+            <div class="cert-control-group">
+              <span class="cert-label">1. ENTRUSTED SPECIMEN (受託標本選択)</span>
+              <div class="cert-pills-row" id="certSpecimenPills">
+                <button class="cert-pill-btn active" data-specimen="SPECIMEN NO. 014: DIOR ZEMIRE 1952" data-price="2499">014: DIOR ZEMIRE</button>
+                <button class="cert-pill-btn" data-specimen="SPECIMEN NO. 021: JEAN DESSES 1951" data-price="2899">021: JEAN DESSES</button>
+                <button class="cert-pill-btn" data-specimen="SPECIMEN NO. 038: KINETIC WRAP 2026" data-price="1699">038: KINETIC WRAP</button>
+              </div>
+            </div>
+
+            <!-- Selector 2: Exhibition Occasion & Date -->
+            <div class="cert-control-group">
+              <span class="cert-label">2. EXHIBITION OCCASION (出展契機)</span>
+              <div class="cert-pills-row" id="certOccasionPills">
+                <button class="cert-pill-btn active" data-occasion="新歓 INDUCTION // 3 DAYS" data-adder="0">FRESHERS</button>
+                <button class="cert-pill-btn" data-occasion="祝祭 FESTIVAL // 3 DAYS" data-adder="0">FESTIVAL</button>
+                <button class="cert-pill-btn" data-occasion="門出 FAREWELL // 5 DAYS" data-adder="600">FAREWELL</button>
+                <button class="cert-pill-btn" data-occasion="夜会 BANQUET // 7 DAYS" data-adder="1100">BANQUET</button>
+              </div>
+            </div>
+
+            <!-- Sizing Covenant -->
+            <div class="cert-control-group">
+              <span class="cert-label">3. SIZE ALLOCATION & BACKUP RESERVE</span>
+              <div class="cert-pills-row" id="certSizePills">
+                <button class="cert-pill-btn" data-size="UK 6 [XS]" data-backup="UK 8">UK 6</button>
+                <button class="cert-pill-btn active" data-size="UK 8 [S]" data-backup="UK 10">UK 8</button>
+                <button class="cert-pill-btn" data-size="UK 10 [M]" data-backup="UK 12">UK 10</button>
+                <button class="cert-pill-btn" data-size="UK 12 [L]" data-backup="UK 14">UK 12</button>
+              </div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 0.62rem; color: #777267; margin-top: 0.35rem;" id="certBackupNote">
+                ✦ COMPLIMENTARY ADJACENT SIZE UK 10 SEALED IN MUSEUM TRANSIT CASE (₹0).
+              </div>
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; font-family: 'Space Mono', monospace; font-size: 0.68rem; margin: 1.25rem 0 0.5rem; line-height: 1.8;">
+              <tr style="border-bottom: 1px dashed var(--line);">
+                <td style="color: var(--muted);">SELECTED SPECIMEN:</td>
+                <td id="certSpecimenVal" style="text-align: right; font-weight: 700;">SPECIMEN NO. 014: DIOR ZEMIRE 1952</td>
+              </tr>
+              <tr style="border-bottom: 1px dashed var(--line);">
+                <td style="color: var(--muted);">EXHIBITION WINDOW:</td>
+                <td id="certOccasionVal" style="text-align: right; font-weight: 700;">新歓 INDUCTION // 3 DAYS</td>
+              </tr>
+              <tr style="border-bottom: 1px dashed var(--line);">
+                <td style="color: var(--muted);">ESCROW PROTOCOL:</td>
+                <td style="text-align: right; font-weight: 700;">100% REVERSIBLE</td>
+              </tr>
+            </table>
+
+            <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 2px solid var(--fg); padding-top: 0.5rem; margin-top: 0.75rem;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted);">LOAN TARIFF:</span>
+              <span id="certTotalTariff" style="font-family: 'Shippori Mincho', serif; font-size: 1.6rem; font-weight: 900; color: var(--vermilion);">₹2,499</span>
+            </div>
           </div>
-        </div>
 
-        <div class="scroll-vertical-column">
           <div>
-            <div class="scroll-big-kanji">無洗</div>
-            <h4 class="scroll-term-title">ZERO LAUNDRY RETURN</h4>
-            <p class="scroll-term-body">Strictly do not dry clean or iron. Slip both pieces into the pre-paid return satchel unwashed. Handover at campus gate.</p>
+            <button class="loan-seal-btn" id="loanSealBtn">
+              <span>押印・受託認証 // APPLY VERMILION SEAL TO ENTRUST</span>
+              <span style="font-size: 0.62rem; font-family: 'Shippori Mincho', serif; opacity: 0.8;">TEMPORARY CUSTODY CEREMONY</span>
+            </button>
+            <div class="cert-confirmed-banner" id="certConfirmedBanner">
+              【受託済】 TEMPORARY CUSTODY SEAL APPLIED. SPECIMEN ACCESSION REGISTERED. 2 SIZES DISPATCH TO RESIDENTIAL GATEWAY 24H PRIOR.
+            </div>
           </div>
         </div>
       </div>
@@ -1347,6 +1568,113 @@
 
     if (shiftBtn) {
       shiftBtn.addEventListener('click', triggerExhibitionShift);
+    }
+
+    // 6. CERTIFICATE OF TEMPORARY CUSTODY CEREMONY
+    let currentCertBase = 2499;
+    let currentCertAdder = 0;
+    let selectedCertSpecimen = 'SPECIMEN NO. 014: DIOR ZEMIRE 1952';
+    let selectedCertOccasion = '新歓 INDUCTION // 3 DAYS';
+    let selectedCertSize = 'UK 8 [S]';
+    let selectedCertBackup = 'UK 10';
+
+    const certSpecimenPills = document.querySelectorAll('#certSpecimenPills .cert-pill-btn');
+    const certOccasionPills = document.querySelectorAll('#certOccasionPills .cert-pill-btn');
+    const certSizePills = document.querySelectorAll('#certSizePills .cert-pill-btn');
+
+    const certSpecimenVal = document.getElementById('certSpecimenVal');
+    const certOccasionVal = document.getElementById('certOccasionVal');
+    const certTotalTariff = document.getElementById('certTotalTariff');
+    const certBackupNote = document.getElementById('certBackupNote');
+    const loanSealBtn = document.getElementById('loanSealBtn');
+    const certHankoSeal = document.getElementById('certHankoSeal');
+    const certConfirmedBanner = document.getElementById('certConfirmedBanner');
+    const custodyPanel = document.getElementById('custodyCertificatePanel');
+
+    function updateCertTariff() {
+      const total = currentCertBase + currentCertAdder;
+      if (certTotalTariff) certTotalTariff.textContent = `₹${total.toLocaleString('en-IN')}`;
+    }
+
+    // Specimen pill switch
+    certSpecimenPills.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        certSpecimenPills.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedCertSpecimen = btn.dataset.specimen;
+        currentCertBase = parseInt(btn.dataset.price, 10);
+        if (certSpecimenVal) certSpecimenVal.textContent = selectedCertSpecimen;
+        updateCertTariff();
+      });
+    });
+
+    // Occasion pill switch
+    certOccasionPills.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        certOccasionPills.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedCertOccasion = btn.dataset.occasion;
+        currentCertAdder = parseInt(btn.dataset.adder, 10);
+        if (certOccasionVal) certOccasionVal.textContent = selectedCertOccasion;
+        updateCertTariff();
+      });
+    });
+
+    // Size pill switch
+    certSizePills.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        certSizePills.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedCertSize = btn.dataset.size;
+        selectedCertBackup = btn.dataset.backup;
+        if (certBackupNote) {
+          certBackupNote.textContent = `✦ COMPLIMENTARY ADJACENT SIZE ${selectedCertBackup} SEALED IN MUSEUM TRANSIT CASE (₹0).`;
+        }
+      });
+    });
+
+    // Loan seal button confirmation ceremony
+    let loanSealed = false;
+    if (loanSealBtn && certHankoSeal) {
+      loanSealBtn.addEventListener('click', () => {
+        if (loanSealed) return;
+        loanSealed = true;
+
+        certHankoSeal.style.display = 'flex';
+        if (!prefersReducedMotion) {
+          gsap.timeline()
+            .to(custodyPanel, {
+              boxShadow: '0 8px 30px rgba(209, 48, 40, 0.15)',
+              duration: 0.2
+            })
+            .to(certHankoSeal, {
+              opacity: 0.95,
+              scale: 1,
+              rotate: -4,
+              duration: 0.45,
+              ease: 'back.out(2)'
+            }, '-=0.1')
+            .call(() => {
+              loanSealBtn.style.background = '#276749';
+              loanSealBtn.style.borderColor = '#276749';
+              loanSealBtn.innerHTML = `
+                <span>✓ 受託認証済 // LOAN ACCESSION REGISTERED</span>
+                <span style="font-size: 0.62rem; font-family: 'Shippori Mincho', serif; opacity: 0.8;">CUSTODY TRANSIT SEALED</span>
+              `;
+              if (certConfirmedBanner) {
+                certConfirmedBanner.style.display = 'block';
+                gsap.from(certConfirmedBanner, { opacity: 0, y: 6, duration: 0.3 });
+              }
+            });
+        } else {
+          certHankoSeal.style.opacity = '0.95';
+          certHankoSeal.style.transform = 'scale(1)';
+          loanSealBtn.style.background = '#276749';
+          loanSealBtn.style.borderColor = '#276749';
+          loanSealBtn.textContent = '✓ 受託認証済 // LOAN ACCESSION REGISTERED';
+          if (certConfirmedBanner) certConfirmedBanner.style.display = 'block';
+        }
+      });
     }
   </script>
 </body>

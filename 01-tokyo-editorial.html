@@ -754,6 +754,321 @@
       letter-spacing: 0.2em;
       color: var(--muted);
     }
+
+    /* COMPOSITION 8.5: DETACHABLE EDITORIAL ORDER SLIP */
+    .editorial-insert-section {
+      background: #f6f3eb;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .insert-section-header {
+      max-width: 1040px;
+      margin: 0 auto 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      border-bottom: 1px solid #dcd7cc;
+      padding-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .magazine-order-slip {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: #fcfaf5;
+      border: 1px solid #111111;
+      padding: 2.5rem 2rem;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border-left: 2px dashed #a89f92;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      box-sizing: border-box;
+    }
+    @media (max-width: 768px) {
+      .editorial-insert-section {
+        padding: 2.5rem 0.75rem;
+      }
+      .magazine-order-slip {
+        padding: 1.5rem 1rem;
+      }
+    }
+    .perforation-stub-label {
+      position: absolute;
+      top: -12px;
+      left: 12px;
+      background: #111111;
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      letter-spacing: 0.1em;
+      max-width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .slip-corner-cross {
+      position: absolute;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: #999083;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .slip-corner-cross.tl { top: 6px; left: 6px; }
+    .slip-corner-cross.tr { top: 6px; right: 6px; }
+    .slip-corner-cross.bl { bottom: 6px; left: 6px; }
+    .slip-corner-cross.br { bottom: 6px; right: 6px; }
+
+    .slip-head-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid #111111;
+      padding-bottom: 1.25rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .slip-title-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      line-height: 1.2;
+    }
+    .slip-title-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      margin-top: 0.25rem;
+    }
+    .slip-meta-block {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      text-align: right;
+      line-height: 1.6;
+    }
+    @media (max-width: 600px) {
+      .slip-meta-block { text-align: left; }
+    }
+
+    .slip-body-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 860px) {
+      .slip-body-grid {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .slip-field-group {
+      margin-bottom: 1.5rem;
+    }
+    .slip-field-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+      display: block;
+      text-transform: uppercase;
+    }
+    .slip-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .slip-pill-btn {
+      background: #ffffff;
+      border: 1px solid #111111;
+      color: #111111;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.4rem 0.75rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    .slip-pill-btn:hover, .slip-pill-btn.active {
+      background: #111111;
+      color: #ffffff;
+    }
+    .slip-backup-notice {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      background: #eeebe3;
+      border-left: 2px solid #111111;
+      padding: 0.4rem 0.65rem;
+      margin-top: 0.5rem;
+      color: #333333;
+      line-height: 1.5;
+    }
+
+    .slip-summary-card {
+      border: 1px solid #111111;
+      background: #f4f0e6;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .slip-specimen-thumb-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #dcd7cc;
+    }
+    .slip-thumb-frame {
+      width: 72px;
+      height: 96px;
+      border: 1px solid #111111;
+      background: #000000;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .slip-thumb-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slip-breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .slip-breakdown-table td {
+      padding: 0.2rem 0;
+      border-bottom: 1px dashed #dcd7cc;
+    }
+    .slip-breakdown-table td:last-child {
+      text-align: right;
+      font-weight: 700;
+    }
+    .slip-total-row {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 2px solid #111111;
+      padding-top: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .slip-campus-select {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid #111111;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.55rem;
+      margin-bottom: 1rem;
+      max-width: 100%;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+    }
+    .editorial-stamp-btn {
+      width: 100%;
+      background: #111111;
+      color: #ffffff;
+      border: 1px solid #111111;
+      padding: 0.85rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+    .editorial-stamp-btn:hover {
+      background: #d13028;
+      border-color: #d13028;
+    }
+    .editorial-stamp-btn:active {
+      transform: scale(0.98);
+    }
+    .stamp-btn-sub {
+      font-size: 0.62rem;
+      font-family: 'Shippori Mincho', serif;
+      opacity: 0.8;
+    }
+
+    /* Vermilion Hanko Stamp */
+    .editorial-hanko-stamp {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      width: 120px;
+      height: 120px;
+      border: 3px double #d13028;
+      border-radius: 50%;
+      color: #d13028;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 900;
+      text-align: center;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(2.2) rotate(15deg);
+      z-index: 10;
+      mix-blend-mode: multiply;
+      background: rgba(209, 48, 40, 0.05);
+      padding: 0.5rem;
+    }
+    .hanko-kanji {
+      font-size: 1.6rem;
+      line-height: 1;
+      letter-spacing: 0.1em;
+    }
+    .hanko-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      margin-top: 0.2rem;
+      text-transform: uppercase;
+    }
+    .slip-confirmed-banner {
+      display: none;
+      margin-top: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: #d13028;
+      font-weight: 700;
+      border: 1px solid #d13028;
+      padding: 0.45rem 0.65rem;
+      background: #fff8f7;
+    }
     /* Refined Double-Spread Page-Turn Overlay */
     .page-turn-overlay {
       position: fixed;
@@ -1295,6 +1610,152 @@
       </div>
     </section>
 
+    <!-- COMPOSITION 8.5: DETACHABLE EDITORIAL ORDER SLIP (TIPPED-IN MAGAZINE INSERT) -->
+    <section class="editorial-insert-section" id="editorialOrderSlipSection">
+      <div class="insert-section-header">
+        <span>04 // EDITORIAL INSERT — DETACHABLE DISPATCH ORDER SLIP (貸出注文票)</span>
+        <span>ISSUE 26 ARCHIVE ENCLOSURE // TYPEWRITTEN DESK RECORD</span>
+      </div>
+
+      <div class="magazine-order-slip" id="magazineOrderSlip">
+        <div class="perforation-stub-label">✂ TEAR ALONG PERFORATION TO CONFIRM DESK RESERVATION</div>
+        <span class="slip-corner-cross tl">+</span>
+        <span class="slip-corner-cross tr">+</span>
+        <span class="slip-corner-cross bl">+</span>
+        <span class="slip-corner-cross br">+</span>
+
+        <!-- Slip Header -->
+        <div class="slip-head-grid">
+          <div>
+            <div class="slip-title-kanji">WEDELIA 編集部 貸出注文票</div>
+            <div class="slip-title-sub">HAUTE RENTAL SPECIFICATION & ACCESSION ORDER // WDL-2026-TOKYO</div>
+          </div>
+          <div class="slip-meta-block">
+            <span>ISSUE NO. 26 // DESK REF: #TOKYO-NCR-8821</span><br>
+            <span>DISPATCH STATUS: <strong style="color: #111111;">AWAITING STAMP</strong></span><br>
+            <span>FIBER ESCROW: 100% REVERSIBLE</span>
+          </div>
+        </div>
+
+        <!-- Slip Body Grid -->
+        <div class="slip-body-grid">
+          <!-- Left: Selection Fields -->
+          <div>
+            <!-- Field 1: Occasion -->
+            <div class="slip-field-group">
+              <span class="slip-field-label">1. SELECT OCCASION SPHERE (瞬間選択)</span>
+              <div class="slip-pills-row" id="slipOccasionRow">
+                <button class="slip-pill-btn active" data-occasion="FRESHERS BALL" data-look="LOOK 014: DIOR ZEMIRE FAILLE" data-price="2499" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">FRESHERS BALL</button>
+                <button class="slip-pill-btn" data-occasion="SENIOR FAREWELL" data-look="LOOK 021: JEAN DESSES PLEATED DUET" data-price="2899" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">SENIOR FAREWELL</button>
+                <button class="slip-pill-btn" data-occasion="COLLEGE FEST" data-look="LOOK 038: KINETIC SHIFT & WRAP" data-price="1699" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">COLLEGE FEST</button>
+                <button class="slip-pill-btn" data-occasion="SOCIETY BANQUET" data-look="LOOK 053: GOLD BROCADE ROBE" data-price="3499" data-img="/assets/editorial/court-dress.jpg">SOCIETY BANQUET</button>
+              </div>
+            </div>
+
+            <!-- Field 2: Size & Dual Sizing Covenant -->
+            <div class="slip-field-group">
+              <span class="slip-field-label">2. PRIMARY SILHOUETTE FIT & DUAL BACKUP SIZE</span>
+              <div class="slip-pills-row" id="slipSizeRow">
+                <button class="slip-pill-btn" data-size="UK 6 (XS)" data-backup="UK 8 (S)">UK 6 (XS)</button>
+                <button class="slip-pill-btn active" data-size="UK 8 (S)" data-backup="UK 10 (M)">UK 8 (S)</button>
+                <button class="slip-pill-btn" data-size="UK 10 (M)" data-backup="UK 12 (L)">UK 10 (M)</button>
+                <button class="slip-pill-btn" data-size="UK 12 (L)" data-backup="UK 14 (XL)">UK 12 (L)</button>
+              </div>
+              <div class="slip-backup-notice" id="slipBackupNotice">
+                ✦ AUTOMATIC SISTER SIZE: <strong>UK 10 (M)</strong> SEALED COMPLIMENTARY IN SATCHEL (₹0 SURCHARGE).
+              </div>
+            </div>
+
+            <!-- Field 3: Duration -->
+            <div class="slip-field-group">
+              <span class="slip-field-label">3. RENTAL DURATION (貸出期間)</span>
+              <div class="slip-pills-row" id="slipDurationRow">
+                <button class="slip-pill-btn active" data-days="3" data-adder="0">3 DAYS (STANDARD)</button>
+                <button class="slip-pill-btn" data-days="5" data-adder="600">5 DAYS (+₹600)</button>
+                <button class="slip-pill-btn" data-days="7" data-adder="1100">7 DAYS (+₹1,100)</button>
+              </div>
+            </div>
+
+            <!-- Field 4: Campus Delivery Point -->
+            <div class="slip-field-group">
+              <span class="slip-field-label">4. RESIDENTIAL DISPATCH GATEWAY</span>
+              <select class="slip-campus-select" id="slipCampusSelector">
+                <option value="MIRANDA_02">MIRANDA HOUSE // GATE 2 PORCH [NORTH CAMPUS]</option>
+                <option value="LSR_ARCH">LADY SHRI RAM COLLEGE // MAIN ARCHWAY [SOUTH CAMPUS]</option>
+                <option value="STEPHENS_LAWN">ST. STEPHEN'S COLLEGE // RESIDENCE LAWN [NORTH CAMPUS]</option>
+                <option value="ASHOKA_QUAD">ASHOKA UNIVERSITY // RESIDENCE HALL 4 [SONIPAT]</option>
+                <option value="NIFT_DESIGN">NIFT DELHI // HAUZ KHAS DESIGN WING</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Right: Summary Slip & Physical Stamp Confirmation -->
+          <div class="slip-summary-card">
+            <!-- Hanko Stamp -->
+            <div class="editorial-hanko-stamp" id="editorialHankoStamp">
+              <span class="hanko-kanji">受託済</span>
+              <span class="hanko-sub">WEDELIA EDITORIAL</span>
+              <span style="font-size: 0.5rem; letter-spacing: 0.05em; margin-top: 2px;">2026 DISPATCH</span>
+            </div>
+
+            <div class="slip-specimen-thumb-row">
+              <div class="slip-thumb-frame">
+                <img id="slipSpecimenThumb" src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Selected Specimen">
+              </div>
+              <div>
+                <div style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em;">
+                  CURATED EDITORIAL ARCHIVE
+                </div>
+                <div id="slipSpecimenTitle" style="font-family: 'Shippori Mincho', serif; font-size: 1.05rem; font-weight: 800; line-height: 1.3; margin: 0.2rem 0;">
+                  LOOK 014: DIOR ZEMIRE FAILLE
+                </div>
+                <div style="font-family: 'Space Mono', monospace; font-size: 0.62rem; color: #555555;">
+                  ATELIER PROVENANCE: PARIS HAUTE COUTURE
+                </div>
+              </div>
+            </div>
+
+            <table class="slip-breakdown-table">
+              <tr>
+                <td>OCCASION:</td>
+                <td id="slipOccasionVal">FRESHERS BALL</td>
+              </tr>
+              <tr>
+                <td>DURATION:</td>
+                <td id="slipDurationVal">3 DAYS</td>
+              </tr>
+              <tr>
+                <td>FIT VERIFICATION:</td>
+                <td id="slipFitVal">UK 8 + BACKUP UK 10</td>
+              </tr>
+              <tr>
+                <td>ACCIDENTAL DAMAGE SHIELD:</td>
+                <td style="color: #276749;">₹0 EMBEDDED</td>
+              </tr>
+              <tr>
+                <td>MAINTENANCE OBLIGATION:</td>
+                <td>ZERO LAUNDRY (RETURN UNWASHED)</td>
+              </tr>
+            </table>
+
+            <div class="slip-total-row">
+              <span style="font-size: 0.75rem; font-family: 'Space Mono', monospace; letter-spacing: 0.1em; color: var(--muted);">TOTAL TARIFF:</span>
+              <span id="slipTotalVal">₹2,499</span>
+            </div>
+
+            <button class="editorial-stamp-btn" id="confirmEditorialSlipBtn">
+              <span>✂ TEAR SLIP & STAMP FOR DISPATCH</span>
+              <span class="stamp-btn-sub">WEDELIA 編集部 受注承認 // LOCK RESERVATION</span>
+            </button>
+
+            <div class="slip-confirmed-banner" id="slipConfirmedBanner">
+              ✦ DISPATCH SLIP STAMPED & LOGGED. REF: #WDL-ED-26-8821. SILHOUETTES DISPATCH 24H PRIOR.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- COMPOSITION 9: FINAL PUBLICATION COLOPHON -->
     <footer class="colophon-ending">
       <div class="colophon-kanji">一期一会の夜に、知的な選択を。</div>
@@ -1583,6 +2044,134 @@
 
     if (turnBtn) {
       turnBtn.addEventListener('click', triggerPageTurn);
+    }
+
+    // 9. TACTILE EDITORIAL INSERT SLIP INTERACTION
+    let currentBasePrice = 2499;
+    let currentDurationAdder = 0;
+    let selectedOccasion = 'FRESHERS BALL';
+    let selectedLook = 'LOOK 014: DIOR ZEMIRE FAILLE';
+    let selectedSize = 'UK 8 (S)';
+    let selectedBackup = 'UK 10 (M)';
+    let selectedDays = '3 DAYS';
+
+    const slipOccasionBtns = document.querySelectorAll('#slipOccasionRow .slip-pill-btn');
+    const slipSizeBtns = document.querySelectorAll('#slipSizeRow .slip-pill-btn');
+    const slipDurationBtns = document.querySelectorAll('#slipDurationRow .slip-pill-btn');
+
+    const slipThumb = document.getElementById('slipSpecimenThumb');
+    const slipTitle = document.getElementById('slipSpecimenTitle');
+    const slipOccasionVal = document.getElementById('slipOccasionVal');
+    const slipDurationVal = document.getElementById('slipDurationVal');
+    const slipFitVal = document.getElementById('slipFitVal');
+    const slipTotalVal = document.getElementById('slipTotalVal');
+    const slipBackupNotice = document.getElementById('slipBackupNotice');
+    const confirmSlipBtn = document.getElementById('confirmEditorialSlipBtn');
+    const hankoStamp = document.getElementById('editorialHankoStamp');
+    const slipConfirmedBanner = document.getElementById('slipConfirmedBanner');
+    const magazineSlip = document.getElementById('magazineOrderSlip');
+
+    function updateSlipCalculations() {
+      const total = currentBasePrice + currentDurationAdder;
+      if (slipTotalVal) slipTotalVal.textContent = `₹${total.toLocaleString('en-IN')}`;
+      if (slipOccasionVal) slipOccasionVal.textContent = selectedOccasion;
+      if (slipDurationVal) slipDurationVal.textContent = selectedDays;
+      if (slipFitVal) slipFitVal.textContent = `${selectedSize} + BACKUP ${selectedBackup}`;
+    }
+
+    // Occasion Pill Click
+    slipOccasionBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        slipOccasionBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedOccasion = btn.dataset.occasion;
+        selectedLook = btn.dataset.look;
+        currentBasePrice = parseInt(btn.dataset.price, 10);
+        const imgSrc = btn.dataset.img;
+
+        if (slipThumb) {
+          gsap.to(slipThumb, {
+            opacity: 0.3,
+            scale: 0.95,
+            duration: 0.2,
+            onComplete: () => {
+              slipThumb.src = imgSrc;
+              gsap.to(slipThumb, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
+            }
+          });
+        }
+        if (slipTitle) {
+          gsap.fromTo(slipTitle, { opacity: 0.4, y: 4 }, { opacity: 1, y: 0, duration: 0.3 });
+          slipTitle.textContent = selectedLook;
+        }
+        updateSlipCalculations();
+      });
+    });
+
+    // Size Pill Click
+    slipSizeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        slipSizeBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedSize = btn.dataset.size;
+        selectedBackup = btn.dataset.backup;
+        if (slipBackupNotice) {
+          slipBackupNotice.innerHTML = `✦ AUTOMATIC SISTER SIZE: <strong>${selectedBackup}</strong> SEALED COMPLIMENTARY IN SATCHEL (₹0 SURCHARGE).`;
+        }
+        updateSlipCalculations();
+      });
+    });
+
+    // Duration Pill Click
+    slipDurationBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        slipDurationBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentDurationAdder = parseInt(btn.dataset.adder, 10);
+        selectedDays = `${btn.dataset.days} DAYS`;
+        updateSlipCalculations();
+      });
+    });
+
+    // Confirmation Hanko Stamp Interaction
+    let slipConfirmed = false;
+    if (confirmSlipBtn && hankoStamp) {
+      confirmSlipBtn.addEventListener('click', () => {
+        if (slipConfirmed) return;
+        slipConfirmed = true;
+
+        hankoStamp.style.display = 'flex';
+        const tl = gsap.timeline();
+        // 1. Slip paper physical tear shudder
+        tl.to(magazineSlip, {
+          rotate: 0.6,
+          x: 4,
+          boxShadow: '0 8px 28px rgba(0, 0, 0, 0.08)',
+          duration: 0.3,
+          ease: 'power2.out'
+        })
+        // 2. Hanko stamp slams down with authentic ink impact
+        .to(hankoStamp, {
+          opacity: 0.94,
+          scale: 1,
+          rotate: -6,
+          duration: 0.5,
+          ease: 'back.out(2.2)'
+        }, '-=0.1')
+        // 3. Button state change
+        .call(() => {
+          confirmSlipBtn.style.background = '#276749';
+          confirmSlipBtn.style.borderColor = '#276749';
+          confirmSlipBtn.innerHTML = `
+            <span>✓ ORDER CONFIRMED & SEALED</span>
+            <span class="stamp-btn-sub">DISPATCH LOGGED // CARRIER ASSIGNED</span>
+          `;
+          if (slipConfirmedBanner) {
+            slipConfirmedBanner.style.display = 'block';
+            gsap.from(slipConfirmedBanner, { opacity: 0, y: 6, duration: 0.3 });
+          }
+        });
+      });
     }
   </script>
 

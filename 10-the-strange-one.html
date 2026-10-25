@@ -729,6 +729,180 @@
         padding: 2rem 1.5rem;
       }
     }
+
+    /* 6.5 SPATIAL RENTAL CONVERGENCE CHAMBER */
+    .spatial-chamber-section {
+      border-top: 1px solid var(--border-dark);
+      padding: 4.5rem 1.5rem;
+      position: relative;
+      background: #040407;
+      overflow: hidden;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .chamber-header-strip {
+      max-width: 1140px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--dim);
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chamber-3d-stage {
+      max-width: 1140px;
+      margin: 0 auto;
+      min-height: 540px;
+      position: relative;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      border: 1px solid var(--border-dark);
+      background: radial-gradient(circle at 50% 50%, #0d1024 0%, #040407 80%);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    @media (max-width: 600px) {
+      .chamber-3d-stage {
+        padding: 1.5rem 1rem;
+        min-height: auto;
+      }
+    }
+    .chamber-controls-cluster {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      z-index: 10;
+    }
+    .spatial-axis-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--electric-blue);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .spatial-nodes-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .spatial-node-pill {
+      background: rgba(14, 17, 36, 0.8);
+      border: 1px solid var(--border-dark);
+      color: var(--bone);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.45rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      letter-spacing: 0.05em;
+    }
+    .spatial-node-pill:hover, .spatial-node-pill.active {
+      border-color: var(--electric-blue);
+      background: #0f38ff;
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(15, 56, 255, 0.4);
+    }
+
+    .chamber-center-core {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+      align-items: center;
+      transform-style: preserve-3d;
+    }
+    @media (min-width: 860px) {
+      .chamber-center-core {
+        grid-template-columns: 1fr 1.3fr;
+      }
+    }
+    .chamber-garment-monolith {
+      border: 1px solid var(--border-dark);
+      background: #090a14;
+      padding: 1.25rem;
+      position: relative;
+      transform: rotateY(-6deg) rotateX(3deg);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+    .monolith-img-wrap {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      border: 1px solid var(--border-dark);
+      background: #000000;
+      margin-bottom: 1rem;
+    }
+    .monolith-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(110%);
+    }
+
+    .chamber-telemetry-screen {
+      border: 1px solid var(--border-dark);
+      background: rgba(9, 10, 20, 0.95);
+      padding: 1.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      line-height: 1.8;
+      color: #b0afaa;
+      position: relative;
+      box-sizing: border-box;
+    }
+    .telemetry-live-stat {
+      font-size: 1.6rem;
+      font-family: 'Anton', sans-serif;
+      color: var(--bone);
+      letter-spacing: -0.02em;
+      margin: 0.35rem 0 0.75rem;
+    }
+    .collapse-dimension-btn {
+      width: 100%;
+      background: #0f38ff;
+      border: 1px solid #0f38ff;
+      color: #ffffff;
+      padding: 0.95rem 1.25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 1.25rem;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .collapse-dimension-btn:hover {
+      background: #254dff;
+      box-shadow: 0 0 25px rgba(15, 56, 255, 0.6);
+    }
+    .chamber-collapsed-badge {
+      display: none;
+      border: 1px solid var(--electric-blue);
+      background: rgba(15, 56, 255, 0.15);
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      margin-top: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
@@ -1019,6 +1193,93 @@
             <div class="spatial-node-meta">SOCIETY BANQUET // SONIPAT RESIDENCE QUAD</div>
           </div>
           <div class="spatial-node-tariff">₹3,899 / 3D</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.5 SPATIAL RENTAL CONVERGENCE CHAMBER // COLLAPSE THE MOMENT -->
+    <section class="spatial-chamber-section" id="spatialChamberSection">
+      <div class="chamber-header-strip">
+        <span>05 // SPATIAL CONVERGENCE CHAMBER — COLLAPSE THE MOMENT</span>
+        <span>ACTIVE VECTOR: <strong id="chamberCoordDisplay" style="color: var(--electric-blue);">X: 142.8 // Y: 891.2 // Z: 04.0</strong></span>
+      </div>
+
+      <div class="chamber-3d-stage" id="chamberStage">
+        <!-- Coordinate Axes Clusters -->
+        <div class="chamber-controls-cluster">
+          <!-- Axis 1: Occasion Coordinate Vector -->
+          <div>
+            <span class="spatial-axis-title">AXIS α // OCCASION SPATIAL CONVERGENCE:</span>
+            <div class="spatial-nodes-row" id="chamberOccasionNodes">
+              <button class="spatial-node-pill active" data-event="FESTIVAL" data-coord="X: 142.8 // Y: 891.2 // Z: 04.0" data-rot="-6" data-price="1899" data-look="KINETIC MULTI-POCKET DRAPE" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">FESTIVAL [142 / 891 / 04]</button>
+              <button class="spatial-node-pill" data-event="FAREWELL" data-coord="X: 210.4 // Y: 418.0 // Z: 12.0" data-rot="8" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">FAREWELL [210 / 418 / 12]</button>
+              <button class="spatial-node-pill" data-event="CONCERT" data-coord="X: 088.1 // Y: 992.5 // Z: 02.0" data-rot="-12" data-price="1699" data-look="STROBE METALLIC KNIT" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">CONCERT [088 / 992 / 02]</button>
+              <button class="spatial-node-pill" data-event="BANQUET" data-coord="X: 330.0 // Y: 112.4 // Z: 08.0" data-rot="10" data-price="3899" data-look="GOLD BROCADE ROBE" data-img="/assets/editorial/court-dress.jpg">BANQUET [330 / 112 / 08]</button>
+            </div>
+          </div>
+
+          <!-- Axis 2: Temporal Node (Duration) -->
+          <div>
+            <span class="spatial-axis-title">AXIS β // TEMPORAL DURATION OFFSET:</span>
+            <div class="spatial-nodes-row" id="chamberDurationNodes">
+              <button class="spatial-node-pill active" data-days="03" data-adder="0">+03 DAYS (BASE)</button>
+              <button class="spatial-node-pill" data-days="05" data-adder="600">+05 DAYS (+₹600)</button>
+              <button class="spatial-node-pill" data-days="07" data-adder="1100">+07 DAYS (+₹1,100)</button>
+            </div>
+          </div>
+
+          <!-- Axis 3: Sizing Calibration -->
+          <div>
+            <span class="spatial-axis-title">AXIS γ // FIT & SISTER REDUNDANCY:</span>
+            <div class="spatial-nodes-row" id="chamberSizeNodes">
+              <button class="spatial-node-pill" data-size="UK 6" data-backup="UK 8">UK 6 [XS]</button>
+              <button class="spatial-node-pill active" data-size="UK 8" data-backup="UK 10">UK 8 [S]</button>
+              <button class="spatial-node-pill" data-size="UK 10" data-backup="UK 12">UK 10 [M]</button>
+              <button class="spatial-node-pill" data-size="UK 12" data-backup="UK 14">UK 12 [L]</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Stage: Floating Garment Monolith & Live Telemetry -->
+        <div class="chamber-center-core">
+          <div class="chamber-garment-monolith" id="garmentMonolith">
+            <div class="monolith-img-wrap">
+              <img id="monolithImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Spatial Specimen">
+            </div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--electric-blue); letter-spacing: 0.1em;" id="monolithLookCode">
+              SPECIMEN // WDL-014
+            </div>
+            <div style="font-family: 'Anton', sans-serif; font-size: 1.4rem; color: var(--bone); text-transform: uppercase; margin-top: 0.25rem;" id="monolithLookTitle">
+              KINETIC MULTI-POCKET DRAPE
+            </div>
+          </div>
+
+          <!-- Real-Time Spatial Telemetry Screen -->
+          <div class="chamber-telemetry-screen" id="chamberTelemetryScreen">
+            <div style="font-size: 0.65rem; letter-spacing: 0.15em; color: var(--electric-blue); border-bottom: 1px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+              DIMENSIONAL LEASE TELEMETRY // SYSTEM WDL-2026
+            </div>
+
+            <div class="telemetry-live-stat" id="chamberPriceDisplay">
+              ₹1,899
+            </div>
+
+            <div>EVENT VECTOR: <strong id="telemetryEvent" style="color: #ffffff;">FESTIVAL</strong></div>
+            <div>TEMPORAL ACCESS: <strong id="telemetryDuration" style="color: #ffffff;">03 DAYS</strong></div>
+            <div>SPATIAL FIT: <strong id="telemetryFit" style="color: #ffffff;">UK 8 [S] + SISTER UK 10 [SEALED]</strong></div>
+            <div>DAMAGE SHIELD: <strong style="color: #4ade80;">₹0 EMBEDDED</strong></div>
+            <div>RETURN PROTOCOL: <strong style="color: #ffffff;">UNWASHED CORRIDOR HANDOVER</strong></div>
+
+            <button class="collapse-dimension-btn" id="collapseDimensionBtn">
+              <span>COLLAPSE COORDINATES // ENTER TEMPORARY POSSESSION</span>
+              <span style="font-size: 0.62rem; color: #8899ff; letter-spacing: 0.15em;">NON-EUCLIDEAN LEASE COMMIT</span>
+            </button>
+
+            <div class="chamber-collapsed-badge" id="collapsedManifestBadge">
+              ✦ COORDINATE SYSTEM COLLAPSED. TEMPORARY POSSESSION LOCKED.<br>
+              REF: WDL-SPATIAL-014 // DISPATCH ASSIGNED TO CAMPUS RESIDENTIAL NODE.
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1362,6 +1623,147 @@
 
     if (teleportBtn) {
       teleportBtn.addEventListener('click', triggerSpatialDisplacement);
+    }
+
+    // 8. SPATIAL RENTAL CONVERGENCE CHAMBER INTERACTION
+    let currentChamberBase = 1899;
+    let currentChamberAdder = 0;
+    let selectedChamberCoord = 'X: 142.8 // Y: 891.2 // Z: 04.0';
+    let selectedChamberEvent = 'FESTIVAL';
+    let selectedChamberDuration = '03 DAYS';
+    let selectedChamberSize = 'UK 8';
+    let selectedChamberBackup = 'UK 10';
+
+    const chamberOccasionNodes = document.querySelectorAll('#chamberOccasionNodes .spatial-node-pill');
+    const chamberDurationNodes = document.querySelectorAll('#chamberDurationNodes .spatial-node-pill');
+    const chamberSizeNodes = document.querySelectorAll('#chamberSizeNodes .spatial-node-pill');
+
+    const chamberCoordDisplay = document.getElementById('chamberCoordDisplay');
+    const chamberPriceDisplay = document.getElementById('chamberPriceDisplay');
+    const telemetryEvent = document.getElementById('telemetryEvent');
+    const telemetryDuration = document.getElementById('telemetryDuration');
+    const telemetryFit = document.getElementById('telemetryFit');
+    const garmentMonolith = document.getElementById('garmentMonolith');
+    const monolithImg = document.getElementById('monolithImg');
+    const monolithLookTitle = document.getElementById('monolithLookTitle');
+    const collapseDimensionBtn = document.getElementById('collapseDimensionBtn');
+    const collapsedManifestBadge = document.getElementById('collapsedManifestBadge');
+
+    function updateChamberPrice() {
+      const total = currentChamberBase + currentChamberAdder;
+      if (chamberPriceDisplay) chamberPriceDisplay.textContent = `₹${total.toLocaleString('en-IN')}`;
+    }
+
+    // Occasion node selection
+    chamberOccasionNodes.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        chamberOccasionNodes.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        selectedChamberEvent = btn.dataset.event;
+        selectedChamberCoord = btn.dataset.coord;
+        currentChamberBase = parseInt(btn.dataset.price, 10);
+        const rot = parseFloat(btn.dataset.rot);
+        const look = btn.dataset.look;
+        const img = btn.dataset.img;
+
+        if (chamberCoordDisplay) chamberCoordDisplay.textContent = selectedChamberCoord;
+        if (telemetryEvent) telemetryEvent.textContent = selectedChamberEvent;
+        if (monolithLookTitle) monolithLookTitle.textContent = look;
+
+        if (monolithImg) {
+          if (!prefersReducedMotion) {
+            gsap.to(monolithImg, {
+              opacity: 0.25,
+              duration: 0.15,
+              onComplete: () => {
+                monolithImg.src = img;
+                gsap.to(monolithImg, { opacity: 1, duration: 0.3 });
+              }
+            });
+          } else {
+            monolithImg.src = img;
+          }
+        }
+
+        if (garmentMonolith && !prefersReducedMotion) {
+          gsap.to(garmentMonolith, {
+            rotateY: rot,
+            rotateX: 3,
+            scale: 1.02,
+            duration: 0.45,
+            ease: 'power3.out'
+          });
+        }
+        updateChamberPrice();
+      });
+    });
+
+    // Duration node selection
+    chamberDurationNodes.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        chamberDurationNodes.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedChamberDuration = `${btn.dataset.days} DAYS`;
+        currentChamberAdder = parseInt(btn.dataset.adder, 10);
+        if (telemetryDuration) telemetryDuration.textContent = selectedChamberDuration;
+        updateChamberPrice();
+      });
+    });
+
+    // Size node selection
+    chamberSizeNodes.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        chamberSizeNodes.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedChamberSize = btn.dataset.size;
+        selectedChamberBackup = btn.dataset.backup;
+        if (telemetryFit) telemetryFit.textContent = `${selectedChamberSize} + SISTER ${selectedChamberBackup} [SEALED]`;
+      });
+    });
+
+    // Collapse coordinate action
+    let isCollapsed = false;
+    if (collapseDimensionBtn && garmentMonolith) {
+      collapseDimensionBtn.addEventListener('click', () => {
+        if (isCollapsed) return;
+        isCollapsed = true;
+
+        if (!prefersReducedMotion) {
+          gsap.timeline()
+            .to('.chamber-controls-cluster .spatial-node-pill', {
+              scale: 0.95,
+              opacity: 0.5,
+              duration: 0.25
+            })
+            .to(garmentMonolith, {
+              rotateY: 0,
+              rotateX: 0,
+              scale: 1.05,
+              borderColor: '#0f38ff',
+              boxShadow: '0 0 50px rgba(15, 56, 255, 0.45)',
+              duration: 0.4,
+              ease: 'back.out(2)'
+            }, '-=0.15')
+            .call(() => {
+              collapseDimensionBtn.style.background = '#276749';
+              collapseDimensionBtn.style.borderColor = '#276749';
+              collapseDimensionBtn.innerHTML = `
+                <span>✓ COORDINATES COLLAPSED // TEMPORARY POSSESSION LOCKED</span>
+                <span style="font-size: 0.62rem; color: #a3e635; letter-spacing: 0.15em;">ENTRY VECTOR CONFIRMED</span>
+              `;
+              if (collapsedManifestBadge) {
+                collapsedManifestBadge.style.display = 'block';
+                gsap.from(collapsedManifestBadge, { opacity: 0, y: 8, duration: 0.3 });
+              }
+            });
+        } else {
+          collapseDimensionBtn.style.background = '#276749';
+          collapseDimensionBtn.style.borderColor = '#276749';
+          collapseDimensionBtn.textContent = '✓ COORDINATES COLLAPSED // TEMPORARY POSSESSION LOCKED';
+          if (collapsedManifestBadge) collapsedManifestBadge.style.display = 'block';
+        }
+      });
     }
   </script>
 </body>
