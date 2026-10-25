@@ -41,6 +41,7 @@ export const VaultModal: React.FC<VaultModalProps> = ({
           <button
             onClick={onClose}
             className="p-1.5 text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors"
+            aria-label="Close reserved looks vault"
           >
             <X className="w-5 h-5" />
           </button>

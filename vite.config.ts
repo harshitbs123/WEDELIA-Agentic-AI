@@ -12,4 +12,16 @@ export default defineConfig({
     port: 5173,
     host: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor_three: ['three'],
+          vendor_gsap: ['gsap', '@gsap/react'],
+          vendor_react: ['react', 'react-dom'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
 });

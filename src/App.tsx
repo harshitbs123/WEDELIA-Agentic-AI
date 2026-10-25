@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { ChannelSelector } from './components/ChannelSelector';
+import { HorizontalRunway } from './components/HorizontalRunway';
 import { WardrobeCard } from './components/WardrobeCard';
 import { RentalDrawer } from './components/RentalDrawer';
 import { HowItWorks } from './components/HowItWorks';
@@ -15,7 +17,7 @@ import { Sparkles, Filter, ArrowRight } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 export function App() {
-  const [activeOccasion, setActiveOccasion] = useState<string>('all');
+  const [activeChannel, setActiveChannel] = useState<string>('fest');
   const [activeDrawerLook, setActiveDrawerLook] = useState<LookItem | null>(null);
   const [drawerDuration, setDrawerDuration] = useState<number>(3);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -45,7 +47,7 @@ export function App() {
             duration: 0.45,
             stagger: 0.05,
             ease: 'power2.out',
-            clearProps: 'opacity,transform', // Cleanly clears inline styles after animation so content is never stuck
+            clearProps: 'opacity,transform',
           });
 
           // ScrollTrigger section reveal
@@ -72,11 +74,11 @@ export function App() {
 
   // Filter looks
   const filteredLooks =
-    activeOccasion === 'all'
+    activeChannel === 'all'
       ? WARDROBE_COLLECTION
-      : WARDROBE_COLLECTION.filter((item) => item.occasion === activeOccasion);
+      : WARDROBE_COLLECTION.filter((item) => item.occasion === activeChannel);
 
-  const handleOpenDrawer = (look: LookItem, duration: number) => {
+  const handleOpenDrawer = (look: LookItem, duration: number = 3) => {
     setActiveDrawerLook(look);
     setDrawerDuration(duration);
     setIsDrawerOpen(true);
@@ -107,13 +109,19 @@ export function App() {
       <Navbar onOpenVault={() => setIsVaultOpen(true)} cartCount={reservedOrders.length} />
 
       <main className="flex-1">
-        {/* 2. Hero Section */}
+        {/* 2. Hero Section with Interactive WebGL Liquid Fabric Canvas */}
         <Hero
-          onSelectOccasion={(occ) => setActiveOccasion(occ)}
-          activeOccasion={activeOccasion}
+          activeChannel={activeChannel}
+          onSelectOccasion={(occ) => setActiveChannel(occ)}
         />
 
-        {/* Kinetic Editorial Marquee Ribbon */}
+        {/* 3. Occasion Frequency Broadcast Console */}
+        <ChannelSelector
+          activeChannel={activeChannel}
+          onSelectChannel={(ch) => setActiveChannel(ch)}
+        />
+
+        {/* 4. Kinetic Marquee Ribbon */}
         <div className="bg-[#d4ff00] text-black py-2.5 overflow-hidden whitespace-nowrap border-y border-black font-mono font-extrabold text-xs uppercase tracking-widest select-none">
           <div className="inline-block animate-marquee">
             <span>• COMPLIMENTARY BACKUP SIZE IN EVERY ORDER • ZERO-LIABILITY DAMAGE SHIELD • 100% INSURED SPILLS • 24H CAMPUS HOSTEL DELIVERY • WEAR IT, RETURN IT UNWASHED • DU • NIFT • IIT • ASHOKA • ST. XAVIER'S • BITS • </span>
@@ -121,7 +129,13 @@ export function App() {
           </div>
         </div>
 
-        {/* 3. The Curated Wardrobe Section */}
+        {/* 5. The Signature "Holy Shit" Moment: The Pinned Horizontal Runway Archive */}
+        <HorizontalRunway
+          looks={WARDROBE_COLLECTION}
+          onInspectLook={(look) => handleOpenDrawer(look, 3)}
+        />
+
+        {/* 6. The Occasion Wardrobe Grid (Filtered Live) */}
         <section id="wardrobe" className="py-16 sm:py-24 border-b border-white/8 section-reveal">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -143,12 +157,22 @@ export function App() {
                   <Filter className="w-3.5 h-3.5" />
                   Filter By:
                 </span>
-                {OCCASIONS.map((occ) => (
+                <button
+                  onClick={() => setActiveChannel('all')}
+                  className={`px-3 py-1.5 text-xs font-mono font-semibold tracking-wide uppercase transition-all ${
+                    activeChannel === 'all'
+                      ? 'bg-[#d4ff00] text-black shadow-md'
+                      : 'bg-[#121217] text-neutral-400 hover:text-white hover:bg-neutral-800 border border-white/5'
+                  }`}
+                >
+                  All Looks ({WARDROBE_COLLECTION.length})
+                </button>
+                {OCCASIONS.filter(o => o.id !== 'all').map((occ) => (
                   <button
                     key={occ.id}
-                    onClick={() => setActiveOccasion(occ.id)}
+                    onClick={() => setActiveChannel(occ.id)}
                     className={`px-3 py-1.5 text-xs font-mono font-semibold tracking-wide uppercase transition-all ${
-                      activeOccasion === occ.id
+                      activeChannel === occ.id
                         ? 'bg-[#d4ff00] text-black shadow-md'
                         : 'bg-[#121217] text-neutral-400 hover:text-white hover:bg-neutral-800 border border-white/5'
                     }`}
@@ -190,17 +214,17 @@ export function App() {
           </div>
         </section>
 
-        {/* 4. The Editorial Runway & Culture Story */}
+        {/* 7. The Editorial Runway & Culture Story */}
         <EditorialStory />
 
-        {/* 5. How Rental Works (Frictionless 4-Step Process) */}
+        {/* 8. How Rental Works (Frictionless 4-Step Process) */}
         <HowItWorks />
       </main>
 
-      {/* 6. Legal Attribution & Colophon */}
+      {/* 9. Legal Attribution & Colophon */}
       <Colophon />
 
-      {/* 7. Interactive Rental Drawer & Size Selector */}
+      {/* 10. Interactive Rental Drawer & Size Selector */}
       <RentalDrawer
         look={activeDrawerLook}
         initialDuration={drawerDuration}
@@ -209,7 +233,7 @@ export function App() {
         onReserveSuccess={handleReserveSuccess}
       />
 
-      {/* 8. Reserved Vault Queue Modal */}
+      {/* 11. Reserved Vault Queue Modal */}
       <VaultModal
         isOpen={isVaultOpen}
         onClose={() => setIsVaultOpen(false)}
