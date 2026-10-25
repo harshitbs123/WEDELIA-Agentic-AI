@@ -287,6 +287,48 @@
     .matrix-wrapper {
       overflow-x: auto;
       border-bottom: 2px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+    }
+    /* ACTIVE MATRIX ARCHIVAL INSTRUMENT */
+    .matrix-instrument-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 1.25rem;
+      background: #000000;
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      border-bottom: 1px solid #333333;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .matrix-filter-keys {
+      display: flex;
+      gap: 0.35rem;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .matrix-key-btn {
+      background: #111111;
+      border: 1px solid #444444;
+      color: #cccccc;
+      padding: 0.25rem 0.55rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: none;
+      white-space: nowrap;
+    }
+    .matrix-key-btn:hover, .matrix-key-btn.active {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
     }
     .matrix-table {
       width: 100%;
@@ -310,10 +352,52 @@
       border-right: 1px solid var(--hairline);
       border-bottom: 1px solid var(--hairline);
       vertical-align: middle;
+      transition: none;
     }
     .matrix-table td:last-child { border-right: none; }
-    .matrix-table tr:hover {
-      background: #fcf8eb;
+    .matrix-table tr:hover, .matrix-table tr.matrix-row-active {
+      background: #000000 !important;
+      color: #ffffff !important;
+    }
+    .matrix-table tr:hover td, .matrix-table tr.matrix-row-active td {
+      border-color: #222222;
+      color: #ffffff;
+    }
+    .matrix-table tr:hover .code-cell, .matrix-table tr.matrix-row-active .code-cell {
+      color: #ffffff;
+    }
+    .matrix-table tr:hover .name-cell, .matrix-table tr.matrix-row-active .name-cell {
+      color: #ffffff;
+    }
+    .matrix-table tr:hover .kanji-cell, .matrix-table tr.matrix-row-active .kanji-cell {
+      color: #888888;
+    }
+    @media (max-width: 768px) {
+      .matrix-instrument-strip {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.62rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+      .matrix-filter-keys {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.25rem;
+        -webkit-overflow-scrolling: touch;
+      }
+      #matrixBusTelemetry {
+        display: block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
     .matrix-table td.code-cell {
       font-family: 'Space Mono', monospace;
@@ -810,10 +894,15 @@
       background: #ffffff;
       border: 1px solid var(--border);
       font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       padding: 0.35rem 0.6rem;
       margin-top: 0.35rem;
       width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
       cursor: pointer;
     }
     .stamp-verified {
@@ -825,6 +914,28 @@
       font-weight: 900;
       letter-spacing: 0.15em;
       margin-top: 0.75rem;
+      max-width: 100%;
+      box-sizing: border-box;
+      word-break: break-all;
+    }
+    @media (max-width: 768px) {
+      .wall-large-visual, .wall-dossier {
+        padding: 1.25rem 1rem;
+      }
+      .document-section {
+        padding: 2rem 1rem;
+      }
+      .doc-col {
+        padding: 1.25rem 1rem;
+      }
+      .doc-barcode {
+        word-break: break-all;
+        font-size: 0.6rem;
+      }
+      .system-registry-switch {
+        bottom: 0.75rem;
+        right: 0.75rem;
+      }
     }
   </style>
 </head>
@@ -917,13 +1028,25 @@
 
     <!-- Section Bar: Master Occasion Matrix -->
     <div class="catalog-section-bar">
-      <span>01 // MASTER OCCASION MATRIX — 9 CAMPUS SPHERES</span>
-      <span>TABLE REF: WDL-MTX-2026</span>
+      <span>01 // MASTER OCCASION MATRIX — ACTIVE ARCHIVAL INSTRUMENT</span>
+      <span>TABLE REF: WDL-MTX-2026 // 9 CAMPUS SPHERES</span>
+    </div>
+
+    <!-- Active Matrix Instrument Control Bar -->
+    <div class="matrix-instrument-strip">
+      <div>MATRIX BUS: <span id="matrixBusTelemetry">STANDBY // HOVER ROW TO ACTIVATE TELEMETRY</span></div>
+      <div class="matrix-filter-keys" id="matrixFilterKeys">
+        <span style="color: #888888; margin-right: 0.35rem; align-self: center;">SPHERE FOCUS:</span>
+        <button class="matrix-key-btn active" data-sphere="ALL">ALL [09]</button>
+        <button class="matrix-key-btn" data-sphere="NIGHTLIFE">NIGHTLIFE [04]</button>
+        <button class="matrix-key-btn" data-sphere="FORMAL">FORMAL [03]</button>
+        <button class="matrix-key-btn" data-sphere="ACADEMIC">ACADEMIC [02]</button>
+      </div>
     </div>
 
     <!-- Master Occasion Matrix Table -->
     <div class="matrix-wrapper">
-      <table class="matrix-table">
+      <table class="matrix-table" id="masterOccasionMatrix">
         <thead>
           <tr>
             <th>CODE</th>
@@ -936,7 +1059,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr data-sphere="NIGHTLIFE" data-code="OC-01" data-name="COLLEGE FEST">
             <td class="code-cell">OC-01</td>
             <td class="name-cell">COLLEGE FEST</td>
             <td class="kanji-cell">祝祭 (FESTIVAL)</td>
@@ -945,7 +1068,7 @@
             <td>₹1,499 – ₹1,899</td>
             <td><span class="status-badge active">DISPATCHING</span></td>
           </tr>
-          <tr>
+          <tr data-sphere="ACADEMIC" data-code="OC-02" data-name="FRESHERS INDUCTION">
             <td class="code-cell">OC-02</td>
             <td class="name-cell">FRESHERS INDUCTION</td>
             <td class="kanji-cell">新歓 (FRESHERS)</td>
@@ -954,7 +1077,7 @@
             <td>₹1,199 – ₹1,599</td>
             <td><span class="status-badge active">IN_STOCK</span></td>
           </tr>
-          <tr>
+          <tr data-sphere="FORMAL" data-code="OC-03" data-name="SENIOR FAREWELL">
             <td class="code-cell">OC-03</td>
             <td class="name-cell">SENIOR FAREWELL</td>
             <td class="kanji-cell">門出 (FAREWELL)</td>
@@ -963,7 +1086,7 @@
             <td>₹2,499 – ₹3,299</td>
             <td><span class="status-badge active">HIGH_DEMAND</span></td>
           </tr>
-          <tr>
+          <tr data-sphere="NIGHTLIFE" data-code="OC-04" data-name="MUSIC CONCERT">
             <td class="code-cell">OC-04</td>
             <td class="name-cell">MUSIC CONCERT</td>
             <td class="kanji-cell">音響 (CONCERT)</td>
@@ -972,7 +1095,7 @@
             <td>₹1,399 – ₹1,799</td>
             <td><span class="status-badge">RESERVED</span></td>
           </tr>
-          <tr>
+          <tr data-sphere="NIGHTLIFE" data-code="OC-05" data-name="AFTER DARK PARTY">
             <td class="code-cell">OC-05</td>
             <td class="name-cell">AFTER DARK PARTY</td>
             <td class="kanji-cell">深夜 (NIGHT OUT)</td>
@@ -981,7 +1104,7 @@
             <td>₹1,299 – ₹1,899</td>
             <td><span class="status-badge active">DISPATCHING</span></td>
           </tr>
-          <tr>
+          <tr data-sphere="FORMAL" data-code="OC-06" data-name="PRIVATE DATE">
             <td class="code-cell">OC-06</td>
             <td class="name-cell">PRIVATE DATE</td>
             <td class="kanji-cell">密会 (DATE NIGHT)</td>
@@ -990,7 +1113,7 @@
             <td>₹999 – ₹1,499</td>
             <td><span class="status-badge active">IN_STOCK</span></td>
           </tr>
-          <tr>
+          <tr data-sphere="NIGHTLIFE" data-code="OC-07" data-name="MILESTONE BIRTHDAY">
             <td class="code-cell">OC-07</td>
             <td class="name-cell">MILESTONE BIRTHDAY</td>
             <td class="kanji-cell">生誕 (BIRTHDAY)</td>
@@ -999,7 +1122,7 @@
             <td>₹1,699 – ₹2,299</td>
             <td><span class="status-badge active">IN_STOCK</span></td>
           </tr>
-          <tr>
+          <tr data-sphere="FORMAL" data-code="OC-08" data-name="SOCIETY / MUN GALA">
             <td class="code-cell">OC-08</td>
             <td class="name-cell">SOCIETY / MUN GALA</td>
             <td class="kanji-cell">舞踏 (SOCIETY)</td>
@@ -1008,7 +1131,7 @@
             <td>₹2,199 – ₹3,499</td>
             <td><span class="status-badge">BOOKED_DU</span></td>
           </tr>
-          <tr>
+          <tr data-sphere="ACADEMIC" data-code="OC-09" data-name="PORTFOLIO SHOOT">
             <td class="code-cell">OC-09</td>
             <td class="name-cell">PORTFOLIO SHOOT</td>
             <td class="kanji-cell">写真 (PHOTOSHOOT)</td>
@@ -1615,7 +1738,55 @@
       });
     }
 
-    // 4. EXPERIMENT 02-A: SCANNER CURSOR BAR TELEMETRY
+    // 4. ACTIVE OCCASION MATRIX INSTRUMENT (ROW SCANNING & SPHERE FILTERING)
+    const matrixBusTelemetry = document.getElementById('matrixBusTelemetry');
+    const matrixRows = document.querySelectorAll('#masterOccasionMatrix tbody tr');
+    const matrixKeyBtns = document.querySelectorAll('.matrix-key-btn');
+
+    matrixRows.forEach((row) => {
+      row.addEventListener('mouseenter', () => {
+        const code = row.dataset.code || 'OC-00';
+        const name = row.dataset.name || 'OCCASION';
+        const sphere = row.dataset.sphere || 'ALL';
+        if (matrixBusTelemetry) {
+          matrixBusTelemetry.textContent = `BUS LOCK [${code}] // ${name} // SECTOR: ${sphere}`;
+        }
+        row.classList.add('matrix-row-active');
+      });
+
+      row.addEventListener('mouseleave', () => {
+        row.classList.remove('matrix-row-active');
+        if (matrixBusTelemetry) {
+          matrixBusTelemetry.textContent = 'STANDBY // HOVER ROW TO ACTIVATE TELEMETRY';
+        }
+      });
+    });
+
+    matrixKeyBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        matrixKeyBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const sphereFilter = btn.dataset.sphere;
+        matrixRows.forEach((row) => {
+          const rowSphere = row.dataset.sphere;
+          if (sphereFilter === 'ALL' || rowSphere === sphereFilter) {
+            row.style.display = '';
+            if (!prefersReducedMotion) {
+              gsap.fromTo(row, { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.2, ease: 'steps(3)' });
+            }
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        if (matrixBusTelemetry) {
+          matrixBusTelemetry.textContent = `FILTER APPLIED // SECTOR: ${sphereFilter}`;
+        }
+      });
+    });
+
+    // 5. EXPERIMENT 02-A: SCANNER CURSOR BAR TELEMETRY
     const scannerCoordinates = document.getElementById('scannerCoordinates');
     const scannerStatus = document.getElementById('scannerStatus');
     const ledgerRows = document.querySelectorAll('.ledger-row');

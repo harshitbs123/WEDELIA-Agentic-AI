@@ -483,7 +483,7 @@
       border: 3px solid var(--red);
       background: #000000;
       color: #ffffff;
-      padding: 4rem 2rem;
+      padding: 3.5rem 1.5rem;
       margin-bottom: 7rem;
       position: relative;
     }
@@ -492,19 +492,66 @@
         padding: 5rem 4rem;
       }
     }
+    .manifesto-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid #333333;
+      padding-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .clause-selector-pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .clause-pill {
+      background: #111111;
+      border: 1px solid #333333;
+      color: #aaaaaa;
+      padding: 0.25rem 0.55rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: none;
+    }
+    .clause-pill:hover, .clause-pill.active {
+      background: var(--red);
+      color: #ffffff;
+      border-color: var(--red);
+    }
     .manifesto-monument-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      gap: 1.5rem;
     }
     @media (min-width: 768px) {
       .manifesto-monument-grid {
         grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
       }
     }
     .manifesto-slogan-box {
+      border: 1px solid #1f1f1f;
       border-top: 3px solid var(--red);
-      padding-top: 1.5rem;
+      padding: 1.75rem 1.25rem;
+      background: #080808;
+      transition: opacity 0.3s ease, border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .manifesto-slogan-box.isolated {
+      border-color: var(--red);
+      box-shadow: 0 0 35px rgba(230, 0, 18, 0.28);
+      background: #120305;
+      transform: translateY(-4px);
+      opacity: 1 !important;
+    }
+    .manifesto-slogan-box.dimmed {
+      opacity: 0.28;
     }
     .manifesto-slogan-title {
       font-family: 'Anton', sans-serif;
@@ -515,10 +562,29 @@
       color: var(--red);
       margin-bottom: 1rem;
     }
+    .manifesto-slogan-box.isolated .manifesto-slogan-title {
+      color: #ffffff;
+      background: var(--red);
+      padding: 0.1em 0.35em;
+      display: inline-block;
+    }
     .manifesto-slogan-body {
       font-size: 0.85rem;
       line-height: 1.6;
       color: #cccccc;
+    }
+    .clause-telemetry-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--red);
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed #333333;
+      display: none;
+      letter-spacing: 0.08em;
+    }
+    .manifesto-slogan-box.isolated .clause-telemetry-tag {
+      display: block;
     }
 
     /* COMPOSITION 5: DENSE NIGHT ARCHIVE WALL */
@@ -969,38 +1035,55 @@
     </div>
 
     <!-- COMPOSITION 4: REDLINE PROTOCOL MANIFESTO -->
-    <section class="redline-manifesto-block">
-      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red); margin-bottom: 2rem; letter-spacing: 0.15em;">
-        THE REDLINE PROTOCOL // FOUR TENETS OF LEASED LUXURY
+    <section class="redline-manifesto-block" id="redlineManifesto">
+      <div class="manifesto-header-row">
+        <div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red); font-weight: 700; letter-spacing: 0.15em;">
+            THE REDLINE PROTOCOL // FOUR TENETS OF LEASED LUXURY
+          </div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888888; margin-top: 0.25rem;" id="clauseTerminalStatus">
+            STATUS: SELECT TENET TO ISOLATE PROTOCOL CLAUSE
+          </div>
+        </div>
+        <div class="clause-selector-pills" id="clauseSelectorPills">
+          <button class="clause-pill active" data-clause="0">01 WEAR HARD</button>
+          <button class="clause-pill" data-clause="1">02 ZERO CLEAN</button>
+          <button class="clause-pill" data-clause="2">03 DUAL FIT</button>
+          <button class="clause-pill" data-clause="3">04 OWN NOTHING</button>
+        </div>
       </div>
 
       <div class="manifesto-monument-grid">
-        <div class="manifesto-slogan-box">
+        <div class="manifesto-slogan-box isolated" data-clause="0">
           <h3 class="manifesto-slogan-title">WEAR HARD.</h3>
           <p class="manifesto-slogan-body">
             You don't lease haute couture to stand still. Dance in amphitheaters, navigate rain-slicked lawns, celebrate through fog machines. We absorb the wear.
           </p>
+          <div class="clause-telemetry-tag">CLAUSE 01: ₹0 LIABILITY COVERAGE ACTIVE ON SPILLS & DANCE TENSION</div>
         </div>
 
-        <div class="manifesto-slogan-box">
+        <div class="manifesto-slogan-box" data-clause="1">
           <h3 class="manifesto-slogan-title">ZERO CLEAN.</h3>
           <p class="manifesto-slogan-body">
             Strictly do not dry clean or iron. Hand the garment back unwashed in the odor-lock satchel. Campus laundry is an obsolete chore.
           </p>
+          <div class="clause-telemetry-tag">CLAUSE 02: ATELIER OZONE SANITIZATION PROTOCOL CONDUCTED POST-RETURN</div>
         </div>
 
-        <div class="manifesto-slogan-box">
+        <div class="manifesto-slogan-box" data-clause="2">
           <h3 class="manifesto-slogan-title">DUAL FIT.</h3>
           <p class="manifesto-slogan-body">
             Fitting anxiety does not exist here. Your selected size arrives paired with a sealed backup size at ₹0 surcharge.
           </p>
+          <div class="clause-telemetry-tag">CLAUSE 03: ADJACENT SIZES (UK 8 + UK 10) DISPATCHED IN SINGLE SHIPMENT</div>
         </div>
 
-        <div class="manifesto-slogan-box">
+        <div class="manifesto-slogan-box" data-clause="3">
           <h3 class="manifesto-slogan-title">OWN NOTHING.</h3>
           <p class="manifesto-slogan-body">
             Ownership fills cupboards with dead polyester. Leasing fills your university memory with museum-tier couture.
           </p>
+          <div class="clause-telemetry-tag">CLAUSE 04: ACCESS OVER OWNERSHIP — 12 RUNWAY SILHOUETTES PER SEMESTER</div>
         </div>
       </div>
     </section>
@@ -1412,7 +1495,56 @@
       });
     }
 
-    // 4. SIGNATURE TRANSITION PROTOTYPE: VERMILION POSTER SNAP
+    // 7. INTERACTIVE REDLINE PROTOCOL TERMINAL (CLAUSE ISOLATION & EXPERIENCE)
+    const clausePills = document.querySelectorAll('.clause-pill');
+    const manifestoBoxes = document.querySelectorAll('.manifesto-slogan-box');
+    const clauseTerminalStatus = document.getElementById('clauseTerminalStatus');
+
+    function isolateClause(targetIndex) {
+      manifestoBoxes.forEach((box, idx) => {
+        if (idx === targetIndex) {
+          box.classList.add('isolated');
+          box.classList.remove('dimmed');
+        } else {
+          box.classList.remove('isolated');
+          box.classList.add('dimmed');
+        }
+      });
+
+      clausePills.forEach((pill, idx) => {
+        if (idx === targetIndex) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+
+      if (clauseTerminalStatus) {
+        const titleEl = manifestoBoxes[targetIndex]?.querySelector('.manifesto-slogan-title');
+        const title = titleEl ? titleEl.textContent.trim() : 'CLAUSE';
+        clauseTerminalStatus.textContent = `ISOLATING TENET // [${title}] // REDLINE AUTH VERIFIED`;
+      }
+    }
+
+    clausePills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const idx = parseInt(pill.dataset.clause, 10);
+        isolateClause(idx);
+      });
+    });
+
+    manifestoBoxes.forEach((box) => {
+      box.addEventListener('click', () => {
+        const idx = parseInt(box.dataset.clause, 10);
+        isolateClause(idx);
+      });
+      box.addEventListener('mouseenter', () => {
+        const idx = parseInt(box.dataset.clause, 10);
+        isolateClause(idx);
+      });
+    });
+
+    // 8. SIGNATURE TRANSITION PROTOTYPE: VERMILION POSTER SNAP
     const snapBtn = document.getElementById('vermilionSnapBtn');
     const overlay = document.getElementById('vermilionOverlay');
 

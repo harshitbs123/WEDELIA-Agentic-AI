@@ -471,12 +471,14 @@
       padding: 1.25rem;
       max-width: 100%;
       overflow: hidden;
+      touch-action: pan-y;
     }
     .specimen-img-col img {
       width: 100%;
       max-height: 580px;
       object-fit: cover;
       display: block;
+      transition: object-position 0.4s ease;
     }
     .specimen-registration-mark {
       position: absolute;
@@ -485,6 +487,49 @@
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
       color: var(--muted);
+      z-index: 10;
+    }
+    .mobile-touch-inspector-hint {
+      display: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .mobile-touch-inspector-hint {
+        display: block;
+      }
+      .specimen-grid {
+        padding: 1.5rem 1rem;
+        gap: 2rem;
+      }
+      .specimen-img-col {
+        padding: 0.75rem;
+      }
+      .specimen-crop-toolbar {
+        bottom: 0.75rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.25rem;
+      }
+      .crop-toggle-btn {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.62rem;
+        flex: 1;
+        text-align: center;
+      }
+      .specimen-data-table {
+        font-size: 0.75rem;
+      }
+      .specimen-data-table td {
+        padding: 0.45rem 0;
+      }
     }
     .specimen-sheet {
       display: flex;
@@ -1090,6 +1135,7 @@
 
     <!-- COMPOSITION 5: FASHION SPECIMEN STUDY (Museum Documentation) -->
     <section class="specimen-study-section">
+      <div class="mobile-touch-inspector-hint">TOUCH SPECIMEN TO PAN LOUPE // EXAMINE DRAPE & WEAVE</div>
       <div class="specimen-grid">
         <div class="specimen-img-col" id="specimenImgContainer">
           <span class="specimen-registration-mark">[SPECIMEN REF: WDL-014]</span>
@@ -1284,43 +1330,43 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. ENTRANCE CHOREOGRAPHY
+    // 1. CALM EDITORIAL ENTRANCE CHOREOGRAPHY
     if (!prefersReducedMotion) {
-      const enterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const enterTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
       enterTl
         .from('.pub-topbar, .cover-issue-tag', {
-          y: -20,
+          y: -15,
           autoAlpha: 0,
-          duration: 0.8,
-          stagger: 0.1
+          duration: 1.0,
+          stagger: 0.12
         })
         .from('.vertical-spine', {
           scaleY: 0,
           transformOrigin: 'top center',
-          duration: 1.2,
-          ease: 'power3.inOut'
-        }, '-=0.5')
+          duration: 1.4,
+          ease: 'power2.inOut'
+        }, '-=0.6')
         .from('.cover-title', {
-          yPercent: 35,
+          y: 25,
           autoAlpha: 0,
-          duration: 1.1,
-          ease: 'power4.out'
+          duration: 1.2,
+          ease: 'power3.out'
         }, '-=0.9')
         .from('.manifesto-col, .cover-meta-strip', {
-          y: 24,
+          y: 18,
           autoAlpha: 0,
-          duration: 0.8,
+          duration: 0.9,
           stagger: 0.12
-        }, '-=0.7')
+        }, '-=0.8')
         .from('.cover-visual-frame', {
           clipPath: 'inset(100% 0 0 0)',
-          duration: 1.3,
-          ease: 'power3.inOut'
+          duration: 1.5,
+          ease: 'power2.inOut'
         }, '-=1.0')
         .from('.cover-visual-frame img', {
-          scale: 1.12,
-          duration: 1.6,
+          scale: 1.08,
+          duration: 1.8,
           ease: 'power2.out'
         }, '<');
     }
@@ -1432,7 +1478,7 @@
       });
     }
 
-    // 6. ART DIRECTOR REGISTRATION LOUPE (EXPERIMENT 01-C)
+    // 6. ART DIRECTOR REGISTRATION LOUPE (EXPERIMENT 01-C & MOBILE TOUCH INSPECTION)
     const specimenContainer = document.getElementById('specimenImgContainer');
     const loupe = document.getElementById('loupeMarker');
     const loupeCoords = document.getElementById('loupeCoords');
@@ -1446,6 +1492,32 @@
         loupe.style.transform = `translate(${x + 12}px, ${y + 12}px)`;
         if (loupeCoords) loupeCoords.textContent = `X:${x} Y:${y}`;
       });
+
+      // Mobile Touch Handling for Loupe
+      specimenContainer.addEventListener('touchstart', (e) => {
+        loupe.style.opacity = '1';
+        const touch = e.touches[0];
+        const rect = specimenContainer.getBoundingClientRect();
+        const x = Math.round(touch.clientX - rect.left);
+        const y = Math.round(touch.clientY - rect.top);
+        loupe.style.transform = `translate(${x}px, ${y}px)`;
+        if (loupeCoords) loupeCoords.textContent = `X:${x} Y:${y}`;
+      }, { passive: true });
+
+      specimenContainer.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const rect = specimenContainer.getBoundingClientRect();
+        const x = Math.round(touch.clientX - rect.left);
+        const y = Math.round(touch.clientY - rect.top);
+        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+          loupe.style.transform = `translate(${x}px, ${y}px)`;
+          if (loupeCoords) loupeCoords.textContent = `X:${x} Y:${y}`;
+        }
+      }, { passive: true });
+
+      specimenContainer.addEventListener('touchend', () => {
+        setTimeout(() => { loupe.style.opacity = '0'; }, 1000);
+      }, { passive: true });
     }
 
     // 7. ARCHIVAL FASHION PLATE CROP SELECTOR (EXPERIMENT 01-E)

@@ -530,60 +530,77 @@
       line-height: 1.6;
     }
 
-    /* 6. STRANGE INDEX: RADICAL DIRECTORY */
+    /* 6. STRANGE RADICAL SPATIAL DIRECTORY */
     .strange-index-section {
       border-top: 1px solid var(--border-dark);
       padding-top: 4rem;
       margin-bottom: 8rem;
+      position: relative;
     }
-    .strange-index-wrap {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+    .spatial-directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
     }
-    .strange-index-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.75rem;
+    .spatial-directory-node {
+      border: 1px solid var(--border-dark);
+      background: #09090e;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .strange-index-table tr {
-      border-bottom: 1px solid var(--border-dark);
-    }
-    .strange-index-table tr:hover {
-      background: #0f1226;
-    }
-    .strange-index-table td {
-      padding: 1.25rem 0.75rem;
-      vertical-align: middle;
-    }
-    .strange-index-table td.code {
+    .spatial-directory-node::before {
+      content: '⟐';
+      position: absolute;
+      top: 1.5rem;
+      left: 0.75rem;
       color: var(--electric-blue);
-      font-weight: 700;
-      width: 12%;
-      white-space: nowrap;
+      font-size: 0.75rem;
+      opacity: 0.6;
     }
-    .strange-index-table td.name {
+    @media (min-width: 768px) {
+      .spatial-directory-node {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 2.25rem;
+      }
+    }
+    .spatial-directory-node:hover {
+      border-color: var(--electric-blue);
+      background: #0e1124;
+      transform: translateX(8px);
+      box-shadow: 0 0 25px rgba(15, 56, 255, 0.2);
+    }
+    .spatial-node-code {
+      font-size: 0.7rem;
+      color: var(--electric-blue);
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .spatial-node-name {
       font-family: 'Anton', sans-serif;
-      font-size: 1.4rem;
-      text-transform: uppercase;
+      font-size: 1.8rem;
       letter-spacing: -0.02em;
-    }
-    .strange-index-table td.val {
-      text-align: right;
-      font-weight: 700;
+      text-transform: uppercase;
       color: var(--bone);
-      white-space: nowrap;
+      line-height: 1;
     }
-    @media (max-width: 640px) {
-      .strange-index-table td.name {
-        font-size: 1.05rem;
-      }
-      .strange-index-table td {
-        padding: 0.85rem 0.4rem;
-      }
-      .col-hide-mobile {
-        display: none;
-      }
+    .spatial-node-meta {
+      font-size: 0.75rem;
+      color: var(--dim);
+      margin-top: 0.35rem;
+    }
+    .spatial-node-tariff {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.6rem;
+      color: var(--electric-blue);
+      text-align: right;
     }
 
     /* 7. NON-TRADITIONAL INSTALLATION ENDING */
@@ -960,45 +977,49 @@
       </div>
     </section>
 
-    <!-- 6. STRANGE INDEX: RADICAL DIRECTORY -->
+    <!-- 6. STRANGE RADICAL SPATIAL DIRECTORY (Vector-Linked to Rail) -->
     <section class="strange-index-section">
-      <div style="font-size: 0.72rem; color: var(--dim); margin-bottom: 2rem; letter-spacing: 0.12em;">
-        04 // RADICAL DIRECTORY — CAMPUS DISPATCH ROSTER
+      <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 0.72rem; color: var(--dim); margin-bottom: 2rem; letter-spacing: 0.12em; flex-wrap: wrap; gap: 0.5rem;">
+        <span>04 // RADICAL SPATIAL DIRECTORY — CAMPUS DISPATCH NODES</span>
+        <span id="directoryBusIndicator" style="color: var(--electric-blue);">RAIL BUS: SYNCHRONIZED</span>
       </div>
 
-      <div class="strange-index-wrap">
-        <table class="strange-index-table">
-          <tbody>
-            <tr>
-              <td class="code">WDL-014</td>
-              <td class="name">ZEMIRE SILK FAILLE</td>
-              <td class="col-hide-mobile" style="color: var(--dim);">FAREWELL BALL</td>
-              <td class="col-hide-mobile" style="color: var(--dim);">DU NORTH / MIRANDA HOUSE</td>
-              <td class="val">₹2,999 / 3D</td>
-            </tr>
-            <tr>
-              <td class="code">WDL-029</td>
-              <td class="name">PLEATED DUET GOWN</td>
-              <td class="col-hide-mobile" style="color: var(--dim);">DEBATE GALA</td>
-              <td class="col-hide-mobile" style="color: var(--dim);">ST. STEPHEN'S / HINDU</td>
-              <td class="val">₹2,899 / 3D</td>
-            </tr>
-            <tr>
-              <td class="code">WDL-041</td>
-              <td class="name">KINETIC SHIFT & WRAP</td>
-              <td class="col-hide-mobile" style="color: var(--dim);">COLLEGE FEST</td>
-              <td class="col-hide-mobile" style="color: var(--dim);">IIT DELHI / NIFT</td>
-              <td class="val">₹1,699 / 3D</td>
-            </tr>
-            <tr>
-              <td class="code">WDL-053</td>
-              <td class="name">GOLD BROCADE ROBE</td>
-              <td class="col-hide-mobile" style="color: var(--dim);">SOCIETY BANQUET</td>
-              <td class="col-hide-mobile" style="color: var(--dim);">ASHOKA UNIVERSITY</td>
-              <td class="val">₹3,899 / 3D</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="spatial-directory-list">
+        <div class="spatial-directory-node" data-coord="28.69° N // 77.21° E" data-campus="MIRANDA HOUSE GATE 2">
+          <div>
+            <div class="spatial-node-code">SYS_ROSTER // NODE WDL-014</div>
+            <div class="spatial-node-name">ZEMIRE SILK FAILLE</div>
+            <div class="spatial-node-meta">FAREWELL BALL // DU NORTH CAMPUS • MIRANDA HOUSE</div>
+          </div>
+          <div class="spatial-node-tariff">₹2,999 / 3D</div>
+        </div>
+
+        <div class="spatial-directory-node" data-coord="28.56° N // 77.24° E" data-campus="LADY SHRI RAM COLLEGE">
+          <div>
+            <div class="spatial-node-code">SYS_ROSTER // NODE WDL-029</div>
+            <div class="spatial-node-name">PLEATED DUET GOWN</div>
+            <div class="spatial-node-meta">DEBATE GALA // DU SOUTH CAMPUS • LSR MAIN ARCHWAY</div>
+          </div>
+          <div class="spatial-node-tariff">₹2,899 / 3D</div>
+        </div>
+
+        <div class="spatial-directory-node" data-coord="28.54° N // 77.19° E" data-campus="IIT DELHI / NIFT">
+          <div>
+            <div class="spatial-node-code">SYS_ROSTER // NODE WDL-041</div>
+            <div class="spatial-node-name">KINETIC SHIFT & WRAP</div>
+            <div class="spatial-node-meta">COLLEGE FEST // IIT DELHI ARENA • HAUZ KHAS</div>
+          </div>
+          <div class="spatial-node-tariff">₹1,699 / 3D</div>
+        </div>
+
+        <div class="spatial-directory-node" data-coord="28.98° N // 77.10° E" data-campus="ASHOKA UNIVERSITY">
+          <div>
+            <div class="spatial-node-code">SYS_ROSTER // NODE WDL-053</div>
+            <div class="spatial-node-name">GOLD BROCADE ROBE</div>
+            <div class="spatial-node-meta">SOCIETY BANQUET // SONIPAT RESIDENCE QUAD</div>
+          </div>
+          <div class="spatial-node-tariff">₹3,899 / 3D</div>
+        </div>
       </div>
     </section>
 
@@ -1272,7 +1293,31 @@
       });
     }
 
-    // 6. SIGNATURE TRANSITION PROTOTYPE: SPATIAL DISPLACEMENT
+    // 6. SPATIAL DIRECTORY VECTOR LINKAGE TO LEFT RAIL
+    const directoryNodes = document.querySelectorAll('.spatial-directory-node');
+    const directoryBusIndicator = document.getElementById('directoryBusIndicator');
+
+    directoryNodes.forEach((node) => {
+      node.addEventListener('mouseenter', () => {
+        const coord = node.dataset.coord;
+        const campus = node.dataset.campus;
+        if (coordStamp) {
+          coordStamp.textContent = `TARGET NODE // ${coord}`;
+          gsap.fromTo(coordStamp, { color: '#ffffff' }, { color: '#7a7974', duration: 0.5 });
+        }
+        if (directoryBusIndicator) {
+          directoryBusIndicator.textContent = `LOCKED // ${campus}`;
+        }
+      });
+
+      node.addEventListener('mouseleave', () => {
+        if (directoryBusIndicator) {
+          directoryBusIndicator.textContent = 'RAIL BUS: SYNCHRONIZED';
+        }
+      });
+    });
+
+    // 7. SIGNATURE TRANSITION PROTOTYPE: SPATIAL DISPLACEMENT
     const teleportBtn = document.getElementById('spatialTeleportBtn');
     const overlay = document.getElementById('spatialOverlay');
     const canvas = document.querySelector('.strange-canvas');

@@ -459,31 +459,62 @@
       margin-bottom: 1.5rem;
     }
 
-    /* POSTER 005: VERTICAL CALLIGRAPHIC LEASE SCROLL */
+    /* POSTER 005: CALLIGRAPHIC MAKIMONO SCROLL DOCUMENT */
     .lease-scroll-layout {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
       background: #faf8f3;
-      border: 1px solid var(--line);
+      border: 1px solid var(--fg);
       padding: 2.5rem 1.5rem;
+      position: relative;
     }
     @media (min-width: 768px) {
       .lease-scroll-layout {
         grid-template-columns: repeat(4, 1fr);
-        padding: 3.5rem 2.5rem;
+        padding: 3.5rem 2rem;
+        gap: 1.5rem;
       }
     }
     .scroll-vertical-column {
-      border-right: 1px solid var(--line);
-      padding-right: 1.5rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 2rem 1.25rem 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+      cursor: pointer;
     }
-    .scroll-vertical-column:last-child {
-      border-right: none;
-      padding-right: 0;
+    .scroll-vertical-column::before {
+      content: '印';
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      border: 1px solid var(--vermilion);
+      color: var(--vermilion);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.65rem;
+      padding: 0.05rem 0.25rem;
+      font-weight: 700;
+    }
+    .scroll-vertical-column:hover {
+      transform: translateY(-8px);
+      border-color: var(--fg);
+      box-shadow: 0 16px 35px rgba(25, 24, 22, 0.12);
+      z-index: 5;
+    }
+    @media (min-width: 768px) {
+      .scroll-vertical-column:nth-child(2) {
+        margin-top: 1.5rem;
+      }
+      .scroll-vertical-column:nth-child(3) {
+        margin-top: -1rem;
+      }
+      .scroll-vertical-column:nth-child(4) {
+        margin-top: 1rem;
+      }
     }
     .scroll-big-kanji {
       font-family: 'Shippori Mincho', serif;
@@ -491,7 +522,7 @@
       font-weight: 900;
       color: var(--vermilion);
       line-height: 1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
     .scroll-term-title {
       font-family: 'Space Mono', monospace;
@@ -499,34 +530,62 @@
       font-weight: 700;
       text-transform: uppercase;
       margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
     }
     .scroll-term-body {
       font-size: 0.85rem;
       color: #44413c;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
-    /* POSTER 006: MULTI-STRIP ARCHIVE */
+    /* POSTER 006: OVERLAPPING GALLERY WALKTHROUGH */
     .strip-archive-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 2rem;
+      position: relative;
     }
     @media (min-width: 768px) {
       .strip-archive-grid {
         grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
       }
     }
     .strip-archive-item {
       display: flex;
       flex-direction: column;
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--fg);
+      padding: 1rem;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, box-shadow 0.4s ease;
+    }
+    @media (min-width: 1024px) {
+      .strip-archive-item:nth-child(2) {
+        transform: translateY(25px);
+        z-index: 2;
+      }
+      .strip-archive-item:nth-child(3) {
+        transform: translateY(-20px);
+        z-index: 3;
+      }
+      .strip-archive-item:nth-child(4) {
+        transform: translateY(15px);
+        z-index: 4;
+      }
+    }
+    .strip-archive-item:hover {
+      transform: translateY(-10px) scale(1.02) !important;
+      z-index: 10 !important;
+      box-shadow: 0 20px 45px rgba(25, 24, 22, 0.16);
     }
     .strip-archive-img {
       width: 100%;
-      aspect-ratio: 1/2;
+      aspect-ratio: 1/1.9;
       object-fit: cover;
-      border: 1px solid var(--fg);
+      border: 1px solid var(--line);
       margin-bottom: 1rem;
+      display: block;
     }
     .strip-caption-vertical {
       writing-mode: vertical-rl;
@@ -535,6 +594,7 @@
       letter-spacing: 0.25em;
       line-height: 1.8;
       height: 140px;
+      color: var(--fg);
     }
 
     /* POSTER 007: FINAL EXHIBITION POSTER */
@@ -1216,18 +1276,39 @@
       });
     });
 
-    // 5. TRIPTYCH MULTI-STRIP REVEAL (Experiment 04-E)
+    // 5. GALLERY OVERLAPPING EXHIBITION CHOREOGRAPHY (POSTER 006)
     if (!prefersReducedMotion) {
-      gsap.utils.toArray('.strip-archive-item').forEach((item, i) => {
-        gsap.from(item, {
-          y: 50,
+      const galleryItems = gsap.utils.toArray('.strip-archive-item');
+      if (galleryItems.length >= 4) {
+        const galleryTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.strip-archive-grid',
+            start: 'top 80%',
+            end: 'bottom 40%',
+            scrub: 1.2
+          }
+        });
+
+        galleryTl
+          .from(galleryItems[0], { y: 60, opacity: 0, duration: 1 })
+          .from(galleryItems[1], { y: 90, opacity: 0, duration: 1 }, '-=0.5')
+          .to(galleryItems[0], { opacity: 0.75, filter: 'contrast(95%)', duration: 0.5 }, '<')
+          .from(galleryItems[2], { y: 110, opacity: 0, duration: 1 }, '-=0.5')
+          .to(galleryItems[1], { opacity: 0.75, filter: 'contrast(95%)', duration: 0.5 }, '<')
+          .from(galleryItems[3], { y: 130, opacity: 0, duration: 1 }, '-=0.5');
+      }
+
+      // Calligraphic Scroll Slips (Poster 005)
+      gsap.utils.toArray('.scroll-vertical-column').forEach((col, i) => {
+        gsap.from(col, {
+          y: 35,
           opacity: 0,
-          duration: 0.9,
-          delay: (i % 4) * 0.1,
+          duration: 0.8,
+          delay: i * 0.1,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: item.closest('.exhibit-poster'),
-            start: 'top 80%'
+            trigger: '.lease-scroll-layout',
+            start: 'top 85%'
           }
         });
       });
