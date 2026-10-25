@@ -30,40 +30,78 @@
       max-width: 100vw;
     }
 
-    /* Switcher Navigation */
+    /* Underground Nightfile Marquee / Live Ticker */
     .switch-nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       height: 48px;
-      background: #0d0d0d;
+      background: #000000;
+      border-bottom: 2px solid var(--red);
       color: #ffffff;
       z-index: 9999;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 1.5rem;
+      padding: 0 1.25rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
     }
-    .switch-nav a { color: #ffffff; text-decoration: none; }
-    .switch-pills { display: flex; gap: 0.25rem; }
+    .nightfile-marquee {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .live-drop-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--red);
+      animation: pulseBlink 1.2s infinite;
+    }
+    @keyframes pulseBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+    .nightfile-brand {
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+    .nightfile-status-tag {
+      color: var(--red);
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+    }
+    .nightfile-zone-tag {
+      color: #777777;
+      font-size: 0.6rem;
+      margin-right: 0.25rem;
+    }
+    .switch-pills { display: flex; align-items: center; gap: 0.25rem; }
     .switch-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 26px;
       height: 26px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #aaaaaa;
+      border: 1px solid #333333;
+      color: #888888;
+      background: #0a0a0a;
+      font-weight: 700;
     }
-    .switch-pill.active { background: var(--red); color: #ffffff; font-weight: 700; border-color: var(--red); }
+    .switch-pill:hover { border-color: var(--red); color: #ffffff; }
+    .switch-pill.active { background: var(--red); color: #ffffff; font-weight: 800; border-color: var(--red); box-shadow: 0 0 10px rgba(255, 34, 0, 0.4); }
     @media (max-width: 768px) {
-      .switch-nav .dir-label { display: none; }
-      .switch-nav { padding: 0 1rem; }
+      .switch-nav .nightfile-status-tag { display: none; }
+      .switch-nav .nightfile-zone-tag { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
       .switch-pills { gap: 2px; }
-      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+      .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
     }
 
     /* Page Canvas */
@@ -472,23 +510,26 @@
       flex-wrap: wrap;
       gap: 0.5rem;
     }
-    .drop-lens-pills {
+    .drop-dispatch-indicator {
       display: flex;
-      gap: 0.3rem;
-    }
-    .drop-lens-btn {
-      background: #181818;
-      border: 1px solid #333333;
-      color: #cccccc;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
-      padding: 0.2rem 0.45rem;
-      cursor: pointer;
-    }
-    .drop-lens-btn.active {
-      background: var(--red);
+      align-items: center;
+      gap: 0.4rem;
       color: #ffffff;
-      border-color: var(--red);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .drop-countdown-badge {
+      background: #1c0000;
+      border: 1px solid var(--red);
+      color: var(--red);
+      padding: 0.25rem 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      box-shadow: 0 0 8px rgba(255, 34, 0, 0.3);
+    }
+    .drop-shield-tag {
+      color: #888888;
+      font-size: 0.62rem;
     }
     .night-drop-prose-col {
       display: flex;
@@ -1302,19 +1343,20 @@
 </head>
 <body>
 
-  <!-- Switcher Top Bar (5 Active Directions) -->
+  <!-- Underground Nightfile Marquee / Live Ticker -->
   <nav class="switch-nav">
-    <div>
-      <a href="index.html">← INDEX</a>
-      <span class="dir-label" style="margin: 0 0.5rem;">/</span>
-      <span class="dir-label" style="font-weight: 700;">DIR 03: RED / BLACK TOKYO</span>
+    <div class="nightfile-marquee">
+      <span class="live-drop-dot"></span>
+      <a href="index.html" class="nightfile-brand">NIGHTFILE // SHIBUYA 23:47</a>
+      <span class="nightfile-status-tag">DROP RUNNER: ACTIVE // COURIER: READY</span>
     </div>
     <div class="switch-pills">
-      <a href="01-tokyo-editorial.html" class="switch-pill">01</a>
-      <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
-      <a href="03-red-black-tokyo.html" class="switch-pill active">03</a>
-      <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
-      <a href="10-the-strange-one.html" class="switch-pill">10</a>
+      <span class="nightfile-zone-tag">ZONES:</span>
+      <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill active" title="Red / Black Tokyo">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill" title="Vertical Poster">04</a>
+      <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
     </div>
   </nav>
 
@@ -1453,13 +1495,14 @@
           <img id="featuredDropActiveImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Featured Midnight Fashion Drop">
         </div>
         <div class="night-drop-control-strip">
-          <div>OPTICAL SCAN:</div>
-          <div class="drop-lens-pills" id="dropLensPillCluster">
-            <button class="drop-lens-btn active" data-scale="1" data-y="0%">01 STREET FULL</button>
-            <button class="drop-lens-btn" data-scale="1.35" data-y="18%">02 DRAPE WEAVE</button>
-            <button class="drop-lens-btn" data-scale="1.65" data-y="-12%">03 HARDWARE DETAIL</button>
+          <div class="drop-dispatch-indicator">
+            <span class="live-drop-dot"></span>
+            <span>SHIBUYA 23:47 RUNTIME</span>
           </div>
-          <div>₹0 EMBEDDED SPILL SHIELD</div>
+          <div class="drop-countdown-badge" id="dropLiveCountdown">
+            COURIER: 00:38:42 REMAINING
+          </div>
+          <div class="drop-shield-tag">₹0 SPILL SHIELD</div>
         </div>
       </div>
 
@@ -2311,7 +2354,20 @@
     const featuredTariffVal = document.getElementById('nightTariffVal');
     const slamNextDropBtn = document.getElementById('slamNextDropBtn');
     const lockTerminalDropBtn = document.getElementById('lockTerminalDropBtn');
-    const dropLensBtns = document.querySelectorAll('#dropLensPillCluster .drop-lens-btn');
+
+    // Live Midnight Drop Countdown Runner (Shibuya 23:47 Urgency)
+    let countdownSeconds = 38 * 60 + 42;
+    const countdownEl = document.getElementById('dropLiveCountdown');
+    setInterval(() => {
+      if (countdownSeconds > 0) {
+        countdownSeconds--;
+        const mins = String(Math.floor(countdownSeconds / 60)).padStart(2, '0');
+        const secs = String(countdownSeconds % 60).padStart(2, '0');
+        if (countdownEl) {
+          countdownEl.textContent = `COURIER: 00:${mins}:${secs} REMAINING`;
+        }
+      }
+    }, 1000);
 
     function renderCampaignDrop(idx) {
       currentCampaignDropIndex = idx;
@@ -2322,7 +2378,7 @@
 
       if (!prefersReducedMotion) {
         gsap.timeline()
-          .to('#featuredNightDropStage', { filter: 'invert(100%)', scale: 0.99, duration: 0.12 })
+          .to('#featuredNightDropStage', { filter: 'invert(100%) brightness(1.5)', duration: 0.08, ease: 'power4.in' })
           .call(() => {
             if (featuredDropBadge) featuredDropBadge.textContent = drop.badge;
             if (featuredDropCode) featuredDropCode.textContent = drop.code;
@@ -2336,7 +2392,7 @@
             if (featuredSizingVal) featuredSizingVal.textContent = drop.sizing;
             if (featuredTariffVal) featuredTariffVal.textContent = drop.tariff;
           })
-          .to('#featuredNightDropStage', { filter: 'invert(0%)', scale: 1, duration: 0.25, ease: 'power2.out' });
+          .to('#featuredNightDropStage', { filter: 'invert(0%) brightness(1)', duration: 0.22, ease: 'power4.out' });
       } else {
         if (featuredDropBadge) featuredDropBadge.textContent = drop.badge;
         if (featuredDropCode) featuredDropCode.textContent = drop.code;
@@ -2366,19 +2422,6 @@
         renderCampaignDrop(nextIdx);
       });
     }
-
-    // Drop Lens buttons
-    dropLensBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        dropLensBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const scale = parseFloat(btn.dataset.scale);
-        const y = btn.dataset.y;
-        if (featuredDropActiveImg) {
-          gsap.to(featuredDropActiveImg, { scale: scale, y: y, duration: 0.45, ease: 'power2.out' });
-        }
-      });
-    });
 
     // Lock Look into Night-Drop Terminal
     if (lockTerminalDropBtn) {

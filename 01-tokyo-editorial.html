@@ -29,7 +29,7 @@
       padding-top: 48px;
     }
 
-    /* Switcher Top Navigation */
+    /* Tokyo Fashion Magazine Folio Header */
     .switch-nav {
       position: fixed;
       top: 0;
@@ -49,25 +49,45 @@
       letter-spacing: 0.05em;
     }
     .switch-nav a { color: var(--fg); text-decoration: none; }
-    .switch-pills { display: flex; gap: 0.3rem; }
+    .mag-masthead-title {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--fg);
+    }
+    .mag-subhead-tag {
+      margin-left: 0.75rem;
+      color: var(--muted);
+      font-size: 0.65rem;
+    }
+    .switch-pills { display: flex; align-items: center; gap: 0.35rem; }
+    .mag-edition-label {
+      font-size: 0.62rem;
+      color: var(--muted);
+      margin-right: 0.25rem;
+      letter-spacing: 0.08em;
+    }
     .switch-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
-      border: 1px solid transparent;
+      padding: 0 0.45rem;
+      height: 26px;
+      border: 1px solid var(--line);
       color: var(--muted);
-      border-radius: 2px;
+      border-radius: 1px;
+      font-size: 0.65rem;
       font-weight: 500;
+      background: transparent;
+      transition: all 0.15s ease;
     }
-    .switch-pill:hover { border-color: var(--line); color: var(--fg); }
-    .switch-pill.active { background: var(--fg); color: var(--bg); font-weight: 700; }
+    .switch-pill:hover { border-color: var(--fg); color: var(--fg); }
+    .switch-pill.active { background: var(--fg); color: var(--bg); font-weight: 700; border-color: var(--fg); }
     @media (max-width: 768px) {
-      .switch-nav .dir-label { display: none; }
-      .switch-nav { padding: 0 1rem; }
-      .switch-pills { gap: 2px; }
-      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+      .switch-nav .mag-subhead-tag { display: none; }
+      .switch-nav .mag-edition-label { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
+      .switch-pills { gap: 3px; }
+      .switch-pill { padding: 0 0.3rem; height: 24px; font-size: 0.6rem; }
     }
 
     /* Editorial Canvas */
@@ -1465,19 +1485,19 @@
 </head>
 <body>
 
-  <!-- Switcher Top Bar (5 Active Directions) -->
+  <!-- Tokyo Fashion Magazine Folio Header -->
   <nav class="switch-nav">
     <div>
-      <a href="index.html">← INDEX</a>
-      <span class="dir-label" style="margin: 0 0.5rem; color: var(--muted);">/</span>
-      <span class="dir-label" style="font-weight: 700;">DIR 01: TOKYO EDITORIAL</span>
+      <a href="index.html" class="mag-masthead-title">WEDELIA // 月刊ウェデリア</a>
+      <span class="mag-subhead-tag">ISSUE 04: TOKYO EDITION // FOLIO P. 01–84</span>
     </div>
     <div class="switch-pills">
-      <a href="01-tokyo-editorial.html" class="switch-pill active">01</a>
-      <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
-      <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
-      <a href="04-vertical-japanese-poster.html" class="switch-pill">04</a>
-      <a href="10-the-strange-one.html" class="switch-pill">10</a>
+      <span class="mag-edition-label">EDITIONS:</span>
+      <a href="01-tokyo-editorial.html" class="switch-pill active" title="Tokyo Editorial">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill" title="Red / Black Tokyo">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill" title="Vertical Poster">04</a>
+      <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
     </div>
   </nav>
 
@@ -1764,13 +1784,13 @@
             <img id="plateActiveImg" src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Editorial Fashion Plate">
           </div>
           <div class="plate-marginalia-bottom">
-            <div>CROP LENS:</div>
+            <div>図版視点 / PERSPECTIVE:</div>
             <div class="plate-crop-toggle" id="plateCropToggle">
-              <button class="plate-crop-btn active" data-scale="1" data-y="0%">SILHOUETTE</button>
-              <button class="plate-crop-btn" data-scale="1.4" data-y="20%">DRAPE DETAIL</button>
-              <button class="plate-crop-btn" data-scale="1.75" data-y="-15%">ATELIER WEAVE</button>
+              <button class="plate-crop-btn active" data-scale="1" data-y="0%">全身 FULL PLATE</button>
+              <button class="plate-crop-btn" data-scale="1.4" data-y="20%">裁断詳細 DRAPE DETAIL</button>
+              <button class="plate-crop-btn" data-scale="1.75" data-y="-15%">織目組織 WEAVE TEXTURE</button>
             </div>
-            <div>₹0 DAMAGE SHIELD ACTIVE</div>
+            <div>装苑特装 編集部 承認済</div>
           </div>
         </div>
 
@@ -2400,7 +2420,7 @@
 
       if (!prefersReducedMotion) {
         gsap.timeline()
-          .to('#fashionPlateStage', { opacity: 0.5, y: 4, duration: 0.15 })
+          .to('#fashionPlateStage', { opacity: 0.3, x: -16, duration: 0.18, ease: 'power2.in' })
           .call(() => {
             if (plateLookStamp) plateLookStamp.textContent = data.lookNum;
             if (plateAtelierRef) plateAtelierRef.textContent = data.atelierRef;
@@ -2419,7 +2439,10 @@
               if (labelEl) labelEl.textContent = data.nextLabel;
             }
           })
-          .to('#fashionPlateStage', { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
+          .fromTo('#fashionPlateStage',
+            { opacity: 0.3, x: 20 },
+            { opacity: 1, x: 0, duration: 0.38, ease: 'power2.out' }
+          );
       } else {
         if (plateLookStamp) plateLookStamp.textContent = data.lookNum;
         if (plateAtelierRef) plateAtelierRef.textContent = data.atelierRef;

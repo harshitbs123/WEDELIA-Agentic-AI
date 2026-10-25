@@ -30,7 +30,7 @@
       max-width: 100vw;
     }
 
-    /* Switcher Navigation */
+    /* Curatorial Exhibition Itinerary Header */
     .switch-nav {
       position: fixed;
       top: 0;
@@ -49,7 +49,25 @@
       font-size: 0.72rem;
     }
     .switch-nav a { color: var(--fg); text-decoration: none; }
-    .switch-pills { display: flex; gap: 0.25rem; }
+    .exhibit-brand {
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--fg);
+      font-size: 0.78rem;
+    }
+    .exhibit-room-tag {
+      margin-left: 0.75rem;
+      color: var(--muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+    }
+    .switch-pills { display: flex; align-items: center; gap: 0.3rem; }
+    .exhibit-dir-tag {
+      font-size: 0.6rem;
+      color: var(--muted);
+      margin-right: 0.25rem;
+    }
     .switch-pill {
       display: inline-flex;
       align-items: center;
@@ -58,13 +76,18 @@
       height: 26px;
       border: 1px solid var(--line);
       color: var(--muted);
+      background: transparent;
+      font-size: 0.65rem;
+      border-radius: 1px;
     }
+    .switch-pill:hover { border-color: var(--fg); color: var(--fg); }
     .switch-pill.active { background: var(--fg); color: var(--bg); font-weight: 700; border-color: var(--fg); }
     @media (max-width: 768px) {
-      .switch-nav .dir-label { display: none; }
-      .switch-nav { padding: 0 1rem; }
+      .switch-nav .exhibit-room-tag { display: none; }
+      .switch-nav .exhibit-dir-tag { display: none; }
+      .switch-nav { padding: 0 0.75rem; }
       .switch-pills { gap: 2px; }
-      .switch-pill { width: 24px; height: 24px; font-size: 0.65rem; }
+      .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
     }
 
     /* Exhibition Canvas Container */
@@ -281,28 +304,30 @@
       letter-spacing: 0.12em;
     }
 
-    /* Experiment 04-D: Curatorial Specimen Crop Shift */
-    .curator-lens-toggle {
+    /* Curatorial Room Seal & Hanko */
+    .curatorial-room-seal {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
+      align-items: center;
+      gap: 0.65rem;
       margin-bottom: 1.25rem;
-      font-family: 'Space Mono', monospace;
     }
-    .curator-lens-btn {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      color: var(--fg);
-      padding: 0.35rem 0.65rem;
-      cursor: pointer;
+    .exhibit-hanko-seal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border: 1.5px solid var(--vermilion);
+      color: var(--vermilion);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+    }
+    .exhibit-room-number {
       font-family: 'Space Mono', monospace;
       font-size: 0.68rem;
-      transition: none;
-    }
-    .curator-lens-btn:hover, .curator-lens-btn.active {
-      background: var(--fg);
-      color: var(--bg);
-      border-color: var(--fg);
+      color: var(--muted);
+      letter-spacing: 0.08em;
     }
 
     /* Experiment 04-E: Multi-Strip Washi Lift */
@@ -994,19 +1019,19 @@
 </head>
 <body>
 
-  <!-- Switcher Top Navigation -->
+  <!-- Curatorial Exhibition Itinerary Header -->
   <nav class="switch-nav">
     <div>
-      <a href="index.html">← INDEX</a>
-      <span class="dir-label" style="margin: 0 0.5rem;">/</span>
-      <span class="dir-label" style="font-weight: 700;">DIR 04: VERTICAL JAPANESE POSTER</span>
+      <a href="index.html" class="exhibit-brand">国立意匠展覧会 // WEDELIA</a>
+      <span class="exhibit-room-tag">ROOM IV: 墨黒と生絹 // TOKYO–DELHI</span>
     </div>
     <div class="switch-pills">
-      <a href="01-tokyo-editorial.html" class="switch-pill">01</a>
-      <a href="02-brutalist-fashion-index.html" class="switch-pill">02</a>
-      <a href="03-red-black-tokyo.html" class="switch-pill">03</a>
-      <a href="04-vertical-japanese-poster.html" class="switch-pill active">04</a>
-      <a href="10-the-strange-one.html" class="switch-pill">10</a>
+      <span class="exhibit-dir-tag">ROOMS:</span>
+      <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
+      <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
+      <a href="03-red-black-tokyo.html" class="switch-pill" title="Red / Black Tokyo">03</a>
+      <a href="04-vertical-japanese-poster.html" class="switch-pill active" title="Vertical Poster">04</a>
+      <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
     </div>
   </nav>
 
@@ -1235,11 +1260,10 @@
           <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem;" id="curatorialDossierTag">
             ARCHIVE DOSSIER // ROBE LONGUE COLUMN
           </div>
-          <!-- Curatorial Specimen Crop Shift Toggle -->
-          <div class="curator-lens-toggle" id="curatorLensToggle">
-            <button class="curator-lens-btn active" data-zoom="1" data-y="0%">01 全体像 SILHOUETTE</button>
-            <button class="curator-lens-btn" data-zoom="1.45" data-y="18%">02 織目 DRAPE DETAIL</button>
-            <button class="curator-lens-btn" data-zoom="1.8" data-y="-25%">03 縫製 ATELIER STITCH</button>
+          <!-- Curatorial Catalogue Accession Seal -->
+          <div class="curatorial-room-seal">
+            <span class="exhibit-hanko-seal">展覧</span>
+            <span class="exhibit-room-number">第四室 // 永久所蔵図録 (ROOM IV // PERMANENT EXHIBITION)</span>
           </div>
           <h2 class="curatorial-title" id="curatorialHeading">THE ARCHITECTURE OF SILENT AUTHORITY.</h2>
           <p style="font-size: 0.92rem; line-height: 1.8; color: #333333; margin-bottom: 1.75rem;" id="curatorialProse">
@@ -1670,47 +1694,6 @@
       });
     }
 
-    // 4. EXPERIMENT 04-D: CURATORIAL SPECIMEN CROP SHIFT
-    const lensBtns = document.querySelectorAll('.curator-lens-btn');
-    const lookExhibitImg = document.getElementById('lookExhibitImg');
-    const lookSpecYear = document.getElementById('lookSpecYear');
-    const lookSpecMaterial = document.getElementById('lookSpecMaterial');
-
-    lensBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        lensBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const zoom = parseFloat(btn.dataset.zoom) || 1;
-        const yOffset = btn.dataset.y || '0%';
-        const yearText = btn.dataset.year;
-        const matText = btn.dataset.mat;
-
-        if (lookExhibitImg) {
-          if (!prefersReducedMotion) {
-            gsap.to(lookExhibitImg, {
-              scale: zoom,
-              y: yOffset,
-              duration: 0.65,
-              ease: 'power3.out'
-            });
-          } else {
-            lookExhibitImg.style.transform = `scale(${zoom}) translateY(${yOffset})`;
-          }
-        }
-
-        if (lookSpecYear && yearText) lookSpecYear.textContent = yearText;
-        if (lookSpecMaterial && matText) lookSpecMaterial.textContent = matText;
-
-        if (!prefersReducedMotion) {
-          gsap.fromTo('.look-vertical-specs', 
-            { opacity: 0.4 }, 
-            { opacity: 1, duration: 0.4, ease: 'power2.out' }
-          );
-        }
-      });
-    });
-
     // 4.5 THE CURATED EXHIBITION HANGING SCROLL SYSTEM
     const exhibitionScrolls = [
       {
@@ -1777,7 +1760,7 @@
 
       if (!prefersReducedMotion) {
         gsap.timeline()
-          .to('#lookExhibitStage', { opacity: 0.5, y: 6, duration: 0.15 })
+          .to('#lookExhibitStage', { opacity: 0.2, y: 15, duration: 0.22, ease: 'power2.in' })
           .call(() => {
             if (scrollAccessionTag) scrollAccessionTag.textContent = data.tag;
             if (lookExhibitImg) lookExhibitImg.src = data.img;
@@ -1793,7 +1776,10 @@
               if (span) span.textContent = data.nextScrollLabel;
             }
           })
-          .to('#lookExhibitStage', { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
+          .fromTo('#lookExhibitStage',
+            { opacity: 0.2, y: -20 },
+            { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' }
+          );
       } else {
         if (scrollAccessionTag) scrollAccessionTag.textContent = data.tag;
         if (lookExhibitImg) lookExhibitImg.src = data.img;
