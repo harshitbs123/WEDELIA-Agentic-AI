@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEDELIA // 04 Vertical Japanese Poster</title>
+  <title>WEDELIA // 04 Vertical Japanese Poster — Gallery Exhibition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,14 +19,15 @@
       --paper: #f4f0e8;
     }
 
-    body {
+    html, body {
       background: var(--bg);
       color: var(--fg);
       font-family: 'Space Grotesk', sans-serif;
-      line-height: 1.5;
+      line-height: 1.55;
       padding-top: 48px;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      max-width: 100vw;
     }
 
     /* Switcher Navigation */
@@ -45,7 +46,7 @@
       justify-content: space-between;
       padding: 0 1.5rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
     }
     .switch-nav a { color: var(--fg); text-decoration: none; }
     .switch-pills { display: flex; gap: 0.25rem; }
@@ -138,13 +139,39 @@
     .poster-board {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 2.5rem;
     }
-    @media (min-width: 1024px) {
+    .poster-board > * {
+      min-width: 0;
+    }
+    .poster-col-dispatch {
+      display: none;
+    }
+    @media (min-width: 860px) and (max-width: 1279px) {
       .poster-board {
-        grid-template-columns: 240px 1.1fr 340px 160px;
-        gap: 2.5rem;
+        grid-template-columns: 180px 1.2fr 260px;
+        gap: 1.5rem;
         align-items: stretch;
+      }
+      .poster-col-dispatch {
+        display: none !important;
+      }
+    }
+    @media (min-width: 1280px) {
+      .poster-board {
+        grid-template-columns: 180px 1.2fr 280px 130px;
+        gap: 1.5rem;
+        align-items: stretch;
+      }
+      .poster-col-dispatch {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        border-left: 1px solid var(--line);
+        padding-left: 1.25rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.68rem;
+        color: var(--muted);
       }
     }
     .poster-col-manifesto {
@@ -173,12 +200,9 @@
       font-size: 0.82rem;
     }
     .poster-col-visual {
-      order: -1;
-    }
-    @media (min-width: 1024px) {
-      .poster-col-visual {
-        order: 0;
-      }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .poster-title {
       font-family: 'Shippori Mincho', serif;
@@ -193,6 +217,7 @@
       overflow: hidden;
       background: #e2ddd3;
       border: 1px solid var(--fg);
+      margin: 1.5rem 0;
     }
     .tall-image-strip img {
       width: 100%;
@@ -200,6 +225,13 @@
       object-fit: cover;
       object-position: center top;
       filter: contrast(108%);
+    }
+    .poster-col-occasions {
+      border-left: 1px solid var(--line);
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .v-number-block {
       border-bottom: 1px solid var(--line);
@@ -262,9 +294,9 @@
       margin-bottom: 0.5rem;
     }
     .pillar-body {
-      font-size: 0.84rem;
-      color: var(--muted);
-      line-height: 1.6;
+      font-size: 0.88rem;
+      color: #4b4842;
+      line-height: 1.65;
       margin-bottom: 1.5rem;
     }
     .pillar-meta {
@@ -332,45 +364,57 @@
     }
     .night-poster-title {
       font-family: 'Shippori Mincho', serif;
-      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
       font-weight: 900;
-      line-height: 1.05;
+      line-height: 1.1;
       margin-bottom: 1.5rem;
     }
 
-    /* POSTER 005: RENTAL RECORD POSTER */
-    .record-poster-columns {
+    /* POSTER 005: VERTICAL CALLIGRAPHIC LEASE SCROLL */
+    .lease-scroll-layout {
       display: grid;
       grid-template-columns: 1fr;
       gap: 2rem;
+      background: #faf8f3;
+      border: 1px solid var(--line);
+      padding: 2.5rem 1.5rem;
     }
     @media (min-width: 768px) {
-      .record-poster-columns {
+      .lease-scroll-layout {
         grid-template-columns: repeat(4, 1fr);
+        padding: 3.5rem 2.5rem;
       }
     }
-    .record-col-card {
-      border: 1px solid var(--line);
-      background: #ffffff;
-      padding: 2rem 1.5rem;
+    .scroll-vertical-column {
+      border-right: 1px solid var(--line);
+      padding-right: 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .record-big-stat {
+    .scroll-vertical-column:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+    .scroll-big-kanji {
       font-family: 'Shippori Mincho', serif;
       font-size: 2.8rem;
       font-weight: 900;
-      line-height: 1;
       color: var(--vermilion);
-      margin-bottom: 0.75rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
     }
-    .record-stat-label {
+    .scroll-term-title {
       font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .scroll-term-body {
+      font-size: 0.85rem;
+      color: #44413c;
+      line-height: 1.65;
     }
 
     /* POSTER 006: MULTI-STRIP ARCHIVE */
@@ -481,14 +525,14 @@
 
         <!-- Col 2: Central Tall Visual -->
         <div class="poster-col-visual">
-          <div class="poster-brand-block">
+          <div>
             <h1 class="poster-title">WEDELIA</h1>
-            <span class="poster-title-en">MOMENTARY COUTURE LEASE SYSTEM</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--muted); margin-top: 0.75rem; display: block;">MOMENTARY COUTURE LEASE SYSTEM</span>
           </div>
           <div class="tall-image-strip">
             <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Evening Gown">
           </div>
-          <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); margin-top: 0.75rem;">
+          <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted);">
             <span>PLATE 01: ZEMIRE FAILLE GOWN</span>
             <span>RENTAL: ₹2,999 / 3 DAYS</span>
           </div>
@@ -499,33 +543,33 @@
           <div class="v-number-block">
             <div class="big-v-num">
               <span>01</span>
-              <span class="v-kanji">祝祭</span>
+              <span style="font-size: 1.1rem; color: var(--vermilion);">祝祭</span>
             </div>
-            <h3>COLLEGE FESTIVAL</h3>
-            <p>Under the blinding stage spotlights. High-contrast reflective silks and kinetic wraps for star night concerts.</p>
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">COLLEGE FESTIVAL</h3>
+            <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.55;">Under the blinding stage spotlights. High-contrast reflective silks and kinetic wraps for star night concerts.</p>
           </div>
 
           <div class="v-number-block">
             <div class="big-v-num">
               <span>02</span>
-              <span class="v-kanji">門出</span>
+              <span style="font-size: 1.1rem; color: var(--vermilion);">門出</span>
             </div>
-            <h3>SENIOR FAREWELL</h3>
-            <p>The final departmental valedictory. Floor-length museum silhouettes that mark the closing of your youth.</p>
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">SENIOR FAREWELL</h3>
+            <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.55;">The final departmental valedictory. Floor-length museum silhouettes that mark the closing of your youth.</p>
           </div>
 
-          <div class="v-number-block">
+          <div class="v-number-block" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
             <div class="big-v-num">
               <span>03</span>
-              <span class="v-kanji">響宴</span>
+              <span style="font-size: 1.1rem; color: var(--vermilion);">響宴</span>
             </div>
-            <h3>CAMPUS CONCERT</h3>
-            <p>Sub-bass frequencies, strobe lights, flash photography. Tailored garments designed for motion without fragility.</p>
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">CAMPUS CONCERT</h3>
+            <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.55;">Sub-bass frequencies, strobe lights, flash photography. Tailored garments designed for motion without fragility.</p>
           </div>
         </div>
 
         <!-- Col 4: Narrow End Strip -->
-        <div class="poster-col-end" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid var(--line); padding-left: 1.5rem; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted);">
+        <div class="poster-col-dispatch">
           <div>
             <strong>DISPATCH:</strong><br>
             DU NORTH CAMPUS<br>
@@ -643,7 +687,7 @@
             ARCHIVE DOSSIER // ROBE LONGUE COLUMN
           </div>
           <h2 class="curatorial-title">THE ARCHITECTURE OF SILENT AUTHORITY.</h2>
-          <p style="font-size: 0.88rem; line-height: 1.8; color: #333333; margin-bottom: 2rem;">
+          <p style="font-size: 0.92rem; line-height: 1.8; color: #333333; margin-bottom: 2rem;">
             Purchased fast fashion shouts with polyester glitter and synthetic sheen. Archival couture speaks in weight, gravity, and pure silk crêpe de chine that catches the ambient tungsten light of campus auditoriums. When you step onto the valedictory stage in this gown, you do not look like a student playing dress-up. You look like the author of the room.
           </p>
           <div style="border-top: 1px solid var(--line); padding-top: 1.25rem; font-family: 'Space Mono', monospace; font-size: 0.75rem;">
@@ -678,63 +722,43 @@
       </div>
     </section>
 
-    <!-- POSTER 005: RENTAL RECORD POSTER -->
+    <!-- POSTER 005: VERTICAL CALLIGRAPHIC LEASE SCROLL -->
     <section class="exhibit-poster">
       <div class="poster-id-tag">
         <span>POSTER NO. 005 // TECHNICAL LEASE PARAMETERS</span>
         <span class="vermilion-stamp">第五号 貸出規約</span>
       </div>
 
-      <div class="record-poster-columns">
-        <div class="record-col-card">
+      <div class="lease-scroll-layout">
+        <div class="scroll-vertical-column">
           <div>
-            <div class="record-big-stat">03</div>
-            <div class="record-stat-label">DAYS DURATION</div>
-            <p style="font-size: 0.8rem; color: var(--muted); line-height: 1.5;">
-              Delivered 24 hours prior to call time. Keeps you unhurried on event day, with a full morning for returns.
-            </p>
-          </div>
-          <div style="font-size: 0.7rem; font-family: 'Space Mono', monospace; border-top: 1px solid var(--line); padding-top: 0.5rem; margin-top: 1rem;">
-            EXTENSION AVAILABLE
+            <div class="scroll-big-kanji">三日</div>
+            <h4 class="scroll-term-title">03 DAYS LEASE</h4>
+            <p class="scroll-term-body">Delivered 24 hours prior to entrance. Gives you a relaxed evening before, event night, and a stress-free morning for return handover.</p>
           </div>
         </div>
 
-        <div class="record-col-card">
+        <div class="scroll-vertical-column">
           <div>
-            <div class="record-big-stat">×2</div>
-            <div class="record-stat-label">DUAL SIZES DISPATCHED</div>
-            <p style="font-size: 0.8rem; color: var(--muted); line-height: 1.5;">
-              Your selected primary size plus an adjacent complimentary backup size sealed in every delivery. Zero anxiety.
-            </p>
-          </div>
-          <div style="font-size: 0.7rem; font-family: 'Space Mono', monospace; border-top: 1px solid var(--line); padding-top: 0.5rem; margin-top: 1rem;">
-            ₹0 SURCHARGE
+            <div class="scroll-big-kanji">二着</div>
+            <h4 class="scroll-term-title">DUAL SIZES DISPATCHED</h4>
+            <p class="scroll-term-body">Your primary choice plus an adjacent complimentary backup size sealed in every delivery. Zero fitting anxiety on the big day.</p>
           </div>
         </div>
 
-        <div class="record-col-card">
+        <div class="scroll-vertical-column">
           <div>
-            <div class="record-big-stat">₹0</div>
-            <div class="record-stat-label">DAMAGE LIABILITY</div>
-            <p style="font-size: 0.8rem; color: var(--muted); line-height: 1.5;">
-              Dancefloor drink spills, minor hem wear, and bead loosening are 100% absorbed under our built-in shield.
-            </p>
-          </div>
-          <div style="font-size: 0.7rem; font-family: 'Space Mono', monospace; border-top: 1px solid var(--line); padding-top: 0.5rem; margin-top: 1rem;">
-            INSURED COVENANT
+            <div class="scroll-big-kanji">零円</div>
+            <h4 class="scroll-term-title">₹0 DAMAGE LIABILITY</h4>
+            <p class="scroll-term-body">Dancefloor drink spills, minor hem wear, and bead loosening are 100% absorbed under our built-in insurance shield.</p>
           </div>
         </div>
 
-        <div class="record-col-card">
+        <div class="scroll-vertical-column">
           <div>
-            <div class="record-big-stat">0%</div>
-            <div class="record-stat-label">LAUNDRY REQUIREMENT</div>
-            <p style="font-size: 0.8rem; color: var(--muted); line-height: 1.5;">
-              Strictly do not dry clean or iron. Slip both pieces into the pre-paid return satchel unwashed. Handover at gate.
-            </p>
-          </div>
-          <div style="font-size: 0.7rem; font-family: 'Space Mono', monospace; border-top: 1px solid var(--line); padding-top: 0.5rem; margin-top: 1rem;">
-            CAMPUS GATE PICKUP
+            <div class="scroll-big-kanji">無洗</div>
+            <h4 class="scroll-term-title">ZERO LAUNDRY RETURN</h4>
+            <p class="scroll-term-body">Strictly do not dry clean or iron. Slip both pieces into the pre-paid return satchel unwashed. Handover at campus gate.</p>
           </div>
         </div>
       </div>
@@ -797,6 +821,22 @@
     </section>
 
   </div>
+
+  <script>
+    // Gallery Exhibition Micro-Interactions
+    document.addEventListener('DOMContentLoaded', () => {
+      const posters = document.querySelectorAll('.exhibit-poster');
+      posters.forEach(poster => {
+        poster.style.transition = 'border-color 0.3s ease, box-shadow 0.3s ease';
+        poster.addEventListener('mouseenter', () => {
+          poster.style.borderColor = '#111111';
+        });
+        poster.addEventListener('mouseleave', () => {
+          poster.style.borderColor = '#cdc7ba';
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>

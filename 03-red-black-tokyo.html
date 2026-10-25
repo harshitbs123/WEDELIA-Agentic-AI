@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEDELIA // 03 Red / Black Tokyo</title>
+  <title>WEDELIA // 03 Red / Black Tokyo — Tokyo Night Campaign</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Shippori+Mincho:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
       background: var(--bg);
       color: var(--fg);
       font-family: 'Space Grotesk', sans-serif;
-      line-height: 1.4;
+      line-height: 1.45;
       padding-top: 48px;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
@@ -44,7 +44,7 @@
       justify-content: space-between;
       padding: 0 1.5rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
     }
     .switch-nav a { color: #ffffff; text-decoration: none; }
     .switch-pills { display: flex; gap: 0.25rem; }
@@ -109,7 +109,7 @@
       letter-spacing: 0.3em;
     }
 
-    /* SECTION 1: ASYMMETRIC OPENING CAMPAIGN HERO */
+    /* COMPOSITION 1: ASYMMETRIC OPENING CAMPAIGN HERO */
     .poster-hero {
       display: grid;
       grid-template-columns: 1fr;
@@ -154,8 +154,8 @@
       border-left: 4px solid var(--red);
     }
     .body-copy {
-      font-size: 0.95rem;
-      line-height: 1.7;
+      font-size: 0.98rem;
+      line-height: 1.75;
       color: #333333;
       max-width: 520px;
       margin-bottom: 2.5rem;
@@ -202,16 +202,8 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
-    .photo-caption-row {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
 
-    /* SECTION 2: TOKYO NIGHT FILE (AFTER DARK 23:47 SHIBUYA) */
+    /* COMPOSITION 2: TOKYO NIGHT FILE (AFTER DARK 23:47 SHIBUYA) */
     .night-file-section {
       background: var(--dark-surface);
       color: #ffffff;
@@ -282,21 +274,8 @@
       font-size: 0.68rem;
       font-weight: 700;
     }
-    .night-prose {
-      font-size: 0.92rem;
-      line-height: 1.75;
-      color: #cccccc;
-    }
-    .night-prose strong {
-      color: #ffffff;
-      font-family: 'Space Mono', monospace;
-      display: block;
-      margin-bottom: 0.5rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-    }
 
-    /* SECTION 3: OCCASION CAMPAIGN (4 DISTINCT GRAPHIC FRAMES) */
+    /* COMPOSITION 3: OCCASION CAMPAIGN POSTERS */
     .section-title-strip {
       display: flex;
       justify-content: space-between;
@@ -311,121 +290,155 @@
       text-transform: uppercase;
       letter-spacing: -0.02em;
     }
-    .occasion-four-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-bottom: 6rem;
-    }
-    @media (min-width: 768px) {
-      .occasion-four-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (min-width: 1200px) {
-      .occasion-four-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-    .occasion-frame {
-      border: 2px solid var(--fg);
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      background: #ffffff;
-      transition: border-color 0.2s ease;
-    }
-    .occasion-frame:hover {
-      border-color: var(--red);
-    }
-    .frame-num {
-      font-family: 'Anton', sans-serif;
-      font-size: 2.8rem;
-      line-height: 0.85;
-      color: var(--red);
-      margin-bottom: 1rem;
-    }
-    .frame-title {
-      font-family: 'Anton', sans-serif;
-      font-size: 2.2rem;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      line-height: 0.95;
-      margin-bottom: 0.5rem;
-    }
-    .frame-kanji {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-    .frame-desc {
-      font-size: 0.85rem;
-      line-height: 1.6;
-      color: #333333;
-      margin-bottom: 2rem;
-    }
-    .frame-tariff {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 700;
-      border-top: 1px solid var(--hairline);
-      padding-top: 0.75rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    .frame-tariff span.price {
-      color: var(--red);
-      font-size: 1.1rem;
-    }
-
-    /* SECTION 4: LOOK CAMPAIGN POSTERS */
-    .look-posters-grid {
+    .occasion-posters-stack {
       display: grid;
       grid-template-columns: 1fr;
       gap: 3.5rem;
       margin-bottom: 7rem;
     }
-    @media (min-width: 1024px) {
-      .look-posters-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2.5rem;
+    @media (min-width: 768px) {
+      .occasion-posters-stack {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
-    .look-poster-card {
+    @media (min-width: 1200px) {
+      .occasion-posters-stack {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .campaign-poster-card {
+      border: 2px solid var(--fg);
+      background: #ffffff;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .campaign-poster-card:hover {
+      border-color: var(--red);
+      transform: translateY(-3px);
+    }
+    .poster-red-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--red);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+    .poster-huge-name {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .poster-kanji-sub {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+    .poster-desc-text {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #333333;
+      margin-bottom: 2rem;
+    }
+    .poster-bottom-rate {
+      border-top: 2px solid var(--fg);
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+    }
+    .poster-bottom-rate .price {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.5rem;
+      color: var(--red);
+    }
+
+    /* COMPOSITION 4: REDLINE PROTOCOL MANIFESTO */
+    .redline-manifesto-block {
+      border: 3px solid var(--red);
+      background: #000000;
+      color: #ffffff;
+      padding: 4rem 2rem;
+      margin-bottom: 7rem;
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .redline-manifesto-block {
+        padding: 5rem 4rem;
+      }
+    }
+    .manifesto-monument-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 768px) {
+      .manifesto-monument-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .manifesto-slogan-box {
+      border-top: 3px solid var(--red);
+      padding-top: 1.5rem;
+    }
+    .manifesto-slogan-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .manifesto-slogan-body {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #cccccc;
+    }
+
+    /* COMPOSITION 5: DENSE NIGHT ARCHIVE WALL */
+    .night-archive-wall {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 8rem;
+    }
+    @media (min-width: 768px) {
+      .night-archive-wall {
+        grid-template-columns: 1.3fr 1fr;
+        align-items: stretch;
+      }
+    }
+    .archive-specimen-poster {
       border: 2px solid var(--fg);
       display: flex;
       flex-direction: column;
       position: relative;
       background: #ffffff;
     }
-    .look-poster-header {
-      padding: 1rem 1.25rem;
-      background: #0d0d0d;
-      color: #ffffff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-    }
-    .look-poster-img-wrap {
+    .archive-poster-img-wrap {
       position: relative;
-      overflow: hidden;
       border-bottom: 2px solid var(--fg);
     }
-    .look-poster-img-wrap img {
+    .archive-poster-img-wrap img {
       width: 100%;
-      aspect-ratio: 1/1.28;
+      aspect-ratio: 1/1.2;
       object-fit: cover;
       display: block;
-      filter: grayscale(100%) contrast(120%);
+      filter: grayscale(100%) contrast(125%);
     }
-    .pen-annotation {
+    .archive-red-pen {
       position: absolute;
       top: 1rem;
       left: 1rem;
@@ -434,47 +447,19 @@
       font-family: 'Space Mono', monospace;
       font-size: 0.68rem;
       font-weight: 700;
-      padding: 0.3rem 0.6rem;
-      letter-spacing: 0.1em;
+      padding: 0.35rem 0.75rem;
       text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
-    .look-poster-body {
-      padding: 1.5rem;
+    .archive-poster-meta {
+      padding: 1.75rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       flex: 1;
     }
-    .look-poster-title {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.7rem;
-      text-transform: uppercase;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-    }
-    .look-poster-specs {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-    .look-poster-rate {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      border-top: 2px solid var(--fg);
-      padding-top: 1rem;
-    }
-    .look-poster-rate .price {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      color: var(--red);
-      letter-spacing: 0.02em;
-    }
 
-    /* SECTION 5: COLLEGIATE CULTURE STORIES */
+    /* COMPOSITION 6: COLLEGIATE CULTURE STORIES */
     .stories-row {
       display: grid;
       grid-template-columns: 1fr;
@@ -515,56 +500,7 @@
       color: #333333;
     }
 
-    /* SECTION 6: REDLINE CONNECTING PROTOCOL */
-    .redline-protocol-bar {
-      border: 2px solid var(--red);
-      padding: 2.5rem 2rem;
-      background: #fff8f8;
-      margin-bottom: 7rem;
-    }
-    .protocol-title {
-      font-family: 'Anton', sans-serif;
-      font-size: 2rem;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-    .protocol-steps-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    @media (min-width: 768px) {
-      .protocol-steps-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-    .step-item {
-      border-top: 2px solid var(--red);
-      padding-top: 1rem;
-    }
-    .step-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--red);
-      margin-bottom: 0.5rem;
-    }
-    .step-label {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.25rem;
-      text-transform: uppercase;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-    }
-    .step-desc {
-      font-size: 0.78rem;
-      line-height: 1.55;
-      color: #555555;
-    }
-
-    /* SECTION 7: FINAL MONUMENTAL TYPOGRAPHIC STATEMENT */
+    /* COMPOSITION 7: FINAL MONUMENTAL CLOSING STATEMENT */
     .closing-monument {
       border-top: 3px solid var(--fg);
       padding-top: 4rem;
@@ -573,7 +509,7 @@
     }
     .closing-huge-type {
       font-family: 'Anton', sans-serif;
-      font-size: clamp(2.8rem, 8vw, 7.5rem);
+      font-size: clamp(3rem, 9vw, 8rem);
       line-height: 0.9;
       text-transform: uppercase;
       letter-spacing: -0.03em;
@@ -612,7 +548,7 @@
 </head>
 <body>
 
-  <!-- Switcher Top Bar (5 Selected Directions) -->
+  <!-- Switcher Top Bar (5 Active Directions) -->
   <nav class="switch-nav">
     <div>
       <a href="index.html">← INDEX</a>
@@ -643,7 +579,7 @@
       </div>
     </header>
 
-    <!-- SECTION 1: ASYMMETRIC OPENING HERO SPREAD -->
+    <!-- COMPOSITION 1: ASYMMETRIC OPENING HERO SPREAD -->
     <section class="poster-hero">
       <div class="poster-left">
         <h1 class="brand-name">WEDELIA</h1>
@@ -686,14 +622,14 @@
           <div class="photo-red-annotation">DISPATCH STATUS: ACTIVE</div>
           <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Faille">
         </div>
-        <div class="photo-caption-row">
+        <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted);">
           <span>PLATE 03: DIOR ATELIER ZEMIRE FAILLE</span>
           <span>VALUATION: ₹48,000 // RENT: ₹2,999</span>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 2: TOKYO NIGHT FILE (AFTER DARK 23:47 SHIBUYA) -->
+    <!-- COMPOSITION 2: TOKYO NIGHT FILE (AFTER DARK 23:47 SHIBUYA) -->
     <section class="night-file-section">
       <div class="night-header">
         <h2 class="night-title">AFTER DARK // 23:47 SHIBUYA</h2>
@@ -708,7 +644,7 @@
           <div style="font-family: 'Space Mono', monospace; font-size: 0.85rem; margin-bottom: 1.5rem; color: #ffffff;">
             STREET RECORD // SHIBUYA CROSSING × NORTH CAMPUS DEL
           </div>
-          <p class="night-prose">
+          <p style="font-size: 0.92rem; line-height: 1.75; color: #cccccc;">
             The clock hits 23:47. The festival headline act just concluded at the college sports grounds. The entire crowd floods the streets, catching late-night autos toward Hudson Lane and Majnu ka Tilla. You are not wearing an ordinary Zara polyester slip that tears at the seam. You are wearing a sculpted runway silhouette with 1,200 grams of structured faille drape.
           </p>
         </div>
@@ -719,180 +655,184 @@
         </div>
 
         <div>
-          <div class="night-prose">
-            <strong>THE REVOLUTION OF LEASED LUXURY</strong>
-            When you own a ₹40,000 dress, you treat it like an fragile heirloom. You sit carefully, you stress about stains, you hesitate to dance. When WEDELIA leases you an archival piece with a ₹0 liability shield, you own the energy of the night completely. Spill mocktails, dance through fog machines, jump to bass drops. We absorb the wear.
+          <div style="font-size: 0.92rem; line-height: 1.75; color: #cccccc;">
+            <strong style="color: #ffffff; font-family: 'Space Mono', monospace; display: block; margin-bottom: 0.5rem; font-size: 0.82rem; letter-spacing: 0.08em;">THE REVOLUTION OF LEASED LUXURY</strong>
+            When you own a ₹40,000 dress, you treat it like a fragile heirloom. You sit carefully, you stress about stains, you hesitate to dance. When WEDELIA leases you an archival piece with a ₹0 liability shield, you own the energy of the night completely. Spill mocktails, dance through fog machines, jump to bass drops. We absorb the wear.
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 3: OCCASION CAMPAIGN (4 DISTINCT GRAPHIC FRAMES) -->
+    <!-- COMPOSITION 3: OCCASION CAMPAIGN POSTERS -->
     <div class="section-title-strip">
-      <h2>OCCASION CAMPAIGN // 4 GRAPHIC FRAMES</h2>
+      <h2>OCCASION CAMPAIGN // 4 POSTER FRAMES</h2>
       <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red);">
         TARGET: UNIVERSITY OF DELHI / IIT / NIFT / ASHOKA
       </div>
     </div>
 
-    <div class="occasion-four-grid">
-      <!-- Frame 1 -->
-      <div class="occasion-frame">
+    <div class="occasion-posters-stack">
+      <!-- Poster 1 -->
+      <div class="campaign-poster-card">
         <div>
-          <div class="frame-num">01</div>
-          <h3 class="frame-title">COLLEGE FEST</h3>
-          <div class="frame-kanji">祝祭 (FESTIVAL)</div>
-          <p class="frame-desc">
+          <div class="poster-red-tag">CAMPAIGN POSTER // 01</div>
+          <h3 class="poster-huge-name">FESTIVAL</h3>
+          <div class="poster-kanji-sub">祝祭 (COLLEGE FEST)</div>
+          <p class="poster-desc-text">
             Electric, loud, strobe-reactive. Kinetic wraps and metallic lurex designed to reflect concert stadium spotlights from 50 yards away.
           </p>
         </div>
-        <div class="frame-tariff">
-          <span>TARIFF // 3D</span>
-          <span class="price">₹1,699</span>
+        <div class="poster-bottom-rate">
+          <span>LEASE TARIFF</span>
+          <span class="price">₹1,699 / 3D</span>
         </div>
       </div>
 
-      <!-- Frame 2 -->
-      <div class="occasion-frame" style="border-color: var(--red);">
+      <!-- Poster 2 -->
+      <div class="campaign-poster-card" style="border-color: var(--red);">
         <div>
-          <div class="frame-num">02</div>
-          <h3 class="frame-title">SENIOR FAREWELL</h3>
-          <div class="frame-kanji" style="color: var(--red);">門出 (FAREWELL)</div>
-          <p class="frame-desc">
+          <div class="poster-red-tag" style="color: var(--red);">CAMPAIGN POSTER // 02</div>
+          <h3 class="poster-huge-name" style="color: var(--red);">FAREWELL</h3>
+          <div class="poster-kanji-sub" style="color: var(--red);">門出 (SENIOR BALL)</div>
+          <p class="poster-desc-text">
             Sharp, formal, monumental contrast. High-neck corsetry and sweeping floor-length faille skirts that command the departmental stage.
           </p>
         </div>
-        <div class="frame-tariff">
-          <span>TARIFF // 3D</span>
-          <span class="price">₹2,899</span>
+        <div class="poster-bottom-rate">
+          <span>LEASE TARIFF</span>
+          <span class="price">₹2,899 / 3D</span>
         </div>
       </div>
 
-      <!-- Frame 3 -->
-      <div class="occasion-frame">
+      <!-- Poster 3 -->
+      <div class="campaign-poster-card">
         <div>
-          <div class="frame-num">03</div>
-          <h3 class="frame-title">CONCERT CIRCUIT</h3>
-          <div class="frame-kanji">音響 (CONCERT)</div>
-          <p class="frame-desc">
+          <div class="poster-red-tag">CAMPAIGN POSTER // 03</div>
+          <h3 class="poster-huge-name">CONCERT</h3>
+          <div class="poster-kanji-sub">響宴 (ARENA CIRCUIT)</div>
+          <p class="poster-desc-text">
             Raw silhouettes, heavy hardware accents, oversized tailoring. Crafted for arena acoustics and flash photography in low light.
           </p>
         </div>
-        <div class="frame-tariff">
-          <span>TARIFF // 3D</span>
-          <span class="price">₹1,499</span>
+        <div class="poster-bottom-rate">
+          <span>LEASE TARIFF</span>
+          <span class="price">₹1,499 / 3D</span>
         </div>
       </div>
 
-      <!-- Frame 4 -->
-      <div class="occasion-frame">
+      <!-- Poster 4 -->
+      <div class="campaign-poster-card">
         <div>
-          <div class="frame-num">04</div>
-          <h3 class="frame-title">FRESHERS NIGHT</h3>
-          <div class="frame-kanji">新歓 (FRESHERS)</div>
-          <p class="frame-desc">
+          <div class="poster-red-tag">CAMPAIGN POSTER // 04</div>
+          <h3 class="poster-huge-name">FRESHERS</h3>
+          <div class="poster-kanji-sub">新歓 (INDUCTION)</div>
+          <p class="poster-desc-text">
             Clean lines, sculptural asymmetry, effortless cool. The defining look of your university entrance that establishes your aesthetic standard.
           </p>
         </div>
-        <div class="frame-tariff">
-          <span>TARIFF // 3D</span>
-          <span class="price">₹1,299</span>
+        <div class="poster-bottom-rate">
+          <span>LEASE TARIFF</span>
+          <span class="price">₹1,299 / 3D</span>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 4: LOOK CAMPAIGN POSTERS -->
+    <!-- COMPOSITION 4: REDLINE PROTOCOL MANIFESTO -->
+    <section class="redline-manifesto-block">
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red); margin-bottom: 2rem; letter-spacing: 0.15em;">
+        THE REDLINE PROTOCOL // FOUR TENETS OF LEASED LUXURY
+      </div>
+
+      <div class="manifesto-monument-grid">
+        <div class="manifesto-slogan-box">
+          <h3 class="manifesto-slogan-title">WEAR HARD.</h3>
+          <p class="manifesto-slogan-body">
+            You don't lease haute couture to stand still. Dance in amphitheaters, navigate rain-slicked lawns, celebrate through fog machines. We absorb the wear.
+          </p>
+        </div>
+
+        <div class="manifesto-slogan-box">
+          <h3 class="manifesto-slogan-title">ZERO CLEAN.</h3>
+          <p class="manifesto-slogan-body">
+            Strictly do not dry clean or iron. Hand the garment back unwashed in the odor-lock satchel. Campus laundry is an obsolete chore.
+          </p>
+        </div>
+
+        <div class="manifesto-slogan-box">
+          <h3 class="manifesto-slogan-title">DUAL FIT.</h3>
+          <p class="manifesto-slogan-body">
+            Fitting anxiety does not exist here. Your selected size arrives paired with a sealed backup size at ₹0 surcharge.
+          </p>
+        </div>
+
+        <div class="manifesto-slogan-box">
+          <h3 class="manifesto-slogan-title">OWN NOTHING.</h3>
+          <p class="manifesto-slogan-body">
+            Ownership fills cupboards with dead polyester. Leasing fills your university memory with museum-tier couture.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPOSITION 5: DENSE NIGHT ARCHIVE WALL -->
     <div class="section-title-strip">
-      <h2>LOOK CAMPAIGN // SPECIMEN POSTERS</h2>
+      <h2>NIGHT ARCHIVE // SPECIMEN DOSSIERS</h2>
       <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem;">
-        RESERVATION ACTIVE FOR THIS WEEKEND
+        READY FOR CAMPUS DISPATCH
       </div>
     </div>
 
-    <div class="look-posters-grid">
-      <!-- Look Poster 1 -->
-      <article class="look-poster-card">
-        <div class="look-poster-header">
-          <span>SPECIMEN // WDL-01</span>
-          <span>STATUS: READY</span>
-        </div>
-        <div class="look-poster-img-wrap">
-          <div class="pen-annotation">SENIOR FAREWELL APEX</div>
+    <section class="night-archive-wall">
+      <article class="archive-specimen-poster">
+        <div class="archive-poster-img-wrap">
+          <div class="archive-red-pen">SENIOR FAREWELL APEX</div>
           <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Duet Gown">
         </div>
-        <div class="look-poster-body">
+        <div class="archive-poster-meta">
           <div>
-            <h3 class="look-poster-title">PLEATED DUET GOWN</h3>
-            <p class="look-poster-specs">
-              ARCHIVE: JEAN DESSES PARIS 1951<br>
+            <h3 style="font-family: 'Anton', sans-serif; font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
+              PLEATED DUET GOWN (1951)
+            </h3>
+            <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem;">
+              ARCHIVE: JEAN DESSES PARIS ATELIER<br>
               FABRIC: HAND-PLEATED SILK CHIFFON<br>
               RETAIL VALUE: ₹42,000<br>
-              INCLUDES: UK 8 + COMPLIMENTARY UK 10
+              INCLUDES: PRIMARY + COMPLIMENTARY BACKUP
             </p>
           </div>
-          <div class="look-poster-rate">
+          <div style="border-top: 2px solid var(--fg); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
             <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem;">RENTAL (3 DAYS)</span>
-            <span class="price">₹2,899</span>
+            <span style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: var(--red);">₹2,899</span>
           </div>
         </div>
       </article>
 
-      <!-- Look Poster 2 -->
-      <article class="look-poster-card">
-        <div class="look-poster-header">
-          <span>SPECIMEN // WDL-02</span>
-          <span>STATUS: READY</span>
-        </div>
-        <div class="look-poster-img-wrap">
-          <div class="pen-annotation">FESTIVAL HEADLINER</div>
+      <article class="archive-specimen-poster">
+        <div class="archive-poster-img-wrap">
+          <div class="archive-red-pen">FESTIVAL HEADLINER</div>
           <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Shift Gown">
         </div>
-        <div class="look-poster-body">
+        <div class="archive-poster-meta">
           <div>
-            <h3 class="look-poster-title">KINETIC SHIFT & WRAP</h3>
-            <p class="look-poster-specs">
-              ARCHIVE: CUSTO BARCELONA SUMMER ED.<br>
+            <h3 style="font-family: 'Anton', sans-serif; font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
+              KINETIC SHIFT & WRAP
+            </h3>
+            <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem;">
+              ARCHIVE: RUNWAY SUMMER EDITION<br>
               FABRIC: METALLIC REFLECTIVE KNIT<br>
               RETAIL VALUE: ₹22,000<br>
-              INCLUDES: UK 6 + COMPLIMENTARY UK 8
+              INCLUDES: PRIMARY + COMPLIMENTARY BACKUP
             </p>
           </div>
-          <div class="look-poster-rate">
+          <div style="border-top: 2px solid var(--fg); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
             <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem;">RENTAL (3 DAYS)</span>
-            <span class="price">₹1,699</span>
+            <span style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: var(--red);">₹1,699</span>
           </div>
         </div>
       </article>
+    </section>
 
-      <!-- Look Poster 3 -->
-      <article class="look-poster-card">
-        <div class="look-poster-header">
-          <span>SPECIMEN // WDL-03</span>
-          <span>STATUS: READY</span>
-        </div>
-        <div class="look-poster-img-wrap">
-          <div class="pen-annotation">SOCIETY GALA SELECTION</div>
-          <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Dress">
-        </div>
-        <div class="look-poster-body">
-          <div>
-            <h3 class="look-poster-title">GOLD BROCADE ROBE</h3>
-            <p class="look-poster-specs">
-              ARCHIVE: COURT SILHOUETTE COLLECTION<br>
-              FABRIC: GILDED METALLIC JACQUARD<br>
-              RETAIL VALUE: ₹65,000<br>
-              INCLUDES: UK 10 + COMPLIMENTARY UK 12
-            </p>
-          </div>
-          <div class="look-poster-rate">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem;">RENTAL (3 DAYS)</span>
-            <span class="price">₹3,899</span>
-          </div>
-        </div>
-      </article>
-    </div>
-
-    <!-- SECTION 5: COLLEGIATE CULTURE STORIES -->
+    <!-- COMPOSITION 6: COLLEGIATE CULTURE STORIES -->
     <div class="stories-row">
       <div class="story-card">
         <div class="story-code">CHRONICLE 01 // FIRST FEST</div>
@@ -919,34 +859,7 @@
       </div>
     </div>
 
-    <!-- SECTION 6: REDLINE CONNECTING PROTOCOL -->
-    <div class="redline-protocol-bar">
-      <h3 class="protocol-title">WEDELIA ZERO-FRICTION RENTAL PROTOCOL</h3>
-      <div class="protocol-steps-grid">
-        <div class="step-item">
-          <div class="step-num">STEP 01</div>
-          <div class="step-label">24H DISPATCH</div>
-          <p class="step-desc">Sealed temperature-controlled box delivered directly to your campus gate or hostel desk 24 hours before event call time.</p>
-        </div>
-        <div class="step-item">
-          <div class="step-num">STEP 02</div>
-          <div class="step-label">DUAL SIZES</div>
-          <p class="step-desc">Your primary choice plus a complimentary adjacent backup size included in every shipment. Zero fitting anxiety.</p>
-        </div>
-        <div class="step-item">
-          <div class="step-num">STEP 03</div>
-          <div class="step-label">₹0 DAMAGE SHIELD</div>
-          <p class="step-desc">Dance floor champagne spills, minor heel snags, and broken seams are 100% insured. Never worry about penalties.</p>
-        </div>
-        <div class="step-item">
-          <div class="step-num">STEP 04</div>
-          <div class="step-label">RETURN UNWASHED</div>
-          <p class="step-desc">Slip both garments back into the pre-paid satchel. Hand over to hostel security Monday morning. Zero laundry hassle.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 7: FINAL MONUMENTAL TYPOGRAPHIC STATEMENT -->
+    <!-- COMPOSITION 7: FINAL MONUMENTAL TYPOGRAPHIC STATEMENT -->
     <section class="closing-monument">
       <div class="closing-huge-type">
         ONE NIGHT.<br>
@@ -973,6 +886,22 @@
     </footer>
 
   </div>
+
+  <script>
+    // Live Shibuya / Delhi Time Protocol
+    document.addEventListener('DOMContentLoaded', () => {
+      const stamp = document.querySelector('.red-stamp');
+      if (stamp) {
+        setInterval(() => {
+          const now = new Date();
+          const jstH = (now.getUTCHours() + 9) % 24;
+          const jstM = String(now.getUTCMinutes()).padStart(2, '0');
+          const jstS = String(now.getUTCSeconds()).padStart(2, '0');
+          stamp.textContent = `SHIBUYA ${String(jstH).padStart(2, '0')}:${jstM}:${jstS}`;
+        }, 1000);
+      }
+    });
+  </script>
 
 </body>
 </html>

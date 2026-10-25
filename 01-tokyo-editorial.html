@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEDELIA // 01 Tokyo Editorial — Full Publication</title>
+  <title>WEDELIA // 01 Tokyo Editorial — Archival Fashion Publication</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,18 +12,18 @@
     
     :root {
       --bg: #f5f4ef;
-      --fg: #121212;
-      --muted: #78756d;
-      --line: #dedad0;
-      --accent: #121212;
-      --highlight: #222222;
+      --fg: #141312;
+      --muted: #6e6b63;
+      --line: #dcd7cc;
+      --paper: #eeebe1;
+      --dark-ink: #11100f;
     }
 
     body {
       background-color: var(--bg);
       color: var(--fg);
       font-family: 'Space Grotesk', -apple-system, sans-serif;
-      line-height: 1.5;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       padding-top: 48px;
@@ -45,7 +45,7 @@
       justify-content: space-between;
       padding: 0 1.5rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       letter-spacing: 0.05em;
     }
     .switch-nav a { color: var(--fg); text-decoration: none; }
@@ -72,12 +72,12 @@
 
     /* Editorial Canvas */
     .editorial-canvas {
-      max-width: 1380px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 8rem;
+      padding: 2.5rem 1.5rem 8rem;
     }
     @media (min-width: 1024px) {
-      .editorial-canvas { padding: 4rem 3.5rem 10rem; }
+      .editorial-canvas { padding: 3.5rem 3.5rem 10rem; }
     }
 
     /* Top Masthead Header */
@@ -98,25 +98,28 @@
       font-family: 'Shippori Mincho', serif;
       font-size: 0.85rem;
       color: var(--fg);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.05em;
     }
 
-    /* SECTION 1: Asymmetric Magazine Cover Spread */
-    .hero-spread {
+    /* COMPOSITION 1: EDITORIAL COVER SPREAD */
+    .cover-spread {
       display: grid;
       grid-template-columns: 1fr;
       gap: 3rem;
-      margin-bottom: 7rem;
+      position: relative;
+      margin-bottom: 6rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5rem;
     }
     @media (min-width: 1024px) {
-      .hero-spread {
-        grid-template-columns: 140px 1.15fr 460px;
+      .cover-spread {
+        grid-template-columns: 60px 1.15fr 1fr;
         gap: 3.5rem;
-        align-items: start;
+        align-items: stretch;
       }
     }
 
-    /* Column 1: Vertical Japanese Spine */
+    /* Vertical Japanese Spine */
     .vertical-spine {
       display: none;
     }
@@ -124,567 +127,566 @@
       .vertical-spine {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        font-family: 'Shippori Mincho', serif;
+        justify-content: space-between;
+        align-items: center;
+        border-right: 1px solid var(--line);
+        padding-right: 1.5rem;
         writing-mode: vertical-rl;
+        text-orientation: mixed;
+        font-family: 'Shippori Mincho', serif;
+        font-size: 0.88rem;
         letter-spacing: 0.35em;
-        font-size: 1.05rem;
         color: var(--muted);
-        line-height: 2.2;
-        padding-top: 1rem;
       }
-      .vertical-spine strong {
-        color: var(--fg);
+      .vertical-spine .spine-bold {
         font-weight: 700;
+        color: var(--fg);
+        font-size: 1.05rem;
       }
     }
 
-    /* Column 2: Title & Editorial Manifesto */
-    .title-col {
+    /* Cover Headline & Manifesto */
+    .cover-main-content {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
     }
-    .editorial-badge {
+    .cover-issue-tag {
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
       color: var(--muted);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      display: block;
     }
-    .editorial-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--fg);
-      border-radius: 50%;
-    }
-    .main-title {
+    .cover-title {
       font-family: 'Shippori Mincho', serif;
-      font-size: clamp(3.4rem, 8vw, 6.8rem);
+      font-size: clamp(3rem, 7.5vw, 6.2rem);
       font-weight: 700;
       line-height: 0.95;
       letter-spacing: -0.03em;
       margin-bottom: 2rem;
       color: var(--fg);
     }
-    .main-title .en-sub {
+    .cover-title .subtitle-italic {
       display: block;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 300;
-      font-size: 0.38em;
-      letter-spacing: -0.02em;
-      margin-top: 0.8rem;
-      color: var(--muted);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.82em;
+      color: #2e2b26;
+      margin-top: 0.5rem;
     }
     .manifesto-col {
       max-width: 480px;
-      margin-top: 2rem;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: #383633;
-      padding-left: 1.5rem;
-      border-left: 1px solid var(--line);
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: #3b3935;
+      margin-bottom: 2.5rem;
     }
-    .manifesto-col p + p {
-      margin-top: 1rem;
-    }
-    .manifesto-col .quote {
-      font-family: 'Shippori Mincho', serif;
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--fg);
-      margin-bottom: 1rem;
-      display: block;
-      line-height: 1.4;
+    .cover-meta-strip {
+      border-top: 1px solid var(--line);
+      padding-top: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
     }
 
-    /* Column 3: The Hanging Runway Artwork */
-    .image-col {
+    /* Hanging Artwork Container */
+    .cover-visual-frame {
       position: relative;
-    }
-    .image-frame {
-      position: relative;
-      background: #e8e5dc;
-      overflow: hidden;
+      background: var(--paper);
+      padding: 1.5rem;
       border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .image-frame img {
+    .cover-visual-frame img {
       width: 100%;
-      height: auto;
-      aspect-ratio: 4/5.5;
+      height: 520px;
       object-fit: cover;
       display: block;
-      filter: grayscale(12%) contrast(106%);
+      filter: contrast(105%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cover-visual-frame:hover img {
+      transform: scale(1.02);
     }
     .caption-box {
-      margin-top: 1rem;
+      margin-top: 1.25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* COMPOSITION 2: GIANT VERTICAL OCCASION INDEX */
+    .vertical-index-section {
+      margin-bottom: 7rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5rem;
+    }
+    .index-header-bar {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+      margin-bottom: 2.5rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       color: var(--muted);
-      border-top: 1px solid var(--line);
-      padding-top: 0.75rem;
+      letter-spacing: 0.12em;
     }
-    .caption-box span.num {
-      color: var(--fg);
-      font-weight: 700;
-    }
-
-    /* SECTION 2: Editor's Note & Philosophical Manifesto */
-    .editors-letter-spread {
-      border-top: 2px solid var(--fg);
-      padding-top: 4rem;
-      margin-bottom: 7rem;
+    .giant-index-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3rem;
+    }
+    .index-row {
+      display: grid;
+      grid-template-columns: 80px 1.2fr 1fr auto;
+      align-items: baseline;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.2s ease, padding-left 0.2s ease;
+    }
+    .index-row:hover {
+      background-color: var(--paper);
+      padding-left: 1rem;
+    }
+    @media (max-width: 768px) {
+      .index-row {
+        grid-template-columns: 50px 1fr auto;
+        gap: 0.5rem;
+      }
+      .index-row .index-desc { display: none; }
+    }
+    .index-serial {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+    .index-title-group {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+    .index-name-en {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .index-name-jp {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .index-desc {
+      font-size: 0.88rem;
+      color: #55524b;
+      max-width: 420px;
+      line-height: 1.6;
+    }
+    .index-tariff {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--fg);
+      text-align: right;
+    }
+
+    /* COMPOSITION 3: EDITOR'S NOTE & CULTURAL ESSAY */
+    .editors-letter-spread {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+      margin-bottom: 7rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5rem;
     }
     @media (min-width: 1024px) {
       .editors-letter-spread {
-        grid-template-columns: 240px 1fr 340px;
-        gap: 4rem;
+        grid-template-columns: 340px 1fr;
+        gap: 5rem;
       }
     }
-    .editors-meta {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--muted);
-      line-height: 1.8;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 2rem;
+    .letter-sidebar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--line);
+      padding-right: 2.5rem;
     }
-    @media (min-width: 1024px) {
-      .editors-meta {
-        border-bottom: none;
-        border-right: 1px solid var(--line);
-        padding-right: 2rem;
-      }
-    }
-    .editors-meta strong {
+    .letter-sidebar-quote {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      line-height: 1.6;
       color: var(--fg);
+      padding: 1.75rem;
+      background: var(--paper);
+      border-left: 3px solid var(--fg);
+      margin-bottom: 1.5rem;
     }
     .letter-body {
       font-size: 1.05rem;
-      line-height: 1.8;
-      color: #2b2926;
+      line-height: 1.9;
+      color: #2e2c29;
     }
     .letter-body .drop-letter {
       float: left;
       font-family: 'Shippori Mincho', serif;
-      font-size: 4.8rem;
+      font-size: 5rem;
       line-height: 0.8;
-      margin-right: 1rem;
-      padding-top: 0.3rem;
+      margin-right: 1.25rem;
+      padding-top: 0.4rem;
       font-weight: 900;
       color: var(--fg);
     }
     .letter-body p + p {
-      margin-top: 1.5rem;
-    }
-    .letter-sidebar-quote {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.35rem;
-      font-style: italic;
-      line-height: 1.5;
-      color: var(--fg);
-      padding: 1.75rem;
-      background: #eeeae0;
-      border-left: 3px solid var(--fg);
-      margin-bottom: 1.5rem;
-    }
-    .letter-sidebar-jp {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.8;
-      padding: 0 0.5rem;
+      margin-top: 1.75rem;
     }
 
-    /* SECTION 3: Typographic Occasion Index (No cards) */
-    .occasion-index-spread {
-      border-top: 1px solid var(--line);
-      padding-top: 4rem;
+    /* COMPOSITION 4: MAGAZINE ISSUE SPREAD (Headline crosses boundary) */
+    .issue-spread-feature {
+      position: relative;
       margin-bottom: 8rem;
-    }
-    .occasion-index-title-row {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 3.5rem;
-      border-bottom: 1px solid var(--fg);
-      padding-bottom: 1.5rem;
-    }
-    @media (min-width: 768px) {
-      .occasion-index-title-row {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: baseline;
-      }
-    }
-    .occasion-index-title-row h2 {
-      font-family: 'Shippori Mincho', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-    }
-    .occasion-index-title-row span {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .editorial-index-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .editorial-index-row {
       border-bottom: 1px solid var(--line);
-      display: grid;
-      grid-template-columns: 1fr;
-      padding: 1.5rem 0;
-      transition: background 0.2s;
+      padding-bottom: 5rem;
     }
-    @media (min-width: 768px) {
-      .editorial-index-row {
-        grid-template-columns: 60px 1.2fr 1fr 1fr;
-        align-items: baseline;
-        gap: 2rem;
-      }
-    }
-    .editorial-index-row:hover {
-      background: rgba(0, 0, 0, 0.015);
-    }
-    .idx-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .idx-name {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--fg);
-      display: flex;
-      flex-direction: column;
-    }
-    .idx-name span.idx-jp {
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-weight: normal;
-      margin-top: 0.2rem;
-    }
-    .idx-desc {
-      font-size: 0.88rem;
-      color: #55524c;
-      line-height: 1.5;
-    }
-    .idx-meta {
+    .issue-feature-header {
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
       color: var(--muted);
-      text-align: left;
-    }
-    @media (min-width: 768px) {
-      .idx-meta {
-        text-align: right;
-      }
-    }
-
-    /* SECTION 4: Revolving Lookbook Archive Spreads */
-    .lookbook-archive-spread {
-      border-top: 2px solid var(--fg);
-      padding-top: 4rem;
-      margin-bottom: 8rem;
-    }
-    .archive-spread-header {
+      margin-bottom: 2rem;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 4rem;
     }
-    .archive-spread-header h2 {
+    .crossing-headline-wrap {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .crossing-headline {
       font-family: 'Shippori Mincho', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
+      font-size: clamp(2.4rem, 5.8vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      max-width: 900px;
     }
-    .archive-spread-header span {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    /* Magazine Spread Item Row */
-    .publication-spread-row {
+    .issue-feature-stage {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3rem;
-      margin-bottom: 6rem;
-      padding-bottom: 6rem;
-      border-bottom: 1px solid var(--line);
+      gap: 2.5rem;
     }
     @media (min-width: 1024px) {
-      .publication-spread-row {
-        grid-template-columns: 320px 1.2fr 360px;
-        gap: 3.5rem;
+      .issue-feature-stage {
+        grid-template-columns: 1.25fr 1fr;
+        gap: 4rem;
         align-items: center;
       }
     }
-    .publication-spread-row.reverse {
-      direction: ltr;
+    .issue-feature-visual {
+      position: relative;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 1.5rem;
+    }
+    .issue-feature-visual img {
+      width: 100%;
+      height: 560px;
+      object-fit: cover;
+      display: block;
+    }
+    .feature-side-dossier {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .feature-dossier-prose {
+      font-size: 0.98rem;
+      line-height: 1.85;
+      color: #3b3935;
+      margin-bottom: 2rem;
+    }
+
+    /* COMPOSITION 5: FASHION SPECIMEN STUDY (Museum Documentation) */
+    .specimen-study-section {
+      margin-bottom: 8rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5rem;
+    }
+    .specimen-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      background: #faf9f5;
+      border: 1px solid var(--line);
+      padding: 2.5rem 1.5rem;
     }
     @media (min-width: 1024px) {
-      .publication-spread-row.reverse {
-        grid-template-columns: 360px 1.2fr 320px;
+      .specimen-grid {
+        grid-template-columns: 1fr 1.2fr;
+        padding: 3.5rem 3rem;
+        gap: 4rem;
       }
     }
-    .pub-spec-sheet {
+    .specimen-img-col {
+      position: relative;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      padding: 1.25rem;
+    }
+    .specimen-img-col img {
+      width: 100%;
+      max-height: 580px;
+      object-fit: cover;
+      display: block;
+    }
+    .specimen-registration-mark {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+    .specimen-sheet {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .specimen-plate-id {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .specimen-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .specimen-data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+      font-size: 0.82rem;
+    }
+    .specimen-data-table td {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .specimen-data-table td.label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      width: 42%;
+    }
+    .specimen-pricing-bar {
+      border-top: 2px solid var(--fg);
+      padding-top: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .specimen-pricing-bar .val-col {
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
       color: var(--muted);
-      line-height: 1.8;
     }
-    .pub-spec-sheet .pub-serial {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--fg);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-    .pub-spec-sheet h3 {
+    .specimen-pricing-bar .rent-col {
       font-family: 'Shippori Mincho', serif;
-      font-size: 1.45rem;
+      font-size: 1.8rem;
+      font-weight: 900;
       color: var(--fg);
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-    .pub-table-line {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.35rem 0;
-      border-bottom: 1px dotted var(--line);
-    }
-    .pub-table-line strong {
-      color: var(--fg);
-    }
-    .pub-img-box {
-      background: #e6e3da;
-      border: 1px solid var(--line);
-    }
-    .pub-img-box img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 3/4.2;
-      object-fit: cover;
-      display: block;
-      filter: contrast(104%);
-    }
-    .pub-essay-col {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: #4a4742;
-      padding: 2rem;
-      background: rgba(0, 0, 0, 0.02);
-      border-left: 2px solid var(--fg);
-    }
-    .pub-essay-col .jp-subheading {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--fg);
-      display: block;
-      margin-bottom: 0.75rem;
-    }
-    .pub-booking-tag {
-      margin-top: 1.5rem;
-      display: inline-block;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.4rem 0.8rem;
-      background: var(--fg);
-      color: var(--bg);
     }
 
-    /* SECTION 5: Style Notes & Dressing Ritual */
-    .style-notes-spread {
-      border-top: 1px solid var(--line);
-      padding-top: 4rem;
+    /* COMPOSITION 6: REVOLVING LOOK ARCHIVE (Double Spreads) */
+    .revolving-archive-section {
       margin-bottom: 8rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5rem;
     }
-    .style-notes-head {
-      margin-bottom: 3.5rem;
+    .archive-double-spread {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
     }
-    .style-notes-head h2 {
+    @media (min-width: 768px) {
+      .archive-double-spread {
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+      }
+    }
+    .archive-item-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .archive-item-visual {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .archive-item-visual img {
+      width: 100%;
+      aspect-ratio: 4/5.2;
+      object-fit: cover;
+      display: block;
+    }
+    .archive-item-title {
       font-family: 'Shippori Mincho', serif;
-      font-size: 2.2rem;
+      font-size: 1.65rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
     }
-    .style-notes-head p {
+    .archive-item-title .price-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.88rem;
+      color: var(--fg);
+      font-weight: 700;
+    }
+    .archive-item-prose {
       font-size: 0.9rem;
+      color: #4b4842;
+      line-height: 1.7;
+    }
+
+    /* COMPOSITION 7: STYLE NOTES & CAMPUS PROTOCOL */
+    .protocol-editorial-section {
+      margin-bottom: 8rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5rem;
+    }
+    .protocol-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+      margin-bottom: 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
       color: var(--muted);
     }
-    .style-notes-grid {
+    .protocol-three-columns {
       display: grid;
       grid-template-columns: 1fr;
       gap: 2.5rem;
     }
     @media (min-width: 768px) {
-      .style-notes-grid {
+      .protocol-three-columns {
         grid-template-columns: repeat(3, 1fr);
-        gap: 3rem;
+        gap: 3.5rem;
       }
     }
-    .note-column {
+    .protocol-pillar {
       border-top: 2px solid var(--fg);
       padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .note-code {
+    .protocol-pillar-num {
       font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.8rem;
       color: var(--muted);
-      letter-spacing: 0.15em;
       margin-bottom: 0.75rem;
-      display: block;
     }
-    .note-column h4 {
+    .protocol-pillar-title {
       font-family: 'Shippori Mincho', serif;
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 0.75rem;
-      line-height: 1.3;
+      margin-bottom: 1rem;
+      line-height: 1.25;
     }
-    .note-column p {
-      font-size: 0.88rem;
-      color: #4f4c46;
-      line-height: 1.7;
+    .protocol-pillar-text {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #3e3b36;
     }
 
-    /* SECTION 6: Campus Culture Stories */
-    .culture-stories-spread {
-      background: #eeece4;
-      padding: 4rem 2rem;
-      margin-bottom: 8rem;
-      border: 1px solid var(--line);
-    }
-    @media (min-width: 1024px) {
-      .culture-stories-spread {
-        padding: 5rem 4rem;
-      }
-    }
-    .culture-stories-grid {
+    /* COMPOSITION 8: CAMPUS CULTURE STORIES */
+    .campus-culture-spread {
       display: grid;
       grid-template-columns: 1fr;
       gap: 3rem;
+      margin-bottom: 7rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5rem;
     }
     @media (min-width: 1024px) {
-      .culture-stories-grid {
-        grid-template-columns: 1.1fr 1fr;
+      .campus-culture-spread {
+        grid-template-columns: 1.2fr 1fr;
         gap: 5rem;
         align-items: center;
       }
     }
-    .culture-headline {
+    .campus-quote-headline {
       font-family: 'Shippori Mincho', serif;
-      font-size: clamp(1.8rem, 3.8vw, 3rem);
+      font-size: clamp(2rem, 4.2vw, 3.4rem);
       font-weight: 900;
       line-height: 1.15;
-      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
     }
-    .culture-text {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: #3b3935;
-    }
-    .culture-text p + p {
-      margin-top: 1rem;
-    }
-    .campus-roster {
-      margin-top: 2rem;
+    .campus-network-roster {
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
       color: var(--muted);
+      line-height: 1.8;
       border-top: 1px solid var(--line);
-      padding-top: 1rem;
+      padding-top: 1.5rem;
     }
 
-    /* SECTION 7: Final Issue Ending Spread */
-    .final-editorial-spread {
-      border-top: 2px solid var(--fg);
-      padding-top: 6rem;
-      margin-bottom: 4rem;
+    /* COMPOSITION 9: FINAL PUBLICATION COLOPHON */
+    .colophon-ending {
       text-align: center;
+      padding: 5rem 1.5rem 3rem;
     }
-    .final-kanji-stamp {
+    .colophon-kanji {
       font-family: 'Shippori Mincho', serif;
-      font-size: 1.25rem;
-      letter-spacing: 0.3em;
-      color: var(--muted);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: 0.15em;
       margin-bottom: 1.5rem;
-      display: block;
     }
-    .final-climax-statement {
+    .colophon-brand {
       font-family: 'Shippori Mincho', serif;
-      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-size: clamp(3rem, 8vw, 6.5rem);
       font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      max-width: 1000px;
-      margin: 0 auto 3rem;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
     }
-    .final-meta-columns {
-      max-width: 800px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      border-top: 1px solid var(--line);
-      padding-top: 2.5rem;
+    .colophon-sub {
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
       color: var(--muted);
-      text-align: left;
-    }
-    @media (min-width: 768px) {
-      .final-meta-columns {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    .final-meta-columns strong {
-      color: var(--fg);
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Colophon Footer */
-    footer.editorial-footer {
-      border-top: 1px solid var(--fg);
-      padding-top: 2rem;
-      margin-top: 4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-    @media (min-width: 768px) {
-      footer.editorial-footer {
-        flex-direction: row;
-        justify-content: space-between;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Switcher Top Navigation -->
+  <!-- Switcher Top Bar (5 Active Directions) -->
   <nav class="switch-nav">
     <div>
       <a href="index.html">← INDEX</a>
@@ -702,463 +704,378 @@
 
   <div class="editorial-canvas">
     
-    <!-- Top Metadata Header -->
+    <!-- Top Publication Masthead -->
     <header class="top-meta">
       <div>
-        <span class="jp">ウェデリア // 瞬間を纏うアーカイブ</span><br>
-        WEDELIA HAUTE RENTAL PUBLICATION — VOL. 26
+        <span>WEDELIA QUARTERLY // VOL. 04</span>
+        <span style="margin: 0 0.75rem;">•</span>
+        <span class="jp">東京 × デリー 瞬間意匠録</span>
       </div>
-      <div style="text-align: right;">
-        ISSUE: AUTUMN/SPRING 2026<br>
-        DELHI NCR CAMPUS BUREAU / TOKYO SHIBUYA
+      <div>
+        <span>AUTUMN / SPRING 2026 ISSUE</span>
+        <span style="margin: 0 0.75rem;">•</span>
+        <span>DELHI NCR CAMPUS EDITION</span>
       </div>
     </header>
 
-    <!-- SECTION 1: Asymmetric Magazine Cover Spread -->
-    <section class="hero-spread">
+    <!-- COMPOSITION 1: EDITORIAL COVER SPREAD -->
+    <section class="cover-spread">
       
-      <!-- Column 1: Vertical Japanese Spine -->
+      <!-- Vertical Japanese Spine -->
       <aside class="vertical-spine">
-        <span>その夜だけの主人公になる。</span>
-        <strong>東京エディトリアル</strong>
-        <span>一回きりの写真に、三万五千円は要らない。</span>
-        <span>レンタルという知的な選択。</span>
+        <span class="spine-bold">記憶の一夜を纏う</span>
+        <span>所有なきオートクチュールへの招待</span>
+        <span>二〇二六秋期特輯目録</span>
       </aside>
 
-      <!-- Column 2: The Title & Editorial Manifesto -->
-      <div class="title-col">
-        <div class="editorial-badge">
-          ARCHIVE FREQUENCY 108.4 // ISSUE 26
+      <!-- Main Cover Content -->
+      <div class="cover-main-content">
+        <div>
+          <span class="cover-issue-tag">ISSUE 26 // CAMPUS NIGHTLIFE EDITORIAL</span>
+          <h1 class="cover-title">
+            WEDELIA
+            <span class="subtitle-italic">Rent the Look for the Moment.</span>
+          </h1>
+          <p class="manifesto-col">
+            You don't need a larger wardrobe. You need access to more moments. High-fashion archives leased for 3, 5, or 7 days, dispatched directly to student residential corridors 24 hours prior to entrance.
+          </p>
         </div>
-        <h1 class="main-title">
-          WEDELIA
-          <span class="en-sub">RENT THE LOOK FOR THE MOMENT.</span>
-        </h1>
 
-        <div class="manifesto-col">
-          <span class="quote">
-            "You have somewhere to go, and you need an unforgettable entrance."
-          </span>
-          <p>
-            Clothing for moments that happen once. College fests, annual farewells, debut society balls, after-dark concerts. To purchase a silhouette you will photograph once and never re-wear is an obsolete burden.
-          </p>
-          <p>
-            WEDELIA operates as a revolving couture archive. Three, five, or seven days. Delivered directly to your campus hostel with a secondary backup size included at no cost. Wear it into the night, return it unwashed.
-          </p>
+        <div class="cover-meta-strip">
+          <span>CAMPUS COURIER: ACTIVE</span>
+          <span>RESERVATION WINDOW: OPEN</span>
+          <span>ESCROW: ₹1,500 REFUNDABLE</span>
         </div>
       </div>
 
-      <!-- Column 3: The Hanging Runway Artwork -->
-      <div class="image-col">
-        <div class="image-frame">
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Sculpted Faille Silhouette">
-        </div>
+      <!-- Hanging Visual Artwork -->
+      <div class="cover-visual-frame">
+        <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Faille Gown">
         <div class="caption-box">
-          <span><span class="num">COVER PLATE</span> // SCULPTED MATTE FAILLE</span>
-          <span>CAMPUS TARIFF: ₹2,499 / 3D</span>
+          <span>PLATE 01: CHRISTIAN DIOR ATELIER</span>
+          <span>VAL: ₹48,000 // RENT: ₹2,999</span>
         </div>
       </div>
 
     </section>
 
-    <!-- SECTION 2: Editor's Note -->
+    <!-- COMPOSITION 2: GIANT VERTICAL OCCASION INDEX -->
+    <section class="vertical-index-section">
+      <div class="index-header-bar">
+        <span>01 // THE OCCASION INDEX — MOMENT DIRECTORY</span>
+        <span>CAMPUS SPHERES // DELHI NCR</span>
+      </div>
+
+      <div class="giant-index-grid">
+        <a href="#fest" class="index-row">
+          <div class="index-serial">01</div>
+          <div class="index-title-group">
+            <span class="index-name-en">FESTIVAL</span>
+            <span class="index-name-jp">祝祭の夜</span>
+          </div>
+          <div class="index-desc">Under 20,000-watt star night stage lights. Kinetic metallic lurex and reflective wraps built for distance visibility.</div>
+          <div class="index-tariff">₹1,699 / 3D</div>
+        </a>
+
+        <a href="#freshers" class="index-row">
+          <div class="index-serial">02</div>
+          <div class="index-title-group">
+            <span class="index-name-en">FRESHERS</span>
+            <span class="index-name-jp">新歓の儀</span>
+          </div>
+          <div class="index-desc">The defining first entrance on college lawns. Minimalist structured crêpe and sculptural halter silhouettes.</div>
+          <div class="index-tariff">₹1,299 / 3D</div>
+        </a>
+
+        <a href="#farewell" class="index-row">
+          <div class="index-serial">03</div>
+          <div class="index-title-group">
+            <span class="index-name-en">FAREWELL</span>
+            <span class="index-name-jp">門出の舞</span>
+          </div>
+          <div class="index-desc">The senior valedictory ball. Floor-length faille silk and atelier pleated duchesse that close out your youth.</div>
+          <div class="index-tariff">₹2,899 / 3D</div>
+        </a>
+
+        <a href="#concert" class="index-row">
+          <div class="index-serial">04</div>
+          <div class="index-title-group">
+            <span class="index-name-en">CONCERT</span>
+            <span class="index-name-jp">響宴の刻</span>
+          </div>
+          <div class="index-desc">Bass-reverberant stadium shows. Sharp tailored cuts and sweat-resistant archival fabrics that move with the crowd.</div>
+          <div class="index-tariff">₹1,499 / 3D</div>
+        </a>
+
+        <a href="#date" class="index-row">
+          <div class="index-serial">05</div>
+          <div class="index-title-group">
+            <span class="index-name-en">DATE NIGHT</span>
+            <span class="index-name-jp">密会の席</span>
+          </div>
+          <div class="index-desc">Off-campus dinners and spontaneous escapes. Washed heavy silk and subtle backless tailoring that doesn't shout.</div>
+          <div class="index-tariff">₹1,099 / 3D</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- COMPOSITION 3: EDITOR'S NOTE & CULTURAL ESSAY -->
     <section class="editors-letter-spread">
-      <div class="editors-meta">
-        <strong>EDITOR'S DISPATCH</strong><br>
-        AUTHOR: WEDELIA ATELIER CONSERVATOR<br>
-        CAMPUS: DELHI NCR & TOKYO<br>
-        DATE: AUTUMN SEMESTER 2026<br>
-        VOLUME: 26 // ISSUE 01
+      <div class="letter-sidebar">
+        <div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.1em;">
+            EDITOR'S NOTE // ESSAY NO. 14
+          </div>
+          <div class="letter-sidebar-quote">
+            "You spend four thousand rupees on a fast-fashion dress to attend one college fest, post three photos, and bury it in your hostel cupboard forever. This is madness."
+          </div>
+        </div>
+
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem;">
+          SHIBUYA BUREAU × DELHI NORTH CAMPUS<br>
+          PUBLISHED: AUTUMN 2026
+        </div>
       </div>
 
       <div class="letter-body">
-        <span class="drop-letter">W</span>
         <p>
-          e began with an acute collegiate observation: every woman in university possesses an evening that defines her calendar. It may be the annual Star Night festival with thousands in the crowd, the final department farewell where goodbye feels tangible, or the society debut dinner. Each demands a look that feels extraordinary.
+          <span class="drop-letter">W</span>hen we examine university life through the lens of aesthetic consumption, we uncover an absurd paradox. A student's social calendar is punctuated by rare, unforgettable peaks: Freshers Induction, the Annual Cultural Fest, the Department Farewell, and society balls. Each event commands a singular visual statement. Yet traditional fashion retail demands that you purchase ownership of these garments permanently.
         </p>
         <p>
-          Yet fast-fashion delivers disposable polyester that dissolves under direct flash, while traditional couture purchasing locks ₹35,000 away in a hostel wardrobe after a single photo. That ritual is dead.
+          Ownership of occasion wear is an economic and ecological trap. A garment manufactured for ₹800 in a synthetic polyester mill is sold at retail for ₹5,000, worn for four hours, photographed extensively, and instantly rendered unusable because "everyone has seen it." WEDELIA was engineered as an alternative philosophy: temporary possession of genuine haute couture.
         </p>
         <p>
-          WEDELIA was constructed as an editorial archive. We curate genuine couture faille, micro-pleated Grecian chiffon, and stage-reflective lurex knits. We deliver them to hostel gates with zero fit anxiety—every order includes two sizes—and we take them back unwashed on Monday. Renting is not a compromise; it is an act of high cultural intelligence.
+          We do not purchase cheap high-street knockoffs. We acquire authenticated atelier pieces, museum-grade mid-century silhouettes, and runway samples. We deliver them to your hostel gate in sealed cases twenty-four hours before call time. You step into the venue with the poise of someone who understands quality. And on Monday morning, you hand the case back unwashed. Intelligence is knowing what to rent.
         </p>
       </div>
+    </section>
 
+    <!-- COMPOSITION 4: MAGAZINE ISSUE SPREAD (Crossing headline) -->
+    <section class="issue-spread-feature">
+      <div class="issue-feature-header">
+        <span>EDITORIAL SPREAD // ATELIER ANATOMY</span>
+        <span>ISSUE 26 FEATURE STORY</span>
+      </div>
+
+      <div class="crossing-headline-wrap">
+        <h2 class="crossing-headline">
+          "FOUR HOURS. ONE NIGHT. NO REASON TO OWN IT FOREVER."
+        </h2>
+      </div>
+
+      <div class="issue-feature-stage">
+        <div class="issue-feature-visual">
+          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Runway Kinetic Shift">
+          <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 1rem;">
+            <span>FIGURE 02: KINETIC REFLECTIVE KNIT</span>
+            <span>RUNWAY ARCHIVE // SUMMER EDITION</span>
+          </div>
+        </div>
+
+        <div class="feature-side-dossier">
+          <div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.75rem; letter-spacing: 0.1em;">
+              THE POWER OF LEASED LUXURY
+            </div>
+            <p class="feature-dossier-prose">
+              When you purchase a dress, anxiety dictates your behavior. You worry about spilled drinks, you avoid dancefloors, you walk with cautious hesitation. When you wear WEDELIA with our built-in ₹0 liability shield, you own the energy of the room without the burden of stewardship.
+            </p>
+            <p class="feature-dossier-prose">
+              Our pieces are engineered to move through crowded amphitheaters, bass-heavy acoustic fields, and outdoor campus lawns without fragility. We absorb the wear. You absorb the moment.
+            </p>
+          </div>
+
+          <div style="border-top: 1px solid var(--line); padding-top: 1.5rem; font-family: 'Space Mono', monospace; font-size: 0.75rem;">
+            DISPATCH PROTOCOL: SEALED DUAL-SIZE CARTON<br>
+            CAMPUS NODES: MIRANDA HOUSE • LSR • ST. STEPHEN'S • IIT • NIFT
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPOSITION 5: FASHION SPECIMEN STUDY (Museum Documentation) -->
+    <section class="specimen-study-section">
+      <div class="specimen-grid">
+        <div class="specimen-img-col">
+          <span class="specimen-registration-mark">[SPECIMEN REF: WDL-014]</span>
+          <img src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Sculptural Longue Column Specimen">
+        </div>
+
+        <div class="specimen-sheet">
+          <div>
+            <div class="specimen-plate-id">ARCHIVE SPECIMEN NO. 067 // HISTORICAL RECORD</div>
+            <h3 class="specimen-title">Sculptural Longue Column</h3>
+            <p style="font-size: 0.92rem; color: #44413b; line-height: 1.7; margin-bottom: 1.75rem;">
+              Crafted in Paris atelier archives, 1983. A sovereign floor-length evening column cut on the bias from heavy silk crêpe de chine. Designed for institutional formals, senior valedictories, and black-tie society banquets.
+            </p>
+
+            <table class="specimen-data-table">
+              <tr>
+                <td class="label">FIBER COMPOSITION</td>
+                <td>100% PURE SILK CRÊPE DE CHINE (890g WEIGHT)</td>
+              </tr>
+              <tr>
+                <td class="label">FIT TOLERANCE</td>
+                <td>BUST 34" // WAIST 26" // LENGTH 57"</td>
+              </tr>
+              <tr>
+                <td class="label">DUAL-SIZE PROTOCOL</td>
+                <td>UK 8 (PRIMARY) + UK 10 (COMPLIMENTARY BACKUP)</td>
+              </tr>
+              <tr>
+                <td class="label">RECOMMENDED MOMENT</td>
+                <td>SENIOR FAREWELL BALL & DEBATING SOCIETY GALA</td>
+              </tr>
+              <tr>
+                <td class="label">DAMAGE SHIELD</td>
+                <td>₹0 LIABILITY (FULL ACCIDENTAL SPILL COVERAGE)</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="specimen-pricing-bar">
+            <div class="val-col">
+              ORIGINAL VALUATION<br>
+              <strong>₹38,000 ARCHIVAL</strong>
+            </div>
+            <div class="rent-col">
+              ₹2,499 / 3 DAYS
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPOSITION 6: REVOLVING LOOK ARCHIVE (Double Spreads) -->
+    <section class="revolving-archive-section">
+      <div class="index-header-bar">
+        <span>02 // REVOLVING LOOK ARCHIVE — CURRENT ROTATION</span>
+        <span>SELECT TO DISPATCH FOR THIS WEEKEND</span>
+      </div>
+
+      <div class="archive-double-spread">
+        <!-- Item 1 -->
+        <article class="archive-item-card">
+          <div class="archive-item-visual">
+            <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Duet Gown">
+          </div>
+          <h4 class="archive-item-title">
+            <span>Pleated Duet Gown (1951)</span>
+            <span class="price-pill">₹2,899 / 3D</span>
+          </h4>
+          <p class="archive-item-prose">
+            Hand-pleated silk chiffon drape from the Jean Desses Paris atelier. Perfect for senior farewell banquets where fluid movement across terraces creates timeless photographs. Includes primary + backup size.
+          </p>
+        </article>
+
+        <!-- Item 2 -->
+        <article class="archive-item-card">
+          <div class="archive-item-visual">
+            <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Silhouette">
+          </div>
+          <h4 class="archive-item-title">
+            <span>Gold Brocade Robe</span>
+            <span class="price-pill">₹3,899 / 3D</span>
+          </h4>
+          <p class="archive-item-prose">
+            Historical metallic stomacher and gilded brocade jacquard. Sourced for formal Model UN dinners, society convocations, and dramatic themed cultural balls. Retail valuation ₹65,000.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- COMPOSITION 7: STYLE NOTES & CAMPUS PROTOCOL -->
+    <section class="protocol-editorial-section">
+      <div class="protocol-title-row">
+        <span>03 // THE WEDELIA PROTOCOL — LOGISTICAL COVENANT</span>
+        <span>ZERO LAUNDRY • ZERO SIZING ANXIETY</span>
+      </div>
+
+      <div class="protocol-three-columns">
+        <div class="protocol-pillar">
+          <div>
+            <div class="protocol-pillar-num">01 / DUAL SIZING</div>
+            <h4 class="protocol-pillar-title">Two Sizes in Every Carton.</h4>
+            <p class="protocol-pillar-text">
+              We eliminate fitting stress. Select your estimated size; our automated dispatch system includes the adjacent complementary size sealed in the same delivery at zero surcharge.
+            </p>
+          </div>
+        </div>
+
+        <div class="protocol-pillar">
+          <div>
+            <div class="protocol-pillar-num">02 / DAMAGE SHIELD</div>
+            <h4 class="protocol-pillar-title">₹0 Accident Liability.</h4>
+            <p class="protocol-pillar-text">
+              Dancefloor champagne spills, minor heel snags on grass lawns, and broken seam tension are 100% absorbed by our embedded damage shield. Wear it with total freedom.
+            </p>
+          </div>
+        </div>
+
+        <div class="protocol-pillar">
+          <div>
+            <div class="protocol-pillar-num">03 / ZERO LAUNDRY</div>
+            <h4 class="protocol-pillar-title">Return Completely Unwashed.</h4>
+            <p class="protocol-pillar-text">
+              Strictly do not dry clean or iron. After your night concludes, slip both silhouettes into the pre-paid satchel. Hand it over to your hostel desk on Monday morning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPOSITION 8: CAMPUS CULTURE STORIES -->
+    <section class="campus-culture-spread">
       <div>
-        <div class="letter-sidebar-quote">
-          "The modern wardrobe is not a museum of past purchases; it is an open transit of extraordinary moments."
+        <h2 class="campus-quote-headline">
+          "WE DRESS THE MAIN CHARACTERS OF CAMPUS NIGHTLIFE."
+        </h2>
+        <div class="campus-network-roster">
+          CAMPUS NODES: MIRANDA HOUSE • LADY SHRI RAM • ST. STEPHEN'S • HINDU COLLEGE • SRCC • IIT DELHI • NIFT HAUZ KHAS • ASHOKA SONIPAT • ST. XAVIER'S MUMBAI
         </div>
-        <div class="letter-sidebar-jp">
-          一度きりの夜に、記憶を刻む。所有から自由になり、瞬間だけを纏うことの贅沢。
-        </div>
+      </div>
+
+      <div style="font-size: 0.98rem; line-height: 1.85; color: #3b3935;">
+        <p style="margin-bottom: 1.5rem;">
+          College is an intense, four-year flash of life where personal style accelerates. The photographs taken during fest season and farewell week remain the anchor of your visual memory for the next decade.
+        </p>
+        <p>
+          WEDELIA was engineered to liberate young women from the financial trap of single-use garment purchases. We bring museum-level archives directly to college gates so you can command the room with ruthless authority.
+        </p>
       </div>
     </section>
 
-    <!-- SECTION 3: Typographic Occasion Index (No cards) -->
-    <section class="occasion-index-spread">
-      <div class="occasion-index-title-row">
-        <div>
-          <h2>OCCASION INDEX</h2>
-          <p style="font-size: 0.88rem; color: var(--muted); margin-top: 0.25rem;">
-            Nine collegiate moments engineered for unforgettable entrances.
-          </p>
-        </div>
-        <span>[ ARCHIVE CATALOGUE 2026 ]</span>
+    <!-- COMPOSITION 9: FINAL PUBLICATION COLOPHON -->
+    <footer class="colophon-ending">
+      <div class="colophon-kanji">一期一会の夜に、知的な選択を。</div>
+      <div class="colophon-brand">WEDELIA</div>
+      <div class="colophon-sub">
+        TOKYO × DELHI NCR ARCHIVE PUBLICATION // ISSUE 26 // ALL RIGHTS RESERVED
       </div>
-
-      <div class="editorial-index-table">
-        <!-- 01 -->
-        <div class="editorial-index-row">
-          <span class="idx-num">01</span>
-          <div class="idx-name">
-            FESTIVAL STAR NIGHT
-            <span class="idx-jp">祝祭の光と音</span>
-          </div>
-          <div class="idx-desc">
-            Engineered for 5-hour stadium crowd surges, DJ stages, and high-intensity movement under cold concert strobes.
-          </div>
-          <div class="idx-meta">
-            DISPATCH: 24H BEFORE CALL<br>
-            RATES FROM ₹1,699 / 3D
-          </div>
-        </div>
-
-        <!-- 02 -->
-        <div class="editorial-index-row">
-          <span class="idx-num">02</span>
-          <div class="idx-name">
-            FAREWELL GALA & BALL
-            <span class="idx-jp">訣別の宴と旅立ち</span>
-          </div>
-          <div class="idx-desc">
-            Heavy matte silk faille peplums and hourglass structures designed for the final departmental ballroom exit.
-          </div>
-          <div class="idx-meta">
-            DISPATCH: 24H BEFORE CALL<br>
-            RATES FROM ₹2,499 / 3D
-          </div>
-        </div>
-
-        <!-- 03 -->
-        <div class="editorial-index-row">
-          <span class="idx-num">03</span>
-          <div class="idx-name">
-            CONCERT & AFTER-HOURS
-            <span class="idx-jp">深夜狂騒の美学</span>
-          </div>
-          <div class="idx-desc">
-            Technical stretch jacquards and reflective lurex knits designed to come alive under 35mm point-and-shoot camera flashes.
-          </div>
-          <div class="idx-meta">
-            DISPATCH: 24H BEFORE CALL<br>
-            RATES FROM ₹1,899 / 3D
-          </div>
-        </div>
-
-        <!-- 04 -->
-        <div class="editorial-index-row">
-          <span class="idx-num">04</span>
-          <div class="idx-name">
-            FRESHERS DEBUT
-            <span class="idx-jp">新風初陣の記憶</span>
-          </div>
-          <div class="idx-desc">
-            Classical micro-pleated Grecian chiffon wraps setting the benchmark of authority on campus day one.
-          </div>
-          <div class="idx-meta">
-            DISPATCH: 24H BEFORE CALL<br>
-            RATES FROM ₹2,899 / 3D
-          </div>
-        </div>
-
-        <!-- 05 -->
-        <div class="editorial-index-row">
-          <span class="idx-num">05</span>
-          <div class="idx-name">
-            GILDED IMPERIAL GALA
-            <span class="idx-jp">金糸刺繍の宮廷服</span>
-          </div>
-          <div class="idx-desc">
-            Heavy gold thread brocade on silk damask with structured pannier architecture for formal society banquets.
-          </div>
-          <div class="idx-meta">
-            DISPATCH: 24H BEFORE CALL<br>
-            RATES FROM ₹3,899 / 3D
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: Revolving Lookbook Archive Spreads (5 Looks) -->
-    <section class="lookbook-archive-spread">
-      <div class="archive-spread-header">
-        <h2>THE REVOLVING ARCHIVE</h2>
-        <span>[ 5 EDITORIAL PLATES IN ACTIVE ROTATION ]</span>
-      </div>
-
-      <!-- Plate 01 -->
-      <article class="publication-spread-row">
-        <div class="pub-spec-sheet">
-          <span class="pub-serial">PLATE 01</span>
-          <h3>Obsidian Sculpted Slip</h3>
-          <div class="pub-table-line">
-            <span>OCCASION</span>
-            <strong>FAREWELL GALA & BALL</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>MATERIAL</span>
-            <strong>MATTE SILK FAILLE</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>RETAIL VALUATION</span>
-            <strong>₹34,000</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>RENTAL RATE (3D)</span>
-            <strong>₹2,499</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>BACKUP SIZE</span>
-            <strong>INCLUDED FREE</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>AVAILABILITY</span>
-            <strong style="color: #2b7a3a;">RESERVING NOV 2026</strong>
-          </div>
-        </div>
-
-        <div class="pub-img-box">
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Obsidian Sculpted Slip">
-        </div>
-
-        <div class="pub-essay-col">
-          <span class="jp-subheading">夜の気品を刻む構造美。</span>
-          Engineered for four years of college distilled into one single entrance. The architectural hourglass peplum waist and flare train in matte faille catches ambient ballroom chandelier light without gloss or distraction.
-          <br><br>
-          <span class="pub-booking-tag">DISPATCH TO CAMPUS CORRIDOR →</span>
-        </div>
-      </article>
-
-      <!-- Plate 02 (Reverse) -->
-      <article class="publication-spread-row reverse">
-        <div class="pub-essay-col">
-          <span class="jp-subheading">微細プリーツが生む流動。</span>
-          Classical micro-pleated Grecian chiffon shoulder drape shifting with movement across the ballroom floor. Includes complimentary secondary size in every delivery bag to ensure absolute fit certainty.
-          <br><br>
-          <span class="pub-booking-tag">DISPATCH TO CAMPUS CORRIDOR →</span>
-        </div>
-
-        <div class="pub-img-box">
-          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Pleated Duet Gown">
-        </div>
-
-        <div class="pub-spec-sheet">
-          <span class="pub-serial">PLATE 02</span>
-          <h3>Couture Pleated Duet Gown</h3>
-          <div class="pub-table-line">
-            <span>OCCASION</span>
-            <strong>FRESHERS & SOCIETY BALL</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>MATERIAL</span>
-            <strong>PURE SILK CHIFFON</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>RETAIL VALUATION</span>
-            <strong>₹42,000</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>RENTAL RATE (3D)</span>
-            <strong>₹2,899</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>BACKUP SIZE</span>
-            <strong>INCLUDED FREE</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>AVAILABILITY</span>
-            <strong style="color: #2b7a3a;">RESERVING NOV 2026</strong>
-          </div>
-        </div>
-      </article>
-
-      <!-- Plate 03 -->
-      <article class="publication-spread-row">
-        <div class="pub-spec-sheet">
-          <span class="pub-serial">PLATE 03</span>
-          <h3>Graphic Kinetic Shift</h3>
-          <div class="pub-table-line">
-            <span>OCCASION</span>
-            <strong>COLLEGE FEST STAR NIGHT</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>MATERIAL</span>
-            <strong>LUREX & STRETCH JACQUARD</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>RETAIL VALUATION</span>
-            <strong>₹22,000</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>RENTAL RATE (3D)</span>
-            <strong>₹1,699</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>BACKUP SIZE</span>
-            <strong>INCLUDED FREE</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>AVAILABILITY</span>
-            <strong style="color: #2b7a3a;">RESERVING NOV 2026</strong>
-          </div>
-        </div>
-
-        <div class="pub-img-box">
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Graphic Kinetic Shift">
-        </div>
-
-        <div class="pub-essay-col">
-          <span class="jp-subheading">ストロボとフラッシュに勝つ。</span>
-          Engineered for 5-hour DJ sets and high-intensity crowd motion. Contrasting metallic print panels and engineered lurex knit reflecting 35mm point-and-shoot camera flashes with high-voltage clarity.
-          <br><br>
-          <span class="pub-booking-tag">DISPATCH TO CAMPUS CORRIDOR →</span>
-        </div>
-      </article>
-
-      <!-- Plate 04 (Reverse) -->
-      <article class="publication-spread-row reverse">
-        <div class="pub-essay-col">
-          <span class="jp-subheading">金糸が放つ永遠の権威。</span>
-          Expansive wide-pannier court silhouette with sculpted metallic stomacher. Heavy metallic gold thread woven onto pure silk damask ground. The ultimate statement for formal university ceremonies.
-          <br><br>
-          <span class="pub-booking-tag">DISPATCH TO CAMPUS CORRIDOR →</span>
-        </div>
-
-        <div class="pub-img-box">
-          <img src="/assets/editorial/court-dress.jpg" alt="Gilded Metallic Brocade Robe">
-        </div>
-
-        <div class="pub-spec-sheet">
-          <span class="pub-serial">PLATE 04</span>
-          <h3>Gilded Brocade Court Robe</h3>
-          <div class="pub-table-line">
-            <span>OCCASION</span>
-            <strong>GILDED IMPERIAL GALA</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>MATERIAL</span>
-            <strong>METALLIC GOLD BROCADE</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>RETAIL VALUATION</span>
-            <strong>₹65,000</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>RENTAL RATE (3D)</span>
-            <strong>₹3,899</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>BACKUP SIZE</span>
-            <strong>INCLUDED FREE</strong>
-          </div>
-          <div class="pub-table-line">
-            <span>AVAILABILITY</span>
-            <strong style="color: #2b7a3a;">RESERVING NOV 2026</strong>
-          </div>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- SECTION 5: Style Notes & Dressing Ritual -->
-    <section class="style-notes-spread">
-      <div class="style-notes-head">
-        <h2>STYLE NOTES & CAMPUS PROTOCOL</h2>
-        <p>Three institutional covenants that make WEDELIA frictionless.</p>
-      </div>
-
-      <div class="style-notes-grid">
-        <div class="note-column">
-          <span class="note-code">PROTOCOL // 01</span>
-          <h4>The Complimentary Backup Size</h4>
-          <p>
-            Fit anxiety is the enemy of confidence. Every single WEDELIA parcel delivered to your hostel room includes both your primary size and an adjacent secondary backup size at no extra cost. Try both on, choose the perfection, keep the tag on the backup, and return both together.
-          </p>
-        </div>
-
-        <div class="note-column">
-          <span class="note-code">PROTOCOL // 02</span>
-          <h4>₹0 Accidental Damage Shield</h4>
-          <p>
-            Real campus nights involve crowded dancefloors, stage confetti, and accidental beverage spills. You should dance unrestricted. Every rental includes comprehensive damage protection; stains and torn hems are 100% absorbed by our conservator atelier.
-          </p>
-        </div>
-
-        <div class="note-column">
-          <span class="note-code">PROTOCOL // 03</span>
-          <h4>Return Completely Unwashed</h4>
-          <p>
-            You have exams, lectures, and memories to process. Zero dry-cleaning chores are required. Simply fold both silhouettes into the pre-addressed bio-satchel. Our campus courier collects directly from your hostel reception on Monday morning.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 6: Campus Culture Stories -->
-    <section class="culture-stories-spread">
-      <div class="culture-stories-grid">
-        <div>
-          <h2 class="culture-headline">
-            "WE DRESS THE MAIN CHARACTERS OF CAMPUS NIGHTLIFE."
-          </h2>
-          <div class="campus-roster">
-            ACTIVE CORRIDORS: DU NORTH CAMPUS • DU SOUTH CAMPUS • IIT DELHI • NIFT • ASHOKA • ST. XAVIER'S • BITS PILANI • NMIMS
-          </div>
-        </div>
-
-        <div class="culture-text">
-          <p>
-            College is an intense, four-year flash of life where personal style accelerates. The photographs taken during fest season and farewell week remain the anchor of your visual memory for the next decade.
-          </p>
-          <p>
-            WEDELIA was engineered to liberate young women from the financial trap of single-use garment purchases. We bring museum-level archives directly to college gates so you can command the room with ruthless authority.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 7: Final Issue Ending Spread -->
-    <section class="final-editorial-spread">
-      <span class="final-kanji-stamp">一期一会の夜に、知的な選択を。</span>
-      <h2 class="final-climax-statement">
-        "RENT THE LOOK FOR THE MOMENT."
-      </h2>
-
-      <div class="final-meta-columns">
-        <div>
-          <strong>CAMPUS DISPATCH</strong>
-          Delivered 24 hours prior to call time directly to hostel desks across Delhi NCR & Tokyo.
-        </div>
-        <div>
-          <strong>RESERVATION TERMS</strong>
-          3, 5, or 7-day hire with ₹1,500 100% refundable security deposit credited immediately upon return.
-        </div>
-        <div>
-          <strong>ATELIER DIRECT</strong>
-          WhatsApp Concierge: +91 98112 04928<br>
-          concierge@wedelia-archive.com
-        </div>
-      </div>
-    </section>
-
-    <!-- Colophon Footer -->
-    <footer class="editorial-footer">
-      <div>WEDELIA // TOKYO EDITORIAL EXPANDED PUBLICATION 01</div>
-      <div>DELHI NCR • DU • IIT • NIFT • ASHOKA • ST. XAVIER'S</div>
-      <div>AUTUMN / SPRING 2026 ISSUE</div>
     </footer>
 
   </div>
+
+  <script>
+    // Restrained Editorial Interactions
+    document.addEventListener('DOMContentLoaded', () => {
+      // Spine reading progress
+      const spine = document.querySelector('.vertical-spine');
+      if (spine) {
+        window.addEventListener('scroll', () => {
+          const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+          spine.style.opacity = (0.6 + scrollPct * 0.4).toFixed(2);
+        }, { passive: true });
+      }
+
+      // Smooth subtle hover tracking on specimen images
+      const images = document.querySelectorAll('.specimen-img-col img, .cover-visual-frame img');
+      images.forEach(img => {
+        img.addEventListener('mouseenter', () => { img.style.filter = 'contrast(112%) brightness(1.02)'; });
+        img.addEventListener('mouseleave', () => { img.style.filter = 'contrast(105%) brightness(1)'; });
+      });
+    });
+  </script>
 
 </body>
 </html>

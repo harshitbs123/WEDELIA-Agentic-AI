@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEDELIA // 10 The Strange One</title>
+  <title>WEDELIA // 10 The Strange One — Digital Fashion Installation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Shippori+Mincho:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -18,17 +18,17 @@
       --acid: #d4ff00;
       --border-dark: #1b1b22;
       --panel-dark: #0d0d12;
-      --glow: rgba(15, 56, 255, 0.15);
     }
 
-    body {
+    html, body {
       background: var(--void-bg);
       color: var(--bone);
       font-family: 'Space Mono', monospace;
-      line-height: 1.4;
+      line-height: 1.45;
       padding-top: 48px;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      max-width: 100vw;
     }
 
     /* Switcher Top Navigation */
@@ -45,7 +45,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
     }
     .switch-nav a { color: var(--bone); text-decoration: none; }
     .switch-pills { display: flex; gap: 0.25rem; }
@@ -317,25 +317,16 @@
       justify-content: space-between;
       min-height: 260px;
     }
-    .scatter-box.offset-down {
-      margin-top: 0;
-    }
     @media (min-width: 768px) {
       .scatter-box.offset-down {
         margin-top: 3rem;
       }
-    }
-    .scatter-box.offset-up {
-      margin-top: 0;
-    }
-    @media (min-width: 768px) {
       .scatter-box.offset-up {
         margin-top: -2rem;
       }
     }
     .scatter-box.blue-border {
       border-color: var(--electric-blue);
-      box-shadow: 0 0 25px rgba(15, 56, 255, 0.1);
     }
     .scatter-tag {
       font-size: 0.65rem;
@@ -428,7 +419,6 @@
       padding: 3rem 2rem;
       margin-bottom: 8rem;
       position: relative;
-      box-shadow: 0 0 40px rgba(15, 56, 255, 0.08);
     }
     @media (min-width: 1024px) {
       .blueprint-section {
@@ -495,6 +485,11 @@
       padding-top: 4rem;
       margin-bottom: 8rem;
     }
+    .strange-index-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
     .strange-index-table {
       width: 100%;
       border-collapse: collapse;
@@ -514,6 +509,7 @@
       color: var(--electric-blue);
       font-weight: 700;
       width: 12%;
+      white-space: nowrap;
     }
     .strange-index-table td.name {
       font-family: 'Anton', sans-serif;
@@ -525,6 +521,18 @@
       text-align: right;
       font-weight: 700;
       color: var(--bone);
+      white-space: nowrap;
+    }
+    @media (max-width: 640px) {
+      .strange-index-table td.name {
+        font-size: 1.05rem;
+      }
+      .strange-index-table td {
+        padding: 0.85rem 0.4rem;
+      }
+      .col-hide-mobile {
+        display: none;
+      }
     }
 
     /* 7. NON-TRADITIONAL INSTALLATION ENDING */
@@ -548,7 +556,7 @@
       color: var(--electric-blue);
     }
     .exit-notes {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--dim);
       max-width: 580px;
       margin: 0 auto 3rem;
@@ -741,7 +749,7 @@
           </div>
         </div>
 
-        <!-- Narrow Look Object -->
+        <!-- Secondary Look Objects -->
         <div style="display: flex; flex-direction: column; gap: 2rem;">
           <div class="spatial-look-card">
             <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Custo Barcelona Summer Edition" style="aspect-ratio: 16/11;">
@@ -816,38 +824,40 @@
         04 // RADICAL DIRECTORY — CAMPUS DISPATCH ROSTER
       </div>
 
-      <table class="strange-index-table">
-        <tbody>
-          <tr>
-            <td class="code">WDL-014</td>
-            <td class="name">ZEMIRE SILK FAILLE</td>
-            <td style="color: var(--dim);">FAREWELL BALL</td>
-            <td style="color: var(--dim);">DU NORTH / MIRANDA HOUSE</td>
-            <td class="val">₹2,999 / 3D</td>
-          </tr>
-          <tr>
-            <td class="code">WDL-029</td>
-            <td class="name">PLEATED DUET GOWN</td>
-            <td style="color: var(--dim);">DEBATE GALA</td>
-            <td style="color: var(--dim);">ST. STEPHEN'S / HINDU</td>
-            <td class="val">₹2,899 / 3D</td>
-          </tr>
-          <tr>
-            <td class="code">WDL-041</td>
-            <td class="name">KINETIC SHIFT & WRAP</td>
-            <td style="color: var(--dim);">COLLEGE FEST</td>
-            <td style="color: var(--dim);">IIT DELHI / NIFT</td>
-            <td class="val">₹1,699 / 3D</td>
-          </tr>
-          <tr>
-            <td class="code">WDL-053</td>
-            <td class="name">GOLD BROCADE ROBE</td>
-            <td style="color: var(--dim);">SOCIETY BANQUET</td>
-            <td style="color: var(--dim);">ASHOKA UNIVERSITY</td>
-            <td class="val">₹3,899 / 3D</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="strange-index-wrap">
+        <table class="strange-index-table">
+          <tbody>
+            <tr>
+              <td class="code">WDL-014</td>
+              <td class="name">ZEMIRE SILK FAILLE</td>
+              <td class="col-hide-mobile" style="color: var(--dim);">FAREWELL BALL</td>
+              <td class="col-hide-mobile" style="color: var(--dim);">DU NORTH / MIRANDA HOUSE</td>
+              <td class="val">₹2,999 / 3D</td>
+            </tr>
+            <tr>
+              <td class="code">WDL-029</td>
+              <td class="name">PLEATED DUET GOWN</td>
+              <td class="col-hide-mobile" style="color: var(--dim);">DEBATE GALA</td>
+              <td class="col-hide-mobile" style="color: var(--dim);">ST. STEPHEN'S / HINDU</td>
+              <td class="val">₹2,899 / 3D</td>
+            </tr>
+            <tr>
+              <td class="code">WDL-041</td>
+              <td class="name">KINETIC SHIFT & WRAP</td>
+              <td class="col-hide-mobile" style="color: var(--dim);">COLLEGE FEST</td>
+              <td class="col-hide-mobile" style="color: var(--dim);">IIT DELHI / NIFT</td>
+              <td class="val">₹1,699 / 3D</td>
+            </tr>
+            <tr>
+              <td class="code">WDL-053</td>
+              <td class="name">GOLD BROCADE ROBE</td>
+              <td class="col-hide-mobile" style="color: var(--dim);">SOCIETY BANQUET</td>
+              <td class="col-hide-mobile" style="color: var(--dim);">ASHOKA UNIVERSITY</td>
+              <td class="val">₹3,899 / 3D</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <!-- 7. NON-TRADITIONAL INSTALLATION ENDING -->
@@ -856,7 +866,7 @@
       <div class="exit-notes">
         THE EXHIBITION CLOSES AS THE NIGHT BEGINS. STEP OUT INTO THE DARKNESS WEARING SOMETHING MONUMENTAL.
       </div>
-      <div style="font-size: 0.72rem; color: var(--dim); letter-spacing: 0.2em;">
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--dim); letter-spacing: 0.2em;">
         INSTALLATION COMPLETE // TOKYO × DELHI NCR
       </div>
     </section>
@@ -872,6 +882,20 @@
     </footer>
 
   </div>
+
+  <script>
+    // Live Spatial Coordinate Tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const coordStamp = document.querySelector('.rail-coord-stamp');
+      if (coordStamp) {
+        window.addEventListener('mousemove', (e) => {
+          const x = (e.clientX / window.innerWidth * 100).toFixed(1);
+          const y = (e.clientY / window.innerHeight * 100).toFixed(1);
+          coordStamp.textContent = `COORD: X:${x} Y:${y} // Z:0.44`;
+        }, { passive: true });
+      }
+    });
+  </script>
 
 </body>
 </html>

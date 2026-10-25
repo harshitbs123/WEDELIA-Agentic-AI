@@ -212,6 +212,65 @@
       border-bottom: 2px solid var(--border);
     }
 
+    /* Master Numbered Quick Directory */
+    .master-numbered-ledger {
+      border-bottom: 2px solid var(--border);
+    }
+    .ledger-row {
+      display: grid;
+      grid-template-columns: 80px 1.5fr 1fr 140px;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.15s ease;
+      cursor: pointer;
+    }
+    .ledger-row:hover {
+      background-color: #f7f7f7;
+    }
+    .ledger-row:last-child {
+      border-bottom: none;
+    }
+    @media (max-width: 900px) {
+      .ledger-row {
+        grid-template-columns: 60px 1fr 100px;
+        gap: 0.5rem;
+        padding: 0.85rem 1rem;
+      }
+      .ledger-row .col-hide-mobile { display: none; }
+    }
+    .ledger-serial {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+    .ledger-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .ledger-name span.sub {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 0.2rem;
+    }
+    .ledger-spec {
+      font-size: 0.72rem;
+      color: #333333;
+    }
+    .ledger-tariff {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-align: right;
+    }
+
     /* MASTER OCCASION MATRIX */
     .matrix-wrapper {
       overflow-x: auto;
@@ -780,7 +839,53 @@
 
     <!-- Section Bar: Dense Look Database -->
     <div class="catalog-section-bar">
-      <span>02 // DENSE LOOK DATABASE — 6 REGISTERED SPECIMENS</span>
+      <span>02 // MASTER INVENTORY ROWS — 6 REGISTERED SPECIMENS</span>
+      <span>CLICK ROW TO JUMP TO DETAILED SPECIMEN</span>
+    </div>
+
+    <!-- Master Numbered Quick Directory -->
+    <div class="master-numbered-ledger">
+      <div class="ledger-row">
+        <span class="ledger-serial">001</span>
+        <div class="ledger-name">ZEMIRE EVENING FAILLE <span class="sub">1952 PARIS ATELIER // WDL-01-DOR</span></div>
+        <div class="ledger-spec col-hide-mobile">SENIOR FAREWELL & FORMAL GALA</div>
+        <div class="ledger-tariff">₹2,999 / 3D</div>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-serial">002</span>
+        <div class="ledger-name">PLEATED DUET GOWN <span class="sub">1951 PARIS DUET // WDL-02-DES</span></div>
+        <div class="ledger-spec col-hide-mobile">COLLEGE FAREWELL & DEBATE BALL</div>
+        <div class="ledger-tariff">₹2,899 / 3D</div>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-serial">003</span>
+        <div class="ledger-name">KINETIC SHIFT & WRAP <span class="sub">SUMMER RUNWAY // WDL-03-CST</span></div>
+        <div class="ledger-spec col-hide-mobile">COLLEGE FEST STAR NIGHT</div>
+        <div class="ledger-tariff">₹1,699 / 3D</div>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-serial">004</span>
+        <div class="ledger-name">GOLD BROCADE ROBE <span class="sub">PALATIAL ARCHIVE // WDL-04-CRT</span></div>
+        <div class="ledger-spec col-hide-mobile">SOCIETY BALL & THEME BANQUET</div>
+        <div class="ledger-tariff">₹3,899 / 3D</div>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-serial">005</span>
+        <div class="ledger-name">SCULPTURAL LONGUE COLUMN <span class="sub">1983 ATELIER // WDL-05-ROB</span></div>
+        <div class="ledger-spec col-hide-mobile">VALEDICTORY NIGHT & AUDITORIUM</div>
+        <div class="ledger-tariff">₹2,499 / 3D</div>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-serial">006</span>
+        <div class="ledger-name">STRAPLESS HOOP ARCHITECTURE <span class="sub">MID-CENTURY // WDL-06-STR</span></div>
+        <div class="ledger-spec col-hide-mobile">PORTFOLIO PHOTOSHOOT & DRAMA</div>
+        <div class="ledger-tariff">₹3,199 / 3D</div>
+      </div>
+    </div>
+
+    <!-- Section Bar: Dense Look Database Detail -->
+    <div class="catalog-section-bar">
+      <span>03 // DENSE SPECIMEN DOSSIERS — TECHNICAL FIT & TARIFFS</span>
       <span>DISPATCH DURATION: 3 DAYS / 5 DAYS / 7 DAYS</span>
     </div>
 
