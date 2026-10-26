@@ -71,26 +71,29 @@
       border-bottom: 2px solid var(--red);
       color: #ffffff;
       z-index: 9999;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 1.25rem;
+      padding: 0 1.5rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
+      box-sizing: border-box;
     }
-    .nightfile-marquee {
+    .nav-cluster-left {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      white-space: nowrap;
     }
     .live-drop-dot {
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       background: var(--red);
       border-radius: 50%;
       box-shadow: 0 0 10px var(--red);
       animation: pulseBlink 1.2s infinite;
+      flex-shrink: 0;
     }
     @keyframes pulseBlink {
       0%, 100% { opacity: 1; transform: scale(1); }
@@ -101,37 +104,205 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       text-decoration: none;
+      font-size: 0.72rem;
+    }
+    .nightfile-world-code {
+      display: inline-block;
+      color: var(--red);
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      background: rgba(255, 31, 0, 0.1);
+      border: 1px solid rgba(255, 31, 0, 0.35);
+      padding: 0.1rem 0.35rem;
+    }
+    .nav-cluster-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      color: #999999;
+      white-space: nowrap;
+      padding: 0 1rem;
+    }
+    .nightfile-status-time {
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .nightfile-status-sep {
+      color: var(--red);
     }
     .nightfile-status-tag {
       color: var(--red);
-      font-size: 0.65rem;
-      letter-spacing: 0.05em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .nav-cluster-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      white-space: nowrap;
+    }
+    .nav-text-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 0.55rem;
+      height: 24px;
+      border: 1px solid #282828;
+      color: #cccccc;
+      background: #0a0a0a;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-text-link:hover {
+      border-color: var(--red);
+      color: #ffffff;
+    }
+    .nav-zone-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
     .nightfile-zone-tag {
-      color: #777777;
-      font-size: 0.6rem;
-      margin-right: 0.25rem;
+      color: #666666;
+      font-size: 0.58rem;
+      letter-spacing: 0.05em;
     }
-    .switch-pills { display: flex; align-items: center; gap: 0.25rem; }
+    .nav-zone-pills {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
     .switch-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 26px;
-      height: 26px;
-      border: 1px solid #333333;
-      color: #888888;
+      width: 24px;
+      height: 24px;
+      border: 1px solid #282828;
+      color: #777777;
       background: #0a0a0a;
       font-weight: 700;
+      font-size: 0.62rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
     }
-    .switch-pill:hover { border-color: var(--red); color: #ffffff; }
-    .switch-pill.active { background: var(--red); color: #ffffff; font-weight: 800; border-color: var(--red); box-shadow: 0 0 10px rgba(255, 34, 0, 0.4); }
+    .switch-pill:hover {
+      border-color: var(--red);
+      color: #ffffff;
+    }
+    .switch-pill.active {
+      background: var(--red);
+      color: #ffffff;
+      font-weight: 800;
+      border-color: var(--red);
+      box-shadow: 0 0 10px rgba(255, 34, 0, 0.5);
+    }
+
+    /* Tablet breakpoint (769px to 1023px) */
+    @media (min-width: 769px) and (max-width: 1023px) {
+      .switch-nav {
+        padding: 0 1rem;
+      }
+      .nav-cluster-center {
+        padding: 0 0.5rem;
+        font-size: 0.6rem;
+      }
+      .nav-link-occasions {
+        display: none;
+      }
+      .nightfile-zone-tag {
+        display: none;
+      }
+      .switch-pill {
+        width: 22px;
+        height: 22px;
+        font-size: 0.58rem;
+      }
+    }
+
+    /* Mobile breakpoint (<= 768px): Intentionally recomposed into clean 2-tier campaign strip */
     @media (max-width: 768px) {
-      .switch-nav .nightfile-status-tag { display: none; }
-      .switch-nav .nightfile-zone-tag { display: none; }
-      .switch-nav { padding: 0 0.75rem; }
-      .switch-pills { gap: 2px; }
-      .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
+      body {
+        padding-top: 68px !important;
+      }
+      .switch-nav {
+        height: 68px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 34px 34px;
+        padding: 0 0.85rem;
+      }
+      .nav-cluster-left {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.68rem;
+      }
+      .nav-cluster-left .nightfile-brand {
+        font-size: 0.68rem;
+      }
+      .nav-cluster-left .nightfile-world-code {
+        font-size: 0.58rem;
+        padding: 0.05rem 0.25rem;
+      }
+      .nav-cluster-right {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .nav-link-occasions {
+        display: none;
+      }
+      .nav-text-link {
+        height: 22px;
+        font-size: 0.58rem;
+        padding: 0 0.45rem;
+      }
+      .nav-zone-group {
+        display: contents;
+      }
+      .nightfile-zone-tag {
+        display: none;
+      }
+      .nav-cluster-center {
+        grid-column: 1;
+        grid-row: 2;
+        border-top: 1px solid #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.35rem;
+        padding: 0;
+        font-size: 0.58rem;
+      }
+      .nav-zone-pills {
+        grid-column: 2;
+        grid-row: 2;
+        border-top: 1px solid #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 3px;
+        height: 34px;
+      }
+      .switch-pill {
+        width: 22px;
+        height: 22px;
+        font-size: 0.58rem;
+      }
     }
 
     /* Page Canvas */
@@ -187,6 +358,18 @@
       color: var(--red);
       font-weight: 700;
       letter-spacing: 0.3em;
+    }
+    @media (max-width: 768px) {
+      .top-lead {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        margin-bottom: 2rem;
+        font-size: 0.68rem;
+      }
+      .top-lead .crosshairs {
+        display: none;
+      }
     }
 
     /* COMPOSITION 1: ASYMMETRIC OPENING CAMPAIGN HERO */
@@ -1630,20 +1813,29 @@
 
   <!-- Underground Nightfile Marquee / Live Ticker -->
   <nav class="switch-nav">
-    <div class="nightfile-marquee">
+    <div class="nav-cluster-left">
       <span class="live-drop-dot"></span>
-      <a href="index.html" class="nightfile-brand">NIGHTFILE // SHIBUYA 23:47</a>
-      <span class="nightfile-status-tag">DROP RUNNER: ACTIVE // COURIER: READY</span>
+      <a href="index.html" class="nightfile-brand">WEDELIA // AFTER DARK</a>
+      <span class="nightfile-world-code">#03 CHASE</span>
     </div>
-    <div class="switch-pills">
-      <a href="wardrobe.html" class="switch-pill" title="Shared Wardrobe">WARDROBE</a>
-      <a href="wardrobe.html#occasions" class="switch-pill" title="Occasions">OCCASIONS</a>
-      <span class="nightfile-zone-tag">ZONES:</span>
-      <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
-      <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
-      <a href="03-red-black-tokyo.html" class="switch-pill active" title="Red / Black Tokyo">03</a>
-      <a href="04-vertical-japanese-poster.html" class="switch-pill" title="Vertical Poster">04</a>
-      <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
+    <div class="nav-cluster-center">
+      <span class="nightfile-status-time">23:47 SHIBUYA</span>
+      <span class="nightfile-status-sep">//</span>
+      <span class="nightfile-status-tag">DROP RUNNER: ACTIVE</span>
+    </div>
+    <div class="nav-cluster-right">
+      <a href="wardrobe.html" class="nav-text-link" title="Shared Wardrobe">WARDROBE</a>
+      <a href="wardrobe.html#occasions" class="nav-text-link nav-link-occasions" title="Occasions">OCCASIONS</a>
+      <div class="nav-zone-group">
+        <span class="nightfile-zone-tag">ZONES:</span>
+        <div class="nav-zone-pills">
+          <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
+          <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
+          <a href="03-red-black-tokyo.html" class="switch-pill active" title="Red / Black Tokyo">03</a>
+          <a href="04-vertical-japanese-poster.html" class="switch-pill" title="Vertical Poster">04</a>
+          <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
+        </div>
+      </div>
     </div>
   </nav>
 
