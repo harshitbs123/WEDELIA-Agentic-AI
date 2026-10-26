@@ -3,6 +3,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const pages = [
+  { name: '00-master-entry-index', url: 'http://localhost:5173/index.html' },
   { name: '01-tokyo-editorial', url: 'http://localhost:5173/01-tokyo-editorial.html' },
   { name: '02-brutalist-fashion-index', url: 'http://localhost:5173/02-brutalist-fashion-index.html' },
   { name: '03-red-black-tokyo', url: 'http://localhost:5173/03-red-black-tokyo.html' },

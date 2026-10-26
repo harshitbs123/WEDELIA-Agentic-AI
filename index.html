@@ -3,303 +3,1595 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEDELIA — 5 Selected Art Directions</title>
+  <title>WEDELIA // Master Entry — Five Worlds of Leased Luxury</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Shippori+Mincho:wght@400;700;900&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-dark: #07070a;
+      --bg-card: #0d0d12;
+      --bone: #f5f4ef;
+      --bone-muted: #a3a199;
+      --dim: #5c5a54;
+      --dim-light: #7a7871;
+      --border-hairline: rgba(245, 244, 239, 0.09);
+      --border-dark: #16161f;
+      
+      /* Distinct World Palette Signatures */
+      --color-read: #f5f4ef;
+      --color-read-ink: #111113;
+      --color-index: #ffffff;
+      --color-index-ink: #000000;
+      --color-chase: #ff2400;
+      --color-contemplate: #f2eee5;
+      --color-contemplate-ink: #1c1a17;
+      --color-navigate: #0f38ff;
     }
-    body {
-      background-color: #0b0b0d;
-      color: #eae8e3;
+
+    html, body {
+      background: var(--bg-dark);
+      color: var(--bone);
       font-family: 'Space Grotesk', -apple-system, sans-serif;
-      min-height: 100vh;
-      padding: 3rem 1.5rem 6rem;
-      line-height: 1.45;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
     }
-    @media (min-width: 768px) {
-      body {
-        padding: 5rem 4rem 8rem;
-      }
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      padding-bottom: 2.5rem;
-      margin-bottom: 3.5rem;
+
+    /* Minimal Sticky Global Masthead */
+    .master-masthead {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      background: rgba(7, 7, 10, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-hairline);
+      z-index: 1000;
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
     }
-    @media (min-width: 768px) {
-      header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-end;
+    @media (min-width: 1024px) {
+      .master-masthead {
+        padding: 0 3rem;
       }
     }
-    .brand {
-      font-size: 2.5rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1;
+    .masthead-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--bone);
+    }
+    .brand-logo {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
     }
     .brand-sub {
-      display: block;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #8a8882;
-      margin-top: 0.75rem;
-    }
-    .header-meta {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: #8a8882;
+      color: var(--dim);
+      font-size: 0.62rem;
+      display: none;
     }
     @media (min-width: 768px) {
-      .header-meta {
-        text-align: right;
+      .brand-sub { display: inline; }
+    }
+    .masthead-nav-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .masthead-pill {
+      color: var(--dim-light);
+      text-decoration: none;
+      font-size: 0.64rem;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      display: none;
+    }
+    @media (min-width: 860px) {
+      .masthead-pill { display: inline-block; }
+    }
+    .masthead-pill:hover {
+      border-color: var(--border-hairline);
+      color: var(--bone);
+    }
+    .masthead-pill.cta {
+      display: inline-block;
+      border: 1px solid rgba(245, 244, 239, 0.25);
+      color: var(--bone);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .masthead-pill.cta:hover {
+      background: var(--bone);
+      color: #000000;
+    }
+
+    /* Container Standard */
+    .master-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    @media (min-width: 1024px) {
+      .master-container {
+        padding: 0 3rem;
       }
     }
-    .header-meta span {
-      color: #eae8e3;
+
+    /* ========================================================
+       SECTION 1: THE MASTER OPENING HERO
+       ======================================================== */
+    .master-hero-section {
+      min-height: calc(100vh - 52px);
+      margin-top: 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      position: relative;
+      border-bottom: 1px solid var(--border-hairline);
     }
-    .statement {
-      font-size: 1.15rem;
-      max-width: 720px;
-      color: #b0ada6;
-      margin-bottom: 4rem;
-      line-height: 1.6;
+    .hero-top-statement {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
-    .statement strong {
+    .hero-category-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .hero-category-label::before {
+      content: '⟐';
+      color: var(--bone);
+    }
+    .hero-monumental-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(3.5rem, 9.5vw, 8.5rem);
+      line-height: 0.84;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--bone);
+      margin-left: -0.03em;
+    }
+    
+    .hero-diptych-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: flex-end;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (min-width: 900px) {
+      .hero-diptych-grid {
+        grid-template-columns: 1.1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+    }
+    .hero-prose-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 1.25rem;
+      max-width: 500px;
+    }
+    .hero-tagline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--bone);
+    }
+    .hero-manifesto-text {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--bone-muted);
+    }
+    .hero-manifesto-text strong {
       color: #ffffff;
       font-weight: 500;
     }
-    .statement .jp {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.95em;
-      color: #7d7a72;
-      display: block;
-      margin-top: 0.5rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.75rem;
-    }
-    @media (min-width: 768px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-    }
-    .card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: #131317;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 2.25rem 2rem;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-    }
-    .card:hover {
-      background: #18181f;
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
-    .card.highlight {
-      border-color: rgba(15, 56, 255, 0.4);
-    }
-    .card.highlight:hover {
-      border-color: #0f38ff;
-    }
-    .card-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
-      color: #7a7872;
-      margin-bottom: 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .card-kanji {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.9rem;
-      color: #9c9990;
-    }
-    .card-title {
-      font-size: 1.65rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-      color: #ffffff;
-    }
-    .card-desc {
-      font-size: 0.88rem;
-      color: #99968e;
-      line-height: 1.6;
-      margin-bottom: 1.75rem;
-    }
-    .card-tags {
+    .hero-meta-strip {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .tag {
+      gap: 1.25rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
-      padding: 0.25rem 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #88857e;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: var(--dim);
+      border-top: 1px solid var(--border-hairline);
+      padding-top: 0.85rem;
     }
-    footer {
-      margin-top: 6rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Asymmetrical Editorial Diptych Plate */
+    .hero-image-diptych {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/4.6;
+      max-width: 440px;
+      max-height: min(480px, calc(100vh - 280px));
+      margin-left: auto;
+    }
+    .hero-primary-photo {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #0d0d12;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+    }
+    .hero-primary-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: contrast(114%) saturate(104%);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-primary-photo:hover img {
+      transform: scale(1.04);
+    }
+    .photo-caption-tag {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      background: rgba(7, 7, 10, 0.85);
+      backdrop-filter: blur(6px);
+      padding: 0.4rem 0.8rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--bone);
+    }
+
+    .hero-bottom-scroll-cue {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+    }
+    .cue-down-arrow {
+      color: var(--bone);
+      animation: floatDown 2s ease-in-out infinite;
+    }
+    @keyframes floatDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ========================================================
+       SECTION 2: THE FIVE WORLDS INTRODUCTION
+       ======================================================== */
+    .worlds-section-intro {
+      padding-top: 6rem;
+      padding-bottom: 3rem;
+    }
+    .section-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-headline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--bone);
+      margin-bottom: 1.5rem;
+    }
+    .section-lead-prose {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--bone-muted);
+      max-width: 680px;
+    }
+
+    /* ========================================================
+       THE FIVE WORLDS: ASYMMETRICAL EDITORIAL STAGES
+       ======================================================== */
+    .worlds-flowing-container {
       display: flex;
       flex-direction: column;
+      gap: 6rem;
+      padding-bottom: 8rem;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .world-stage-item {
+      position: relative;
+      padding: 3.5rem 0;
+      border-top: 1px solid var(--border-hairline);
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+    .world-stage-item:hover {
+      border-top-color: rgba(245, 244, 239, 0.22);
+    }
+
+    /* ========================================================
+       WORLD 01: READ // TOKYO EDITORIAL
+       ======================================================== */
+    .stage-read-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .stage-read-grid {
+        grid-template-columns: 1.15fr 1fr;
+        gap: 5rem;
+      }
+    }
+    .read-miniature-spread {
+      background: var(--color-read);
+      color: var(--color-read-ink);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 600px) {
+      .read-miniature-spread {
+        grid-template-columns: 1fr 1.2fr;
+        padding: 3rem 2.5rem;
+      }
+    }
+    .read-miniature-spread:hover {
+      transform: translateY(-6px) rotate(-0.5deg);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85), 0 0 40px rgba(245, 244, 239, 0.12);
+    }
+    .read-spread-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .read-issue-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: #666;
+      letter-spacing: 0.15em;
+    }
+    .read-spread-masthead {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+      margin: 1.5rem 0;
+    }
+    .read-vertical-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.9rem;
+      color: #777;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.3em;
+      height: 120px;
+    }
+    .read-spread-photo {
+      width: 100%;
+      aspect-ratio: 4/5.2;
+      overflow: hidden;
+      background: #eae8e1;
+    }
+    .read-spread-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: contrast(108%);
+      transition: transform 0.6s ease;
+    }
+    .read-miniature-spread:hover .read-spread-photo img {
+      transform: scale(1.04);
+    }
+
+    /* World Text Dossier Column */
+    .world-dossier-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .world-number-verb {
+      display: flex;
+      align-items: baseline;
       gap: 1rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
-      color: #66645e;
+      letter-spacing: 0.15em;
+      color: var(--dim-light);
+    }
+    .world-verb-badge {
+      color: var(--bone);
+      border: 1px solid var(--border-hairline);
+      padding: 0.2rem 0.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+    }
+    .world-display-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--bone);
+    }
+    .world-narrative-prose {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--bone-muted);
+    }
+    .world-ingredients-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.64rem;
+      color: var(--dim);
+    }
+    .world-ingredient-pill {
+      border: 1px solid var(--border-hairline);
+      padding: 0.3rem 0.65rem;
+      color: var(--bone-muted);
+    }
+    .world-enter-btn {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: transparent;
+      border: 1px solid var(--bone);
+      color: var(--bone);
+      padding: 0.9rem 1.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .world-enter-btn:hover {
+      background: var(--bone);
+      color: #000000;
+    }
+
+    /* ========================================================
+       WORLD 02: INDEX // BRUTALIST ARCHIVE
+       ======================================================== */
+    .stage-index-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .stage-index-grid {
+        grid-template-columns: 1fr 1.15fr;
+        gap: 5rem;
+      }
+    }
+    .index-miniature-docket {
+      background: var(--color-index);
+      color: var(--color-index-ink);
+      border: 1px solid #000000;
+      padding: 2rem 1.75rem;
+      box-shadow: 12px 12px 0 rgba(255, 255, 255, 0.08);
+      font-family: 'Space Mono', monospace;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .index-miniature-docket:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 16px 16px 0 var(--bone), -1px -1px 0 rgba(255, 255, 255, 0.3);
+    }
+    .docket-header-strip {
+      border-bottom: 2px solid #000000;
+      padding-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+    .docket-content-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    @media (min-width: 540px) {
+      .docket-content-split {
+        grid-template-columns: 1fr 1.1fr;
+      }
+    }
+    .docket-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: #eaeaea;
+      border: 1px solid #000000;
+    }
+    .docket-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: grayscale(100%) contrast(120%);
+    }
+    .docket-telemetry-lines {
+      font-size: 0.68rem;
+      line-height: 1.8;
+    }
+    .docket-telemetry-lines strong {
+      display: block;
+      font-size: 0.6rem;
+      color: #666;
+    }
+    .docket-barcode-footer {
+      border-top: 1px solid #000000;
+      padding-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.62rem;
+    }
+
+    /* ========================================================
+       WORLD 03: CHASE // RED / BLACK TOKYO
+       ======================================================== */
+    .stage-chase-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .stage-chase-grid {
+        grid-template-columns: 1.15fr 1fr;
+        gap: 5rem;
+      }
+    }
+    .chase-miniature-poster {
+      background: #000000;
+      border: 2px solid var(--color-chase);
+      padding: 2rem 1.75rem;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 25px 60px rgba(255, 36, 0, 0.2);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      overflow: hidden;
+    }
+    .chase-miniature-poster:hover {
+      transform: translateY(-6px) rotate(0.5deg);
+      box-shadow: 0 35px 80px rgba(255, 36, 0, 0.45), 0 0 50px rgba(255, 36, 0, 0.25);
+    }
+    .chase-vermilion-slash {
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: var(--color-chase);
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+    .chase-poster-header {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--color-chase);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+    }
+    .chase-poster-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(3rem, 7vw, 4.8rem);
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+    .chase-poster-title span {
+      color: var(--color-chase);
+    }
+    .chase-poster-img-wrap {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      border: 1px solid var(--color-chase);
+      margin-bottom: 1.25rem;
+    }
+    .chase-poster-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: contrast(125%) saturate(110%);
+      transition: transform 0.6s ease;
+    }
+    .chase-miniature-poster:hover .chase-poster-img-wrap img {
+      transform: scale(1.06);
+    }
+    .chase-poster-footer {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: #888888;
+    }
+
+    /* ========================================================
+       WORLD 04: CONTEMPLATE // JAPANESE EXHIBITION
+       ======================================================== */
+    .stage-contemplate-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .stage-contemplate-grid {
+        grid-template-columns: 1fr 1.15fr;
+        gap: 5rem;
+      }
+    }
+    .contemplate-miniature-scroll {
+      background: var(--color-contemplate);
+      color: var(--color-contemplate-ink);
+      padding: 3rem 2rem 2.5rem;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    .contemplate-miniature-scroll:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 45px 100px rgba(0, 0, 0, 0.95), 0 0 45px rgba(242, 238, 229, 0.1);
+    }
+    /* Scroll Rod Finial */
+    .scroll-rod-top {
+      position: absolute;
+      top: -8px;
+      left: 5%;
+      right: 5%;
+      height: 8px;
+      background: #2b2520;
+      border-radius: 4px;
+    }
+    .scroll-rod-bottom {
+      position: absolute;
+      bottom: -8px;
+      left: 3%;
+      right: 3%;
+      height: 10px;
+      background: #1c1815;
+      border-radius: 5px;
+    }
+    .scroll-kanji-vert {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.35em;
+      margin-bottom: 2rem;
+      height: 160px;
+    }
+    .scroll-photo-wrap {
+      width: 100%;
+      aspect-ratio: 4/5.4;
+      overflow: hidden;
+      background: #ded7c9;
+      margin-bottom: 1.75rem;
+    }
+    .scroll-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: contrast(110%);
+      transition: transform 0.6s ease;
+    }
+    .contemplate-miniature-scroll:hover .scroll-photo-wrap img {
+      transform: scale(1.05);
+    }
+    .scroll-hanko-seal {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: #6d665a;
+      letter-spacing: 0.12em;
+    }
+    .hanko-red-stamp {
+      width: 22px;
+      height: 22px;
+      border: 1px solid #c93b2b;
+      color: #c93b2b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.65rem;
+    }
+
+    /* ========================================================
+       WORLD 10: NAVIGATE // THE SPATIAL EXPERIMENT
+       ======================================================== */
+    .stage-navigate-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .stage-navigate-grid {
+        grid-template-columns: 1.15fr 1fr;
+        gap: 5rem;
+      }
+    }
+    .navigate-miniature-volume {
+      position: relative;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      min-height: 420px;
+      background: #020204;
+      border: 1px solid var(--border-hairline);
+      box-shadow: 0 35px 90px rgba(0, 0, 0, 0.95);
+      padding: 3rem 2rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .navigate-miniature-volume:hover {
+      border-color: rgba(15, 56, 255, 0.7);
+      box-shadow: 0 40px 100px rgba(15, 56, 255, 0.35), 0 0 60px rgba(15, 56, 255, 0.2);
+    }
+    .nav-spatial-fore-we {
+      position: absolute;
+      top: 10%;
+      left: 6%;
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(4rem, 9vw, 6.5rem);
+      line-height: 0.8;
+      color: var(--bone);
+      transform: translateZ(80px);
+      user-select: none;
+      z-index: 5;
+    }
+    .nav-spatial-garment-plate {
+      position: relative;
+      width: 220px;
+      aspect-ratio: 4/5.4;
+      background: #000000;
+      overflow: hidden;
+      transform: translateZ(0px) rotateY(-8deg);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+      transition: transform 0.4s ease;
+      z-index: 3;
+    }
+    .navigate-miniature-volume:hover .nav-spatial-garment-plate {
+      transform: translateZ(20px) rotateY(0deg);
+    }
+    .nav-spatial-garment-plate img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: contrast(116%) saturate(104%);
+    }
+    .nav-spatial-deep-lia {
+      position: absolute;
+      bottom: 8%;
+      right: 8%;
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(5rem, 11vw, 7.5rem);
+      line-height: 0.8;
+      color: rgba(244, 243, 238, 0.1);
+      transform: translateZ(-100px);
+      user-select: none;
+      z-index: 1;
+    }
+    .nav-coord-badge {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+    }
+    .navigate-miniature-volume:hover .nav-coord-badge {
+      color: var(--color-navigate);
+    }
+
+    /* ========================================================
+       SECTION 3: OCCASION BRIDGE (ART DIRECTION → PURPOSE)
+       ======================================================== */
+    .occasion-bridge-section {
+      padding: 7rem 0;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .occasion-flow-grid {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border-hairline);
+      margin-top: 3.5rem;
+    }
+    .occasion-flow-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border-hairline);
+      cursor: pointer;
+      position: relative;
+      transition: padding-left 0.3s ease;
     }
     @media (min-width: 768px) {
-      footer {
+      .occasion-flow-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+    }
+    .occasion-flow-row:hover {
+      padding-left: 1rem;
+    }
+    .occasion-name {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: -0.02em;
+      line-height: 0.9;
+      text-transform: uppercase;
+      color: rgba(245, 244, 239, 0.4);
+      transition: color 0.25s ease;
+    }
+    .occasion-flow-row:hover .occasion-name {
+      color: var(--bone);
+    }
+    .occasion-meta-desc {
+      font-size: 0.88rem;
+      color: var(--dim-light);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+    .occasion-campus-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--dim);
+      letter-spacing: 0.12em;
+    }
+
+    /* ========================================================
+       SECTION 4: ABOUT WEDELIA
+       ======================================================== */
+    .about-section {
+      padding: 7rem 0 8rem;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .about-editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+    }
+    @media (min-width: 900px) {
+      .about-editorial-grid {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 6rem;
+      }
+    }
+    .about-large-manifesto {
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      line-height: 1.45;
+      font-weight: 400;
+      color: var(--bone);
+      letter-spacing: -0.01em;
+    }
+    .about-large-manifesto strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .about-specs-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      justify-content: center;
+    }
+    .spec-block {
+      border-top: 1px solid var(--border-hairline);
+      padding-top: 1.25rem;
+    }
+    .spec-block-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--bone);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .spec-block-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--bone-muted);
+    }
+
+    /* ========================================================
+       SECTION 5: FINAL CALL TO ENTER (PORTAL BANDS)
+       ======================================================== */
+    .final-selector-section {
+      padding: 8rem 0 5rem;
+    }
+    .final-headline-cue {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 4rem;
+      color: var(--bone);
+    }
+    .portal-bands-stack {
+      display: flex;
+      flex-direction: column;
+    }
+    .portal-band {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.25rem 0;
+      border-top: 1px solid var(--border-hairline);
+      text-decoration: none;
+      color: var(--bone);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portal-band:last-child {
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .portal-band:hover {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .portal-band[data-theme="read"]:hover {
+      background: rgba(245, 244, 239, 0.04);
+      border-color: rgba(245, 244, 239, 0.35);
+    }
+    .portal-band[data-theme="index"]:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .portal-band[data-theme="chase"]:hover {
+      background: rgba(255, 36, 0, 0.06);
+      border-color: rgba(255, 36, 0, 0.5);
+    }
+    .portal-band[data-theme="chase"]:hover .portal-name,
+    .portal-band[data-theme="chase"]:hover .portal-arrow {
+      color: var(--color-chase);
+    }
+    .portal-band[data-theme="contemplate"]:hover {
+      background: rgba(242, 238, 229, 0.04);
+      border-color: rgba(242, 238, 229, 0.35);
+    }
+    .portal-band[data-theme="navigate"]:hover {
+      background: rgba(15, 56, 255, 0.06);
+      border-color: rgba(15, 56, 255, 0.5);
+    }
+    .portal-band[data-theme="navigate"]:hover .portal-name,
+    .portal-band[data-theme="navigate"]:hover .portal-arrow {
+      color: #6d8bff;
+    }
+    .portal-band-left {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+    .portal-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+    }
+    .portal-name {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--bone);
+    }
+    .portal-verb {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--dim-light);
+      letter-spacing: 0.15em;
+    }
+    .portal-arrow {
+      font-size: 1.5rem;
+      color: var(--dim);
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+    .portal-band:hover .portal-arrow {
+      transform: translateX(8px);
+      color: var(--bone);
+    }
+
+    /* Master Colophon Footer */
+    .master-footer {
+      padding: 4rem 0 5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--dim);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      border-top: 1px solid var(--border-hairline);
+    }
+    @media (min-width: 768px) {
+      .master-footer {
         flex-direction: row;
         justify-content: space-between;
       }
+    }
+
+    /* Full-Screen Transition Overlay */
+    .world-transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .world-transition-overlay.active {
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1 class="brand">WEDELIA</h1>
-        <span class="brand-sub">EXPANDED ART DIRECTIONS // 5 SELECTED WORLDS</span>
+
+  <!-- Minimal Top Masthead -->
+  <header class="master-masthead">
+    <a href="index.html" class="masthead-brand">
+      <span class="brand-logo">WEDELIA</span>
+      <span class="brand-sub">// MASTER ENTRY</span>
+    </a>
+    <nav class="masthead-nav-pills">
+      <a href="01-tokyo-editorial.html" class="masthead-pill" data-world="read">01 READ</a>
+      <a href="02-brutalist-fashion-index.html" class="masthead-pill" data-world="index">02 INDEX</a>
+      <a href="03-red-black-tokyo.html" class="masthead-pill" data-world="chase">03 CHASE</a>
+      <a href="04-vertical-japanese-poster.html" class="masthead-pill" data-world="contemplate">04 CONTEMPLATE</a>
+      <a href="10-the-strange-one.html" class="masthead-pill" data-world="navigate">10 NAVIGATE</a>
+      <a href="#worlds" class="masthead-pill cta">EXPLORE WORLDS ↓</a>
+    </nav>
+  </header>
+
+  <!-- ========================================================
+       SECTION 1: THE MASTER OPENING HERO
+       ======================================================== -->
+  <main>
+    <section class="master-hero-section master-container">
+      <div class="hero-top-statement">
+        <div class="hero-category-label">FIVE PERSPECTIVES ON LEASED LUXURY</div>
+        <h1 class="hero-monumental-title">WEDELIA.</h1>
       </div>
-      <div class="header-meta">
-        PROJECT: <span>WEDELIA (AI)</span><br>
-        STATUS: <span>5 EXPANDED EXPERIENCES</span><br>
-        STAGE: <span>FINAL CONCEPT SELECTION</span>
+
+      <div class="hero-diptych-grid">
+        <div class="hero-prose-col">
+          <h2 class="hero-tagline">DRESS THE MOMENT.</h2>
+          <p class="hero-manifesto-text">
+            A fashion rental archive for occasions, moments, nights, and memories. Monumental couture silhouettes rented for <strong>3, 5, or 7 days</strong> — with direct campus hostel delivery, ₹0 damage coverage, and zero laundry obligation.
+          </p>
+          <div class="hero-meta-strip">
+            <span>5 INDEPENDENT WORLDS</span>
+            <span>NCR × TOKYO</span>
+            <span>AUTONOMOUS COURIER GATE</span>
+          </div>
+        </div>
+
+        <div class="hero-image-diptych">
+          <div class="hero-primary-photo">
+            <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Classical Couture Draping">
+            <div class="photo-caption-tag">ARCHIVE SPECIMEN // 1951 PARIS ATELIER</div>
+          </div>
+        </div>
       </div>
-    </header>
 
-    <p class="statement">
-      Five deeply expanded, completely independent editorial worlds for WEDELIA. 
-      Each world has its own unique DOM architecture, distinct typographic personality, and complete information design.
-      <span class="jp">選ばれた5つの視覚世界。雑誌社説、技術目録、夜間宣伝、縦型ポスター、そして異形の空間。</span>
-    </p>
+      <div class="hero-bottom-scroll-cue">
+        <span>CHOOSE A PERSPECTIVE</span>
+        <span class="cue-down-arrow">↓</span>
+        <span>SCROLL TO ENTER</span>
+      </div>
+    </section>
 
-    <div class="grid">
-      <!-- 01 -->
-      <a href="01-tokyo-editorial.html" class="card">
-        <div>
-          <div class="card-num">
-            <span>DIRECTION 01 // VERB: READ</span>
-            <span class="card-kanji">東京エディトリアル</span>
+    <!-- ========================================================
+         SECTION 2: THE FIVE WORLDS SECTION
+         ======================================================== -->
+    <section class="master-container" id="worlds">
+      <div class="worlds-section-intro">
+        <div class="section-eyebrow">THE ARCHIVE DOORS</div>
+        <h2 class="section-headline">FIVE WAYS INTO WEDELIA.</h2>
+        <p class="section-lead-prose">
+          WEDELIA is one fashion platform experienced through five radically different artistic realities. Each world has its own interaction grammar, typography, pacing, and attitude toward fashion discovery.
+        </p>
+      </div>
+
+      <div class="worlds-flowing-container">
+
+        <!-- WORLD 01: READ // TOKYO EDITORIAL -->
+        <article class="world-stage-item" id="world01">
+          <div class="stage-read-grid">
+            <!-- Miniature Interactive Spread Preview -->
+            <div class="read-miniature-spread world-card-action" data-href="01-tokyo-editorial.html" data-theme="read">
+              <div class="read-spread-left">
+                <div>
+                  <div class="read-issue-meta">ISSUE 07 // TOKYO NCR</div>
+                  <h3 class="read-spread-masthead">一回きりの夜に、常識を脱ぎ捨てる。</h3>
+                </div>
+                <div class="read-vertical-kanji">
+                  雑誌 // 読む // 刊行物
+                </div>
+              </div>
+              <div class="read-spread-photo">
+                <img src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Tokyo Editorial Plate Preview">
+              </div>
+            </div>
+
+            <!-- World Dossier -->
+            <div class="world-dossier-col">
+              <div class="world-number-verb">
+                <span>01 // DIRECTION</span>
+                <span class="world-verb-badge">READ</span>
+              </div>
+              <h3 class="world-display-title">TOKYO EDITORIAL</h3>
+              <p class="world-narrative-prose">
+                A Japanese fashion publication translated into an interactive digital folio. Fashion is discovered through printed matter metaphors, dual-column spreads, vertical Mincho marginalia, and tipped-in order slips.
+              </p>
+              <div class="world-ingredients-list">
+                <span class="world-ingredient-pill">Warm Paper #f5f4ef</span>
+                <span class="world-ingredient-pill">Shippori Mincho</span>
+                <span class="world-ingredient-pill">Physical Folio Turn</span>
+                <span class="world-ingredient-pill">Tipped-in Order Slips</span>
+              </div>
+              <a href="01-tokyo-editorial.html" class="world-enter-btn world-card-action" data-href="01-tokyo-editorial.html" data-theme="read">
+                <span>OPEN PUBLICATION</span>
+                <span>⟶</span>
+              </a>
+            </div>
           </div>
-          <h2 class="card-title">Tokyo Editorial</h2>
-          <p class="card-desc">Japanese fashion publication. Warm off-white paper folio, dual-column editorial reading spreads, 3D paper leaf turns, and perforated tipped-in subscriber order slips.</p>
-        </div>
-        <div class="card-tags">
-          <span class="tag">#f5f4ef Paper Folio</span>
-          <span class="tag">Shippori Mincho</span>
-          <span class="tag">Magazine Architecture</span>
-        </div>
-      </a>
+        </article>
 
-      <!-- 02 -->
-      <a href="02-brutalist-fashion-index.html" class="card">
-        <div>
-          <div class="card-num">
-            <span>DIRECTION 02 // VERB: INDEX</span>
-            <span class="card-kanji">技術目録</span>
+        <!-- WORLD 02: INDEX // BRUTALIST ARCHIVE -->
+        <article class="world-stage-item" id="world02">
+          <div class="stage-index-grid">
+            <!-- World Dossier Left -->
+            <div class="world-dossier-col">
+              <div class="world-number-verb">
+                <span>02 // DIRECTION</span>
+                <span class="world-verb-badge">INDEX</span>
+              </div>
+              <h3 class="world-display-title">THE ARCHIVE MACHINE</h3>
+              <p class="world-narrative-prose">
+                A mechanical fashion registry where garments are discovered through indexing, classification, and accession records. Driven by rigid 1px hairline grids, serial numbers, and punched dispatch tickets.
+              </p>
+              <div class="world-ingredients-list">
+                <span class="world-ingredient-pill">Pure Hairline Grid</span>
+                <span class="world-ingredient-pill">Space Mono Registry</span>
+                <span class="world-ingredient-pill">Stepped Mechanical Shift</span>
+                <span class="world-ingredient-pill">Punched Docket</span>
+              </div>
+              <a href="02-brutalist-fashion-index.html" class="world-enter-btn world-card-action" data-href="02-brutalist-fashion-index.html" data-theme="index">
+                <span>ENTER ARCHIVE</span>
+                <span>⟶</span>
+              </a>
+            </div>
+
+            <!-- Miniature Interactive Docket Preview -->
+            <div class="index-miniature-docket world-card-action" data-href="02-brutalist-fashion-index.html" data-theme="index">
+              <div class="docket-header-strip">
+                <span>REGISTRY WDL-SYS-02</span>
+                <span>ACCESS: IMMEDIATE</span>
+              </div>
+              <div class="docket-content-split">
+                <div class="docket-thumb-wrap">
+                  <img src="/assets/editorial/court-dress.jpg" alt="Archive Machine Specimen">
+                </div>
+                <div class="docket-telemetry-lines">
+                  <strong>SPECIMEN // 0041:</strong>
+                  Gilded Brocade Court Robe
+                  <strong>FIBER MASS:</strong>
+                  1,620g Metallic Thread
+                  <strong>TARIFF:</strong>
+                  ₹3,899 / 3 Days [₹0 Shield]
+                </div>
+              </div>
+              <div class="docket-barcode-footer">
+                <span>BARCODE // 8940-2219-01</span>
+                <span>[PUNCHED DOCKET ACTIVE]</span>
+              </div>
+            </div>
           </div>
-          <h2 class="card-title">Brutalist Fashion Index</h2>
-          <p class="card-desc">Institutional archive machine. Pure white, rigid 1px hairline grid, mechanical stepped easing, accession matrix, punched dispatch docket, and dry inventory tables.</p>
-        </div>
-        <div class="card-tags">
-          <span class="tag">Hairline Grid</span>
-          <span class="tag">Archive Database</span>
-          <span class="tag">Punched Docket</span>
-        </div>
-      </a>
+        </article>
 
-      <!-- 03 -->
-      <a href="03-red-black-tokyo.html" class="card">
-        <div>
-          <div class="card-num">
-            <span>DIRECTION 03 // VERB: CHASE</span>
-            <span class="card-kanji">紅と黒</span>
+        <!-- WORLD 03: CHASE // TOKYO AFTER DARK -->
+        <article class="world-stage-item" id="world03">
+          <div class="stage-chase-grid">
+            <!-- Miniature Interactive Street Poster Preview -->
+            <div class="chase-miniature-poster world-card-action" data-href="03-red-black-tokyo.html" data-theme="chase">
+              <div class="chase-vermilion-slash"></div>
+              <div class="chase-poster-header">
+                <span>TOKYO NOCTURNE // DROP 23:47</span>
+                <span>DOOR PASS ACTIVE</span>
+              </div>
+              <h4 class="chase-poster-title">
+                NOCTURNE<br><span>STREET.</span>
+              </h4>
+              <div class="chase-poster-img-wrap">
+                <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Tokyo Nightlife Flash Preview">
+              </div>
+              <div class="chase-poster-footer">
+                <span>SHIBUYA ARENA CIR</span>
+                <span>₹1,699 / 3D LEASE</span>
+              </div>
+            </div>
+
+            <!-- World Dossier Right -->
+            <div class="world-dossier-col">
+              <div class="world-number-verb">
+                <span>03 // DIRECTION</span>
+                <span class="world-verb-badge">CHASE</span>
+              </div>
+              <h3 class="world-display-title">TOKYO AFTER DARK</h3>
+              <p class="world-narrative-prose">
+                A midnight fashion campaign built around movement, velocity, and nocturnal urgency. Strobe photography, razor-sharp condensed typography, high-voltage vermilion red, and street-poster slams.
+              </p>
+              <div class="world-ingredients-list">
+                <span class="world-ingredient-pill">Asphalt Black & Vermilion #ff2400</span>
+                <span class="world-ingredient-pill">Anton Condensed Display</span>
+                <span class="world-ingredient-pill">Razor-Wipe Poster Slams</span>
+                <span class="world-ingredient-pill">Nightclub Door Passes</span>
+              </div>
+              <a href="03-red-black-tokyo.html" class="world-enter-btn world-card-action" data-href="03-red-black-tokyo.html" data-theme="chase">
+                <span>ENTER THE NIGHT</span>
+                <span>⟶</span>
+              </a>
+            </div>
           </div>
-          <h2 class="card-title">Red / Black Tokyo</h2>
-          <p class="card-desc">Underground midnight drop campaign. High-voltage vermilion marker on asphalt black, live 23:47 courier countdown runner, aggressive razor-wipe poster slams, and nightclub door passes.</p>
-        </div>
-        <div class="card-tags">
-          <span class="tag">Vermilion Red Marker</span>
-          <span class="tag">Shibuya 23:47 Drop</span>
-          <span class="tag">Anton Display</span>
-        </div>
-      </a>
+        </article>
 
-      <!-- 04 -->
-      <a href="04-vertical-japanese-poster.html" class="card">
-        <div>
-          <div class="card-num">
-            <span>DIRECTION 04 // VERB: CONTEMPLATE</span>
-            <span class="card-kanji">縦型ポスター</span>
+        <!-- WORLD 04: CONTEMPLATE // JAPANESE EXHIBITION -->
+        <article class="world-stage-item" id="world04">
+          <div class="stage-contemplate-grid">
+            <!-- World Dossier Left -->
+            <div class="world-dossier-col">
+              <div class="world-number-verb">
+                <span>04 // DIRECTION</span>
+                <span class="world-verb-badge">CONTEMPLATE</span>
+              </div>
+              <h3 class="world-display-title">JAPANESE EXHIBITION</h3>
+              <p class="world-narrative-prose">
+                A quiet fashion sanctuary where garments become hanging works of art inside a Japanese-inspired gallery. Washi parchment tones, vertical calligraphy scrolls, ink black typography, and temporary custody seals.
+              </p>
+              <div class="world-ingredients-list">
+                <span class="world-ingredient-pill">Parchment Washi #f2eee5</span>
+                <span class="world-ingredient-pill">Vertical Kakemono Scroll</span>
+                <span class="world-ingredient-pill">Sumi Ink & Hanko Seal</span>
+                <span class="world-ingredient-pill">Temporary Custody Protocol</span>
+              </div>
+              <a href="04-vertical-japanese-poster.html" class="world-enter-btn world-card-action" data-href="04-vertical-japanese-poster.html" data-theme="contemplate">
+                <span>ENTER EXHIBITION</span>
+                <span>⟶</span>
+              </a>
+            </div>
+
+            <!-- Miniature Interactive Scroll Preview -->
+            <div class="contemplate-miniature-scroll world-card-action" data-href="04-vertical-japanese-poster.html" data-theme="contemplate">
+              <div class="scroll-rod-top"></div>
+              <div class="scroll-kanji-vert">
+                静寂の中に漂う、一着の美術品。
+              </div>
+              <div class="scroll-photo-wrap">
+                <img src="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg" alt="Exhibition Hanging Garment Preview">
+              </div>
+              <div class="scroll-hanko-seal">
+                <span>標本 04 // 衣服の展示</span>
+                <div class="hanko-red-stamp">和</div>
+              </div>
+              <div class="scroll-rod-bottom"></div>
+            </div>
           </div>
-          <h2 class="card-title">Vertical Japanese Poster</h2>
-          <p class="card-desc">Museum hanging scroll exhibition. Parchment cream washi tone, vertical Mincho calligraphy (縦書き), weighted atelier scroll rods, Makimono unrolling momentum, and consignment vouchers.</p>
-        </div>
-        <div class="card-tags">
-          <span class="tag">writing-mode: vertical-rl</span>
-          <span class="tag">Parchment Cream</span>
-          <span class="tag">Hanging Scroll (Kakejiku)</span>
-        </div>
-      </a>
+        </article>
 
-      <!-- 10 -->
-      <a href="10-the-strange-one.html" class="card highlight" style="grid-column: 1 / -1;">
-        <div>
-          <div class="card-num">
-            <span>DIRECTION 10 // VERB: NAVIGATE</span>
-            <span class="card-kanji" style="color: #0f38ff;">異形の空間 — THE STRANGE ONE</span>
+        <!-- WORLD 10: NAVIGATE // THE SPATIAL EXPERIMENT -->
+        <article class="world-stage-item" id="world10">
+          <div class="stage-navigate-grid">
+            <!-- Miniature Interactive Spatial Volume Preview -->
+            <div class="navigate-miniature-volume world-card-action" data-href="10-the-strange-one.html" data-theme="navigate">
+              <div class="nav-coord-badge">[X: 04.27, Y: 12.80, Z: +03.14]</div>
+              <div class="nav-spatial-fore-we">WE</div>
+              <div class="nav-spatial-garment-plate">
+                <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Spatial Specimen">
+              </div>
+              <div class="nav-spatial-deep-lia">LIA</div>
+            </div>
+
+            <!-- World Dossier Right -->
+            <div class="world-dossier-col">
+              <div class="world-number-verb">
+                <span>10 // DIRECTION</span>
+                <span class="world-verb-badge">NAVIGATE</span>
+              </div>
+              <h3 class="world-display-title">THE STRANGE ONE</h3>
+              <p class="world-narrative-prose">
+                A spatial fashion installation where garments, detached typography, and space occupy different dimensional planes. Non-Euclidean geometries, coordinate raycasts, and physical convergence moments.
+              </p>
+              <div class="world-ingredients-list">
+                <span class="world-ingredient-pill">Obsidian Void #040407</span>
+                <span class="world-ingredient-pill">Detached WE / DE / LIA</span>
+                <span class="world-ingredient-pill">Event-Driven Cobalt #0f38ff</span>
+                <span class="world-ingredient-pill">Cross-Axis Convergence</span>
+              </div>
+              <a href="10-the-strange-one.html" class="world-enter-btn world-card-action" data-href="10-the-strange-one.html" data-theme="navigate">
+                <span>ENTER SPATIAL FIELD</span>
+                <span>⟶</span>
+              </a>
+            </div>
           </div>
-          <h2 class="card-title">The Strange One</h2>
-          <p class="card-desc">Spatial fashion installation. Non-Euclidean 3D tensor field, floating garment monoliths, 3D axis realignments, detached typography, and coordinate token allocations.</p>
-        </div>
-        <div class="card-tags">
-          <span class="tag" style="border-color: #0f38ff; color: #ffffff;">Spatial Rail Nav</span>
-          <span class="tag">Electric Blue #0f38ff</span>
-          <span class="tag">Tensor Matrix</span>
-          <span class="tag">Viewport Bleed</span>
-        </div>
-      </a>
-    </div>
+        </article>
 
-    <footer>
-      <div>WEDELIA ARCHIVE // 5 EXPANDED EDITORIAL WORLDS</div>
-      <div>PURE STATIC ART DIRECTION // GSAP ENGINE AT FINAL STAGE</div>
-    </footer>
-  </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+       SECTION 3: OCCASION BRIDGE (ART DIRECTION → PURPOSE)
+       ======================================================== -->
+    <section class="occasion-bridge-section master-container">
+      <div class="section-eyebrow">OCCASIONS OF SIGNIFICANCE</div>
+      <h2 class="section-headline">DRESS THE MOMENT.</h2>
+      <p class="section-lead-prose">
+        Clothing borrowed for the defining hours of university life. You photograph it once. The memory authors the room forever.
+      </p>
+
+      <div class="occasion-flow-grid">
+        <div class="occasion-flow-row">
+          <div class="occasion-name">FESTIVAL</div>
+          <div class="occasion-meta-desc">
+            15,000 students filling the sports stadium under laser truss towers. Kinetic reflective shifts engineered to strobe in darkness.
+          </div>
+          <div class="occasion-campus-pill">IIT DELHI ARENA / HAUZ KHAS</div>
+        </div>
+
+        <div class="occasion-flow-row">
+          <div class="occasion-name">FAREWELL</div>
+          <div class="occasion-meta-desc">
+            The departmental valedictory apex. Sweeping silk faille gowns and sculpted peplums that author your graduation chapter.
+          </div>
+          <div class="occasion-campus-pill">MIRANDA HOUSE QUAD / NORTH CAMPUS</div>
+        </div>
+
+        <div class="occasion-flow-row">
+          <div class="occasion-name">CONCERT</div>
+          <div class="occasion-meta-desc">
+            Sub-bass stadium tours and live lawn concerts. Fluid hand-pleated silk chiffon draping that responds to motion and night air.
+          </div>
+          <div class="occasion-campus-pill">LSR ARCHWAY / SOUTH CAMPUS</div>
+        </div>
+
+        <div class="occasion-flow-row">
+          <div class="occasion-name">FRESHERS</div>
+          <div class="occasion-meta-desc">
+            First impression on campus. An audacious silhouette that establishes your creative authority before you speak a single word.
+          </div>
+          <div class="occasion-campus-pill">ST. STEPHEN'S QUAD / DELHI</div>
+        </div>
+
+        <div class="occasion-flow-row">
+          <div class="occasion-name">BANQUET</div>
+          <div class="occasion-meta-desc">
+            Model UN valedictories and formal society convocations. Regal side-pannier brocade silencing the dining hall upon entrance.
+          </div>
+          <div class="occasion-campus-pill">ASHOKA RESIDENCE / SONIPAT</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+       SECTION 4: ABOUT WEDELIA
+       ======================================================== */ -->
+    <section class="about-section master-container">
+      <div class="about-editorial-grid">
+        <div>
+          <div class="section-eyebrow">THE ARCHIVE PHILOSOPHY</div>
+          <p class="about-large-manifesto">
+            WEDELIA is built upon a singular conviction: <strong>the most monumental garments in your life should not rot in a wardrobe after one photograph.</strong>
+            <br><br>
+            Don't spend ₹35,000 on an outfit you will never wear again. Lease museum-grade couture silhouettes for 3, 5, or 7 days.
+          </p>
+        </div>
+
+        <div class="about-specs-col">
+          <div class="spec-block">
+            <div class="spec-block-title">01 // 24H PRIOR DISPATCH</div>
+            <div class="spec-block-body">
+              Sealed temperature-controlled carton delivered directly to your campus gate or hostel desk 24 hours prior to entrance.
+            </div>
+          </div>
+
+          <div class="spec-block">
+            <div class="spec-block-title">02 // DUAL-FIT SISTER SIZING</div>
+            <div class="spec-block-body">
+              Your primary chosen size arrives accompanied automatically by a sealed complimentary backup sister size. Zero sizing hesitation.
+            </div>
+          </div>
+
+          <div class="spec-block">
+            <div class="spec-block-title">03 // ₹0 DAMAGE COVERAGE</div>
+            <div class="spec-block-body">
+              Accidental drink spills, dancefloor scuffs, and normal seam tension are 100% insured. Zero penalty fear. Return unwashed on Monday morning.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+       SECTION 5: FINAL CALL TO ENTER (PORTAL BANDS)
+       ======================================================== -->
+    <section class="final-selector-section master-container">
+      <h2 class="final-headline-cue">CHOOSE YOUR WAY IN.</h2>
+
+      <div class="portal-bands-stack">
+        <a href="01-tokyo-editorial.html" class="portal-band world-card-action" data-href="01-tokyo-editorial.html" data-theme="read">
+          <div class="portal-band-left">
+            <span class="portal-num">01</span>
+            <span class="portal-name">TOKYO EDITORIAL</span>
+          </div>
+          <span class="portal-verb">READ // MAGAZINE SPREAD</span>
+          <span class="portal-arrow">⟶</span>
+        </a>
+
+        <a href="02-brutalist-fashion-index.html" class="portal-band world-card-action" data-href="02-brutalist-fashion-index.html" data-theme="index">
+          <div class="portal-band-left">
+            <span class="portal-num">02</span>
+            <span class="portal-name">THE FASHION ARCHIVE</span>
+          </div>
+          <span class="portal-verb">INDEX // ARCHIVE MACHINE</span>
+          <span class="portal-arrow">⟶</span>
+        </a>
+
+        <a href="03-red-black-tokyo.html" class="portal-band world-card-action" data-href="03-red-black-tokyo.html" data-theme="chase">
+          <div class="portal-band-left">
+            <span class="portal-num">03</span>
+            <span class="portal-name">TOKYO AFTER DARK</span>
+          </div>
+          <span class="portal-verb">CHASE // MIDNIGHT DROP</span>
+          <span class="portal-arrow">⟶</span>
+        </a>
+
+        <a href="04-vertical-japanese-poster.html" class="portal-band world-card-action" data-href="04-vertical-japanese-poster.html" data-theme="contemplate">
+          <div class="portal-band-left">
+            <span class="portal-num">04</span>
+            <span class="portal-name">JAPANESE EXHIBITION</span>
+          </div>
+          <span class="portal-verb">CONTEMPLATE // KAKEMONO</span>
+          <span class="portal-arrow">⟶</span>
+        </a>
+
+        <a href="10-the-strange-one.html" class="portal-band world-card-action" data-href="10-the-strange-one.html" data-theme="navigate">
+          <div class="portal-band-left">
+            <span class="portal-num">10</span>
+            <span class="portal-name">THE STRANGE ONE</span>
+          </div>
+          <span class="portal-verb">NAVIGATE // SPATIAL FIELD</span>
+          <span class="portal-arrow">⟶</span>
+        </a>
+      </div>
+
+      <!-- Master Colophon Footer -->
+      <footer class="master-footer">
+        <div>WEDELIA // MASTER ENTRY OF FIVE WORLDS</div>
+        <div>NCR × TOKYO ARCHIVE SYSTEM // 2026</div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- World Transition Flash Overlay -->
+  <div class="world-transition-overlay" id="transitionOverlay"></div>
+
+  <script type="module">
+    import gsap from 'gsap';
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const overlay = document.getElementById('transitionOverlay');
+
+    const themeColors = {
+      read: '#f5f4ef',
+      index: '#ffffff',
+      chase: '#ff2400',
+      contemplate: '#f2eee5',
+      navigate: '#040407'
+    };
+
+    let isNavigating = false;
+
+    // Signature World-to-World Entrance Transitions
+    document.querySelectorAll('.world-card-action').forEach(el => {
+      el.addEventListener('click', (e) => {
+        const href = el.dataset.href;
+        const theme = el.dataset.theme;
+
+        if (!href || isNavigating) return;
+        e.preventDefault();
+        isNavigating = true;
+
+        if (prefersReducedMotion || !overlay) {
+          window.location.href = href;
+          return;
+        }
+
+        const color = themeColors[theme] || '#ffffff';
+        overlay.style.background = color;
+        overlay.classList.add('active');
+
+        // Short transition matching destination (500ms - 700ms)
+        gsap.to(overlay, {
+          opacity: 1,
+          duration: 0.45,
+          ease: 'power3.inOut',
+          onComplete: () => {
+            window.location.href = href;
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
