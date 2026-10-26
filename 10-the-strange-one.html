@@ -11,27 +11,23 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --void-bg: #050508;
-      --void-surface: #0a0a11;
-      --panel-dark: #0e0e17;
+      --void-bg: #040407;
+      --void-deep: #020204;
       --bone: #f4f3ee;
-      --bone-muted: #abaaa4;
-      --dim: #5c5b56;
-      --dim-light: #7a7974;
+      --bone-muted: #9e9d96;
+      --dim: #54534e;
+      --dim-light: #706f69;
       --electric-blue: #0f38ff;
-      --electric-blue-bright: #3b66ff;
-      --electric-blue-glow: rgba(15, 56, 255, 0.45);
-      --electric-blue-subtle: rgba(15, 56, 255, 0.12);
-      --border-dark: #191924;
-      --border-accent: rgba(15, 56, 255, 0.35);
-      --border-light: rgba(244, 243, 238, 0.15);
+      --electric-blue-glow: rgba(15, 56, 255, 0.4);
+      --border-dark: #14141d;
+      --border-hairline: rgba(244, 243, 238, 0.08);
     }
 
     html, body {
       background: var(--void-bg);
       color: var(--bone);
       font-family: 'Space Mono', monospace;
-      line-height: 1.45;
+      line-height: 1.5;
       padding-top: 48px;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
@@ -39,14 +35,16 @@
       width: 100%;
     }
 
-    /* Spatial Coordinate Top Nav */
+    /* Minimal Top Vector Navigation */
     .switch-nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       height: 48px;
-      background: #020205;
+      background: rgba(4, 4, 7, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-dark);
       z-index: 9999;
       display: flex;
@@ -54,56 +52,56 @@
       justify-content: space-between;
       padding: 0 1.5rem;
       font-size: 0.72rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
     }
     .switch-nav a { color: var(--bone); text-decoration: none; }
     .spatial-nav-brand {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.75rem;
     }
     .spatial-node-dot {
       display: inline-block;
-      width: 7px;
-      height: 7px;
-      background: var(--electric-blue);
+      width: 5px;
+      height: 5px;
+      background: var(--bone-muted);
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--electric-blue);
-      animation: pulseDot 2.4s ease-in-out infinite;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    @keyframes pulseDot {
-      0%, 100% { opacity: 0.4; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.25); box-shadow: 0 0 14px var(--electric-blue-bright); }
+    .spatial-nav-brand:hover .spatial-node-dot {
+      background: var(--electric-blue);
+      box-shadow: 0 0 10px var(--electric-blue);
     }
     .spatial-brand-link {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.1em;
+      color: var(--bone);
+      letter-spacing: 0.12em;
     }
     .spatial-coord-sub {
-      color: var(--dim-light);
+      color: var(--dim);
       font-size: 0.62rem;
     }
     .switch-pills { display: flex; align-items: center; gap: 0.25rem; }
     .spatial-nodes-label {
       font-size: 0.6rem;
-      color: var(--dim-light);
+      color: var(--dim);
       margin-right: 0.25rem;
     }
     .switch-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 26px;
-      height: 26px;
-      border: 1px solid rgba(15, 56, 255, 0.25);
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--border-dark);
       color: var(--dim-light);
-      background: #06060e;
+      background: transparent;
       font-family: 'Space Mono', monospace;
+      font-size: 0.64rem;
       transition: all 0.2s ease;
     }
-    .switch-pill:hover { border-color: var(--electric-blue); color: #ffffff; }
+    .switch-pill:hover { border-color: var(--bone-muted); color: #ffffff; }
     .switch-pill.active {
       background: var(--electric-blue);
       color: #ffffff;
@@ -119,22 +117,23 @@
       .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
     }
 
-    /* Left Vertical Spatial Rail (Desktop) */
+    /* Left Quiet Vertical Spatial Rail (Desktop) */
     .viewport-rail {
       position: fixed;
       left: 0;
       top: 48px;
       bottom: 0;
-      width: 68px;
-      background: #030306;
-      border-right: 1px solid var(--border-dark);
+      width: 56px;
+      background: transparent;
+      border-right: 1px solid var(--border-hairline);
       z-index: 100;
       display: none;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      padding: 2rem 0;
-      font-size: 0.68rem;
+      padding: 2.5rem 0;
+      font-size: 0.65rem;
+      pointer-events: none;
     }
     @media (min-width: 1024px) {
       .viewport-rail {
@@ -144,25 +143,25 @@
     .rail-vertical-text {
       writing-mode: vertical-rl;
       text-orientation: mixed;
-      letter-spacing: 0.35em;
-      color: var(--dim-light);
-      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      color: var(--dim);
+      font-size: 0.62rem;
     }
     .rail-num-active {
       font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      color: var(--electric-blue);
+      font-size: 1.6rem;
+      color: var(--bone-muted);
       line-height: 1;
     }
     .rail-coord-stamp {
-      font-size: 0.6rem;
-      color: var(--dim-light);
+      font-size: 0.58rem;
+      color: var(--dim);
       letter-spacing: 0.1em;
       writing-mode: vertical-rl;
       text-orientation: mixed;
     }
 
-    /* Main Experimental Spatial Container */
+    /* Main Experimental Canvas Container */
     .strange-canvas {
       margin-left: 0;
       padding: 0 0 8rem;
@@ -172,73 +171,58 @@
     }
     @media (min-width: 1024px) {
       .strange-canvas {
-        margin-left: 68px;
-        width: calc(100% - 68px);
+        margin-left: 56px;
+        width: calc(100% - 56px);
       }
     }
 
-    /* Floating Spatial Stage Map Navigation Bar */
-    .spatial-stage-map-bar {
+    /* Hovering Spatial Stage Coordinates Navigation */
+    .spatial-stage-hover-nav {
       position: sticky;
       top: 48px;
-      z-index: 95;
-      background: rgba(3, 3, 6, 0.94);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-dark);
-      padding: 0.5rem 1rem;
+      z-index: 90;
+      background: rgba(4, 4, 7, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 0.45rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: 1rem;
       overflow-x: auto;
       scrollbar-width: none;
     }
-    .spatial-stage-map-bar::-webkit-scrollbar { display: none; }
-    .stage-map-label {
-      font-size: 0.62rem;
-      color: var(--dim-light);
-      letter-spacing: 0.12em;
-      white-space: nowrap;
+    .spatial-stage-hover-nav::-webkit-scrollbar { display: none; }
+    .stage-coord-nodes {
       display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .stage-map-label::before {
-      content: '⟐';
-      color: var(--electric-blue);
-      font-size: 0.75rem;
-    }
-    .stage-map-nodes {
-      display: flex;
-      gap: 0.4rem;
+      gap: 1.25rem;
       align-items: center;
     }
-    .stage-nav-pill {
-      background: #080812;
-      border: 1px solid var(--border-dark);
-      color: var(--bone-muted);
+    .stage-coord-link {
+      color: var(--dim);
       font-family: 'Space Mono', monospace;
       font-size: 0.64rem;
-      padding: 0.3rem 0.65rem;
       text-decoration: none;
+      letter-spacing: 0.12em;
       white-space: nowrap;
-      transition: all 0.2s ease;
+      transition: color 0.25s ease;
       cursor: pointer;
     }
-    .stage-nav-pill:hover, .stage-nav-pill.active {
-      border-color: var(--electric-blue);
-      color: #ffffff;
-      background: rgba(15, 56, 255, 0.18);
-      box-shadow: 0 0 10px rgba(15, 56, 255, 0.3);
+    .stage-coord-link:hover {
+      color: var(--bone);
     }
-    .stage-nav-pill.active {
-      border-color: var(--electric-blue-bright);
+    .stage-coord-link.active {
+      color: var(--bone);
       font-weight: 700;
+    }
+    .stage-coord-link.active::before {
+      content: '⟐ ';
+      color: var(--electric-blue);
     }
 
     /* ========================================================
-       STAGE 1: DESTROYED HERO (3D COORDINATE VOLUME)
+       STAGE 1: DESTROYED HERO (SPATIAL TYPOGRAPHIC VOLUME)
        ======================================================== */
     .hero-spatial-volume {
       position: relative;
@@ -246,23 +230,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      perspective: 1200px;
+      perspective: 1400px;
       transform-style: preserve-3d;
       overflow: hidden;
-      border-bottom: 1px solid var(--border-dark);
-      padding: 3rem 1.5rem 5rem;
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 4rem 1.5rem 6rem;
+      /* Subtle architectural construction lines, not loud grid */
       background-image: 
-        radial-gradient(circle at 50% 50%, rgba(15, 56, 255, 0.08) 0%, transparent 70%),
-        linear-gradient(to right, rgba(25, 25, 36, 0.3) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(25, 25, 36, 0.3) 1px, transparent 1px);
-      background-size: 100% 100%, 60px 60px, 60px 60px;
+        linear-gradient(to right, rgba(244, 243, 238, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(244, 243, 238, 0.02) 1px, transparent 1px);
+      background-size: 120px 120px;
     }
 
     .hero-stage-inner {
       position: relative;
       width: 100%;
       max-width: 1240px;
-      min-height: 580px;
+      min-height: 640px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -270,332 +254,260 @@
     }
     @media (max-width: 768px) {
       .hero-spatial-volume {
-        min-height: 84vh;
-        padding: 2rem 1rem 3.5rem;
+        min-height: 82vh;
+        padding: 2.5rem 1rem 3.5rem;
       }
       .hero-stage-inner {
-        min-height: 540px;
-      }
-      .hero-plane-mid {
-        max-width: 310px;
-        width: 78%;
-      }
-      .fore-title-detached {
-        font-size: clamp(4.5rem, 18vw, 7.5rem);
-        top: 2%;
-        left: 2%;
-      }
-      .fore-reticle-strip {
-        bottom: 0%;
-        left: 0;
-        right: 0;
-        gap: 0.5rem;
-      }
-      .fore-reticle-badge {
-        font-size: 0.58rem;
-        padding: 0.35rem 0.65rem;
-      }
-      .fore-thesis-box {
-        font-size: 0.7rem;
-        padding: 0.6rem 0.75rem;
+        min-height: 520px;
       }
     }
 
-    /* Deep Layer: DELIA (translateZ -150px) */
-    .hero-plane-deep {
+    /* Deepest Layer: Monumental LIA (translateZ -220px) */
+    .hero-plane-deep-lia {
       position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transform: translateZ(-150px);
+      right: 2%;
+      bottom: 8%;
+      transform: translateZ(-220px);
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(8rem, 28vw, 26rem);
+      line-height: 0.78;
+      letter-spacing: -0.05em;
+      color: rgba(244, 243, 238, 0.08);
+      text-transform: uppercase;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform;
+    }
+    .deep-japanese-annotation {
+      position: absolute;
+      top: 12%;
+      right: 6%;
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      color: rgba(244, 243, 238, 0.12);
+      writing-mode: vertical-rl;
+      letter-spacing: 0.4em;
       pointer-events: none;
       user-select: none;
-      z-index: 1;
-      text-align: center;
-    }
-    .deep-kanji-watermark {
-      font-family: 'Shippori Mincho', serif;
-      font-size: clamp(2rem, 6vw, 4.5rem);
-      color: rgba(244, 243, 238, 0.07);
-      letter-spacing: 0.3em;
-      margin-bottom: 1rem;
-      white-space: nowrap;
-    }
-    .deep-monument-delia {
-      font-family: 'Anton', sans-serif;
-      font-size: clamp(6.5rem, 24vw, 22rem);
-      line-height: 0.8;
-      letter-spacing: -0.05em;
-      color: rgba(244, 243, 238, 0.12);
-      text-transform: uppercase;
-      transform: translateY(30px);
-    }
-    .deep-coordinate-matrix {
-      position: absolute;
-      top: 10%;
-      right: 5%;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem;
-      color: rgba(244, 243, 238, 0.25);
-      line-height: 1.8;
-      text-align: right;
     }
 
-    /* Mid Plane: Floating Fashion Object (translateZ 0px) */
-    .hero-plane-mid {
-      position: relative;
+    /* Mid Layer Behind: DE (translateZ -60px) */
+    .hero-plane-mid-de {
+      position: absolute;
+      left: 28%;
+      top: 22%;
+      transform: translateZ(-60px);
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(7rem, 22vw, 20rem);
+      line-height: 0.8;
+      letter-spacing: -0.05em;
+      color: rgba(244, 243, 238, 0.28);
+      text-transform: uppercase;
+      user-select: none;
+      pointer-events: none;
       z-index: 2;
+      will-change: transform;
+    }
+
+    /* Mid Plane Center: Floating Fashion Photographic Plane (translateZ 0px) */
+    .hero-plane-garment-plate {
+      position: relative;
+      z-index: 3;
       transform-style: preserve-3d;
       transform: translateZ(0px);
       max-width: 440px;
       width: 82%;
       margin: 0 auto;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @media (min-width: 900px) {
-      .hero-plane-mid {
-        width: 380px;
-        transform: translateZ(0px) rotateY(-4deg) rotateX(2deg);
+      .hero-plane-garment-plate {
+        width: 390px;
+        transform: translateZ(0px) rotateY(-5deg) rotateX(2deg);
       }
     }
-    .hero-garment-frame {
+    /* Floating image: NO thick border, NO card container, NO specimen price box */
+    .hero-floating-image-wrap {
       position: relative;
-      background: #020204;
-      border: 1px solid var(--border-dark);
-      padding: 0.85rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(15, 56, 255, 0.18);
-    }
-    .hero-garment-frame::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border: 1px solid var(--electric-blue);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-    .hero-garment-corner-tl, .hero-garment-corner-br {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      border: 2px solid var(--electric-blue);
-      pointer-events: none;
-      z-index: 4;
-    }
-    .hero-garment-corner-tl { top: -4px; left: -4px; border-right: none; border-bottom: none; }
-    .hero-garment-corner-br { bottom: -4px; right: -4px; border-left: none; border-top: none; }
-    
-    .hero-garment-img-wrap {
       width: 100%;
-      aspect-ratio: 4/5.4;
+      aspect-ratio: 4/5.6;
       overflow: hidden;
-      background: #08080f;
-      position: relative;
+      background: #010103;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95);
     }
-    .hero-garment-img-wrap img {
+    .hero-floating-image-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 15%;
+      object-position: center 12%;
       display: block;
-      filter: contrast(114%) saturate(106%);
+      filter: contrast(118%) saturate(106%);
+      transform: scale(1.08);
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .hero-garment-frame:hover .hero-garment-img-wrap img {
-      transform: scale(1.04);
+    .hero-plane-garment-plate:hover .hero-floating-image-wrap img {
+      transform: scale(1.12);
     }
-    .hero-garment-tag {
+    /* Minimal hairline registration tick */
+    .hero-floating-registration {
       margin-top: 0.75rem;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      font-size: 0.68rem;
-      border-top: 1px solid var(--border-dark);
-      padding-top: 0.5rem;
+      font-size: 0.62rem;
+      color: var(--dim);
+      letter-spacing: 0.12em;
     }
-    .hero-garment-title {
-      color: var(--bone);
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    .hero-garment-tariff {
-      color: var(--electric-blue);
-      font-weight: 700;
+    .hero-floating-registration .obj-code {
+      color: var(--bone-muted);
     }
 
-    /* Foreground Layer: Detached WE & Front Coordinates (translateZ +120px) */
-    .hero-plane-fore {
+    /* Foreground Plane: Monumental WE (translateZ +160px) */
+    .hero-plane-fore-we {
       position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      pointer-events: none;
-      transform: translateZ(120px);
-      z-index: 3;
-    }
-    .fore-title-detached {
+      left: 2%;
+      top: 6%;
+      transform: translateZ(160px);
       font-family: 'Anton', sans-serif;
-      font-size: clamp(6.5rem, 24vw, 22rem);
-      line-height: 0.8;
+      font-size: clamp(7.5rem, 25vw, 24rem);
+      line-height: 0.78;
       letter-spacing: -0.05em;
       color: var(--bone);
       text-transform: uppercase;
-      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
-      position: absolute;
-      top: 5%;
-      left: 2%;
+      text-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
+      user-select: none;
+      pointer-events: none;
+      z-index: 4;
       will-change: transform;
     }
-    .fore-title-detached .blue-period {
-      color: var(--electric-blue);
-      text-shadow: 0 0 30px var(--electric-blue);
-    }
-    .fore-reticle-strip {
+
+    /* Hero Editorial Fragment (Replaces Advertising Copy) */
+    .hero-editorial-fragment {
       position: absolute;
-      bottom: 2%;
-      left: 2%;
-      right: 2%;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      font-size: 0.68rem;
-      color: var(--dim-light);
+      bottom: 4%;
+      right: 3%;
+      z-index: 5;
+      max-width: 340px;
       pointer-events: auto;
-      flex-wrap: wrap;
-      gap: 1rem;
     }
-    .fore-reticle-badge {
-      border: 1px solid var(--border-accent);
-      background: rgba(8, 8, 18, 0.9);
-      padding: 0.45rem 0.85rem;
-      color: var(--electric-blue);
-      letter-spacing: 0.12em;
-      font-size: 0.64rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    @media (max-width: 768px) {
+      .hero-editorial-fragment {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: 2rem;
+        max-width: 100%;
+        padding: 0 1rem;
+      }
     }
-    .fore-thesis-box {
-      max-width: 440px;
-      background: rgba(5, 5, 8, 0.9);
-      border-left: 2px solid var(--electric-blue);
-      padding: 0.75rem 1rem;
-      font-size: 0.75rem;
-      line-height: 1.6;
+    .fragment-obj-tag {
+      font-size: 0.62rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+    }
+    .fragment-prose {
+      font-size: 0.78rem;
+      line-height: 1.7;
       color: var(--bone-muted);
     }
-    .fore-thesis-box strong { color: #ffffff; }
+    .fragment-prose strong {
+      color: #ffffff;
+      font-weight: 400;
+    }
 
     /* ========================================================
-       STAGE 2: SPATIAL GARMENT INSTALLATION (MONOLITH FIELD)
+       STAGE 2: SPATIAL GARMENT OBJECTS (OPEN SUSPENSION)
        ======================================================== */
     .stage-monolith-field {
-      border-bottom: 1px solid var(--border-dark);
-      padding: 5rem 1.5rem 6rem;
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 6rem 1.5rem 7rem;
       position: relative;
     }
     @media (min-width: 1024px) {
       .stage-monolith-field {
-        padding: 6rem 3.5rem 7rem;
+        padding: 7rem 3.5rem 8rem;
       }
     }
     .stage-section-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      font-size: 0.72rem;
-      color: var(--dim-light);
-      margin-bottom: 2.5rem;
-      letter-spacing: 0.12em;
-      border-bottom: 1px solid var(--border-dark);
-      padding-bottom: 0.85rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .spatial-vector-tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-    }
-    .vector-tab-btn {
-      background: #090912;
-      border: 1px solid var(--border-dark);
-      color: var(--dim-light);
-      font-family: 'Space Mono', monospace;
       font-size: 0.68rem;
-      padding: 0.5rem 0.9rem;
+      color: var(--dim);
+      margin-bottom: 3rem;
+      letter-spacing: 0.14em;
+      border-bottom: 1px solid var(--border-hairline);
+      padding-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .spatial-vector-coords {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .vector-coord-btn {
+      background: transparent;
+      border: none;
+      color: var(--dim);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
       cursor: pointer;
-      transition: all 0.2s ease;
-      letter-spacing: 0.05em;
+      transition: color 0.25s ease;
+      padding: 0;
     }
-    .vector-tab-btn:hover, .vector-tab-btn.active {
-      background: #050510;
-      border-color: var(--electric-blue);
-      color: #ffffff;
-      box-shadow: 0 0 15px rgba(15, 56, 255, 0.35);
+    .vector-coord-btn:hover {
+      color: var(--bone);
     }
-    .vector-tab-btn.active {
-      border-color: var(--electric-blue-bright);
+    .vector-coord-btn.active {
+      color: var(--bone);
       font-weight: 700;
     }
+    .vector-coord-btn.active::before {
+      content: '⟐ ';
+      color: var(--electric-blue);
+    }
 
-    .spatial-monolith-stage-grid {
+    .spatial-suspension-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3rem;
-      background: #030308;
-      border: 1px solid var(--border-dark);
-      padding: 1.5rem;
+      gap: 3.5rem;
       position: relative;
       perspective: 1200px;
+      align-items: center;
     }
     @media (min-width: 1024px) {
-      .spatial-monolith-stage-grid {
+      .spatial-suspension-grid {
         grid-template-columns: 1.15fr 1fr;
-        padding: 3rem;
-        gap: 4rem;
+        gap: 5rem;
       }
     }
 
-    .spatial-monolith-box {
+    /* Floating Image Plate: NO thick box */
+    .spatial-image-plate {
       position: relative;
-      background: #06060c;
-      border: 1px solid var(--electric-blue);
-      box-shadow: 0 0 35px rgba(15, 56, 255, 0.2);
-      padding: 1rem;
       transform: rotateY(-4deg) rotateX(2deg);
       transition: transform 0.4s ease;
       transform-style: preserve-3d;
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
     }
-    .spatial-monolith-box:hover {
+    .spatial-image-plate:hover {
       transform: rotateY(0deg) rotateX(0deg);
     }
-    .monolith-coord-badge {
-      position: absolute;
-      top: -0.9rem;
-      left: 1.5rem;
-      background: #020205;
-      border: 1px solid var(--electric-blue);
-      color: var(--electric-blue);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      padding: 0.25rem 0.65rem;
-      letter-spacing: 0.1em;
-      font-weight: 700;
-      z-index: 3;
-    }
-    .monolith-img-container {
+    .plate-photo-frame {
       width: 100%;
       aspect-ratio: 4/5.2;
       overflow: hidden;
-      position: relative;
       background: #010103;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
     }
-    .monolith-img-container img {
+    .plate-photo-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -604,207 +516,207 @@
       filter: contrast(114%) saturate(104%);
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    .plate-coord-caption {
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.62rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+    }
 
-    .monolith-dossier {
+    .spatial-object-dossier {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .monolith-occasion-tag {
-      display: inline-block;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--electric-blue);
-      border: 1px solid var(--electric-blue);
-      background: rgba(15, 56, 255, 0.08);
-      padding: 0.35rem 0.65rem;
-      margin-bottom: 1.25rem;
-      letter-spacing: 0.08em;
+    .dossier-occasion-line {
+      font-size: 0.65rem;
+      color: var(--dim-light);
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
     }
-    .monolith-heading {
+    .dossier-heading {
       font-family: 'Anton', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 0.95;
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      line-height: 0.92;
       letter-spacing: -0.02em;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
       color: var(--bone);
     }
-    .monolith-prose {
+    .dossier-prose {
       font-size: 0.88rem;
-      line-height: 1.7;
-      color: #a09f98;
-      margin-bottom: 1.75rem;
+      line-height: 1.75;
+      color: var(--bone-muted);
+      margin-bottom: 2rem;
     }
-    .monolith-specs-matrix {
-      border-top: 1px solid var(--border-dark);
-      border-bottom: 1px solid var(--border-dark);
-      padding: 1.2rem 0;
+    .dossier-specs-lines {
+      border-top: 1px solid var(--border-hairline);
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 1.25rem 0;
       margin-bottom: 2rem;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.85rem 1.5rem;
-      font-family: 'Space Mono', monospace;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.5rem;
       font-size: 0.68rem;
     }
-    @media (min-width: 600px) {
-      .monolith-specs-matrix {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    .spec-cell strong {
+    .spec-line strong {
       display: block;
-      color: var(--dim-light);
-      font-size: 0.6rem;
+      color: var(--dim);
+      font-size: 0.58rem;
       margin-bottom: 0.2rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
     }
-    .monolith-action-cluster {
+    .dossier-action-cluster {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
+      align-items: center;
       flex-wrap: wrap;
     }
-    .btn-spatial-collapse {
-      background: var(--electric-blue);
-      color: #ffffff;
+    .btn-quiet-collapse {
+      background: transparent;
+      color: var(--bone);
+      border: 1px solid var(--bone-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-quiet-collapse:hover {
+      border-color: var(--electric-blue);
+      color: var(--electric-blue);
+      box-shadow: 0 0 20px var(--electric-blue-glow);
+    }
+    .btn-quiet-next {
+      background: transparent;
+      color: var(--dim);
       border: none;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.9rem 1.35rem;
       cursor: pointer;
-      letter-spacing: 0.08em;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      letter-spacing: 0.1em;
+      transition: color 0.2s ease;
+      padding: 0;
     }
-    .btn-spatial-collapse:hover {
-      background: var(--electric-blue-bright);
-      box-shadow: 0 0 25px rgba(15, 56, 255, 0.6);
-    }
-    .btn-spatial-next {
-      background: transparent;
-      color: #ffffff;
-      border: 1px solid var(--border-dark);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.9rem 1.35rem;
-      cursor: pointer;
-      letter-spacing: 0.08em;
-      transition: all 0.2s ease;
-    }
-    .btn-spatial-next:hover {
-      border-color: var(--electric-blue);
-      color: var(--electric-blue);
+    .btn-quiet-next:hover {
+      color: var(--bone);
     }
 
-    /* Orbital Look Specimen Strip */
+    /* Orbital Specimen Plates */
     .orbital-specimen-strip {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-      margin-top: 2.5rem;
+      gap: 2rem;
+      margin-top: 4rem;
     }
     @media (min-width: 900px) {
       .orbital-specimen-strip {
         grid-template-columns: repeat(4, 1fr);
       }
     }
-    .orbital-specimen-card {
-      border: 1px solid var(--border-dark);
-      background: #06060c;
-      padding: 0.75rem;
+    .orbital-specimen-plate {
       cursor: pointer;
-      transition: all 0.25s ease;
-      position: relative;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0.65;
     }
-    .orbital-specimen-card:hover, .orbital-specimen-card.active {
-      border-color: var(--electric-blue);
-      box-shadow: 0 0 15px rgba(15, 56, 255, 0.35);
+    .orbital-specimen-plate:hover, .orbital-specimen-plate.active {
+      opacity: 1;
       transform: translateY(-4px);
     }
-    .orbital-specimen-thumb {
+    .orbital-specimen-plate.active .orbital-thumb-wrap {
+      outline: 1px solid var(--bone);
+    }
+    .orbital-thumb-wrap {
       width: 100%;
       aspect-ratio: 4/5;
+      overflow: hidden;
+      background: #010103;
+      margin-bottom: 0.75rem;
+    }
+    .orbital-thumb-wrap img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: center 15%;
       display: block;
-      margin-bottom: 0.65rem;
-      filter: contrast(112%) saturate(102%);
+      filter: contrast(110%);
     }
-    .orbital-specimen-name {
+    .orbital-name {
       font-family: 'Anton', sans-serif;
       font-size: 1.1rem;
       text-transform: uppercase;
-      color: #ffffff;
-      margin-bottom: 0.25rem;
+      color: var(--bone);
+      margin-bottom: 0.2rem;
     }
-    .orbital-specimen-rate {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--electric-blue);
-      font-weight: 700;
+    .orbital-meta {
+      font-size: 0.62rem;
+      color: var(--dim);
     }
 
     /* ========================================================
-       STAGE 3: THE IMPOSSIBLE SECTION (NON-EUCLIDEAN ARCHITECTURE)
+       STAGE 3: THE IMPOSSIBLE SECTION (ARCHITECTURAL MONOLITH)
        ======================================================== */
     .stage-impossible-chamber {
       position: relative;
       min-height: 85vh;
-      border-bottom: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-hairline);
       overflow: hidden;
       perspective: 1400px;
       transform-style: preserve-3d;
-      padding: 6rem 1.5rem;
-      background: #030307;
+      padding: 7rem 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
     @media (min-width: 1024px) {
       .stage-impossible-chamber {
-        padding: 7rem 3.5rem;
+        padding: 8rem 3.5rem;
       }
     }
-    .impossible-layer-text {
+    /* Kinetic background typography */
+    .impossible-kinetic-type {
       position: absolute;
-      top: 15%;
+      top: 18%;
       left: 0;
-      width: 250%;
+      width: 260%;
       font-family: 'Anton', sans-serif;
-      font-size: clamp(5rem, 15vw, 14rem);
-      line-height: 0.85;
+      font-size: clamp(6rem, 16vw, 15rem);
+      line-height: 0.82;
       letter-spacing: -0.04em;
-      color: rgba(244, 243, 238, 0.08);
+      color: rgba(244, 243, 238, 0.05);
       white-space: nowrap;
       pointer-events: none;
       user-select: none;
-      transform: translateZ(-80px);
+      transform: translateZ(-100px);
       will-change: transform;
     }
-    .impossible-stage-grid {
+
+    .impossible-monument-grid {
       position: relative;
       z-index: 2;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3.5rem;
+      gap: 4rem;
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
       transform-style: preserve-3d;
     }
     @media (min-width: 960px) {
-      .impossible-stage-grid {
+      .impossible-monument-grid {
         grid-template-columns: 1.25fr 1fr;
-        gap: 5rem;
+        gap: 6rem;
       }
     }
 
-    /* Non-Euclidean Masked Portal Installation */
-    .impossible-portal-installation {
+    /* The Non-Euclidean Masked Portal */
+    .impossible-portal-wrap {
       position: relative;
       width: 100%;
       max-width: 520px;
@@ -813,71 +725,73 @@
       transform-style: preserve-3d;
       perspective: 1000px;
     }
-    /* Primary Towering Garment Silhouette */
-    .impossible-outer-garment {
+    /* Towering Primary Silhouette */
+    .impossible-silhouette-primary {
       position: absolute;
       inset: 0;
-      border: 1px solid var(--border-dark);
-      background: #05050a;
+      background: #010103;
       overflow: hidden;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95);
       transform: translateZ(20px);
     }
-    .impossible-outer-garment img {
+    .impossible-silhouette-primary img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 15%;
       filter: contrast(120%) grayscale(20%);
-      transform: scale(1.05);
     }
-    /* Skewed Aperture Window Revealing Secondary Garment */
-    .impossible-inner-aperture {
+    /* Skewed Aperture Window: NO sci-fi neon */
+    .impossible-aperture-cutout {
       position: absolute;
-      bottom: 8%;
-      right: -8%;
-      width: 62%;
+      bottom: 6%;
+      right: -6%;
+      width: 60%;
       aspect-ratio: 4/5;
-      border: 2px solid var(--electric-blue);
-      box-shadow: 0 0 35px var(--electric-blue-glow);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
       overflow: hidden;
-      transform: translateZ(90px) rotate(-3deg);
+      transform: translateZ(100px) rotate(-3deg);
       background: #000000;
       z-index: 5;
     }
     @media (max-width: 640px) {
-      .impossible-inner-aperture {
+      .impossible-aperture-cutout {
         right: 0;
-        bottom: -5%;
-        width: 70%;
+        bottom: -4%;
+        width: 68%;
       }
     }
-    .impossible-inner-aperture img {
+    .impossible-aperture-cutout img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 20%;
-      filter: contrast(118%) saturate(108%);
+      filter: contrast(116%) saturate(106%);
       transform: scale(1.1);
       will-change: transform;
     }
-    .aperture-coord-label {
+    .impossible-aperture-label {
       position: absolute;
-      bottom: 0.5rem;
-      left: 0.5rem;
-      background: rgba(0, 0, 0, 0.85);
-      border: 1px solid var(--electric-blue);
-      color: #ffffff;
-      font-size: 0.6rem;
+      bottom: 0.6rem;
+      left: 0.6rem;
+      font-size: 0.58rem;
+      color: var(--bone-muted);
+      letter-spacing: 0.12em;
+      background: rgba(4, 4, 7, 0.85);
       padding: 0.2rem 0.5rem;
-      letter-spacing: 0.1em;
     }
 
-    .impossible-narrative-col {
+    .impossible-prose-col {
       z-index: 4;
       transform: translateZ(40px);
     }
-    .impossible-kanji-title {
+    .impossible-subhead {
+      font-size: 0.65rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    .impossible-kanji-statement {
       font-family: 'Shippori Mincho', serif;
       font-size: clamp(2rem, 4vw, 3.2rem);
       font-weight: 900;
@@ -886,514 +800,463 @@
       margin-bottom: 1.5rem;
       letter-spacing: 0.05em;
     }
-    .impossible-thesis {
+    .impossible-thesis-text {
       font-size: 0.95rem;
       line-height: 1.8;
       color: var(--bone-muted);
       margin-bottom: 2rem;
     }
-    .impossible-thesis strong {
+    .impossible-thesis-text strong {
       color: #ffffff;
+      font-weight: 400;
     }
-    .impossible-metrics-cluster {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      border-top: 1px solid var(--border-dark);
-      padding-top: 1.5rem;
-    }
-    .impossible-metric-node {
-      border: 1px solid var(--border-dark);
-      background: var(--panel-dark);
-      padding: 1rem;
-    }
-    .impossible-metric-node .metric-num {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      color: var(--electric-blue);
-      line-height: 1;
-      margin-bottom: 0.35rem;
-    }
-    .impossible-metric-node .metric-label {
-      font-size: 0.65rem;
-      color: var(--dim-light);
-      letter-spacing: 0.1em;
+    .impossible-quiet-annotation {
+      font-size: 0.62rem;
+      color: var(--dim);
+      letter-spacing: 0.12em;
+      border-top: 1px solid var(--border-hairline);
+      padding-top: 1rem;
     }
 
     /* ========================================================
-       STAGE 4: SCATTERED OCCASION FIELD (3D COORDINATE VOID)
+       STAGE 4: SCATTERED OCCASION WORDS (WORDS ARE OBJECTS)
        ======================================================== */
     .stage-occasions-void {
-      border-bottom: 1px solid var(--border-dark);
-      padding: 5rem 1.5rem 6rem;
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 6rem 1.5rem 8rem;
       position: relative;
-      background: radial-gradient(circle at 50% 50%, #0a0b18 0%, #050508 75%);
       perspective: 1200px;
       transform-style: preserve-3d;
       overflow: hidden;
     }
     @media (min-width: 1024px) {
       .stage-occasions-void {
-        padding: 6rem 3.5rem 7rem;
+        padding: 7rem 3.5rem 9rem;
       }
     }
-    .occasion-spatial-universe {
+    .occasion-words-universe {
       position: relative;
-      min-height: 720px;
+      min-height: 640px;
       transform-style: preserve-3d;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      align-items: center;
+      justify-content: center;
     }
     @media (min-width: 860px) {
-      .occasion-spatial-universe {
+      .occasion-words-universe {
         display: block;
       }
     }
-    .occasion-coordinate-orb {
-      border: 1px solid var(--border-dark);
-      background: rgba(9, 9, 16, 0.95);
-      padding: 1.75rem 1.5rem;
+
+    /* Words AS Objects: NO boxes, NO cards, NO borders */
+    .occasion-word-object {
       cursor: pointer;
       position: relative;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       transform-style: preserve-3d;
-      box-sizing: border-box;
+      text-align: center;
     }
     @media (min-width: 860px) {
-      .occasion-coordinate-orb {
+      .occasion-word-object {
         position: absolute;
-        width: 320px;
+        text-align: left;
       }
-      .occasion-coordinate-orb:nth-child(1) { top: 2%; left: 4%; transform: translateZ(40px); }
-      .occasion-coordinate-orb:nth-child(2) { top: 6%; right: 6%; transform: translateZ(90px); }
-      .occasion-coordinate-orb:nth-child(3) { top: 38%; left: 24%; transform: translateZ(-20px); }
-      .occasion-coordinate-orb:nth-child(4) { bottom: 6%; left: 8%; transform: translateZ(60px); }
-      .occasion-coordinate-orb:nth-child(5) { bottom: 4%; right: 10%; transform: translateZ(10px); }
+      .occasion-word-object:nth-child(1) { top: 5%; left: 8%; transform: translateZ(20px); }
+      .occasion-word-object:nth-child(2) { top: 12%; right: 12%; transform: translateZ(70px); }
+      .occasion-word-object:nth-child(3) { top: 44%; left: 28%; transform: translateZ(-30px); }
+      .occasion-word-object:nth-child(4) { bottom: 10%; left: 12%; transform: translateZ(50px); }
+      .occasion-word-object:nth-child(5) { bottom: 6%; right: 15%; transform: translateZ(0px); }
     }
-    .occasion-coordinate-orb:hover, .occasion-coordinate-orb.active {
-      border-color: var(--electric-blue);
-      box-shadow: 0 0 35px var(--electric-blue-glow);
-      background: #0c0f24;
-      z-index: 20;
-    }
-    @media (min-width: 860px) {
-      .occasion-coordinate-orb:hover, .occasion-coordinate-orb.active {
-        transform: translateZ(140px) scale(1.05);
-      }
-    }
-    .orb-node-tag {
-      font-size: 0.65rem;
-      color: var(--electric-blue);
-      letter-spacing: 0.15em;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-    .orb-title {
+    .occasion-word-name {
       font-family: 'Anton', sans-serif;
-      font-size: 2.2rem;
-      letter-spacing: -0.02em;
-      line-height: 1;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      letter-spacing: -0.03em;
+      line-height: 0.9;
       text-transform: uppercase;
-      margin-bottom: 0.35rem;
+      color: rgba(244, 243, 238, 0.45);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .occasion-word-object:hover .occasion-word-name,
+    .occasion-word-object.active .occasion-word-name {
       color: var(--bone);
     }
-    .orb-kanji {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.05rem;
-      color: var(--dim-light);
-      margin-bottom: 0.85rem;
-    }
-    .orb-desc {
-      font-size: 0.8rem;
-      line-height: 1.6;
-      color: #9c9a92;
-      margin-bottom: 1.25rem;
-    }
-    .orb-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border-dark);
-      padding-top: 0.75rem;
-      font-size: 0.72rem;
-    }
-    .orb-footer .tariff {
+    .occasion-word-object.active .occasion-word-name {
       color: var(--electric-blue);
-      font-weight: 700;
+    }
+    @media (min-width: 860px) {
+      .occasion-word-object:hover,
+      .occasion-word-object.active {
+        transform: translateZ(140px);
+      }
+    }
+    .occasion-word-meta {
+      font-size: 0.65rem;
+      color: var(--dim);
+      letter-spacing: 0.12em;
+      margin-top: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    .occasion-word-object:hover .occasion-word-meta {
+      color: var(--bone-muted);
     }
 
     /* ========================================================
-       STAGE 5: THE TELEPORT MOMENT (SPATIAL DISPLACEMENT)
+       STAGE 5: TELEPORT MOMENT (MINIMAL DISPLACEMENT)
        ======================================================== */
     .stage-teleport-portal {
-      border-bottom: 1px solid var(--border-dark);
-      padding: 5rem 1.5rem 6rem;
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 6rem 1.5rem 7rem;
       position: relative;
-      background: #020205;
       perspective: 1200px;
       overflow: hidden;
     }
     @media (min-width: 1024px) {
       .stage-teleport-portal {
-        padding: 6rem 3.5rem 7rem;
+        padding: 7rem 3.5rem 8rem;
       }
     }
-    .teleport-threshold-container {
-      max-width: 1100px;
+    .teleport-quiet-container {
+      max-width: 1000px;
       margin: 0 auto;
-      border: 1px solid var(--border-dark);
-      background: #06060e;
-      padding: 2.5rem 1.5rem;
       position: relative;
       transform-style: preserve-3d;
-      box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
     }
-    @media (min-width: 768px) {
-      .teleport-threshold-container {
-        padding: 3.5rem 3rem;
-      }
-    }
-    .teleport-portal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      border-bottom: 1px dashed var(--electric-blue);
-      padding-bottom: 1.25rem;
-      margin-bottom: 2.5rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .teleport-duo-fields {
+    .teleport-duo-stations {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 3rem;
       align-items: center;
     }
-    @media (min-width: 860px) {
-      .teleport-duo-fields {
+    @media (min-width: 800px) {
+      .teleport-duo-stations {
         grid-template-columns: 1fr auto 1fr;
       }
     }
-    .field-card {
-      border: 1px solid var(--border-dark);
-      background: #030307;
-      padding: 2rem 1.5rem;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    .station-block {
+      transition: opacity 0.4s ease;
+      opacity: 0.5;
     }
-    .field-card.active {
-      border-color: var(--electric-blue);
-      box-shadow: 0 0 30px rgba(15, 56, 255, 0.3);
-      background: #080a1c;
+    .station-block.active {
+      opacity: 1;
     }
-    .field-code {
-      font-size: 0.68rem;
-      color: var(--electric-blue);
+    .station-code {
+      font-size: 0.62rem;
+      color: var(--dim);
       letter-spacing: 0.15em;
-      font-weight: 700;
       margin-bottom: 0.5rem;
     }
-    .field-name {
+    .station-block.active .station-code {
+      color: var(--electric-blue);
+    }
+    .station-title {
       font-family: 'Anton', sans-serif;
-      font-size: 2rem;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
       letter-spacing: -0.02em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      line-height: 0.95;
+      margin-bottom: 0.75rem;
+      color: var(--bone);
     }
-    .field-coordinates {
-      font-size: 0.75rem;
+    .station-coord-line {
+      font-size: 0.68rem;
       color: var(--dim-light);
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
-    .field-stations {
+    .station-corridors {
       list-style: none;
-      font-size: 0.75rem;
-      color: #98968f;
-      line-height: 1.8;
+      font-size: 0.72rem;
+      color: var(--bone-muted);
+      line-height: 2;
     }
-    .field-stations li::before {
-      content: '⟐ ';
-      color: var(--electric-blue);
+    .station-corridors li::before {
+      content: '— ';
+      color: var(--dim);
     }
-    .teleport-exchange-btn {
-      background: var(--panel-dark);
-      border: 1px solid var(--electric-blue);
-      color: #ffffff;
-      padding: 1.25rem 1.5rem;
+
+    .btn-quiet-teleport {
+      background: transparent;
+      border: 1px solid var(--border-dark);
+      color: var(--bone-muted);
+      padding: 1.25rem 1.75rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       transition: all 0.25s ease;
       justify-self: center;
     }
-    .teleport-exchange-btn:hover {
-      background: var(--electric-blue);
-      box-shadow: 0 0 30px var(--electric-blue-glow);
+    .btn-quiet-teleport:hover {
+      border-color: var(--electric-blue);
+      color: var(--electric-blue);
     }
 
     /* ========================================================
-       STAGE 6: SPATIAL CONVERGENCE RENTAL CHAMBER
+       STAGE 6: SPATIAL CONVERGENCE CHAMBER (CROSS-AXIS SYSTEM)
        ======================================================== */
     .stage-convergence-chamber {
-      border-bottom: 1px solid var(--border-dark);
-      padding: 5rem 1.5rem 6rem;
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 6rem 1.5rem 8rem;
       position: relative;
-      background: #040407;
       overflow: hidden;
       width: 100%;
     }
     @media (min-width: 1024px) {
       .stage-convergence-chamber {
-        padding: 6rem 3.5rem 7rem;
+        padding: 7rem 3.5rem 9rem;
       }
-    }
-    .chamber-3d-volume {
-      max-width: 1160px;
-      margin: 0 auto;
-      border: 1px solid var(--border-dark);
-      background: radial-gradient(circle at 50% 50%, #0c0e22 0%, #040407 80%);
-      padding: 2.5rem 1.5rem;
-      position: relative;
-      perspective: 1200px;
-      transform-style: preserve-3d;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @media (min-width: 768px) {
-      .chamber-3d-volume {
-        padding: 3rem 2.5rem;
-      }
-    }
-    .chamber-axes-cluster {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      z-index: 10;
-      position: relative;
-      margin-bottom: 2.5rem;
-    }
-    .chamber-axis-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--electric-blue);
-      letter-spacing: 0.15em;
-      margin-bottom: 0.4rem;
-      display: block;
-    }
-    .chamber-nodes-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .spatial-node-pill {
-      background: rgba(14, 17, 36, 0.8);
-      border: 1px solid var(--border-dark);
-      color: var(--bone);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      padding: 0.45rem 0.85rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      letter-spacing: 0.05em;
-    }
-    .spatial-node-pill:hover, .spatial-node-pill.active {
-      border-color: var(--electric-blue);
-      background: var(--electric-blue);
-      color: #ffffff;
-      box-shadow: 0 0 15px rgba(15, 56, 255, 0.45);
     }
 
-    .chamber-core-split {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      align-items: center;
-      transform-style: preserve-3d;
-    }
-    @media (min-width: 860px) {
-      .chamber-core-split {
-        grid-template-columns: 1fr 1.3fr;
-      }
-    }
-    .chamber-monolith-display {
-      border: 1px solid var(--border-dark);
-      background: #080914;
-      padding: 1.25rem;
+    .chamber-cross-composition {
+      max-width: 1080px;
+      margin: 0 auto;
       position: relative;
-      transform: rotateY(-6deg) rotateX(3deg);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       transform-style: preserve-3d;
+      perspective: 1200px;
+    }
+
+    /* Top Axis: Occasion Vector */
+    .chamber-axis-top {
+      text-align: center;
+      margin-bottom: 2rem;
+      z-index: 10;
+    }
+    .axis-top-title {
+      font-size: 0.62rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .axis-words-selector {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .axis-word-btn {
+      background: transparent;
+      border: none;
+      color: var(--dim);
+      font-family: 'Anton', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .axis-word-btn:hover {
+      color: var(--bone);
+    }
+    .axis-word-btn.active {
+      color: var(--bone);
+      border-bottom: 2px solid var(--electric-blue);
+    }
+
+    /* Center Cross Horizon: Size ── [ Garment ] ── Duration */
+    .chamber-cross-horizon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      width: 100%;
+      position: relative;
+      margin: 1.5rem 0;
     }
     @media (max-width: 768px) {
-      .chamber-monolith-display {
-        transform: rotateY(0deg) rotateX(0deg);
-        padding: 0.85rem;
-      }
-      .chamber-img-wrap {
-        height: 280px;
-      }
-      .chamber-telemetry-monitor {
-        padding: 1.25rem 1rem;
+      .chamber-cross-horizon {
+        flex-direction: column;
+        gap: 1.5rem;
       }
     }
-    .chamber-img-wrap {
-      width: 100%;
-      height: 330px;
+
+    /* Left Hairline Axis: Sizing */
+    .chamber-axis-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: right;
+      z-index: 10;
+    }
+    .axis-left-label {
+      font-size: 0.58rem;
+      color: var(--dim);
+      letter-spacing: 0.12em;
+    }
+    .axis-size-btn {
+      background: transparent;
+      border: none;
+      color: var(--dim);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      text-align: right;
+    }
+    .axis-size-btn:hover { color: var(--bone); }
+    .axis-size-btn.active { color: var(--bone); font-weight: 700; }
+
+    /* Center Dominant Garment Monolith */
+    .chamber-central-garment {
+      position: relative;
+      width: 280px;
+      aspect-ratio: 4/5.4;
+      background: #010103;
       overflow: hidden;
-      border: 1px solid var(--border-dark);
-      background: #000000;
-      margin-bottom: 1rem;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.95);
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      z-index: 8;
     }
-    .chamber-img-wrap img {
+    @media (min-width: 860px) {
+      .chamber-central-garment {
+        width: 320px;
+      }
+    }
+    .chamber-central-garment img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 15%;
       display: block;
-      filter: contrast(114%) saturate(104%);
+      filter: contrast(116%) saturate(104%);
+      transition: transform 0.6s ease;
     }
 
-    .chamber-telemetry-monitor {
-      border: 1px solid var(--border-dark);
-      background: rgba(8, 9, 18, 0.95);
-      padding: 2rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      line-height: 1.9;
-      color: #adaaa2;
-      position: relative;
-    }
-    .chamber-live-price {
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      font-family: 'Anton', sans-serif;
-      color: var(--bone);
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin: 0.5rem 0 1rem;
-    }
-    .btn-commit-convergence {
-      width: 100%;
-      background: var(--electric-blue);
-      border: 1px solid var(--electric-blue);
-      color: #ffffff;
-      padding: 1.1rem 1.25rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      cursor: pointer;
+    /* Right Hairline Axis: Duration */
+    .chamber-axis-right {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-      margin-top: 1.5rem;
-      transition: background 0.2s ease, box-shadow 0.2s ease;
+      gap: 0.5rem;
+      text-align: left;
+      z-index: 10;
     }
-    .btn-commit-convergence:hover {
-      background: var(--electric-blue-bright);
-      box-shadow: 0 0 30px var(--electric-blue-glow);
+    .axis-right-label {
+      font-size: 0.58rem;
+      color: var(--dim);
+      letter-spacing: 0.12em;
     }
-    .chamber-locked-manifest {
+    .axis-duration-btn {
+      background: transparent;
+      border: none;
+      color: var(--dim);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      text-align: left;
+    }
+    .axis-duration-btn:hover { color: var(--bone); }
+    .axis-duration-btn.active { color: var(--bone); font-weight: 700; }
+
+    /* Bottom: Convergence Action */
+    .chamber-axis-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      z-index: 10;
+    }
+    .chamber-price-quiet {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.2rem;
+      color: var(--bone);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .btn-spatial-converge-trigger {
+      background: transparent;
+      border: 1px solid var(--bone-muted);
+      color: var(--bone);
+      padding: 0.85rem 2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+    .btn-spatial-converge-trigger:hover {
+      border-color: var(--electric-blue);
+      color: var(--electric-blue);
+      box-shadow: 0 0 25px var(--electric-blue-glow);
+    }
+    .chamber-locked-quiet-stamp {
       display: none;
-      border: 1px solid #10b981;
-      background: rgba(16, 185, 129, 0.12);
+      font-size: 0.68rem;
       color: #34d399;
-      padding: 0.85rem 1rem;
-      margin-top: 1.25rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      line-height: 1.6;
+      letter-spacing: 0.12em;
+      margin-top: 1rem;
     }
 
     /* ========================================================
        STAGE 7: SPATIAL DIRECTORY & COLOPHON EXIT
        ======================================================== */
     .stage-directory-exit {
-      padding: 5rem 1.5rem 4rem;
+      padding: 6rem 1.5rem 4rem;
       position: relative;
     }
     @media (min-width: 1024px) {
       .stage-directory-exit {
-        padding: 6rem 3.5rem 4rem;
+        padding: 7rem 3.5rem 4rem;
       }
     }
-    .spatial-directory-table {
+    .spatial-quiet-roster {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      border-top: 1px solid var(--border-hairline);
       margin-bottom: 6rem;
     }
-    .spatial-directory-entry {
-      border: 1px solid var(--border-dark);
-      background: #08080f;
-      padding: 1.5rem 1.75rem;
+    .roster-row {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      position: relative;
+      gap: 0.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border-hairline);
       cursor: pointer;
-      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .spatial-directory-entry::before {
-      content: '⟐';
-      position: absolute;
-      top: 1.5rem;
-      left: 0.75rem;
-      color: var(--electric-blue);
-      font-size: 0.75rem;
-      opacity: 0.6;
+      transition: padding-left 0.25s ease;
     }
     @media (min-width: 768px) {
-      .spatial-directory-entry {
+      .roster-row {
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
-        padding-left: 2.25rem;
+        align-items: baseline;
       }
     }
-    .spatial-directory-entry:hover {
-      border-color: var(--electric-blue);
-      background: #0e1124;
-      transform: translateX(8px);
-      box-shadow: 0 0 25px rgba(15, 56, 255, 0.2);
+    .roster-row:hover {
+      padding-left: 0.75rem;
     }
-    .dir-code {
-      font-size: 0.7rem;
-      color: var(--electric-blue);
-      letter-spacing: 0.15em;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    .dir-name {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
+    .roster-row:hover .roster-title {
       color: var(--bone);
-      line-height: 1;
     }
-    .dir-meta {
-      font-size: 0.75rem;
-      color: var(--dim-light);
-      margin-top: 0.35rem;
-    }
-    .dir-tariff {
+    .roster-title {
       font-family: 'Anton', sans-serif;
       font-size: 1.6rem;
-      color: var(--electric-blue);
-      text-align: right;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--bone-muted);
+      transition: color 0.25s ease;
+    }
+    .roster-campus {
+      font-size: 0.7rem;
+      color: var(--dim);
+    }
+    .roster-tariff {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--dim-light);
     }
 
     .colophon-monument-block {
-      border-top: 1px solid var(--border-dark);
-      padding: 4rem 1rem 2rem;
+      border-top: 1px solid var(--border-hairline);
+      padding: 5rem 1rem 2rem;
       text-align: center;
     }
     .colophon-huge-masthead {
@@ -1402,18 +1265,18 @@
       line-height: 0.85;
       letter-spacing: -0.04em;
       text-transform: uppercase;
-      color: rgba(244, 243, 238, 0.22);
+      color: rgba(244, 243, 238, 0.18);
       margin-bottom: 2rem;
       transition: color 0.3s ease;
       cursor: default;
     }
     .colophon-huge-masthead:hover {
-      color: var(--electric-blue);
+      color: var(--bone);
     }
     .colophon-notes {
-      font-size: 0.85rem;
-      color: var(--dim-light);
-      max-width: 600px;
+      font-size: 0.82rem;
+      color: var(--dim);
+      max-width: 540px;
       margin: 0 auto 3rem;
       line-height: 1.8;
     }
@@ -1421,9 +1284,9 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      font-size: 0.7rem;
-      color: var(--dim-light);
-      border-top: 1px solid var(--border-dark);
+      font-size: 0.65rem;
+      color: var(--dim);
+      border-top: 1px solid var(--border-hairline);
       padding-top: 2rem;
     }
     @media (min-width: 768px) {
@@ -1432,68 +1295,16 @@
         justify-content: space-between;
       }
     }
-
-    /* Fixed Architectural HUD Crosshair */
-    .spatial-hud-crosshair {
-      position: fixed;
-      width: 32px;
-      height: 32px;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      z-index: 9998;
-    }
-    .spatial-hud-crosshair::before, .spatial-hud-crosshair::after {
-      content: '';
-      position: absolute;
-      background: var(--electric-blue);
-    }
-    .spatial-hud-crosshair::before { top: 15px; left: 0; right: 0; height: 1px; }
-    .spatial-hud-crosshair::after { left: 15px; top: 0; bottom: 0; width: 1px; }
-
-    /* Spatial Teleport Floating Button */
-    .spatial-float-teleport {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 9000;
-      background: #020204;
-      color: var(--bone);
-      border: 1px solid var(--electric-blue);
-      padding: 0.55rem 1.1rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
-      transition: background 0.2s, color 0.2s;
-    }
-    .spatial-float-teleport:hover {
-      background: var(--electric-blue);
-      color: #ffffff;
-      box-shadow: 0 0 25px var(--electric-blue-glow);
-    }
-    @media (max-width: 640px) {
-      .spatial-float-teleport {
-        bottom: 1rem;
-        right: 1rem;
-        padding: 0.45rem 0.8rem;
-        font-size: 0.65rem;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Top Tensor Matrix Coordinate Bar -->
+  <!-- Minimal Top Vector Navigation -->
   <nav class="switch-nav">
     <div class="spatial-nav-brand">
       <span class="spatial-node-dot"></span>
-      <a href="index.html" class="spatial-brand-link">TENSOR FIELD // AXIS [X, Y, Z]</a>
-      <span class="spatial-coord-sub">COORD: 35.6595° N // VECTOR 10.0</span>
+      <a href="index.html" class="spatial-brand-link">WEDELIA // SPATIAL ARCHIVE</a>
+      <span class="spatial-coord-sub">AXIS [X, Y, Z] // 10</span>
     </div>
     <div class="switch-pills">
       <span class="spatial-nodes-label">VECTORS:</span>
@@ -1505,363 +1316,307 @@
     </div>
   </nav>
 
-  <!-- Left Vertical Spatial Rail (Desktop) -->
+  <!-- Left Quiet Spatial Rail (Desktop) -->
   <aside class="viewport-rail">
     <div class="rail-num-active">10</div>
-    <div class="rail-vertical-text">WEDELIA // 異形の空間 // SPATIAL ARCHIVE</div>
-    <div class="rail-coord-stamp" id="railCoordStamp">COORD: 28.5983° N // 77.2281° E</div>
+    <div class="rail-vertical-text">異形の空間 // SPATIAL DEPTH</div>
+    <div class="rail-coord-stamp" id="railCoordStamp">X: 04.27 Y: 12.80</div>
   </aside>
 
   <!-- Main Experimental Spatial Canvas -->
   <main class="strange-canvas">
 
-    <!-- Spatial Stage Map Bar (Sticky Stage Navigator) -->
-    <nav class="spatial-stage-map-bar" id="spatialStageMapBar">
-      <div class="stage-map-label">SPATIAL NODES:</div>
-      <div class="stage-map-nodes">
-        <a href="#stageArrival" class="stage-nav-pill active" data-stage="arrival">01 / ARRIVAL</a>
-        <a href="#stageObjects" class="stage-nav-pill" data-stage="objects">02 / OBJECT</a>
-        <a href="#stageImpossible" class="stage-nav-pill" data-stage="impossible">03 / IMPOSSIBLE</a>
-        <a href="#stageOccasions" class="stage-nav-pill" data-stage="occasions">04 / OCCASION</a>
-        <a href="#stageTeleport" class="stage-nav-pill" data-stage="teleport">05 / TELEPORT</a>
-        <a href="#stageChamber" class="stage-nav-pill" data-stage="chamber">06 / CONVERGENCE</a>
-        <a href="#stageExit" class="stage-nav-pill" data-stage="exit">07 / EXIT</a>
+    <!-- Hovering Spatial Stage Coordinates Navigation -->
+    <nav class="spatial-stage-hover-nav" id="stageHoverNav">
+      <div class="stage-coord-nodes">
+        <a href="#stageArrival" class="stage-coord-link active" data-stage="arrival">01 ARRIVAL</a>
+        <a href="#stageObjects" class="stage-coord-link" data-stage="objects">02 OBJECT</a>
+        <a href="#stageImpossible" class="stage-coord-link" data-stage="impossible">03 IMPOSSIBLE</a>
+        <a href="#stageOccasions" class="stage-coord-link" data-stage="occasions">04 OCCASION</a>
+        <a href="#stageTeleport" class="stage-coord-link" data-stage="teleport">05 TELEPORT</a>
+        <a href="#stageChamber" class="stage-coord-link" data-stage="chamber">06 CONVERGENCE</a>
+        <a href="#stageExit" class="stage-coord-link" data-stage="exit">07 EXIT</a>
       </div>
     </nav>
 
     <!-- ========================================================
-         STAGE 1: DESTROYED HERO (3D COORDINATE VOLUME)
+         STAGE 1: DESTROYED HERO (SPATIAL TYPOGRAPHIC VOLUME)
          ======================================================== -->
     <section class="hero-spatial-volume" id="stageArrival">
       <div class="hero-stage-inner" id="heroStageInner">
         
-        <!-- Deep Layer (translateZ -150px) -->
-        <div class="hero-plane-deep" id="heroPlaneDeep">
-          <div class="deep-kanji-watermark">異形の空間 // 次元座標</div>
-          <div class="deep-monument-delia">DELIA</div>
-          <div class="deep-coordinate-matrix">
-            <div>SECTOR // 0047°</div>
-            <div>FIELD / A // NCR × TOKYO</div>
-            <div>METRIC TENSOR: g_μν</div>
+        <!-- Deepest Layer: LIA (translateZ -220px) -->
+        <div class="hero-plane-deep-lia" id="heroDeepLia">
+          LIA
+        </div>
+
+        <!-- Mysterious Quiet Japanese Annotation -->
+        <div class="deep-japanese-annotation">
+          異形 // 座標 // 静止
+        </div>
+
+        <!-- Mid Layer Behind Garment: DE (translateZ -60px) -->
+        <div class="hero-plane-mid-de" id="heroMidDe">
+          DE
+        </div>
+
+        <!-- Center: Floating Photographic Fashion Plate (translateZ 0px) -->
+        <div class="hero-plane-garment-plate" id="heroGarmentPlate">
+          <div class="hero-floating-image-wrap">
+            <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Archive Silhouette">
+          </div>
+          <div class="hero-floating-registration">
+            <span class="obj-code">OBJECT 01 // ZEMIRE FAILLE</span>
+            <span>28.5983° N // NCR</span>
           </div>
         </div>
 
-        <!-- Mid Plane (translateZ 0px) -->
-        <div class="hero-plane-mid" id="heroPlaneMid">
-          <div class="hero-garment-frame">
-            <div class="hero-garment-corner-tl"></div>
-            <div class="hero-garment-corner-br"></div>
-            <div class="hero-garment-img-wrap">
-              <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Archive Specimen">
-            </div>
-            <div class="hero-garment-tag">
-              <span class="hero-garment-title">SPECIMEN 01 // ZEMIRE FAILLE</span>
-              <span class="hero-garment-tariff">₹2,999 / 3 DAYS</span>
-            </div>
-          </div>
+        <!-- Foreground Plane: WE (translateZ +160px) -->
+        <div class="hero-plane-fore-we" id="heroForeWe">
+          WE
         </div>
 
-        <!-- Foreground Layer (translateZ +120px) -->
-        <div class="hero-plane-fore" id="heroPlaneFore">
-          <div class="fore-title-detached" id="foreDetachedWE">
-            WE<span class="blue-period">.</span>
-          </div>
-
-          <div class="fore-reticle-strip">
-            <div class="fore-reticle-badge">
-              <span>✦ FRONT PLANE TENSOR: +120mm</span>
-              <span>COORD: [X: 04.27, Y: 12.80, Z: +03.14]</span>
-            </div>
-            <div class="fore-thesis-box">
-              Don't spend ₹35,000 on an outfit you will photograph once. <strong>WEDELIA</strong> is a digital fashion installation operating as a revolving coordinate archive. Monumental couture silhouettes rented for 3, 5, or 7 days with direct campus hostel delivery.
-            </div>
-          </div>
+        <!-- Pure Editorial Fragment (Replaced Advertising Copy) -->
+        <div class="hero-editorial-fragment">
+          <div class="fragment-obj-tag">OBJECT 01</div>
+          <p class="fragment-prose">
+            A garment displaced from its original context.<br>
+            <strong>The silhouette remains.</strong><br>
+            The room changes around it.
+          </p>
         </div>
 
       </div>
     </section>
 
     <!-- ========================================================
-         STAGE 2: SPATIAL GARMENT INSTALLATION (MONOLITH FIELD)
+         STAGE 2: SPATIAL GARMENT OBJECTS (OPEN SUSPENSION)
          ======================================================== -->
     <section class="stage-monolith-field" id="stageObjects">
       <div class="stage-section-header">
-        <span>02 // SPATIAL GARMENT OBJECTS — VOLUMETRIC SPECIMEN FIELD</span>
-        <span style="color: var(--electric-blue);">TENSOR PROJECTION: ACTIVE</span>
+        <span>02 // SPATIAL GARMENT OBJECTS</span>
+        <span>FIELD / A</span>
       </div>
 
-      <!-- Spatial Vector Tabs -->
-      <div class="spatial-vector-tabs" id="spatialVectorTabs">
-        <button class="vector-tab-btn active" data-index="0">VECTOR α // [142.8 // KINETIC DRAPE]</button>
-        <button class="vector-tab-btn" data-index="1">VECTOR β // [210.4 // ZEMIRE FAILLE]</button>
-        <button class="vector-tab-btn" data-index="2">VECTOR γ // [088.1 // DUET PLEAT]</button>
-        <button class="vector-tab-btn" data-index="3">VECTOR δ // [330.0 // BROCADE ROBE]</button>
+      <!-- Quiet Vector Coordinates -->
+      <div class="spatial-vector-coords" id="spatialVectorCoords">
+        <button class="vector-coord-btn active" data-index="0">VECTOR α // KINETIC DRAPE</button>
+        <button class="vector-coord-btn" data-index="1">VECTOR β // ZEMIRE FAILLE</button>
+        <button class="vector-coord-btn" data-index="2">VECTOR γ // DUET PLEAT</button>
+        <button class="vector-coord-btn" data-index="3">VECTOR δ // COURT BROCADE</button>
       </div>
 
-      <!-- Monolith Stage Grid -->
-      <div class="spatial-monolith-stage-grid" id="monolithStageGrid">
-        <div class="spatial-monolith-box" id="monolithBox">
-          <div class="monolith-coord-badge" id="monolithCoordBadge">VECTOR α // COORD: X:142.8 Y:891.2 Z:04.0</div>
-          <div class="monolith-img-container">
-            <img id="activeMonolithImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Spatial Specimen Image">
+      <!-- Suspension Grid -->
+      <div class="spatial-suspension-grid" id="suspensionGrid">
+        <div class="spatial-image-plate" id="spatialImagePlate">
+          <div class="plate-photo-frame">
+            <img id="activePlateImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Spatial Specimen">
+          </div>
+          <div class="plate-coord-caption">
+            <span id="plateCoordLabel">COORD: X:142.8 Y:891.2 Z:04.0</span>
+            <span id="plateTariffLabel">₹1,699 / 3 DAYS</span>
           </div>
         </div>
 
-        <div class="monolith-dossier">
+        <div class="spatial-object-dossier">
           <div>
-            <div class="monolith-occasion-tag" id="monolithOccasionTag">
-              OCCASION VECTOR // COLLEGE FESTIVAL ARENA & CONCERT STAGE
+            <div class="dossier-occasion-line" id="dossierOccasionLine">
+              OCCASION VECTOR // ARENA SOUNDSTAGE
             </div>
-            <h3 class="monolith-heading" id="monolithHeading">
+            <h3 class="dossier-heading" id="dossierHeading">
               Kinetic Multi-Pocket Wrap
             </h3>
-            <p class="monolith-prose" id="monolithProse">
-              A floating kinetic silhouette crafted from high-voltage metallic polymer weave. Suspended at the intersection of collegiate rave culture and avant-garde couture draping. Engineered for outdoor festival soundstages where strobe towers and laser sweeps illuminate reflective filaments from across the campus field.
+            <p class="dossier-prose" id="dossierProse">
+              A kinetic silhouette woven from reflective metallic polymer. Suspended between rave energy and couture draping. Engineered for outdoor festival stages where strobe towers illuminate filaments from across the campus field.
             </p>
 
-            <div class="monolith-specs-matrix">
-              <div class="spec-cell">
-                <strong>ATELIER TENSOR:</strong>
-                <span id="specAtelier">CUSTO SUMMER ARCHIVE (2010)</span>
+            <div class="dossier-specs-lines">
+              <div class="spec-line">
+                <strong>ATELIER:</strong>
+                <span id="specAtelier">CUSTO SUMMER ARCHIVE</span>
               </div>
-              <div class="spec-cell">
-                <strong>FIBER COMPOSITION:</strong>
-                <span id="specFiber">METALLIC WEAVE & SILK KNIT (920g)</span>
+              <div class="spec-line">
+                <strong>FIBER MASS:</strong>
+                <span id="specFiber">METALLIC SILK WEAVE (920g)</span>
               </div>
-              <div class="spec-cell">
-                <strong>DUAL-FIT REDUNDANCY:</strong>
-                <span id="specDualFit">UK 6 (PRIMARY) + UK 8 (SEALED SISTER)</span>
+              <div class="spec-line">
+                <strong>REDUNDANCY:</strong>
+                <span id="specDualFit">UK 6 (PRIMARY) + UK 8 (SISTER)</span>
               </div>
-              <div class="spec-cell">
-                <strong>DIMENSIONAL LEASE:</strong>
-                <span id="specTariff" style="color: var(--electric-blue); font-weight: 700;">₹1,699 / 3 DAYS (₹0 DAMAGE SHIELD)</span>
+              <div class="spec-line">
+                <strong>LIABILITY:</strong>
+                <span id="specLiability">₹0 DAMAGE EMBEDDED</span>
               </div>
             </div>
           </div>
 
-          <div class="monolith-action-cluster">
-            <button class="btn-spatial-collapse" id="btnCollapseSpecimen">
-              <span>COLLAPSE COORDINATES TO RENT</span>
+          <div class="dossier-action-cluster">
+            <button class="btn-quiet-collapse" id="btnCollapseToChamber">
+              <span>COLLAPSE COORDINATES</span>
               <span>⟶</span>
             </button>
-            <button class="btn-spatial-next" id="btnNextSpecimen">
-              <span>TRANSLATE TO NEXT VECTOR</span>
+            <button class="btn-quiet-next" id="btnNextVector">
+              <span>NEXT VECTOR</span>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Orbital Specimens Strip -->
-      <div class="orbital-specimen-strip" id="orbitalSpecimenStrip">
-        <div class="orbital-specimen-card active" data-index="0">
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Wrap" class="orbital-specimen-thumb">
-          <div class="orbital-specimen-name">KINETIC DRAPE</div>
-          <div class="orbital-specimen-rate">VECTOR α // ₹1,699</div>
+      <!-- Orbital Specimen Plates -->
+      <div class="orbital-specimen-strip" id="orbitalStrip">
+        <div class="orbital-specimen-plate active" data-index="0">
+          <div class="orbital-thumb-wrap">
+            <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Wrap">
+          </div>
+          <div class="orbital-name">KINETIC DRAPE</div>
+          <div class="orbital-meta">VECTOR α // ₹1,699</div>
         </div>
-        <div class="orbital-specimen-card" data-index="1">
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Faille" class="orbital-specimen-thumb">
-          <div class="orbital-specimen-name">ZEMIRE FAILLE</div>
-          <div class="orbital-specimen-rate">VECTOR β // ₹2,999</div>
+        <div class="orbital-specimen-plate" data-index="1">
+          <div class="orbital-thumb-wrap">
+            <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Faille">
+          </div>
+          <div class="orbital-name">ZEMIRE FAILLE</div>
+          <div class="orbital-meta">VECTOR β // ₹2,999</div>
         </div>
-        <div class="orbital-specimen-card" data-index="2">
-          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Duet Pleat" class="orbital-specimen-thumb">
-          <div class="orbital-specimen-name">DUET PLEAT</div>
-          <div class="orbital-specimen-rate">VECTOR γ // ₹2,899</div>
+        <div class="orbital-specimen-plate" data-index="2">
+          <div class="orbital-thumb-wrap">
+            <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Duet Pleat">
+          </div>
+          <div class="orbital-name">DUET PLEAT</div>
+          <div class="orbital-meta">VECTOR γ // ₹2,899</div>
         </div>
-        <div class="orbital-specimen-card" data-index="3">
-          <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade" class="orbital-specimen-thumb">
-          <div class="orbital-specimen-name">COURT BROCADE</div>
-          <div class="orbital-specimen-rate">VECTOR δ // ₹3,899</div>
+        <div class="orbital-specimen-plate" data-index="3">
+          <div class="orbital-thumb-wrap">
+            <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade">
+          </div>
+          <div class="orbital-name">COURT BROCADE</div>
+          <div class="orbital-meta">VECTOR δ // ₹3,899</div>
         </div>
       </div>
     </section>
 
     <!-- ========================================================
-         STAGE 3: THE IMPOSSIBLE SECTION (NON-EUCLIDEAN ARCHITECTURE)
+         STAGE 3: THE IMPOSSIBLE SECTION (ARCHITECTURAL MONOLITH)
          ======================================================== -->
     <section class="stage-impossible-chamber" id="stageImpossible">
-      <!-- Kinetic Deep Running Typography -->
-      <div class="impossible-layer-text" id="impossibleKineticText">
-        NON-EUCLIDEAN FORM // 重力歪曲 // SPATIAL ARCHITECTURE // METRIC CURVATURE // THE CLOTHES OCCUPY MORE SPACE THAN THE ROOM PERMITS //
+      <!-- Kinetic Background Typography -->
+      <div class="impossible-kinetic-type" id="impossibleKineticType">
+        THE CLOTHES OCCUPY MORE SPACE THAN THE ROOM PERMITS // 重力歪曲 // SPATIAL ARCHITECTURE //
       </div>
 
-      <div class="impossible-stage-grid">
-        <!-- Masked Cut-Through Aperture Installation -->
-        <div class="impossible-portal-installation" id="impossiblePortalWrap">
-          <!-- Primary Outer Garment Silhouette -->
-          <div class="impossible-outer-garment">
-            <img src="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg" alt="Architectural Hoop Skirt Rear">
+      <div class="impossible-monument-grid">
+        <!-- Portal Installation -->
+        <div class="impossible-portal-wrap" id="impossiblePortalWrap">
+          <!-- Towering Primary Silhouette -->
+          <div class="impossible-silhouette-primary">
+            <img src="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg" alt="Architectural Hoop Skirt">
           </div>
-          <!-- Skewed Secondary Aperture Window -->
-          <div class="impossible-inner-aperture" id="impossibleAperture">
+          <!-- Skewed Secondary Aperture Cutout -->
+          <div class="impossible-aperture-cutout" id="impossibleAperture">
             <img id="impossibleApertureImg" src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Differential Parallax Silhouette">
-            <div class="aperture-coord-label">APERTURE 07 // PARALLAX 2.4X</div>
+            <div class="impossible-aperture-label">APERTURE 07 // PARALLAX 2.4X</div>
           </div>
         </div>
 
-        <!-- Non-Euclidean Architectural Narrative -->
-        <div class="impossible-narrative-col">
-          <div style="font-size: 0.68rem; color: var(--electric-blue); letter-spacing: 0.15em; margin-bottom: 0.5rem;">
-            NODE 03 // NON-EUCLIDEAN ARCHITECTURE
-          </div>
-          <h2 class="impossible-kanji-title">
+        <!-- Architectural Narrative Column -->
+        <div class="impossible-prose-col">
+          <div class="impossible-subhead">03 // NON-EUCLIDEAN ARCHITECTURE</div>
+          <h2 class="impossible-kanji-statement">
             部屋の寸法を超越する、<br>
             異形のシルエット。
           </h2>
-          <p class="impossible-thesis">
-            High-fashion rental defies classical geometry. You do not store the archive in your closet. You inhabit it for 72 hours, walk into the university ballroom, permanently alter the room's spatial memory, and return it without ever laundering a stitch. <strong>The garment exists in a higher dimensional coordinate than the room itself.</strong>
+          <p class="impossible-thesis-text">
+            High-fashion rental defies classical geometry. You do not store the archive in a wardrobe. You inhabit it for 72 hours, enter the university hall, permanently alter the room's spatial memory, and return it unwashed. <strong>The garment exists in a higher dimensional coordinate than the room itself.</strong>
           </p>
-
-          <div class="impossible-metrics-cluster">
-            <div class="impossible-metric-node">
-              <div class="metric-num">-0.428</div>
-              <div class="metric-label">SPATIAL CURVATURE (RAD)</div>
-            </div>
-            <div class="impossible-metric-node">
-              <div class="metric-num">100%</div>
-              <div class="metric-label">DAMAGE LIABILITY ABSORBED</div>
-            </div>
-            <div class="impossible-metric-node">
-              <div class="metric-num">24H</div>
-              <div class="metric-label">PRIOR GATE DISPATCH</div>
-            </div>
-            <div class="impossible-metric-node">
-              <div class="metric-num">₹0</div>
-              <div class="metric-label">CLEANING FEE (ZERO LAUNDRY)</div>
-            </div>
+          <div class="impossible-quiet-annotation">
+            CURVATURE TENSOR κ = -0.428 rad // 24H PRIOR DISPATCH // ₹0 LIABILITY
           </div>
         </div>
       </div>
     </section>
 
     <!-- ========================================================
-         STAGE 4: SCATTERED OCCASION FIELD (3D COORDINATE VOID)
+         STAGE 4: SCATTERED OCCASION WORDS (WORDS ARE OBJECTS)
          ======================================================== -->
     <section class="stage-occasions-void" id="stageOccasions">
       <div class="stage-section-header">
-        <span>04 // 3D OCCASION COORDINATE VOID — NON-EUCLIDEAN CAMPUS SPHERES</span>
-        <span style="color: var(--electric-blue);">GRAVITATIONAL PULL: ACTIVE</span>
+        <span>04 // 3D OCCASION VOID</span>
+        <span>GRAVITATIONAL COORDINATES</span>
       </div>
 
-      <div class="occasion-spatial-universe" id="occasionUniverse">
+      <div class="occasion-words-universe" id="occasionUniverse">
         <!-- Occasion 1: FESTIVAL -->
-        <div class="occasion-coordinate-orb active" data-event="FESTIVAL" data-coord="X: 142.8 // Y: 891.2 // Z: 04.0" data-price="1899" data-look="KINETIC MULTI-POCKET DRAPE" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">
-          <div class="orb-node-tag">NODE 01 // HIGH VOLTAGE</div>
-          <h3 class="orb-title">FESTIVAL</h3>
-          <div class="orb-kanji">祝祭 (COLLEGE FEST)</div>
-          <p class="orb-desc">
-            15,000 students filling the sports stadium under laser truss towers. Kinetic lurex and reflective shift garments engineered to strobe in darkness.
-          </p>
-          <div class="orb-footer">
-            <span style="color: var(--dim-light);">CAMPUS: IIT DELHI ARENA</span>
-            <span class="tariff">₹1,899 / 3D</span>
-          </div>
+        <div class="occasion-word-object active" data-event="FESTIVAL" data-coord="X: 142.8 // Y: 891.2 // Z: 04.0" data-price="1899" data-look="KINETIC MULTI-POCKET DRAPE" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">
+          <div class="occasion-word-name">FESTIVAL</div>
+          <div class="occasion-word-meta">祝祭 // ARENA SOUNDSTAGE // ₹1,899</div>
         </div>
 
         <!-- Occasion 2: FAREWELL -->
-        <div class="occasion-coordinate-orb" data-event="FAREWELL" data-coord="X: 210.4 // Y: 418.0 // Z: 12.0" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">
-          <div class="orb-node-tag">NODE 02 // VALEDICTORY</div>
-          <h3 class="orb-title">FAREWELL</h3>
-          <div class="orb-kanji">門出 (SENIOR BALL)</div>
-          <p class="orb-desc">
-            The departmental apex. Sweeping floor-length silk faille and sculpted peplums that author your graduation chapter with museum-grade severity.
-          </p>
-          <div class="orb-footer">
-            <span style="color: var(--dim-light);">CAMPUS: MIRANDA HOUSE QUAD</span>
-            <span class="tariff">₹2,999 / 3D</span>
-          </div>
+        <div class="occasion-word-object" data-event="FAREWELL" data-coord="X: 210.4 // Y: 418.0 // Z: 12.0" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">
+          <div class="occasion-word-name">FAREWELL</div>
+          <div class="occasion-word-meta">門出 // SENIOR VALEDICTORY // ₹2,999</div>
         </div>
 
         <!-- Occasion 3: CONCERT -->
-        <div class="occasion-coordinate-orb" data-event="CONCERT" data-coord="X: 088.1 // Y: 992.5 // Z: 02.0" data-price="1699" data-look="PLEATED DUET CHIFFON" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">
-          <div class="orb-node-tag">NODE 03 // ACOUSTIC SUB</div>
-          <h3 class="orb-title">CONCERT</h3>
-          <div class="orb-kanji">響宴 (ARENA CIRCUIT)</div>
-          <p class="orb-desc">
-            Bass-heavy club tours and stadium shows. Tailored micro-corsets and fluid silk chiffon built for motion, heat, and flash photography.
-          </p>
-          <div class="orb-footer">
-            <span style="color: var(--dim-light);">CAMPUS: LSR MAIN ARCHWAY</span>
-            <span class="tariff">₹1,699 / 3D</span>
-          </div>
+        <div class="occasion-word-object" data-event="CONCERT" data-coord="X: 088.1 // Y: 992.5 // Z: 02.0" data-price="1699" data-look="PLEATED DUET CHIFFON" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">
+          <div class="occasion-word-name">CONCERT</div>
+          <div class="occasion-word-meta">響宴 // ARENA CIRCUIT // ₹1,699</div>
         </div>
 
         <!-- Occasion 4: FRESHERS -->
-        <div class="occasion-coordinate-orb" data-event="FRESHERS" data-coord="X: 174.5 // Y: 320.1 // Z: 06.0" data-price="2199" data-look="VINTAGE DRAPED ROBE" data-img="/assets/editorial/robe-longue-1983-12-1-1.jpg">
-          <div class="orb-node-tag">NODE 04 // INDUCTION</div>
-          <h3 class="orb-title">FRESHERS</h3>
-          <div class="orb-kanji">初陣 (ORIENTATION GALA)</div>
-          <p class="orb-desc">
-            First impression on campus. An audacious silhouette that establishes your creative authority before you speak a single word.
-          </p>
-          <div class="orb-footer">
-            <span style="color: var(--dim-light);">CAMPUS: ST. STEPHEN'S QUAD</span>
-            <span class="tariff">₹2,199 / 3D</span>
-          </div>
+        <div class="occasion-word-object" data-event="FRESHERS" data-coord="X: 174.5 // Y: 320.1 // Z: 06.0" data-price="2199" data-look="VINTAGE DRAPED ROBE" data-img="/assets/editorial/robe-longue-1983-12-1-1.jpg">
+          <div class="occasion-word-name">FRESHERS</div>
+          <div class="occasion-word-meta">初陣 // INDUCTION GALA // ₹2,199</div>
         </div>
 
         <!-- Occasion 5: BANQUET -->
-        <div class="occasion-coordinate-orb" data-event="BANQUET" data-coord="X: 330.0 // Y: 112.4 // Z: 08.0" data-price="3899" data-look="GOLD BROCADE ROBE" data-img="/assets/editorial/court-dress.jpg">
-          <div class="orb-node-tag">NODE 05 // SOIRÉE APEX</div>
-          <h3 class="orb-title">BANQUET</h3>
-          <div class="orb-kanji">晩餐 (MODEL UN GALA)</div>
-          <p class="orb-desc">
-            Regal side-pannier volume and gold thread jacquard. Historic court silhouettes commanding the dining hall upon your entrance.
-          </p>
-          <div class="orb-footer">
-            <span style="color: var(--dim-light);">CAMPUS: ASHOKA RESIDENCE</span>
-            <span class="tariff">₹3,899 / 3D</span>
-          </div>
+        <div class="occasion-word-object" data-event="BANQUET" data-coord="X: 330.0 // Y: 112.4 // Z: 08.0" data-price="3899" data-look="GOLD BROCADE ROBE" data-img="/assets/editorial/court-dress.jpg">
+          <div class="occasion-word-name">BANQUET</div>
+          <div class="occasion-word-meta">晩餐 // MODEL UN GALA // ₹3,899</div>
         </div>
       </div>
     </section>
 
     <!-- ========================================================
-         STAGE 5: THE TELEPORT MOMENT (SPATIAL DISPLACEMENT)
+         STAGE 5: TELEPORT MOMENT (MINIMAL DISPLACEMENT)
          ======================================================== -->
     <section class="stage-teleport-portal" id="stageTeleport">
       <div class="stage-section-header">
-        <span>05 // SPATIAL DISPLACEMENT THRESHOLD — TELEMETRY HANDOFF</span>
-        <span style="color: var(--electric-blue);">BRIDGE ACTIVE: DELHI NCR ⇄ TOKYO</span>
+        <span>05 // SPATIAL DISPLACEMENT THRESHOLD</span>
+        <span>NCR ⇄ TOKYO</span>
       </div>
 
-      <div class="teleport-threshold-container">
-        <div class="teleport-portal-header">
-          <span>COORDINATE DISPLACEMENT BRIDGE</span>
-          <span>LATENCY: 0.041s // ENCRYPTED TRANSIT</span>
-        </div>
-
-        <div class="teleport-duo-fields">
-          <!-- Field A: Delhi NCR -->
-          <div class="field-card active" id="fieldA">
-            <div class="field-code">SECTOR α // DISPATCH CORRIDOR</div>
-            <div class="field-name">DELHI NCR</div>
-            <div class="field-coordinates">28.5983° N // 77.2281° E</div>
-            <ul class="field-stations">
-              <li>North Campus: Miranda House Gate 2</li>
-              <li>South Campus: LSR Main Archway</li>
-              <li>Hauz Khas: IIT Delhi Arena Gate</li>
-              <li>Sonipat: Ashoka Residence Quad</li>
+      <div class="teleport-quiet-container">
+        <div class="teleport-duo-stations">
+          <!-- Station A: Delhi NCR -->
+          <div class="station-block active" id="stationA">
+            <div class="station-code">SECTOR α // DISPATCH CORRIDOR</div>
+            <div class="station-title">DELHI NCR</div>
+            <div class="station-coord-line">28.5983° N // 77.2281° E</div>
+            <ul class="station-corridors">
+              <li>Miranda House Gate 2</li>
+              <li>LSR Main Archway</li>
+              <li>IIT Delhi Arena Gate</li>
+              <li>Ashoka Residence Quad</li>
             </ul>
           </div>
 
-          <!-- Interactive Teleport Switcher Button -->
-          <button class="teleport-exchange-btn" id="btnTriggerTeleport">
-            <span style="font-size: 1.4rem;">⇄</span>
-            <span>TRANSLATE FIELD</span>
-            <span style="font-size: 0.6rem; color: var(--electric-blue);">[DISPLACE]</span>
+          <!-- Switcher -->
+          <button class="btn-quiet-teleport" id="btnTriggerTeleport">
+            <span style="font-size: 1.2rem;">⇄</span>
+            <span>DISPLACE</span>
           </button>
 
-          <!-- Field B: Tokyo -->
-          <div class="field-card" id="fieldB">
-            <div class="field-code">SECTOR β // ARCHIVE ORIGIN</div>
-            <div class="field-name">TOKYO METRO</div>
-            <div class="field-coordinates">35.6595° N // 139.7004° E</div>
-            <ul class="field-stations">
-              <li>Ginza: Historical Couture Vault</li>
-              <li>Aoyama: Miyake Pleats Archive</li>
-              <li>Harajuku: Street-Cut Prototype Node</li>
-              <li>Roppongi: Museum Restoration Atelier</li>
+          <!-- Station B: Tokyo Metro -->
+          <div class="station-block" id="stationB">
+            <div class="station-code">SECTOR β // ARCHIVE ORIGIN</div>
+            <div class="station-title">TOKYO METRO</div>
+            <div class="station-coord-line">35.6595° N // 139.7004° E</div>
+            <ul class="station-corridors">
+              <li>Ginza Historical Vault</li>
+              <li>Aoyama Pleats Archive</li>
+              <li>Harajuku Prototype Node</li>
+              <li>Roppongi Museum Atelier</li>
             </ul>
           </div>
         </div>
@@ -1869,89 +1624,62 @@
     </section>
 
     <!-- ========================================================
-         STAGE 6: SPATIAL CONVERGENCE RENTAL CHAMBER
+         STAGE 6: SPATIAL CONVERGENCE CHAMBER (CROSS-AXIS SYSTEM)
          ======================================================== -->
     <section class="stage-convergence-chamber" id="stageChamber">
       <div class="stage-section-header">
-        <span>06 // SPATIAL CONVERGENCE CHAMBER — COLLAPSE THE MOMENT</span>
-        <span>ACTIVE VECTOR: <strong id="chamberActiveVectorDisplay" style="color: var(--electric-blue);">X: 142.8 // Y: 891.2 // Z: 04.0</strong></span>
+        <span>06 // SPATIAL CONVERGENCE CHAMBER</span>
+        <span id="chamberActiveVectorDisplay">X: 142.8 // Y: 891.2 // Z: 04.0</span>
       </div>
 
-      <div class="chamber-3d-volume" id="chamberVolume">
-        <!-- Coordinate Axes Cluster -->
-        <div class="chamber-axes-cluster">
-          <!-- Axis 1: Occasion Vector -->
-          <div>
-            <span class="chamber-axis-title">AXIS α // OCCASION SPATIAL CONVERGENCE:</span>
-            <div class="chamber-nodes-row" id="chamberOccasionNodes">
-              <button class="spatial-node-pill active" data-event="FESTIVAL" data-coord="X: 142.8 // Y: 891.2 // Z: 04.0" data-rot="-6" data-price="1899" data-look="KINETIC MULTI-POCKET DRAPE" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">FESTIVAL [142 / 891 / 04]</button>
-              <button class="spatial-node-pill" data-event="FAREWELL" data-coord="X: 210.4 // Y: 418.0 // Z: 12.0" data-rot="8" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">FAREWELL [210 / 418 / 12]</button>
-              <button class="spatial-node-pill" data-event="CONCERT" data-coord="X: 088.1 // Y: 992.5 // Z: 02.0" data-rot="-12" data-price="1699" data-look="PLEATED DUET CHIFFON" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">CONCERT [088 / 992 / 02]</button>
-              <button class="spatial-node-pill" data-event="FRESHERS" data-coord="X: 174.5 // Y: 320.1 // Z: 06.0" data-rot="5" data-price="2199" data-look="VINTAGE DRAPED ROBE" data-img="/assets/editorial/robe-longue-1983-12-1-1.jpg">FRESHERS [174 / 320 / 06]</button>
-              <button class="spatial-node-pill" data-event="BANQUET" data-coord="X: 330.0 // Y: 112.4 // Z: 08.0" data-rot="10" data-price="3899" data-look="GOLD BROCADE ROBE" data-img="/assets/editorial/court-dress.jpg">BANQUET [330 / 112 / 08]</button>
-            </div>
-          </div>
-
-          <!-- Axis 2: Duration Vector -->
-          <div>
-            <span class="chamber-axis-title">AXIS β // TEMPORAL DURATION OFFSET:</span>
-            <div class="chamber-nodes-row" id="chamberDurationNodes">
-              <button class="spatial-node-pill active" data-days="03" data-adder="0">+03 DAYS (BASE)</button>
-              <button class="spatial-node-pill" data-days="05" data-adder="600">+05 DAYS (+₹600)</button>
-              <button class="spatial-node-pill" data-days="07" data-adder="1100">+07 DAYS (+₹1,100)</button>
-            </div>
-          </div>
-
-          <!-- Axis 3: Sizing Vector -->
-          <div>
-            <span class="chamber-axis-title">AXIS γ // FIT & SISTER REDUNDANCY:</span>
-            <div class="chamber-nodes-row" id="chamberSizeNodes">
-              <button class="spatial-node-pill" data-size="UK 6" data-backup="UK 8">UK 6 [XS]</button>
-              <button class="spatial-node-pill active" data-size="UK 8" data-backup="UK 10">UK 8 [S]</button>
-              <button class="spatial-node-pill" data-size="UK 10" data-backup="UK 12">UK 10 [M]</button>
-              <button class="spatial-node-pill" data-size="UK 12" data-backup="UK 14">UK 12 [L]</button>
-            </div>
+      <div class="chamber-cross-composition" id="chamberCrossComposition">
+        <!-- Top Axis: Occasion Words -->
+        <div class="chamber-axis-top">
+          <div class="axis-top-title">AXIS α // OCCASION VECTOR:</div>
+          <div class="axis-words-selector" id="chamberOccasionWords">
+            <button class="axis-word-btn active" data-event="FESTIVAL" data-coord="X: 142.8 // Y: 891.2 // Z: 04.0" data-rot="-5" data-price="1899" data-look="KINETIC MULTI-POCKET DRAPE" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">FESTIVAL</button>
+            <button class="axis-word-btn" data-event="FAREWELL" data-coord="X: 210.4 // Y: 418.0 // Z: 12.0" data-rot="6" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">FAREWELL</button>
+            <button class="axis-word-btn" data-event="CONCERT" data-coord="X: 088.1 // Y: 992.5 // Z: 02.0" data-rot="-8" data-price="1699" data-look="PLEATED DUET CHIFFON" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">CONCERT</button>
+            <button class="axis-word-btn" data-event="FRESHERS" data-coord="X: 174.5 // Y: 320.1 // Z: 06.0" data-rot="4" data-price="2199" data-look="VINTAGE DRAPED ROBE" data-img="/assets/editorial/robe-longue-1983-12-1-1.jpg">FRESHERS</button>
+            <button class="axis-word-btn" data-event="BANQUET" data-coord="X: 330.0 // Y: 112.4 // Z: 08.0" data-rot="8" data-price="3899" data-look="GOLD BROCADE ROBE" data-img="/assets/editorial/court-dress.jpg">BANQUET</button>
           </div>
         </div>
 
-        <!-- Center Stage: Garment Monolith & Real-Time Telemetry -->
-        <div class="chamber-core-split">
-          <div class="chamber-monolith-display" id="chamberGarmentBox">
-            <div class="chamber-img-wrap">
-              <img id="chamberGarmentImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Chamber Specimen">
-            </div>
-            <div style="font-size: 0.65rem; color: var(--electric-blue); letter-spacing: 0.1em;" id="chamberGarmentCode">
-              SPECIMEN // WDL-014
-            </div>
-            <div style="font-family: 'Anton', sans-serif; font-size: 1.4rem; color: var(--bone); text-transform: uppercase; margin-top: 0.25rem;" id="chamberGarmentTitle">
-              KINETIC MULTI-POCKET DRAPE
-            </div>
+        <!-- Center Cross Horizon: Size ── [ Garment ] ── Duration -->
+        <div class="chamber-cross-horizon">
+          <!-- Left Axis: Sizing -->
+          <div class="chamber-axis-left" id="chamberSizeAxis">
+            <span class="axis-left-label">AXIS γ // FIT:</span>
+            <button class="axis-size-btn" data-size="UK 6">UK 6 [XS]</button>
+            <button class="axis-size-btn active" data-size="UK 8">UK 8 [S]</button>
+            <button class="axis-size-btn" data-size="UK 10">UK 10 [M]</button>
+            <button class="axis-size-btn" data-size="UK 12">UK 12 [L]</button>
           </div>
 
-          <div class="chamber-telemetry-monitor" id="chamberTelemetryMonitor">
-            <div style="font-size: 0.65rem; letter-spacing: 0.15em; color: var(--electric-blue); border-bottom: 1px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
-              DIMENSIONAL LEASE TELEMETRY // WDL-SYS-2026
-            </div>
+          <!-- Central Dominant Garment Plate -->
+          <div class="chamber-central-garment" id="chamberGarmentBox">
+            <img id="chamberGarmentImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Chamber Specimen">
+          </div>
 
-            <div class="chamber-live-price" id="chamberLivePrice">
-              ₹1,899
-            </div>
+          <!-- Right Axis: Duration -->
+          <div class="chamber-axis-right" id="chamberDurationAxis">
+            <span class="axis-right-label">AXIS β // TEMPORAL:</span>
+            <button class="axis-duration-btn active" data-days="03" data-adder="0">03 DAYS</button>
+            <button class="axis-duration-btn" data-days="05" data-adder="600">05 DAYS</button>
+            <button class="axis-duration-btn" data-days="07" data-adder="1100">07 DAYS</button>
+          </div>
+        </div>
 
-            <div>OCCASION VECTOR: <strong id="telemEvent" style="color: #ffffff;">FESTIVAL</strong></div>
-            <div>TEMPORAL ACCESS: <strong id="telemDuration" style="color: #ffffff;">03 DAYS</strong></div>
-            <div>SPATIAL FIT: <strong id="telemFit" style="color: #ffffff;">UK 8 [S] + SISTER UK 10 [SEALED]</strong></div>
-            <div>DAMAGE SHIELD: <strong style="color: #34d399;">₹0 EMBEDDED</strong></div>
-            <div>RETURN PROTOCOL: <strong style="color: #ffffff;">UNWASHED CORRIDOR HANDOVER</strong></div>
-
-            <button class="btn-commit-convergence" id="btnCommitConvergence">
-              <span>COLLAPSE COORDINATES // LOCK TEMPORARY POSSESSION</span>
-              <span style="font-size: 0.62rem; color: #8899ff; letter-spacing: 0.15em;">NON-EUCLIDEAN CONVERGENCE COMMIT</span>
-            </button>
-
-            <div class="chamber-locked-manifest" id="chamberLockedManifest">
-              ✦ COORDINATE SYSTEM COLLAPSED. POSSESSION CONFIRMED.<br>
-              REF: WDL-SPATIAL-014 // DISPATCH ASSIGNED TO CAMPUS RESIDENTIAL NODE.
-            </div>
+        <!-- Bottom: Price & Convergence Action -->
+        <div class="chamber-axis-bottom">
+          <div class="chamber-price-quiet" id="chamberPriceDisplay">
+            ₹1,899
+          </div>
+          <button class="btn-spatial-converge-trigger" id="btnCommitConvergence">
+            COLLAPSE COORDINATES
+          </button>
+          <div class="chamber-locked-quiet-stamp" id="chamberLockedManifest">
+            ✦ COORDINATES COLLAPSED // TEMPORARY POSSESSION CONFIRMED
           </div>
         </div>
       </div>
@@ -1962,69 +1690,45 @@
          ======================================================== -->
     <section class="stage-directory-exit" id="stageExit">
       <div class="stage-section-header">
-        <span>07 // RADICAL SPATIAL DIRECTORY — CAMPUS DISPATCH NODES</span>
-        <span id="directoryStatusIndicator" style="color: var(--electric-blue);">RAIL BUS: SYNCHRONIZED</span>
+        <span>07 // SPATIAL DIRECTORY</span>
+        <span>CAMPUS NODES</span>
       </div>
 
-      <div class="spatial-directory-table">
-        <div class="spatial-directory-entry" data-coord="28.69° N // 77.21° E" data-campus="MIRANDA HOUSE GATE 2">
-          <div>
-            <div class="dir-code">SYS_ROSTER // NODE WDL-014</div>
-            <div class="dir-name">ZEMIRE SILK FAILLE</div>
-            <div class="dir-meta">FAREWELL BALL // DU NORTH CAMPUS • MIRANDA HOUSE</div>
-          </div>
-          <div class="dir-tariff">₹2,999 / 3D</div>
+      <div class="spatial-quiet-roster">
+        <div class="roster-row" data-coord="28.69° N // 77.21° E">
+          <div class="roster-title">ZEMIRE SILK FAILLE</div>
+          <div class="roster-campus">MIRANDA HOUSE GATE 2</div>
+          <div class="roster-tariff">₹2,999 / 3D</div>
         </div>
-
-        <div class="spatial-directory-entry" data-coord="28.56° N // 77.24° E" data-campus="LADY SHRI RAM COLLEGE">
-          <div>
-            <div class="dir-code">SYS_ROSTER // NODE WDL-029</div>
-            <div class="dir-name">PLEATED DUET GOWN</div>
-            <div class="dir-meta">DEBATE GALA // DU SOUTH CAMPUS • LSR MAIN ARCHWAY</div>
-          </div>
-          <div class="dir-tariff">₹2,899 / 3D</div>
+        <div class="roster-row" data-coord="28.56° N // 77.24° E">
+          <div class="roster-title">PLEATED DUET GOWN</div>
+          <div class="roster-campus">LADY SHRI RAM ARCHWAY</div>
+          <div class="roster-tariff">₹2,899 / 3D</div>
         </div>
-
-        <div class="spatial-directory-entry" data-coord="28.54° N // 77.19° E" data-campus="IIT DELHI / NIFT">
-          <div>
-            <div class="dir-code">SYS_ROSTER // NODE WDL-041</div>
-            <div class="dir-name">KINETIC SHIFT & WRAP</div>
-            <div class="dir-meta">COLLEGE FEST // IIT DELHI ARENA • HAUZ KHAS</div>
-          </div>
-          <div class="dir-tariff">₹1,699 / 3D</div>
+        <div class="roster-row" data-coord="28.54° N // 77.19° E">
+          <div class="roster-title">KINETIC SHIFT & WRAP</div>
+          <div class="roster-campus">IIT DELHI ARENA</div>
+          <div class="roster-tariff">₹1,699 / 3D</div>
         </div>
-
-        <div class="spatial-directory-entry" data-coord="28.98° N // 77.10° E" data-campus="ASHOKA UNIVERSITY">
-          <div>
-            <div class="dir-code">SYS_ROSTER // NODE WDL-053</div>
-            <div class="dir-name">GOLD BROCADE ROBE</div>
-            <div class="dir-meta">SOCIETY BANQUET // SONIPAT RESIDENCE QUAD</div>
-          </div>
-          <div class="dir-tariff">₹3,899 / 3D</div>
+        <div class="roster-row" data-coord="28.98° N // 77.10° E">
+          <div class="roster-title">GOLD BROCADE ROBE</div>
+          <div class="roster-campus">ASHOKA RESIDENCE QUAD</div>
+          <div class="roster-tariff">₹3,899 / 3D</div>
         </div>
       </div>
 
-      <!-- Final Colophon Exit -->
+      <!-- Final Quiet Colophon -->
       <div class="colophon-monument-block">
         <h2 class="colophon-huge-masthead" id="colophonTitle">WEDELIA.</h2>
         <p class="colophon-notes">
-          THE EXHIBITION CLOSES AS THE NIGHT BEGINS. STEP OUT INTO THE DARKNESS WEARING SOMETHING MONUMENTAL. RETURN UNWASHED ON MONDAY MORNING.
+          THE EXHIBITION CLOSES AS THE NIGHT BEGINS. STEP OUT INTO THE DARKNESS WEARING SOMETHING MONUMENTAL.
         </p>
         <div class="colophon-footer-strip">
-          <div>WEDELIA SPATIAL INSTALLATION // TOKYO × DELHI NCR</div>
-          <div>CAMPUS HOSTEL DISPATCH GATEWAY ACTIVE</div>
+          <div>WEDELIA SPATIAL ARCHIVE // TOKYO × DELHI NCR</div>
+          <div>HOSTEL DESK RETURN UNWASHED</div>
         </div>
       </div>
     </section>
-
-    <!-- Floating Quick Displace Teleport Node -->
-    <button class="spatial-float-teleport" id="btnFloatTeleport">
-      <span style="color: var(--electric-blue);">⟐</span>
-      <span>DISPLACE ⇄</span>
-    </button>
-
-    <!-- Fixed Spatial Raycast Crosshair -->
-    <div class="spatial-hud-crosshair" id="spatialHudCrosshair"></div>
 
   </main>
 
@@ -2035,97 +1739,99 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. ARCHITECTURAL RAYCAST MATH (Rail & Crosshair)
+    // 1. RAIL LIVE COORDINATES
     const coordStamp = document.getElementById('railCoordStamp');
-    const hudCrosshair = document.getElementById('spatialHudCrosshair');
-
-    if (hudCrosshair) {
-      const xTo = gsap.quickTo(hudCrosshair, 'x', { duration: 0.1, ease: 'power2.out' });
-      const yTo = gsap.quickTo(hudCrosshair, 'y', { duration: 0.1, ease: 'power2.out' });
-
+    if (coordStamp) {
       window.addEventListener('mousemove', (e) => {
-        xTo(e.clientX);
-        yTo(e.clientY);
-        gsap.to(hudCrosshair, { opacity: 0.65, duration: 0.15 });
-
-        if (coordStamp) {
-          const zDepth = ((e.clientY / window.innerHeight) * 3).toFixed(2);
-          coordStamp.textContent = `COORD: X:${Math.round(e.clientX)} Y:${Math.round(e.clientY)} // Z:${zDepth}mm`;
-        }
+        const xNorm = ((e.clientX / window.innerWidth) * 20).toFixed(2);
+        const yNorm = ((e.clientY / window.innerHeight) * 20).toFixed(2);
+        coordStamp.textContent = `X: ${xNorm} Y: ${yNorm}`;
       }, { passive: true });
-
-      window.addEventListener('mouseleave', () => {
-        gsap.to(hudCrosshair, { opacity: 0, duration: 0.2 });
-      });
     }
 
-    // 2. HERO 3D PERSPECTIVE PARALLAX & DETACHED WE SCROLL DRIFT
-    const heroInner = document.getElementById('heroStageInner');
-    const heroMid = document.getElementById('heroPlaneMid');
-    const heroFore = document.getElementById('foreDetachedWE');
-    const heroDeep = document.getElementById('heroPlaneDeep');
+    // 2. HERO SPATIAL TYPOGRAPHIC SCROLL & TILT: WE / DE / LIA
+    const heroStage = document.getElementById('heroStageInner');
+    const heroForeWe = document.getElementById('heroForeWe');
+    const heroMidDe = document.getElementById('heroMidDe');
+    const heroDeepLia = document.getElementById('heroDeepLia');
+    const heroGarmentPlate = document.getElementById('heroGarmentPlate');
 
-    if (heroInner && !prefersReducedMotion) {
-      heroInner.addEventListener('mousemove', (e) => {
-        const rect = heroInner.getBoundingClientRect();
+    if (heroStage && !prefersReducedMotion) {
+      // Mouse 3D perspective tilt
+      heroStage.addEventListener('mousemove', (e) => {
+        const rect = heroStage.getBoundingClientRect();
         const normX = (e.clientX - rect.left) / rect.width - 0.5;
         const normY = (e.clientY - rect.top) / rect.height - 0.5;
 
-        // Differential 3D tilt across depth planes
-        if (heroMid) {
-          gsap.to(heroMid, {
-            rotateY: normX * 12,
-            rotateX: -normY * 10,
-            x: normX * 18,
-            y: normY * 14,
+        if (heroForeWe) {
+          gsap.to(heroForeWe, { x: normX * 40, y: normY * 30, duration: 0.35, ease: 'power2.out' });
+        }
+        if (heroMidDe) {
+          gsap.to(heroMidDe, { x: normX * 18, y: normY * 14, duration: 0.45, ease: 'power2.out' });
+        }
+        if (heroGarmentPlate) {
+          gsap.to(heroGarmentPlate, {
+            rotateY: normX * 10 - 4,
+            rotateX: -normY * 8 + 2,
             duration: 0.4,
             ease: 'power2.out'
           });
         }
-        if (heroFore) {
-          gsap.to(heroFore, {
-            x: normX * 36,
-            y: normY * 28,
-            duration: 0.35,
-            ease: 'power2.out'
-          });
-        }
-        if (heroDeep) {
-          gsap.to(heroDeep, {
-            x: -normX * 22,
-            y: -normY * 18,
-            duration: 0.5,
-            ease: 'power2.out'
-          });
+        if (heroDeepLia) {
+          gsap.to(heroDeepLia, { x: -normX * 24, y: -normY * 18, duration: 0.55, ease: 'power2.out' });
         }
       });
 
-      heroInner.addEventListener('mouseleave', () => {
-        if (heroMid) gsap.to(heroMid, { rotateY: -4, rotateX: 2, x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
-        if (heroFore) gsap.to(heroFore, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
-        if (heroDeep) gsap.to(heroDeep, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
+      heroStage.addEventListener('mouseleave', () => {
+        if (heroForeWe) gsap.to(heroForeWe, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
+        if (heroMidDe) gsap.to(heroMidDe, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
+        if (heroGarmentPlate) gsap.to(heroGarmentPlate, { rotateY: -5, rotateX: 2, duration: 0.6, ease: 'power3.out' });
+        if (heroDeepLia) gsap.to(heroDeepLia, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
       });
 
-      // Scroll scrubbing detachment
-      if (heroFore) {
-        gsap.to(heroFore, {
-          xPercent: -20,
-          yPercent: -15,
-          rotationZ: -3,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '#stageArrival',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.2
-          }
-        });
-      }
+      // Signature Depth Scroll: WE recedes, DE crosses the garment, LIA approaches!
+      gsap.to(heroForeWe, {
+        xPercent: -18,
+        yPercent: -12,
+        opacity: 0.3,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#stageArrival',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2
+        }
+      });
+
+      gsap.to(heroMidDe, {
+        xPercent: 12,
+        yPercent: 8,
+        opacity: 0.7,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#stageArrival',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2
+        }
+      });
+
+      gsap.to(heroDeepLia, {
+        scale: 1.25,
+        opacity: 0.28,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#stageArrival',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2
+        }
+      });
     }
 
-    // 3. STAGE MAP NAVIGATION BAR (Sticky Pill Highlighter)
-    const stagePills = document.querySelectorAll('.stage-nav-pill');
-    const sections = [
+    // 3. STAGE HOVER NAVIGATION HIGHLIGHTER
+    const stageLinks = document.querySelectorAll('.stage-coord-link');
+    const stageSections = [
       { id: 'stageArrival', key: 'arrival' },
       { id: 'stageObjects', key: 'objects' },
       { id: 'stageImpossible', key: 'impossible' },
@@ -2135,82 +1841,86 @@
       { id: 'stageExit', key: 'exit' }
     ];
 
-    sections.forEach(({ id, key }) => {
+    stageSections.forEach(({ id, key }) => {
       const el = document.getElementById(id);
       if (el) {
         ScrollTrigger.create({
           trigger: el,
           start: 'top 40%',
           end: 'bottom 40%',
-          onEnter: () => setActiveStagePill(key),
-          onEnterBack: () => setActiveStagePill(key)
+          onEnter: () => setActiveStageLink(key),
+          onEnterBack: () => setActiveStageLink(key)
         });
       }
     });
 
-    function setActiveStagePill(key) {
-      stagePills.forEach(pill => {
-        pill.classList.toggle('active', pill.dataset.stage === key);
+    function setActiveStageLink(key) {
+      stageLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.stage === key);
       });
     }
 
     // 4. STAGE 2: MONOLITH VECTOR SWITCHER DATA & LOGIC
     const spatialVectors = [
       {
-        coord: 'VECTOR α // COORD: X:142.8 Y:891.2 Z:04.0',
+        coord: 'COORD: X:142.8 Y:891.2 Z:04.0',
         img: '/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg',
-        occTag: 'OCCASION VECTOR // COLLEGE FESTIVAL ARENA & CONCERT STAGE',
+        occTag: 'OCCASION VECTOR // ARENA SOUNDSTAGE',
         heading: 'Kinetic Multi-Pocket Wrap',
-        prose: 'A floating kinetic silhouette crafted from high-voltage metallic polymer weave. Suspended at the intersection of collegiate rave culture and avant-garde couture draping. Engineered for outdoor festival soundstages where strobe towers and laser sweeps illuminate reflective filaments from across the campus field.',
-        atelier: 'CUSTO SUMMER ARCHIVE (2010)',
-        fiber: 'METALLIC WEAVE & SILK KNIT (920g)',
-        dualFit: 'UK 6 (PRIMARY) + UK 8 (SEALED SISTER)',
-        tariff: '₹1,699 / 3 DAYS (₹0 DAMAGE SHIELD)',
+        prose: 'A kinetic silhouette woven from reflective metallic polymer. Suspended between rave energy and couture draping. Engineered for outdoor festival stages where strobe towers illuminate filaments from across the campus field.',
+        atelier: 'CUSTO SUMMER ARCHIVE',
+        fiber: 'METALLIC SILK WEAVE (920g)',
+        dualFit: 'UK 6 (PRIMARY) + UK 8 (SISTER)',
+        liability: '₹0 DAMAGE EMBEDDED',
+        tariff: '₹1,699 / 3 DAYS',
         price: 1699,
         eventKey: 'FESTIVAL',
         lookTitle: 'KINETIC MULTI-POCKET DRAPE',
         vectorCode: 'X: 142.8 // Y: 891.2 // Z: 04.0'
       },
       {
-        coord: 'VECTOR β // COORD: X:210.4 Y:418.0 Z:12.0',
+        coord: 'COORD: X:210.4 Y:418.0 Z:12.0',
         img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg',
-        occTag: 'OCCASION VECTOR // SENIOR VALEDICTORY BALL & FORMAL GALA',
+        occTag: 'OCCASION VECTOR // SENIOR VALEDICTORY',
         heading: 'Zemire Obsidian Faille Gown',
-        prose: 'A monumental architectural sculpture tailored from dense 1,480g black silk faille. Cut on historical Dior proportions with an authoritative peplum that anchors your presence on the valedictory stage. Designed for the student whose graduation photograph must permanently author the room.',
-        atelier: 'CHRISTIAN DIOR HAUTE COUTURE (1954)',
+        prose: 'A monumental architectural sculpture cut from dense black silk faille on historic Dior proportions with an authoritative peplum that anchors presence on the valedictory stage.',
+        atelier: 'CHRISTIAN DIOR HAUTE COUTURE',
         fiber: '100% HEAVY SILK FAILLE (1,480g)',
-        dualFit: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
-        tariff: '₹2,999 / 3 DAYS (₹0 DAMAGE SHIELD)',
+        dualFit: 'UK 8 (PRIMARY) + UK 10 (SISTER)',
+        liability: '₹0 DAMAGE EMBEDDED',
+        tariff: '₹2,999 / 3 DAYS',
         price: 2999,
         eventKey: 'FAREWELL',
         lookTitle: 'ZEMIRE OBSIDIAN FAILLE',
         vectorCode: 'X: 210.4 // Y: 418.0 // Z: 12.0'
       },
       {
-        coord: 'VECTOR γ // COORD: X:088.1 Y:992.5 Z:02.0',
+        coord: 'COORD: X:088.1 Y:992.5 Z:02.0',
         img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg',
-        occTag: 'OCCASION VECTOR // TERRACE CONCERT & LAWN SOIRÉE',
+        occTag: 'OCCASION VECTOR // ARENA CIRCUIT',
         heading: 'Pleated Duet Chiffon Gown',
-        prose: 'Hand-pleated silk chiffon draping from the Jean Dessès Paris atelier. Under twilight fest lanterns and outdoor campus terraces, the fluid classical folds respond to ambient breeze, creating living ripples that decisively outshine ordinary fast fashion.',
+        prose: 'Hand-pleated silk chiffon draping from the Jean Dessès Paris atelier. Under evening lanterns and campus terraces, the fluid classical folds respond to every ambient breeze.',
         atelier: 'JEAN DESSÈS PARIS (1951)',
         fiber: 'FLUID SILK CHIFFON DRAPE (1,140g)',
-        dualFit: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
-        tariff: '₹2,899 / 3 DAYS (₹0 DAMAGE SHIELD)',
+        dualFit: 'UK 8 (PRIMARY) + UK 10 (SISTER)',
+        liability: '₹0 DAMAGE EMBEDDED',
+        tariff: '₹2,899 / 3 DAYS',
         price: 2899,
         eventKey: 'CONCERT',
         lookTitle: 'PLEATED DUET CHIFFON',
         vectorCode: 'X: 088.1 // Y: 992.5 // Z: 02.0'
       },
       {
-        coord: 'VECTOR δ // COORD: X:330.0 Y:112.4 Z:08.0',
+        coord: 'COORD: X:330.0 Y:112.4 Z:08.0',
         img: '/assets/editorial/court-dress.jpg',
-        occTag: 'OCCASION VECTOR // SOCIETY CONVOCATION & FORMAL BANQUET',
+        occTag: 'OCCASION VECTOR // MODEL UN GALA',
         heading: 'Gilded Court Brocade Robe',
-        prose: 'Regal side-pannier volume and metallic gold thread jacquard. Sourced from court collection archives for grand Model UN valedictories and society banquets where commanding historic grandeur silences the dining hall upon entrance.',
-        atelier: 'MET HISTORIC ATELIER (CA. 1750)',
+        prose: 'Regal side-pannier volume and metallic gold thread jacquard. Sourced from court collection archives for grand Model UN valedictories where commanding historic grandeur silences the dining hall.',
+        atelier: 'MET HISTORIC ATELIER',
         fiber: 'METALLIC GOLD BROCADE (1,620g)',
-        dualFit: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
-        tariff: '₹3,899 / 3 DAYS (₹0 DAMAGE SHIELD)',
+        dualFit: 'UK 8 (PRIMARY) + UK 10 (SISTER)',
+        liability: '₹0 DAMAGE EMBEDDED',
+        tariff: '₹3,899 / 3 DAYS',
         price: 3899,
         eventKey: 'BANQUET',
         lookTitle: 'GOLD BROCADE ROBE',
@@ -2219,77 +1929,79 @@
     ];
 
     let currentVecIdx = 0;
-    const vecTabs = document.querySelectorAll('#spatialVectorTabs .vector-tab-btn');
-    const orbCards = document.querySelectorAll('#orbitalSpecimenStrip .orbital-specimen-card');
-    const monolithCoordBadge = document.getElementById('monolithCoordBadge');
-    const activeMonolithImg = document.getElementById('activeMonolithImg');
-    const monolithOccTag = document.getElementById('monolithOccasionTag');
-    const monolithHeading = document.getElementById('monolithHeading');
-    const monolithProse = document.getElementById('monolithProse');
+    const vecCoordBtns = document.querySelectorAll('#spatialVectorCoords .vector-coord-btn');
+    const orbitalPlates = document.querySelectorAll('#orbitalStrip .orbital-specimen-plate');
+    const activePlateImg = document.getElementById('activePlateImg');
+    const plateCoordLabel = document.getElementById('plateCoordLabel');
+    const plateTariffLabel = document.getElementById('plateTariffLabel');
+    const dossierOccasionLine = document.getElementById('dossierOccasionLine');
+    const dossierHeading = document.getElementById('dossierHeading');
+    const dossierProse = document.getElementById('dossierProse');
     const specAtelier = document.getElementById('specAtelier');
     const specFiber = document.getElementById('specFiber');
     const specDualFit = document.getElementById('specDualFit');
-    const specTariff = document.getElementById('specTariff');
-    const btnNextSpecimen = document.getElementById('btnNextSpecimen');
-    const btnCollapseSpecimen = document.getElementById('btnCollapseSpecimen');
+    const specLiability = document.getElementById('specLiability');
+    const btnNextVector = document.getElementById('btnNextVector');
+    const btnCollapseToChamber = document.getElementById('btnCollapseToChamber');
 
     function renderSpecimen(idx) {
       currentVecIdx = idx;
       const data = spatialVectors[idx];
 
-      vecTabs.forEach((b, i) => b.classList.toggle('active', i === idx));
-      orbCards.forEach((c, i) => c.classList.toggle('active', i === idx));
+      vecCoordBtns.forEach((b, i) => b.classList.toggle('active', i === idx));
+      orbitalPlates.forEach((c, i) => c.classList.toggle('active', i === idx));
 
       if (!prefersReducedMotion) {
         gsap.timeline()
-          .to('#monolithStageGrid', { opacity: 0.3, rotateY: 8, scale: 0.96, duration: 0.16, ease: 'power2.in' })
+          .to('#spatialImagePlate', { opacity: 0.3, rotateY: 6, scale: 0.97, duration: 0.16, ease: 'power2.in' })
           .call(() => {
-            if (monolithCoordBadge) monolithCoordBadge.textContent = data.coord;
-            if (activeMonolithImg) activeMonolithImg.src = data.img;
-            if (monolithOccTag) monolithOccTag.textContent = data.occTag;
-            if (monolithHeading) monolithHeading.textContent = data.heading;
-            if (monolithProse) monolithProse.textContent = data.prose;
+            if (activePlateImg) activePlateImg.src = data.img;
+            if (plateCoordLabel) plateCoordLabel.textContent = data.coord;
+            if (plateTariffLabel) plateTariffLabel.textContent = data.tariff;
+            if (dossierOccasionLine) dossierOccasionLine.textContent = data.occTag;
+            if (dossierHeading) dossierHeading.textContent = data.heading;
+            if (dossierProse) dossierProse.textContent = data.prose;
             if (specAtelier) specAtelier.textContent = data.atelier;
             if (specFiber) specFiber.textContent = data.fiber;
             if (specDualFit) specDualFit.textContent = data.dualFit;
-            if (specTariff) specTariff.textContent = data.tariff;
+            if (specLiability) specLiability.textContent = data.liability;
           })
-          .to('#monolithStageGrid', { opacity: 1, rotateY: 0, scale: 1, duration: 0.35, ease: 'power3.out' });
+          .to('#spatialImagePlate', { opacity: 1, rotateY: -4, scale: 1, duration: 0.35, ease: 'power3.out' });
       } else {
-        if (monolithCoordBadge) monolithCoordBadge.textContent = data.coord;
-        if (activeMonolithImg) activeMonolithImg.src = data.img;
-        if (monolithOccTag) monolithOccTag.textContent = data.occTag;
-        if (monolithHeading) monolithHeading.textContent = data.heading;
-        if (monolithProse) monolithProse.textContent = data.prose;
+        if (activePlateImg) activePlateImg.src = data.img;
+        if (plateCoordLabel) plateCoordLabel.textContent = data.coord;
+        if (plateTariffLabel) plateTariffLabel.textContent = data.tariff;
+        if (dossierOccasionLine) dossierOccasionLine.textContent = data.occTag;
+        if (dossierHeading) dossierHeading.textContent = data.heading;
+        if (dossierProse) dossierProse.textContent = data.prose;
         if (specAtelier) specAtelier.textContent = data.atelier;
         if (specFiber) specFiber.textContent = data.fiber;
         if (specDualFit) specDualFit.textContent = data.dualFit;
-        if (specTariff) specTariff.textContent = data.tariff;
+        if (specLiability) specLiability.textContent = data.liability;
       }
     }
 
-    vecTabs.forEach(btn => {
+    vecCoordBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         renderSpecimen(parseInt(btn.dataset.index, 10));
       });
     });
 
-    orbCards.forEach(card => {
+    orbitalPlates.forEach(card => {
       card.addEventListener('click', () => {
         renderSpecimen(parseInt(card.dataset.index, 10));
         document.getElementById('stageObjects')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
 
-    if (btnNextSpecimen) {
-      btnNextSpecimen.addEventListener('click', () => {
+    if (btnNextVector) {
+      btnNextVector.addEventListener('click', () => {
         renderSpecimen((currentVecIdx + 1) % spatialVectors.length);
       });
     }
 
-    // Collapse coordinates from Monolith directly down to Chamber
-    if (btnCollapseSpecimen) {
-      btnCollapseSpecimen.addEventListener('click', () => {
+    if (btnCollapseToChamber) {
+      btnCollapseToChamber.addEventListener('click', () => {
         const data = spatialVectors[currentVecIdx];
         syncToChamber(data.eventKey, data.price, data.lookTitle, data.img, data.vectorCode);
         document.getElementById('stageChamber')?.scrollIntoView({ behavior: 'smooth' });
@@ -2298,10 +2010,10 @@
 
     // 5. STAGE 3: IMPOSSIBLE SECTION DIFFERENTIAL PARALLAX
     if (!prefersReducedMotion) {
-      const kineticText = document.getElementById('impossibleKineticText');
-      if (kineticText) {
-        gsap.to(kineticText, {
-          xPercent: -35,
+      const kineticType = document.getElementById('impossibleKineticType');
+      if (kineticType) {
+        gsap.to(kineticType, {
+          xPercent: -30,
           ease: 'none',
           scrollTrigger: {
             trigger: '#stageImpossible',
@@ -2312,11 +2024,11 @@
         });
       }
 
-      const apertureWrap = document.getElementById('impossibleAperture');
-      if (apertureWrap) {
-        gsap.to(apertureWrap, {
-          yPercent: -22,
-          rotate: 2,
+      const apertureCutout = document.getElementById('impossibleAperture');
+      if (apertureCutout) {
+        gsap.to(apertureCutout, {
+          yPercent: -20,
+          rotate: 1,
           ease: 'none',
           scrollTrigger: {
             trigger: '#stageImpossible',
@@ -2328,177 +2040,152 @@
       }
     }
 
-    // 6. STAGE 4: SCATTERED OCCASION 3D GRAVITATIONAL INTERACTION
-    const occasionOrbs = document.querySelectorAll('.occasion-coordinate-orb');
-    occasionOrbs.forEach((orb) => {
-      orb.addEventListener('mouseenter', () => {
-        occasionOrbs.forEach(other => {
-          if (other !== orb) {
-            gsap.to(other, { opacity: 0.35, duration: 0.3 });
+    // 6. STAGE 4: SCATTERED OCCASION WORDS (WORDS AS OBJECTS)
+    const occasionWordObjects = document.querySelectorAll('.occasion-word-object');
+    occasionWordObjects.forEach((wordObj) => {
+      wordObj.addEventListener('mouseenter', () => {
+        occasionWordObjects.forEach(other => {
+          if (other !== wordObj) {
+            gsap.to(other, { opacity: 0.25, duration: 0.3 });
           }
         });
-        gsap.to(orb, { opacity: 1, duration: 0.25 });
+        gsap.to(wordObj, { opacity: 1, duration: 0.25 });
       });
 
-      orb.addEventListener('mouseleave', () => {
-        gsap.to(occasionOrbs, { opacity: 1, duration: 0.35 });
+      wordObj.addEventListener('mouseleave', () => {
+        gsap.to(occasionWordObjects, { opacity: 1, duration: 0.35 });
       });
 
-      orb.addEventListener('click', () => {
-        occasionOrbs.forEach(b => b.classList.remove('active'));
-        orb.classList.add('active');
+      wordObj.addEventListener('click', () => {
+        occasionWordObjects.forEach(b => b.classList.remove('active'));
+        wordObj.classList.add('active');
 
-        const eventKey = orb.dataset.event;
-        const price = parseInt(orb.dataset.price, 10);
-        const look = orb.dataset.look;
-        const img = orb.dataset.img;
-        const coord = orb.dataset.coord;
+        const eventKey = wordObj.dataset.event;
+        const price = parseInt(wordObj.dataset.price, 10);
+        const look = wordObj.dataset.look;
+        const img = wordObj.dataset.img;
+        const coord = wordObj.dataset.coord;
 
         syncToChamber(eventKey, price, look, img, coord);
         document.getElementById('stageChamber')?.scrollIntoView({ behavior: 'smooth' });
       });
     });
 
-    // 7. STAGE 5: THE TELEPORT MOMENT (SPATIAL DISPLACEMENT)
+    // 7. STAGE 5: THE TELEPORT MOMENT
     const btnTriggerTeleport = document.getElementById('btnTriggerTeleport');
-    const fieldA = document.getElementById('fieldA');
-    const fieldB = document.getElementById('fieldB');
-    let isFieldBSource = false;
+    const stationA = document.getElementById('stationA');
+    const stationB = document.getElementById('stationB');
+    let isStationBSource = false;
 
     function triggerTeleport() {
       if (prefersReducedMotion) {
-        isFieldBSource = !isFieldBSource;
-        fieldA?.classList.toggle('active', !isFieldBSource);
-        fieldB?.classList.toggle('active', isFieldBSource);
+        isStationBSource = !isStationBSource;
+        stationA?.classList.toggle('active', !isStationBSource);
+        stationB?.classList.toggle('active', isStationBSource);
         return;
       }
 
       gsap.timeline()
-        .to('.teleport-threshold-container', { scale: 0.94, rotateY: 10, opacity: 0.5, duration: 0.22, ease: 'power2.in' })
+        .to('.teleport-quiet-container', { scale: 0.95, opacity: 0.4, duration: 0.2, ease: 'power2.in' })
         .call(() => {
-          isFieldBSource = !isFieldBSource;
-          fieldA?.classList.toggle('active', !isFieldBSource);
-          fieldB?.classList.toggle('active', isFieldBSource);
+          isStationBSource = !isStationBSource;
+          stationA?.classList.toggle('active', !isStationBSource);
+          stationB?.classList.toggle('active', isStationBSource);
           if (coordStamp) {
-            coordStamp.textContent = isFieldBSource 
-              ? 'COORD: 35.6595° N // 139.7004° E // TOKYO' 
-              : 'COORD: 28.5983° N // 77.2281° E // NCR';
+            coordStamp.textContent = isStationBSource ? 'X: 35.65 Y: 139.70' : 'X: 28.59 Y: 77.22';
           }
         })
-        .to('.teleport-threshold-container', { scale: 1, rotateY: 0, opacity: 1, duration: 0.38, ease: 'back.out(1.8)' });
+        .to('.teleport-quiet-container', { scale: 1, opacity: 1, duration: 0.35, ease: 'power3.out' });
     }
 
     if (btnTriggerTeleport) {
       btnTriggerTeleport.addEventListener('click', triggerTeleport);
     }
 
-    const btnFloatTeleport = document.getElementById('btnFloatTeleport');
-    if (btnFloatTeleport) {
-      btnFloatTeleport.addEventListener('click', () => {
-        triggerTeleport();
-        document.getElementById('stageTeleport')?.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
-
-    // 8. STAGE 6: SPATIAL CONVERGENCE RENTAL CHAMBER
+    // 8. STAGE 6: SPATIAL CONVERGENCE CHAMBER (CROSS-AXIS SYSTEM)
     let chamberBasePrice = 1899;
     let chamberAdder = 0;
     let chamberEvent = 'FESTIVAL';
     let chamberDuration = '03 DAYS';
-    let chamberFit = 'UK 8 [S] + SISTER UK 10 [SEALED]';
+    let chamberFit = 'UK 8';
 
-    const chamberOccasionBtns = document.querySelectorAll('#chamberOccasionNodes .spatial-node-pill');
-    const chamberDurationBtns = document.querySelectorAll('#chamberDurationNodes .spatial-node-pill');
-    const chamberSizeBtns = document.querySelectorAll('#chamberSizeNodes .spatial-node-pill');
+    const axisWordBtns = document.querySelectorAll('#chamberOccasionWords .axis-word-btn');
+    const axisDurationBtns = document.querySelectorAll('#chamberDurationAxis .axis-duration-btn');
+    const axisSizeBtns = document.querySelectorAll('#chamberSizeAxis .axis-size-btn');
 
     const chamberActiveVectorDisplay = document.getElementById('chamberActiveVectorDisplay');
-    const chamberLivePrice = document.getElementById('chamberLivePrice');
-    const telemEvent = document.getElementById('telemEvent');
-    const telemDuration = document.getElementById('telemDuration');
-    const telemFit = document.getElementById('telemFit');
+    const chamberPriceDisplay = document.getElementById('chamberPriceDisplay');
     const chamberGarmentBox = document.getElementById('chamberGarmentBox');
     const chamberGarmentImg = document.getElementById('chamberGarmentImg');
-    const chamberGarmentTitle = document.getElementById('chamberGarmentTitle');
-    const chamberGarmentCode = document.getElementById('chamberGarmentCode');
     const btnCommitConvergence = document.getElementById('btnCommitConvergence');
     const chamberLockedManifest = document.getElementById('chamberLockedManifest');
 
     function updateChamberPrice() {
       const total = chamberBasePrice + chamberAdder;
-      if (chamberLivePrice) chamberLivePrice.textContent = `₹${total.toLocaleString('en-IN')}`;
+      if (chamberPriceDisplay) chamberPriceDisplay.textContent = `₹${total.toLocaleString('en-IN')}`;
     }
 
     function syncToChamber(eventKey, price, look, img, coord) {
       chamberEvent = eventKey;
       chamberBasePrice = price;
 
-      chamberOccasionBtns.forEach(btn => {
+      axisWordBtns.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.event === eventKey);
       });
 
       if (chamberActiveVectorDisplay && coord) chamberActiveVectorDisplay.textContent = coord;
-      if (telemEvent) telemEvent.textContent = eventKey;
-      if (chamberGarmentTitle) chamberGarmentTitle.textContent = look;
       if (chamberGarmentImg) chamberGarmentImg.src = img;
 
       updateChamberPrice();
 
       if (!prefersReducedMotion && chamberGarmentBox) {
         gsap.fromTo(chamberGarmentBox,
-          { rotateY: 14, scale: 0.95 },
-          { rotateY: -6, scale: 1, duration: 0.45, ease: 'power3.out' }
+          { rotateY: 10, scale: 0.96 },
+          { rotateY: 0, scale: 1, duration: 0.45, ease: 'power3.out' }
         );
       }
     }
 
-    // Occasion pill click
-    chamberOccasionBtns.forEach(btn => {
+    axisWordBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        chamberOccasionBtns.forEach(b => b.classList.remove('active'));
+        axisWordBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         chamberEvent = btn.dataset.event;
         chamberBasePrice = parseInt(btn.dataset.price, 10);
-        const look = btn.dataset.look;
         const img = btn.dataset.img;
         const coord = btn.dataset.coord;
         const rot = parseFloat(btn.dataset.rot);
 
         if (chamberActiveVectorDisplay) chamberActiveVectorDisplay.textContent = coord;
-        if (telemEvent) telemEvent.textContent = chamberEvent;
-        if (chamberGarmentTitle) chamberGarmentTitle.textContent = look;
         if (chamberGarmentImg) chamberGarmentImg.src = img;
 
         if (!prefersReducedMotion && chamberGarmentBox) {
-          gsap.to(chamberGarmentBox, { rotateY: rot, scale: 1.02, duration: 0.4, ease: 'power2.out' });
+          gsap.to(chamberGarmentBox, { rotateY: rot, scale: 1.02, duration: 0.35, ease: 'power2.out' });
         }
         updateChamberPrice();
       });
     });
 
-    // Duration pill click
-    chamberDurationBtns.forEach(btn => {
+    axisDurationBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        chamberDurationBtns.forEach(b => b.classList.remove('active'));
+        axisDurationBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         chamberDuration = `${btn.dataset.days} DAYS`;
         chamberAdder = parseInt(btn.dataset.adder, 10);
-        if (telemDuration) telemDuration.textContent = chamberDuration;
         updateChamberPrice();
       });
     });
 
-    // Size pill click
-    chamberSizeBtns.forEach(btn => {
+    axisSizeBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        chamberSizeBtns.forEach(b => b.classList.remove('active'));
+        axisSizeBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        chamberFit = `${btn.dataset.size} + SISTER ${btn.dataset.backup} [SEALED]`;
-        if (telemFit) telemFit.textContent = chamberFit;
+        chamberFit = btn.dataset.size;
       });
     });
 
-    // Signature Convergence Animation
+    // Convergence Collapse Trigger
     let isChamberLocked = false;
     if (btnCommitConvergence) {
       btnCommitConvergence.addEventListener('click', () => {
@@ -2506,58 +2193,50 @@
         isChamberLocked = true;
 
         if (!prefersReducedMotion) {
+          // All cross-axes collapse into the garment monolith
           gsap.timeline()
-            .to('.chamber-axes-cluster .spatial-node-pill', { scale: 0.94, opacity: 0.45, duration: 0.25 })
-            .to('#chamberGarmentBox', {
+            .to(['.chamber-axis-top', '.chamber-axis-left', '.chamber-axis-right'], {
+              scale: 0.92,
+              opacity: 0.35,
+              duration: 0.25,
+              ease: 'power2.in'
+            })
+            .to(chamberGarmentBox, {
+              scale: 1.06,
               rotateY: 0,
-              rotateX: 0,
-              scale: 1.05,
-              borderColor: '#0f38ff',
-              boxShadow: '0 0 50px rgba(15, 56, 255, 0.5)',
-              duration: 0.45,
+              boxShadow: '0 0 60px rgba(15, 56, 255, 0.45)',
+              duration: 0.4,
               ease: 'back.out(2)'
             }, '-=0.15')
             .call(() => {
-              btnCommitConvergence.style.background = '#059669';
-              btnCommitConvergence.style.borderColor = '#059669';
-              btnCommitConvergence.innerHTML = `
-                <span>✓ COORDINATES COLLAPSED // TEMPORARY POSSESSION LOCKED</span>
-                <span style="font-size: 0.62rem; color: #a7f3d0; letter-spacing: 0.15em;">ENTRY VECTOR CONFIRMED</span>
-              `;
+              btnCommitConvergence.style.borderColor = '#0f38ff';
+              btnCommitConvergence.style.color = '#0f38ff';
+              btnCommitConvergence.textContent = 'CONVERGENCE LOCKED';
               if (chamberLockedManifest) {
                 chamberLockedManifest.style.display = 'block';
-                gsap.from(chamberLockedManifest, { opacity: 0, y: 10, duration: 0.35 });
+                gsap.from(chamberLockedManifest, { opacity: 0, y: 8, duration: 0.3 });
               }
             });
         } else {
-          btnCommitConvergence.style.background = '#059669';
-          btnCommitConvergence.style.borderColor = '#059669';
-          btnCommitConvergence.textContent = '✓ COORDINATES COLLAPSED // TEMPORARY POSSESSION LOCKED';
+          btnCommitConvergence.style.borderColor = '#0f38ff';
+          btnCommitConvergence.style.color = '#0f38ff';
+          btnCommitConvergence.textContent = 'CONVERGENCE LOCKED';
           if (chamberLockedManifest) chamberLockedManifest.style.display = 'block';
         }
       });
     }
 
-    // 9. STAGE 7: DIRECTORY ROW HOVER & COLOPHON TRACKING
-    const dirEntries = document.querySelectorAll('.spatial-directory-entry');
-    const dirStatusIndicator = document.getElementById('directoryStatusIndicator');
-
-    dirEntries.forEach(entry => {
-      entry.addEventListener('mouseenter', () => {
-        const coord = entry.dataset.coord;
-        const campus = entry.dataset.campus;
+    // 9. STAGE 7: QUIET ROSTER HOVER
+    const rosterRows = document.querySelectorAll('.roster-row');
+    rosterRows.forEach(row => {
+      row.addEventListener('mouseenter', () => {
         if (coordStamp) {
-          coordStamp.textContent = `TARGET // ${coord}`;
-          gsap.fromTo(coordStamp, { color: '#ffffff' }, { color: '#7a7974', duration: 0.4 });
+          coordStamp.textContent = row.dataset.coord;
         }
-        if (dirStatusIndicator) dirStatusIndicator.textContent = `LOCKED // ${campus}`;
-      });
-
-      entry.addEventListener('mouseleave', () => {
-        if (dirStatusIndicator) dirStatusIndicator.textContent = 'RAIL BUS: SYNCHRONIZED';
       });
     });
 
+    // Colophon tracking expansion
     if (!prefersReducedMotion) {
       gsap.fromTo('#colophonTitle',
         { letterSpacing: '-0.04em' },

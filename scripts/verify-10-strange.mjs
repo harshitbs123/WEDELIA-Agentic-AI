@@ -32,7 +32,7 @@ async function run() {
   await page.screenshot({ path: join(outDir, '10-desktop-02-monolith-field.jpg'), fullPage: false });
 
   // Test vector tab switch to Vector β (Dior Zemire)
-  await page.eval(`document.querySelectorAll('#spatialVectorTabs .vector-tab-btn')[1]?.click()`);
+  await page.eval(`document.querySelectorAll('#spatialVectorCoords .vector-coord-btn')[1]?.click()`);
   await sleep(600);
   await page.screenshot({ path: join(outDir, '10-desktop-02-monolith-switched.jpg'), fullPage: false });
 
