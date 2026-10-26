@@ -2,7 +2,7 @@ import { Browser, sleep } from '../.agents/skills/design-taste-frontend/scripts/
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const outDir = join(process.cwd(), '.taste-skill/inspect/04-verification');
+const outDir = join(process.cwd(), '.taste-skill/inspect/04-environment');
 mkdirSync(outDir, { recursive: true });
 
 const viewports = [
@@ -17,54 +17,63 @@ const viewports = [
 ];
 
 async function run() {
-  console.log('Launching CDP Browser for Concept #04 Verification...');
+  console.log('Launching CDP Browser for Concept #04 Environment Verification...');
   const browser = await Browser.launch({ width: 1440, height: 900 });
   const page = await browser.newPage({ width: 1440, height: 900, mobile: false });
 
-  await page.goto('http://127.0.0.1:5173/04-vertical-japanese-poster.html', { settleMs: 1500 });
+  await page.goto('http://127.0.0.1:5173/04-vertical-japanese-poster.html', { settleMs: 1600 });
 
-  // 1. Desktop Hero
-  await page.screenshot({ path: join(outDir, '04-transformed-desktop-hero.jpg'), fullPage: false });
+  // 1. Room 001 Entrance Gallery
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room001-entrance.jpg'), fullPage: false });
 
-  // 2. Room 002 Kakemono Scroll
+  // 2. Room 002 Kakemono Unroll
   await page.eval(`document.querySelector('#chamberKakemono')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
   await sleep(600);
-  await page.screenshot({ path: join(outDir, '04-transformed-desktop-kakemono.jpg'), fullPage: false });
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room002-kakemono.jpg'), fullPage: false });
 
-  // Test interactive unroll on specimen 1
+  // Test interactive unroll on specimen 2
   await page.eval(`document.querySelectorAll('#kakemonoTabs .kakemono-specimen-tab')[1]?.click()`);
   await sleep(800);
-  await page.screenshot({ path: join(outDir, '04-transformed-desktop-kakemono-unrolled.jpg'), fullPage: false });
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room002-kakemono-unrolled.jpg'), fullPage: false });
 
-  // 3. Room 003 Occasion Chambers
-  await page.eval(`document.querySelector('#chamberOccasions')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
-  await sleep(500);
-  await page.screenshot({ path: join(outDir, '04-transformed-desktop-occasions.jpg'), fullPage: false });
-
-  // 4. Room 004 Suspended Textiles
+  // 3. Room 003 Hanging Textiles Installation
   await page.eval(`document.querySelector('#chamberTextiles')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
   await sleep(500);
-  await page.screenshot({ path: join(outDir, '04-transformed-desktop-textiles.jpg'), fullPage: false });
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room003-textiles.jpg'), fullPage: false });
 
-  // 5. Room 005 Custody Record
+  // 4. Room 004 Monumental Garment
+  await page.eval(`document.querySelector('#chamberGarments')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
+  await sleep(500);
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room004-garments.jpg'), fullPage: false });
+
+  // 5. Room 005 Archival Material Close-Ups
+  await page.eval(`document.querySelector('#chamberArchive')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
+  await sleep(500);
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room005-archive.jpg'), fullPage: false });
+
+  // 6. Room 006 Custody Record & Hanko Seal
   await page.eval(`document.querySelector('#chamberCustody')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
   await sleep(500);
-  await page.screenshot({ path: join(outDir, '04-transformed-desktop-custody.jpg'), fullPage: false });
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room006-custody.jpg'), fullPage: false });
 
-  // Test Custody Hanko Seal Press
   await page.eval(`document.querySelector('#btnLoanSeal')?.click()`);
   await sleep(600);
-  await page.screenshot({ path: join(outDir, '04-transformed-desktop-custody-sealed.jpg'), fullPage: false });
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room006-custody-sealed.jpg'), fullPage: false });
 
-  // 6. Room 006 Exit
+  // 7. Room 007 Corridor
+  await page.eval(`document.querySelector('#chamberCorridor')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
+  await sleep(500);
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room007-corridor.jpg'), fullPage: false });
+
+  // 8. Room 007 Final Exit
   await page.eval(`document.querySelector('#chamberExit')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
   await sleep(500);
-  await page.screenshot({ path: join(outDir, '04-transformed-desktop-exit.jpg'), fullPage: false });
+  await page.screenshot({ path: join(outDir, '04-env-desktop-room007-exit.jpg'), fullPage: false });
 
   await page.close();
 
   // Verification across all 8 viewports
-  console.log('\n--- VERIFYING ALL 8 VIEWPORTS FOR CONCEPT #04 ---');
+  console.log('\n--- VERIFYING ALL 8 VIEWPORTS FOR CONCEPT #04 ENVIRONMENT ---');
   let allPass = true;
 
   for (const vp of viewports) {
@@ -88,13 +97,16 @@ async function run() {
     })()`);
 
     if (vp.width === 390) {
-      await vpPage.screenshot({ path: join(outDir, '04-transformed-mobile-hero.jpg'), fullPage: false });
+      await vpPage.screenshot({ path: join(outDir, '04-env-mobile-entrance.jpg'), fullPage: false });
       await vpPage.eval(`document.querySelector('#chamberKakemono')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
       await sleep(500);
-      await vpPage.screenshot({ path: join(outDir, '04-transformed-mobile-kakemono.jpg'), fullPage: false });
-      await vpPage.eval(`document.querySelector('#chamberCustody')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
+      await vpPage.screenshot({ path: join(outDir, '04-env-mobile-kakemono.jpg'), fullPage: false });
+      await vpPage.eval(`document.querySelector('#chamberGarments')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
       await sleep(500);
-      await vpPage.screenshot({ path: join(outDir, '04-transformed-mobile-custody.jpg'), fullPage: false });
+      await vpPage.screenshot({ path: join(outDir, '04-env-mobile-garments.jpg'), fullPage: false });
+      await vpPage.eval(`document.querySelector('#chamberCorridor')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
+      await sleep(500);
+      await vpPage.screenshot({ path: join(outDir, '04-env-mobile-corridor.jpg'), fullPage: false });
     }
 
     const pass = checks.overflowPx === 0 && checks.brokenImages === 0;
