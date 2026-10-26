@@ -6,39 +6,63 @@
   <title>WEDELIA // 04 Vertical Japanese Poster — Gallery Exhibition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --bg: #ede9e1;
-      --fg: #191816;
-      --line: #cdc7ba;
-      --vermilion: #b83a2d;
-      --muted: #6b675e;
       --paper: #f4f0e8;
+      --paper-warm: #faf7f1;
+      --paper-cream: #e6e0d4;
+      --fg: #191816;
+      --ink-muted: #5e5950;
+      --line: #cdc7ba;
+      --line-subtle: rgba(25, 24, 22, 0.12);
+      --vermilion: #b83a2d;
+      --vermilion-soft: rgba(184, 58, 45, 0.08);
+      --wood-dark: #1b1917;
+      --wood-bar: #2a2825;
+      --wood-accent: #b3a898;
     }
 
     html, body {
       background: var(--bg);
       color: var(--fg);
       font-family: 'Space Grotesk', sans-serif;
-      line-height: 1.55;
+      line-height: 1.6;
       padding-top: 48px;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       max-width: 100vw;
     }
 
-    /* Curatorial Exhibition Itinerary Header */
+    /* Subtle Paper Texture Effect */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: radial-gradient(var(--fg) 1px, transparent 0);
+      background-size: 24px 24px;
+      z-index: 9998;
+    }
+
+    /* Curatorial Header & Exhibition Itinerary */
     .switch-nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       height: 48px;
-      background: rgba(237, 233, 225, 0.96);
-      backdrop-filter: blur(8px);
+      background: rgba(237, 233, 225, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
       z-index: 9999;
       display: flex;
@@ -48,26 +72,80 @@
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
     }
-    .switch-nav a { color: var(--fg); text-decoration: none; }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
     .exhibit-brand {
       font-family: 'Shippori Mincho', serif;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.14em;
       color: var(--fg);
-      font-size: 0.78rem;
+      text-decoration: none;
+      font-size: 0.8rem;
     }
-    .exhibit-room-tag {
-      margin-left: 0.75rem;
-      color: var(--muted);
-      font-size: 0.65rem;
-      letter-spacing: 0.05em;
+
+    .exhibit-curator-mark {
+      font-size: 0.62rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.08em;
+      border-left: 1px solid var(--line);
+      padding-left: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .switch-pills { display: flex; align-items: center; gap: 0.3rem; }
-    .exhibit-dir-tag {
+
+    .vermilion-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--vermilion);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .nav-itinerary {
+      display: none;
+      align-items: center;
+      gap: 0.85rem;
+      font-size: 0.62rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-itinerary {
+        display: flex;
+      }
+    }
+
+    .itinerary-step {
+      text-decoration: none;
+      color: var(--ink-muted);
+      transition: color 0.2s ease;
+    }
+
+    .itinerary-step:hover, .itinerary-step.active {
+      color: var(--fg);
+      font-weight: 700;
+    }
+
+    .switch-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .rooms-label {
       font-size: 0.6rem;
-      color: var(--muted);
-      margin-right: 0.25rem;
+      color: var(--ink-muted);
+      margin-right: 0.35rem;
+      letter-spacing: 0.1em;
     }
+
     .switch-pill {
       display: inline-flex;
       align-items: center;
@@ -75,551 +153,871 @@
       width: 26px;
       height: 26px;
       border: 1px solid var(--line);
-      color: var(--muted);
+      color: var(--ink-muted);
       background: transparent;
       font-size: 0.65rem;
       border-radius: 1px;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
-    .switch-pill:hover { border-color: var(--fg); color: var(--fg); }
-    .switch-pill.active { background: var(--fg); color: var(--bg); font-weight: 700; border-color: var(--fg); }
+
+    .switch-pill:hover {
+      border-color: var(--fg);
+      color: var(--fg);
+    }
+
+    .switch-pill.active {
+      background: var(--fg);
+      color: var(--bg);
+      font-weight: 700;
+      border-color: var(--fg);
+    }
+
     @media (max-width: 768px) {
-      .switch-nav .exhibit-room-tag { display: none; }
-      .switch-nav .exhibit-dir-tag { display: none; }
-      .switch-nav { padding: 0 0.75rem; }
-      .switch-pills { gap: 2px; }
+      .exhibit-curator-mark { display: none; }
+      .switch-nav { padding: 0 0.85rem; }
       .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
     }
 
-    /* Exhibition Canvas Container */
-    .poster-container {
-      max-width: 1440px;
+    /* Gallery Exhibition Sanctuary */
+    .gallery-sanctuary {
+      max-width: 1380px;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem 8rem;
+      padding: 3rem 1.5rem 10rem;
+      overflow-x: hidden;
     }
+
     @media (min-width: 1024px) {
-      .poster-container { padding: 3.5rem 3.5rem 10rem; }
-    }
-
-    /* Exhibition Top Masthead */
-    .poster-topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      border-bottom: 2px solid var(--fg);
-      padding-bottom: 1.5rem;
-      margin-bottom: 3.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-    .poster-topbar .seal {
-      display: inline-block;
-      border: 1px solid var(--vermilion);
-      color: var(--vermilion);
-      padding: 0.15rem 0.5rem;
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-    }
-
-    /* Poster Frame Component */
-    .exhibit-poster {
-      border: 1px solid var(--fg);
-      background: var(--paper);
-      padding: 2.5rem 1.5rem;
-      margin-bottom: 5rem;
-      position: relative;
-    }
-    @media (min-width: 1024px) {
-      .exhibit-poster {
-        padding: 3.5rem 3rem;
-      }
-    }
-    .poster-id-tag {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1rem;
-      margin-bottom: 2.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-    .vermilion-stamp {
-      display: inline-block;
-      border: 1px solid var(--vermilion);
-      color: var(--vermilion);
-      padding: 0.1rem 0.45rem;
-      font-size: 0.68rem;
-      font-family: 'Shippori Mincho', serif;
-      font-weight: 700;
-    }
-
-    /* POSTER 001: OPENING SPREAD */
-    .poster-board {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    .poster-board > * {
-      min-width: 0;
-    }
-    .poster-col-dispatch {
-      display: none;
-    }
-    @media (min-width: 860px) and (max-width: 1279px) {
-      .poster-board {
-        grid-template-columns: 180px 1.2fr 260px;
-        gap: 1.5rem;
-        align-items: stretch;
-      }
-      .poster-col-dispatch {
-        display: none !important;
+      .gallery-sanctuary {
+        padding: 4.5rem 2.5rem 12rem;
       }
     }
     @media (min-width: 1280px) {
-      .poster-board {
-        grid-template-columns: 180px 1.2fr 280px 130px;
-        gap: 1.5rem;
-        align-items: stretch;
-      }
-      .poster-col-dispatch {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: space-between;
-        border-left: 1px solid var(--line);
-        padding-left: 1.25rem;
-        font-family: 'Space Mono', monospace;
-        font-size: 0.68rem;
-        color: var(--muted);
+      .gallery-sanctuary {
+        padding: 4.5rem 3.5rem 12rem;
       }
     }
-    .poster-col-manifesto {
+
+    /* Architectural Chamber Header Marker */
+    .chamber-marker {
       display: flex;
-      flex-direction: row-reverse;
-      gap: 1.5rem;
-      border-right: 1px solid var(--line);
-      padding-right: 1.5rem;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--fg);
+      padding-bottom: 0.85rem;
+      margin-bottom: 3.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
-    .v-text-stream {
+
+    .chamber-hanko {
+      display: inline-block;
+      border: 1px solid var(--vermilion);
+      color: var(--vermilion);
+      padding: 0.12rem 0.45rem;
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 700;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* Vertical Typography Core Styles */
+    .v-calligraphy {
       writing-mode: vertical-rl;
       text-orientation: mixed;
       font-family: 'Shippori Mincho', serif;
-      font-size: 0.95rem;
-      letter-spacing: 0.32em;
-      line-height: 2.2;
+      letter-spacing: 0.36em;
+      line-height: 2.3;
       color: var(--fg);
     }
-    .v-text-stream.bold {
+
+    .v-calligraphy.prominent {
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
       font-weight: 900;
-      font-size: 1.25rem;
-      color: var(--fg);
+      letter-spacing: 0.4em;
     }
-    .v-text-stream.muted {
-      color: var(--muted);
-      font-size: 0.82rem;
+
+    .v-calligraphy.body {
+      font-size: clamp(0.85rem, 1.2vw, 0.98rem);
+      color: #3b3730;
+      line-height: 2.1;
     }
-    .poster-col-visual {
+
+    .v-calligraphy.muted {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.3em;
+    }
+
+    /* ========================================================
+       CHAMBER 001 // ENTRANCE & OPENING MANIFESTO
+       ======================================================== */
+    .chamber-entrance {
+      margin-bottom: clamp(6rem, 10vw, 10rem);
+      position: relative;
+    }
+
+    .entrance-monument-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    @media (min-width: 960px) and (max-width: 1199px) {
+      .entrance-monument-grid {
+        grid-template-columns: auto 1fr 200px;
+        gap: 2rem;
+        align-items: stretch;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .entrance-monument-grid {
+        grid-template-columns: auto 1fr 220px;
+        gap: clamp(2.5rem, 4vw, 4.5rem);
+        align-items: stretch;
+      }
+    }
+
+    .entrance-vertical-manifesto {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: clamp(1.25rem, 2.5vw, 2.5rem);
+      padding-right: clamp(1rem, 2vw, 2.5rem);
+      border-right: 1px solid var(--line);
+    }
+
+    .entrance-focal-column {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .poster-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      font-weight: 900;
-      line-height: 0.9;
-      letter-spacing: -0.04em;
+
+    .entrance-masthead {
+      margin-bottom: 2rem;
     }
-    .tall-image-strip {
+
+    .monument-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(3.5rem, 8vw, 6.8rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+    }
+
+    .monument-subtitle {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(0.88rem, 1.3vw, 1.1rem);
+      letter-spacing: 0.22em;
+      color: var(--fg);
+      margin-top: 1rem;
+      font-weight: 700;
+      display: block;
+    }
+
+    .monument-descriptor {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.12em;
+      margin-top: 0.4rem;
+    }
+
+    /* Hanging Entrance Scroll Preview */
+    .entrance-scroll-frame {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--fg);
+      padding: 1.5rem 1.25rem 0.5rem;
+      box-shadow: 0 16px 40px rgba(25, 24, 22, 0.08);
+      margin: 1.5rem 0;
+    }
+
+    .hanging-suspension-cord {
       width: 100%;
-      height: 540px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-bottom: -1px;
+    }
+
+    .cord-tri-svg {
+      width: 80px;
+      height: 24px;
+    }
+
+    .entrance-scroll-img-wrap {
+      width: 100%;
+      height: clamp(360px, 44vh, 480px);
       overflow: hidden;
       background: #e2ddd3;
-      border: 1px solid var(--fg);
-      margin: 1.5rem 0;
+      border: 1px solid var(--line);
       position: relative;
-      box-shadow: inset 0 0 0 8px var(--paper);
     }
-    .tall-image-strip img {
+
+    .entrance-scroll-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center top;
-      filter: contrast(108%);
+      filter: contrast(106%) saturate(98%);
     }
 
-    /* Experiment 04-A: Hanging Scroll Weight Bar */
-    .hanging-scroll-weight {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 18px;
-      background: var(--fg);
+    .scroll-bottom-weight-bar {
+      height: 22px;
+      background: var(--wood-bar);
       border-top: 1px solid var(--paper);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 0.75rem;
+      padding: 0 0.85rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+      position: relative;
       z-index: 10;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.22);
     }
-    .weight-knob {
-      width: 8px;
-      height: 8px;
+
+    .weight-finial-knob {
+      width: 9px;
+      height: 9px;
       background: var(--vermilion);
       border-radius: 50%;
     }
 
-    /* Experiment 04-B: Interactive Vermilion Seal Press */
-    .interactive-seal-press {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      border: 1px dashed var(--vermilion);
-      background: rgba(184, 58, 45, 0.05);
-      color: var(--vermilion);
-      padding: 0.45rem 0.85rem;
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: none;
-      margin-top: 1rem;
-    }
-    .interactive-seal-press:hover {
-      background: var(--vermilion);
-      color: #ffffff;
-      border-style: solid;
-    }
-    .seal-impression {
-      display: inline-block;
-      border: 2px solid currentColor;
-      padding: 0.15rem 0.45rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-    }
-
-    /* Curatorial Room Seal & Hanko */
-    .curatorial-room-seal {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      margin-bottom: 1.25rem;
-    }
-    .exhibit-hanko-seal {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border: 1.5px solid var(--vermilion);
-      color: var(--vermilion);
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-    }
-    .exhibit-room-number {
+    .weight-bar-caption {
       font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
+      font-size: 0.58rem;
+      color: var(--wood-accent);
+      letter-spacing: 0.15em;
     }
 
-    /* Experiment 04-E: Multi-Strip Washi Lift */
-    .strip-archive-item {
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .strip-archive-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 28px rgba(25, 24, 22, 0.09);
-    }
-    .poster-col-occasions {
+    .entrance-curator-dossier {
       border-left: 1px solid var(--line);
-      padding-left: 2rem;
+      padding-left: clamp(1rem, 2vw, 2.5rem);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    }
-    .v-number-block {
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1.75rem;
-      margin-bottom: 1.75rem;
-    }
-    .big-v-num {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 2.5rem;
-      font-weight: 900;
-      line-height: 1;
-      color: var(--fg);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.5rem;
+      min-width: 0;
+      width: 100%;
     }
 
-    /* POSTER 002: OCCASION POSTER */
-    .occasion-poster-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-    @media (min-width: 768px) {
-      .occasion-poster-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-    .occasion-vertical-pillar {
-      border-right: 1px solid var(--line);
-      padding-right: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .occasion-vertical-pillar:last-child {
-      border-right: none;
-      padding-right: 0;
-    }
-    .pillar-kanji {
-      writing-mode: vertical-rl;
-      font-family: 'Shippori Mincho', serif;
-      font-size: 3.5rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      line-height: 1;
-      color: var(--fg);
-      margin-bottom: 1.5rem;
-    }
-    .pillar-kanji.highlight {
-      color: var(--vermilion);
-    }
-    .pillar-en {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-    }
-    .pillar-body {
-      font-size: 0.88rem;
-      color: #4b4842;
-      line-height: 1.65;
-      margin-bottom: 1.5rem;
-    }
-    .pillar-meta {
+    .dossier-room-badge {
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      border-top: 1px solid var(--line);
-      padding-top: 0.75rem;
+      font-size: 0.65rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* POSTER 003: LOOK EXHIBITION POSTER */
-    .scroll-curator-tabs {
+    .dossier-stat-row {
+      margin-bottom: 1.5rem;
+    }
+
+    .dossier-stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .dossier-stat-val {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .curator-stamp-box {
+      border: 1px dashed var(--vermilion);
+      padding: 1rem 0.85rem;
+      background: var(--vermilion-soft);
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .curator-seal-symbol {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--vermilion);
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .curator-seal-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--vermilion);
+      letter-spacing: 0.1em;
+      display: block;
+    }
+
+    /* ========================================================
+       CHAMBER 002 // THE TRUE KAKEMONO MOMENT (SIGNATURE SLOW UNROLL)
+       ======================================================== */
+    .chamber-kakemono {
+      margin-bottom: clamp(6rem, 12vw, 12rem);
+      position: relative;
+    }
+
+    .kakemono-stage-wrapper {
+      background: var(--paper-warm);
+      border: 1px solid var(--fg);
+      padding: clamp(2rem, 4vw, 4.5rem) clamp(1.5rem, 3.5vw, 3.5rem);
+      position: relative;
+      box-shadow: 0 20px 50px rgba(25, 24, 22, 0.06);
+      overflow: hidden;
+    }
+
+    .kakemono-tabs-nav {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.65rem;
       border-bottom: 1px solid var(--fg);
-      padding-bottom: 0.75rem;
-      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      margin-bottom: 2.5rem;
       flex-wrap: wrap;
     }
-    .scroll-curator-btn {
+
+    .kakemono-specimen-tab {
       background: transparent;
       border: 1px solid var(--line);
       font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      padding: 0.35rem 0.75rem;
+      font-size: 0.68rem;
+      padding: 0.45rem 0.95rem;
       cursor: pointer;
-      color: var(--muted);
-      transition: all 0.2s ease;
+      color: var(--ink-muted);
+      transition: all 0.25s ease;
+      letter-spacing: 0.05em;
     }
-    .scroll-curator-btn.active, .scroll-curator-btn:hover {
+
+    .kakemono-specimen-tab:hover, .kakemono-specimen-tab.active {
       background: var(--fg);
       color: var(--paper);
       border-color: var(--fg);
     }
-    .look-exhibit-layout {
+
+    .kakemono-exhibition-stage {
       display: grid;
       grid-template-columns: 1fr;
       gap: 3rem;
+      align-items: center;
     }
+
     @media (min-width: 1024px) {
-      .look-exhibit-layout {
-        grid-template-columns: 1.15fr 180px 1.2fr;
-        gap: 3rem;
-        align-items: center;
+      .kakemono-exhibition-stage {
+        grid-template-columns: 1.15fr auto 1.15fr;
+        gap: clamp(2.5rem, 4vw, 4.5rem);
       }
     }
-    .look-exhibit-visual {
-      border: 1px solid var(--fg);
+
+    /* Authentic Suspended Kakemono Scroll Structure */
+    .kakemono-suspended-scroll {
       position: relative;
-      background: var(--paper);
-    }
-    .scroll-accession-tag {
-      position: absolute;
-      top: -0.85rem;
-      left: 1rem;
-      background: var(--paper);
+      background: #ede8dd;
       border: 1px solid var(--fg);
-      padding: 0.15rem 0.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      z-index: 2;
+      padding: 1.25rem 1rem 0;
+      box-shadow: 0 24px 55px rgba(25, 24, 22, 0.12);
     }
-    .scroll-img-inner {
+
+    .scroll-top-hanger {
+      position: absolute;
+      top: -26px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hanger-ring {
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--fg);
+      border-radius: 50%;
+      margin-bottom: 2px;
+    }
+
+    .hanger-cords-svg {
       width: 100%;
-      aspect-ratio: 4/5.6;
+      height: 12px;
+    }
+
+    .scroll-upper-rod {
+      height: 14px;
+      background: var(--wood-dark);
+      border-bottom: 1px solid var(--paper);
+      margin-bottom: 0.5rem;
+    }
+
+    .scroll-textile-canvas {
+      width: 100%;
+      aspect-ratio: 3.8 / 5.4;
       overflow: hidden;
       position: relative;
+      background: #dfd9ce;
+      box-shadow: inset 0 0 0 10px var(--paper);
     }
-    .scroll-img-inner img {
+
+    .scroll-textile-canvas img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 12%;
+      object-position: center 10%;
       display: block;
-      filter: contrast(106%) saturate(95%);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: contrast(106%) saturate(96%);
     }
-    .scroll-hanging-rod {
-      background: #191816;
-      height: 20px;
+
+    .scroll-lower-roller {
+      position: relative;
+      height: 24px;
+      background: var(--wood-bar);
+      border-top: 1px solid var(--paper);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 0 0.5rem;
+      align-items: center;
+      padding: 0 0.85rem;
+      margin: 0;
+      width: 100%;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+      z-index: 10;
     }
-    .rod-end-knob {
-      width: 8px;
-      height: 14px;
-      background: #b8b2a4;
-      border-radius: 1px;
+
+    .roller-knob {
+      width: 12px;
+      height: 16px;
+      background: var(--wood-dark);
+      border: 1px solid var(--wood-accent);
+      border-radius: 2px;
     }
-    .rod-text {
+
+    .roller-tag {
       font-family: 'Space Mono', monospace;
       font-size: 0.55rem;
-      color: #b8b2a4;
-      letter-spacing: 0.1em;
+      color: var(--wood-accent);
+      letter-spacing: 0.15em;
     }
-    .scroll-action-row {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .unroll-next-btn {
-      background: var(--fg);
-      color: var(--paper);
-      border: 1px solid var(--fg);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.75rem 1.25rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      letter-spacing: 0.08em;
-      transition: all 0.2s ease;
-    }
-    .unroll-next-btn:hover {
-      background: #33312c;
-    }
-    .attach-cert-btn {
-      background: transparent;
-      color: var(--fg);
-      border: 1px solid var(--fg);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.75rem 1.25rem;
-      cursor: pointer;
-      letter-spacing: 0.08em;
-      transition: all 0.2s ease;
-    }
-    .attach-cert-btn:hover {
-      background: #efebe4;
-    }
-    .look-vertical-specs {
+
+    .kakemono-vertical-dossier {
       display: flex;
       flex-direction: row-reverse;
       gap: 1.5rem;
       justify-content: center;
       border-left: 1px solid var(--line);
       border-right: 1px solid var(--line);
-      padding: 0 1.5rem;
-    }
-    .look-curatorial-text {
-      padding: 1.5rem 0;
-    }
-    .curatorial-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 2.2rem;
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
+      padding: 0 clamp(1rem, 2vw, 2rem);
     }
 
-    /* POSTER 004: NIGHT POSTER */
-    .night-poster-board {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-    @media (min-width: 1024px) {
-      .night-poster-board {
-        grid-template-columns: 1.2fr 1fr;
-        gap: 4rem;
-        align-items: center;
-      }
-    }
-    .night-poster-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: clamp(2rem, 4.5vw, 3.6rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
+    .kakemono-commentary {
+      padding: 1rem 0;
     }
 
-    /* POSTER 005: CALLIGRAPHIC MAKIMONO SCROLL DOCUMENT & LOAN CERTIFICATE */
-    .lease-scroll-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      background: #faf8f3;
+    .specimen-accession-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--line);
+      padding: 0.2rem 0.65rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+    }
+
+    .kakemono-heading {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 1.5rem;
+      color: var(--fg);
+    }
+
+    .kakemono-prose {
+      font-size: 0.94rem;
+      line-height: 1.85;
+      color: #3b3730;
+      margin-bottom: 2rem;
+    }
+
+    .kakemono-spec-table {
+      border-top: 1px solid var(--fg);
+      border-bottom: 1px solid var(--fg);
+      padding: 1.25rem 0;
+      margin-bottom: 2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+    }
+
+    .kakemono-spec-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .kakemono-spec-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .kakemono-tariff-display {
+      color: var(--vermilion);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .kakemono-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-unroll-next {
+      background: var(--fg);
+      color: var(--paper);
       border: 1px solid var(--fg);
-      padding: 2.5rem 1.5rem;
-      position: relative;
-      overflow: hidden;
-      box-sizing: border-box;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.85rem 1.4rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      letter-spacing: 0.1em;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-unroll-next:hover {
+      background: #33312c;
+      transform: translateY(-2px);
+    }
+
+    .btn-to-custody {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--fg);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.85rem 1.4rem;
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      transition: all 0.2s ease;
+    }
+
+    .btn-to-custody:hover {
+      background: var(--paper-cream);
+      transform: translateY(-2px);
+    }
+
+    /* Hanko Accession Stamp Animation Target */
+    .kakemono-stamp-imprint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1.5px solid var(--vermilion);
+      color: var(--vermilion);
+      padding: 0.35rem 0.75rem;
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      margin-top: 1.5rem;
+      background: var(--vermilion-soft);
+      opacity: 0;
+      transform: scale(1);
+      transform-origin: left center;
       max-width: 100%;
     }
-    @media (min-width: 1024px) {
-      .lease-scroll-layout {
-        grid-template-columns: 1.15fr 1fr;
-        padding: 3rem 2.5rem;
-        gap: 2.5rem;
+
+    /* ========================================================
+       CHAMBER 003 // EXHIBITION MAP & OCCASION CHAMBERS
+       ======================================================== */
+    .chamber-occasions {
+      margin-bottom: clamp(6rem, 12vw, 12rem);
+      position: relative;
+    }
+
+    .occasions-quad-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .occasions-quad-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
       }
     }
-    .makimono-pillars-grid {
+
+    .occasion-pillar {
+      border-right: 1px solid var(--line);
+      padding-right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 480px;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .occasion-pillar:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .occasion-pillar:hover {
+      transform: translateY(-4px);
+    }
+
+    .occasion-pillar-kanji {
+      writing-mode: vertical-rl;
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      color: var(--fg);
+      margin-bottom: 2rem;
+    }
+
+    .occasion-pillar-kanji.highlight {
+      color: var(--vermilion);
+    }
+
+    .occasion-pillar-en {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .occasion-pillar-body {
+      font-size: 0.88rem;
+      color: #4b4842;
+      line-height: 1.68;
+      margin-bottom: 1.75rem;
+    }
+
+    .occasion-pillar-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.85rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    .occasion-pillar-meta strong {
+      color: var(--fg);
+    }
+
+    /* ========================================================
+       CHAMBER 004 // SECONDARY TEXTILE INSTALLATION (SUSPENDED STRIPS)
+       ======================================================== */
+    .chamber-textiles {
+      margin-bottom: clamp(6rem, 12vw, 12rem);
+      position: relative;
+    }
+
+    .textiles-installation-stage {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    @media (min-width: 860px) {
+      .textiles-installation-stage {
+        grid-template-columns: 0.85fr 1.3fr 0.95fr;
+        gap: clamp(1.5rem, 3vw, 3rem);
+        align-items: start;
+      }
+    }
+
+    .suspended-textile-banner {
+      background: var(--paper);
+      border: 1px solid var(--fg);
+      box-shadow: 0 16px 40px rgba(25, 24, 22, 0.08);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+
+    .suspended-textile-banner:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 24px 60px rgba(25, 24, 22, 0.16);
+      z-index: 5;
+    }
+
+    .banner-suspension-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding: 0.65rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .banner-hanko {
+      border: 1px solid var(--vermilion);
+      color: var(--vermilion);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.62rem;
+      padding: 0.05rem 0.35rem;
+      font-weight: 700;
+    }
+
+    .banner-img-wrap {
+      width: 100%;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #e2ddd3;
+    }
+
+    .suspended-textile-banner.banner-left .banner-img-wrap {
+      aspect-ratio: 1 / 1.95;
+    }
+
+    .suspended-textile-banner.banner-center .banner-img-wrap {
+      aspect-ratio: 1 / 1.7;
+    }
+
+    .suspended-textile-banner.banner-right .banner-img-wrap {
+      aspect-ratio: 1 / 1.85;
+    }
+
+    .banner-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 12%;
+      filter: contrast(106%) saturate(96%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      display: block;
+    }
+
+    .suspended-textile-banner:hover .banner-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .banner-content-box {
+      padding: 1.25rem 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .banner-v-caption {
+      writing-mode: vertical-rl;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.28em;
+      line-height: 1.85;
+      height: 160px;
+      color: var(--fg);
+    }
+
+    .banner-h-spec {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      border-left: 1px solid var(--line);
+      padding-left: 0.85rem;
+    }
+
+    .banner-h-spec strong {
+      color: var(--fg);
+    }
+
+    .banner-bottom-bar {
+      height: 16px;
+      background: var(--wood-bar);
+      border-top: 1px solid var(--paper);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.5rem;
+    }
+
+    .banner-knob {
+      width: 7px;
+      height: 7px;
+      background: var(--vermilion);
+      border-radius: 50%;
+    }
+
+    /* Staggered Heights for Gallery Installation Feel */
+    @media (min-width: 860px) {
+      .suspended-textile-banner.banner-left {
+        transform: translateY(-25px);
+      }
+      .suspended-textile-banner.banner-center {
+        transform: translateY(30px);
+      }
+      .suspended-textile-banner.banner-right {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* ========================================================
+       CHAMBER 005 // TEMPORARY CUSTODY & EXHIBITION LOAN CERTIFICATE
+       ======================================================== */
+    .chamber-custody {
+      margin-bottom: clamp(6rem, 12vw, 12rem);
+      position: relative;
+    }
+
+    .custody-architecture-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      background: var(--paper-warm);
+      border: 1px solid var(--fg);
+      padding: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 3.5vw, 3rem);
+      box-shadow: 0 20px 50px rgba(25, 24, 22, 0.06);
+    }
+
+    @media (min-width: 1024px) {
+      .custody-architecture-grid {
+        grid-template-columns: 1.15fr 1fr;
+        gap: 3.5rem;
+      }
+    }
+
+    /* 4 Makimono Covenant Pillars */
+    .covenants-quad-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.25rem;
     }
+
     @media (min-width: 600px) {
-      .makimono-pillars-grid {
+      .covenants-quad-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    .scroll-vertical-column {
+
+    .covenant-column-card {
       background: var(--paper);
       border: 1px solid var(--line);
       padding: 1.75rem 1.25rem 1.5rem;
@@ -627,14 +1025,15 @@
       flex-direction: column;
       justify-content: space-between;
       position: relative;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+      transition: all 0.3s ease;
       cursor: pointer;
     }
-    .scroll-vertical-column::before {
+
+    .covenant-column-card::before {
       content: '印';
       position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
+      top: 0.85rem;
+      right: 0.85rem;
       border: 1px solid var(--vermilion);
       color: var(--vermilion);
       font-family: 'Shippori Mincho', serif;
@@ -642,94 +1041,164 @@
       padding: 0.05rem 0.25rem;
       font-weight: 700;
     }
-    .scroll-vertical-column:hover {
-      transform: translateY(-5px);
+
+    .covenant-column-card:hover {
+      transform: translateY(-4px);
       border-color: var(--fg);
-      box-shadow: 0 12px 28px rgba(25, 24, 22, 0.1);
-      z-index: 5;
+      box-shadow: 0 12px 28px rgba(25, 24, 22, 0.08);
     }
 
-    /* Interactive Exhibition Loan Certificate Panel */
+    .covenant-big-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--vermilion);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .covenant-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .covenant-body {
+      font-size: 0.85rem;
+      color: #44413c;
+      line-height: 1.65;
+    }
+
+    /* The Custody Record Certificate Panel */
     .custody-certificate-panel {
       border: 2px double var(--fg);
       background: #fdfbf7;
-      padding: 2rem 1.5rem;
+      padding: clamp(1.75rem, 3vw, 2.5rem);
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-sizing: border-box;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
       overflow: hidden;
     }
+
     .cert-corner-seal {
       position: absolute;
-      top: 10px;
-      right: 12px;
+      top: 12px;
+      right: 14px;
       border: 2px solid var(--vermilion);
       color: var(--vermilion);
       font-family: 'Shippori Mincho', serif;
       font-size: 0.68rem;
       font-weight: 900;
       padding: 0.2rem 0.5rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
     }
+
     .cert-title-kanji {
       font-family: 'Shippori Mincho', serif;
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       font-weight: 900;
       line-height: 1.2;
       letter-spacing: 0.1em;
       margin-bottom: 0.35rem;
     }
+
     .cert-sub-tag {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.15em;
+      color: var(--ink-muted);
+      letter-spacing: 0.14em;
       border-bottom: 1px dashed var(--line);
-      padding-bottom: 0.75rem;
+      padding-bottom: 0.85rem;
       margin-bottom: 1.5rem;
     }
+
     .cert-control-group {
       margin-bottom: 1.25rem;
     }
+
     .cert-label {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
-      color: var(--muted);
+      color: var(--ink-muted);
       letter-spacing: 0.12em;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.45rem;
       display: block;
       text-transform: uppercase;
     }
+
     .cert-pills-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.45rem;
     }
+
     .cert-pill-btn {
       background: #ffffff;
       border: 1px solid var(--line);
       color: var(--fg);
       font-family: 'Space Mono', monospace;
       font-size: 0.68rem;
-      padding: 0.35rem 0.65rem;
+      padding: 0.4rem 0.75rem;
       cursor: pointer;
       font-weight: 700;
       transition: all 0.2s ease;
     }
+
     .cert-pill-btn:hover, .cert-pill-btn.active {
       background: var(--fg);
       color: #ffffff;
       border-color: var(--fg);
     }
-    .loan-seal-btn {
+
+    .cert-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      margin: 1.25rem 0 0.5rem;
+      line-height: 1.85;
+    }
+
+    .cert-summary-table tr {
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .cert-summary-table td {
+      padding: 0.35rem 0;
+    }
+
+    .cert-summary-table td:last-child {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .cert-tariff-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 2px solid var(--fg);
+      padding-top: 0.65rem;
+      margin-top: 0.85rem;
+    }
+
+    .cert-tariff-val {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--vermilion);
+    }
+
+    .btn-loan-seal {
       width: 100%;
       background: #191816;
       color: #ffffff;
       border: 1px solid #191816;
-      padding: 0.85rem 1rem;
+      padding: 0.95rem 1.2rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
       font-weight: 700;
@@ -739,13 +1208,17 @@
       flex-direction: column;
       align-items: center;
       gap: 0.25rem;
-      margin-top: 1.25rem;
-      transition: background 0.2s ease;
+      margin-top: 1.5rem;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
-    .loan-seal-btn:hover {
+
+    .btn-loan-seal:hover {
       background: var(--vermilion);
       border-color: var(--vermilion);
+      transform: translateY(-2px);
     }
+
+    /* Hanko Seal Impression Stamp */
     .cert-hanko-seal {
       position: absolute;
       bottom: 2.5rem;
@@ -767,174 +1240,92 @@
       transform: scale(2) rotate(10deg);
       z-index: 10;
       mix-blend-mode: multiply;
-      background: rgba(209, 48, 40, 0.05);
+      background: rgba(184, 58, 45, 0.06);
       padding: 0.4rem;
     }
+
     .cert-confirmed-banner {
       display: none;
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
       color: var(--vermilion);
       font-weight: 700;
       border: 1px solid var(--vermilion);
-      padding: 0.45rem 0.65rem;
+      padding: 0.55rem 0.75rem;
       background: #fff8f7;
     }
-    .scroll-big-kanji {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--vermilion);
-      line-height: 1;
-      margin-bottom: 0.75rem;
-    }
-    .scroll-term-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      letter-spacing: 0.05em;
-    }
-    .scroll-term-body {
-      font-size: 0.85rem;
-      color: #44413c;
-      line-height: 1.7;
+
+    /* ========================================================
+       CHAMBER 006 // EXHIBITION EXIT & FINAL COLOPHON
+       ======================================================== */
+    .chamber-exit {
+      text-align: center;
+      padding: clamp(4rem, 8vw, 8rem) 1.5rem 3rem;
+      position: relative;
     }
 
-    /* POSTER 006: OVERLAPPING GALLERY WALKTHROUGH */
-    .strip-archive-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      position: relative;
-    }
-    @media (min-width: 768px) {
-      .strip-archive-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.25rem;
-      }
-    }
-    .strip-archive-item {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      background: var(--paper);
-      border: 1px solid var(--fg);
-      box-shadow: 5px 5px 0px rgba(184, 178, 164, 0.45);
-      padding: 0.85rem;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, box-shadow 0.4s ease;
-    }
-    @media (min-width: 1024px) {
-      .strip-archive-item:nth-child(1) {
-        transform: translateY(-10px);
-      }
-      .strip-archive-item:nth-child(2) {
-        transform: translateY(30px);
-        z-index: 2;
-      }
-      .strip-archive-item:nth-child(3) {
-        transform: translateY(-20px);
-        z-index: 3;
-      }
-      .strip-archive-item:nth-child(4) {
-        transform: translateY(20px);
-        z-index: 4;
-      }
-    }
-    .strip-archive-item:hover {
-      transform: translateY(-12px) scale(1.02) !important;
-      z-index: 10 !important;
-      box-shadow: 0 20px 45px rgba(25, 24, 22, 0.16);
-    }
-    .strip-archive-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 0.4rem;
-      margin-bottom: 0.75rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-    }
-    .strip-chop-seal {
-      display: inline-block;
-      border: 1px solid var(--vermilion);
-      color: var(--vermilion);
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.62rem;
-      padding: 0.05rem 0.25rem;
-      line-height: 1.1;
-      font-weight: 700;
-    }
-    .strip-archive-img {
-      width: 100%;
-      aspect-ratio: 1/1.85;
-      object-fit: cover;
-      object-position: center 12%;
-      filter: contrast(105%) saturate(96%);
-      border: 1px solid var(--line);
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-    .strip-archive-item:nth-child(2) .strip-archive-img {
-      aspect-ratio: 1/2.05;
-    }
-    .strip-archive-item:nth-child(3) .strip-archive-img {
-      aspect-ratio: 1/1.75;
-    }
-    .strip-archive-item:nth-child(4) .strip-archive-img {
-      aspect-ratio: 1/2.0;
-    }
-    .strip-caption-vertical {
+    .exit-v-marker {
       writing-mode: vertical-rl;
       font-family: 'Shippori Mincho', serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.25em;
-      line-height: 1.8;
-      height: 150px;
-      color: var(--fg);
-      margin-bottom: 0.75rem;
-    }
-    .strip-archive-footer {
-      border-top: 1px dashed var(--line);
-      padding-top: 0.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
-      color: var(--muted);
-      line-height: 1.5;
-      letter-spacing: 0.05em;
-    }
-    .strip-archive-footer strong {
-      color: var(--fg);
-      font-weight: 700;
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 0.45em;
+      margin: 0 auto 2.5rem;
+      color: var(--vermilion);
+      height: 160px;
+      display: inline-block;
     }
 
-    /* POSTER 007: FINAL EXHIBITION POSTER */
-    .final-monument-poster {
-      text-align: center;
-      padding: 4rem 1.5rem;
-    }
-    .final-monument-title {
+    .exit-brand-monument {
       font-family: 'Shippori Mincho', serif;
-      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
       font-weight: 900;
       line-height: 0.95;
       letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .exit-colophon-jp {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
       margin-bottom: 2rem;
     }
-    .final-colophon-text {
+
+    .exit-colophon-body {
       font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 600px;
+      color: var(--ink-muted);
+      max-width: 620px;
       margin: 0 auto 3rem;
-      line-height: 1.8;
+      line-height: 1.85;
     }
-    /* Refined Sliding Exhibition Panel Overlay */
-    .washi-scroll-overlay {
+
+    .exit-curator-seal {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      border: 2px solid var(--vermilion);
+      color: var(--vermilion);
+      padding: 0.65rem 1.25rem;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+    }
+
+    .exit-catalogue-note {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.15em;
+    }
+
+    /* Sliding Exhibition Washi Curtain Overlay */
+    .washi-scroll-curtain {
       position: fixed;
       inset: 0;
       background: linear-gradient(180deg, #ede9e1 0%, #e2ddd3 50%, #d8d3c7 100%);
@@ -946,36 +1337,40 @@
       align-items: center;
       clip-path: inset(100% 0 0 0);
       border-bottom: 2px solid var(--fg);
-      box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.15);
     }
-    .washi-inner-box {
+
+    .washi-curtain-inner {
       border: 1px solid rgba(25, 24, 22, 0.25);
       padding: 3rem 4rem;
-      background: rgba(244, 240, 232, 0.75);
-      backdrop-filter: blur(4px);
+      background: rgba(244, 240, 232, 0.85);
+      backdrop-filter: blur(6px);
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .washi-scroll-kanji {
+
+    .curtain-kanji {
       writing-mode: vertical-rl;
       font-family: 'Shippori Mincho', serif;
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: 900;
-      letter-spacing: 0.4em;
+      letter-spacing: 0.45em;
       color: var(--fg);
       margin-bottom: 1.5rem;
     }
-    .washi-scroll-meta {
+
+    .curtain-meta {
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
       letter-spacing: 0.25em;
       color: var(--vermilion);
       font-weight: 700;
     }
-    /* Refined Exhibition Catalogue Seal Tab */
-    .exhibition-catalogue-seal {
+
+    /* Floating Catalogue Tab */
+    .floating-catalogue-tab {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
@@ -983,7 +1378,7 @@
       background: rgba(244, 240, 232, 0.94);
       backdrop-filter: blur(8px);
       border: 1px solid var(--fg);
-      padding: 0.5rem 1rem;
+      padding: 0.55rem 1.15rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
       letter-spacing: 0.12em;
@@ -992,45 +1387,138 @@
       align-items: center;
       gap: 0.75rem;
       color: var(--fg);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+      transition: all 0.25s ease;
     }
-    .exhibition-catalogue-seal:hover {
+
+    .floating-catalogue-tab:hover {
       background: var(--fg);
       color: var(--bg);
       transform: translateY(-2px);
     }
-    .seal-kanji {
+
+    .floating-seal-kanji {
       font-family: 'Shippori Mincho', serif;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 900;
       border-right: 1px solid currentColor;
       padding-right: 0.65rem;
       color: var(--vermilion);
     }
-    .exhibition-catalogue-seal:hover .seal-kanji {
+
+    .floating-catalogue-tab:hover .floating-seal-kanji {
       color: var(--bg);
     }
+
     @media (max-width: 640px) {
-      .exhibition-catalogue-seal {
+      .floating-catalogue-tab {
         bottom: 1rem;
         right: 1rem;
-        padding: 0.45rem 0.75rem;
+        padding: 0.45rem 0.8rem;
         font-size: 0.65rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery-sanctuary {
+        padding: 2.5rem 1rem 6rem;
+      }
+      .entrance-vertical-manifesto {
+        border-right: none;
+        padding-right: 0;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+      .entrance-curator-dossier {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid var(--line);
+        padding-top: 1.5rem;
+      }
+      .kakemono-stage-wrapper {
+        padding: 1.5rem 1rem;
+      }
+      .kakemono-vertical-dossier {
+        border-left: none;
+        border-right: none;
+        padding: 1rem 0;
+        justify-content: flex-start;
+        overflow-x: auto;
+      }
+      .occasions-quad-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .occasion-pillar {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding-right: 0;
+        padding-bottom: 2rem;
+        min-height: auto;
+      }
+      .occasion-pillar:last-child {
+        border-bottom: none;
+      }
+      .textiles-installation-stage {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .banner-content-box {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .banner-v-caption {
+        height: auto;
+        max-height: 120px;
+      }
+      .banner-h-spec {
+        border-left: none;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+        padding-top: 0.5rem;
+      }
+      .custody-architecture-grid {
+        padding: 1.5rem 1rem;
+      }
+      .cert-corner-seal {
+        top: 8px;
+        right: 8px;
+        font-size: 0.6rem;
+        padding: 0.15rem 0.35rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Curatorial Exhibition Itinerary Header -->
+  <!-- Curatorial Exhibition Header & Itinerary Tracker -->
   <nav class="switch-nav">
-    <div>
+    <div class="nav-left">
       <a href="index.html" class="exhibit-brand">国立意匠展覧会 // WEDELIA</a>
-      <span class="exhibit-room-tag">ROOM IV: 墨黒と生絹 // TOKYO–DELHI</span>
+      <div class="exhibit-curator-mark">
+        <span class="vermilion-dot"></span>
+        <span>GALLERY IV: 墨黒と生絹 // TOKYO–DELHI REPOSITORY</span>
+      </div>
     </div>
+
+    <!-- Gallery Itinerary Steps -->
+    <div class="nav-itinerary">
+      <a href="#chamberEntrance" class="itinerary-step active">001 // ENTRANCE</a>
+      <span>·</span>
+      <a href="#chamberKakemono" class="itinerary-step">002 // KAKEMONO</a>
+      <span>·</span>
+      <a href="#chamberOccasions" class="itinerary-step">003 // ROOMS</a>
+      <span>·</span>
+      <a href="#chamberTextiles" class="itinerary-step">004 // TEXTILES</a>
+      <span>·</span>
+      <a href="#chamberCustody" class="itinerary-step">005 // CUSTODY</a>
+      <span>·</span>
+      <a href="#chamberExit" class="itinerary-step">006 // EXIT</a>
+    </div>
+
     <div class="switch-pills">
-      <span class="exhibit-dir-tag">ROOMS:</span>
+      <span class="rooms-label">WORLDS:</span>
       <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
       <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
       <a href="03-red-black-tokyo.html" class="switch-pill" title="Red / Black Tokyo">03</a>
@@ -1039,329 +1527,462 @@
     </div>
   </nav>
 
-  <div class="poster-container">
-    
-    <!-- Topbar Masthead -->
-    <header class="poster-topbar">
-      <div>
-        <span>EXHIBITION CATALOGUE // 2026</span>
-        <span style="margin-left: 1rem;">COLLEGE NIGHT ARCHIVE</span>
-      </div>
-      <div>
-        <span class="seal">瞬間意匠</span>
-        <span style="margin-left: 0.5rem;">WEDELIA GALLERY</span>
-      </div>
-    </header>
+  <div class="gallery-sanctuary">
 
-    <!-- POSTER 001: OPENING POSTER -->
-    <section class="exhibit-poster">
-      <div class="poster-id-tag">
-        <span>POSTER NO. 001 // OPENING MANIFESTO</span>
-        <span class="vermilion-stamp">第一号 展示目録</span>
+    <!-- ========================================================
+         ROOM 001 // ENTRANCE FOYER & OPENING MANIFESTO
+         ======================================================== -->
+    <section class="chamber-entrance" id="chamberEntrance">
+      <div class="chamber-marker">
+        <div>
+          <span>EXHIBITION CATALOGUE // 2026</span>
+          <span style="margin-left: 1rem; color: var(--ink-muted);">DELHI CAMPUS ARCHIVAL REPOSITORY</span>
+        </div>
+        <div>
+          <span class="chamber-hanko">瞬間意匠</span>
+          <span style="margin-left: 0.5rem;">WEDELIA GALLERY</span>
+        </div>
       </div>
 
-      <div class="poster-board">
-        <!-- Col 1: Vertical Japanese Manifesto -->
-        <div class="poster-col-manifesto">
-          <div class="v-text-stream bold">
+      <div class="entrance-monument-grid">
+        
+        <!-- Left: Monumental Vertical Calligraphy Stream -->
+        <div class="entrance-vertical-manifesto">
+          <div class="v-calligraphy prominent">
             服を所有することの無意味さについて。
           </div>
-          <div class="v-text-stream">
+          <div class="v-calligraphy body">
             大学の祭典、新歓の宴、卒業の舞踏。人は一度きりの瞬間のために衣服を買い、二度と袖を通さない。
           </div>
-          <div class="v-text-stream muted">
+          <div class="v-calligraphy muted">
             ウェデリアは、その夜の主役になるためのオートクチュールを貸し出す。
           </div>
         </div>
 
-        <!-- Col 2: Central Tall Visual -->
-        <div class="poster-col-visual">
-          <div>
-            <h1 class="poster-title">WEDELIA</h1>
-            <span style="font-family: 'Shippori Mincho', serif; font-size: 0.85rem; letter-spacing: 0.15em; color: var(--fg); margin-top: 0.75rem; display: block; font-weight: 700;">布と静寂の建築展 // LIVING TEXTILES CONSIGNMENT</span>
+        <!-- Center: Masthead & Suspended Entrance Scroll -->
+        <div class="entrance-focal-column">
+          <div class="entrance-masthead">
+            <h1 class="monument-title">WEDELIA</h1>
+            <span class="monument-subtitle">布と静寂の建築展 // LIVING TEXTILES CONSIGNMENT</span>
+            <span class="monument-descriptor">CURATED FOR THE CULTURAL CALENDAR OF HIGHER ACADEMIA</span>
           </div>
-          <div class="tall-image-strip" id="hangingScrollStrip">
-            <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Evening Gown">
-            <!-- Experiment 04-A: Hanging Scroll Weight Bar -->
-            <div class="hanging-scroll-weight" id="hangingWeightBar">
-              <span class="weight-knob"></span>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--paper); letter-spacing: 0.1em;">WDL-SCROLL-WEIGHT // 420g</span>
-              <span class="weight-knob"></span>
+
+          <!-- Hanging Scroll Visual Unit -->
+          <div class="entrance-scroll-frame" id="entranceScrollFrame">
+            <!-- Top Suspension Cord -->
+            <div class="hanging-suspension-cord">
+              <svg class="cord-tri-svg" viewBox="0 0 80 24" fill="none">
+                <line x1="40" y1="2" x2="4" y2="24" stroke="var(--fg)" stroke-width="1.2" />
+                <line x1="40" y1="2" x2="76" y2="24" stroke="var(--fg)" stroke-width="1.2" />
+                <circle cx="40" cy="2" r="2" fill="var(--fg)" />
+              </svg>
+            </div>
+
+            <div class="entrance-scroll-img-wrap" id="entranceScrollImgWrap">
+              <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Evening Gown">
+            </div>
+
+            <!-- Hanging Scroll Bottom Weight Bar -->
+            <div class="scroll-bottom-weight-bar" id="entranceWeightBar">
+              <span class="weight-finial-knob"></span>
+              <span class="weight-bar-caption">JIKUGI WEIGHTED ATELIER BAR // 420g</span>
+              <span class="weight-finial-knob"></span>
             </div>
           </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); flex-wrap: wrap; gap: 0.5rem;">
-            <span>PLATE 01: ZEMIRE FAILLE GOWN</span>
-            <!-- Experiment 04-B: Tactile Vermilion Seal Press -->
-            <button class="interactive-seal-press" id="sealPressBtn">
-              <span class="seal-impression" id="sealImpressionBadge">印 // 認可 AUTHORIZED</span>
-              <span id="sealBtnText">PRESS CURATORIAL SEAL</span>
-            </button>
-            <span>RENTAL: ₹2,999 / 3 DAYS</span>
+
+          <div style="display: flex; justify-content: space-between; align-items: baseline; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--ink-muted); margin-top: 0.5rem;">
+            <span>PLATE 001 // DIOR ZÉMIRE PEPLUM</span>
+            <span>TEMPORARY CONSIGNMENT // ₹2,999 / 3 DAYS</span>
           </div>
         </div>
 
-        <!-- Col 3: Numbered Occasions -->
-        <div class="poster-col-occasions">
-          <div class="v-number-block">
-            <div class="big-v-num">
-              <span>01</span>
-              <span style="font-size: 1.1rem; color: var(--vermilion);">祝祭</span>
+        <!-- Right: Curatorial Dossier & Dispatch -->
+        <div class="entrance-curator-dossier">
+          <div>
+            <div class="dossier-room-badge">
+              ROOM 001 // FOYER<br>
+              GALLERY ACCESSION NO. EX-001
             </div>
-            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">COLLEGE FESTIVAL</h3>
-            <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.55;">Under the blinding stage spotlights. High-contrast reflective silks and kinetic wraps for star night concerts.</p>
+
+            <div class="dossier-stat-row">
+              <span class="dossier-stat-label">DISPATCH NETWORK</span>
+              <div style="font-family: 'Space Mono', monospace; font-size: 0.68rem; line-height: 1.6; color: var(--fg);">
+                DU NORTH CAMPUS<br>
+                DU SOUTH CAMPUS<br>
+                IIT DELHI CAMPUS<br>
+                NIFT HAUZ KHAS<br>
+                ASHOKA UNIVERSITY
+              </div>
+            </div>
+
+            <div class="dossier-stat-row">
+              <span class="dossier-stat-label">CUSTODY PROTOCOL</span>
+              <div style="font-family: 'Space Mono', monospace; font-size: 0.68rem; line-height: 1.6; color: var(--fg);">
+                ₹0 DAMAGE SHIELD<br>
+                COMPLIMENTARY BACKUP SIZE<br>
+                ZERO LAUNDRY RETURN
+              </div>
+            </div>
           </div>
 
-          <div class="v-number-block">
-            <div class="big-v-num">
-              <span>02</span>
-              <span style="font-size: 1.1rem; color: var(--vermilion);">門出</span>
-            </div>
-            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">SENIOR FAREWELL</h3>
-            <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.55;">The final departmental valedictory. Floor-length museum silhouettes that mark the closing of your youth.</p>
-          </div>
-
-          <div class="v-number-block" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
-            <div class="big-v-num">
-              <span>03</span>
-              <span style="font-size: 1.1rem; color: var(--vermilion);">響宴</span>
-            </div>
-            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">CAMPUS CONCERT</h3>
-            <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.55;">Sub-bass frequencies, strobe lights, flash photography. Tailored garments designed for motion without fragility.</p>
+          <div class="curator-stamp-box">
+            <span class="curator-seal-symbol">認</span>
+            <span class="curator-seal-text">AUTHORIZED ACCESSION<br>WEDELIA ARCHIVE 2026</span>
           </div>
         </div>
 
-        <!-- Col 4: Narrow End Strip -->
-        <div class="poster-col-dispatch">
-          <div>
-            <strong>DISPATCH:</strong><br>
-            DU NORTH CAMPUS<br>
-            DU SOUTH CAMPUS<br>
-            IIT DELHI<br>
-            NIFT HAUZ KHAS<br>
-            ASHOKA SONIPAT
-          </div>
-          <div>
-            <strong>INSURANCE:</strong><br>
-            ₹0 DAMAGE SHIELD<br>
-            SPILL COVERAGE<br>
-            UNWASHED RETURN
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- POSTER 002: OCCASION POSTER -->
-    <section class="exhibit-poster">
-      <div class="poster-id-tag">
-        <span>POSTER NO. 002 // QUAD-OCCASION COMPOSITION</span>
-        <span class="vermilion-stamp">第二号 四季祭事</span>
-      </div>
-
-      <div class="occasion-poster-grid">
-        <!-- Occasion 1 -->
-        <div class="occasion-vertical-pillar">
-          <div>
-            <div class="pillar-kanji highlight">祝祭</div>
-            <h3 class="pillar-en">FESTIVAL</h3>
-            <p class="pillar-body">
-              The annual campus fest. When tens of thousands gather on the lawns under stadium towers, fast fashion collapses into anonymity. Rent a piece that commands the ground.
-            </p>
-          </div>
-          <div class="pillar-meta">
-            TARIFF: ₹1,699 / 3D<br>
-            PEAK: FEB — APR
-          </div>
-        </div>
-
-        <!-- Occasion 2 -->
-        <div class="occasion-vertical-pillar">
-          <div>
-            <div class="pillar-kanji">門出</div>
-            <h3 class="pillar-en">FAREWELL</h3>
-            <p class="pillar-body">
-              The closing ceremony of college life. Four years distilled into one black-tie banquet. Walk the final red carpet in genuine haute couture faille and silk pleats.
-            </p>
-          </div>
-          <div class="pillar-meta">
-            TARIFF: ₹2,899 / 3D<br>
-            PEAK: APR — MAY
-          </div>
-        </div>
-
-        <!-- Occasion 3 -->
-        <div class="occasion-vertical-pillar">
-          <div>
-            <div class="pillar-kanji">響宴</div>
-            <h3 class="pillar-en">CONCERT</h3>
-            <p class="pillar-body">
-              Arena tours and star nights. High-energy silhouettes with metallic lurex weave and structured shoulder cuts that hold their shape through four hours of sweat and bass.
-            </p>
-          </div>
-          <div class="pillar-meta">
-            TARIFF: ₹1,499 / 3D<br>
-            PEAK: YEAR-ROUND
-          </div>
-        </div>
-
-        <!-- Occasion 4 -->
-        <div class="occasion-vertical-pillar">
-          <div>
-            <div class="pillar-kanji">新歓</div>
-            <h3 class="pillar-en">FRESHERS</h3>
-            <p class="pillar-body">
-              The inaugural university entrance. First impressions are written permanently into collegiate mythology. Clean, sculptural asymmetry with zero overstatement.
-            </p>
-          </div>
-          <div class="pillar-meta">
-            TARIFF: ₹1,299 / 3D<br>
-            PEAK: AUG — SEP
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- POSTER 003: LOOK EXHIBITION POSTER -->
-    <section class="exhibit-poster" id="lookExhibitionPoster">
-      <div class="poster-id-tag">
-        <span>POSTER NO. 003 // ATELIER SPECIMEN STUDY (特別掛軸展覧)</span>
-        <span class="vermilion-stamp">第三号 造形考証</span>
-      </div>
-
-      <!-- Curatorial Scroll Switcher Tabs -->
-      <div class="scroll-curator-tabs" id="scrollCuratorTabs">
-        <button class="scroll-curator-btn active" data-index="0">巻一 // ROBE LONGUE (1983)</button>
-        <button class="scroll-curator-btn" data-index="1">巻二 // ZÉMIRE FAILLE (1954)</button>
-        <button class="scroll-curator-btn" data-index="2">巻三 // DESSÈS DUET (1951)</button>
-      </div>
-
-      <div class="look-exhibit-layout" id="lookExhibitStage">
-        <!-- Hanging Scroll Visual with Real Weighted Rod -->
-        <div class="look-exhibit-visual" id="lookExhibitVisual">
-          <div class="scroll-accession-tag" id="scrollAccessionTag">ACCESSION NO. EX-1983-POI // TIER A+</div>
-          <div class="scroll-img-inner">
-            <img id="lookExhibitImg" src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Robe Longue Sculptural Column">
-          </div>
-          <div class="scroll-hanging-rod">
-            <span class="rod-end-knob"></span>
-            <span class="rod-text">掛軸本紙 // WEIGHTED ATELIER ROD 380g</span>
-            <span class="rod-end-knob"></span>
-          </div>
-        </div>
-
-        <div class="look-vertical-specs" id="lookVerticalSpecs">
-          <div class="v-text-stream bold" id="lookSpecYear">
-            一九八三年 パリアトリエ制作。
-          </div>
-          <div class="v-text-stream" id="lookSpecMaterial">
-            絹クレープ・ド・シーン百パーセント。立体裁断による直線的なドレープ。
-          </div>
-          <div class="v-text-stream muted" id="lookSpecDispatch">
-            学生証提示により三日間の特別貸出適用。
-          </div>
-        </div>
-
-        <div class="look-curatorial-text">
-          <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem;" id="curatorialDossierTag">
-            ARCHIVE DOSSIER // ROBE LONGUE COLUMN
-          </div>
-          <!-- Curatorial Catalogue Accession Seal -->
-          <div class="curatorial-room-seal">
-            <span class="exhibit-hanko-seal">展覧</span>
-            <span class="exhibit-room-number">第四室 // 永久所蔵図録 (ROOM IV // PERMANENT EXHIBITION)</span>
-          </div>
-          <h2 class="curatorial-title" id="curatorialHeading">THE ARCHITECTURE OF SILENT AUTHORITY.</h2>
-          <p style="font-size: 0.92rem; line-height: 1.8; color: #333333; margin-bottom: 1.75rem;" id="curatorialProse">
-            Purchased fast fashion shouts with polyester glitter and synthetic sheen. Archival couture speaks in weight, gravity, and pure silk crêpe de chine that catches the ambient tungsten light of campus auditoriums. When you step onto the valedictory stage in this gown, you do not look like a student playing dress-up. You look like the author of the room.
-          </p>
-          <div style="border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1rem 0; font-family: 'Space Mono', monospace; font-size: 0.75rem; margin-bottom: 1.5rem;" id="curatorialTariffBlock">
-            <div><strong>MUSEUM VALUATION:</strong> <span id="curatorialValuation">₹38,000 ARCHIVAL BENCHMARK</span></div>
-            <div style="margin-top: 0.35rem;"><strong>WEDELIA LEASE:</strong> <span id="curatorialLeaseRate" style="color: var(--vermilion); font-weight: 700;">₹2,499 / 3 DAYS (2 SIZES DISPATCHED)</span></div>
-          </div>
-
-          <div class="scroll-action-row">
-            <button class="unroll-next-btn" id="unrollNextBtn">
-              <span>UNROLL NEXT EXHIBIT // 次号掛軸開帳</span>
-              <span>⟶</span>
-            </button>
-            <button class="attach-cert-btn" id="attachCertBtn">
-              <span>TRANSFER TO LEASE CERTIFICATE</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- POSTER 004: NIGHT POSTER -->
-    <section class="exhibit-poster">
-      <div class="poster-id-tag">
-        <span>POSTER NO. 004 // CAMPUS NIGHT CHRONICLE</span>
-        <span class="vermilion-stamp">第四号 夜間行事</span>
-      </div>
-
-      <div class="night-poster-board">
+    <!-- ========================================================
+         ROOM 002 // THE KAKEMONO MOMENT (SIGNATURE SLOW UNROLL)
+         ======================================================== -->
+    <section class="chamber-kakemono" id="chamberKakemono">
+      <div class="chamber-marker">
         <div>
-          <h2 class="night-poster-title">FROM CAMPUS LECTURE HALL TO THE NIGHT.</h2>
-          <p style="font-size: 0.95rem; line-height: 1.8; color: #2b2b2b; margin-bottom: 2rem;">
-            At 17:00, you are taking notes on microeconomics in a lecture theatre. By 19:30, you have unzipped the sealed Wedelia carton at your hostel desk. The transformation is absolute. College is the only time in human life when you transition from student to aristocrat in twenty minutes. Wedelia supplies the armor for that metamorphosis.
-          </p>
-          <div style="font-family: 'Shippori Mincho', serif; font-size: 1.15rem; color: var(--vermilion); font-weight: 700;">
-            「記憶に残る一度きりの夜に、知的な選択を。」
-          </div>
+          <span>ROOM 002 // THE SUSPENDED KAKEMONO SCROLL</span>
+          <span style="margin-left: 1rem; color: var(--ink-muted);">(特別掛軸展覧)</span>
+        </div>
+        <div>
+          <span class="chamber-hanko">掛軸開帳</span>
+          <span style="margin-left: 0.5rem;">SIGNATURE SPECIMEN STUDY</span>
+        </div>
+      </div>
+
+      <div class="kakemono-stage-wrapper">
+        
+        <!-- Specimen Selection Tabs -->
+        <div class="kakemono-tabs-nav" id="kakemonoTabs">
+          <button class="kakemono-specimen-tab active" data-index="0">巻一 // ROBE LONGUE (1983)</button>
+          <button class="kakemono-specimen-tab" data-index="1">巻二 // ZÉMIRE FAILLE (1954)</button>
+          <button class="kakemono-specimen-tab" data-index="2">巻三 // DESSÈS DUET (1951)</button>
         </div>
 
-        <div style="border: 1px solid var(--fg); overflow: hidden;">
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Night Motion Visual" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(110%);">
+        <div class="kakemono-exhibition-stage">
+          
+          <!-- Suspended Kakemono Scroll Component -->
+          <div class="kakemono-suspended-scroll" id="kakemonoScrollObject">
+            <!-- Top Cord & Rod -->
+            <div class="scroll-top-hanger">
+              <div class="hanger-ring"></div>
+              <svg class="hanger-cords-svg" viewBox="0 0 120 12" fill="none">
+                <line x1="60" y1="0" x2="6" y2="12" stroke="var(--fg)" stroke-width="1.2" />
+                <line x1="60" y1="0" x2="114" y2="12" stroke="var(--fg)" stroke-width="1.2" />
+              </svg>
+            </div>
+
+            <div class="scroll-upper-rod"></div>
+
+            <div class="scroll-textile-canvas" id="kakemonoCanvas">
+              <img id="kakemonoImg" src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Robe Longue Sculptural Column">
+            </div>
+
+            <div class="scroll-lower-roller" id="kakemonoRollerBar">
+              <span class="roller-knob"></span>
+              <span class="roller-tag" id="kakemonoRollerTag">掛軸本紙 // WEIGHTED ATELIER ROD 380g</span>
+              <span class="roller-knob"></span>
+            </div>
+          </div>
+
+          <!-- Vertical Calligraphic Specimen Description -->
+          <div class="kakemono-vertical-dossier">
+            <div class="v-calligraphy prominent" id="kakemonoSpecYear">
+              一九八三年 パリアトリエ制作。
+            </div>
+            <div class="v-calligraphy body" id="kakemonoSpecMaterial">
+              絹クレープ・ド・シーン百パーセント。立体裁断による直線的なドレープ。
+            </div>
+            <div class="v-calligraphy muted" id="kakemonoSpecDispatch">
+              学生証提示により三日間の特別貸出適用。
+            </div>
+          </div>
+
+          <!-- Curatorial Commentary & Lease Access -->
+          <div class="kakemono-commentary">
+            <div class="specimen-accession-pill" id="kakemonoAccessionTag">
+              <span class="vermilion-dot"></span>
+              <span>ACCESSION NO. EX-1983-POI // TIER A+</span>
+            </div>
+
+            <h2 class="kakemono-heading" id="kakemonoHeading">THE ARCHITECTURE OF SILENT AUTHORITY.</h2>
+
+            <p class="kakemono-prose" id="kakemonoProse">
+              Purchased fast fashion shouts with polyester glitter and synthetic sheen. Archival couture speaks in weight, gravity, and pure silk crêpe de chine that catches the ambient tungsten light of campus auditoriums. When you step onto the valedictory stage in this gown, you do not look like a student playing dress-up. You look like the author of the room.
+            </p>
+
+            <div class="kakemono-spec-table">
+              <div class="kakemono-spec-row">
+                <span style="color: var(--ink-muted);">HISTORICAL VALUATION:</span>
+                <span id="kakemonoBenchmark">₹38,000 ARCHIVAL BENCHMARK</span>
+              </div>
+              <div class="kakemono-spec-row">
+                <span style="color: var(--ink-muted);">EXHIBITION LEASE:</span>
+                <span class="kakemono-tariff-display" id="kakemonoTariff">₹2,499 / 3 DAYS (2 SIZES DISPATCHED)</span>
+              </div>
+            </div>
+
+            <div class="kakemono-actions">
+              <button class="btn-unroll-next" id="btnKakemonoNext">
+                <span>UNROLL NEXT EXHIBIT // 次号開帳</span>
+                <span>⟶</span>
+              </button>
+              <button class="btn-to-custody" id="btnKakemonoCustody">
+                <span>TRANSFER TO LEASE CERTIFICATE</span>
+              </button>
+            </div>
+
+            <div class="kakemono-stamp-imprint" id="kakemonoStampBadge">
+              <span>印 // 認可 AUTHORIZED</span>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem;">CURATORIAL ACCESSION SEAL</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- POSTER 005: VERTICAL CALLIGRAPHIC LEASE SCROLL & EXHIBITION LOAN CERTIFICATE -->
-    <section class="exhibit-poster">
-      <div class="poster-id-tag">
-        <span>POSTER NO. 005 // TECHNICAL LEASE & EXHIBITION LOAN CERTIFICATE</span>
-        <span class="vermilion-stamp">第五号 貸出規約・受託証書</span>
+    <!-- ========================================================
+         ROOM 003 // EXHIBITION MAP & OCCASION CHAMBERS
+         ======================================================== -->
+    <section class="chamber-occasions" id="chamberOccasions">
+      <div class="chamber-marker">
+        <div>
+          <span>ROOM 003 // OCCASION CHAMBERS & CURATORIAL MAP</span>
+          <span style="margin-left: 1rem; color: var(--ink-muted);">(四室 四季祭事)</span>
+        </div>
+        <div>
+          <span class="chamber-hanko">式典意匠</span>
+          <span style="margin-left: 0.5rem;">QUAD-OCCASION COMPOSITION</span>
+        </div>
       </div>
 
-      <div class="lease-scroll-layout">
-        <!-- Left: Makimono Pillars Grid -->
-        <div class="makimono-pillars-grid">
-          <div class="scroll-vertical-column">
+      <div class="occasions-quad-grid">
+        
+        <!-- Chamber 1: Festival -->
+        <div class="occasion-pillar">
+          <div>
+            <div class="occasion-pillar-kanji highlight">祝祭</div>
+            <h3 class="occasion-pillar-en">FESTIVAL</h3>
+            <p class="occasion-pillar-body">
+              The annual campus festival. When tens of thousands gather on the lawns under stadium towers, fast fashion collapses into anonymity. Rent a piece that commands the ground.
+            </p>
+          </div>
+          <div class="occasion-pillar-meta">
+            <div>TARIFF: <strong>₹1,699 / 3D</strong></div>
+            <div>PEAK: <strong>FEB — APR</strong></div>
+            <div>SPECIMEN: <strong>KINETIC WRAPS</strong></div>
+          </div>
+        </div>
+
+        <!-- Chamber 2: Farewell -->
+        <div class="occasion-pillar">
+          <div>
+            <div class="occasion-pillar-kanji">門出</div>
+            <h3 class="occasion-pillar-en">FAREWELL</h3>
+            <p class="occasion-pillar-body">
+              The closing valedictory banquet of college life. Four years distilled into one black-tie evening. Walk the final red carpet in genuine haute couture faille and silk pleats.
+            </p>
+          </div>
+          <div class="occasion-pillar-meta">
+            <div>TARIFF: <strong>₹2,899 / 3D</strong></div>
+            <div>PEAK: <strong>APR — MAY</strong></div>
+            <div>SPECIMEN: <strong>SCULPTURAL FAILLE</strong></div>
+          </div>
+        </div>
+
+        <!-- Chamber 3: Concert -->
+        <div class="occasion-pillar">
+          <div>
+            <div class="occasion-pillar-kanji">響宴</div>
+            <h3 class="occasion-pillar-en">CONCERT</h3>
+            <p class="occasion-pillar-body">
+              Arena tours, EDM nights, and star concerts. High-energy silhouettes with metallic lurex weave and structured shoulder cuts that hold their shape through four hours of bass.
+            </p>
+          </div>
+          <div class="occasion-pillar-meta">
+            <div>TARIFF: <strong>₹1,499 / 3D</strong></div>
+            <div>PEAK: <strong>YEAR-ROUND</strong></div>
+            <div>SPECIMEN: <strong>METALLIC BROCADE</strong></div>
+          </div>
+        </div>
+
+        <!-- Chamber 4: Freshers -->
+        <div class="occasion-pillar">
+          <div>
+            <div class="occasion-pillar-kanji">新歓</div>
+            <h3 class="occasion-pillar-en">FRESHERS</h3>
+            <p class="occasion-pillar-body">
+              The inaugural university entrance. First impressions are written permanently into collegiate memory. Clean, architectural asymmetry with zero synthetic overstatement.
+            </p>
+          </div>
+          <div class="occasion-pillar-meta">
+            <div>TARIFF: <strong>₹1,299 / 3D</strong></div>
+            <div>PEAK: <strong>AUG — SEP</strong></div>
+            <div>SPECIMEN: <strong>DRAPED CHIFFON</strong></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         ROOM 004 // SECONDARY TEXTILE INSTALLATION (SUSPENDED STRIPS)
+         ======================================================== -->
+    <section class="chamber-textiles" id="chamberTextiles">
+      <div class="chamber-marker">
+        <div>
+          <span>ROOM 004 // SUSPENDED TEXTILE INSTALLATION</span>
+          <span style="margin-left: 1rem; color: var(--ink-muted);">(連作織物懸垂)</span>
+        </div>
+        <div>
+          <span class="chamber-hanko">織物標本</span>
+          <span style="margin-left: 0.5rem;">TRIPTYCH ATELIER STRIPS</span>
+        </div>
+      </div>
+
+      <div class="textiles-installation-stage">
+        
+        <!-- Strip A: Left Narrow Strip -->
+        <div class="suspended-textile-banner banner-left" id="bannerStripA">
+          <div class="banner-suspension-header">
+            <span>ACCESSION: EX-1949-CB</span>
+            <span class="banner-hanko">所蔵印</span>
+          </div>
+          <div class="banner-img-wrap">
+            <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Silhouette">
+          </div>
+          <div class="banner-content-box">
+            <div class="banner-v-caption">
+              宮廷金糸錦織。厳格なる建築的コルセット。
+            </div>
+            <div class="banner-h-spec">
+              <div><strong>適合:</strong> 式典 GALA</div>
+              <div><strong>仕様:</strong> METALLIC BROCADE</div>
+              <div><strong>等級:</strong> IMPERIAL TIER-S</div>
+              <div style="color: var(--vermilion); margin-top: 0.4rem;"><strong>₹2,899 / 3D</strong></div>
+            </div>
+          </div>
+          <div class="banner-bottom-bar">
+            <span class="banner-knob"></span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.5rem; color: var(--wood-accent);">WDL-TEXTILE-BAR</span>
+            <span class="banner-knob"></span>
+          </div>
+        </div>
+
+        <!-- Strip B: Center Prominent Strip -->
+        <div class="suspended-textile-banner banner-center" id="bannerStripB">
+          <div class="banner-suspension-header">
+            <span>ACCESSION: EX-1952-CD</span>
+            <span class="banner-hanko">特選印</span>
+          </div>
+          <div class="banner-img-wrap">
+            <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Faille">
+          </div>
+          <div class="banner-content-box">
+            <div class="banner-v-caption">
+              ディオール ゼミール。漆黒シルクファイユの威厳。
+            </div>
+            <div class="banner-h-spec">
+              <div><strong>適合:</strong> 舞踏会 SOIREE</div>
+              <div><strong>仕様:</strong> HEAVY SILK FAILLE</div>
+              <div><strong>等級:</strong> COUTURE PATRIMONY</div>
+              <div style="color: var(--vermilion); margin-top: 0.4rem;"><strong>₹2,999 / 3D</strong></div>
+            </div>
+          </div>
+          <div class="banner-bottom-bar">
+            <span class="banner-knob"></span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.5rem; color: var(--wood-accent);">WDL-TEXTILE-BAR</span>
+            <span class="banner-knob"></span>
+          </div>
+        </div>
+
+        <!-- Strip C: Right Offset Strip -->
+        <div class="suspended-textile-banner banner-right" id="bannerStripC">
+          <div class="banner-suspension-header">
+            <span>ACCESSION: EX-1951-JD</span>
+            <span class="banner-hanko">選定印</span>
+          </div>
+          <div class="banner-img-wrap">
+            <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Duet Gown">
+          </div>
+          <div class="banner-content-box">
+            <div class="banner-v-caption">
+              ジャン・デッセ。流麗なる古代ギリシア調プリーツ。
+            </div>
+            <div class="banner-h-spec">
+              <div><strong>適合:</strong> 卒業祝宴 BANQUET</div>
+              <div><strong>仕様:</strong> SILK CHIFFON DRAPERY</div>
+              <div><strong>等級:</strong> ATELIER TIER-A+</div>
+              <div style="color: var(--vermilion); margin-top: 0.4rem;"><strong>₹2,499 / 3D</strong></div>
+            </div>
+          </div>
+          <div class="banner-bottom-bar">
+            <span class="banner-knob"></span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.5rem; color: var(--wood-accent);">WDL-TEXTILE-BAR</span>
+            <span class="banner-knob"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         ROOM 005 // TEMPORARY CUSTODY & EXHIBITION LOAN CERTIFICATE
+         ======================================================== -->
+    <section class="chamber-custody" id="chamberCustody">
+      <div class="chamber-marker">
+        <div>
+          <span>ROOM 005 // TEMPORARY CUSTODY & LOAN RECORD</span>
+          <span style="margin-left: 1rem; color: var(--ink-muted);">(一時保管受託証書)</span>
+        </div>
+        <div>
+          <span class="chamber-hanko">貸出認証</span>
+          <span style="margin-left: 0.5rem;">EXHIBITION LOAN COVENANT</span>
+        </div>
+      </div>
+
+      <div class="custody-architecture-grid">
+        
+        <!-- Left: 4 Makimono Covenants -->
+        <div class="covenants-quad-grid">
+          <div class="covenant-column-card">
             <div>
-              <div class="scroll-big-kanji">三日</div>
-              <h4 class="scroll-term-title">03 DAYS LEASE</h4>
-              <p class="scroll-term-body">Delivered 24 hours prior to entrance. Gives you a relaxed evening before, event night, and a stress-free morning for return handover.</p>
+              <div class="covenant-big-kanji">三日</div>
+              <h4 class="covenant-title">03 DAYS LEASE</h4>
+              <p class="covenant-body">Delivered 24 hours prior to entrance. Gives you a relaxed evening before, event night, and a stress-free morning for return handover.</p>
             </div>
           </div>
 
-          <div class="scroll-vertical-column">
+          <div class="covenant-column-card">
             <div>
-              <div class="scroll-big-kanji">二着</div>
-              <h4 class="scroll-term-title">DUAL SIZES DISPATCHED</h4>
-              <p class="scroll-term-body">Your primary choice plus an adjacent complimentary backup size sealed in every delivery. Zero fitting anxiety on the big day.</p>
+              <div class="covenant-big-kanji">二着</div>
+              <h4 class="covenant-title">DUAL SIZES DISPATCHED</h4>
+              <p class="covenant-body">Your primary choice plus an adjacent complimentary backup size sealed in every delivery. Zero fitting anxiety on the big day.</p>
             </div>
           </div>
 
-          <div class="scroll-vertical-column">
+          <div class="covenant-column-card">
             <div>
-              <div class="scroll-big-kanji">零円</div>
-              <h4 class="scroll-term-title">₹0 DAMAGE LIABILITY</h4>
-              <p class="scroll-term-body">Dancefloor drink spills, minor hem wear, and bead loosening are 100% absorbed under our built-in insurance shield.</p>
+              <div class="covenant-big-kanji">零円</div>
+              <h4 class="covenant-title">₹0 DAMAGE LIABILITY</h4>
+              <p class="covenant-body">Dancefloor drink spills, minor hem wear, and bead loosening are 100% absorbed under our built-in insurance shield.</p>
             </div>
           </div>
 
-          <div class="scroll-vertical-column">
+          <div class="covenant-column-card">
             <div>
-              <div class="scroll-big-kanji">無洗</div>
-              <h4 class="scroll-term-title">ZERO LAUNDRY RETURN</h4>
-              <p class="scroll-term-body">Strictly do not dry clean or iron. Slip both pieces into the pre-paid return satchel unwashed. Handover at campus gate.</p>
+              <div class="covenant-big-kanji">無洗</div>
+              <h4 class="covenant-title">ZERO LAUNDRY RETURN</h4>
+              <p class="covenant-body">Strictly do not dry clean or iron. Slip both pieces into the pre-paid return satchel unwashed. Handover at campus gate.</p>
             </div>
           </div>
         </div>
 
-        <!-- Right: Interactive Certificate of Temporary Custody -->
+        <!-- Right: Official Certificate of Temporary Custody -->
         <div class="custody-certificate-panel" id="custodyCertificatePanel">
           <div class="cert-corner-seal">京都・東京</div>
-          <!-- Hanko Vermilion Seal -->
+          
+          <!-- Hanko Impression Stamp -->
           <div class="cert-hanko-seal" id="certHankoSeal">
             <span style="font-size: 1.5rem; line-height: 1;">受託済</span>
             <span style="font-family: 'Space Mono', monospace; font-size: 0.5rem; margin-top: 3px;">WEDELIA CUSTODY</span>
@@ -1395,7 +2016,7 @@
               </div>
             </div>
 
-            <!-- Sizing Covenant -->
+            <!-- Selector 3: Sizing Covenant -->
             <div class="cert-control-group">
               <span class="cert-label">3. SIZE ALLOCATION & BACKUP RESERVE</span>
               <div class="cert-pills-row" id="certSizePills">
@@ -1409,143 +2030,80 @@
               </div>
             </div>
 
-            <table style="width: 100%; border-collapse: collapse; font-family: 'Space Mono', monospace; font-size: 0.68rem; margin: 1.25rem 0 0.5rem; line-height: 1.8;">
-              <tr style="border-bottom: 1px dashed var(--line);">
-                <td style="color: var(--muted);">SELECTED SPECIMEN:</td>
-                <td id="certSpecimenVal" style="text-align: right; font-weight: 700;">SPECIMEN NO. 014: DIOR ZEMIRE 1952</td>
+            <table class="cert-summary-table">
+              <tr>
+                <td style="color: var(--ink-muted);">SELECTED SPECIMEN:</td>
+                <td id="certSpecimenVal">SPECIMEN NO. 014: DIOR ZEMIRE 1952</td>
               </tr>
-              <tr style="border-bottom: 1px dashed var(--line);">
-                <td style="color: var(--muted);">EXHIBITION WINDOW:</td>
-                <td id="certOccasionVal" style="text-align: right; font-weight: 700;">新歓 INDUCTION // 3 DAYS</td>
+              <tr>
+                <td style="color: var(--ink-muted);">EXHIBITION WINDOW:</td>
+                <td id="certOccasionVal">新歓 INDUCTION // 3 DAYS</td>
               </tr>
-              <tr style="border-bottom: 1px dashed var(--line);">
-                <td style="color: var(--muted);">ESCROW PROTOCOL:</td>
-                <td style="text-align: right; font-weight: 700;">100% REVERSIBLE</td>
+              <tr>
+                <td style="color: var(--ink-muted);">ESCROW PROTOCOL:</td>
+                <td>100% REVERSIBLE</td>
               </tr>
             </table>
 
-            <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 2px solid var(--fg); padding-top: 0.5rem; margin-top: 0.75rem;">
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted);">LOAN TARIFF:</span>
-              <span id="certTotalTariff" style="font-family: 'Shippori Mincho', serif; font-size: 1.6rem; font-weight: 900; color: var(--vermilion);">₹2,499</span>
+            <div class="cert-tariff-line">
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--ink-muted);">LOAN TARIFF:</span>
+              <span class="cert-tariff-val" id="certTotalTariff">₹2,499</span>
             </div>
           </div>
 
           <div>
-            <button class="loan-seal-btn" id="loanSealBtn">
+            <button class="btn-loan-seal" id="btnLoanSeal">
               <span>押印・受託認証 // APPLY VERMILION SEAL TO ENTRUST</span>
-              <span style="font-size: 0.62rem; font-family: 'Shippori Mincho', serif; opacity: 0.8;">TEMPORARY CUSTODY CEREMONY</span>
+              <span style="font-size: 0.62rem; font-family: 'Shippori Mincho', serif; opacity: 0.85;">TEMPORARY CUSTODY CEREMONY</span>
             </button>
             <div class="cert-confirmed-banner" id="certConfirmedBanner">
               【受託済】 TEMPORARY CUSTODY SEAL APPLIED. SPECIMEN ACCESSION REGISTERED. 2 SIZES DISPATCH TO RESIDENTIAL GATEWAY 24H PRIOR.
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- POSTER 006: MULTI-STRIP ARCHIVE -->
-    <section class="exhibit-poster">
-      <div class="poster-id-tag">
-        <span>POSTER NO. 006 // ARCHIVAL TRIPTYCH STRIPS</span>
-        <span class="vermilion-stamp">第六号 連作目録</span>
+    <!-- ========================================================
+         ROOM 006 // EXHIBITION EXIT & FINAL COLOPHON
+         ======================================================== -->
+    <section class="chamber-exit" id="chamberExit">
+      <div class="exit-v-marker">
+        展示終了 // 閲覧感謝
       </div>
 
-      <div class="strip-archive-grid">
-        <div class="strip-archive-item">
-          <div class="strip-archive-header">
-            <span>ACCESSION: EX-1951-JD</span>
-            <span class="strip-chop-seal">選定印</span>
-          </div>
-          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Duet Gown" class="strip-archive-img">
-          <div class="strip-caption-vertical">
-            一九五一年 ジャン・デッセ オートクチュール。流麗なる絹プリーツ。
-          </div>
-          <div class="strip-archive-footer">
-            <div><strong>適合:</strong> 卒業祝宴 // GALA</div>
-            <div><strong>仕様:</strong> SILK CHIFFON DRAPERY</div>
-            <div><strong>等級:</strong> TOKYO VAULT TIER-A</div>
-          </div>
-        </div>
+      <h2 class="exit-brand-monument">WEDELIA</h2>
 
-        <div class="strip-archive-item">
-          <div class="strip-archive-header">
-            <span>ACCESSION: EX-1949-CB</span>
-            <span class="strip-chop-seal">所蔵印</span>
-          </div>
-          <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade Silhouette" class="strip-archive-img">
-          <div class="strip-caption-vertical">
-            宮廷金糸錦織 ローブ・モンタント。厳格なる建築的コルセット。
-          </div>
-          <div class="strip-archive-footer">
-            <div><strong>適合:</strong> 式典 // COMMENCEMENT</div>
-            <div><strong>仕様:</strong> METALLIC BROCADE</div>
-            <div><strong>等級:</strong> IMPERIAL ARCHIVE TIER-S</div>
-          </div>
-        </div>
-
-        <div class="strip-archive-item">
-          <div class="strip-archive-header">
-            <span>ACCESSION: EX-1952-CD</span>
-            <span class="strip-chop-seal">特選印</span>
-          </div>
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Faille" class="strip-archive-img">
-          <div class="strip-caption-vertical">
-            一九五二年 ディオール ゼミール。漆黒シルクファイユの威厳。
-          </div>
-          <div class="strip-archive-footer">
-            <div><strong>適合:</strong> 舞踏会 // SOIREE</div>
-            <div><strong>仕様:</strong> HEAVY SILK FAILLE</div>
-            <div><strong>等級:</strong> COUTURE PATRIMONY TIER-A</div>
-          </div>
-        </div>
-
-        <div class="strip-archive-item">
-          <div class="strip-archive-header">
-            <span>ACCESSION: EX-1954-SK</span>
-            <span class="strip-chop-seal">認可印</span>
-          </div>
-          <img src="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg" alt="Strapless Hoop Gown" class="strip-archive-img">
-          <div class="strip-caption-vertical">
-            構造的クリノリン フープスカート造形。身体を拡張する空間性。
-          </div>
-          <div class="strip-archive-footer">
-            <div><strong>適合:</strong> 晩餐会 // FORMAL GALA</div>
-            <div><strong>仕様:</strong> STEEL HOOP ARCHITECTURE</div>
-            <div><strong>等級:</strong> SCULPTURAL EDITION TIER-A</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- POSTER 007: FINAL EXHIBITION POSTER -->
-    <section class="exhibit-poster final-monument-poster">
-      <div class="poster-id-tag" style="justify-content: center;">
-        <span class="vermilion-stamp">第七号 終章展覧</span>
-      </div>
-
-      <h2 class="final-monument-title">WEDELIA</h2>
-      <div style="font-family: 'Shippori Mincho', serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 0.2em; margin-bottom: 2rem;">
+      <div class="exit-colophon-jp">
         瞬間意匠貸出仕様 // 二〇二六
       </div>
-      <p class="final-colophon-text">
-        WEDELIA IS A SYSTEM OF TEMPORARY HIGH-FASHION POSSESSION. CRAFTED FOR THE CULTURAL CALENDARS OF UNIVERSITY LIFE ACROSS DELHI NCR AND BEYOND. ALL RIGHTS RESERVED.
+
+      <p class="exit-colophon-body">
+        WEDELIA IS A SYSTEM OF TEMPORARY HIGH-FASHION POSSESSION. CRAFTED FOR THE CULTURAL CALENDARS OF UNIVERSITY LIFE ACROSS DELHI NCR AND BEYOND. ALL ARCHIVAL SPECIMENS RETURN TO REPOSITORY FOLLOWING CUSTODY EXPIRATION.
       </p>
-      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em;">
-        EXHIBITION CONCLUDED // TOKYO × DELHI CAMPUS NETWORK
+
+      <div class="exit-curator-seal">
+        <span>完 // WEDELIA ARCHIVE</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em;">PERMANENT CONSIGNMENT RECORD</span>
+      </div>
+
+      <div class="exit-catalogue-note">
+        EXHIBITION CONCLUDED // TOKYO × DELHI CAMPUS REPOSITORY
       </div>
     </section>
 
-    <!-- Signature Sliding Exhibition Panel Overlay -->
-    <div class="washi-scroll-overlay" id="washiOverlay">
-      <div class="washi-inner-box">
-        <div class="washi-scroll-kanji">次号展覧・開帳</div>
-        <div class="washi-scroll-meta">EXHIBITION PANEL SLIDE // WASHI COUTURE ARCHIVE</div>
+    <!-- Signature Sliding Washi Curtain Overlay -->
+    <div class="washi-scroll-curtain" id="washiCurtain">
+      <div class="washi-curtain-inner">
+        <div class="curtain-kanji">次号展覧・開帳</div>
+        <div class="curtain-meta">EXHIBITION PANEL SLIDE // WASHI COUTURE ARCHIVE</div>
       </div>
     </div>
 
-    <!-- Exhibition Catalogue Seal Tab -->
-    <button class="exhibition-catalogue-seal" id="exhibitShiftBtn">
-      <span class="seal-kanji">目録</span>
+    <!-- Floating Curatorial Catalogue Tab -->
+    <button class="floating-catalogue-tab" id="floatingCatalogueBtn">
+      <span class="floating-seal-kanji">目録</span>
       <span>NEXT EXHIBIT ⟶</span>
     </button>
 
@@ -1558,161 +2116,120 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. DELIBERATE PHYSICAL ENTRANCE & EXPERIMENT 04-A: HANGING SCROLL UNROLL
+    // 1. Curatorial Itinerary Spy
+    const navSections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-itinerary .itinerary-step');
+
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+      const scrollPos = window.scrollY + 140;
+
+      navSections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          currentId = section.getAttribute('id');
+        }
+      });
+
+      if (currentId) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+        });
+      }
+    });
+
+    // 2. Room 001 Entrance Choreography
     if (!prefersReducedMotion) {
       const enterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       enterTl
-        .from('.poster-topbar', {
-          y: -25,
+        .from('.chamber-entrance .chamber-marker', {
+          y: -20,
           opacity: 0,
           duration: 0.8
         })
-        .from('.poster-col-manifesto .v-text-stream', {
+        .from('.entrance-vertical-manifesto .v-calligraphy', {
           y: -30,
           opacity: 0,
           duration: 1.1,
           stagger: 0.18,
           ease: 'power3.out'
         }, '-=0.4')
-        .from('.poster-title', {
-          y: 30,
+        .from('.monument-title', {
+          y: 25,
           opacity: 0,
           duration: 0.9,
           ease: 'power4.out'
         }, '-=0.8')
-        .from('.tall-image-strip', {
-          clipPath: 'inset(0 0 100% 0)',
-          duration: 1.4,
-          ease: 'power2.inOut'
-        }, '-=0.7')
-        .from('#hangingWeightBar', {
-          y: -250,
-          duration: 1.4,
-          ease: 'power2.inOut'
-        }, '<')
-        .fromTo('#hangingWeightBar', 
-          { y: 0 },
-          { y: -6, yoyo: true, repeat: 1, duration: 0.25, ease: 'power1.out' },
-          '-=0.1'
+        .fromTo('#entranceScrollImgWrap',
+          { clipPath: 'inset(0 0 100% 0)' },
+          { clipPath: 'inset(0 0 0% 0)', duration: 0.9, ease: 'power2.inOut' },
+          '-=0.5'
         )
-        .from('.tall-image-strip img', {
-          scale: 1.1,
-          duration: 1.6,
-          ease: 'power2.out'
-        }, '<')
-        .from('.v-number-block', {
-          x: 25,
+        .fromTo('#entranceWeightBar',
+          { y: -150 },
+          { y: 0, duration: 0.9, ease: 'power2.inOut' },
+          '<'
+        )
+        .from('.entrance-curator-dossier', {
+          x: 20,
           opacity: 0,
-          duration: 0.7,
-          stagger: 0.12,
+          duration: 0.8,
           ease: 'power3.out'
         }, '-=0.8');
     }
 
-    // 2. EXPERIMENT 04-C: VERTICAL TYPOGRAPHY COUNTER-FLOW SCRUB
+    // 3. Vertical Typography Counter-Flow Scrub
     if (!prefersReducedMotion) {
-      const manifestoStreams = document.querySelectorAll('.poster-col-manifesto .v-text-stream');
-      if (manifestoStreams.length >= 3) {
-        // Counter-directional scrub: bold down, regular up, muted down
-        gsap.to(manifestoStreams[0], {
+      const manifestoCalligraphy = document.querySelectorAll('.entrance-vertical-manifesto .v-calligraphy');
+      if (manifestoCalligraphy.length >= 3) {
+        gsap.to(manifestoCalligraphy[0], {
           y: 35,
           ease: 'none',
           scrollTrigger: {
-            trigger: '.poster-board',
+            trigger: '.chamber-entrance',
             start: 'top bottom',
             end: 'bottom top',
             scrub: 1.2
           }
         });
-        gsap.to(manifestoStreams[1], {
-          y: -40,
+        gsap.to(manifestoCalligraphy[1], {
+          y: -35,
           ease: 'none',
           scrollTrigger: {
-            trigger: '.poster-board',
+            trigger: '.chamber-entrance',
             start: 'top bottom',
             end: 'bottom top',
             scrub: 1.2
           }
         });
-        gsap.to(manifestoStreams[2], {
-          y: 25,
+        gsap.to(manifestoCalligraphy[2], {
+          y: 20,
           ease: 'none',
           scrollTrigger: {
-            trigger: '.poster-board',
+            trigger: '.chamber-entrance',
             start: 'top bottom',
             end: 'bottom top',
             scrub: 1.2
           }
         });
       }
-
-      // Other vertical streams
-      gsap.utils.toArray('.look-vertical-specs .v-text-stream').forEach(stream => {
-        gsap.to(stream, {
-          yPercent: -10,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: stream.closest('.exhibit-poster'),
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.4
-          }
-        });
-      });
-
-      // Kanji pillars in Poster 002
-      gsap.utils.toArray('.occasion-vertical-pillar').forEach((pillar, i) => {
-        gsap.from(pillar, {
-          y: 40,
-          opacity: 0,
-          duration: 0.9,
-          delay: (i % 2) * 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: pillar,
-            start: 'top 85%'
-          }
-        });
-      });
     }
 
-    // 3. EXPERIMENT 04-B: TACTILE VERMILION SEAL PRESS
-    const sealPressBtn = document.getElementById('sealPressBtn');
-    const sealImpressionBadge = document.getElementById('sealImpressionBadge');
-    const sealBtnText = document.getElementById('sealBtnText');
-    let isSealed = false;
-
-    if (sealPressBtn && sealImpressionBadge) {
-      sealPressBtn.addEventListener('click', () => {
-        isSealed = !isSealed;
-        if (!prefersReducedMotion) {
-          gsap.fromTo(sealImpressionBadge,
-            { scale: 1.4, rotate: -5, backgroundColor: 'var(--vermilion)', color: '#ffffff' },
-            { scale: 1, rotate: 0, backgroundColor: isSealed ? 'var(--vermilion)' : 'transparent', color: isSealed ? '#ffffff' : 'var(--vermilion)', duration: 0.35, ease: 'back.out(2)' }
-          );
-        }
-        if (sealBtnText) {
-          sealBtnText.textContent = isSealed ? 'VERIFIED // ARCHIVE REGISTRY SEALED' : 'PRESS CURATORIAL SEAL';
-        }
-      });
-    }
-
-    // 4.5 THE CURATED EXHIBITION HANGING SCROLL SYSTEM
-    const exhibitionScrolls = [
+    // 4. Room 002: Signature Kakemono Unroll System
+    const kakemonoSpecimens = [
       {
         tag: 'ACCESSION NO. EX-1983-POI // TIER A+',
         img: '/assets/editorial/robe-longue-1983-12-1-1.jpg',
         year: '一九八三年 パリアトリエ制作。',
         material: '絹クレープ・ド・シーン百パーセント。立体裁断による直線的なドレープ。',
         dispatch: '学生証提示により三日間の特別貸出適用。',
-        dossierTag: 'ARCHIVE DOSSIER // ROBE LONGUE COLUMN',
         heading: 'THE ARCHITECTURE OF SILENT AUTHORITY.',
         prose: 'Purchased fast fashion shouts with polyester glitter and synthetic sheen. Archival couture speaks in weight, gravity, and pure silk crêpe de chine that catches the ambient tungsten light of campus auditoriums. When you step onto the valedictory stage in this gown, you do not look like a student playing dress-up. You look like the author of the room.',
         valuation: '₹38,000 ARCHIVAL BENCHMARK',
-        lease: '₹2,499 / 3 DAYS (2 SIZES DISPATCHED)',
-        certTitle: '第〇八三号 意匠借用証書 // ROBE LONGUE',
-        nextScrollLabel: 'UNROLL NEXT EXHIBIT // 次号掛軸開帳 (ZÉMIRE)'
+        tariff: '₹2,499 / 3 DAYS (2 SIZES DISPATCHED)',
+        rollerTag: '掛軸本紙 // WEIGHTED ATELIER ROD 380g'
       },
       {
         tag: 'ACCESSION NO. EX-1954-CD // TIER S',
@@ -1720,13 +2237,11 @@
         year: '一九五四年 ディオール アトリエ制作。',
         material: '重厚なる漆黒シルクファイユ千四百八十グラム。彫刻的ペプラム造形。',
         dispatch: '卒業祝宴・正装晩餐会向け特別出納仕様。',
-        dossierTag: 'ARCHIVE DOSSIER // ZÉMIRE EVENING FAILLE',
         heading: 'MONUMENTAL GEOMETRY OF THE PEPLUM.',
         prose: 'The Zémire silhouette stands as Christian Dior’s definitive mastery of architectural tailoring. Cut from dense black silk faille that holds sculptural form under motion, the peplum flares into regal volume above a column skirt. Designed for senior farewell banquets where commanding dignity is non-negotiable.',
         valuation: '₹48,000 ARCHIVAL BENCHMARK',
-        lease: '₹2,999 / 3 DAYS (2 SIZES DISPATCHED)',
-        certTitle: '第〇一四号 意匠借用証書 // ZÉMIRE FAILLE',
-        nextScrollLabel: 'UNROLL NEXT EXHIBIT // 次号掛軸開帳 (DESSÈS DUET)'
+        tariff: '₹2,999 / 3 DAYS (2 SIZES DISPATCHED)',
+        rollerTag: '掛軸本紙 // WEIGHTED ATELIER ROD 450g'
       },
       {
         tag: 'ACCESSION NO. EX-1951-JD // TIER A+',
@@ -1734,185 +2249,168 @@
         year: '一九五一年 ジャン・デッセ パリ制作。',
         material: '極薄絹シフォンの手仕事プリーツ。古代ギリシア彫像の流麗なる陰影。',
         dispatch: '学園祭典・野外祝祭向け特別貸出認可。',
-        dossierTag: 'ARCHIVE DOSSIER // PLEATED DUET GOWN',
         heading: 'CLASSICAL GRECO-EGYPTIAN DRAPERY.',
         prose: 'Jean Dessès was the unmatched architect of fluid chiffon drapery. Under outdoor amphitheater winds and evening festival lanterns, the hand-pleated chiffon expands and ripples, producing an ethereal, unreplicable cinematic presence that photographs with timeless grain.',
         valuation: '₹54,000 ARCHIVAL BENCHMARK',
-        lease: '₹2,899 / 3 DAYS (2 SIZES DISPATCHED)',
-        certTitle: '第〇二九号 意匠借用証書 // PLEATED DUET',
-        nextScrollLabel: 'UNROLL NEXT EXHIBIT // 次号掛軸開帳 (ROBE LONGUE)'
+        tariff: '₹2,899 / 3 DAYS (2 SIZES DISPATCHED)',
+        rollerTag: '掛軸本紙 // WEIGHTED ATELIER ROD 340g'
       }
     ];
 
-    let currentScrollIndex = 0;
-    const scrollCuratorBtns = document.querySelectorAll('#scrollCuratorTabs .scroll-curator-btn');
-    const scrollAccessionTag = document.getElementById('scrollAccessionTag');
-    const curatorialDossierTag = document.getElementById('curatorialDossierTag');
-    const curatorialHeading = document.getElementById('curatorialHeading');
-    const curatorialProse = document.getElementById('curatorialProse');
-    const curatorialValuation = document.getElementById('curatorialValuation');
-    const curatorialLeaseRate = document.getElementById('curatorialLeaseRate');
-    const unrollNextBtn = document.getElementById('unrollNextBtn');
-    const attachCertBtn = document.getElementById('attachCertBtn');
+    let currentKakemonoIdx = 0;
+    const kakemonoTabs = document.querySelectorAll('#kakemonoTabs .kakemono-specimen-tab');
+    const kakemonoCanvas = document.getElementById('kakemonoCanvas');
+    const kakemonoImg = document.getElementById('kakemonoImg');
+    const kakemonoRollerBar = document.getElementById('kakemonoRollerBar');
+    const kakemonoRollerTag = document.getElementById('kakemonoRollerTag');
+    const kakemonoSpecYear = document.getElementById('kakemonoSpecYear');
+    const kakemonoSpecMaterial = document.getElementById('kakemonoSpecMaterial');
+    const kakemonoSpecDispatch = document.getElementById('kakemonoSpecDispatch');
+    const kakemonoAccessionTag = document.getElementById('kakemonoAccessionTag');
+    const kakemonoHeading = document.getElementById('kakemonoHeading');
+    const kakemonoProse = document.getElementById('kakemonoProse');
+    const kakemonoBenchmark = document.getElementById('kakemonoBenchmark');
+    const kakemonoTariff = document.getElementById('kakemonoTariff');
+    const kakemonoStampBadge = document.getElementById('kakemonoStampBadge');
+    const btnKakemonoNext = document.getElementById('btnKakemonoNext');
+    const btnKakemonoCustody = document.getElementById('btnKakemonoCustody');
 
-    function renderScrollExhibit(idx) {
-      currentScrollIndex = idx;
-      const data = exhibitionScrolls[idx];
-      scrollCuratorBtns.forEach((b, i) => {
-        b.classList.toggle('active', i === idx);
+    function renderKakemonoSpecimen(idx) {
+      currentKakemonoIdx = idx;
+      const data = kakemonoSpecimens[idx];
+
+      kakemonoTabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === idx);
       });
 
       if (!prefersReducedMotion) {
         gsap.timeline()
-          .to('#lookExhibitVisual', { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.25, ease: 'power2.in' })
-          .call(() => {
-            if (scrollAccessionTag) scrollAccessionTag.textContent = data.tag;
-            if (lookExhibitImg) lookExhibitImg.src = data.img;
-            if (lookSpecYear) lookSpecYear.textContent = data.year;
-            if (lookSpecMaterial) lookSpecMaterial.textContent = data.material;
-            if (curatorialDossierTag) curatorialDossierTag.textContent = data.dossierTag;
-            if (curatorialHeading) curatorialHeading.textContent = data.heading;
-            if (curatorialProse) curatorialProse.textContent = data.prose;
-            if (curatorialValuation) curatorialValuation.textContent = data.valuation;
-            if (curatorialLeaseRate) curatorialLeaseRate.textContent = data.lease;
-            if (unrollNextBtn) {
-              const span = unrollNextBtn.querySelector('span:first-child');
-              if (span) span.textContent = data.nextScrollLabel;
-            }
+          .to(kakemonoCanvas, {
+            clipPath: 'inset(0% 0% 100% 0%)',
+            duration: 0.35,
+            ease: 'power2.in'
           })
-          .fromTo('#lookExhibitVisual',
-            { clipPath: 'inset(0% 0% 100% 0%)' },
-            { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.65, ease: 'power3.out' }
-          )
-          .fromTo('.look-vertical-specs',
-            { opacity: 0, y: -15 },
-            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-            '-=0.4'
-          );
+          .to(kakemonoRollerBar, {
+            y: -150,
+            duration: 0.35,
+            ease: 'power2.in'
+          }, '<')
+          .set(kakemonoStampBadge, { opacity: 0, scale: 1.15, rotate: 3 })
+          .call(() => {
+            if (kakemonoImg) kakemonoImg.src = data.img;
+            if (kakemonoRollerTag) kakemonoRollerTag.textContent = data.rollerTag;
+            if (kakemonoSpecYear) kakemonoSpecYear.textContent = data.year;
+            if (kakemonoSpecMaterial) kakemonoSpecMaterial.textContent = data.material;
+            if (kakemonoSpecDispatch) kakemonoSpecDispatch.textContent = data.dispatch;
+            if (kakemonoAccessionTag) kakemonoAccessionTag.querySelector('span:last-child').textContent = data.tag;
+            if (kakemonoHeading) kakemonoHeading.textContent = data.heading;
+            if (kakemonoProse) kakemonoProse.textContent = data.prose;
+            if (kakemonoBenchmark) kakemonoBenchmark.textContent = data.valuation;
+            if (kakemonoTariff) kakemonoTariff.textContent = data.tariff;
+          })
+          .to(kakemonoCanvas, {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: 0.85,
+            ease: 'power3.out'
+          })
+          .to(kakemonoRollerBar, {
+            y: 0,
+            duration: 0.85,
+            ease: 'power3.out'
+          }, '<')
+          .to(kakemonoStampBadge, {
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            duration: 0.35,
+            ease: 'back.out(2)'
+          }, '-=0.2');
       } else {
-        if (scrollAccessionTag) scrollAccessionTag.textContent = data.tag;
-        if (lookExhibitImg) lookExhibitImg.src = data.img;
-        if (lookSpecYear) lookSpecYear.textContent = data.year;
-        if (lookSpecMaterial) lookSpecMaterial.textContent = data.material;
-        if (curatorialDossierTag) curatorialDossierTag.textContent = data.dossierTag;
-        if (curatorialHeading) curatorialHeading.textContent = data.heading;
-        if (curatorialProse) curatorialProse.textContent = data.prose;
-        if (curatorialValuation) curatorialValuation.textContent = data.valuation;
-        if (curatorialLeaseRate) curatorialLeaseRate.textContent = data.lease;
-        if (unrollNextBtn) {
-          const span = unrollNextBtn.querySelector('span:first-child');
-          if (span) span.textContent = data.nextScrollLabel;
+        if (kakemonoImg) kakemonoImg.src = data.img;
+        if (kakemonoRollerTag) kakemonoRollerTag.textContent = data.rollerTag;
+        if (kakemonoSpecYear) kakemonoSpecYear.textContent = data.year;
+        if (kakemonoSpecMaterial) kakemonoSpecMaterial.textContent = data.material;
+        if (kakemonoSpecDispatch) kakemonoSpecDispatch.textContent = data.dispatch;
+        if (kakemonoAccessionTag) kakemonoAccessionTag.querySelector('span:last-child').textContent = data.tag;
+        if (kakemonoHeading) kakemonoHeading.textContent = data.heading;
+        if (kakemonoProse) kakemonoProse.textContent = data.prose;
+        if (kakemonoBenchmark) kakemonoBenchmark.textContent = data.valuation;
+        if (kakemonoTariff) kakemonoTariff.textContent = data.tariff;
+        if (kakemonoStampBadge) {
+          kakemonoStampBadge.style.opacity = '1';
+          kakemonoStampBadge.style.transform = 'scale(1)';
         }
       }
     }
 
-    scrollCuratorBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const idx = parseInt(btn.dataset.index, 10);
-        renderScrollExhibit(idx);
+    kakemonoTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const idx = parseInt(tab.dataset.index, 10);
+        renderKakemonoSpecimen(idx);
       });
     });
 
-    if (unrollNextBtn) {
-      unrollNextBtn.addEventListener('click', () => {
-        const nextIdx = (currentScrollIndex + 1) % exhibitionScrolls.length;
-        renderScrollExhibit(nextIdx);
+    if (btnKakemonoNext) {
+      btnKakemonoNext.addEventListener('click', () => {
+        const nextIdx = (currentKakemonoIdx + 1) % kakemonoSpecimens.length;
+        renderKakemonoSpecimen(nextIdx);
       });
     }
 
-    // Attach to Lease Certificate
-    if (attachCertBtn) {
-      attachCertBtn.addEventListener('click', () => {
-        const data = exhibitionScrolls[currentScrollIndex];
-        const certTitleEl = document.querySelector('.cert-title-kanji');
-        if (certTitleEl) {
-          certTitleEl.textContent = data.certTitle;
-        }
-        const certPanel = document.querySelector('.custody-certificate-panel');
-        if (certPanel) {
-          certPanel.scrollIntoView({ behavior: 'smooth' });
-          gsap.fromTo(certPanel, 
-            { outline: '4px solid var(--vermilion)' }, 
-            { outline: '2px double var(--fg)', duration: 1.2 }
-          );
+    if (btnKakemonoCustody) {
+      btnKakemonoCustody.addEventListener('click', () => {
+        const custodySection = document.getElementById('chamberCustody');
+        if (custodySection) {
+          custodySection.scrollIntoView({ behavior: 'smooth' });
+          const certPanel = document.getElementById('custodyCertificatePanel');
+          if (certPanel && !prefersReducedMotion) {
+            gsap.fromTo(certPanel,
+              { outline: '4px solid var(--vermilion)' },
+              { outline: '2px double var(--fg)', duration: 1.2 }
+            );
+          }
         }
       });
     }
 
-    // 5. GALLERY OVERLAPPING EXHIBITION CHOREOGRAPHY (POSTER 006)
+    // Initial Trigger for Kakemono on Scroll
+    if (!prefersReducedMotion && kakemonoCanvas) {
+      ScrollTrigger.create({
+        trigger: '#chamberKakemono',
+        start: 'top 75%',
+        once: true,
+        onEnter: () => {
+          renderKakemonoSpecimen(0);
+        }
+      });
+    }
+
+    // 5. Room 004 Suspended Textile Strips Parallax
     if (!prefersReducedMotion) {
-      const galleryItems = gsap.utils.toArray('.strip-archive-item');
-      if (galleryItems.length >= 4) {
-        const galleryTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: '.strip-archive-grid',
-            start: 'top 80%',
-            end: 'bottom 40%',
-            scrub: 1.2
-          }
-        });
-
-        galleryTl
-          .from(galleryItems[0], { y: 60, opacity: 0, duration: 1 })
-          .from(galleryItems[1], { y: 90, opacity: 0, duration: 1 }, '-=0.5')
-          .to(galleryItems[0], { opacity: 0.75, filter: 'contrast(95%)', duration: 0.5 }, '<')
-          .from(galleryItems[2], { y: 110, opacity: 0, duration: 1 }, '-=0.5')
-          .to(galleryItems[1], { opacity: 0.75, filter: 'contrast(95%)', duration: 0.5 }, '<')
-          .from(galleryItems[3], { y: 130, opacity: 0, duration: 1 }, '-=0.5');
-      }
-
-      // Calligraphic Scroll Slips (Poster 005)
-      gsap.utils.toArray('.scroll-vertical-column').forEach((col, i) => {
-        gsap.from(col, {
-          y: 35,
-          opacity: 0,
-          duration: 0.8,
-          delay: i * 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.lease-scroll-layout',
-            start: 'top 85%'
-          }
-        });
-      });
-    }
-
-    // 4. SIGNATURE TRANSITION PROTOTYPE: SLIDING EXHIBITION PANEL
-    const shiftBtn = document.getElementById('exhibitShiftBtn');
-    const overlay = document.getElementById('washiOverlay');
-
-    let isShifting = false;
-
-    function triggerExhibitionShift() {
-      if (isShifting) return;
-      isShifting = true;
-
-      const shiftTl = gsap.timeline({
-        onComplete: () => {
-          isShifting = false;
+      gsap.to('#bannerStripA', {
+        y: 20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#chamberTextiles',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.4
         }
       });
 
-      shiftTl
-        .set(overlay, { clipPath: 'inset(100% 0 0 0)' })
-        .to(overlay, {
-          clipPath: 'inset(0% 0 0 0)',
-          duration: 0.85,
-          ease: 'power2.inOut'
-        })
-        .to(overlay, {
-          clipPath: 'inset(0 0 100% 0)',
-          duration: 0.85,
-          ease: 'power2.inOut',
-          delay: 0.2
-        });
+      gsap.to('#bannerStripC', {
+        y: -30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#chamberTextiles',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.2
+        }
+      });
     }
 
-    if (shiftBtn) {
-      shiftBtn.addEventListener('click', triggerExhibitionShift);
-    }
-
-    // 6. CERTIFICATE OF TEMPORARY CUSTODY CEREMONY
+    // 6. Room 005 Temporary Custody Certificate Ceremony
     let currentCertBase = 2499;
     let currentCertAdder = 0;
     let selectedCertSpecimen = 'SPECIMEN NO. 014: DIOR ZEMIRE 1952';
@@ -1928,18 +2426,19 @@
     const certOccasionVal = document.getElementById('certOccasionVal');
     const certTotalTariff = document.getElementById('certTotalTariff');
     const certBackupNote = document.getElementById('certBackupNote');
-    const loanSealBtn = document.getElementById('loanSealBtn');
+    const btnLoanSeal = document.getElementById('btnLoanSeal');
     const certHankoSeal = document.getElementById('certHankoSeal');
     const certConfirmedBanner = document.getElementById('certConfirmedBanner');
     const custodyPanel = document.getElementById('custodyCertificatePanel');
 
     function updateCertTariff() {
       const total = currentCertBase + currentCertAdder;
-      if (certTotalTariff) certTotalTariff.textContent = `₹${total.toLocaleString('en-IN')}`;
+      if (certTotalTariff) {
+        certTotalTariff.textContent = `₹${total.toLocaleString('en-IN')}`;
+      }
     }
 
-    // Specimen pill switch
-    certSpecimenPills.forEach((btn) => {
+    certSpecimenPills.forEach(btn => {
       btn.addEventListener('click', () => {
         certSpecimenPills.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -1950,8 +2449,7 @@
       });
     });
 
-    // Occasion pill switch
-    certOccasionPills.forEach((btn) => {
+    certOccasionPills.forEach(btn => {
       btn.addEventListener('click', () => {
         certOccasionPills.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -1962,8 +2460,7 @@
       });
     });
 
-    // Size pill switch
-    certSizePills.forEach((btn) => {
+    certSizePills.forEach(btn => {
       btn.addEventListener('click', () => {
         certSizePills.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -1975,18 +2472,18 @@
       });
     });
 
-    // Loan seal button confirmation ceremony
     let loanSealed = false;
-    if (loanSealBtn && certHankoSeal) {
-      loanSealBtn.addEventListener('click', () => {
+    if (btnLoanSeal && certHankoSeal) {
+      btnLoanSeal.addEventListener('click', () => {
         if (loanSealed) return;
         loanSealed = true;
 
         certHankoSeal.style.display = 'flex';
+
         if (!prefersReducedMotion) {
           gsap.timeline()
             .to(custodyPanel, {
-              boxShadow: '0 8px 30px rgba(209, 48, 40, 0.15)',
+              boxShadow: '0 8px 30px rgba(184, 58, 45, 0.16)',
               duration: 0.2
             })
             .to(certHankoSeal, {
@@ -1997,11 +2494,11 @@
               ease: 'back.out(2)'
             }, '-=0.1')
             .call(() => {
-              loanSealBtn.style.background = '#276749';
-              loanSealBtn.style.borderColor = '#276749';
-              loanSealBtn.innerHTML = `
+              btnLoanSeal.style.background = '#276749';
+              btnLoanSeal.style.borderColor = '#276749';
+              btnLoanSeal.innerHTML = `
                 <span>✓ 受託認証済 // LOAN ACCESSION REGISTERED</span>
-                <span style="font-size: 0.62rem; font-family: 'Shippori Mincho', serif; opacity: 0.8;">CUSTODY TRANSIT SEALED</span>
+                <span style="font-size: 0.62rem; font-family: 'Shippori Mincho', serif; opacity: 0.85;">CUSTODY TRANSIT SEALED</span>
               `;
               if (certConfirmedBanner) {
                 certConfirmedBanner.style.display = 'block';
@@ -2011,11 +2508,41 @@
         } else {
           certHankoSeal.style.opacity = '0.95';
           certHankoSeal.style.transform = 'scale(1)';
-          loanSealBtn.style.background = '#276749';
-          loanSealBtn.style.borderColor = '#276749';
-          loanSealBtn.textContent = '✓ 受託認証済 // LOAN ACCESSION REGISTERED';
+          btnLoanSeal.style.background = '#276749';
+          btnLoanSeal.style.borderColor = '#276749';
+          btnLoanSeal.textContent = '✓ 受託認証済 // LOAN ACCESSION REGISTERED';
           if (certConfirmedBanner) certConfirmedBanner.style.display = 'block';
         }
+      });
+    }
+
+    // 7. Signature Sliding Washi Curtain Transition
+    const floatingBtn = document.getElementById('floatingCatalogueBtn');
+    const washiCurtain = document.getElementById('washiCurtain');
+    let isCurtainMoving = false;
+
+    if (floatingBtn && washiCurtain) {
+      floatingBtn.addEventListener('click', () => {
+        if (isCurtainMoving) return;
+        isCurtainMoving = true;
+
+        gsap.timeline({
+          onComplete: () => {
+            isCurtainMoving = false;
+          }
+        })
+          .set(washiCurtain, { clipPath: 'inset(100% 0 0 0)' })
+          .to(washiCurtain, {
+            clipPath: 'inset(0% 0 0 0)',
+            duration: 0.85,
+            ease: 'power2.inOut'
+          })
+          .to(washiCurtain, {
+            clipPath: 'inset(0 0 100% 0)',
+            duration: 0.85,
+            ease: 'power2.inOut',
+            delay: 0.2
+          });
       });
     }
   </script>
