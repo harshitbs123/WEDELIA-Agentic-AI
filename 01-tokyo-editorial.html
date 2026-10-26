@@ -532,6 +532,76 @@
       text-align: right;
     }
 
+    /* OCCASION HOVER IMAGE PREVIEW (JAPANESE EDITORIAL ANNOTATION) */
+    .occasion-float-preview {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 160px;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      will-change: transform, opacity;
+      transform: translate3d(-9999px, -9999px, 0);
+    }
+    .preview-inner-card {
+      background: #fdfcf9;
+      border: 1px solid var(--fg);
+      padding: 0.35rem 0.35rem 0.45rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16), 0 3px 8px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+    .preview-img-frame {
+      width: 100%;
+      height: 140px;
+      overflow: hidden;
+      position: relative;
+      background: #e8e4dc;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    .preview-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(103%) saturate(96%);
+    }
+    .preview-vermilion-stamp {
+      position: absolute;
+      top: 0.25rem;
+      right: 0.25rem;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.58rem;
+      font-weight: 900;
+      color: #b32d20;
+      background: rgba(253, 252, 249, 0.94);
+      border: 1px solid #b32d20;
+      padding: 0 0.2rem;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    .preview-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 0.35rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      margin-top: 0.3rem;
+    }
+    .preview-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .preview-ref {
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
     /* COMPOSITION 3: EDITOR'S NOTE & CULTURAL ESSAY */
     .editors-letter-spread {
       display: grid;
@@ -1051,7 +1121,10 @@
     /* COMPOSITION 9: FINAL PUBLICATION COLOPHON */
     .colophon-ending {
       text-align: center;
-      padding: 5rem 1.5rem 3rem;
+      padding: 6.5rem 1.5rem 4.5rem;
+      border-top: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
     }
     .colophon-kanji {
       font-family: 'Shippori Mincho', serif;
@@ -1059,20 +1132,24 @@
       font-weight: 900;
       letter-spacing: 0.15em;
       margin-bottom: 1.5rem;
+      will-change: transform, opacity;
     }
     .colophon-brand {
       font-family: 'Shippori Mincho', serif;
-      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-size: clamp(3.2rem, 9.5vw, 7.5rem);
       font-weight: 700;
       line-height: 0.9;
       letter-spacing: -0.03em;
       margin-bottom: 1.5rem;
+      display: inline-block;
+      will-change: transform, opacity;
     }
     .colophon-sub {
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       color: var(--muted);
+      will-change: letter-spacing, opacity, transform;
     }
 
     /* COMPOSITION 8.5: DETACHABLE EDITORIAL ORDER SLIP */
@@ -1653,7 +1730,11 @@
       </div>
 
       <div class="giant-index-grid">
-        <a href="#fest" class="index-row">
+        <a href="#fest" class="index-row"
+           data-preview-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg"
+           data-preview-pos="center 20%"
+           data-preview-kanji="祝祭の夜"
+           data-preview-ref="MOMENT 01 // FESTIVAL">
           <div class="index-serial">01</div>
           <div class="index-title-group">
             <span class="index-name-en">FESTIVAL</span>
@@ -1663,7 +1744,11 @@
           <div class="index-tariff">₹1,699 / 3D</div>
         </a>
 
-        <a href="#freshers" class="index-row">
+        <a href="#freshers" class="index-row"
+           data-preview-img="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg"
+           data-preview-pos="center 25%"
+           data-preview-kanji="新歓の儀"
+           data-preview-ref="MOMENT 02 // FRESHERS">
           <div class="index-serial">02</div>
           <div class="index-title-group">
             <span class="index-name-en">FRESHERS</span>
@@ -1673,7 +1758,11 @@
           <div class="index-tariff">₹1,299 / 3D</div>
         </a>
 
-        <a href="#farewell" class="index-row">
+        <a href="#farewell" class="index-row"
+           data-preview-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg"
+           data-preview-pos="center 15%"
+           data-preview-kanji="門出の舞"
+           data-preview-ref="MOMENT 03 // FAREWELL">
           <div class="index-serial">03</div>
           <div class="index-title-group">
             <span class="index-name-en">FAREWELL</span>
@@ -1683,7 +1772,11 @@
           <div class="index-tariff">₹2,899 / 3D</div>
         </a>
 
-        <a href="#concert" class="index-row">
+        <a href="#concert" class="index-row"
+           data-preview-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg"
+           data-preview-pos="center 25%"
+           data-preview-kanji="響宴の刻"
+           data-preview-ref="MOMENT 04 // CONCERT">
           <div class="index-serial">04</div>
           <div class="index-title-group">
             <span class="index-name-en">CONCERT</span>
@@ -1693,7 +1786,11 @@
           <div class="index-tariff">₹1,499 / 3D</div>
         </a>
 
-        <a href="#date" class="index-row">
+        <a href="#date" class="index-row"
+           data-preview-img="/assets/editorial/robe-longue-1983-12-1-1.jpg"
+           data-preview-pos="center 15%"
+           data-preview-kanji="密会の席"
+           data-preview-ref="MOMENT 05 // DATE NIGHT">
           <div class="index-serial">05</div>
           <div class="index-title-group">
             <span class="index-name-en">DATE NIGHT</span>
@@ -1787,23 +1884,23 @@
           <span style="margin-left: 0.75rem; color: var(--muted);">PUBLISHED ROTATION FOR THE AUTUMN / SPRING SEASON</span>
         </div>
         <div class="fashion-plate-tabs" id="plateTabCluster">
-          <button class="plate-tab-btn active" data-index="0">01 // LOOK 014 (FAILLE)</button>
-          <button class="plate-tab-btn" data-index="1">02 // LOOK 029 (DUET)</button>
-          <button class="plate-tab-btn" data-index="2">03 // LOOK 053 (BROCADE)</button>
-          <button class="plate-tab-btn" data-index="3">04 // LOOK 067 (COLUMN)</button>
+          <button class="plate-tab-btn active" data-index="0">01 // LOOK 067 (COLUMN)</button>
+          <button class="plate-tab-btn" data-index="1">02 // LOOK 014 (FAILLE)</button>
+          <button class="plate-tab-btn" data-index="2">03 // LOOK 029 (DUET)</button>
+          <button class="plate-tab-btn" data-index="3">04 // LOOK 053 (BROCADE)</button>
         </div>
       </div>
 
       <div class="fashion-plate-stage" id="fashionPlateStage">
         <!-- Visual Column with Look Number Stamp -->
         <div class="plate-visual-box">
-          <div class="plate-look-num-stamp" id="plateLookStamp">LOOK 014</div>
+          <div class="plate-look-num-stamp" id="plateLookStamp">LOOK 067</div>
           <div class="plate-marginalia-top">
-            <span id="plateAtelierRef">PARIS ATELIER ARCHIVE // FALL 1954</span>
+            <span id="plateAtelierRef">PARIS ATELIER ARCHIVE // SPRING 1983</span>
             <span id="plateDualNotice">✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)</span>
           </div>
           <div class="plate-img-frame" id="plateImgFrame">
-            <img id="plateActiveImg" src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Editorial Fashion Plate">
+            <img id="plateActiveImg" src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Editorial Fashion Plate" style="object-position: center 15%;">
           </div>
           <div class="plate-marginalia-bottom">
             <div>図版視点 / PERSPECTIVE:</div>
@@ -1820,44 +1917,44 @@
         <div class="plate-editorial-text-col">
           <div>
             <div class="plate-vertical-kanji-rubi" id="plateKanjiRubi">
-              一回きりの夜に放つ、沈黙のオートクチュール。
+              静寂の夜を支配する、彫刻的ロングコラム。
             </div>
             <h3 class="plate-title-en" id="plateTitleEn">
-              Zemire Obsidian Silk Faille
+              Sculptural Longue Silk Column
             </h3>
             <span class="plate-occasion-badge" id="plateOccasionBadge">
-              OCCASION: SENIOR FAREWELL BALL & FORMAL VALEDICTORY
+              OCCASION: SENIOR FAREWELL BALL & DEBATING SOCIETY GALA
             </span>
             <p class="plate-prose" id="plateProse">
-              When you step into the university auditorium at 19:30, fast fashion collapses into synthetic anonymity. The Christian Dior 'Zémire' architectural faille peplum gown absorbs the ambient tungsten lighting, establishing an unshakeable presence. A sovereign silhouette cut for the graduating student who refuses to look like everyone else in the yearbook photograph.
+              Crafted in Paris atelier archives, 1983. A sovereign floor-length evening column cut on the bias from heavy silk crêpe de chine. Designed for institutional formals, senior valedictories, and black-tie society banquets where pure sculptural restraint commands the room.
             </p>
 
             <div class="plate-specs-ledger">
               <div class="plate-spec-item">
                 <strong>ATELIER COMPOSITION:</strong>
-                <span id="plateFiberVal">PURE HEAVY SILK FAILLE</span>
+                <span id="plateFiberVal">PURE SILK CRÊPE DE CHINE BIAS CUT</span>
               </div>
               <div class="plate-spec-item">
                 <strong>OCCASION PROTOCOL:</strong>
-                <span id="plateTimingVal">EVENING CALL TIME // 19:30 IST</span>
+                <span id="plateTimingVal">CEREMONY CALL TIME // 19:00 IST</span>
               </div>
               <div class="plate-spec-item">
                 <strong>ARCHIVE REFERENCE:</strong>
-                <span id="plateValuationVal">ARCHIVE NO. 014 // PARIS ATELIER</span>
+                <span id="plateValuationVal">ARCHIVE NO. 067 // PARIS ARCHIVE</span>
               </div>
               <div class="plate-spec-item">
                 <strong>EDITORIAL RENTAL:</strong>
-                <span id="plateTariffVal" style="font-weight: 700; color: #111111;">₹2,999 / 4 NIGHTS (DUAL-SIZE)</span>
+                <span id="plateTariffVal" style="font-weight: 700; color: #111111;">₹2,499 / 4 NIGHTS (DUAL-SIZE)</span>
               </div>
             </div>
           </div>
 
           <div class="plate-actions-row">
             <button class="turn-plate-btn" id="turnPlateBtn">
-              <span>TURN THE PAGE // 次の図版 (LOOK 029)</span>
+              <span>TURN THE PAGE // 次の図版 (LOOK 014)</span>
               <span>⟶</span>
             </button>
-            <button class="pin-to-slip-btn open-rental-btn" id="pinToSlipBtn" data-rent-garment="WD-005" data-rent-world="read">
+            <button class="pin-to-slip-btn open-rental-btn" id="pinToSlipBtn" data-rent-garment="WD-002" data-rent-world="read">
               <span>PIN TO ORDER SLIP // 注文票へ転写</span>
             </button>
           </div>
@@ -2097,7 +2194,7 @@
     </section>
 
     <!-- COMPOSITION 9: FINAL PUBLICATION COLOPHON -->
-    <footer class="colophon-ending">
+    <footer class="colophon-ending" id="publicationColophon">
       <div class="colophon-kanji">一期一会の夜に、知的な選択を。</div>
       <div class="colophon-brand">WEDELIA</div>
       <div class="colophon-sub">
@@ -2111,6 +2208,20 @@
       <span>TURN SPREAD ⟶</span>
       <span class="folio-kanji">次頁</span>
     </button>
+
+    <!-- Floating Japanese Editorial Occasion Hover Preview -->
+    <div class="occasion-float-preview" id="occasionFloatPreview" aria-hidden="true">
+      <div class="preview-inner-card">
+        <div class="preview-img-frame">
+          <img id="previewImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Occasion Look Preview">
+          <span class="preview-vermilion-stamp">印</span>
+        </div>
+        <div class="preview-caption">
+          <span class="preview-kanji" id="previewKanji">祝祭の夜</span>
+          <span class="preview-ref" id="previewRef">MOMENT 01 // FESTIVAL</span>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -2180,16 +2291,16 @@
     // 2. OCCASION INDEX & SPREAD CHOREOGRAPHY
     if (!prefersReducedMotion) {
       // Occasion rows reveal with deliberate staggering
-      gsap.utils.toArray('.occasion-row').forEach((row, i) => {
+      gsap.utils.toArray('.index-row').forEach((row, i) => {
         gsap.from(row, {
-          x: -30,
-          autoAlpha: 0,
-          duration: 0.8,
-          delay: (i % 2) * 0.1,
-          ease: 'power3.out',
+          y: 20,
+          opacity: 0,
+          duration: 0.75,
+          delay: (i % 3) * 0.08,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: row,
-            start: 'top 90%',
+            start: 'top 92%',
             toggleActions: 'play none none none'
           }
         });
@@ -2410,6 +2521,54 @@
           }
         });
       });
+
+      // COMPOSITION 9: FINAL PUBLICATION COLOPHON MOTION
+      const footerEl = document.getElementById('publicationColophon');
+      if (footerEl) {
+        const footTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: footerEl,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          },
+          defaults: { ease: 'power3.out' }
+        });
+
+        footTl
+          // Phase 1: Small publication closing inscription
+          .from('.colophon-kanji', {
+            y: 14,
+            opacity: 0,
+            duration: 0.75
+          })
+          // Phase 2: Giant WEDELIA horizontal editorial impression reveal
+          .from('.colophon-brand', {
+            xPercent: -4,
+            opacity: 0.2,
+            duration: 1.1,
+            ease: 'power3.out'
+          }, '-=0.4')
+          // Phase 4: Small colophon metadata tracking expansion & rise
+          .from('.colophon-sub', {
+            y: 12,
+            opacity: 0,
+            letterSpacing: '0.1em',
+            duration: 0.8,
+            ease: 'power2.out'
+          }, '-=0.5');
+
+        // Phase 3: Continuous subtle horizontal editorial drift across scroll
+        gsap.to('.colophon-brand', {
+          xPercent: 2,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: footerEl,
+            start: 'top bottom',
+            end: 'bottom bottom',
+            scrub: 1.4
+          }
+        });
+      }
     }
 
     // 4. SPINE READING PROGRESSION
@@ -2453,8 +2612,135 @@
       });
     }
 
-    // 6. THE EDITORIAL FASHION PLATE INTERACTIVE SYSTEM (4 ROTATION ENTRIES)
+    // 5.5 OCCASION HOVER IMAGE PREVIEW INTERACTION (EDITORIAL PHOTO ANNOTATION)
+    const previewEl = document.getElementById('occasionFloatPreview');
+    const previewImg = document.getElementById('previewImg');
+    const previewKanji = document.getElementById('previewKanji');
+    const previewRef = document.getElementById('previewRef');
+    const indexRows = document.querySelectorAll('.index-row');
+
+    if (previewEl && indexRows.length > 0 && !prefersReducedMotion) {
+      const xTo = gsap.quickTo(previewEl, 'x', { duration: 0.22, ease: 'power2.out' });
+      const yTo = gsap.quickTo(previewEl, 'y', { duration: 0.22, ease: 'power2.out' });
+
+      indexRows.forEach(row => {
+        // Desktop fine pointer hover
+        row.addEventListener('mouseenter', (e) => {
+          if (window.innerWidth <= 768) return;
+          const imgSrc = row.dataset.previewImg;
+          const imgPos = row.dataset.previewPos || 'center center';
+          const kanji = row.dataset.previewKanji || '';
+          const ref = row.dataset.previewRef || '';
+
+          if (previewImg) {
+            previewImg.src = imgSrc;
+            previewImg.style.objectPosition = imgPos;
+          }
+          if (previewKanji) previewKanji.textContent = kanji;
+          if (previewRef) previewRef.textContent = ref;
+
+          previewEl.style.visibility = 'visible';
+
+          const targetX = Math.min(Math.max(e.clientX + 24, 16), window.innerWidth - 180);
+          const targetY = Math.min(Math.max(e.clientY - 75, 16), window.innerHeight - 190);
+
+          gsap.killTweensOf(previewEl);
+          gsap.set(previewEl, { x: targetX, y: targetY });
+          gsap.fromTo(previewEl,
+            { opacity: 0, scale: 0.88, rotation: -2 },
+            { opacity: 1, scale: 1, rotation: 0, duration: 0.28, ease: 'power2.out' }
+          );
+        });
+
+        row.addEventListener('mousemove', (e) => {
+          if (window.innerWidth <= 768) return;
+          const targetX = Math.min(Math.max(e.clientX + 24, 16), window.innerWidth - 180);
+          const targetY = Math.min(Math.max(e.clientY - 75, 16), window.innerHeight - 190);
+          xTo(targetX);
+          yTo(targetY);
+        });
+
+        row.addEventListener('mouseleave', () => {
+          if (window.innerWidth <= 768) return;
+          gsap.to(previewEl, {
+            opacity: 0,
+            scale: 0.94,
+            duration: 0.2,
+            ease: 'power2.in',
+            onComplete: () => {
+              previewEl.style.visibility = 'hidden';
+            }
+          });
+        });
+
+        // Mobile tap interaction
+        let mobileTimeout = null;
+        row.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            const rect = row.getBoundingClientRect();
+            if (previewImg) {
+              previewImg.src = row.dataset.previewImg;
+              previewImg.style.objectPosition = row.dataset.previewPos || 'center center';
+            }
+            if (previewKanji) previewKanji.textContent = row.dataset.previewKanji || '';
+            if (previewRef) previewRef.textContent = row.dataset.previewRef || '';
+
+            previewEl.style.visibility = 'visible';
+            const targetX = Math.max(16, window.innerWidth - 180);
+            const targetY = Math.min(Math.max(rect.top - 10, 16), window.innerHeight - 190);
+
+            gsap.killTweensOf(previewEl);
+            gsap.set(previewEl, { x: targetX, y: targetY });
+            gsap.fromTo(previewEl,
+              { opacity: 0, scale: 0.9, rotation: 1 },
+              { opacity: 1, scale: 1, rotation: 0, duration: 0.25, ease: 'power2.out' }
+            );
+
+            clearTimeout(mobileTimeout);
+            mobileTimeout = setTimeout(() => {
+              gsap.to(previewEl, {
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.22,
+                ease: 'power2.in',
+                onComplete: () => {
+                  previewEl.style.visibility = 'hidden';
+                }
+              });
+            }, 2200);
+          }
+        });
+      });
+
+      // Hide preview on mobile scroll immediately
+      window.addEventListener('scroll', () => {
+        if (window.innerWidth <= 768 && previewEl.style.visibility === 'visible') {
+          gsap.set(previewEl, { opacity: 0, visibility: 'hidden' });
+        }
+      }, { passive: true });
+    }
+
+    // 6. THE EDITORIAL FASHION PLATE INTERACTIVE SYSTEM (4 ROTATION ENTRIES: 067 -> 014 -> 029 -> 053 -> 067)
     const platesData = [
+      {
+        lookNum: 'LOOK 067',
+        atelierRef: 'PARIS ATELIER ARCHIVE // SPRING 1983',
+        dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
+        img: '/assets/editorial/robe-longue-1983-12-1-1.jpg',
+        objectPosition: 'center 15%',
+        kanjiRubi: '静寂の夜を支配する、彫刻的ロングコラム。',
+        titleEn: 'Sculptural Longue Silk Column',
+        occasionBadge: 'OCCASION: SENIOR FAREWELL BALL & DEBATING SOCIETY GALA',
+        prose: "Crafted in Paris atelier archives, 1983. A sovereign floor-length evening column cut on the bias from heavy silk crêpe de chine. Designed for institutional formals, senior valedictories, and black-tie society banquets where pure sculptural restraint commands the room.",
+        fiber: 'PURE SILK CRÊPE DE CHINE BIAS CUT',
+        timing: 'CEREMONY CALL TIME // 19:00 IST',
+        valuation: 'ARCHIVE NO. 067 // PARIS ARCHIVE',
+        tariff: '₹2,499 / 4 NIGHTS (DUAL-SIZE)',
+        price: 2499,
+        garmentId: 'WD-002',
+        slipName: 'LOOK 067: SCULPTURAL LONGUE COLUMN',
+        nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 014)'
+      },
       {
         lookNum: 'LOOK 014',
         atelierRef: 'PARIS ATELIER ARCHIVE // FALL 1954',
@@ -2511,25 +2797,6 @@
         garmentId: 'WD-003',
         slipName: 'LOOK 053: GILDED COURT BROCADE',
         nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 067)'
-      },
-      {
-        lookNum: 'LOOK 067',
-        atelierRef: 'PARIS ATELIER ARCHIVE // SPRING 1983',
-        dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
-        img: '/assets/editorial/robe-longue-1983-12-1-1.jpg',
-        objectPosition: 'center 15%',
-        kanjiRubi: '静寂の夜を支配する、彫刻的ロングコラム。',
-        titleEn: 'Sculptural Longue Silk Column',
-        occasionBadge: 'OCCASION: SENIOR FAREWELL BALL & DEBATING SOCIETY GALA',
-        prose: "Crafted in Paris atelier archives, 1983. A sovereign floor-length evening column cut on the bias from heavy silk crêpe de chine. Designed for institutional formals, senior valedictories, and black-tie society banquets where pure sculptural restraint commands the room.",
-        fiber: 'PURE SILK CRÊPE DE CHINE BIAS CUT',
-        timing: 'CEREMONY CALL TIME // 19:00 IST',
-        valuation: 'ARCHIVE NO. 067 // PARIS ARCHIVE',
-        tariff: '₹2,499 / 4 NIGHTS (DUAL-SIZE)',
-        price: 2499,
-        garmentId: 'WD-002',
-        slipName: 'LOOK 067: SCULPTURAL LONGUE COLUMN',
-        nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 014)'
       }
     ];
 
