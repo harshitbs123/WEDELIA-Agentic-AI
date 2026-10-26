@@ -13,6 +13,7 @@
   <link rel="preload" as="image" href="/assets/editorial/farewell.webp">
   <link rel="preload" as="image" href="/assets/editorial/concert.jpg">
   <link rel="preload" as="image" href="/assets/editorial/date%20night.jpeg">
+  <link rel="preload" as="image" href="/assets/editorial/queen.avif">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
@@ -1080,6 +1081,21 @@
       letter-spacing: -0.02em;
       margin-bottom: 2rem;
     }
+    .campus-quote-headline .quote-line {
+      display: block;
+      overflow: hidden;
+      line-height: 1.18;
+    }
+    .campus-quote-headline .quote-word {
+      display: inline-block;
+      will-change: transform, opacity, clip-path;
+    }
+    .campus-culture-prose {
+      font-size: 0.98rem;
+      line-height: 1.85;
+      color: #3b3935;
+      will-change: transform;
+    }
     .campus-network-roster {
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
@@ -1087,6 +1103,7 @@
       line-height: 1.8;
       border-top: 1px solid var(--line);
       padding-top: 1.5rem;
+      will-change: transform, opacity;
     }
 
     /* COMPOSITION 9: FINAL PUBLICATION COLOPHON */
@@ -1157,9 +1174,21 @@
       padding: 2.5rem 2rem;
       position: relative;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      border-left: 2px dashed #a89f92;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      border-left: 2px dashed #9d9486;
       box-sizing: border-box;
+      transform-origin: top left;
+      will-change: transform, box-shadow;
+    }
+    .magazine-order-slip.is-hoverable:not(.is-detached):hover {
+      border-left-color: #111111;
+    }
+    .magazine-order-slip.is-tearing {
+      border-left-style: dashed;
+      border-left-color: #b51f25;
+    }
+    .magazine-order-slip.is-detached {
+      border-left: 2px dotted #b0a696;
+      box-shadow: 14px 20px 42px rgba(20, 18, 15, 0.12), 0 4px 12px rgba(20, 18, 15, 0.06);
     }
     @media (max-width: 768px) {
       .editorial-insert-section {
@@ -1178,12 +1207,40 @@
       font-family: 'Space Mono', monospace;
       font-size: 0.6rem;
       font-weight: 700;
-      padding: 0.15rem 0.5rem;
+      padding: 0.18rem 0.65rem;
       letter-spacing: 0.1em;
       max-width: 90%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .perforation-stub-label:hover {
+      background: #b51f25;
+      transform: translateY(-1px);
+    }
+    .slip-reset-btn {
+      display: none;
+      margin-top: 1rem;
+      width: 100%;
+      background: transparent;
+      border: 1px dashed #999083;
+      color: #555555;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.6rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .slip-reset-btn:hover {
+      border-color: #111111;
+      color: #111111;
+      background: rgba(0, 0, 0, 0.03);
     }
     .slip-corner-cross {
       position: absolute;
@@ -1470,6 +1527,20 @@
       border-left: 1px solid currentColor;
       padding-left: 0.65rem;
       letter-spacing: 0.12em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor-preview {
+        display: none !important;
+      }
+      .campus-quote-headline .quote-word {
+        clip-path: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .magazine-order-slip {
+        transition: none !important;
+      }
     }
     @media (max-width: 640px) {
       .publication-folio-control {
@@ -1814,10 +1885,10 @@
 
       <div class="issue-feature-stage">
         <div class="issue-feature-visual" data-aos="fade-right">
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Runway Kinetic Shift">
+          <img src="/assets/editorial/queen.avif" alt="Tokyo Architectural Draped Ivory Silk">
           <div class="issue-feature-visual-meta" style="display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 1rem;">
-            <span>FIGURE 02: KINETIC REFLECTIVE KNIT</span>
-            <span>RUNWAY ARCHIVE // SUMMER EDITION</span>
+            <span>FIGURE 02: ARCHITECTURAL DRAPED IVORY</span>
+            <span>TOKYO EDITORIAL ARCHIVE // AUTUMN EDITION</span>
           </div>
         </div>
 
@@ -1993,17 +2064,20 @@
     </section>
 
     <!-- COMPOSITION 8: CAMPUS CULTURE STORIES -->
-    <section class="campus-culture-spread">
+    <section class="campus-culture-spread" id="campusCultureSpread">
       <div>
-        <h2 class="campus-quote-headline">
-          "WE DRESS THE MAIN CHARACTERS OF CAMPUS NIGHTLIFE."
+        <h2 class="campus-quote-headline" aria-label="WE DRESS THE MAIN CHARACTERS OF CAMPUS NIGHTLIFE.">
+          <span class="quote-line"><span class="quote-word">“WE DRESS</span></span>
+          <span class="quote-line"><span class="quote-word">THE MAIN</span></span>
+          <span class="quote-line"><span class="quote-word">CHARACTERS</span></span>
+          <span class="quote-line"><span class="quote-word">OF CAMPUS NIGHTLIFE.”</span></span>
         </h2>
         <div class="campus-network-roster">
           CAMPUS NODES: MIRANDA HOUSE • LADY SHRI RAM • ST. STEPHEN'S • HINDU COLLEGE • SRCC • IIT DELHI • NIFT HAUZ KHAS • ASHOKA SONIPAT • ST. XAVIER'S MUMBAI
         </div>
       </div>
 
-      <div style="font-size: 0.98rem; line-height: 1.85; color: #3b3935;">
+      <div class="campus-culture-prose">
         <p style="margin-bottom: 1.5rem;">
           College is an intense, four-year flash of life where personal style accelerates. The photographs taken during fest season and farewell week remain the anchor of your visual memory for the next decade.
         </p>
@@ -2020,8 +2094,8 @@
         <span>ISSUE 26 ARCHIVE ENCLOSURE // TYPEWRITTEN DESK RECORD</span>
       </div>
 
-      <div class="magazine-order-slip" id="magazineOrderSlip">
-        <div class="perforation-stub-label">✂ TEAR ALONG PERFORATION TO CONFIRM DESK RESERVATION</div>
+      <div class="magazine-order-slip is-hoverable" id="magazineOrderSlip">
+        <div class="perforation-stub-label" id="perforationStubLabel" title="Click to tear slip along perforation">✂ TEAR ALONG PERFORATION TO CONFIRM DESK RESERVATION</div>
         <span class="slip-corner-cross tl">+</span>
         <span class="slip-corner-cross tr">+</span>
         <span class="slip-corner-cross bl">+</span>
@@ -2050,7 +2124,7 @@
               <div class="slip-pills-row" id="slipOccasionRow">
                 <button class="slip-pill-btn active" data-occasion="FRESHERS BALL" data-look="LOOK 014: JAPANESE FLORAL MAXI DRESS" data-price="2499" data-img="/assets/editorial/maxi-dress-with-a-japanese-floral-print-and-a-round-neckline-brown__47d2e225cb451b1402e0bedaf5457566.jpeg">FRESHERS BALL</button>
                 <button class="slip-pill-btn" data-occasion="SENIOR FAREWELL" data-look="LOOK 021: JEAN DESSES PLEATED DUET" data-price="2899" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">SENIOR FAREWELL</button>
-                <button class="slip-pill-btn" data-occasion="COLLEGE FEST" data-look="LOOK 038: KINETIC SHIFT & WRAP" data-price="1699" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">COLLEGE FEST</button>
+                <button class="slip-pill-btn" data-occasion="COLLEGE FEST" data-look="LOOK 038: ARCHITECTURAL DRAPED IVORY" data-price="1699" data-img="/assets/editorial/queen.avif">COLLEGE FEST</button>
                 <button class="slip-pill-btn" data-occasion="SOCIETY BANQUET" data-look="LOOK 053: GOLD BROCADE ROBE" data-price="3499" data-img="/assets/editorial/court-dress.jpg">SOCIETY BANQUET</button>
               </div>
             </div>
@@ -2154,6 +2228,10 @@
             <div class="slip-confirmed-banner" id="slipConfirmedBanner">
               ✦ DISPATCH SLIP STAMPED & LOGGED. REF: #WDL-ED-26-8821. SILHOUETTES DISPATCH 24H PRIOR.
             </div>
+
+            <button class="slip-reset-btn" id="slipResetBtn" type="button">
+              ↺ RE-ATTACH SLIP TO ISSUE 26 // 帳票を元に戻す
+            </button>
           </div>
         </div>
       </div>
@@ -2564,172 +2642,181 @@
       });
     }
 
-    // 5.5 CURSOR-FOLLOWING OCCASION PHOTOGRAPHIC PREVIEW (MINIMAL ART-DIRECTED FLOATING OBJECT)
-    const previewEl = document.getElementById('cursorPreview') || document.querySelector('.cursor-preview');
-    const previewImg = document.getElementById('cursorPreviewImg') || previewEl?.querySelector('img');
-    const occasionLinks = document.querySelectorAll('.occasion-link');
+    // 5.5 CURSOR-FOLLOWING OCCASION PHOTOGRAPHIC PREVIEW (IDEMPOTENT & HARDENED PERSISTENT COMPOSITOR TRACKING)
+    if (!window.__wedeliaCursorPreviewInitialized && !prefersReducedMotion) {
+      const previewEl = document.getElementById('cursorPreview') || document.querySelector('.cursor-preview');
+      const previewImg = document.getElementById('cursorPreviewImg') || previewEl?.querySelector('img');
+      const occasionLinks = document.querySelectorAll('.occasion-link');
 
-    if (previewEl && occasionLinks.length > 0 && !prefersReducedMotion) {
-      if (previewEl.parentElement !== document.body) {
-        document.body.appendChild(previewEl);
-      }
-      const PREVIEW_WIDTH = 170;
-      const PREVIEW_HEIGHT = 225;
-      const OFFSET = 20;
+      if (previewEl && occasionLinks.length > 0) {
+        window.__wedeliaCursorPreviewInitialized = true;
 
-      // Preload occasion campaign imagery for instant responsive hover
-      const occasionImgs = [
-        '/assets/editorial/festival.webp',
-        '/assets/editorial/freshers.jpg',
-        '/assets/editorial/farewell.webp',
-        '/assets/editorial/concert.jpg',
-        '/assets/editorial/date night.jpeg'
-      ];
-      occasionImgs.forEach(src => {
-        const im = new Image();
-        im.src = src;
-      });
+        if (previewEl.parentElement !== document.body) {
+          document.body.appendChild(previewEl);
+        }
 
-      const xTo = gsap.quickTo(previewEl, 'x', {
-        duration: 0.32,
-        ease: 'power3.out'
-      });
+        const PREVIEW_WIDTH = 170;
+        const PREVIEW_HEIGHT = 225;
+        const OFFSET = 20;
 
-      const yTo = gsap.quickTo(previewEl, 'y', {
-        duration: 0.32,
-        ease: 'power3.out'
-      });
+        // Viewport bounds cached and updated strictly on passive resize (zero layout thrashing in mousemove)
+        let winW = window.innerWidth;
+        let winH = window.innerHeight;
+        window.addEventListener('resize', () => {
+          winW = window.innerWidth;
+          winH = window.innerHeight;
+        }, { passive: true });
 
-      function calcCoordinates(e) {
-        // Dynamically flip offset if approaching right or bottom edge
-        const flipX = (e.clientX + OFFSET + PREVIEW_WIDTH > window.innerWidth - 10);
-        const flipY = (e.clientY + OFFSET + PREVIEW_HEIGHT > window.innerHeight - 10);
+        // Preload occasion campaign imagery for instant responsive hover
+        const occasionImgs = [
+          '/assets/editorial/festival.webp',
+          '/assets/editorial/freshers.jpg',
+          '/assets/editorial/farewell.webp',
+          '/assets/editorial/concert.jpg',
+          '/assets/editorial/date night.jpeg'
+        ];
+        occasionImgs.forEach(src => {
+          const im = new Image();
+          im.src = src;
+        });
 
-        let targetX = flipX ? (e.clientX - PREVIEW_WIDTH - OFFSET) : (e.clientX + OFFSET);
-        let targetY = flipY ? (e.clientY - PREVIEW_HEIGHT - OFFSET) : (e.clientY + OFFSET);
+        // SINGLE persistent quickTo instance pair created ONCE
+        const xTo = gsap.quickTo(previewEl, 'x', {
+          duration: 0.26,
+          ease: 'power3.out'
+        });
 
-        // Clamping to stay safely within viewport bounds
-        targetX = Math.max(8, Math.min(window.innerWidth - PREVIEW_WIDTH - 8, targetX));
-        targetY = Math.max(8, Math.min(window.innerHeight - PREVIEW_HEIGHT - 8, targetY));
+        const yTo = gsap.quickTo(previewEl, 'y', {
+          duration: 0.26,
+          ease: 'power3.out'
+        });
 
-        return { x: targetX, y: targetY };
-      }
+        // Fast arithmetic coordinate clamping (no DOM or layout queries)
+        function updateCoordinates(clientX, clientY) {
+          const flipX = (clientX + OFFSET + PREVIEW_WIDTH > winW - 10);
+          const flipY = (clientY + OFFSET + PREVIEW_HEIGHT > winH - 10);
 
-      let isPreviewActive = false;
-      let currentActiveLink = null;
+          let targetX = flipX ? (clientX - PREVIEW_WIDTH - OFFSET) : (clientX + OFFSET);
+          let targetY = flipY ? (clientY - PREVIEW_HEIGHT - OFFSET) : (clientY + OFFSET);
 
-      occasionLinks.forEach(link => {
-        link.addEventListener('mouseenter', (e) => {
-          if (window.innerWidth <= 768) return;
+          if (targetX < 8) targetX = 8;
+          else if (targetX > winW - PREVIEW_WIDTH - 8) targetX = winW - PREVIEW_WIDTH - 8;
 
-          const image = link.dataset.preview || link.dataset.previewImg;
-          if (!image) return;
+          if (targetY < 8) targetY = 8;
+          else if (targetY > winH - PREVIEW_HEIGHT - 8) targetY = winH - PREVIEW_HEIGHT - 8;
 
-          const coords = calcCoordinates(e);
+          xTo(targetX);
+          yTo(targetY);
+          return { targetX, targetY };
+        }
 
-          if (!isPreviewActive) {
-            isPreviewActive = true;
-            currentActiveLink = link;
+        let isPreviewActive = false;
+        let currentActiveLink = null;
 
-            if (previewImg) {
-              previewImg.src = image;
-              previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
-            }
+        occasionLinks.forEach(link => {
+          link.addEventListener('mouseenter', (e) => {
+            if (winW <= 768) return;
 
-            previewEl.style.visibility = 'visible';
+            const image = link.dataset.preview || link.dataset.previewImg;
+            if (!image) return;
 
-            gsap.killTweensOf(previewEl);
-            gsap.set(previewEl, { x: coords.x, y: coords.y });
-            xTo(coords.x);
-            yTo(coords.y);
+            const coords = updateCoordinates(e.clientX, e.clientY);
 
-            gsap.fromTo(
-              previewEl,
-              {
-                opacity: 0,
-                scale: 0.9,
-                x: coords.x,
-                y: coords.y
-              },
-              {
-                opacity: 1,
-                scale: 1,
-                x: coords.x,
-                y: coords.y,
-                duration: 0.22,
-                ease: 'power3.out'
-              }
-            );
-          } else {
-            // Direct transfer between occasion links
-            currentActiveLink = link;
-            if (previewImg) {
-              const currentSrc = previewImg.getAttribute('src');
-              if (currentSrc !== image) {
+            if (!isPreviewActive) {
+              isPreviewActive = true;
+              currentActiveLink = link;
+
+              if (previewImg) {
                 previewImg.src = image;
                 previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
-                gsap.fromTo(
-                  previewImg,
-                  { opacity: 0.45 },
-                  { opacity: 1, duration: 0.18, ease: 'power2.out' }
-                );
               }
-            }
-            xTo(coords.x);
-            yTo(coords.y);
-          }
-        });
 
-        link.addEventListener('mousemove', (e) => {
-          if (window.innerWidth <= 768 || !isPreviewActive) return;
-          const coords = calcCoordinates(e);
-          xTo(coords.x);
-          yTo(coords.y);
-        });
+              previewEl.style.visibility = 'visible';
 
-        link.addEventListener('mouseleave', (e) => {
-          if (window.innerWidth <= 768) return;
-          const nextTarget = e.relatedTarget;
-          if (nextTarget && nextTarget.closest && nextTarget.closest('.occasion-link')) {
-            return;
-          }
+              // Set initial position immediately with set; do NOT pass x/y to fromTo
+              gsap.set(previewEl, { x: coords.targetX, y: coords.targetY });
 
-          isPreviewActive = false;
-          currentActiveLink = null;
+              // ONLY kill opacity and scale, NEVER kill persistent xTo / yTo tweens!
+              gsap.killTweensOf(previewEl, 'opacity,scale');
 
-          gsap.killTweensOf(previewEl);
-          gsap.to(previewEl, {
-            opacity: 0,
-            scale: 0.94,
-            duration: 0.18,
-            ease: 'power2.out',
-            onComplete: () => {
-              if (!isPreviewActive) {
-                previewEl.style.visibility = 'hidden';
+              gsap.fromTo(
+                previewEl,
+                { opacity: 0, scale: 0.92 },
+                { opacity: 1, scale: 1, duration: 0.22, ease: 'power3.out', overwrite: 'auto' }
+              );
+            } else {
+              // Direct switch between occasion links
+              currentActiveLink = link;
+              if (previewImg) {
+                const currentSrc = previewImg.getAttribute('src');
+                if (currentSrc !== image) {
+                  previewImg.src = image;
+                  previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
+                  gsap.killTweensOf(previewImg, 'opacity');
+                  gsap.fromTo(
+                    previewImg,
+                    { opacity: 0.5 },
+                    { opacity: 1, duration: 0.18, ease: 'power2.out', overwrite: 'auto' }
+                  );
+                }
               }
             }
           });
-        });
-      });
 
-      // Hide preview if user scrolls away rapidly
-      window.addEventListener('scroll', () => {
-        if (isPreviewActive && previewEl.style.visibility === 'visible') {
-          isPreviewActive = false;
-          currentActiveLink = null;
-          gsap.to(previewEl, {
-            opacity: 0,
-            scale: 0.94,
-            duration: 0.15,
-            ease: 'power2.out',
-            onComplete: () => {
-              if (!isPreviewActive) {
-                previewEl.style.visibility = 'hidden';
-              }
-            }
+          link.addEventListener('mousemove', (e) => {
+            if (winW <= 768 || !isPreviewActive) return;
+            // Pure coordinate update on the compositor
+            updateCoordinates(e.clientX, e.clientY);
           });
-        }
-      }, { passive: true });
+
+          link.addEventListener('mouseleave', (e) => {
+            if (winW <= 768) return;
+            const nextTarget = e.relatedTarget;
+            if (nextTarget && nextTarget.closest && nextTarget.closest('.occasion-link')) {
+              return; // Handled by next row's mouseenter
+            }
+
+            isPreviewActive = false;
+            currentActiveLink = null;
+
+            // ONLY kill opacity and scale, preserving persistent quickTo
+            gsap.killTweensOf(previewEl, 'opacity,scale');
+            gsap.to(previewEl, {
+              opacity: 0,
+              scale: 0.94,
+              duration: 0.18,
+              ease: 'power2.out',
+              overwrite: 'auto',
+              onComplete: () => {
+                if (!isPreviewActive) {
+                  previewEl.style.visibility = 'hidden';
+                }
+              }
+            });
+          });
+        });
+
+        // Hide preview if user scrolls away rapidly
+        window.addEventListener('scroll', () => {
+          if (isPreviewActive && previewEl.style.visibility === 'visible') {
+            isPreviewActive = false;
+            currentActiveLink = null;
+            gsap.killTweensOf(previewEl, 'opacity,scale');
+            gsap.to(previewEl, {
+              opacity: 0,
+              scale: 0.94,
+              duration: 0.15,
+              ease: 'power2.out',
+              overwrite: 'auto',
+              onComplete: () => {
+                if (!isPreviewActive) {
+                  previewEl.style.visibility = 'hidden';
+                }
+              }
+            });
+          }
+        }, { passive: true });
+      }
     }
 
     // 6. THE EDITORIAL FASHION PLATE INTERACTIVE SYSTEM (4 ROTATION ENTRIES: 067 -> 014 -> 029 -> 053 -> 067)
@@ -3033,11 +3120,76 @@
       turnBtn.addEventListener('click', executePhysicalSpreadTurn);
     }
 
-    // 9. TACTILE EDITORIAL INSERT SLIP INTERACTION
+    // 8.5 CAMPUS CULTURE HEADLINE SCROLLTRIGGER (EDITORIAL TYPOGRAPHY REVEAL & DEPTH PARALLAX)
+    const campusSpread = document.getElementById('campusCultureSpread') || document.querySelector('.campus-culture-spread');
+    if (campusSpread && !prefersReducedMotion) {
+      const quoteWords = campusSpread.querySelectorAll('.campus-quote-headline .quote-word');
+      const roster = campusSpread.querySelector('.campus-network-roster');
+      const prose = campusSpread.querySelector('.campus-culture-prose');
+
+      const campusTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: campusSpread,
+          start: 'top 82%',
+          once: true
+        }
+      });
+
+      campusTl.fromTo(quoteWords, {
+        opacity: 0,
+        yPercent: 110,
+        clipPath: 'inset(100% 0 0 0)'
+      }, {
+        opacity: 1,
+        yPercent: 0,
+        clipPath: 'inset(0 0 0 0)',
+        duration: 0.85,
+        stagger: 0.07,
+        ease: 'power3.out'
+      });
+
+      if (roster) {
+        campusTl.fromTo(roster, {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power2.out'
+        }, '-=0.45');
+      }
+
+      if (prose) {
+        campusTl.fromTo(prose, {
+          opacity: 0,
+          y: 25
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out'
+        }, '-=0.6');
+
+        // Subtle editorial depth scrub
+        gsap.to(prose, {
+          yPercent: -6,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: campusSpread,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        });
+      }
+    }
+
+    // 9. TACTILE EDITORIAL INSERT SLIP INTERACTION WITH REALISTIC PHYSICAL TEAR
     let currentBasePrice = 2499;
     let currentDurationAdder = 0;
     let selectedOccasion = 'FRESHERS BALL';
-    let selectedLook = 'LOOK 014: DIOR ZEMIRE FAILLE';
+    let selectedLook = 'LOOK 014: JAPANESE FLORAL MAXI DRESS';
     let selectedSize = 'UK 8 (S)';
     let selectedBackup = 'UK 10 (M)';
     let selectedDays = '3 DAYS';
@@ -3057,6 +3209,8 @@
     const hankoStamp = document.getElementById('editorialHankoStamp');
     const slipConfirmedBanner = document.getElementById('slipConfirmedBanner');
     const magazineSlip = document.getElementById('magazineOrderSlip');
+    const perforationStubLabel = document.getElementById('perforationStubLabel');
+    const slipResetBtn = document.getElementById('slipResetBtn');
 
     function updateSlipCalculations() {
       const total = currentBasePrice + currentDurationAdder;
@@ -3120,42 +3274,169 @@
       });
     });
 
-    // Confirmation Hanko Stamp Interaction
+    // Confirmation & Physical Paper Tear Interaction
     let slipConfirmed = false;
-    if (confirmSlipBtn && hankoStamp) {
-      confirmSlipBtn.addEventListener('click', () => {
-        if (slipConfirmed) return;
-        slipConfirmed = true;
+    let isTearing = false;
 
-        hankoStamp.style.display = 'flex';
-        const tl = gsap.timeline();
-        // 1. Slip paper physical tear shudder
-        tl.to(magazineSlip, {
-          rotate: 0.6,
-          x: 4,
-          boxShadow: '0 8px 28px rgba(0, 0, 0, 0.08)',
-          duration: 0.3,
-          ease: 'power2.out'
-        })
-        // 2. Hanko stamp slams down with authentic ink impact
-        .to(hankoStamp, {
-          opacity: 0.94,
-          scale: 1,
-          rotate: -6,
-          duration: 0.5,
-          ease: 'back.out(2.2)'
-        }, '-=0.1')
-        // 3. Button state change
-        .call(() => {
+    if (magazineSlip && !prefersReducedMotion) {
+      magazineSlip.addEventListener('mouseenter', () => {
+        if (slipConfirmed || isTearing) return;
+        gsap.to(magazineSlip, {
+          x: 3,
+          rotate: 0.15,
+          boxShadow: '0 6px 24px rgba(20, 18, 15, 0.08)',
+          duration: 0.25,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      });
+
+      magazineSlip.addEventListener('mouseleave', () => {
+        if (slipConfirmed || isTearing) return;
+        gsap.to(magazineSlip, {
+          x: 0,
+          rotate: 0,
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+          duration: 0.25,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      });
+    }
+
+    function triggerPaperTear() {
+      if (slipConfirmed || isTearing) return;
+      slipConfirmed = true;
+      isTearing = true;
+
+      if (!magazineSlip) return;
+      magazineSlip.classList.add('is-tearing');
+
+      if (prefersReducedMotion) {
+        magazineSlip.classList.remove('is-tearing');
+        magazineSlip.classList.add('is-detached');
+        if (hankoStamp) {
+          hankoStamp.style.display = 'flex';
+          hankoStamp.style.opacity = '0.94';
+        }
+        if (confirmSlipBtn) {
           confirmSlipBtn.style.background = '#276749';
           confirmSlipBtn.style.borderColor = '#276749';
           confirmSlipBtn.innerHTML = `
-            <span>✓ ORDER CONFIRMED & SEALED</span>
+            <span>✓ SLIP DETACHED & RESERVATION SEALED</span>
             <span class="stamp-btn-sub">DISPATCH LOGGED // CARRIER ASSIGNED</span>
           `;
-          if (slipConfirmedBanner) {
-            slipConfirmedBanner.style.display = 'block';
-            gsap.from(slipConfirmedBanner, { opacity: 0, y: 6, duration: 0.3 });
+        }
+        if (slipConfirmedBanner) slipConfirmedBanner.style.display = 'block';
+        if (slipResetBtn) slipResetBtn.style.display = 'block';
+        isTearing = false;
+        return;
+      }
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          isTearing = false;
+          magazineSlip.classList.remove('is-tearing');
+          magazineSlip.classList.add('is-detached');
+          if (slipResetBtn) {
+            slipResetBtn.style.display = 'block';
+            gsap.fromTo(slipResetBtn, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
+          }
+        }
+      });
+
+      // Phase 1 — Anticipation (0.2s): Tension along perforated left edge
+      tl.to(magazineSlip, {
+        x: 6,
+        y: -2,
+        rotate: 0.35,
+        duration: 0.2,
+        ease: 'power2.in'
+      })
+      // Phase 2 — Tear Separation (0.42s): Visually pulls away down and outward
+      .to(magazineSlip, {
+        x: 20,
+        y: 16,
+        rotate: 1.35,
+        boxShadow: '16px 24px 44px rgba(20, 18, 15, 0.14), 0 4px 12px rgba(20, 18, 15, 0.08)',
+        duration: 0.42,
+        ease: 'power3.out'
+      })
+      // Hanko stamp slams down with authentic ink impact
+      .call(() => {
+        if (hankoStamp) hankoStamp.style.display = 'flex';
+      }, null, '-=0.25')
+      .fromTo(hankoStamp, {
+        opacity: 0,
+        scale: 1.8,
+        rotate: 12
+      }, {
+        opacity: 0.94,
+        scale: 1,
+        rotate: -6,
+        duration: 0.45,
+        ease: 'back.out(2.2)'
+      }, '-=0.25')
+      // Phase 3 — Settle (0.26s): Detached slip settles into resting spot
+      .to(magazineSlip, {
+        x: 15,
+        y: 13,
+        rotate: 0.95,
+        duration: 0.26,
+        ease: 'power2.out'
+      }, '-=0.15')
+      // Update UI button and banner
+      .call(() => {
+        if (confirmSlipBtn) {
+          confirmSlipBtn.style.background = '#276749';
+          confirmSlipBtn.style.borderColor = '#276749';
+          confirmSlipBtn.innerHTML = `
+            <span>✓ SLIP DETACHED & RESERVATION SEALED</span>
+            <span class="stamp-btn-sub">DISPATCH LOGGED // CARRIER ASSIGNED</span>
+          `;
+        }
+        if (slipConfirmedBanner) {
+          slipConfirmedBanner.style.display = 'block';
+          gsap.from(slipConfirmedBanner, { opacity: 0, y: 6, duration: 0.3 });
+        }
+      });
+    }
+
+    if (confirmSlipBtn) {
+      confirmSlipBtn.addEventListener('click', triggerPaperTear);
+    }
+    if (perforationStubLabel) {
+      perforationStubLabel.addEventListener('click', triggerPaperTear);
+    }
+
+    // Reset / Re-attach slip back to the magazine folio
+    if (slipResetBtn) {
+      slipResetBtn.addEventListener('click', () => {
+        if (isTearing) return;
+        isTearing = true;
+
+        gsap.to(magazineSlip, {
+          x: 0,
+          y: 0,
+          rotate: 0,
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+          duration: 0.45,
+          ease: 'power3.inOut',
+          onComplete: () => {
+            magazineSlip.classList.remove('is-detached', 'is-tearing');
+            slipConfirmed = false;
+            isTearing = false;
+            if (hankoStamp) hankoStamp.style.display = 'none';
+            if (confirmSlipBtn) {
+              confirmSlipBtn.style.background = '#111111';
+              confirmSlipBtn.style.borderColor = '#111111';
+              confirmSlipBtn.innerHTML = `
+                <span>✂ TEAR SLIP & STAMP FOR DISPATCH</span>
+                <span class="stamp-btn-sub">WEDELIA 編集部 受注承認 // LOCK RESERVATION</span>
+              `;
+            }
+            if (slipConfirmedBanner) slipConfirmedBanner.style.display = 'none';
+            slipResetBtn.style.display = 'none';
           }
         });
       });
