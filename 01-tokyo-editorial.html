@@ -237,8 +237,9 @@
       width: 100%;
       height: 520px;
       object-fit: cover;
+      object-position: center 15%;
       display: block;
-      filter: contrast(105%);
+      filter: contrast(104%) saturate(96%);
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .cover-visual-frame:hover img {
@@ -447,7 +448,9 @@
       width: 100%;
       height: 560px;
       object-fit: cover;
+      object-position: center 15%;
       display: block;
+      filter: contrast(104%) saturate(96%);
     }
     .feature-side-dossier {
       display: flex;
@@ -497,7 +500,9 @@
       width: 100%;
       max-height: 580px;
       object-fit: cover;
+      object-position: center 15%;
       display: block;
+      filter: contrast(104%) saturate(96%);
       transition: object-position 0.4s ease;
     }
     .specimen-registration-mark {
@@ -682,7 +687,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 15%;
       display: block;
+      filter: contrast(104%) saturate(96%);
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .plate-look-num-stamp {
@@ -1220,6 +1227,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 15%;
       display: block;
     }
     .slip-breakdown-table {
@@ -2440,6 +2448,10 @@
       plateTabBtns.forEach((btn, i) => {
         btn.classList.toggle('active', i === index);
       });
+      plateCropBtns.forEach((b, i) => b.classList.toggle('active', i === 0));
+      if (plateActiveImg) {
+        gsap.set(plateActiveImg, { scale: 1, y: '0%' });
+      }
 
       if (!prefersReducedMotion) {
         gsap.timeline()
