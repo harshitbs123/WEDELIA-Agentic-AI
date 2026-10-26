@@ -3,12 +3,13 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const pages = [
-  { name: '00-master-entry-index', url: 'http://localhost:5173/index.html' },
-  { name: '01-tokyo-editorial', url: 'http://localhost:5173/01-tokyo-editorial.html' },
-  { name: '02-brutalist-fashion-index', url: 'http://localhost:5173/02-brutalist-fashion-index.html' },
-  { name: '03-red-black-tokyo', url: 'http://localhost:5173/03-red-black-tokyo.html' },
-  { name: '04-vertical-japanese-poster', url: 'http://localhost:5173/04-vertical-japanese-poster.html' },
-  { name: '10-the-strange-one', url: 'http://localhost:5173/10-the-strange-one.html' },
+  { name: '00-master-entry-index', url: 'http://127.0.0.1:5173/index.html' },
+  { name: '00-shared-wardrobe', url: 'http://127.0.0.1:5173/wardrobe.html' },
+  { name: '01-tokyo-editorial', url: 'http://127.0.0.1:5173/01-tokyo-editorial.html' },
+  { name: '02-brutalist-fashion-index', url: 'http://127.0.0.1:5173/02-brutalist-fashion-index.html' },
+  { name: '03-red-black-tokyo', url: 'http://127.0.0.1:5173/03-red-black-tokyo.html' },
+  { name: '04-vertical-japanese-poster', url: 'http://127.0.0.1:5173/04-vertical-japanese-poster.html' },
+  { name: '10-the-strange-one', url: 'http://127.0.0.1:5173/10-the-strange-one.html' },
 ];
 
 const viewports = [
@@ -36,7 +37,7 @@ async function run() {
       try {
         await page.goto(pageInfo.url, { settleMs: 1200 });
 
-        const metrics = await page.eval(() => {
+        const metrics = await page.eval(async () => {
           const docW = document.documentElement.clientWidth;
           const scrollW = document.documentElement.scrollWidth;
           const bodyScrollW = document.body ? document.body.scrollWidth : 0;
@@ -44,6 +45,7 @@ async function run() {
 
           // Broken images
           const imgs = Array.from(document.querySelectorAll('img'));
+          await Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(r => { img.onload = img.onerror = r; })));
           const brokenImgs = imgs.filter(img => img.naturalWidth === 0).map(img => img.src);
 
           // Overflows

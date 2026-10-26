@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/shared/rental-modal.css">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -1826,7 +1827,7 @@
     }
   </style>
 </head>
-<body>
+<body data-world="contemplate">
 
   <!-- Curatorial Exhibition Header & Itinerary Tracker -->
   <nav class="switch-nav">
@@ -1856,6 +1857,8 @@
     </div>
 
     <div class="switch-pills">
+      <a href="wardrobe.html" class="switch-pill" title="Shared Wardrobe">WARDROBE</a>
+      <a href="wardrobe.html#occasions" class="switch-pill" title="Occasions">OCCASIONS</a>
       <span class="rooms-label">WORLDS:</span>
       <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
       <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
@@ -2099,7 +2102,7 @@
                 <span>開帳 // UNROLL NEXT EXHIBIT</span>
                 <span>⟶</span>
               </button>
-              <button class="btn-to-custody" id="btnKakemonoCustody">
+              <button class="btn-to-custody open-rental-btn" id="btnKakemonoCustody" data-rent-garment="WD-004" data-rent-world="contemplate">
                 <span>TRANSFER TO LEASE CERTIFICATE</span>
               </button>
             </div>
@@ -3070,5 +3073,6 @@
       });
     }
   </script>
+  <script type="module" src="/src/shared/rental-modal.js"></script>
 </body>
 </html>

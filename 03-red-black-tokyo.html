@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Shippori+Mincho:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/shared/rental-modal.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1625,7 +1626,7 @@
     }
   </style>
 </head>
-<body>
+<body data-world="chase">
 
   <!-- Underground Nightfile Marquee / Live Ticker -->
   <nav class="switch-nav">
@@ -1635,6 +1636,8 @@
       <span class="nightfile-status-tag">DROP RUNNER: ACTIVE // COURIER: READY</span>
     </div>
     <div class="switch-pills">
+      <a href="wardrobe.html" class="switch-pill" title="Shared Wardrobe">WARDROBE</a>
+      <a href="wardrobe.html#occasions" class="switch-pill" title="Occasions">OCCASIONS</a>
       <span class="nightfile-zone-tag">ZONES:</span>
       <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
       <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
@@ -1851,7 +1854,7 @@
           <button class="slam-next-drop-btn" id="slamNextDropBtn">
             <span>SLAM NEXT NIGHT DROP // 次の投下</span>
           </button>
-          <button class="lock-terminal-drop-btn" id="lockTerminalDropBtn">
+          <button class="lock-terminal-drop-btn open-rental-btn" id="lockTerminalDropBtn" data-rent-garment="WD-003" data-rent-world="chase">
             <span>LOCK INTO NIGHT-DROP TERMINAL</span>
             <span style="font-size: 0.8rem;">⟶</span>
           </button>
@@ -3092,5 +3095,6 @@
       });
     }
   </script>
+  <script type="module" src="/src/shared/rental-modal.js"></script>
 </body>
 </html>

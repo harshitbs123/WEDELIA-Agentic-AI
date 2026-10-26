@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/shared/rental-modal.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
@@ -1663,7 +1664,7 @@
     }
   </style>
 </head>
-<body>
+<body data-world="read">
 
   <!-- Tokyo Fashion Magazine Folio Header -->
   <nav class="switch-nav">
@@ -1672,6 +1673,8 @@
       <span class="mag-subhead-tag">ISSUE 04: TOKYO EDITION // FOLIO P. 01–84</span>
     </div>
     <div class="switch-pills">
+      <a href="wardrobe.html" class="switch-pill" title="Shared Wardrobe">WARDROBE</a>
+      <a href="wardrobe.html#occasions" class="switch-pill" title="Occasions">OCCASIONS</a>
       <span class="mag-edition-label">EDITIONS:</span>
       <a href="01-tokyo-editorial.html" class="switch-pill active" title="Tokyo Editorial">01</a>
       <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
@@ -2081,7 +2084,7 @@
               <span>TURN THE PAGE // 次の図版 (LOOK 029)</span>
               <span>⟶</span>
             </button>
-            <button class="pin-to-slip-btn" id="pinToSlipBtn">
+            <button class="pin-to-slip-btn open-rental-btn" id="pinToSlipBtn" data-rent-garment="WD-005" data-rent-world="read">
               <span>PIN TO ORDER SLIP // 注文票へ転写</span>
             </button>
           </div>
@@ -2998,6 +3001,7 @@
       });
     }
   </script>
+  <script type="module" src="/src/shared/rental-modal.js"></script>
 
 </body>
 </html>

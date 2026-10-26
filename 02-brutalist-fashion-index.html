@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/shared/rental-modal.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1643,7 +1644,7 @@
     }
   </style>
 </head>
-<body>
+<body data-world="index">
 
   <!-- Institutional Archive Terminal Status Bar -->
   <nav class="switch-nav">
@@ -1662,6 +1663,8 @@
     </div>
 
     <div class="switch-pills">
+      <a href="wardrobe.html" class="switch-pill" title="Shared Wardrobe">WARDROBE</a>
+      <a href="wardrobe.html#occasions" class="switch-pill" title="Occasions">OCCASIONS</a>
       <span class="terminal-sector-label">SYSTEM NODES:</span>
       <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
       <a href="02-brutalist-fashion-index.html" class="switch-pill active" title="Brutalist Index">02</a>
@@ -2497,7 +2500,7 @@
               ||| | ||||| |||| || | |||| || |||||||| | ||||| ||| ||<br>
               WDL-8891-DELHI-NCR-2026-TOKEN
             </div>
-            <button class="punch-voucher-btn" id="punchVoucherBtn">PUNCH DISPATCH VOUCHER // ISSUE GATE TOKEN</button>
+            <button class="punch-voucher-btn open-rental-btn" id="punchVoucherBtn" data-rent-garment="WD-006" data-rent-world="index">PUNCH DISPATCH VOUCHER // ISSUE GATE TOKEN</button>
             <div id="voucherPunchedNotice" style="display: none; margin-top: 0.75rem; background: #000000; color: #ffffff; padding: 0.5rem 0.75rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;">
               ✓ DISPATCH PROTOCOL VERIFIED // GATEWAY DISPATCH MANIFEST #8891 LOCKED FOR COURIER.
             </div>
@@ -3426,5 +3429,6 @@
       reindexBtn.addEventListener('click', triggerRegistryCut);
     }
   </script>
+  <script type="module" src="/src/shared/rental-modal.js"></script>
 </body>
 </html>

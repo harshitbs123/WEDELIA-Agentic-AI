@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Shippori+Mincho:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/shared/rental-modal.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1297,7 +1298,7 @@
     }
   </style>
 </head>
-<body>
+<body data-world="navigate">
 
   <!-- Minimal Top Vector Navigation -->
   <nav class="switch-nav">
@@ -1307,6 +1308,8 @@
       <span class="spatial-coord-sub">AXIS [X, Y, Z] // 10</span>
     </div>
     <div class="switch-pills">
+      <a href="wardrobe.html" class="switch-pill" title="Shared Wardrobe">WARDROBE</a>
+      <a href="wardrobe.html#occasions" class="switch-pill" title="Occasions">OCCASIONS</a>
       <span class="spatial-nodes-label">VECTORS:</span>
       <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
       <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
@@ -1675,7 +1678,7 @@
           <div class="chamber-price-quiet" id="chamberPriceDisplay">
             ₹1,899
           </div>
-          <button class="btn-spatial-converge-trigger" id="btnCommitConvergence">
+          <button class="btn-spatial-converge-trigger open-rental-btn" id="btnCommitConvergence" data-rent-garment="WD-005" data-rent-world="navigate">
             COLLAPSE COORDINATES
           </button>
           <div class="chamber-locked-quiet-stamp" id="chamberLockedManifest">
@@ -2253,5 +2256,6 @@
       );
     }
   </script>
+  <script type="module" src="/src/shared/rental-modal.js"></script>
 </body>
 </html>
