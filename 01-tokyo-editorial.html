@@ -2642,13 +2642,14 @@
       });
     }
 
-    // 5.5 CURSOR-FOLLOWING OCCASION PHOTOGRAPHIC PREVIEW (IDEMPOTENT & HARDENED PERSISTENT COMPOSITOR TRACKING)
+    // 5.5 CURSOR-FOLLOWING OCCASION PHOTOGRAPHIC PREVIEW (HIGH-PRECISION GLOBAL COMPOSITOR SYSTEM)
     if (!window.__wedeliaCursorPreviewInitialized && !prefersReducedMotion) {
       const previewEl = document.getElementById('cursorPreview') || document.querySelector('.cursor-preview');
       const previewImg = document.getElementById('cursorPreviewImg') || previewEl?.querySelector('img');
-      const occasionLinks = document.querySelectorAll('.occasion-link');
+      const indexGrid = document.querySelector('.giant-index-grid');
+      const occasionLinks = Array.from(document.querySelectorAll('.occasion-link'));
 
-      if (previewEl && occasionLinks.length > 0) {
+      if (previewEl && indexGrid && occasionLinks.length > 0) {
         window.__wedeliaCursorPreviewInitialized = true;
 
         if (previewEl.parentElement !== document.body) {
@@ -2657,17 +2658,21 @@
 
         const PREVIEW_WIDTH = 170;
         const PREVIEW_HEIGHT = 225;
-        const OFFSET = 20;
+        const OFFSET_X = 22;
+        const OFFSET_Y = 22;
 
-        // Viewport bounds cached and updated strictly on passive resize (zero layout thrashing in mousemove)
+        // Viewport bounds cached and updated strictly on passive resize (zero layout queries in pointermove)
         let winW = window.innerWidth;
         let winH = window.innerHeight;
         window.addEventListener('resize', () => {
           winW = window.innerWidth;
           winH = window.innerHeight;
+          if (winW <= 768 && isVisible) {
+            hidePreview(true);
+          }
         }, { passive: true });
 
-        // Preload occasion campaign imagery for instant responsive hover
+        // Pre-decode all occasion campaign imagery for instant, zero-latency visual switches
         const occasionImgs = [
           '/assets/editorial/festival.webp',
           '/assets/editorial/freshers.jpg',
@@ -2678,144 +2683,178 @@
         occasionImgs.forEach(src => {
           const im = new Image();
           im.src = src;
+          if ('decode' in im) {
+            im.decode().catch(() => {});
+          }
         });
 
         // SINGLE persistent quickTo instance pair created ONCE
         const xTo = gsap.quickTo(previewEl, 'x', {
-          duration: 0.26,
+          duration: 0.28,
           ease: 'power3.out'
         });
 
         const yTo = gsap.quickTo(previewEl, 'y', {
-          duration: 0.26,
+          duration: 0.28,
           ease: 'power3.out'
         });
 
-        // Fast arithmetic coordinate clamping (no DOM or layout queries)
-        function updateCoordinates(clientX, clientY) {
-          const flipX = (clientX + OFFSET + PREVIEW_WIDTH > winW - 10);
-          const flipY = (clientY + OFFSET + PREVIEW_HEIGHT > winH - 10);
+        // Pure arithmetic coordinate computation and edge flipping
+        function computeTargetCoordinates(clientX, clientY) {
+          const flipX = (clientX + OFFSET_X + PREVIEW_WIDTH > winW - 12);
+          const flipY = (clientY + OFFSET_Y + PREVIEW_HEIGHT > winH - 12);
 
-          let targetX = flipX ? (clientX - PREVIEW_WIDTH - OFFSET) : (clientX + OFFSET);
-          let targetY = flipY ? (clientY - PREVIEW_HEIGHT - OFFSET) : (clientY + OFFSET);
+          let targetX = flipX ? (clientX - PREVIEW_WIDTH - OFFSET_X) : (clientX + OFFSET_X);
+          let targetY = flipY ? (clientY - PREVIEW_HEIGHT - OFFSET_Y) : (clientY + OFFSET_Y);
 
-          if (targetX < 8) targetX = 8;
-          else if (targetX > winW - PREVIEW_WIDTH - 8) targetX = winW - PREVIEW_WIDTH - 8;
+          if (targetX < 12) targetX = 12;
+          else if (targetX > winW - PREVIEW_WIDTH - 12) targetX = winW - PREVIEW_WIDTH - 12;
 
-          if (targetY < 8) targetY = 8;
-          else if (targetY > winH - PREVIEW_HEIGHT - 8) targetY = winH - PREVIEW_HEIGHT - 8;
+          if (targetY < 12) targetY = 12;
+          else if (targetY > winH - PREVIEW_HEIGHT - 12) targetY = winH - PREVIEW_HEIGHT - 12;
 
-          xTo(targetX);
-          yTo(targetY);
           return { targetX, targetY };
         }
 
-        let isPreviewActive = false;
-        let currentActiveLink = null;
+        let isVisible = false;
+        let currentLink = null;
+        let lastClientX = 0;
+        let lastClientY = 0;
 
-        occasionLinks.forEach(link => {
-          link.addEventListener('mouseenter', (e) => {
-            if (winW <= 768) return;
+        function showPreview(clientX, clientY, link) {
+          if (winW <= 768) return;
+          const image = link.dataset.preview || link.dataset.previewImg;
+          if (!image) return;
 
-            const image = link.dataset.preview || link.dataset.previewImg;
-            if (!image) return;
+          currentLink = link;
+          if (previewImg) {
+            previewImg.src = image;
+            previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
+          }
 
-            const coords = updateCoordinates(e.clientX, e.clientY);
+          const { targetX, targetY } = computeTargetCoordinates(clientX, clientY);
 
-            if (!isPreviewActive) {
-              isPreviewActive = true;
-              currentActiveLink = link;
+          // Synchronize quickTo start and target simultaneously (zero jumps, zero snapback)
+          xTo(targetX, targetX);
+          yTo(targetY, targetY);
 
-              if (previewImg) {
-                previewImg.src = image;
-                previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
+          previewEl.style.visibility = 'visible';
+          gsap.killTweensOf(previewEl, 'opacity,scale');
+          gsap.to(previewEl, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.22,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          });
+
+          isVisible = true;
+        }
+
+        function hidePreview(immediate = false) {
+          if (!isVisible) return;
+          isVisible = false;
+          currentLink = null;
+
+          gsap.killTweensOf(previewEl, 'opacity,scale');
+          if (immediate) {
+            previewEl.style.opacity = '0';
+            previewEl.style.visibility = 'hidden';
+            return;
+          }
+
+          gsap.to(previewEl, {
+            opacity: 0,
+            scale: 0.94,
+            duration: 0.18,
+            ease: 'power2.out',
+            overwrite: 'auto',
+            onComplete: () => {
+              if (!isVisible) {
+                previewEl.style.visibility = 'hidden';
               }
+            }
+          });
+        }
 
-              previewEl.style.visibility = 'visible';
+        function updateTracking(clientX, clientY) {
+          const { targetX, targetY } = computeTargetCoordinates(clientX, clientY);
+          xTo(targetX);
+          yTo(targetY);
+        }
 
-              // Set initial position immediately with set; do NOT pass x/y to fromTo
-              gsap.set(previewEl, { x: coords.targetX, y: coords.targetY });
+        // Global pointer tracking (resilient to rapid movement, boundaries, sub-elements, and fast sweeps)
+        window.addEventListener('pointermove', (e) => {
+          if (winW <= 768) return;
 
-              // ONLY kill opacity and scale, NEVER kill persistent xTo / yTo tweens!
-              gsap.killTweensOf(previewEl, 'opacity,scale');
+          lastClientX = e.clientX;
+          lastClientY = e.clientY;
 
-              gsap.fromTo(
-                previewEl,
-                { opacity: 0, scale: 0.92 },
-                { opacity: 1, scale: 1, duration: 0.22, ease: 'power3.out', overwrite: 'auto' }
-              );
+          const target = e.target;
+          const link = target ? target.closest('.occasion-link') : null;
+          const inGrid = target ? target.closest('.giant-index-grid') : null;
+
+          if (link) {
+            const image = link.dataset.preview || link.dataset.previewImg;
+            if (!isVisible) {
+              showPreview(e.clientX, e.clientY, link);
             } else {
-              // Direct switch between occasion links
-              currentActiveLink = link;
-              if (previewImg) {
-                const currentSrc = previewImg.getAttribute('src');
-                if (currentSrc !== image) {
+              updateTracking(e.clientX, e.clientY);
+              if (currentLink !== link) {
+                currentLink = link;
+                if (image && previewImg && previewImg.getAttribute('src') !== image) {
                   previewImg.src = image;
                   previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
-                  gsap.killTweensOf(previewImg, 'opacity');
                   gsap.fromTo(
                     previewImg,
-                    { opacity: 0.5 },
+                    { opacity: 0.6 },
                     { opacity: 1, duration: 0.18, ease: 'power2.out', overwrite: 'auto' }
                   );
                 }
               }
             }
-          });
-
-          link.addEventListener('mousemove', (e) => {
-            if (winW <= 768 || !isPreviewActive) return;
-            // Pure coordinate update on the compositor
-            updateCoordinates(e.clientX, e.clientY);
-          });
-
-          link.addEventListener('mouseleave', (e) => {
-            if (winW <= 768) return;
-            const nextTarget = e.relatedTarget;
-            if (nextTarget && nextTarget.closest && nextTarget.closest('.occasion-link')) {
-              return; // Handled by next row's mouseenter
-            }
-
-            isPreviewActive = false;
-            currentActiveLink = null;
-
-            // ONLY kill opacity and scale, preserving persistent quickTo
-            gsap.killTweensOf(previewEl, 'opacity,scale');
-            gsap.to(previewEl, {
-              opacity: 0,
-              scale: 0.94,
-              duration: 0.18,
-              ease: 'power2.out',
-              overwrite: 'auto',
-              onComplete: () => {
-                if (!isPreviewActive) {
-                  previewEl.style.visibility = 'hidden';
-                }
-              }
-            });
-          });
-        });
-
-        // Hide preview if user scrolls away rapidly
-        window.addEventListener('scroll', () => {
-          if (isPreviewActive && previewEl.style.visibility === 'visible') {
-            isPreviewActive = false;
-            currentActiveLink = null;
-            gsap.killTweensOf(previewEl, 'opacity,scale');
-            gsap.to(previewEl, {
-              opacity: 0,
-              scale: 0.94,
-              duration: 0.15,
-              ease: 'power2.out',
-              overwrite: 'auto',
-              onComplete: () => {
-                if (!isPreviewActive) {
-                  previewEl.style.visibility = 'hidden';
-                }
-              }
-            });
+          } else if (inGrid && isVisible) {
+            // Pointer is traversing whitespace/borders inside the index grid: keep tracking without resetting
+            updateTracking(e.clientX, e.clientY);
+          } else if (isVisible) {
+            // Pointer left the occasion index entirely
+            updateTracking(e.clientX, e.clientY);
+            hidePreview();
           }
         }, { passive: true });
+
+        // Scroll listener: guarantees stability during and after scrolling
+        window.addEventListener('scroll', () => {
+          if (winW <= 768 || lastClientX === 0) return;
+
+          const elUnderCursor = document.elementFromPoint(lastClientX, lastClientY);
+          const link = elUnderCursor ? elUnderCursor.closest('.occasion-link') : null;
+          const inGrid = elUnderCursor ? elUnderCursor.closest('.giant-index-grid') : null;
+
+          if (link) {
+            if (!isVisible) {
+              showPreview(lastClientX, lastClientY, link);
+            } else {
+              updateTracking(lastClientX, lastClientY);
+              if (currentLink !== link) {
+                currentLink = link;
+                const image = link.dataset.preview || link.dataset.previewImg;
+                if (image && previewImg && previewImg.getAttribute('src') !== image) {
+                  previewImg.src = image;
+                  previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
+                }
+              }
+            }
+          } else if (inGrid && isVisible) {
+            updateTracking(lastClientX, lastClientY);
+          } else if (isVisible) {
+            hidePreview();
+          }
+        }, { passive: true });
+
+        // Clean hide on document leave or window blur
+        document.addEventListener('mouseleave', () => hidePreview());
+        window.addEventListener('blur', () => hidePreview());
       }
     }
 
@@ -3459,7 +3498,7 @@
 
   <!-- Cursor-Following Fashion Photographic Preview (Direct child of body to guarantee viewport coordinate mapping) -->
   <div class="cursor-preview" id="cursorPreview" aria-hidden="true">
-    <img id="cursorPreviewImg" src="/assets/editorial/festival.webp" alt="Occasion Editorial Preview">
+    <img id="cursorPreviewImg" src="/assets/editorial/festival.webp" alt="Occasion Editorial Preview" decoding="async">
   </div>
 
 </body>
