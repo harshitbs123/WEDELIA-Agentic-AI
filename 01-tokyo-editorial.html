@@ -35,9 +35,8 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 48px;
-      background: rgba(245, 244, 239, 0.96);
-      backdrop-filter: blur(8px);
+      height: 44px;
+      background: var(--bg);
       border-bottom: 1px solid var(--line);
       z-index: 9999;
       display: flex;
@@ -45,49 +44,55 @@
       justify-content: space-between;
       padding: 0 1.5rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.05em;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
     }
     .switch-nav a { color: var(--fg); text-decoration: none; }
     .mag-masthead-title {
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       color: var(--fg);
     }
     .mag-subhead-tag {
-      margin-left: 0.75rem;
+      margin-left: 0.85rem;
       color: var(--muted);
-      font-size: 0.65rem;
+      font-size: 0.64rem;
+      letter-spacing: 0.08em;
     }
-    .switch-pills { display: flex; align-items: center; gap: 0.35rem; }
+    .switch-pills { display: flex; align-items: center; gap: 0.45rem; }
     .mag-edition-label {
       font-size: 0.62rem;
       color: var(--muted);
       margin-right: 0.25rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
     }
     .switch-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0 0.45rem;
-      height: 26px;
-      border: 1px solid var(--line);
+      padding: 0.12rem 0.45rem;
       color: var(--muted);
-      border-radius: 1px;
       font-size: 0.65rem;
       font-weight: 500;
       background: transparent;
+      border: 1px solid transparent;
       transition: all 0.15s ease;
+      letter-spacing: 0.05em;
     }
-    .switch-pill:hover { border-color: var(--fg); color: var(--fg); }
-    .switch-pill.active { background: var(--fg); color: var(--bg); font-weight: 700; border-color: var(--fg); }
+    .switch-pill:hover { color: var(--fg); border-color: var(--line); }
+    .switch-pill.active {
+      background: var(--fg);
+      color: var(--bg);
+      font-weight: 700;
+      border-color: var(--fg);
+      padding: 0.12rem 0.5rem;
+    }
     @media (max-width: 768px) {
       .switch-nav .mag-subhead-tag { display: none; }
       .switch-nav .mag-edition-label { display: none; }
-      .switch-nav { padding: 0 0.75rem; }
-      .switch-pills { gap: 3px; }
-      .switch-pill { padding: 0 0.3rem; height: 24px; font-size: 0.6rem; }
+      .switch-nav { padding: 0 0.85rem; height: 42px; }
+      .switch-pills { gap: 0.2rem; }
+      .switch-pill { padding: 0.1rem 0.35rem; font-size: 0.62rem; }
     }
 
     /* Editorial Canvas */
@@ -95,6 +100,7 @@
       max-width: 1400px;
       margin: 0 auto;
       padding: 2.5rem 1.5rem 8rem;
+      perspective: 1600px;
     }
     @media (min-width: 1024px) {
       .editorial-canvas { padding: 3.5rem 3.5rem 10rem; }
@@ -223,35 +229,103 @@
       color: var(--muted);
     }
 
-    /* Hanging Artwork Container */
+    /* Hanging Artwork Container / Editorial Fashion Plate */
     .cover-visual-frame {
       position: relative;
-      background: var(--paper);
-      padding: 1.5rem;
+      background: #ffffff;
+      padding: 1.5rem 1.5rem 1.25rem;
       border: 1px solid var(--line);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
+    .plate-reg-mark {
+      position: absolute;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: #9a9486;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .plate-reg-mark.tl { top: 6px; left: 6px; }
+    .plate-reg-mark.tr { top: 6px; right: 6px; }
+    .plate-reg-mark.bl { bottom: 6px; left: 6px; }
+    .plate-reg-mark.br { bottom: 6px; right: 6px; }
+    .plate-pub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 0.45rem;
+    }
+    .cover-img-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5.25;
+      overflow: hidden;
+      background: #ece8e1;
+      border: 1px solid var(--line);
+    }
     .cover-visual-frame img {
       width: 100%;
-      height: 520px;
+      height: 100%;
       object-fit: cover;
-      object-position: center 15%;
+      object-position: center 20%;
       display: block;
-      filter: contrast(104%) saturate(96%);
+      filter: contrast(105%) brightness(99%) saturate(93%);
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .cover-visual-frame:hover img {
-      transform: scale(1.02);
+      transform: scale(1.018);
     }
     .caption-box {
-      margin-top: 1.25rem;
+      margin-top: 0.85rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid var(--line);
       font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--muted);
       display: flex;
       justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .caption-lead-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .caption-lead-group .caption-line-1 {
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: 0.08em;
+    }
+    .caption-lead-group .caption-line-2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.75rem;
+      color: #635f57;
+      letter-spacing: 0.06em;
+    }
+    .caption-meta-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+    }
+    .caption-meta-col .rental-callout {
+      color: var(--fg);
+      font-weight: 700;
     }
 
     /* COMPOSITION 2: GIANT VERTICAL OCCASION INDEX */
@@ -1347,80 +1421,44 @@
       padding: 0.45rem 0.65rem;
       background: #fff8f7;
     }
-    /* Refined Double-Spread Page-Turn Overlay */
-    .page-turn-overlay {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(90deg, #ede9e1 0%, #e3ded5 49%, #cec8bd 50%, #ede9e1 51%, #ede9e1 100%);
-      z-index: 10000;
-      pointer-events: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      clip-path: inset(0 100% 0 0);
-      border-left: 1px solid var(--fg);
-      box-shadow: -25px 0 60px rgba(0, 0, 0, 0.15);
-    }
-    .page-turn-inner {
-      text-align: center;
-      padding: 3rem 4rem;
-      border: 1px solid rgba(46, 43, 38, 0.25);
-      background: rgba(245, 244, 239, 0.75);
-      backdrop-filter: blur(6px);
-    }
-    .page-turn-kanji {
-      font-family: 'Shippori Mincho', serif;
-      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
-      font-weight: 700;
-      letter-spacing: 0.35em;
-      margin-bottom: 1rem;
-      color: var(--fg);
-    }
-    .page-turn-sub {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.25em;
-      color: var(--muted);
-    }
-    /* Refined Publication Folio Control */
+    /* Tactile Publication Folio Control */
     .publication-folio-control {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
       z-index: 9000;
-      background: rgba(245, 244, 239, 0.95);
-      backdrop-filter: blur(8px);
+      background: var(--bg);
       border: 1px solid var(--fg);
-      padding: 0.55rem 1rem;
+      padding: 0.6rem 1.15rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.85rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       letter-spacing: 0.12em;
       cursor: pointer;
       color: var(--fg);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.12);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
     .publication-folio-control:hover {
       background: var(--fg);
       color: var(--bg);
-      transform: translateY(-2px);
+      box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+      transform: translate(1px, 1px);
     }
     .publication-folio-control .folio-kanji {
       font-family: 'Shippori Mincho', serif;
       font-size: 0.8rem;
       border-left: 1px solid currentColor;
       padding-left: 0.65rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
     }
     @media (max-width: 640px) {
       .publication-folio-control {
         bottom: 1rem;
         right: 1rem;
-        padding: 0.45rem 0.75rem;
+        padding: 0.45rem 0.85rem;
         font-size: 0.65rem;
       }
     }
@@ -1549,7 +1587,7 @@
     </header>
 
     <!-- COMPOSITION 1: EDITORIAL COVER SPREAD -->
-    <section class="cover-spread">
+    <section class="cover-spread" id="folioCoverSpread">
       
       <!-- Vertical Japanese Spine -->
       <aside class="vertical-spine">
@@ -1562,7 +1600,7 @@
       <div class="cover-main-content">
         <div>
           <span class="cover-issue-tag">
-            <span>ISSUE 26 // CAMPUS NIGHTLIFE EDITORIAL</span>
+            <span>ISSUE 04 // TOKYO EDITORIAL FOLIO</span>
             <span class="jp-stamp">秋期特輯</span>
           </span>
           <h1 class="cover-title">
@@ -1575,18 +1613,37 @@
         </div>
 
         <div class="cover-meta-strip">
-          <span>CAMPUS COURIER: ACTIVE</span>
-          <span>RESERVATION WINDOW: OPEN</span>
-          <span>ESCROW: ₹1,500 REFUNDABLE</span>
+          <span>COLOPHON: TOKYO × DELHI</span>
+          <span>RESERVATION: 04 NIGHTS</span>
+          <span>DISPATCH: CAMPUS COURIER</span>
         </div>
       </div>
 
-      <!-- Hanging Visual Artwork -->
-      <div class="cover-visual-frame">
-        <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Faille Gown">
+      <!-- Hanging Visual Artwork / Fashion Plate -->
+      <div class="cover-visual-frame" id="heroFashionPlate">
+        <div class="plate-reg-mark tl">+</div>
+        <div class="plate-reg-mark tr">+</div>
+        <div class="plate-reg-mark bl">+</div>
+        <div class="plate-reg-mark br">+</div>
+
+        <div class="plate-pub-header">
+          <span>PLATE 01 // AUTUMN ARCHIVE</span>
+          <span>PRINTED IN TOKYO</span>
+        </div>
+
+        <div class="cover-img-wrapper">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Christian Dior Zemire Evening Faille Gown (1954)">
+        </div>
+
         <div class="caption-box">
-          <span>PLATE 01: CHRISTIAN DIOR ATELIER</span>
-          <span>VAL: ₹48,000 // RENT: ₹2,999</span>
+          <div class="caption-lead-group">
+            <span class="caption-line-1">PLATE 01 // CHRISTIAN DIOR HAUTE COUTURE (FALL 1954)</span>
+            <span class="caption-line-2">図版 〇一 ： 漆黒シルクファイユ イブニングガウン</span>
+          </div>
+          <div class="caption-meta-col">
+            <span>ARCHIVE NO. 001 // PARIS</span>
+            <span class="rental-callout">RENTAL: ₹2,999 / 4 NIGHTS</span>
+          </div>
         </div>
       </div>
 
@@ -1653,7 +1710,7 @@
     </section>
 
     <!-- COMPOSITION 3: EDITOR'S NOTE & CULTURAL ESSAY -->
-    <section class="editors-letter-spread">
+    <section class="editors-letter-spread" id="folioEditorsLetterSpread">
       <div class="letter-sidebar">
         <div>
           <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.1em;">
@@ -1755,7 +1812,7 @@
             <table class="specimen-data-table">
               <tr>
                 <td class="label">FIBER COMPOSITION</td>
-                <td>100% PURE SILK CRÊPE DE CHINE (890g WEIGHT)</td>
+                <td>PURE SILK CRÊPE DE CHINE BIAS CUT</td>
               </tr>
               <tr>
                 <td class="label">FIT TOLERANCE</td>
@@ -1778,11 +1835,11 @@
 
           <div class="specimen-pricing-bar">
             <div class="val-col">
-              ORIGINAL VALUATION<br>
-              <strong>₹38,000 ARCHIVAL</strong>
+              RESERVATION WINDOW<br>
+              <strong>EDITORIAL ARCHIVE // OPEN</strong>
             </div>
             <div class="rent-col">
-              ₹2,499 / 3 DAYS
+              ₹2,499 / 4 NIGHTS
             </div>
           </div>
         </div>
@@ -1844,19 +1901,19 @@
             <div class="plate-specs-ledger">
               <div class="plate-spec-item">
                 <strong>ATELIER COMPOSITION:</strong>
-                <span id="plateFiberVal">100% HEAVY SILK FAILLE (1,480g)</span>
+                <span id="plateFiberVal">PURE HEAVY SILK FAILLE</span>
               </div>
               <div class="plate-spec-item">
-                <strong>OCCASION TIMING:</strong>
-                <span id="plateTimingVal">19:30 IST // VALEDICTORY ENTRANCE</span>
+                <strong>OCCASION PROTOCOL:</strong>
+                <span id="plateTimingVal">EVENING CALL TIME // 19:30 IST</span>
               </div>
               <div class="plate-spec-item">
-                <strong>HISTORICAL VALUATION:</strong>
-                <span id="plateValuationVal">₹48,000 ARCHIVAL RECORD</span>
+                <strong>ARCHIVE REFERENCE:</strong>
+                <span id="plateValuationVal">ARCHIVE NO. 014 // PARIS ATELIER</span>
               </div>
               <div class="plate-spec-item">
-                <strong>TEMPORARY LEASE:</strong>
-                <span id="plateTariffVal" style="font-weight: 700; color: #7a1f18;">₹2,999 / 3 DAYS (2 SIZES)</span>
+                <strong>EDITORIAL RENTAL:</strong>
+                <span id="plateTariffVal" style="font-weight: 700; color: #111111;">₹2,999 / 4 NIGHTS (DUAL-SIZE)</span>
               </div>
             </div>
           </div>
@@ -1982,7 +2039,7 @@
           <div class="slip-meta-block">
             <span>ISSUE NO. 26 // DESK REF: #TOKYO-NCR-8821</span><br>
             <span>DISPATCH STATUS: <strong style="color: #111111;">AWAITING STAMP</strong></span><br>
-            <span>FIBER ESCROW: 100% REVERSIBLE</span>
+            <span>DAMAGE SHIELD: ₹0 EMBEDDED</span>
           </div>
         </div>
 
@@ -2114,19 +2171,9 @@
       </div>
     </footer>
 
-    <!-- Signature 3D Page-Turn Transition Overlay -->
-    <div class="page-turn-overlay" id="pageTurnOverlay">
-      <div class="page-leaf-turning">
-        <div class="page-turn-inner">
-          <div class="page-turn-kanji">特装第二輯 展開</div>
-          <div class="page-turn-sub">FOLIO SPREAD SEQUENCE // EDITORIAL WIPE</div>
-        </div>
-      </div>
-    </div>
-
     <!-- Editorial Folio Control -->
-    <button class="publication-folio-control" id="turnPageBtn">
-      <span>FOLIO 26</span>
+    <button class="publication-folio-control" id="turnPageBtn" aria-label="Turn Publication Spread">
+      <span id="folioCountLabel">FOLIO 01</span>
       <span>TURN SPREAD ⟶</span>
       <span class="folio-kanji">次頁</span>
     </button>
@@ -2376,14 +2423,15 @@
         atelierRef: 'PARIS ATELIER ARCHIVE // FALL 1954',
         dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
         img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg',
+        objectPosition: 'center 18%',
         kanjiRubi: '一回きりの夜に放つ、沈黙のオートクチュール。',
         titleEn: 'Zemire Obsidian Silk Faille',
         occasionBadge: 'OCCASION: SENIOR FAREWELL BALL & FORMAL VALEDICTORY',
         prose: "When you step into the university auditorium at 19:30, fast fashion collapses into synthetic anonymity. The Christian Dior 'Zémire' architectural faille peplum gown absorbs the ambient tungsten lighting, establishing an unshakeable presence. A sovereign silhouette cut for the graduating student who refuses to look like everyone else in the yearbook photograph.",
-        fiber: '100% HEAVY SILK FAILLE (1,480g)',
-        timing: '19:30 IST // VALEDICTORY ENTRANCE',
-        valuation: '₹48,000 ARCHIVAL RECORD',
-        tariff: '₹2,999 / 3 DAYS (2 SIZES)',
+        fiber: 'PURE HEAVY SILK FAILLE',
+        timing: 'EVENING CALL TIME // 19:30 IST',
+        valuation: 'ARCHIVE NO. 014 // PARIS ATELIER',
+        tariff: '₹2,999 / 4 NIGHTS (DUAL-SIZE)',
         price: 2999,
         slipName: 'LOOK 014: DIOR ZEMIRE FAILLE',
         nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 029)'
@@ -2393,14 +2441,15 @@
         atelierRef: 'JEAN DESSÈS PARIS // SPRING 1951',
         dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
         img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg',
+        objectPosition: 'center 22%',
         kanjiRubi: '夜の芝生を流れる、古代ギリシアのプリーツ。',
         titleEn: 'Pleated Duet Chiffon Gown',
         occasionBadge: 'OCCASION: COLLEGE FESTIVAL & STADIUM NIGHT',
         prose: "Hand-pleated silk chiffon drape from the Jean Dessès Paris atelier. Under the concert floodlights and terrace evening breeze, this gown catches every atmospheric draft, creating fluid sculptural motion across university lawns. Includes primary size plus a sealed sister size.",
-        fiber: 'FLUID SILK CHIFFON DRAPE (1,140g)',
-        timing: '20:15 IST // STADIUM FESTIVAL',
-        valuation: '₹54,000 ARCHIVAL RECORD',
-        tariff: '₹2,899 / 3 DAYS (2 SIZES)',
+        fiber: 'HAND-PLEATED SILK CHIFFON',
+        timing: 'FESTIVAL CALL TIME // 20:15 IST',
+        valuation: 'ARCHIVE NO. 029 // PARIS ATELIER',
+        tariff: '₹2,899 / 4 NIGHTS (DUAL-SIZE)',
         price: 2899,
         slipName: 'LOOK 029: JEAN DESSES PLEATED DUET',
         nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 053)'
@@ -2410,14 +2459,15 @@
         atelierRef: 'ROYAL HERITAGE ATELIER // HISTORICAL RECORD',
         dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
         img: '/assets/editorial/court-dress.jpg',
+        objectPosition: 'center 25%',
         kanjiRubi: '金糸の威厳を纏い、壇上を統べる。',
         titleEn: 'Gilded Court Brocade Robe',
         occasionBadge: 'OCCASION: SOCIETY CONVOCATION & VALEDICTORY DINNER',
-        prose: "Architectural side panniers and metallic gold thread jacquard. Sourced for formal society convocations and Model UN valedictory dinners where regal historic proportion commands immediate silence across the dining hall. Retail valuation ₹65,000.",
-        fiber: 'METALLIC GOLD BROCADE (1,620g)',
-        timing: '18:45 IST // SOCIETY CONVOCATION',
-        valuation: '₹65,000 ARCHIVAL RECORD',
-        tariff: '₹3,899 / 3 DAYS (2 SIZES)',
+        prose: "Architectural side panniers and metallic gold thread jacquard. Sourced for formal society convocations and Model UN valedictory dinners where regal historic proportion commands immediate silence across the dining hall.",
+        fiber: 'METALLIC GOLD BROCADE JACQUARD',
+        timing: 'CEREMONY CALL TIME // 18:45 IST',
+        valuation: 'ARCHIVE NO. 053 // ROYAL HISTORIC',
+        tariff: '₹3,899 / 4 NIGHTS (DUAL-SIZE)',
         price: 3899,
         slipName: 'LOOK 053: GILDED COURT BROCADE',
         nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 014)'
@@ -2460,7 +2510,10 @@
             if (plateLookStamp) plateLookStamp.textContent = data.lookNum;
             if (plateAtelierRef) plateAtelierRef.textContent = data.atelierRef;
             if (plateDualNotice) plateDualNotice.textContent = data.dualNotice;
-            if (plateActiveImg) plateActiveImg.src = data.img;
+            if (plateActiveImg) {
+              plateActiveImg.src = data.img;
+              plateActiveImg.style.objectPosition = data.objectPosition;
+            }
             if (plateKanjiRubi) plateKanjiRubi.textContent = data.kanjiRubi;
             if (plateTitleEn) plateTitleEn.textContent = data.titleEn;
             if (plateOccasionBadge) plateOccasionBadge.textContent = data.occasionBadge;
@@ -2482,7 +2535,10 @@
         if (plateLookStamp) plateLookStamp.textContent = data.lookNum;
         if (plateAtelierRef) plateAtelierRef.textContent = data.atelierRef;
         if (plateDualNotice) plateDualNotice.textContent = data.dualNotice;
-        if (plateActiveImg) plateActiveImg.src = data.img;
+        if (plateActiveImg) {
+          plateActiveImg.src = data.img;
+          plateActiveImg.style.objectPosition = data.objectPosition;
+        }
         if (plateKanjiRubi) plateKanjiRubi.textContent = data.kanjiRubi;
         if (plateTitleEn) plateTitleEn.textContent = data.titleEn;
         if (plateOccasionBadge) plateOccasionBadge.textContent = data.occasionBadge;
@@ -2548,45 +2604,89 @@
       });
     }
 
-    // 8. SIGNATURE TRANSITION PROTOTYPE: 3D PHYSICAL SPREAD FOLD (EXPERIMENT 01-A)
+    // 8. SIGNATURE TRANSITION PROTOTYPE: 3D PHYSICAL SPREAD FOLD
     const turnBtn = document.getElementById('turnPageBtn');
-    const overlay = document.getElementById('pageTurnOverlay');
-    const turningLeaf = document.querySelector('.page-leaf-turning');
+    const folioCountLabel = document.getElementById('folioCountLabel');
 
-    let isWiping = false;
-    function triggerPageTurn() {
-      if (isWiping) return;
-      isWiping = true;
+    const folioSpreads = [
+      { id: 'folioCoverSpread', folioNum: 'FOLIO 01' },
+      { id: 'folioEditorsLetterSpread', folioNum: 'FOLIO 02' },
+      { id: 'editorialFashionPlateSection', folioNum: 'FOLIO 03' },
+      { id: 'editorialOrderSlipSection', folioNum: 'FOLIO 04' }
+    ];
 
-      const wipeTl = gsap.timeline({
+    let currentFolioIndex = 0;
+    let isTurningSpread = false;
+
+    function executePhysicalSpreadTurn() {
+      if (isTurningSpread) return;
+      isTurningSpread = true;
+
+      const nextIdx = (currentFolioIndex + 1) % folioSpreads.length;
+      const currentSpreadData = folioSpreads[currentFolioIndex];
+      const targetSpreadData = folioSpreads[nextIdx];
+      const currentEl = document.getElementById(currentSpreadData.id);
+      const targetEl = document.getElementById(targetSpreadData.id);
+
+      currentFolioIndex = nextIdx;
+      if (folioCountLabel) {
+        folioCountLabel.textContent = targetSpreadData.folioNum;
+      }
+
+      if (prefersReducedMotion || !targetEl) {
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }
+        isTurningSpread = false;
+        return;
+      }
+
+      // Tactile physical page turn
+      const turnTl = gsap.timeline({
         onComplete: () => {
-          isWiping = false;
+          if (currentEl) gsap.set(currentEl, { clearProps: 'transform,boxShadow,opacity' });
+          if (targetEl) gsap.set(targetEl, { clearProps: 'transform,boxShadow,opacity' });
+          isTurningSpread = false;
         }
       });
 
-      wipeTl
-        .set(overlay, { clipPath: 'inset(0 100% 0 0)' })
-        .set(turningLeaf, { rotateY: -75, transformOrigin: 'left center' })
-        .to(overlay, {
-          clipPath: 'inset(0 0% 0 0)',
-          duration: 0.85,
-          ease: 'power2.inOut'
-        })
-        .to(turningLeaf, {
-          rotateY: 0,
-          duration: 0.85,
-          ease: 'power2.out'
-        }, '<')
-        .to(overlay, {
-          clipPath: 'inset(0 0 0 100%)',
-          duration: 0.8,
-          ease: 'power2.inOut',
-          delay: 0.2
+      if (currentEl) {
+        turnTl.to(currentEl, {
+          rotateY: -7,
+          scale: 0.99,
+          opacity: 0.7,
+          transformOrigin: 'left center',
+          boxShadow: '-25px 12px 35px rgba(0, 0, 0, 0.07)',
+          duration: 0.32,
+          ease: 'power2.in'
         });
+      }
+
+      turnTl.call(() => {
+        targetEl.scrollIntoView({ behavior: 'instant', block: 'start' });
+      });
+
+      turnTl.fromTo(targetEl,
+        {
+          rotateY: 7,
+          scale: 0.99,
+          opacity: 0.7,
+          transformOrigin: 'right center',
+          boxShadow: '25px 12px 35px rgba(0, 0, 0, 0.07)'
+        },
+        {
+          rotateY: 0,
+          scale: 1,
+          opacity: 1,
+          boxShadow: 'none',
+          duration: 0.45,
+          ease: 'power2.out'
+        }
+      );
     }
 
     if (turnBtn) {
-      turnBtn.addEventListener('click', triggerPageTurn);
+      turnBtn.addEventListener('click', executePhysicalSpreadTurn);
     }
 
     // 9. TACTILE EDITORIAL INSERT SLIP INTERACTION
