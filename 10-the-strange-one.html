@@ -320,7 +320,7 @@
       max-width: 440px;
       width: 82%;
       margin: 0 auto;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
     }
     @media (min-width: 900px) {
       .hero-plane-garment-plate {
@@ -492,11 +492,11 @@
     .spatial-image-plate {
       position: relative;
       transform: rotateY(-4deg) rotateX(2deg);
-      transition: transform 0.4s ease;
       transform-style: preserve-3d;
       max-width: 480px;
       margin: 0 auto;
       width: 100%;
+      will-change: transform;
     }
     .spatial-image-plate:hover {
       transform: rotateY(0deg) rotateX(0deg);
@@ -855,9 +855,10 @@
     .occasion-word-object {
       cursor: pointer;
       position: relative;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: color 0.3s ease;
       transform-style: preserve-3d;
       text-align: center;
+      will-change: transform, opacity;
     }
     @media (min-width: 860px) {
       .occasion-word-object {
@@ -1740,6 +1741,15 @@
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
     gsap.registerPlugin(ScrollTrigger);
 
+    // Expose for inspection and verified testing
+    window.gsap = gsap;
+    window.ScrollTrigger = ScrollTrigger;
+
+    // Maintain stable browser scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'auto';
+    }
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // 1. RAIL LIVE COORDINATES
@@ -1759,6 +1769,77 @@
     const heroDeepLia = document.getElementById('heroDeepLia');
     const heroGarmentPlate = document.getElementById('heroGarmentPlate');
 
+    const restingRotY = window.innerWidth >= 900 ? -5 : 0;
+    const restingRotX = window.innerWidth >= 900 ? 2 : 0;
+
+    // Hero Entrance Sequence (Plays on direct load / refresh when at top)
+    function initHeroEntrance() {
+      if (prefersReducedMotion) return;
+
+      const isAtTop = window.scrollY < 140;
+      if (!isAtTop) {
+        // Scrolled down on load / refresh: set immediately to target resting state
+        if (heroForeWe) gsap.set(heroForeWe, { opacity: 1, y: 0 });
+        if (heroMidDe) gsap.set(heroMidDe, { opacity: 0.28, x: 0 });
+        if (heroDeepLia) gsap.set(heroDeepLia, { opacity: 0.12, scale: 1 });
+        if (heroGarmentPlate) gsap.set(heroGarmentPlate, { opacity: 1, scale: 1, rotateY: restingRotY, rotateX: restingRotX });
+        gsap.set('.deep-japanese-annotation', { opacity: 0.12 });
+        gsap.set('.hero-editorial-fragment', { opacity: 1, y: 0 });
+        return;
+      }
+
+      const introTl = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        onComplete: () => {
+          ScrollTrigger.refresh();
+        }
+      });
+
+      if (heroDeepLia) {
+        introTl.fromTo(heroDeepLia,
+          { opacity: 0, scale: 0.84 },
+          { opacity: 0.12, scale: 1, duration: 0.9 },
+          0
+        );
+      }
+
+      introTl.fromTo('.deep-japanese-annotation',
+        { opacity: 0 },
+        { opacity: 0.12, duration: 0.75 },
+        0.1
+      );
+
+      if (heroGarmentPlate) {
+        introTl.fromTo(heroGarmentPlate,
+          { opacity: 0, scale: 0.93, rotateY: restingRotY - 14, rotateX: restingRotX + 4 },
+          { opacity: 1, scale: 1, rotateY: restingRotY, rotateX: restingRotX, duration: 0.95, ease: 'power3.out' },
+          0.08
+        );
+      }
+
+      if (heroMidDe) {
+        introTl.fromTo(heroMidDe,
+          { opacity: 0, x: -28 },
+          { opacity: 0.28, x: 0, duration: 0.85 },
+          0.16
+        );
+      }
+
+      if (heroForeWe) {
+        introTl.fromTo(heroForeWe,
+          { opacity: 0, y: -32 },
+          { opacity: 1, y: 0, duration: 0.85 },
+          0.22
+        );
+      }
+
+      introTl.fromTo('.hero-editorial-fragment',
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.7 },
+        0.32
+      );
+    }
+
     if (heroStage && !prefersReducedMotion) {
       // Mouse 3D perspective tilt
       heroStage.addEventListener('mousemove', (e) => {
@@ -1774,8 +1855,8 @@
         }
         if (heroGarmentPlate) {
           gsap.to(heroGarmentPlate, {
-            rotateY: normX * 10 - 4,
-            rotateX: -normY * 8 + 2,
+            rotateY: normX * 10 + restingRotY,
+            rotateX: -normY * 8 + restingRotX,
             duration: 0.4,
             ease: 'power2.out'
           });
@@ -1788,7 +1869,7 @@
       heroStage.addEventListener('mouseleave', () => {
         if (heroForeWe) gsap.to(heroForeWe, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
         if (heroMidDe) gsap.to(heroMidDe, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
-        if (heroGarmentPlate) gsap.to(heroGarmentPlate, { rotateY: -5, rotateX: 2, duration: 0.6, ease: 'power3.out' });
+        if (heroGarmentPlate) gsap.to(heroGarmentPlate, { rotateY: restingRotY, rotateX: restingRotX, duration: 0.6, ease: 'power3.out' });
         if (heroDeepLia) gsap.to(heroDeepLia, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
       });
 
@@ -1830,6 +1911,21 @@
           scrub: 1.2
         }
       });
+
+      if (heroGarmentPlate) {
+        gsap.to(heroGarmentPlate, {
+          yPercent: 12,
+          rotateY: restingRotY - 8,
+          opacity: 0.7,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#stageArrival',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        });
+      }
     }
 
     // 3. STAGE HOVER NAVIGATION HIGHLIGHTER
@@ -1844,6 +1940,12 @@
       { id: 'stageExit', key: 'exit' }
     ];
 
+    function setActiveStageLink(key) {
+      stageLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.stage === key);
+      });
+    }
+
     stageSections.forEach(({ id, key }) => {
       const el = document.getElementById(id);
       if (el) {
@@ -1857,10 +1959,152 @@
       }
     });
 
-    function setActiveStageLink(key) {
-      stageLinks.forEach(link => {
-        link.classList.toggle('active', link.dataset.stage === key);
-      });
+    function updateActiveStageFromScroll() {
+      const scrollPos = window.scrollY + window.innerHeight * 0.45;
+      for (let i = stageSections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(stageSections[i].id);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveStageLink(stageSections[i].key);
+          break;
+        }
+      }
+    }
+
+    // SECTION SCROLL REVEALS
+    if (!prefersReducedMotion) {
+      // Stage 2: Monolith Vector Object
+      gsap.fromTo('#spatialImagePlate',
+        { opacity: 0, y: 36, rotateY: 10 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateY: -4,
+          duration: 0.85,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#stageObjects',
+            start: 'top 75%',
+            once: true
+          }
+        }
+      );
+
+      gsap.fromTo('.dossier-spec-col',
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '#stageObjects',
+            start: 'top 70%',
+            once: true
+          }
+        }
+      );
+
+      gsap.fromTo('.orbital-specimen-plate',
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '#orbitalStrip',
+            start: 'top 92%',
+            once: true
+          }
+        }
+      );
+
+      // Stage 3: Impossible Section Narrative
+      gsap.fromTo('.impossible-prose-col',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '#stageImpossible',
+            start: 'top 70%',
+            once: true
+          }
+        }
+      );
+
+      // Stage 4: Scattered Occasion Words (Staggered Floating Entry)
+      gsap.fromTo('.occasion-word-object',
+        { opacity: 0, y: 44 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.09,
+          duration: 0.75,
+          ease: 'power3.out',
+          clearProps: 'transform',
+          scrollTrigger: {
+            trigger: '#stageOccasions',
+            start: 'top 75%',
+            once: true
+          }
+        }
+      );
+
+      // Stage 5: Teleport Threshold
+      gsap.fromTo('.teleport-quiet-container',
+        { opacity: 0, scale: 0.96 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.75,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '#stageTeleport',
+            start: 'top 75%',
+            once: true
+          }
+        }
+      );
+
+      // Stage 6: Convergence Chamber Cross-Axes
+      gsap.fromTo(['.chamber-axis-top', '.chamber-axis-left', '.chamber-axis-right'],
+        { opacity: 0, y: 22 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 0.65,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '#stageChamber',
+            start: 'top 70%',
+            once: true
+          }
+        }
+      );
+
+      const chamberGarmentBoxEl = document.getElementById('chamberGarmentBox');
+      if (chamberGarmentBoxEl) {
+        gsap.fromTo(chamberGarmentBoxEl,
+          { opacity: 0, scale: 0.94, rotateY: 8 },
+          {
+            opacity: 1,
+            scale: 1,
+            rotateY: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '#stageChamber',
+              start: 'top 70%',
+              once: true
+            }
+          }
+        );
+      }
     }
 
     // 4. STAGE 2: MONOLITH VECTOR SWITCHER DATA & LOGIC
@@ -2229,7 +2473,7 @@
       });
     }
 
-    // 9. STAGE 7: QUIET ROSTER HOVER
+    // 9. STAGE 7: QUIET ROSTER HOVER & COLOPHON
     const rosterRows = document.querySelectorAll('.roster-row');
     rosterRows.forEach(row => {
       row.addEventListener('mouseenter', () => {
@@ -2255,6 +2499,64 @@
         }
       );
     }
+
+    // 10. INITIALIZATION & REFLOW LIFECYCLE
+    initHeroEntrance();
+    updateActiveStageFromScroll();
+    ScrollTrigger.refresh();
+
+    // Font readiness hook (Anton, Shippori Mincho, Space Mono)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        ScrollTrigger.refresh();
+        updateActiveStageFromScroll();
+      });
+    }
+
+    // Window load hook (all stylesheets and high-res imagery)
+    if (document.readyState === 'complete') {
+      ScrollTrigger.refresh();
+      updateActiveStageFromScroll();
+    } else {
+      window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
+        updateActiveStageFromScroll();
+      }, { once: true });
+    }
+
+    // Progressive image settle
+    const pageImgs = Array.from(document.querySelectorAll('img'));
+    const pendingImgs = pageImgs.filter(img => !img.complete);
+    if (pendingImgs.length > 0) {
+      let settled = 0;
+      const onImgSettle = () => {
+        settled++;
+        if (settled === pendingImgs.length) {
+          ScrollTrigger.refresh();
+          updateActiveStageFromScroll();
+        }
+      };
+      pendingImgs.forEach(img => {
+        img.addEventListener('load', onImgSettle, { once: true });
+        img.addEventListener('error', onImgSettle, { once: true });
+      });
+    }
+
+    // bfcache / navigation back into #10
+    window.addEventListener('pageshow', () => {
+      ScrollTrigger.refresh();
+      updateActiveStageFromScroll();
+    });
+
+    // Debounced window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+        updateActiveStageFromScroll();
+      }, 120);
+    }, { passive: true });
   </script>
   <script type="module" src="/src/shared/rental-modal.js"></script>
 </body>
