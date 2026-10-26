@@ -48,6 +48,11 @@ async function run() {
       console.log(`After flyer switch: Plate=${plateTag} | Price=${priceTag}`);
       await page.screenshot({ path: join(outDir, 'desktop-1440-flyer-switch.jpg'), fullPage: false });
 
+      console.log('Capturing Full-Viewport Cinematic Campaign Moment...');
+      await page.eval(`document.getElementById('cinematicMoment')?.scrollIntoView({ behavior: 'instant', block: 'center' })`);
+      await new Promise(r => setTimeout(r, 600));
+      await page.screenshot({ path: join(outDir, 'desktop-1440-cinematic-moment.jpg'), fullPage: false });
+
       console.log('Testing Tokyo Night Clock [01:14 UNDERPASS]...');
       await page.eval(`document.querySelectorAll('.night-time-pill')[1]?.click()`);
       await new Promise(r => setTimeout(r, 600));

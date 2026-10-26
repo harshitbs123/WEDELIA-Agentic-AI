@@ -340,21 +340,23 @@
       border-color: var(--red);
       box-shadow: 0 0 15px var(--red-glow);
     }
+    /* Physical Razor-Wipe Layer with Angular Slant */
     .poster-razor-wipe {
       position: absolute;
-      inset: 0;
+      inset: -5% -10%;
       background: var(--red);
       z-index: 20;
       pointer-events: none;
-      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      clip-path: polygon(0 0, 0 0, -10% 100%, 0 100%);
+      box-shadow: 0 0 35px var(--red-glow);
     }
 
-    /* Experiment 03-C: Real-Time Laser Reticle Crosshair */
+    /* Refined 35mm Viewfinder Reticle (Camera Focus, not Gaming HUD) */
     .laser-reticle {
       position: absolute;
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--red);
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255, 31, 0, 0.65);
       pointer-events: none;
       transform: translate(-50%, -50%);
       opacity: 0;
@@ -362,24 +364,219 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 2px;
     }
     .laser-reticle::before {
-      content: '+';
-      color: var(--red);
-      font-family: 'Space Mono', monospace;
-      font-size: 1rem;
-      font-weight: 700;
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--red);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--red);
     }
     .laser-telemetry-badge {
       position: absolute;
-      bottom: 0.5rem;
-      right: 0.5rem;
-      background: rgba(0,0,0,0.85);
-      color: var(--red);
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(7, 7, 8, 0.88);
+      border: 1px solid rgba(255, 31, 0, 0.35);
+      color: #f5f5f7;
       font-family: 'Space Mono', monospace;
       font-size: 0.62rem;
-      padding: 0.2rem 0.5rem;
+      padding: 0.25rem 0.6rem;
+      letter-spacing: 0.08em;
       z-index: 15;
+    }
+
+    /* Continuous Visual Handoff Spines */
+    .section-handoff-spine {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin: -3.5rem 0 4rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      position: relative;
+      z-index: 3;
+    }
+    .spine-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--red) 0%, rgba(255, 31, 0, 0.3) 50%, transparent 100%);
+    }
+    .spine-tag {
+      color: var(--red);
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .spine-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--red);
+      display: inline-block;
+    }
+
+    /* Environmental Mid-Stream Ambient Typography */
+    .environmental-mid-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin: 1.5rem 0 3.5rem;
+      pointer-events: none;
+      z-index: 1;
+      user-select: none;
+    }
+    .environmental-mid-word {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(4.5rem, 12vw, 9.5rem);
+      line-height: 0.85;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.035);
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+      display: inline-block;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    /* COMPOSITION 3.5: THE PERFECT FULL-VIEWPORT CINEMATIC CAMPAIGN MOMENT */
+    .cinematic-campaign-moment {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      min-height: 88vh;
+      background: #050507;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 4rem 1.5rem;
+      box-sizing: border-box;
+      border-top: 2px solid var(--red);
+      border-bottom: 2px solid var(--hairline-bright);
+      margin-bottom: 7rem;
+    }
+    @media (min-width: 1024px) {
+      .cinematic-campaign-moment {
+        min-height: 95vh;
+        padding: 5rem 6rem;
+      }
+    }
+    .cinematic-bg-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .cinematic-bg-photo img {
+      width: 100%;
+      height: 125%;
+      object-fit: cover;
+      object-position: 72% 20%;
+      display: block;
+      filter: contrast(116%) saturate(106%) brightness(95%);
+      transform: translate3d(0, -6%, 0);
+      will-change: transform;
+    }
+    .cinematic-vignette-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(5,5,7,0.92) 0%, rgba(5,5,7,0.7) 45%, rgba(5,5,7,0.2) 80%, rgba(5,5,7,0.85) 100%),
+                  linear-gradient(180deg, rgba(5,5,7,0.6) 0%, transparent 20%, transparent 80%, rgba(5,5,7,0.85) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .cinematic-headline-wrap {
+      position: relative;
+      z-index: 3;
+      max-width: 900px;
+    }
+    .cinematic-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+      color: var(--muted);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cinematic-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+    }
+    .cinematic-monument-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(4.5rem, 13vw, 11rem);
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 40px rgba(0,0,0,0.8);
+      will-change: transform;
+    }
+    .cinematic-vermilion-intervention {
+      display: inline-flex;
+      align-items: center;
+      background: var(--red);
+      color: #ffffff;
+      padding: 0.6rem 1.4rem;
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.72rem, 1.3vw, 0.9rem);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      box-shadow: 0 0 30px var(--red-glow);
+    }
+    .cinematic-corner-annotation {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2rem;
+      z-index: 3;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: #aaaaaa;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+      letter-spacing: 0.12em;
+    }
+    @media (min-width: 1024px) {
+      .cinematic-corner-annotation {
+        left: 6rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .cinematic-bg-photo img {
+        object-position: 50% 20%;
+      }
+      .cinematic-vignette-overlay {
+        background: linear-gradient(180deg, rgba(5,5,7,0.7) 0%, rgba(5,5,7,0.4) 40%, rgba(5,5,7,0.92) 100%);
+      }
+      .cinematic-corner-annotation {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        font-size: 0.6rem;
+      }
     }
 
     /* Experiment 03-D: Tokyo Night Clock & Ambience Time-Lapse */
@@ -1520,7 +1717,7 @@
           <div class="photo-red-annotation">DISPATCH STATUS: ACTIVE</div>
           <div class="poster-razor-wipe" id="posterRazorWipe"></div>
           <div class="laser-reticle" id="laserReticle"></div>
-          <div class="laser-telemetry-badge" id="laserTelemetry">TARGET: SHIBUYA GATE // 35MM ISO 3200</div>
+          <div class="laser-telemetry-badge" id="laserTelemetry">35MM FLASH // 1/250s f/2.8 // SHIBUYA 23:47</div>
           <img id="heroMonumentImg" src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Faille">
         </div>
         <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted);">
@@ -1530,12 +1727,19 @@
       </div>
     </section>
 
+    <!-- SECTION HANDOFF 01: HERO ⟶ AFTER DARK 23:47 -->
+    <div class="section-handoff-spine">
+      <span class="spine-line"></span>
+      <span class="spine-tag"><span class="spine-dot"></span> DISPATCH FLOW ⟶ 23:47 SHIBUYA</span>
+      <span class="spine-line"></span>
+    </div>
+
     <!-- COMPOSITION 2: TOKYO NIGHT FILE (AFTER DARK 23:47 SHIBUYA) -->
     <section class="night-file-section" id="nightFileSection">
       <div class="night-header">
         <h2 class="night-title">AFTER DARK // 23:47 SHIBUYA</h2>
         <div style="font-size: 0.72rem; color: var(--red); font-weight: 700;">
-          [ SURVEILLANCE & HIGH-SPEED NIGHTLIFE DOSSIER ]
+          [ TOKYO NIGHT CHRONICLE // 23:47 ]
         </div>
       </div>
 
@@ -1569,6 +1773,11 @@
         </div>
       </div>
     </section>
+
+    <!-- ENVIRONMENTAL MID-STREAM AMBIENT TYPOGRAPHY -->
+    <div class="environmental-mid-wrap">
+      <div class="environmental-mid-word" id="bgDropWord">NIGHT ROTATION // FOUR NIGHT DROPS // TOKYO 23:47 // DELHI 20:17</div>
+    </div>
 
     <!-- COMPOSITION 3: THE MIDNIGHT CAMPAIGN LOOK DROP (深夜投下 // 4 NIGHT POSTER SLAMMERS) -->
     <div class="section-title-strip">
@@ -1728,6 +1937,25 @@
         </div>
       </div>
     </div>
+
+    <!-- COMPOSITION 3.5: FULL-VIEWPORT CINEMATIC CAMPAIGN MOMENT -->
+    <section class="cinematic-campaign-moment" id="cinematicMoment">
+      <div class="cinematic-bg-photo">
+        <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Nocturnal Haute Couture Duet" id="cinematicPhoto">
+      </div>
+      <div class="cinematic-vignette-overlay"></div>
+      <div class="cinematic-headline-wrap">
+        <div class="cinematic-eyebrow">TOKYO NIGHT PROTOCOL // MONUMENT SPECIMEN</div>
+        <h2 class="cinematic-monument-title" id="cinematicTitle">RENT THE NIGHT.</h2>
+        <div class="cinematic-vermilion-intervention">
+          <span class="intervention-stamp">DISPATCH 00:00 // ALL-ACCESS PATRIMONY</span>
+        </div>
+      </div>
+      <div class="cinematic-corner-annotation">
+        <span style="color: #ffffff; font-weight: 700;">JEAN DESSÈS PARIS 1951</span>
+        <span>ARCHIVE SPECIMEN 04 // PLEATED SILK CHIFFON</span>
+      </div>
+    </section>
 
     <!-- COMPOSITION 4: REDLINE PROTOCOL MANIFESTO -->
     <section class="redline-manifesto-block" id="redlineManifesto">
@@ -2054,58 +2282,94 @@
       }, 1000);
     }
 
-    // 1. AGGRESSIVE CAMPAIGN ENTRANCE
+    // 1. PHYSICAL CAMPAIGN POSTER ENTRANCE RHYTHM
     if (!prefersReducedMotion) {
       const enterTl = gsap.timeline({ defaults: { ease: 'expo.out' } });
 
+      // BLACK -> tiny white metadata
       enterTl
-        .from('.top-lead', {
-          y: -25,
-          opacity: 0,
-          duration: 0.5
+        .set('.monument-image-frame', {
+          clipPath: 'polygon(25% 0, 35% 0, 35% 100%, 25% 100%)',
+          scale: 1.1,
+          opacity: 0
         })
+        .from('.top-lead', {
+          y: -15,
+          opacity: 0,
+          duration: 0.35,
+          ease: 'power2.out'
+        })
+        // Image fragment appears as vertical sliver
+        .to('.monument-image-frame', {
+          opacity: 0.85,
+          duration: 0.18,
+          ease: 'power2.in'
+        }, '-=0.1')
+        // Giant typography slams in
         .from('.brand-name', {
-          xPercent: -50,
+          xPercent: -35,
           opacity: 0,
-          duration: 0.7,
+          duration: 0.5,
           ease: 'expo.out'
-        }, '-=0.2')
-        .from('.tokyo-sub', {
-          xPercent: 30,
-          opacity: 0,
-          duration: 0.6
-        }, '-=0.4')
-        .from('.japanese-lead, .body-copy', {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.1
-        }, '-=0.3')
-        .from('.monument-image-frame', {
-          scale: 1.15,
-          clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-          duration: 0.8,
-          ease: 'power4.out'
-        }, '-=0.5')
+        }, '-=0.08')
+        // Red intervention: razor wipe slices across
+        .set('#posterRazorWipe', {
+          clipPath: 'polygon(0 0, 0 0, -10% 100%, 0 100%)'
+        }, '<')
+        .to('#posterRazorWipe', {
+          clipPath: 'polygon(0 0, 106% 0, 96% 100%, 0 100%)',
+          duration: 0.22,
+          ease: 'power4.in'
+        }, '-=0.22')
+        // Full image snaps open as red peels away
         .to('.monument-image-frame', {
           clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-          duration: 0.8,
-          ease: 'power4.out'
+          scale: 1,
+          opacity: 1,
+          duration: 0.42,
+          ease: 'power3.out'
+        }, '-=0.06')
+        .to('#posterRazorWipe', {
+          clipPath: 'polygon(100% 0, 106% 0, 100% 100%, 96% 100%)',
+          duration: 0.24,
+          ease: 'power3.out'
         }, '<')
-        .from('.poster-left ul li', {
-          x: -25,
+        // Campaign information reveals with crisp rhythm
+        .from('.tokyo-sub', {
+          xPercent: 22,
           opacity: 0,
           duration: 0.45,
-          stagger: 0.05,
+          ease: 'expo.out'
+        }, '-=0.32')
+        .from('.japanese-lead, .body-copy', {
+          y: 14,
+          opacity: 0,
+          duration: 0.38,
+          stagger: 0.08,
           ease: 'power3.out'
-        }, '-=0.4');
+        }, '-=0.28')
+        .from('.poster-left ul li', {
+          x: -16,
+          opacity: 0,
+          duration: 0.32,
+          stagger: 0.04,
+          ease: 'power2.out'
+        }, '-=0.22')
+        // Interaction becomes active
+        .from('.poster-flyer-tabs, .photo-red-annotation, .laser-telemetry-badge', {
+          opacity: 0,
+          y: 6,
+          duration: 0.28,
+          stagger: 0.05,
+          ease: 'power2.out'
+        }, '-=0.18');
     }
 
-    // 2. TYPOGRAPHY COLLISION MOVEMENT SYSTEMS (Experiment 03-B)
+    // 2. CONTINUOUS VISUAL HANDOFFS & TYPOGRAPHY COLLISION (Experiment 03-B)
     if (!prefersReducedMotion) {
       // Two-speed background chase typography
       gsap.to('#bgChaseWord', {
-        x: -260,
+        x: -280,
         ease: 'none',
         scrollTrigger: {
           trigger: '.editorial-wrap',
@@ -2114,6 +2378,33 @@
           scrub: 0.6
         }
       });
+
+      // Mid-stream ambient typography behind Section 3
+      gsap.to('#bgDropWord', {
+        x: -220,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.featured-night-drop-stage',
+          start: 'top 95%',
+          end: 'bottom 5%',
+          scrub: 0.7
+        }
+      });
+
+      // Continuous Red Spine Handoff (Hero -> Section 2)
+      gsap.fromTo('.spine-line',
+        { scaleX: 0, transformOrigin: 'left center' },
+        {
+          scaleX: 1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.section-handoff-spine',
+            start: 'top 85%',
+            end: 'top 45%',
+            scrub: true
+          }
+        }
+      );
 
       // Two-speed counter-directional scrub collision on hero typography
       gsap.to('.brand-name', {
@@ -2137,6 +2428,45 @@
           scrub: 0.5
         }
       });
+
+      // Heavy spatial inertia on Hero Fashion Plate
+      gsap.to('#heroMonumentImg', {
+        yPercent: 8,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.poster-hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.8
+        }
+      });
+
+      // COMPOSITION 3.5: FULL-VIEWPORT CINEMATIC MOMENT PARALLAX & TYPOGRAPHY SLICE
+      gsap.to('#cinematicPhoto', {
+        yPercent: 14,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#cinematicMoment',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1
+        }
+      });
+
+      gsap.fromTo('#cinematicTitle',
+        { x: -50, letterSpacing: '-0.04em' },
+        {
+          x: 35,
+          letterSpacing: '-0.01em',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#cinematicMoment',
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 0.8
+          }
+        }
+      );
 
       // Monumental closing headline split translation
       gsap.fromTo('.closing-huge-type', 
@@ -2170,7 +2500,7 @@
       });
     }
 
-    // 3. EXPERIMENT 03-A: INTERACTIVE CAMPAIGN POSTER FLYER SWAPPER
+    // 3. PHYSICAL MOMENTUM RAZOR-WIPE (Experiment 03-A)
     const flyerBtns = document.querySelectorAll('.flyer-tab-btn');
     const heroMonumentImg = document.getElementById('heroMonumentImg');
     const posterRazorWipe = document.getElementById('posterRazorWipe');
@@ -2189,27 +2519,59 @@
         if (posterRazorWipe && heroMonumentImg) {
           if (!prefersReducedMotion) {
             const wipeTl = gsap.timeline();
+            
+            // 1. Old type and photo shift with slight momentum
             wipeTl
-              .set(posterRazorWipe, { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)' })
+              .to([heroPlateTag, heroPriceTag], {
+                x: -16,
+                opacity: 0.35,
+                duration: 0.12,
+                ease: 'power2.in'
+              })
+              .to(heroMonumentImg, {
+                scale: 0.98,
+                duration: 0.12,
+                ease: 'power2.in'
+              }, '<')
+              // 2. Red blade strikes across with acceleration and angular slant
+              .set(posterRazorWipe, {
+                clipPath: 'polygon(0 0, 0 0, -10% 100%, 0 100%)',
+                opacity: 1
+              })
               .to(posterRazorWipe, {
-                clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-                duration: 0.16,
+                clipPath: 'polygon(0 0, 106% 0, 96% 100%, 0 100%)',
+                duration: 0.18,
                 ease: 'power4.in',
                 onComplete: () => {
+                  // 3. Swap image and metadata at peak blade coverage
                   heroMonumentImg.src = newImg;
                   if (heroPlateTag) heroPlateTag.textContent = newTag;
                   if (heroPriceTag) heroPriceTag.textContent = newPrice;
                 }
               })
+              // 4. Red blade pulls off with deceleration and physical momentum
               .to(posterRazorWipe, {
-                clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
-                duration: 0.18,
-                ease: 'power4.out'
+                clipPath: 'polygon(100% 0, 106% 0, 100% 100%, 96% 100%)',
+                duration: 0.22,
+                ease: 'power3.out'
               })
-              .fromTo(heroMonumentImg, 
-                { scale: 1.06, rotate: -0.5 },
-                { scale: 1, rotate: 0, duration: 0.35, ease: 'power3.out' },
-                '-=0.1'
+              // 5. New image reveals with slight overshoot settle
+              .fromTo(heroMonumentImg,
+                { scale: 1.05, x: 12 },
+                { scale: 1, x: 0, duration: 0.38, ease: 'power3.out' },
+                '-=0.14'
+              )
+              // 6. New type slides in and locks with flash settle
+              .fromTo([heroPlateTag, heroPriceTag],
+                { x: 16, opacity: 0, color: 'var(--red)' },
+                { x: 0, opacity: 1, color: '#f5f5f7', duration: 0.26, stagger: 0.05, ease: 'expo.out' },
+                '-=0.2'
+              )
+              // 7. Corner ticks snap to lock in
+              .fromTo('.corner-tick',
+                { opacity: 0.3, scale: 0.85 },
+                { opacity: 1, scale: 1, duration: 0.2, stagger: 0.03, ease: 'steps(2)' },
+                '-=0.15'
               );
           } else {
             heroMonumentImg.src = newImg;
@@ -2220,7 +2582,7 @@
       });
     });
 
-    // 4. EXPERIMENT 03-C: REAL-TIME LASER RETICLE CROSSHAIR TRACKING
+    // 4. REFINED 35MM VIEWFINDER RETICLE TRACKING (Camera Telemetry, not Gaming HUD)
     const heroMonumentFrame = document.getElementById('heroMonumentFrame');
     const laserReticle = document.getElementById('laserReticle');
     const laserTelemetry = document.getElementById('laserTelemetry');
@@ -2241,14 +2603,14 @@
         yTo(relY);
 
         if (laserTelemetry) {
-          laserTelemetry.textContent = `TARGET: [X:${Math.round(relX)} Y:${Math.round(relY)}] // ISO 3200 // SHIBUYA GATE`;
+          laserTelemetry.textContent = '35MM FLASH // 1/250s f/2.8 // SHIBUYA 23:47';
         }
       });
 
       heroMonumentFrame.addEventListener('mouseleave', () => {
         gsap.to(laserReticle, { opacity: 0, duration: 0.2 });
         if (laserTelemetry) {
-          laserTelemetry.textContent = 'TARGET: SHIBUYA GATE // 35MM ISO 3200';
+          laserTelemetry.textContent = '35MM FLASH // 1/250s f/2.8 // SHIBUYA 23:47';
         }
       });
     }
