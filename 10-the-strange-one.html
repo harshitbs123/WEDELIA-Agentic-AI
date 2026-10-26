@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEDELIA // 10 The Strange One — Digital Fashion Installation</title>
+  <title>WEDELIA // 10 The Strange One — Spatial Fashion Coordinate Exhibition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Shippori+Mincho:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -11,13 +11,20 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --void-bg: #070709;
+      --void-bg: #050508;
+      --void-surface: #0a0a11;
+      --panel-dark: #0e0e17;
       --bone: #f4f3ee;
-      --dim: #7a7974;
+      --bone-muted: #abaaa4;
+      --dim: #5c5b56;
+      --dim-light: #7a7974;
       --electric-blue: #0f38ff;
-      --acid: #d4ff00;
-      --border-dark: #1b1b22;
-      --panel-dark: #0d0d12;
+      --electric-blue-bright: #3b66ff;
+      --electric-blue-glow: rgba(15, 56, 255, 0.45);
+      --electric-blue-subtle: rgba(15, 56, 255, 0.12);
+      --border-dark: #191924;
+      --border-accent: rgba(15, 56, 255, 0.35);
+      --border-light: rgba(244, 243, 238, 0.15);
     }
 
     html, body {
@@ -29,16 +36,17 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       max-width: 100vw;
+      width: 100%;
     }
 
-    /* Spatial Tensor Matrix Coordinate Bar */
+    /* Spatial Coordinate Top Nav */
     .switch-nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       height: 48px;
-      background: #030308;
+      background: #020205;
       border-bottom: 1px solid var(--border-dark);
       z-index: 9999;
       display: flex;
@@ -61,6 +69,11 @@
       background: var(--electric-blue);
       border-radius: 50%;
       box-shadow: 0 0 10px var(--electric-blue);
+      animation: pulseDot 2.4s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.25); box-shadow: 0 0 14px var(--electric-blue-bright); }
     }
     .spatial-brand-link {
       font-family: 'Space Mono', monospace;
@@ -69,13 +82,13 @@
       letter-spacing: 0.1em;
     }
     .spatial-coord-sub {
-      color: var(--dim);
+      color: var(--dim-light);
       font-size: 0.62rem;
     }
     .switch-pills { display: flex; align-items: center; gap: 0.25rem; }
     .spatial-nodes-label {
       font-size: 0.6rem;
-      color: var(--dim);
+      color: var(--dim-light);
       margin-right: 0.25rem;
     }
     .switch-pill {
@@ -84,13 +97,20 @@
       justify-content: center;
       width: 26px;
       height: 26px;
-      border: 1px solid rgba(0, 102, 255, 0.25);
-      color: var(--dim);
-      background: #050510;
+      border: 1px solid rgba(15, 56, 255, 0.25);
+      color: var(--dim-light);
+      background: #06060e;
       font-family: 'Space Mono', monospace;
+      transition: all 0.2s ease;
     }
     .switch-pill:hover { border-color: var(--electric-blue); color: #ffffff; }
-    .switch-pill.active { background: var(--electric-blue); color: #ffffff; font-weight: 700; border-color: var(--electric-blue); box-shadow: 0 0 12px rgba(0, 102, 255, 0.5); }
+    .switch-pill.active {
+      background: var(--electric-blue);
+      color: #ffffff;
+      font-weight: 700;
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 12px var(--electric-blue-glow);
+    }
     @media (max-width: 768px) {
       .switch-nav .spatial-coord-sub { display: none; }
       .switch-nav .spatial-nodes-label { display: none; }
@@ -99,14 +119,14 @@
       .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
     }
 
-    /* Left Vertical Spatial Rail */
+    /* Left Vertical Spatial Rail (Desktop) */
     .viewport-rail {
       position: fixed;
       left: 0;
       top: 48px;
       bottom: 0;
       width: 68px;
-      background: #050507;
+      background: #030306;
       border-right: 1px solid var(--border-dark);
       z-index: 100;
       display: none;
@@ -125,357 +145,375 @@
       writing-mode: vertical-rl;
       text-orientation: mixed;
       letter-spacing: 0.35em;
-      color: var(--dim);
+      color: var(--dim-light);
       font-size: 0.65rem;
     }
     .rail-num-active {
       font-family: 'Anton', sans-serif;
       font-size: 1.8rem;
       color: var(--electric-blue);
+      line-height: 1;
     }
     .rail-coord-stamp {
       font-size: 0.6rem;
-      color: var(--dim);
+      color: var(--dim-light);
       letter-spacing: 0.1em;
       writing-mode: vertical-rl;
+      text-orientation: mixed;
     }
 
-    /* Main Experimental Canvas */
+    /* Main Experimental Spatial Container */
     .strange-canvas {
       margin-left: 0;
-      padding: 2.5rem 1rem 8rem;
+      padding: 0 0 8rem;
       position: relative;
+      overflow-x: hidden;
+      width: 100%;
     }
     @media (min-width: 1024px) {
       .strange-canvas {
         margin-left: 68px;
-        padding: 3.5rem 3.5rem 10rem;
+        width: calc(100% - 68px);
       }
     }
 
-    /* 1. BLEEDING OVERSIZED TYPOGRAPHIC MASTHEAD */
-    .bleeding-type-hero {
-      position: relative;
-      margin-bottom: 5rem;
-      overflow: visible;
+    /* Floating Spatial Stage Map Navigation Bar */
+    .spatial-stage-map-bar {
+      position: sticky;
+      top: 48px;
+      z-index: 95;
+      background: rgba(3, 3, 6, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-dark);
-      padding-bottom: 2rem;
-    }
-    .oversized-bleed-title {
-      font-family: 'Anton', sans-serif;
-      font-size: clamp(5.5rem, 18vw, 17rem);
-      line-height: 0.82;
-      letter-spacing: -0.04em;
-      text-transform: uppercase;
-      color: var(--bone);
-      margin-left: -0.04em;
-      margin-bottom: 2rem;
-      user-select: none;
-      position: relative;
-    }
-    .huge-split-name span {
-      display: inline-block;
-      will-change: transform;
-    }
-    .huge-split-name .line-1 {
-      position: relative;
-    }
-    .huge-split-name .line-2.blue {
-      color: var(--electric-blue);
-      transform: skewX(-3deg);
-      display: inline-block;
-    }
-    .hero-spatial-reticle {
-      position: absolute;
-      right: 0;
-      top: 15%;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--dim);
-      border-left: 2px solid var(--electric-blue);
-      padding-left: 0.75rem;
-      line-height: 1.5;
-      display: none;
-    }
-    @media (min-width: 1024px) {
-      .hero-spatial-reticle {
-        display: block;
-      }
-    }
-    .bleed-sub-manifesto {
+      padding: 0.5rem 1rem;
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      font-size: 0.75rem;
-      color: var(--dim);
-    }
-    @media (min-width: 768px) {
-      .bleed-sub-manifesto {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: baseline;
-      }
-    }
-    .spatial-coord-pill {
-      display: inline-block;
-      border: 1px solid var(--electric-blue);
-      color: var(--electric-blue);
-      padding: 0.2rem 0.6rem;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-    }
-
-    /* 2. ASYMMETRIC SPATIAL STAGE */
-    .spatial-stage-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
       align-items: center;
-      position: relative;
-      margin-bottom: 8rem;
+      justify-content: space-between;
+      gap: 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-    @media (min-width: 1024px) {
-      .spatial-stage-grid {
-        grid-template-columns: 1fr 1.25fr;
-        gap: 5rem;
-      }
-    }
-    .stage-narrative {
+    .spatial-stage-map-bar::-webkit-scrollbar { display: none; }
+    .stage-map-label {
+      font-size: 0.62rem;
+      color: var(--dim-light);
+      letter-spacing: 0.12em;
+      white-space: nowrap;
       display: flex;
-      flex-direction: column;
-      z-index: 5;
+      align-items: center;
+      gap: 0.4rem;
     }
-    .kanji-banner {
-      font-family: 'Shippori Mincho', serif;
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      font-weight: 900;
-      color: var(--bone);
-      line-height: 1.2;
-      margin-bottom: 1.75rem;
-      letter-spacing: 0.05em;
-    }
-    .stage-thesis {
-      font-size: 0.95rem;
-      line-height: 1.75;
-      color: #b5b3aa;
-      max-width: 520px;
-      margin-bottom: 2.5rem;
-    }
-    .stage-thesis strong {
-      color: #ffffff;
-    }
-    .spatial-pillars {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      border-top: 1px solid var(--border-dark);
-      padding-top: 2rem;
-    }
-    @media (min-width: 600px) {
-      .spatial-pillars {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    .pillar-box {
-      border: 1px solid var(--border-dark);
-      padding: 1.25rem 1rem;
-      background: var(--panel-dark);
-      position: relative;
-    }
-    .pillar-box:hover {
-      border-color: var(--electric-blue);
-    }
-    .pillar-num {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
+    .stage-map-label::before {
+      content: '⟐';
       color: var(--electric-blue);
-      line-height: 1;
-      margin-bottom: 0.5rem;
+      font-size: 0.75rem;
     }
-    .pillar-label {
-      font-size: 0.72rem;
+    .stage-map-nodes {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    .stage-nav-pill {
+      background: #080812;
+      border: 1px solid var(--border-dark);
+      color: var(--bone-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.64rem;
+      padding: 0.3rem 0.65rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .stage-nav-pill:hover, .stage-nav-pill.active {
+      border-color: var(--electric-blue);
+      color: #ffffff;
+      background: rgba(15, 56, 255, 0.18);
+      box-shadow: 0 0 10px rgba(15, 56, 255, 0.3);
+    }
+    .stage-nav-pill.active {
+      border-color: var(--electric-blue-bright);
       font-weight: 700;
-      color: var(--bone);
-      text-transform: uppercase;
-      margin-bottom: 0.25rem;
-    }
-    .pillar-sub {
-      font-size: 0.65rem;
-      color: var(--dim);
     }
 
-    /* Right Bleeding Image Installation */
-    .stage-bleed-image {
+    /* ========================================================
+       STAGE 1: DESTROYED HERO (3D COORDINATE VOLUME)
+       ======================================================== */
+    .hero-spatial-volume {
       position: relative;
+      min-height: calc(100vh - 96px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       perspective: 1200px;
+      transform-style: preserve-3d;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-dark);
+      padding: 3rem 1.5rem 5rem;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(15, 56, 255, 0.08) 0%, transparent 70%),
+        linear-gradient(to right, rgba(25, 25, 36, 0.3) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(25, 25, 36, 0.3) 1px, transparent 1px);
+      background-size: 100% 100%, 60px 60px, 60px 60px;
     }
-    .bleed-photo-frame {
+
+    .hero-stage-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1240px;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+    @media (max-width: 768px) {
+      .hero-spatial-volume {
+        min-height: 84vh;
+        padding: 2rem 1rem 3.5rem;
+      }
+      .hero-stage-inner {
+        min-height: 540px;
+      }
+      .hero-plane-mid {
+        max-width: 310px;
+        width: 78%;
+      }
+      .fore-title-detached {
+        font-size: clamp(4.5rem, 18vw, 7.5rem);
+        top: 2%;
+        left: 2%;
+      }
+      .fore-reticle-strip {
+        bottom: 0%;
+        left: 0;
+        right: 0;
+        gap: 0.5rem;
+      }
+      .fore-reticle-badge {
+        font-size: 0.58rem;
+        padding: 0.35rem 0.65rem;
+      }
+      .fore-thesis-box {
+        font-size: 0.7rem;
+        padding: 0.6rem 0.75rem;
+      }
+    }
+
+    /* Deep Layer: DELIA (translateZ -150px) */
+    .hero-plane-deep {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateZ(-150px);
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      text-align: center;
+    }
+    .deep-kanji-watermark {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      color: rgba(244, 243, 238, 0.07);
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+      white-space: nowrap;
+    }
+    .deep-monument-delia {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(6.5rem, 24vw, 22rem);
+      line-height: 0.8;
+      letter-spacing: -0.05em;
+      color: rgba(244, 243, 238, 0.12);
+      text-transform: uppercase;
+      transform: translateY(30px);
+    }
+    .deep-coordinate-matrix {
+      position: absolute;
+      top: 10%;
+      right: 5%;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: rgba(244, 243, 238, 0.25);
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    /* Mid Plane: Floating Fashion Object (translateZ 0px) */
+    .hero-plane-mid {
+      position: relative;
+      z-index: 2;
+      transform-style: preserve-3d;
+      transform: translateZ(0px);
+      max-width: 440px;
+      width: 82%;
+      margin: 0 auto;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 900px) {
+      .hero-plane-mid {
+        width: 380px;
+        transform: translateZ(0px) rotateY(-4deg) rotateX(2deg);
+      }
+    }
+    .hero-garment-frame {
+      position: relative;
+      background: #020204;
+      border: 1px solid var(--border-dark);
+      padding: 0.85rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(15, 56, 255, 0.18);
+    }
+    .hero-garment-frame::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border: 1px solid var(--electric-blue);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero-garment-corner-tl, .hero-garment-corner-br {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--electric-blue);
+      pointer-events: none;
+      z-index: 4;
+    }
+    .hero-garment-corner-tl { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+    .hero-garment-corner-br { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+    
+    .hero-garment-img-wrap {
       width: 100%;
       aspect-ratio: 4/5.4;
       overflow: hidden;
-      background: #111116;
-      border: 1px solid var(--border-dark);
+      background: #08080f;
       position: relative;
-      transform-style: preserve-3d;
     }
-    .bleed-photo-frame img {
+    .hero-garment-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 15%;
       display: block;
-      filter: contrast(114%) saturate(104%);
+      filter: contrast(114%) saturate(106%);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .image-spatial-badge {
-      position: absolute;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      background: rgba(0,0,0,0.9);
-      border: 1px solid var(--electric-blue);
-      color: #ffffff;
-      padding: 0.75rem 1.25rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      transform: translateZ(30px);
+    .hero-garment-frame:hover .hero-garment-img-wrap img {
+      transform: scale(1.04);
     }
-    .image-spatial-badge span.price {
-      color: var(--electric-blue);
-      font-weight: 700;
-      font-size: 1.1rem;
-      display: block;
-      margin-top: 0.25rem;
-    }
-
-    /* Experiment 10-B: Strange Architectural Crosshair */
-    .strange-hud-crosshair {
-      position: fixed;
-      width: 32px;
-      height: 32px;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      z-index: 9998;
-    }
-    .strange-hud-crosshair::before, .strange-hud-crosshair::after {
-      content: '';
-      position: absolute;
-      background: var(--electric-blue);
-    }
-    .strange-hud-crosshair::before {
-      top: 15px; left: 0; right: 0; height: 1px;
-    }
-    .strange-hud-crosshair::after {
-      left: 15px; top: 0; bottom: 0; width: 1px;
-    }
-
-    /* Experiment 10-D: Blueprint Mode Toggle */
-    .blueprint-mode-toggle {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    .blueprint-mode-btn {
-      background: transparent;
-      border: 1px solid var(--border-dark);
-      color: var(--dim);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      padding: 0.25rem 0.5rem;
-      cursor: pointer;
-      transition: none;
-    }
-    .blueprint-mode-btn:hover, .blueprint-mode-btn.active {
-      border-color: var(--electric-blue);
-      color: var(--bone);
-      background: rgba(15, 56, 255, 0.15);
-    }
-
-    /* 3. SCATTERED OCCASION SPACE (Non-Euclidean Layout) */
-    .scattered-occasion-section {
-      border-top: 1px solid var(--border-dark);
-      padding-top: 5rem;
-      margin-bottom: 8rem;
-      position: relative;
-    }
-    .scattered-header {
+    .hero-garment-tag {
+      margin-top: 0.75rem;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 3.5rem;
-      font-size: 0.72rem;
-      color: var(--dim);
+      font-size: 0.68rem;
+      border-top: 1px solid var(--border-dark);
+      padding-top: 0.5rem;
     }
-    .scatter-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
+    .hero-garment-title {
+      color: var(--bone);
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      letter-spacing: 0.05em;
     }
-    @media (min-width: 768px) {
-      .scatter-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    .hero-garment-tariff {
+      color: var(--electric-blue);
+      font-weight: 700;
     }
-    .scatter-box {
-      border: 1px solid var(--border-dark);
-      background: #09090e;
-      padding: 2rem 1.5rem;
-      position: relative;
+
+    /* Foreground Layer: Detached WE & Front Coordinates (translateZ +120px) */
+    .hero-plane-fore {
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 260px;
+      pointer-events: none;
+      transform: translateZ(120px);
+      z-index: 3;
     }
-    @media (min-width: 768px) {
-      .scatter-box.offset-down {
-        margin-top: 3rem;
-      }
-      .scatter-box.offset-up {
-        margin-top: -2rem;
-      }
-    }
-    .scatter-box.blue-border {
-      border-color: var(--electric-blue);
-    }
-    .scatter-tag {
-      font-size: 0.65rem;
-      color: var(--electric-blue);
-      letter-spacing: 0.15em;
-      margin-bottom: 0.5rem;
-    }
-    .scatter-title {
+    .fore-title-detached {
       font-family: 'Anton', sans-serif;
-      font-size: 2.2rem;
-      letter-spacing: -0.02em;
-      line-height: 1;
+      font-size: clamp(6.5rem, 24vw, 22rem);
+      line-height: 0.8;
+      letter-spacing: -0.05em;
+      color: var(--bone);
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
+      position: absolute;
+      top: 5%;
+      left: 2%;
+      will-change: transform;
     }
-    .scatter-kanji {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.1rem;
-      color: var(--dim);
-      margin-bottom: 1rem;
+    .fore-title-detached .blue-period {
+      color: var(--electric-blue);
+      text-shadow: 0 0 30px var(--electric-blue);
     }
-    .scatter-desc {
-      font-size: 0.8rem;
-      line-height: 1.6;
-      color: #8c8a82;
-      margin-bottom: 1.5rem;
-    }
-    .scatter-foot {
+    .fore-reticle-strip {
+      position: absolute;
+      bottom: 2%;
+      left: 2%;
+      right: 2%;
       display: flex;
       justify-content: space-between;
-      font-size: 0.72rem;
-      border-top: 1px solid var(--border-dark);
-      padding-top: 0.75rem;
+      align-items: flex-end;
+      font-size: 0.68rem;
+      color: var(--dim-light);
+      pointer-events: auto;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
+    .fore-reticle-badge {
+      border: 1px solid var(--border-accent);
+      background: rgba(8, 8, 18, 0.9);
+      padding: 0.45rem 0.85rem;
+      color: var(--electric-blue);
+      letter-spacing: 0.12em;
+      font-size: 0.64rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .fore-thesis-box {
+      max-width: 440px;
+      background: rgba(5, 5, 8, 0.9);
+      border-left: 2px solid var(--electric-blue);
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: var(--bone-muted);
+    }
+    .fore-thesis-box strong { color: #ffffff; }
 
-    /* 4. LOOK INSTALLATION (SPATIAL GARMENT OBJECT FIELD) */
-    .look-installation-section {
-      border-top: 1px solid var(--border-dark);
-      padding-top: 5rem;
-      margin-bottom: 9rem;
+    /* ========================================================
+       STAGE 2: SPATIAL GARMENT INSTALLATION (MONOLITH FIELD)
+       ======================================================== */
+    .stage-monolith-field {
+      border-bottom: 1px solid var(--border-dark);
+      padding: 5rem 1.5rem 6rem;
       position: relative;
+    }
+    @media (min-width: 1024px) {
+      .stage-monolith-field {
+        padding: 6rem 3.5rem 7rem;
+      }
+    }
+    .stage-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.72rem;
+      color: var(--dim-light);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.12em;
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 0.85rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
     .spatial-vector-tabs {
       display: flex;
@@ -486,65 +524,57 @@
     .vector-tab-btn {
       background: #090912;
       border: 1px solid var(--border-dark);
-      color: var(--dim);
+      color: var(--dim-light);
       font-family: 'Space Mono', monospace;
       font-size: 0.68rem;
-      padding: 0.45rem 0.85rem;
+      padding: 0.5rem 0.9rem;
       cursor: pointer;
       transition: all 0.2s ease;
+      letter-spacing: 0.05em;
     }
-    .vector-tab-btn.active, .vector-tab-btn:hover {
+    .vector-tab-btn:hover, .vector-tab-btn.active {
       background: #050510;
       border-color: var(--electric-blue);
       color: #ffffff;
-      box-shadow: 0 0 15px rgba(0, 102, 255, 0.3);
+      box-shadow: 0 0 15px rgba(15, 56, 255, 0.35);
     }
-    .spatial-object-stage {
+    .vector-tab-btn.active {
+      border-color: var(--electric-blue-bright);
+      font-weight: 700;
+    }
+
+    .spatial-monolith-stage-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      gap: 3rem;
       background: #030308;
       border: 1px solid var(--border-dark);
       padding: 1.5rem;
       position: relative;
-      margin-bottom: 3.5rem;
+      perspective: 1200px;
     }
     @media (min-width: 1024px) {
-      .spatial-object-stage {
-        grid-template-columns: 1.2fr 1fr;
+      .spatial-monolith-stage-grid {
+        grid-template-columns: 1.15fr 1fr;
         padding: 3rem;
-        gap: 3.5rem;
+        gap: 4rem;
       }
     }
-    .spatial-monolith-frame {
+
+    .spatial-monolith-box {
       position: relative;
       background: #06060c;
       border: 1px solid var(--electric-blue);
-      box-shadow: 0 0 35px rgba(0, 102, 255, 0.2);
+      box-shadow: 0 0 35px rgba(15, 56, 255, 0.2);
       padding: 1rem;
-      transform: perspective(1000px) rotateY(-3deg) rotateX(2deg);
+      transform: rotateY(-4deg) rotateX(2deg);
       transition: transform 0.4s ease;
+      transform-style: preserve-3d;
     }
-    .spatial-monolith-frame:hover {
-      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    .spatial-monolith-box:hover {
+      transform: rotateY(0deg) rotateX(0deg);
     }
-    .spatial-monolith-img-wrap {
-      width: 100%;
-      aspect-ratio: 4/5.2;
-      overflow: hidden;
-      position: relative;
-      background: #010103;
-    }
-    .spatial-monolith-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 15%;
-      display: block;
-      filter: contrast(114%) saturate(104%);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .spatial-coordinate-badge {
+    .monolith-coord-badge {
       position: absolute;
       top: -0.9rem;
       left: 1.5rem;
@@ -558,117 +588,144 @@
       font-weight: 700;
       z-index: 3;
     }
-    .spatial-dossier-col {
+    .monolith-img-container {
+      width: 100%;
+      aspect-ratio: 4/5.2;
+      overflow: hidden;
+      position: relative;
+      background: #010103;
+    }
+    .monolith-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+      filter: contrast(114%) saturate(104%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .monolith-dossier {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .spatial-tensor-heading {
-      font-family: 'Anton', sans-serif;
-      font-size: 2.5rem;
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      color: var(--bone);
-    }
-    .spatial-occasion-vector-tag {
+    .monolith-occasion-tag {
       display: inline-block;
       font-family: 'Space Mono', monospace;
       font-size: 0.68rem;
       color: var(--electric-blue);
       border: 1px solid var(--electric-blue);
-      background: rgba(0, 102, 255, 0.08);
+      background: rgba(15, 56, 255, 0.08);
       padding: 0.35rem 0.65rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       letter-spacing: 0.08em;
     }
-    .spatial-object-prose {
-      font-size: 0.9rem;
+    .monolith-heading {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      color: var(--bone);
+    }
+    .monolith-prose {
+      font-size: 0.88rem;
       line-height: 1.7;
-      color: #999990;
+      color: #a09f98;
       margin-bottom: 1.75rem;
     }
-    .spatial-specs-matrix {
+    .monolith-specs-matrix {
       border-top: 1px solid var(--border-dark);
       border-bottom: 1px solid var(--border-dark);
-      padding: 1rem 0;
+      padding: 1.2rem 0;
       margin-bottom: 2rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem 1.5rem;
+      grid-template-columns: 1fr;
+      gap: 0.85rem 1.5rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.68rem;
     }
-    .spatial-spec-cell strong {
-      display: block;
-      color: var(--dim);
-      font-size: 0.6rem;
-      margin-bottom: 0.15rem;
+    @media (min-width: 600px) {
+      .monolith-specs-matrix {
+        grid-template-columns: 1fr 1fr;
+      }
     }
-    .spatial-object-actions {
+    .spec-cell strong {
+      display: block;
+      color: var(--dim-light);
+      font-size: 0.6rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.1em;
+    }
+    .monolith-action-cluster {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
     }
-    .collapse-coords-btn {
+    .btn-spatial-collapse {
       background: var(--electric-blue);
-      color: #000000;
+      color: #ffffff;
       border: none;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 0.85rem 1.25rem;
+      padding: 0.9rem 1.35rem;
       cursor: pointer;
       letter-spacing: 0.08em;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
-    .collapse-coords-btn:hover {
-      background: #3385ff;
-      box-shadow: 0 0 25px rgba(0, 102, 255, 0.6);
+    .btn-spatial-collapse:hover {
+      background: var(--electric-blue-bright);
+      box-shadow: 0 0 25px rgba(15, 56, 255, 0.6);
     }
-    .next-vector-btn {
+    .btn-spatial-next {
       background: transparent;
       color: #ffffff;
       border: 1px solid var(--border-dark);
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 0.85rem 1.25rem;
+      padding: 0.9rem 1.35rem;
       cursor: pointer;
       letter-spacing: 0.08em;
       transition: all 0.2s ease;
     }
-    .next-vector-btn:hover {
+    .btn-spatial-next:hover {
       border-color: var(--electric-blue);
       color: var(--electric-blue);
     }
-    .orbital-looks-strip {
+
+    /* Orbital Look Specimen Strip */
+    .orbital-specimen-strip {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
     }
     @media (min-width: 900px) {
-      .orbital-looks-strip {
+      .orbital-specimen-strip {
         grid-template-columns: repeat(4, 1fr);
       }
     }
-    .orbital-look-card {
+    .orbital-specimen-card {
       border: 1px solid var(--border-dark);
       background: #06060c;
       padding: 0.75rem;
       cursor: pointer;
       transition: all 0.25s ease;
+      position: relative;
     }
-    .orbital-look-card:hover, .orbital-look-card.active {
+    .orbital-specimen-card:hover, .orbital-specimen-card.active {
       border-color: var(--electric-blue);
-      box-shadow: 0 0 15px rgba(0, 102, 255, 0.35);
+      box-shadow: 0 0 15px rgba(15, 56, 255, 0.35);
       transform: translateY(-4px);
     }
-    .orbital-thumb {
+    .orbital-specimen-thumb {
       width: 100%;
       aspect-ratio: 4/5;
       object-fit: cover;
@@ -677,372 +734,452 @@
       margin-bottom: 0.65rem;
       filter: contrast(112%) saturate(102%);
     }
-    .orbital-title {
+    .orbital-specimen-name {
       font-family: 'Anton', sans-serif;
       font-size: 1.1rem;
       text-transform: uppercase;
       color: #ffffff;
       margin-bottom: 0.25rem;
     }
-    .orbital-rate {
+    .orbital-specimen-rate {
       font-family: 'Space Mono', monospace;
       font-size: 0.68rem;
       color: var(--electric-blue);
+      font-weight: 700;
     }
 
-    /* 5. FLOATING RENTAL OBJECT (Patent / Spatial Blueprint) */
-    .blueprint-section {
-      border: 1px solid var(--electric-blue);
-      background: #040409;
-      background-image: radial-gradient(rgba(0, 102, 255, 0.12) 1px, transparent 0);
-      background-size: 20px 20px;
-      padding: 3rem 1.5rem;
-      margin-bottom: 8rem;
+    /* ========================================================
+       STAGE 3: THE IMPOSSIBLE SECTION (NON-EUCLIDEAN ARCHITECTURE)
+       ======================================================== */
+    .stage-impossible-chamber {
       position: relative;
+      min-height: 85vh;
+      border-bottom: 1px solid var(--border-dark);
+      overflow: hidden;
+      perspective: 1400px;
+      transform-style: preserve-3d;
+      padding: 6rem 1.5rem;
+      background: #030307;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     @media (min-width: 1024px) {
-      .blueprint-section {
-        padding: 4rem 3rem;
+      .stage-impossible-chamber {
+        padding: 7rem 3.5rem;
       }
     }
-    .blueprint-header {
+    .impossible-layer-text {
+      position: absolute;
+      top: 15%;
+      left: 0;
+      width: 250%;
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(5rem, 15vw, 14rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: rgba(244, 243, 238, 0.08);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      transform: translateZ(-80px);
+      will-change: transform;
+    }
+    .impossible-stage-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+    }
+    @media (min-width: 960px) {
+      .impossible-stage-grid {
+        grid-template-columns: 1.25fr 1fr;
+        gap: 5rem;
+      }
+    }
+
+    /* Non-Euclidean Masked Portal Installation */
+    .impossible-portal-installation {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 4/5.5;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    /* Primary Towering Garment Silhouette */
+    .impossible-outer-garment {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--border-dark);
+      background: #05050a;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
+      transform: translateZ(20px);
+    }
+    .impossible-outer-garment img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: contrast(120%) grayscale(20%);
+      transform: scale(1.05);
+    }
+    /* Skewed Aperture Window Revealing Secondary Garment */
+    .impossible-inner-aperture {
+      position: absolute;
+      bottom: 8%;
+      right: -8%;
+      width: 62%;
+      aspect-ratio: 4/5;
+      border: 2px solid var(--electric-blue);
+      box-shadow: 0 0 35px var(--electric-blue-glow);
+      overflow: hidden;
+      transform: translateZ(90px) rotate(-3deg);
+      background: #000000;
+      z-index: 5;
+    }
+    @media (max-width: 640px) {
+      .impossible-inner-aperture {
+        right: 0;
+        bottom: -5%;
+        width: 70%;
+      }
+    }
+    .impossible-inner-aperture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: contrast(118%) saturate(108%);
+      transform: scale(1.1);
+      will-change: transform;
+    }
+    .aperture-coord-label {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid var(--electric-blue);
+      color: #ffffff;
+      font-size: 0.6rem;
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .impossible-narrative-col {
+      z-index: 4;
+      transform: translateZ(40px);
+    }
+    .impossible-kanji-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--bone);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+    .impossible-thesis {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--bone-muted);
+      margin-bottom: 2rem;
+    }
+    .impossible-thesis strong {
+      color: #ffffff;
+    }
+    .impossible-metrics-cluster {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      border-top: 1px solid var(--border-dark);
+      padding-top: 1.5rem;
+    }
+    .impossible-metric-node {
+      border: 1px solid var(--border-dark);
+      background: var(--panel-dark);
+      padding: 1rem;
+    }
+    .impossible-metric-node .metric-num {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.8rem;
+      color: var(--electric-blue);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .impossible-metric-node .metric-label {
+      font-size: 0.65rem;
+      color: var(--dim-light);
+      letter-spacing: 0.1em;
+    }
+
+    /* ========================================================
+       STAGE 4: SCATTERED OCCASION FIELD (3D COORDINATE VOID)
+       ======================================================== */
+    .stage-occasions-void {
+      border-bottom: 1px solid var(--border-dark);
+      padding: 5rem 1.5rem 6rem;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #0a0b18 0%, #050508 75%);
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      overflow: hidden;
+    }
+    @media (min-width: 1024px) {
+      .stage-occasions-void {
+        padding: 6rem 3.5rem 7rem;
+      }
+    }
+    .occasion-spatial-universe {
+      position: relative;
+      min-height: 720px;
+      transform-style: preserve-3d;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 860px) {
+      .occasion-spatial-universe {
+        display: block;
+      }
+    }
+    .occasion-coordinate-orb {
+      border: 1px solid var(--border-dark);
+      background: rgba(9, 9, 16, 0.95);
+      padding: 1.75rem 1.5rem;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+      box-sizing: border-box;
+    }
+    @media (min-width: 860px) {
+      .occasion-coordinate-orb {
+        position: absolute;
+        width: 320px;
+      }
+      .occasion-coordinate-orb:nth-child(1) { top: 2%; left: 4%; transform: translateZ(40px); }
+      .occasion-coordinate-orb:nth-child(2) { top: 6%; right: 6%; transform: translateZ(90px); }
+      .occasion-coordinate-orb:nth-child(3) { top: 38%; left: 24%; transform: translateZ(-20px); }
+      .occasion-coordinate-orb:nth-child(4) { bottom: 6%; left: 8%; transform: translateZ(60px); }
+      .occasion-coordinate-orb:nth-child(5) { bottom: 4%; right: 10%; transform: translateZ(10px); }
+    }
+    .occasion-coordinate-orb:hover, .occasion-coordinate-orb.active {
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 35px var(--electric-blue-glow);
+      background: #0c0f24;
+      z-index: 20;
+    }
+    @media (min-width: 860px) {
+      .occasion-coordinate-orb:hover, .occasion-coordinate-orb.active {
+        transform: translateZ(140px) scale(1.05);
+      }
+    }
+    .orb-node-tag {
+      font-size: 0.65rem;
+      color: var(--electric-blue);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .orb-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      color: var(--bone);
+    }
+    .orb-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.05rem;
+      color: var(--dim-light);
+      margin-bottom: 0.85rem;
+    }
+    .orb-desc {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #9c9a92;
+      margin-bottom: 1.25rem;
+    }
+    .orb-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-dark);
+      padding-top: 0.75rem;
+      font-size: 0.72rem;
+    }
+    .orb-footer .tariff {
+      color: var(--electric-blue);
+      font-weight: 700;
+    }
+
+    /* ========================================================
+       STAGE 5: THE TELEPORT MOMENT (SPATIAL DISPLACEMENT)
+       ======================================================== */
+    .stage-teleport-portal {
+      border-bottom: 1px solid var(--border-dark);
+      padding: 5rem 1.5rem 6rem;
+      position: relative;
+      background: #020205;
+      perspective: 1200px;
+      overflow: hidden;
+    }
+    @media (min-width: 1024px) {
+      .stage-teleport-portal {
+        padding: 6rem 3.5rem 7rem;
+      }
+    }
+    .teleport-threshold-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1px solid var(--border-dark);
+      background: #06060e;
+      padding: 2.5rem 1.5rem;
+      position: relative;
+      transform-style: preserve-3d;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    }
+    @media (min-width: 768px) {
+      .teleport-threshold-container {
+        padding: 3.5rem 3rem;
+      }
+    }
+    .teleport-portal-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       border-bottom: 1px dashed var(--electric-blue);
       padding-bottom: 1.25rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.75rem;
     }
-    .blueprint-grid {
+    .teleport-duo-fields {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
-      position: relative;
+      gap: 2rem;
+      align-items: center;
     }
-    @media (min-width: 768px) {
-      .blueprint-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+    @media (min-width: 860px) {
+      .teleport-duo-fields {
+        grid-template-columns: 1fr auto 1fr;
       }
     }
-    .blueprint-node {
+    .field-card {
       border: 1px solid var(--border-dark);
-      background: #06060c;
-      padding: 1.75rem 1.25rem;
-      position: relative;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #030307;
+      padding: 2rem 1.5rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .blueprint-node:hover {
+    .field-card.active {
       border-color: var(--electric-blue);
-      box-shadow: 0 0 25px rgba(0, 102, 255, 0.25);
-      transform: translateY(-4px);
+      box-shadow: 0 0 30px rgba(15, 56, 255, 0.3);
+      background: #080a1c;
     }
-    @media (min-width: 1024px) {
-      .blueprint-node:nth-child(even) {
-        transform: translateY(22px);
-      }
-      .blueprint-node:nth-child(even):hover {
-        transform: translateY(16px);
-      }
-    }
-    .blueprint-node::before {
-      content: '+';
-      position: absolute;
-      top: -8px;
-      left: -8px;
-      color: var(--electric-blue);
-      font-size: 1.1rem;
-      line-height: 1;
-      font-family: 'Space Mono', monospace;
-    }
-    .blueprint-node::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: transparent;
-      transition: background 0.3s ease;
-    }
-    .blueprint-node:hover::after {
-      background: var(--electric-blue);
-    }
-    .node-code {
+    .field-code {
       font-size: 0.68rem;
       color: var(--electric-blue);
-      margin-bottom: 0.75rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
     }
-    .node-title {
+    .field-name {
       font-family: 'Anton', sans-serif;
-      font-size: 1.4rem;
+      font-size: 2rem;
       letter-spacing: -0.02em;
       text-transform: uppercase;
       margin-bottom: 0.5rem;
     }
-    .node-text {
-      font-size: 0.78rem;
-      color: #8c8a82;
-      line-height: 1.6;
-    }
-
-    /* 6. STRANGE RADICAL SPATIAL DIRECTORY */
-    .strange-index-section {
-      border-top: 1px solid var(--border-dark);
-      padding-top: 4rem;
-      margin-bottom: 8rem;
-      position: relative;
-    }
-    .spatial-directory-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    .spatial-directory-node {
-      border: 1px solid var(--border-dark);
-      background: #09090e;
-      padding: 1.5rem 1.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      position: relative;
-      cursor: pointer;
-      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .spatial-directory-node::before {
-      content: '⟐';
-      position: absolute;
-      top: 1.5rem;
-      left: 0.75rem;
-      color: var(--electric-blue);
+    .field-coordinates {
       font-size: 0.75rem;
-      opacity: 0.6;
+      color: var(--dim-light);
+      margin-bottom: 1rem;
     }
-    @media (min-width: 768px) {
-      .spatial-directory-node {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding-left: 2.25rem;
-      }
-    }
-    .spatial-directory-node:hover {
-      border-color: var(--electric-blue);
-      background: #0e1124;
-      transform: translateX(8px);
-      box-shadow: 0 0 25px rgba(15, 56, 255, 0.2);
-    }
-    .spatial-node-code {
-      font-size: 0.7rem;
-      color: var(--electric-blue);
-      letter-spacing: 0.15em;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    .spatial-node-name {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      color: var(--bone);
-      line-height: 1;
-    }
-    .spatial-node-meta {
+    .field-stations {
+      list-style: none;
       font-size: 0.75rem;
-      color: var(--dim);
-      margin-top: 0.35rem;
-    }
-    .spatial-node-tariff {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.6rem;
-      color: var(--electric-blue);
-      text-align: right;
-    }
-
-    /* 7. NON-TRADITIONAL INSTALLATION ENDING */
-    .spatial-colophon-exit {
-      border-top: 1px solid var(--border-dark);
-      padding: 5rem 1rem 3rem;
-      text-align: center;
-    }
-    .exit-huge-title {
-      font-family: 'Anton', sans-serif;
-      font-size: clamp(3.5rem, 12vw, 11rem);
-      line-height: 0.85;
-      letter-spacing: -0.04em;
-      text-transform: uppercase;
-      color: rgba(244, 243, 238, 0.25);
-      text-shadow: 0 0 1px rgba(244, 243, 238, 0.4);
-      margin-bottom: 2rem;
-      transition: color 0.3s ease;
-    }
-    .exit-huge-title:hover {
-      color: var(--electric-blue);
-    }
-    .exit-notes {
-      font-size: 0.85rem;
-      color: var(--dim);
-      max-width: 580px;
-      margin: 0 auto 3rem;
+      color: #98968f;
       line-height: 1.8;
     }
-
-    /* Footer */
-    footer.strange-footer {
-      border-top: 1px solid var(--border-dark);
-      padding-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      font-size: 0.7rem;
-      color: var(--dim);
-    }
-    @media (min-width: 768px) {
-      footer.strange-footer {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-    }
-    /* Refined Spatial Displace Overlay — Architectural & Minimal */
-    .spatial-displace-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(7, 7, 9, 0.94);
-      z-index: 10000;
-      pointer-events: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      font-family: 'Space Mono', monospace;
-      border: 1px solid var(--electric-blue);
-    }
-    .displace-frame-box {
-      border: 1px solid rgba(244, 243, 238, 0.15);
-      padding: 3rem 4rem;
-      background: #000000;
-      text-align: center;
-      max-width: 600px;
-      width: 90%;
-    }
-    .displace-monument-title {
-      font-family: 'Anton', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      letter-spacing: -0.02em;
-      color: #ffffff;
-      line-height: 0.92;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-    .displace-coord-strip {
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 1.25rem;
-      font-size: 0.72rem;
+    .field-stations li::before {
+      content: '⟐ ';
       color: var(--electric-blue);
-      letter-spacing: 0.15em;
     }
-    /* Refined Spatial Coordinate Anchor Node */
-    .spatial-coordinate-node {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 9000;
-      background: #000000;
-      color: var(--bone);
+    .teleport-exchange-btn {
+      background: var(--panel-dark);
       border: 1px solid var(--electric-blue);
-      padding: 0.5rem 1rem;
+      color: #ffffff;
+      padding: 1.25rem 1.5rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.75rem;
-      transition: background 0.2s, color 0.2s;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+      justify-self: center;
     }
-    .spatial-coordinate-node:hover {
+    .teleport-exchange-btn:hover {
       background: var(--electric-blue);
-      color: #ffffff;
-    }
-    .node-marker {
-      color: var(--electric-blue);
-      font-size: 0.85rem;
-    }
-    .spatial-coordinate-node:hover .node-marker {
-      color: #ffffff;
-    }
-    @media (max-width: 640px) {
-      .spatial-coordinate-node {
-        bottom: 1rem;
-        right: 1rem;
-        padding: 0.45rem 0.75rem;
-        font-size: 0.65rem;
-      }
-      .displace-frame-box {
-        padding: 2rem 1.5rem;
-      }
+      box-shadow: 0 0 30px var(--electric-blue-glow);
     }
 
-    /* 6.5 SPATIAL RENTAL CONVERGENCE CHAMBER */
-    .spatial-chamber-section {
-      border-top: 1px solid var(--border-dark);
-      padding: 4.5rem 1.5rem;
+    /* ========================================================
+       STAGE 6: SPATIAL CONVERGENCE RENTAL CHAMBER
+       ======================================================== */
+    .stage-convergence-chamber {
+      border-bottom: 1px solid var(--border-dark);
+      padding: 5rem 1.5rem 6rem;
       position: relative;
       background: #040407;
       overflow: hidden;
-      max-width: 100%;
-      box-sizing: border-box;
+      width: 100%;
     }
-    .chamber-header-strip {
-      max-width: 1140px;
-      margin: 0 auto 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--dim);
-      border-bottom: 1px solid var(--border-dark);
-      padding-bottom: 0.75rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    @media (min-width: 1024px) {
+      .stage-convergence-chamber {
+        padding: 6rem 3.5rem 7rem;
+      }
     }
-    .chamber-3d-stage {
-      max-width: 1140px;
+    .chamber-3d-volume {
+      max-width: 1160px;
       margin: 0 auto;
-      min-height: 540px;
+      border: 1px solid var(--border-dark);
+      background: radial-gradient(circle at 50% 50%, #0c0e22 0%, #040407 80%);
+      padding: 2.5rem 1.5rem;
       position: relative;
       perspective: 1200px;
       transform-style: preserve-3d;
-      border: 1px solid var(--border-dark);
-      background: radial-gradient(circle at 50% 50%, #0d1024 0%, #040407 80%);
-      padding: 2.5rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-sizing: border-box;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    @media (max-width: 600px) {
-      .chamber-3d-stage {
-        padding: 1.5rem 1rem;
-        min-height: auto;
+    @media (min-width: 768px) {
+      .chamber-3d-volume {
+        padding: 3rem 2.5rem;
       }
     }
-    .chamber-controls-cluster {
+    .chamber-axes-cluster {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
       z-index: 10;
+      position: relative;
+      margin-bottom: 2.5rem;
     }
-    .spatial-axis-title {
+    .chamber-axis-title {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
       color: var(--electric-blue);
@@ -1050,7 +1187,7 @@
       margin-bottom: 0.4rem;
       display: block;
     }
-    .spatial-nodes-row {
+    .chamber-nodes-row {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
@@ -1068,43 +1205,53 @@
     }
     .spatial-node-pill:hover, .spatial-node-pill.active {
       border-color: var(--electric-blue);
-      background: #0f38ff;
+      background: var(--electric-blue);
       color: #ffffff;
-      box-shadow: 0 0 15px rgba(15, 56, 255, 0.4);
+      box-shadow: 0 0 15px rgba(15, 56, 255, 0.45);
     }
 
-    .chamber-center-core {
+    .chamber-core-split {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
-      margin: 2rem 0;
+      gap: 2.5rem;
       align-items: center;
       transform-style: preserve-3d;
     }
     @media (min-width: 860px) {
-      .chamber-center-core {
+      .chamber-core-split {
         grid-template-columns: 1fr 1.3fr;
       }
     }
-    .chamber-garment-monolith {
+    .chamber-monolith-display {
       border: 1px solid var(--border-dark);
-      background: #090a14;
+      background: #080914;
       padding: 1.25rem;
       position: relative;
       transform: rotateY(-6deg) rotateX(3deg);
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-      box-sizing: border-box;
-      max-width: 100%;
+      transform-style: preserve-3d;
     }
-    .monolith-img-wrap {
+    @media (max-width: 768px) {
+      .chamber-monolith-display {
+        transform: rotateY(0deg) rotateX(0deg);
+        padding: 0.85rem;
+      }
+      .chamber-img-wrap {
+        height: 280px;
+      }
+      .chamber-telemetry-monitor {
+        padding: 1.25rem 1rem;
+      }
+    }
+    .chamber-img-wrap {
       width: 100%;
-      height: 320px;
+      height: 330px;
       overflow: hidden;
       border: 1px solid var(--border-dark);
       background: #000000;
       margin-bottom: 1rem;
     }
-    .monolith-img-wrap img {
+    .chamber-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -1113,30 +1260,30 @@
       filter: contrast(114%) saturate(104%);
     }
 
-    .chamber-telemetry-screen {
+    .chamber-telemetry-monitor {
       border: 1px solid var(--border-dark);
-      background: rgba(9, 10, 20, 0.95);
-      padding: 1.75rem;
+      background: rgba(8, 9, 18, 0.95);
+      padding: 2rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
-      line-height: 1.8;
-      color: #b0afaa;
+      line-height: 1.9;
+      color: #adaaa2;
       position: relative;
-      box-sizing: border-box;
     }
-    .telemetry-live-stat {
-      font-size: 1.6rem;
+    .chamber-live-price {
+      font-size: clamp(2rem, 5vw, 2.8rem);
       font-family: 'Anton', sans-serif;
       color: var(--bone);
       letter-spacing: -0.02em;
-      margin: 0.35rem 0 0.75rem;
+      line-height: 1;
+      margin: 0.5rem 0 1rem;
     }
-    .collapse-dimension-btn {
+    .btn-commit-convergence {
       width: 100%;
-      background: #0f38ff;
-      border: 1px solid #0f38ff;
+      background: var(--electric-blue);
+      border: 1px solid var(--electric-blue);
       color: #ffffff;
-      padding: 0.95rem 1.25rem;
+      padding: 1.1rem 1.25rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
       font-weight: 700;
@@ -1145,31 +1292,203 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.25rem;
-      margin-top: 1.25rem;
+      gap: 0.3rem;
+      margin-top: 1.5rem;
       transition: background 0.2s ease, box-shadow 0.2s ease;
     }
-    .collapse-dimension-btn:hover {
-      background: #254dff;
-      box-shadow: 0 0 25px rgba(15, 56, 255, 0.6);
+    .btn-commit-convergence:hover {
+      background: var(--electric-blue-bright);
+      box-shadow: 0 0 30px var(--electric-blue-glow);
     }
-    .chamber-collapsed-badge {
+    .chamber-locked-manifest {
       display: none;
-      border: 1px solid var(--electric-blue);
-      background: rgba(15, 56, 255, 0.15);
-      color: #ffffff;
-      padding: 0.75rem 1rem;
-      margin-top: 1rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
+      border: 1px solid #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      padding: 0.85rem 1rem;
+      margin-top: 1.25rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
       line-height: 1.6;
+    }
+
+    /* ========================================================
+       STAGE 7: SPATIAL DIRECTORY & COLOPHON EXIT
+       ======================================================== */
+    .stage-directory-exit {
+      padding: 5rem 1.5rem 4rem;
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .stage-directory-exit {
+        padding: 6rem 3.5rem 4rem;
+      }
+    }
+    .spatial-directory-table {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 6rem;
+    }
+    .spatial-directory-entry {
+      border: 1px solid var(--border-dark);
+      background: #08080f;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .spatial-directory-entry::before {
+      content: '⟐';
+      position: absolute;
+      top: 1.5rem;
+      left: 0.75rem;
+      color: var(--electric-blue);
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+    @media (min-width: 768px) {
+      .spatial-directory-entry {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 2.25rem;
+      }
+    }
+    .spatial-directory-entry:hover {
+      border-color: var(--electric-blue);
+      background: #0e1124;
+      transform: translateX(8px);
+      box-shadow: 0 0 25px rgba(15, 56, 255, 0.2);
+    }
+    .dir-code {
+      font-size: 0.7rem;
+      color: var(--electric-blue);
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .dir-name {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--bone);
+      line-height: 1;
+    }
+    .dir-meta {
+      font-size: 0.75rem;
+      color: var(--dim-light);
+      margin-top: 0.35rem;
+    }
+    .dir-tariff {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.6rem;
+      color: var(--electric-blue);
+      text-align: right;
+    }
+
+    .colophon-monument-block {
+      border-top: 1px solid var(--border-dark);
+      padding: 4rem 1rem 2rem;
+      text-align: center;
+    }
+    .colophon-huge-masthead {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(3.5rem, 13vw, 12rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: rgba(244, 243, 238, 0.22);
+      margin-bottom: 2rem;
+      transition: color 0.3s ease;
+      cursor: default;
+    }
+    .colophon-huge-masthead:hover {
+      color: var(--electric-blue);
+    }
+    .colophon-notes {
+      font-size: 0.85rem;
+      color: var(--dim-light);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+    .colophon-footer-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.7rem;
+      color: var(--dim-light);
+      border-top: 1px solid var(--border-dark);
+      padding-top: 2rem;
+    }
+    @media (min-width: 768px) {
+      .colophon-footer-strip {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    /* Fixed Architectural HUD Crosshair */
+    .spatial-hud-crosshair {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      z-index: 9998;
+    }
+    .spatial-hud-crosshair::before, .spatial-hud-crosshair::after {
+      content: '';
+      position: absolute;
+      background: var(--electric-blue);
+    }
+    .spatial-hud-crosshair::before { top: 15px; left: 0; right: 0; height: 1px; }
+    .spatial-hud-crosshair::after { left: 15px; top: 0; bottom: 0; width: 1px; }
+
+    /* Spatial Teleport Floating Button */
+    .spatial-float-teleport {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9000;
+      background: #020204;
+      color: var(--bone);
+      border: 1px solid var(--electric-blue);
+      padding: 0.55rem 1.1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+      transition: background 0.2s, color 0.2s;
+    }
+    .spatial-float-teleport:hover {
+      background: var(--electric-blue);
+      color: #ffffff;
+      box-shadow: 0 0 25px var(--electric-blue-glow);
+    }
+    @media (max-width: 640px) {
+      .spatial-float-teleport {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.45rem 0.8rem;
+        font-size: 0.65rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Spatial Tensor Matrix Coordinate Bar -->
+  <!-- Top Tensor Matrix Coordinate Bar -->
   <nav class="switch-nav">
     <div class="spatial-nav-brand">
       <span class="spatial-node-dot"></span>
@@ -1186,147 +1505,88 @@
     </div>
   </nav>
 
-  <!-- Left Vertical Spatial Rail -->
+  <!-- Left Vertical Spatial Rail (Desktop) -->
   <aside class="viewport-rail">
     <div class="rail-num-active">10</div>
     <div class="rail-vertical-text">WEDELIA // 異形の空間 // SPATIAL ARCHIVE</div>
-    <div class="rail-coord-stamp">COORD: 28.5983° N // 77.2281° E</div>
+    <div class="rail-coord-stamp" id="railCoordStamp">COORD: 28.5983° N // 77.2281° E</div>
   </aside>
 
-  <!-- Main Canvas -->
-  <div class="strange-canvas">
-    
-    <!-- 1. Bleeding Typographic Title (Breaks Viewport Bounds) -->
-    <header class="bleeding-type-hero">
-      <div class="hero-spatial-reticle">
-        <div>SPATIAL COORD // 28.5983° N</div>
-        <div style="color: var(--electric-blue);">DETACHED ARCHIVE TENSOR</div>
-        <div>VECTOR DELTA // ±0.038 rad</div>
+  <!-- Main Experimental Spatial Canvas -->
+  <main class="strange-canvas">
+
+    <!-- Spatial Stage Map Bar (Sticky Stage Navigator) -->
+    <nav class="spatial-stage-map-bar" id="spatialStageMapBar">
+      <div class="stage-map-label">SPATIAL NODES:</div>
+      <div class="stage-map-nodes">
+        <a href="#stageArrival" class="stage-nav-pill active" data-stage="arrival">01 / ARRIVAL</a>
+        <a href="#stageObjects" class="stage-nav-pill" data-stage="objects">02 / OBJECT</a>
+        <a href="#stageImpossible" class="stage-nav-pill" data-stage="impossible">03 / IMPOSSIBLE</a>
+        <a href="#stageOccasions" class="stage-nav-pill" data-stage="occasions">04 / OCCASION</a>
+        <a href="#stageTeleport" class="stage-nav-pill" data-stage="teleport">05 / TELEPORT</a>
+        <a href="#stageChamber" class="stage-nav-pill" data-stage="chamber">06 / CONVERGENCE</a>
+        <a href="#stageExit" class="stage-nav-pill" data-stage="exit">07 / EXIT</a>
       </div>
-      <h1 class="oversized-bleed-title huge-split-name">
-        <span class="line-1">WEDE</span><br>
-        <span class="line-2 blue">LIA.</span>
-      </h1>
-      <div class="bleed-sub-manifesto">
-        <div>
-          <span class="spatial-coord-pill">SECTOR 01 // TOKYO × NCR</span>
-          <span style="margin-left: 0.75rem;">SPATIAL REVOLUTION OF LEASED LUXURY</span>
-        </div>
-        <div>
-          AUTONOMOUS CAMPUS COURIER GATE PROTOCOL // ACTIVE
-        </div>
-      </div>
-    </header>
+    </nav>
 
-    <!-- 2. Asymmetric Spatial Stage -->
-    <section class="spatial-stage-grid">
-      
-      <!-- Left Narrative Column -->
-      <div class="stage-narrative">
-        <h2 class="kanji-banner">
-          一回きりの夜に、<br>
-          常識を脱ぎ捨てる。
-        </h2>
-
-        <p class="stage-thesis">
-          You have somewhere to go. Don't spend ₹35,000 on an outfit you will only ever photograph once. <strong>WEDELIA</strong> is a digital fashion installation operating as a revolving archive. High-voltage couture silhouettes rented for 3, 5, or 7 days with direct campus hostel delivery.
-        </p>
-
-        <!-- Spatial Occasion Pillars -->
-        <div class="spatial-pillars">
-          <div class="pillar-box">
-            <div class="pillar-num">01</div>
-            <div class="pillar-label">STAR NIGHTS</div>
-            <div class="pillar-sub">STAGE METALLICS</div>
-          </div>
-          <div class="pillar-box">
-            <div class="pillar-num">02</div>
-            <div class="pillar-label">FAREWELL BALL</div>
-            <div class="pillar-sub">FAILLE SILK PLEATS</div>
-          </div>
-          <div class="pillar-box">
-            <div class="pillar-num">03</div>
-            <div class="pillar-label">CONCERT CIRCUIT</div>
-            <div class="pillar-sub">STROBE REFLECTION</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Bleeding Image Installation -->
-      <div class="stage-bleed-image">
-        <div class="bleed-photo-frame">
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Archive Silhouette">
-          <div class="image-spatial-badge">
-            <div>SPECIMEN 01 // ZEMIRE FAILLE</div>
-            <span class="price">₹2,999 / 3 DAYS</span>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- 3. SCATTERED OCCASION SPACE (Non-Euclidean Layout) -->
-    <section class="scattered-occasion-section">
-      <div class="scattered-header">
-        <span>02 // NON-EUCLIDEAN OCCASION SPACE</span>
-        <span>COORDINATES: CAMPUS SPHERES</span>
-      </div>
-
-      <div class="scatter-grid">
-        <!-- Occasion 1: FESTIVAL -->
-        <div class="scatter-box blue-border">
-          <div>
-            <div class="scatter-tag">NODE 01 // HIGH VOLTAGE</div>
-            <h3 class="scatter-title">FESTIVAL</h3>
-            <div class="scatter-kanji">祝祭 (COLLEGE FEST)</div>
-            <p class="scatter-desc">
-              15,000 students filling the sports field under arena truss towers. Kinetic lurex and reflective shift garments engineered to strobe in darkness.
-            </p>
-          </div>
-          <div class="scatter-foot">
-            <span style="color: var(--dim);">LEASE DURATION</span>
-            <span style="color: var(--electric-blue); font-weight: 700;">₹1,699 / 3D</span>
+    <!-- ========================================================
+         STAGE 1: DESTROYED HERO (3D COORDINATE VOLUME)
+         ======================================================== -->
+    <section class="hero-spatial-volume" id="stageArrival">
+      <div class="hero-stage-inner" id="heroStageInner">
+        
+        <!-- Deep Layer (translateZ -150px) -->
+        <div class="hero-plane-deep" id="heroPlaneDeep">
+          <div class="deep-kanji-watermark">異形の空間 // 次元座標</div>
+          <div class="deep-monument-delia">DELIA</div>
+          <div class="deep-coordinate-matrix">
+            <div>SECTOR // 0047°</div>
+            <div>FIELD / A // NCR × TOKYO</div>
+            <div>METRIC TENSOR: g_μν</div>
           </div>
         </div>
 
-        <!-- Occasion 2: FAREWELL -->
-        <div class="scatter-box offset-down">
-          <div>
-            <div class="scatter-tag">NODE 02 // VALEDICTORY</div>
-            <h3 class="scatter-title">FAREWELL</h3>
-            <div class="scatter-kanji">門出 (SENIOR BALL)</div>
-            <p class="scatter-desc">
-              The departmental apex. Sweeping floor-length silk faille and sculpted pleats that mark your closing university chapter with museum-grade severity.
-            </p>
-          </div>
-          <div class="scatter-foot">
-            <span style="color: var(--dim);">LEASE DURATION</span>
-            <span style="color: var(--bone); font-weight: 700;">₹2,899 / 3D</span>
+        <!-- Mid Plane (translateZ 0px) -->
+        <div class="hero-plane-mid" id="heroPlaneMid">
+          <div class="hero-garment-frame">
+            <div class="hero-garment-corner-tl"></div>
+            <div class="hero-garment-corner-br"></div>
+            <div class="hero-garment-img-wrap">
+              <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Archive Specimen">
+            </div>
+            <div class="hero-garment-tag">
+              <span class="hero-garment-title">SPECIMEN 01 // ZEMIRE FAILLE</span>
+              <span class="hero-garment-tariff">₹2,999 / 3 DAYS</span>
+            </div>
           </div>
         </div>
 
-        <!-- Occasion 3: CONCERT -->
-        <div class="scatter-box offset-up">
-          <div>
-            <div class="scatter-tag">NODE 03 // ACOUSTIC SUB</div>
-            <h3 class="scatter-title">CONCERT</h3>
-            <div class="scatter-kanji">響宴 (ARENA CIRCUIT)</div>
-            <p class="scatter-desc">
-              Bass-heavy club tours and stadium shows. Tailored micro-corsets and oversized blazer structures built for motion, heat, and flash photography.
-            </p>
+        <!-- Foreground Layer (translateZ +120px) -->
+        <div class="hero-plane-fore" id="heroPlaneFore">
+          <div class="fore-title-detached" id="foreDetachedWE">
+            WE<span class="blue-period">.</span>
           </div>
-          <div class="scatter-foot">
-            <span style="color: var(--dim);">LEASE DURATION</span>
-            <span style="color: var(--electric-blue); font-weight: 700;">₹1,499 / 3D</span>
+
+          <div class="fore-reticle-strip">
+            <div class="fore-reticle-badge">
+              <span>✦ FRONT PLANE TENSOR: +120mm</span>
+              <span>COORD: [X: 04.27, Y: 12.80, Z: +03.14]</span>
+            </div>
+            <div class="fore-thesis-box">
+              Don't spend ₹35,000 on an outfit you will photograph once. <strong>WEDELIA</strong> is a digital fashion installation operating as a revolving coordinate archive. Monumental couture silhouettes rented for 3, 5, or 7 days with direct campus hostel delivery.
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- 4. LOOK INSTALLATION (SPATIAL GARMENT OBJECT FIELD) -->
-    <section class="look-installation-section" id="spatialLookObjectsSection">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 0.72rem; color: var(--dim); margin-bottom: 2rem; letter-spacing: 0.12em; flex-wrap: wrap; gap: 0.5rem;">
-        <span>03 // SPATIAL LOOK OBJECTS — NON-EUCLIDEAN COORDINATES</span>
+    <!-- ========================================================
+         STAGE 2: SPATIAL GARMENT INSTALLATION (MONOLITH FIELD)
+         ======================================================== -->
+    <section class="stage-monolith-field" id="stageObjects">
+      <div class="stage-section-header">
+        <span>02 // SPATIAL GARMENT OBJECTS — VOLUMETRIC SPECIMEN FIELD</span>
         <span style="color: var(--electric-blue);">TENSOR PROJECTION: ACTIVE</span>
       </div>
 
@@ -1338,217 +1598,314 @@
         <button class="vector-tab-btn" data-index="3">VECTOR δ // [330.0 // BROCADE ROBE]</button>
       </div>
 
-      <!-- Spatial Object Stage -->
-      <div class="spatial-object-stage" id="spatialObjectStage">
-        <!-- Left: Floating Garment Monolith -->
-        <div class="spatial-monolith-frame">
-          <div class="spatial-coordinate-badge" id="spatialCoordinateBadge">VECTOR α // COORD: X:142.8 Y:891.2 Z:04.0</div>
-          <div class="spatial-monolith-img-wrap">
-            <img id="spatialActiveLookImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Spatial Fashion Object">
+      <!-- Monolith Stage Grid -->
+      <div class="spatial-monolith-stage-grid" id="monolithStageGrid">
+        <div class="spatial-monolith-box" id="monolithBox">
+          <div class="monolith-coord-badge" id="monolithCoordBadge">VECTOR α // COORD: X:142.8 Y:891.2 Z:04.0</div>
+          <div class="monolith-img-container">
+            <img id="activeMonolithImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Spatial Specimen Image">
           </div>
         </div>
 
-        <!-- Right: Spatial Dossier & Collapsing Mechanism -->
-        <div class="spatial-dossier-col">
+        <div class="monolith-dossier">
           <div>
-            <div class="spatial-occasion-vector-tag" id="spatialOccasionVectorTag">
+            <div class="monolith-occasion-tag" id="monolithOccasionTag">
               OCCASION VECTOR // COLLEGE FESTIVAL ARENA & CONCERT STAGE
             </div>
-            <h3 class="spatial-tensor-heading" id="spatialTensorHeading">
+            <h3 class="monolith-heading" id="monolithHeading">
               Kinetic Multi-Pocket Wrap
             </h3>
-            <p class="spatial-object-prose" id="spatialObjectProse">
-              A floating kinetic silhouette crafted from high-voltage metallic polymer weave. Suspended at the intersection of collegiate rave culture and avant-garde couture draping. Engineered for outdoor festival soundstages where flash photography and laser beams illuminate the garment's reflective filament from across the field.
+            <p class="monolith-prose" id="monolithProse">
+              A floating kinetic silhouette crafted from high-voltage metallic polymer weave. Suspended at the intersection of collegiate rave culture and avant-garde couture draping. Engineered for outdoor festival soundstages where strobe towers and laser sweeps illuminate reflective filaments from across the campus field.
             </p>
 
-            <div class="spatial-specs-matrix">
-              <div class="spatial-spec-cell">
+            <div class="monolith-specs-matrix">
+              <div class="spec-cell">
                 <strong>ATELIER TENSOR:</strong>
-                <span id="spatialAtelierVal">CUSTO SUMMER ARCHIVE (2010)</span>
+                <span id="specAtelier">CUSTO SUMMER ARCHIVE (2010)</span>
               </div>
-              <div class="spatial-spec-cell">
+              <div class="spec-cell">
                 <strong>FIBER COMPOSITION:</strong>
-                <span id="spatialFiberVal">STRUCTURED POLYMER & SILK KNIT (920g)</span>
+                <span id="specFiber">METALLIC WEAVE & SILK KNIT (920g)</span>
               </div>
-              <div class="spatial-spec-cell">
+              <div class="spec-cell">
                 <strong>DUAL-FIT REDUNDANCY:</strong>
-                <span id="spatialDualFitVal">UK 6 (PRIMARY) + UK 8 (SEALED SISTER)</span>
+                <span id="specDualFit">UK 6 (PRIMARY) + UK 8 (SEALED SISTER)</span>
               </div>
-              <div class="spatial-spec-cell">
+              <div class="spec-cell">
                 <strong>DIMENSIONAL LEASE:</strong>
-                <span id="spatialTariffVal" style="color: var(--electric-blue); font-weight: 700;">₹1,699 / 3 DAYS (₹0 DAMAGE SHIELD)</span>
+                <span id="specTariff" style="color: var(--electric-blue); font-weight: 700;">₹1,699 / 3 DAYS (₹0 DAMAGE SHIELD)</span>
               </div>
             </div>
           </div>
 
-          <div class="spatial-object-actions">
-            <button class="collapse-coords-btn" id="collapseCoordsBtn">
-              <span>COLLAPSE SPATIAL COORDINATES TO LEASE</span>
+          <div class="monolith-action-cluster">
+            <button class="btn-spatial-collapse" id="btnCollapseSpecimen">
+              <span>COLLAPSE COORDINATES TO RENT</span>
               <span>⟶</span>
             </button>
-            <button class="next-vector-btn" id="nextVectorBtn">
+            <button class="btn-spatial-next" id="btnNextSpecimen">
               <span>TRANSLATE TO NEXT VECTOR</span>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Secondary Orbital Look Strip -->
-      <div class="orbital-looks-strip" id="orbitalLooksStrip">
-        <div class="orbital-look-card active" data-index="0">
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Wrap" class="orbital-thumb">
-          <div class="orbital-title">KINETIC DRAPE</div>
-          <div class="orbital-rate">VECTOR α // ₹1,699</div>
+      <!-- Orbital Specimens Strip -->
+      <div class="orbital-specimen-strip" id="orbitalSpecimenStrip">
+        <div class="orbital-specimen-card active" data-index="0">
+          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Wrap" class="orbital-specimen-thumb">
+          <div class="orbital-specimen-name">KINETIC DRAPE</div>
+          <div class="orbital-specimen-rate">VECTOR α // ₹1,699</div>
         </div>
-        <div class="orbital-look-card" data-index="1">
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Faille" class="orbital-thumb">
-          <div class="orbital-title">ZEMIRE FAILLE</div>
-          <div class="orbital-rate">VECTOR β // ₹2,999</div>
+        <div class="orbital-specimen-card" data-index="1">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Faille" class="orbital-specimen-thumb">
+          <div class="orbital-specimen-name">ZEMIRE FAILLE</div>
+          <div class="orbital-specimen-rate">VECTOR β // ₹2,999</div>
         </div>
-        <div class="orbital-look-card" data-index="2">
-          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Duet Pleat" class="orbital-thumb">
-          <div class="orbital-title">DUET PLEAT</div>
-          <div class="orbital-rate">VECTOR γ // ₹2,899</div>
+        <div class="orbital-specimen-card" data-index="2">
+          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Duet Pleat" class="orbital-specimen-thumb">
+          <div class="orbital-specimen-name">DUET PLEAT</div>
+          <div class="orbital-specimen-rate">VECTOR γ // ₹2,899</div>
         </div>
-        <div class="orbital-look-card" data-index="3">
-          <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade" class="orbital-thumb">
-          <div class="orbital-title">COURT BROCADE</div>
-          <div class="orbital-rate">VECTOR δ // ₹3,899</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. FLOATING RENTAL OBJECT (Blueprint / Patent Filing) -->
-    <section class="blueprint-section">
-      <div class="blueprint-header">
-        <div>
-          <span>PATENT FILING // WDL-SYS-LEASE-2026</span>
-          <!-- Experiment 10-D: Blueprint Mode Toggle -->
-          <div class="blueprint-mode-toggle" id="blueprintModeToggle">
-            <button class="blueprint-mode-btn active" data-mode="ARCH">01 TOPOLOGY</button>
-            <button class="blueprint-mode-btn" data-mode="TELEMETRY">02 TELEMETRY</button>
-            <button class="blueprint-mode-btn" data-mode="ESCROW">03 ESCROW</button>
-          </div>
-        </div>
-        <span>SCHEMATIC: FOUR-COORDINATE REVOLVING ACCESS</span>
-      </div>
-
-      <div class="blueprint-grid">
-        <div class="blueprint-node">
-          <div class="node-code">COORD 01 // DISPATCH</div>
-          <h4 class="node-title">24H PRIOR</h4>
-          <p class="node-text">
-            Sealed temperature-controlled carton delivered to campus gate or hostel desk 24 hours prior to entrance.
-          </p>
-        </div>
-
-        <div class="blueprint-node">
-          <div class="node-code">COORD 02 // SIZING</div>
-          <h4 class="node-title">DUAL FIT</h4>
-          <p class="node-text">
-            Primary size + sealed complimentary backup size included automatically. Zero sizing hesitation.
-          </p>
-        </div>
-
-        <div class="blueprint-node">
-          <div class="node-code">COORD 03 // LIABILITY</div>
-          <h4 class="node-title">₹0 SHIELD</h4>
-          <p class="node-text">
-            Accidental drink spills, dancefloor scuffs, and normal seam tension are 100% insured. Zero penalty fear.
-          </p>
-        </div>
-
-        <div class="blueprint-node">
-          <div class="node-code">COORD 04 // RETURN</div>
-          <h4 class="node-title">ZERO LAUNDRY</h4>
-          <p class="node-text">
-            Slip unwashed garments into the prepaid return pouch. Handover at hostel desk Monday morning.
-          </p>
+        <div class="orbital-specimen-card" data-index="3">
+          <img src="/assets/editorial/court-dress.jpg" alt="Court Brocade" class="orbital-specimen-thumb">
+          <div class="orbital-specimen-name">COURT BROCADE</div>
+          <div class="orbital-specimen-rate">VECTOR δ // ₹3,899</div>
         </div>
       </div>
     </section>
 
-    <!-- 6. STRANGE RADICAL SPATIAL DIRECTORY (Vector-Linked to Rail) -->
-    <section class="strange-index-section">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 0.72rem; color: var(--dim); margin-bottom: 2rem; letter-spacing: 0.12em; flex-wrap: wrap; gap: 0.5rem;">
-        <span>04 // RADICAL SPATIAL DIRECTORY — CAMPUS DISPATCH NODES</span>
-        <span id="directoryBusIndicator" style="color: var(--electric-blue);">RAIL BUS: SYNCHRONIZED</span>
+    <!-- ========================================================
+         STAGE 3: THE IMPOSSIBLE SECTION (NON-EUCLIDEAN ARCHITECTURE)
+         ======================================================== -->
+    <section class="stage-impossible-chamber" id="stageImpossible">
+      <!-- Kinetic Deep Running Typography -->
+      <div class="impossible-layer-text" id="impossibleKineticText">
+        NON-EUCLIDEAN FORM // 重力歪曲 // SPATIAL ARCHITECTURE // METRIC CURVATURE // THE CLOTHES OCCUPY MORE SPACE THAN THE ROOM PERMITS //
       </div>
 
-      <div class="spatial-directory-list">
-        <div class="spatial-directory-node" data-coord="28.69° N // 77.21° E" data-campus="MIRANDA HOUSE GATE 2">
-          <div>
-            <div class="spatial-node-code">SYS_ROSTER // NODE WDL-014</div>
-            <div class="spatial-node-name">ZEMIRE SILK FAILLE</div>
-            <div class="spatial-node-meta">FAREWELL BALL // DU NORTH CAMPUS • MIRANDA HOUSE</div>
+      <div class="impossible-stage-grid">
+        <!-- Masked Cut-Through Aperture Installation -->
+        <div class="impossible-portal-installation" id="impossiblePortalWrap">
+          <!-- Primary Outer Garment Silhouette -->
+          <div class="impossible-outer-garment">
+            <img src="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg" alt="Architectural Hoop Skirt Rear">
           </div>
-          <div class="spatial-node-tariff">₹2,999 / 3D</div>
+          <!-- Skewed Secondary Aperture Window -->
+          <div class="impossible-inner-aperture" id="impossibleAperture">
+            <img id="impossibleApertureImg" src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Differential Parallax Silhouette">
+            <div class="aperture-coord-label">APERTURE 07 // PARALLAX 2.4X</div>
+          </div>
         </div>
 
-        <div class="spatial-directory-node" data-coord="28.56° N // 77.24° E" data-campus="LADY SHRI RAM COLLEGE">
-          <div>
-            <div class="spatial-node-code">SYS_ROSTER // NODE WDL-029</div>
-            <div class="spatial-node-name">PLEATED DUET GOWN</div>
-            <div class="spatial-node-meta">DEBATE GALA // DU SOUTH CAMPUS • LSR MAIN ARCHWAY</div>
+        <!-- Non-Euclidean Architectural Narrative -->
+        <div class="impossible-narrative-col">
+          <div style="font-size: 0.68rem; color: var(--electric-blue); letter-spacing: 0.15em; margin-bottom: 0.5rem;">
+            NODE 03 // NON-EUCLIDEAN ARCHITECTURE
           </div>
-          <div class="spatial-node-tariff">₹2,899 / 3D</div>
-        </div>
+          <h2 class="impossible-kanji-title">
+            部屋の寸法を超越する、<br>
+            異形のシルエット。
+          </h2>
+          <p class="impossible-thesis">
+            High-fashion rental defies classical geometry. You do not store the archive in your closet. You inhabit it for 72 hours, walk into the university ballroom, permanently alter the room's spatial memory, and return it without ever laundering a stitch. <strong>The garment exists in a higher dimensional coordinate than the room itself.</strong>
+          </p>
 
-        <div class="spatial-directory-node" data-coord="28.54° N // 77.19° E" data-campus="IIT DELHI / NIFT">
-          <div>
-            <div class="spatial-node-code">SYS_ROSTER // NODE WDL-041</div>
-            <div class="spatial-node-name">KINETIC SHIFT & WRAP</div>
-            <div class="spatial-node-meta">COLLEGE FEST // IIT DELHI ARENA • HAUZ KHAS</div>
+          <div class="impossible-metrics-cluster">
+            <div class="impossible-metric-node">
+              <div class="metric-num">-0.428</div>
+              <div class="metric-label">SPATIAL CURVATURE (RAD)</div>
+            </div>
+            <div class="impossible-metric-node">
+              <div class="metric-num">100%</div>
+              <div class="metric-label">DAMAGE LIABILITY ABSORBED</div>
+            </div>
+            <div class="impossible-metric-node">
+              <div class="metric-num">24H</div>
+              <div class="metric-label">PRIOR GATE DISPATCH</div>
+            </div>
+            <div class="impossible-metric-node">
+              <div class="metric-num">₹0</div>
+              <div class="metric-label">CLEANING FEE (ZERO LAUNDRY)</div>
+            </div>
           </div>
-          <div class="spatial-node-tariff">₹1,699 / 3D</div>
-        </div>
-
-        <div class="spatial-directory-node" data-coord="28.98° N // 77.10° E" data-campus="ASHOKA UNIVERSITY">
-          <div>
-            <div class="spatial-node-code">SYS_ROSTER // NODE WDL-053</div>
-            <div class="spatial-node-name">GOLD BROCADE ROBE</div>
-            <div class="spatial-node-meta">SOCIETY BANQUET // SONIPAT RESIDENCE QUAD</div>
-          </div>
-          <div class="spatial-node-tariff">₹3,899 / 3D</div>
         </div>
       </div>
     </section>
 
-    <!-- 6.5 SPATIAL RENTAL CONVERGENCE CHAMBER // COLLAPSE THE MOMENT -->
-    <section class="spatial-chamber-section" id="spatialChamberSection">
-      <div class="chamber-header-strip">
-        <span>05 // SPATIAL CONVERGENCE CHAMBER — COLLAPSE THE MOMENT</span>
-        <span>ACTIVE VECTOR: <strong id="chamberCoordDisplay" style="color: var(--electric-blue);">X: 142.8 // Y: 891.2 // Z: 04.0</strong></span>
+    <!-- ========================================================
+         STAGE 4: SCATTERED OCCASION FIELD (3D COORDINATE VOID)
+         ======================================================== -->
+    <section class="stage-occasions-void" id="stageOccasions">
+      <div class="stage-section-header">
+        <span>04 // 3D OCCASION COORDINATE VOID — NON-EUCLIDEAN CAMPUS SPHERES</span>
+        <span style="color: var(--electric-blue);">GRAVITATIONAL PULL: ACTIVE</span>
       </div>
 
-      <div class="chamber-3d-stage" id="chamberStage">
-        <!-- Coordinate Axes Clusters -->
-        <div class="chamber-controls-cluster">
-          <!-- Axis 1: Occasion Coordinate Vector -->
+      <div class="occasion-spatial-universe" id="occasionUniverse">
+        <!-- Occasion 1: FESTIVAL -->
+        <div class="occasion-coordinate-orb active" data-event="FESTIVAL" data-coord="X: 142.8 // Y: 891.2 // Z: 04.0" data-price="1899" data-look="KINETIC MULTI-POCKET DRAPE" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">
+          <div class="orb-node-tag">NODE 01 // HIGH VOLTAGE</div>
+          <h3 class="orb-title">FESTIVAL</h3>
+          <div class="orb-kanji">祝祭 (COLLEGE FEST)</div>
+          <p class="orb-desc">
+            15,000 students filling the sports stadium under laser truss towers. Kinetic lurex and reflective shift garments engineered to strobe in darkness.
+          </p>
+          <div class="orb-footer">
+            <span style="color: var(--dim-light);">CAMPUS: IIT DELHI ARENA</span>
+            <span class="tariff">₹1,899 / 3D</span>
+          </div>
+        </div>
+
+        <!-- Occasion 2: FAREWELL -->
+        <div class="occasion-coordinate-orb" data-event="FAREWELL" data-coord="X: 210.4 // Y: 418.0 // Z: 12.0" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">
+          <div class="orb-node-tag">NODE 02 // VALEDICTORY</div>
+          <h3 class="orb-title">FAREWELL</h3>
+          <div class="orb-kanji">門出 (SENIOR BALL)</div>
+          <p class="orb-desc">
+            The departmental apex. Sweeping floor-length silk faille and sculpted peplums that author your graduation chapter with museum-grade severity.
+          </p>
+          <div class="orb-footer">
+            <span style="color: var(--dim-light);">CAMPUS: MIRANDA HOUSE QUAD</span>
+            <span class="tariff">₹2,999 / 3D</span>
+          </div>
+        </div>
+
+        <!-- Occasion 3: CONCERT -->
+        <div class="occasion-coordinate-orb" data-event="CONCERT" data-coord="X: 088.1 // Y: 992.5 // Z: 02.0" data-price="1699" data-look="PLEATED DUET CHIFFON" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">
+          <div class="orb-node-tag">NODE 03 // ACOUSTIC SUB</div>
+          <h3 class="orb-title">CONCERT</h3>
+          <div class="orb-kanji">響宴 (ARENA CIRCUIT)</div>
+          <p class="orb-desc">
+            Bass-heavy club tours and stadium shows. Tailored micro-corsets and fluid silk chiffon built for motion, heat, and flash photography.
+          </p>
+          <div class="orb-footer">
+            <span style="color: var(--dim-light);">CAMPUS: LSR MAIN ARCHWAY</span>
+            <span class="tariff">₹1,699 / 3D</span>
+          </div>
+        </div>
+
+        <!-- Occasion 4: FRESHERS -->
+        <div class="occasion-coordinate-orb" data-event="FRESHERS" data-coord="X: 174.5 // Y: 320.1 // Z: 06.0" data-price="2199" data-look="VINTAGE DRAPED ROBE" data-img="/assets/editorial/robe-longue-1983-12-1-1.jpg">
+          <div class="orb-node-tag">NODE 04 // INDUCTION</div>
+          <h3 class="orb-title">FRESHERS</h3>
+          <div class="orb-kanji">初陣 (ORIENTATION GALA)</div>
+          <p class="orb-desc">
+            First impression on campus. An audacious silhouette that establishes your creative authority before you speak a single word.
+          </p>
+          <div class="orb-footer">
+            <span style="color: var(--dim-light);">CAMPUS: ST. STEPHEN'S QUAD</span>
+            <span class="tariff">₹2,199 / 3D</span>
+          </div>
+        </div>
+
+        <!-- Occasion 5: BANQUET -->
+        <div class="occasion-coordinate-orb" data-event="BANQUET" data-coord="X: 330.0 // Y: 112.4 // Z: 08.0" data-price="3899" data-look="GOLD BROCADE ROBE" data-img="/assets/editorial/court-dress.jpg">
+          <div class="orb-node-tag">NODE 05 // SOIRÉE APEX</div>
+          <h3 class="orb-title">BANQUET</h3>
+          <div class="orb-kanji">晩餐 (MODEL UN GALA)</div>
+          <p class="orb-desc">
+            Regal side-pannier volume and gold thread jacquard. Historic court silhouettes commanding the dining hall upon your entrance.
+          </p>
+          <div class="orb-footer">
+            <span style="color: var(--dim-light);">CAMPUS: ASHOKA RESIDENCE</span>
+            <span class="tariff">₹3,899 / 3D</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         STAGE 5: THE TELEPORT MOMENT (SPATIAL DISPLACEMENT)
+         ======================================================== -->
+    <section class="stage-teleport-portal" id="stageTeleport">
+      <div class="stage-section-header">
+        <span>05 // SPATIAL DISPLACEMENT THRESHOLD — TELEMETRY HANDOFF</span>
+        <span style="color: var(--electric-blue);">BRIDGE ACTIVE: DELHI NCR ⇄ TOKYO</span>
+      </div>
+
+      <div class="teleport-threshold-container">
+        <div class="teleport-portal-header">
+          <span>COORDINATE DISPLACEMENT BRIDGE</span>
+          <span>LATENCY: 0.041s // ENCRYPTED TRANSIT</span>
+        </div>
+
+        <div class="teleport-duo-fields">
+          <!-- Field A: Delhi NCR -->
+          <div class="field-card active" id="fieldA">
+            <div class="field-code">SECTOR α // DISPATCH CORRIDOR</div>
+            <div class="field-name">DELHI NCR</div>
+            <div class="field-coordinates">28.5983° N // 77.2281° E</div>
+            <ul class="field-stations">
+              <li>North Campus: Miranda House Gate 2</li>
+              <li>South Campus: LSR Main Archway</li>
+              <li>Hauz Khas: IIT Delhi Arena Gate</li>
+              <li>Sonipat: Ashoka Residence Quad</li>
+            </ul>
+          </div>
+
+          <!-- Interactive Teleport Switcher Button -->
+          <button class="teleport-exchange-btn" id="btnTriggerTeleport">
+            <span style="font-size: 1.4rem;">⇄</span>
+            <span>TRANSLATE FIELD</span>
+            <span style="font-size: 0.6rem; color: var(--electric-blue);">[DISPLACE]</span>
+          </button>
+
+          <!-- Field B: Tokyo -->
+          <div class="field-card" id="fieldB">
+            <div class="field-code">SECTOR β // ARCHIVE ORIGIN</div>
+            <div class="field-name">TOKYO METRO</div>
+            <div class="field-coordinates">35.6595° N // 139.7004° E</div>
+            <ul class="field-stations">
+              <li>Ginza: Historical Couture Vault</li>
+              <li>Aoyama: Miyake Pleats Archive</li>
+              <li>Harajuku: Street-Cut Prototype Node</li>
+              <li>Roppongi: Museum Restoration Atelier</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         STAGE 6: SPATIAL CONVERGENCE RENTAL CHAMBER
+         ======================================================== -->
+    <section class="stage-convergence-chamber" id="stageChamber">
+      <div class="stage-section-header">
+        <span>06 // SPATIAL CONVERGENCE CHAMBER — COLLAPSE THE MOMENT</span>
+        <span>ACTIVE VECTOR: <strong id="chamberActiveVectorDisplay" style="color: var(--electric-blue);">X: 142.8 // Y: 891.2 // Z: 04.0</strong></span>
+      </div>
+
+      <div class="chamber-3d-volume" id="chamberVolume">
+        <!-- Coordinate Axes Cluster -->
+        <div class="chamber-axes-cluster">
+          <!-- Axis 1: Occasion Vector -->
           <div>
-            <span class="spatial-axis-title">AXIS α // OCCASION SPATIAL CONVERGENCE:</span>
-            <div class="spatial-nodes-row" id="chamberOccasionNodes">
+            <span class="chamber-axis-title">AXIS α // OCCASION SPATIAL CONVERGENCE:</span>
+            <div class="chamber-nodes-row" id="chamberOccasionNodes">
               <button class="spatial-node-pill active" data-event="FESTIVAL" data-coord="X: 142.8 // Y: 891.2 // Z: 04.0" data-rot="-6" data-price="1899" data-look="KINETIC MULTI-POCKET DRAPE" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">FESTIVAL [142 / 891 / 04]</button>
               <button class="spatial-node-pill" data-event="FAREWELL" data-coord="X: 210.4 // Y: 418.0 // Z: 12.0" data-rot="8" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">FAREWELL [210 / 418 / 12]</button>
-              <button class="spatial-node-pill" data-event="CONCERT" data-coord="X: 088.1 // Y: 992.5 // Z: 02.0" data-rot="-12" data-price="1699" data-look="STROBE METALLIC KNIT" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">CONCERT [088 / 992 / 02]</button>
+              <button class="spatial-node-pill" data-event="CONCERT" data-coord="X: 088.1 // Y: 992.5 // Z: 02.0" data-rot="-12" data-price="1699" data-look="PLEATED DUET CHIFFON" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">CONCERT [088 / 992 / 02]</button>
+              <button class="spatial-node-pill" data-event="FRESHERS" data-coord="X: 174.5 // Y: 320.1 // Z: 06.0" data-rot="5" data-price="2199" data-look="VINTAGE DRAPED ROBE" data-img="/assets/editorial/robe-longue-1983-12-1-1.jpg">FRESHERS [174 / 320 / 06]</button>
               <button class="spatial-node-pill" data-event="BANQUET" data-coord="X: 330.0 // Y: 112.4 // Z: 08.0" data-rot="10" data-price="3899" data-look="GOLD BROCADE ROBE" data-img="/assets/editorial/court-dress.jpg">BANQUET [330 / 112 / 08]</button>
             </div>
           </div>
 
-          <!-- Axis 2: Temporal Node (Duration) -->
+          <!-- Axis 2: Duration Vector -->
           <div>
-            <span class="spatial-axis-title">AXIS β // TEMPORAL DURATION OFFSET:</span>
-            <div class="spatial-nodes-row" id="chamberDurationNodes">
+            <span class="chamber-axis-title">AXIS β // TEMPORAL DURATION OFFSET:</span>
+            <div class="chamber-nodes-row" id="chamberDurationNodes">
               <button class="spatial-node-pill active" data-days="03" data-adder="0">+03 DAYS (BASE)</button>
               <button class="spatial-node-pill" data-days="05" data-adder="600">+05 DAYS (+₹600)</button>
               <button class="spatial-node-pill" data-days="07" data-adder="1100">+07 DAYS (+₹1,100)</button>
             </div>
           </div>
 
-          <!-- Axis 3: Sizing Calibration -->
+          <!-- Axis 3: Sizing Vector -->
           <div>
-            <span class="spatial-axis-title">AXIS γ // FIT & SISTER REDUNDANCY:</span>
-            <div class="spatial-nodes-row" id="chamberSizeNodes">
+            <span class="chamber-axis-title">AXIS γ // FIT & SISTER REDUNDANCY:</span>
+            <div class="chamber-nodes-row" id="chamberSizeNodes">
               <button class="spatial-node-pill" data-size="UK 6" data-backup="UK 8">UK 6 [XS]</button>
               <button class="spatial-node-pill active" data-size="UK 8" data-backup="UK 10">UK 8 [S]</button>
               <button class="spatial-node-pill" data-size="UK 10" data-backup="UK 12">UK 10 [M]</button>
@@ -1557,43 +1914,42 @@
           </div>
         </div>
 
-        <!-- Center Stage: Floating Garment Monolith & Live Telemetry -->
-        <div class="chamber-center-core">
-          <div class="chamber-garment-monolith" id="garmentMonolith">
-            <div class="monolith-img-wrap">
-              <img id="monolithImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Spatial Specimen">
+        <!-- Center Stage: Garment Monolith & Real-Time Telemetry -->
+        <div class="chamber-core-split">
+          <div class="chamber-monolith-display" id="chamberGarmentBox">
+            <div class="chamber-img-wrap">
+              <img id="chamberGarmentImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Chamber Specimen">
             </div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--electric-blue); letter-spacing: 0.1em;" id="monolithLookCode">
+            <div style="font-size: 0.65rem; color: var(--electric-blue); letter-spacing: 0.1em;" id="chamberGarmentCode">
               SPECIMEN // WDL-014
             </div>
-            <div style="font-family: 'Anton', sans-serif; font-size: 1.4rem; color: var(--bone); text-transform: uppercase; margin-top: 0.25rem;" id="monolithLookTitle">
+            <div style="font-family: 'Anton', sans-serif; font-size: 1.4rem; color: var(--bone); text-transform: uppercase; margin-top: 0.25rem;" id="chamberGarmentTitle">
               KINETIC MULTI-POCKET DRAPE
             </div>
           </div>
 
-          <!-- Real-Time Spatial Telemetry Screen -->
-          <div class="chamber-telemetry-screen" id="chamberTelemetryScreen">
+          <div class="chamber-telemetry-monitor" id="chamberTelemetryMonitor">
             <div style="font-size: 0.65rem; letter-spacing: 0.15em; color: var(--electric-blue); border-bottom: 1px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
-              DIMENSIONAL LEASE TELEMETRY // SYSTEM WDL-2026
+              DIMENSIONAL LEASE TELEMETRY // WDL-SYS-2026
             </div>
 
-            <div class="telemetry-live-stat" id="chamberPriceDisplay">
+            <div class="chamber-live-price" id="chamberLivePrice">
               ₹1,899
             </div>
 
-            <div>EVENT VECTOR: <strong id="telemetryEvent" style="color: #ffffff;">FESTIVAL</strong></div>
-            <div>TEMPORAL ACCESS: <strong id="telemetryDuration" style="color: #ffffff;">03 DAYS</strong></div>
-            <div>SPATIAL FIT: <strong id="telemetryFit" style="color: #ffffff;">UK 8 [S] + SISTER UK 10 [SEALED]</strong></div>
-            <div>DAMAGE SHIELD: <strong style="color: #4ade80;">₹0 EMBEDDED</strong></div>
+            <div>OCCASION VECTOR: <strong id="telemEvent" style="color: #ffffff;">FESTIVAL</strong></div>
+            <div>TEMPORAL ACCESS: <strong id="telemDuration" style="color: #ffffff;">03 DAYS</strong></div>
+            <div>SPATIAL FIT: <strong id="telemFit" style="color: #ffffff;">UK 8 [S] + SISTER UK 10 [SEALED]</strong></div>
+            <div>DAMAGE SHIELD: <strong style="color: #34d399;">₹0 EMBEDDED</strong></div>
             <div>RETURN PROTOCOL: <strong style="color: #ffffff;">UNWASHED CORRIDOR HANDOVER</strong></div>
 
-            <button class="collapse-dimension-btn" id="collapseDimensionBtn">
-              <span>COLLAPSE COORDINATES // ENTER TEMPORARY POSSESSION</span>
-              <span style="font-size: 0.62rem; color: #8899ff; letter-spacing: 0.15em;">NON-EUCLIDEAN LEASE COMMIT</span>
+            <button class="btn-commit-convergence" id="btnCommitConvergence">
+              <span>COLLAPSE COORDINATES // LOCK TEMPORARY POSSESSION</span>
+              <span style="font-size: 0.62rem; color: #8899ff; letter-spacing: 0.15em;">NON-EUCLIDEAN CONVERGENCE COMMIT</span>
             </button>
 
-            <div class="chamber-collapsed-badge" id="collapsedManifestBadge">
-              ✦ COORDINATE SYSTEM COLLAPSED. TEMPORARY POSSESSION LOCKED.<br>
+            <div class="chamber-locked-manifest" id="chamberLockedManifest">
+              ✦ COORDINATE SYSTEM COLLAPSED. POSSESSION CONFIRMED.<br>
               REF: WDL-SPATIAL-014 // DISPATCH ASSIGNED TO CAMPUS RESIDENTIAL NODE.
             </div>
           </div>
@@ -1601,49 +1957,76 @@
       </div>
     </section>
 
-    <!-- 7. NON-TRADITIONAL INSTALLATION ENDING -->
-    <section class="spatial-colophon-exit">
-      <h2 class="exit-huge-title">WEDELIA.</h2>
-      <div class="exit-notes">
-        THE EXHIBITION CLOSES AS THE NIGHT BEGINS. STEP OUT INTO THE DARKNESS WEARING SOMETHING MONUMENTAL.
+    <!-- ========================================================
+         STAGE 7: SPATIAL DIRECTORY & COLOPHON EXIT
+         ======================================================== -->
+    <section class="stage-directory-exit" id="stageExit">
+      <div class="stage-section-header">
+        <span>07 // RADICAL SPATIAL DIRECTORY — CAMPUS DISPATCH NODES</span>
+        <span id="directoryStatusIndicator" style="color: var(--electric-blue);">RAIL BUS: SYNCHRONIZED</span>
       </div>
-      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--dim); letter-spacing: 0.2em;">
-        INSTALLATION COMPLETE // TOKYO × DELHI NCR
+
+      <div class="spatial-directory-table">
+        <div class="spatial-directory-entry" data-coord="28.69° N // 77.21° E" data-campus="MIRANDA HOUSE GATE 2">
+          <div>
+            <div class="dir-code">SYS_ROSTER // NODE WDL-014</div>
+            <div class="dir-name">ZEMIRE SILK FAILLE</div>
+            <div class="dir-meta">FAREWELL BALL // DU NORTH CAMPUS • MIRANDA HOUSE</div>
+          </div>
+          <div class="dir-tariff">₹2,999 / 3D</div>
+        </div>
+
+        <div class="spatial-directory-entry" data-coord="28.56° N // 77.24° E" data-campus="LADY SHRI RAM COLLEGE">
+          <div>
+            <div class="dir-code">SYS_ROSTER // NODE WDL-029</div>
+            <div class="dir-name">PLEATED DUET GOWN</div>
+            <div class="dir-meta">DEBATE GALA // DU SOUTH CAMPUS • LSR MAIN ARCHWAY</div>
+          </div>
+          <div class="dir-tariff">₹2,899 / 3D</div>
+        </div>
+
+        <div class="spatial-directory-entry" data-coord="28.54° N // 77.19° E" data-campus="IIT DELHI / NIFT">
+          <div>
+            <div class="dir-code">SYS_ROSTER // NODE WDL-041</div>
+            <div class="dir-name">KINETIC SHIFT & WRAP</div>
+            <div class="dir-meta">COLLEGE FEST // IIT DELHI ARENA • HAUZ KHAS</div>
+          </div>
+          <div class="dir-tariff">₹1,699 / 3D</div>
+        </div>
+
+        <div class="spatial-directory-entry" data-coord="28.98° N // 77.10° E" data-campus="ASHOKA UNIVERSITY">
+          <div>
+            <div class="dir-code">SYS_ROSTER // NODE WDL-053</div>
+            <div class="dir-name">GOLD BROCADE ROBE</div>
+            <div class="dir-meta">SOCIETY BANQUET // SONIPAT RESIDENCE QUAD</div>
+          </div>
+          <div class="dir-tariff">₹3,899 / 3D</div>
+        </div>
+      </div>
+
+      <!-- Final Colophon Exit -->
+      <div class="colophon-monument-block">
+        <h2 class="colophon-huge-masthead" id="colophonTitle">WEDELIA.</h2>
+        <p class="colophon-notes">
+          THE EXHIBITION CLOSES AS THE NIGHT BEGINS. STEP OUT INTO THE DARKNESS WEARING SOMETHING MONUMENTAL. RETURN UNWASHED ON MONDAY MORNING.
+        </p>
+        <div class="colophon-footer-strip">
+          <div>WEDELIA SPATIAL INSTALLATION // TOKYO × DELHI NCR</div>
+          <div>CAMPUS HOSTEL DISPATCH GATEWAY ACTIVE</div>
+        </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="strange-footer">
-      <div>
-        <strong>WEDELIA SPATIAL INSTALLATION</strong> // TOKYO ARCHIVE SYSTEM
-      </div>
-      <div>
-        CAMPUS GATE PROTOCOL // DELHI NCR
-      </div>
-    </footer>
-
-    <!-- Signature Spatial Displacement Overlay -->
-    <div class="spatial-displace-overlay" id="spatialOverlay">
-      <div class="displace-frame-box">
-        <div class="displace-monument-title">SPATIAL DISPLACEMENT</div>
-        <div class="displace-coord-strip">
-          <span>X: 144.29° // TOKYO</span>
-          <span>Y: 77.10° // DELHI</span>
-          <span>Z: 0.884 NON-EUCLIDEAN</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Spatial Coordinate Anchor Node -->
-    <button class="spatial-coordinate-node" id="spatialTeleportBtn">
-      <span class="node-marker">⟐</span>
-      <span>COORD // DISPLACE</span>
+    <!-- Floating Quick Displace Teleport Node -->
+    <button class="spatial-float-teleport" id="btnFloatTeleport">
+      <span style="color: var(--electric-blue);">⟐</span>
+      <span>DISPLACE ⇄</span>
     </button>
 
-    <!-- Experiment 10-B: Strange Architectural Crosshair -->
-    <div class="strange-hud-crosshair" id="strangeHudCrosshair"></div>
+    <!-- Fixed Spatial Raycast Crosshair -->
+    <div class="spatial-hud-crosshair" id="spatialHudCrosshair"></div>
 
-  </div>
+  </main>
 
   <script type="module">
     import gsap from 'gsap';
@@ -1652,9 +2035,9 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Experiment 10-B: Live Architectural Raycast Math on Left Rail & Crosshair
-    const coordStamp = document.querySelector('.rail-coord-stamp');
-    const hudCrosshair = document.getElementById('strangeHudCrosshair');
+    // 1. ARCHITECTURAL RAYCAST MATH (Rail & Crosshair)
+    const coordStamp = document.getElementById('railCoordStamp');
+    const hudCrosshair = document.getElementById('spatialHudCrosshair');
 
     if (hudCrosshair) {
       const xTo = gsap.quickTo(hudCrosshair, 'x', { duration: 0.1, ease: 'power2.out' });
@@ -1663,11 +2046,11 @@
       window.addEventListener('mousemove', (e) => {
         xTo(e.clientX);
         yTo(e.clientY);
-        gsap.to(hudCrosshair, { opacity: 0.7, duration: 0.15 });
+        gsap.to(hudCrosshair, { opacity: 0.65, duration: 0.15 });
 
         if (coordStamp) {
-          const zDepth = ((e.clientY / window.innerHeight) * 2.5).toFixed(2);
-          coordStamp.textContent = `COORD: X:${Math.round(e.clientX)} Y:${Math.round(e.clientY)} // Z:${zDepth}`;
+          const zDepth = ((e.clientY / window.innerHeight) * 3).toFixed(2);
+          coordStamp.textContent = `COORD: X:${Math.round(e.clientX)} Y:${Math.round(e.clientY)} // Z:${zDepth}mm`;
         }
       }, { passive: true });
 
@@ -1676,118 +2059,111 @@
       });
     }
 
-    // 1. SPATIAL ENTRANCE CHOREOGRAPHY
-    if (!prefersReducedMotion) {
-      const enterTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    // 2. HERO 3D PERSPECTIVE PARALLAX & DETACHED WE SCROLL DRIFT
+    const heroInner = document.getElementById('heroStageInner');
+    const heroMid = document.getElementById('heroPlaneMid');
+    const heroFore = document.getElementById('foreDetachedWE');
+    const heroDeep = document.getElementById('heroPlaneDeep');
 
-      enterTl
-        .from('.viewport-rail', {
-          xPercent: -100,
-          duration: 0.8,
-          ease: 'power3.inOut'
-        })
-        .from('.huge-split-name span', {
-          rotateX: 45,
-          yPercent: 80,
-          opacity: 0,
-          stagger: 0.15,
-          duration: 1.2,
-          ease: 'power4.out'
-        }, '-=0.4')
-        .from('.stage-narrative', {
-          y: 35,
-          opacity: 0,
-          duration: 0.8
-        }, '-=0.6')
-        .from('.bleed-photo-frame', {
-          scale: 0.9,
-          opacity: 0,
-          duration: 1,
-          ease: 'power3.out'
-        }, '-=0.7');
-    }
+    if (heroInner && !prefersReducedMotion) {
+      heroInner.addEventListener('mousemove', (e) => {
+        const rect = heroInner.getBoundingClientRect();
+        const normX = (e.clientX - rect.left) / rect.width - 0.5;
+        const normY = (e.clientY - rect.top) / rect.height - 0.5;
 
-    // 2. EXPERIMENT 10-A: SPLIT REALITY DETACHMENT & SNAPPING ON SCROLL
-    if (!prefersReducedMotion) {
-      const splitLines = document.querySelectorAll('.huge-split-name span');
-      if (splitLines.length >= 2) {
-        // Line 1 ('WEDE') drifts left and tilts down
-        gsap.to(splitLines[0], {
-          xPercent: -16,
-          yPercent: -10,
-          rotationZ: -2.5,
+        // Differential 3D tilt across depth planes
+        if (heroMid) {
+          gsap.to(heroMid, {
+            rotateY: normX * 12,
+            rotateX: -normY * 10,
+            x: normX * 18,
+            y: normY * 14,
+            duration: 0.4,
+            ease: 'power2.out'
+          });
+        }
+        if (heroFore) {
+          gsap.to(heroFore, {
+            x: normX * 36,
+            y: normY * 28,
+            duration: 0.35,
+            ease: 'power2.out'
+          });
+        }
+        if (heroDeep) {
+          gsap.to(heroDeep, {
+            x: -normX * 22,
+            y: -normY * 18,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+        }
+      });
+
+      heroInner.addEventListener('mouseleave', () => {
+        if (heroMid) gsap.to(heroMid, { rotateY: -4, rotateX: 2, x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
+        if (heroFore) gsap.to(heroFore, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
+        if (heroDeep) gsap.to(heroDeep, { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
+      });
+
+      // Scroll scrubbing detachment
+      if (heroFore) {
+        gsap.to(heroFore, {
+          xPercent: -20,
+          yPercent: -15,
+          rotationZ: -3,
           ease: 'none',
           scrollTrigger: {
-            trigger: '.bleeding-type-hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.2
-          }
-        });
-
-        // Line 2 ('LIA.') drifts right and tilts up
-        gsap.to(splitLines[1], {
-          xPercent: 18,
-          yPercent: 14,
-          rotationZ: 3,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.bleeding-type-hero',
+            trigger: '#stageArrival',
             start: 'top top',
             end: 'bottom top',
             scrub: 1.2
           }
         });
       }
-
-      // Exit monumental title tracking expansion
-      gsap.fromTo('.exit-huge-title',
-        { letterSpacing: '-0.04em' },
-        {
-          letterSpacing: '0.06em',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.spatial-colophon-exit',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            scrub: 1
-          }
-        }
-      );
     }
 
-    // 3. EXPERIMENT 10-C: NON-EUCLIDEAN GRAVITATIONAL REPULSION IN SCATTER GRID
-    const scatterBoxes = document.querySelectorAll('.scatter-box');
-    scatterBoxes.forEach((box, i) => {
-      box.addEventListener('mouseenter', () => {
-        if (!prefersReducedMotion) {
-          gsap.to(box, { scale: 1.03, borderColor: '#0f38ff', duration: 0.25, ease: 'power2.out' });
-          scatterBoxes.forEach((otherBox, otherIdx) => {
-            if (otherBox !== box) {
-              const dir = otherIdx < i ? -14 : 14;
-              gsap.to(otherBox, { x: dir, opacity: 0.55, duration: 0.3, ease: 'power3.out' });
-            }
-          });
-        }
-      });
+    // 3. STAGE MAP NAVIGATION BAR (Sticky Pill Highlighter)
+    const stagePills = document.querySelectorAll('.stage-nav-pill');
+    const sections = [
+      { id: 'stageArrival', key: 'arrival' },
+      { id: 'stageObjects', key: 'objects' },
+      { id: 'stageImpossible', key: 'impossible' },
+      { id: 'stageOccasions', key: 'occasions' },
+      { id: 'stageTeleport', key: 'teleport' },
+      { id: 'stageChamber', key: 'chamber' },
+      { id: 'stageExit', key: 'exit' }
+    ];
 
-      box.addEventListener('mouseleave', () => {
-        if (!prefersReducedMotion) {
-          gsap.to(scatterBoxes, { scale: 1, x: 0, opacity: 1, duration: 0.35, ease: 'power3.out' });
-        }
-      });
+    sections.forEach(({ id, key }) => {
+      const el = document.getElementById(id);
+      if (el) {
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 40%',
+          end: 'bottom 40%',
+          onEnter: () => setActiveStagePill(key),
+          onEnterBack: () => setActiveStagePill(key)
+        });
+      }
     });
 
-    // 3.5 THE SPATIAL GARMENT OBJECT FIELD SYSTEM
-    const spatialVectorsData = [
+    function setActiveStagePill(key) {
+      stagePills.forEach(pill => {
+        pill.classList.toggle('active', pill.dataset.stage === key);
+      });
+    }
+
+    // 4. STAGE 2: MONOLITH VECTOR SWITCHER DATA & LOGIC
+    const spatialVectors = [
       {
         coord: 'VECTOR α // COORD: X:142.8 Y:891.2 Z:04.0',
         img: '/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg',
         occTag: 'OCCASION VECTOR // COLLEGE FESTIVAL ARENA & CONCERT STAGE',
         heading: 'Kinetic Multi-Pocket Wrap',
-        prose: 'A floating kinetic silhouette crafted from high-voltage metallic polymer weave. Suspended at the intersection of collegiate rave culture and avant-garde couture draping. Engineered for outdoor festival soundstages where flash photography and laser beams illuminate the garment\'s reflective filament from across the field.',
+        prose: 'A floating kinetic silhouette crafted from high-voltage metallic polymer weave. Suspended at the intersection of collegiate rave culture and avant-garde couture draping. Engineered for outdoor festival soundstages where strobe towers and laser sweeps illuminate reflective filaments from across the campus field.',
         atelier: 'CUSTO SUMMER ARCHIVE (2010)',
-        fiber: 'STRUCTURED POLYMER & SILK KNIT (920g)',
+        fiber: 'METALLIC WEAVE & SILK KNIT (920g)',
         dualFit: 'UK 6 (PRIMARY) + UK 8 (SEALED SISTER)',
         tariff: '₹1,699 / 3 DAYS (₹0 DAMAGE SHIELD)',
         price: 1699,
@@ -1815,7 +2191,7 @@
         img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg',
         occTag: 'OCCASION VECTOR // TERRACE CONCERT & LAWN SOIRÉE',
         heading: 'Pleated Duet Chiffon Gown',
-        prose: 'Hand-pleated silk chiffon draping from the Jean Dessès Paris atelier. Under twilight fest lanterns and outdoor campus terraces, the fluid classical folds respond to every ambient breeze, creating living cinematic ripples that outshine ordinary fast fashion.',
+        prose: 'Hand-pleated silk chiffon draping from the Jean Dessès Paris atelier. Under twilight fest lanterns and outdoor campus terraces, the fluid classical folds respond to ambient breeze, creating living ripples that decisively outshine ordinary fast fashion.',
         atelier: 'JEAN DESSÈS PARIS (1951)',
         fiber: 'FLUID SILK CHIFFON DRAPE (1,140g)',
         dualFit: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
@@ -1842,413 +2218,360 @@
       }
     ];
 
-    let currentVectorIndex = 0;
-    const vectorTabBtns = document.querySelectorAll('#spatialVectorTabs .vector-tab-btn');
-    const orbitalCards = document.querySelectorAll('#orbitalLooksStrip .orbital-look-card');
-    const spatialCoordBadge = document.getElementById('spatialCoordinateBadge');
-    const spatialActiveImg = document.getElementById('spatialActiveLookImg');
-    const spatialOccTag = document.getElementById('spatialOccasionVectorTag');
-    const spatialHeading = document.getElementById('spatialTensorHeading');
-    const spatialProse = document.getElementById('spatialObjectProse');
-    const spatialAtelier = document.getElementById('spatialAtelierVal');
-    const spatialFiber = document.getElementById('spatialFiberVal');
-    const spatialDualFit = document.getElementById('spatialDualFitVal');
-    const spatialTariff = document.getElementById('spatialTariffVal');
-    const collapseCoordsBtn = document.getElementById('collapseCoordsBtn');
-    const nextVectorBtn = document.getElementById('nextVectorBtn');
+    let currentVecIdx = 0;
+    const vecTabs = document.querySelectorAll('#spatialVectorTabs .vector-tab-btn');
+    const orbCards = document.querySelectorAll('#orbitalSpecimenStrip .orbital-specimen-card');
+    const monolithCoordBadge = document.getElementById('monolithCoordBadge');
+    const activeMonolithImg = document.getElementById('activeMonolithImg');
+    const monolithOccTag = document.getElementById('monolithOccasionTag');
+    const monolithHeading = document.getElementById('monolithHeading');
+    const monolithProse = document.getElementById('monolithProse');
+    const specAtelier = document.getElementById('specAtelier');
+    const specFiber = document.getElementById('specFiber');
+    const specDualFit = document.getElementById('specDualFit');
+    const specTariff = document.getElementById('specTariff');
+    const btnNextSpecimen = document.getElementById('btnNextSpecimen');
+    const btnCollapseSpecimen = document.getElementById('btnCollapseSpecimen');
 
-    function renderSpatialVector(idx) {
-      currentVectorIndex = idx;
-      const data = spatialVectorsData[idx];
+    function renderSpecimen(idx) {
+      currentVecIdx = idx;
+      const data = spatialVectors[idx];
 
-      vectorTabBtns.forEach((b, i) => b.classList.toggle('active', i === idx));
-      orbitalCards.forEach((c, i) => c.classList.toggle('active', i === idx));
+      vecTabs.forEach((b, i) => b.classList.toggle('active', i === idx));
+      orbCards.forEach((c, i) => c.classList.toggle('active', i === idx));
 
       if (!prefersReducedMotion) {
-        gsap.killTweensOf('#spatialObjectStage');
         gsap.timeline()
-          .to('#spatialObjectStage', { opacity: 0.2, rotateY: 12, scale: 0.95, duration: 0.18, ease: 'power2.in' })
+          .to('#monolithStageGrid', { opacity: 0.3, rotateY: 8, scale: 0.96, duration: 0.16, ease: 'power2.in' })
           .call(() => {
-            if (spatialCoordBadge) spatialCoordBadge.textContent = data.coord;
-            if (spatialActiveImg) spatialActiveImg.src = data.img;
-            if (spatialOccTag) spatialOccTag.textContent = data.occTag;
-            if (spatialHeading) spatialHeading.textContent = data.heading;
-            if (spatialProse) spatialProse.textContent = data.prose;
-            if (spatialAtelier) spatialAtelier.textContent = data.atelier;
-            if (spatialFiber) spatialFiber.textContent = data.fiber;
-            if (spatialDualFit) spatialDualFit.textContent = data.dualFit;
-            if (spatialTariff) spatialTariff.textContent = data.tariff;
+            if (monolithCoordBadge) monolithCoordBadge.textContent = data.coord;
+            if (activeMonolithImg) activeMonolithImg.src = data.img;
+            if (monolithOccTag) monolithOccTag.textContent = data.occTag;
+            if (monolithHeading) monolithHeading.textContent = data.heading;
+            if (monolithProse) monolithProse.textContent = data.prose;
+            if (specAtelier) specAtelier.textContent = data.atelier;
+            if (specFiber) specFiber.textContent = data.fiber;
+            if (specDualFit) specDualFit.textContent = data.dualFit;
+            if (specTariff) specTariff.textContent = data.tariff;
           })
-          .fromTo('#spatialObjectStage',
-            { rotateY: -12, scale: 0.95 },
-            { opacity: 1, rotateY: 0, scale: 1, duration: 0.42, ease: 'power3.out' }
-          );
+          .to('#monolithStageGrid', { opacity: 1, rotateY: 0, scale: 1, duration: 0.35, ease: 'power3.out' });
       } else {
-        if (spatialCoordBadge) spatialCoordBadge.textContent = data.coord;
-        if (spatialActiveImg) spatialActiveImg.src = data.img;
-        if (spatialOccTag) spatialOccTag.textContent = data.occTag;
-        if (spatialHeading) spatialHeading.textContent = data.heading;
-        if (spatialProse) spatialProse.textContent = data.prose;
-        if (spatialAtelier) spatialAtelier.textContent = data.atelier;
-        if (spatialFiber) spatialFiber.textContent = data.fiber;
-        if (spatialDualFit) spatialDualFit.textContent = data.dualFit;
-        if (spatialTariff) spatialTariff.textContent = data.tariff;
+        if (monolithCoordBadge) monolithCoordBadge.textContent = data.coord;
+        if (activeMonolithImg) activeMonolithImg.src = data.img;
+        if (monolithOccTag) monolithOccTag.textContent = data.occTag;
+        if (monolithHeading) monolithHeading.textContent = data.heading;
+        if (monolithProse) monolithProse.textContent = data.prose;
+        if (specAtelier) specAtelier.textContent = data.atelier;
+        if (specFiber) specFiber.textContent = data.fiber;
+        if (specDualFit) specDualFit.textContent = data.dualFit;
+        if (specTariff) specTariff.textContent = data.tariff;
       }
     }
 
-    vectorTabBtns.forEach(btn => {
+    vecTabs.forEach(btn => {
       btn.addEventListener('click', () => {
-        const idx = parseInt(btn.dataset.index, 10);
-        renderSpatialVector(idx);
+        renderSpecimen(parseInt(btn.dataset.index, 10));
       });
     });
 
-    orbitalCards.forEach(card => {
+    orbCards.forEach(card => {
       card.addEventListener('click', () => {
-        const idx = parseInt(card.dataset.index, 10);
-        renderSpatialVector(idx);
-        const stage = document.getElementById('spatialObjectStage');
-        if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        renderSpecimen(parseInt(card.dataset.index, 10));
+        document.getElementById('stageObjects')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
 
-    if (nextVectorBtn) {
-      nextVectorBtn.addEventListener('click', () => {
-        const nextIdx = (currentVectorIndex + 1) % spatialVectorsData.length;
-        renderSpatialVector(nextIdx);
+    if (btnNextSpecimen) {
+      btnNextSpecimen.addEventListener('click', () => {
+        renderSpecimen((currentVecIdx + 1) % spatialVectors.length);
       });
     }
 
-    // Collapse Spatial Coordinates directly to Chamber
-    if (collapseCoordsBtn) {
-      collapseCoordsBtn.addEventListener('click', () => {
-        const data = spatialVectorsData[currentVectorIndex];
-        const chamberCoordDisplay = document.getElementById('chamberCoordDisplay');
-        const monolithImg = document.getElementById('monolithImg');
-        const monolithLookTitle = document.getElementById('monolithLookTitle');
-        const chamberPriceDisplay = document.getElementById('chamberPriceDisplay');
-        const telemetryEvent = document.getElementById('telemetryEvent');
-
-        if (chamberCoordDisplay) chamberCoordDisplay.textContent = data.vectorCode;
-        if (monolithImg) monolithImg.src = data.img;
-        if (monolithLookTitle) monolithLookTitle.textContent = data.lookTitle;
-        if (chamberPriceDisplay) chamberPriceDisplay.textContent = `₹${data.price.toLocaleString('en-IN')}`;
-        if (telemetryEvent) telemetryEvent.textContent = data.eventKey;
-
-        const chamberSection = document.getElementById('spatialChamberSection');
-        if (chamberSection) {
-          chamberSection.scrollIntoView({ behavior: 'smooth' });
-          gsap.fromTo('#chamberStage', 
-            { boxShadow: '0 0 50px rgba(0, 102, 255, 0.7)' }, 
-            { boxShadow: '0 0 20px rgba(0, 102, 255, 0.2)', duration: 1.2 }
-          );
-        }
+    // Collapse coordinates from Monolith directly down to Chamber
+    if (btnCollapseSpecimen) {
+      btnCollapseSpecimen.addEventListener('click', () => {
+        const data = spatialVectors[currentVecIdx];
+        syncToChamber(data.eventKey, data.price, data.lookTitle, data.img, data.vectorCode);
+        document.getElementById('stageChamber')?.scrollIntoView({ behavior: 'smooth' });
       });
     }
 
-    // 4. EXPERIMENT 10-D: BLUEPRINT NODE WIREFRAME DISSECTION TOGGLE
-    const blueprintBtns = document.querySelectorAll('.blueprint-mode-btn');
-    const blueprintNodes = document.querySelectorAll('.blueprint-node');
-
-    const blueprintContent = {
-      'ARCH': [
-        { code: 'COORD 01 // DISPATCH', title: '24H PRIOR', text: 'Sealed temperature-controlled carton delivered to campus gate or hostel desk 24 hours prior to entrance.' },
-        { code: 'COORD 02 // SIZING', title: 'DUAL FIT', text: 'Primary size + sealed complimentary backup size included automatically. Zero sizing hesitation.' },
-        { code: 'COORD 03 // LIABILITY', title: '₹0 SHIELD', text: 'Accidental drink spills, dancefloor scuffs, and normal seam tension are 100% insured. Zero penalty fear.' },
-        { code: 'COORD 04 // RETURN', title: 'ZERO LAUNDRY', text: 'Slip unwashed garments into the prepaid return pouch. Handover at hostel desk Monday morning.' }
-      ],
-      'TELEMETRY': [
-        { code: 'NODE 01 // NORTH DU', title: 'MIRANDA GATE 2', text: 'Delivery Corridor: Chhatra Marg. Transit time: 14 mins from Kamla Nagar hub.' },
-        { code: 'NODE 02 // SOUTH DU', title: 'LSR ARCHWAY', text: 'Delivery Corridor: Lala Lajpat Rai Rd. Secure locker handover option active.' },
-        { code: 'NODE 03 // SONIPAT', title: 'ASHOKA QUAD', text: 'Delivery Corridor: Rajiv Gandhi Education City. Direct courier gate drop.' },
-        { code: 'NODE 04 // CHANAKYA', title: 'JMC ROTUNDA', text: 'Delivery Corridor: San Martin Marg. Dispatch window: 07:00 - 21:00 IST.' }
-      ],
-      'ESCROW': [
-        { code: 'SMART ESCROW // 01', title: '₹1,500 HOLD', text: 'Temporary authorization hold via UPI. Zero immediate debit from student account.' },
-        { code: 'SMART ESCROW // 02', title: 'TOKEN AUTH', text: 'Cryptographic tamper barcode scanned at hostel gate handover.' },
-        { code: 'SMART ESCROW // 03', title: 'INSTANT RELEASE', text: 'Automatic deposit release within 12 hours of courier pickup scan.' },
-        { code: 'SMART ESCROW // 04', title: 'DAMAGE ABSORB', text: '100% coverage on champagne splashes, grass stains, and seam elasticity.' }
-      ]
-    };
-
-    blueprintBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        blueprintBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const mode = btn.dataset.mode;
-        const data = blueprintContent[mode];
-
-        if (data && blueprintNodes.length >= 4) {
-          blueprintNodes.forEach((node, idx) => {
-            const item = data[idx];
-            if (item) {
-              const codeEl = node.querySelector('.node-code');
-              const titleEl = node.querySelector('.node-title');
-              const textEl = node.querySelector('.node-text');
-
-              if (!prefersReducedMotion) {
-                gsap.fromTo(node,
-                  { borderColor: '#0f38ff', opacity: 0.4 },
-                  { borderColor: 'var(--border-dark)', opacity: 1, duration: 0.35, delay: idx * 0.05, ease: 'power2.out' }
-                );
-              }
-
-              if (codeEl) codeEl.textContent = item.code;
-              if (titleEl) titleEl.textContent = item.title;
-              if (textEl) textEl.textContent = item.text;
-            }
-          });
-        }
-      });
-    });
-
-    // 5. EXPERIMENT 10-E: MULTI-DEPTH 3D PARALLAX ON HERO IMAGE INSTALLATION
-    const bleedFrame = document.querySelector('.bleed-photo-frame');
-    const spatialBadge = document.querySelector('.image-spatial-badge');
-    const stageBleedImage = document.querySelector('.stage-bleed-image');
-
-    if (stageBleedImage && bleedFrame && !prefersReducedMotion) {
-      stageBleedImage.addEventListener('mousemove', (e) => {
-        const rect = stageBleedImage.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-        gsap.to(bleedFrame, {
-          rotateY: x * 10,
-          rotateX: -y * 8,
-          duration: 0.3,
-          ease: 'power2.out'
+    // 5. STAGE 3: IMPOSSIBLE SECTION DIFFERENTIAL PARALLAX
+    if (!prefersReducedMotion) {
+      const kineticText = document.getElementById('impossibleKineticText');
+      if (kineticText) {
+        gsap.to(kineticText, {
+          xPercent: -35,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#stageImpossible',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
         });
+      }
 
-        if (spatialBadge) {
-          gsap.to(spatialBadge, {
-            x: x * 20,
-            y: y * 15,
-            duration: 0.25,
-            ease: 'power2.out'
-          });
-        }
-      });
-
-      stageBleedImage.addEventListener('mouseleave', () => {
-        gsap.to(bleedFrame, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power3.out' });
-        if (spatialBadge) {
-          gsap.to(spatialBadge, { x: 0, y: 0, duration: 0.5, ease: 'power3.out' });
-        }
-      });
+      const apertureWrap = document.getElementById('impossibleAperture');
+      if (apertureWrap) {
+        gsap.to(apertureWrap, {
+          yPercent: -22,
+          rotate: 2,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#stageImpossible',
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 1.5
+          }
+        });
+      }
     }
 
-    // 6. SPATIAL DIRECTORY VECTOR LINKAGE TO LEFT RAIL
-    const directoryNodes = document.querySelectorAll('.spatial-directory-node');
-    const directoryBusIndicator = document.getElementById('directoryBusIndicator');
-
-    directoryNodes.forEach((node) => {
-      node.addEventListener('mouseenter', () => {
-        const coord = node.dataset.coord;
-        const campus = node.dataset.campus;
-        if (coordStamp) {
-          coordStamp.textContent = `TARGET NODE // ${coord}`;
-          gsap.fromTo(coordStamp, { color: '#ffffff' }, { color: '#7a7974', duration: 0.5 });
-        }
-        if (directoryBusIndicator) {
-          directoryBusIndicator.textContent = `LOCKED // ${campus}`;
-        }
+    // 6. STAGE 4: SCATTERED OCCASION 3D GRAVITATIONAL INTERACTION
+    const occasionOrbs = document.querySelectorAll('.occasion-coordinate-orb');
+    occasionOrbs.forEach((orb) => {
+      orb.addEventListener('mouseenter', () => {
+        occasionOrbs.forEach(other => {
+          if (other !== orb) {
+            gsap.to(other, { opacity: 0.35, duration: 0.3 });
+          }
+        });
+        gsap.to(orb, { opacity: 1, duration: 0.25 });
       });
 
-      node.addEventListener('mouseleave', () => {
-        if (directoryBusIndicator) {
-          directoryBusIndicator.textContent = 'RAIL BUS: SYNCHRONIZED';
-        }
+      orb.addEventListener('mouseleave', () => {
+        gsap.to(occasionOrbs, { opacity: 1, duration: 0.35 });
+      });
+
+      orb.addEventListener('click', () => {
+        occasionOrbs.forEach(b => b.classList.remove('active'));
+        orb.classList.add('active');
+
+        const eventKey = orb.dataset.event;
+        const price = parseInt(orb.dataset.price, 10);
+        const look = orb.dataset.look;
+        const img = orb.dataset.img;
+        const coord = orb.dataset.coord;
+
+        syncToChamber(eventKey, price, look, img, coord);
+        document.getElementById('stageChamber')?.scrollIntoView({ behavior: 'smooth' });
       });
     });
 
-    // 7. SIGNATURE TRANSITION PROTOTYPE: SPATIAL DISPLACEMENT
-    const teleportBtn = document.getElementById('spatialTeleportBtn');
-    const overlay = document.getElementById('spatialOverlay');
-    const canvas = document.querySelector('.strange-canvas');
+    // 7. STAGE 5: THE TELEPORT MOMENT (SPATIAL DISPLACEMENT)
+    const btnTriggerTeleport = document.getElementById('btnTriggerTeleport');
+    const fieldA = document.getElementById('fieldA');
+    const fieldB = document.getElementById('fieldB');
+    let isFieldBSource = false;
 
-    let isDisplacing = false;
+    function triggerTeleport() {
+      if (prefersReducedMotion) {
+        isFieldBSource = !isFieldBSource;
+        fieldA?.classList.toggle('active', !isFieldBSource);
+        fieldB?.classList.toggle('active', isFieldBSource);
+        return;
+      }
 
-    function triggerSpatialDisplacement() {
-      if (isDisplacing) return;
-      isDisplacing = true;
+      gsap.timeline()
+        .to('.teleport-threshold-container', { scale: 0.94, rotateY: 10, opacity: 0.5, duration: 0.22, ease: 'power2.in' })
+        .call(() => {
+          isFieldBSource = !isFieldBSource;
+          fieldA?.classList.toggle('active', !isFieldBSource);
+          fieldB?.classList.toggle('active', isFieldBSource);
+          if (coordStamp) {
+            coordStamp.textContent = isFieldBSource 
+              ? 'COORD: 35.6595° N // 139.7004° E // TOKYO' 
+              : 'COORD: 28.5983° N // 77.2281° E // NCR';
+          }
+        })
+        .to('.teleport-threshold-container', { scale: 1, rotateY: 0, opacity: 1, duration: 0.38, ease: 'back.out(1.8)' });
+    }
 
-      const displaceTl = gsap.timeline({
-        onComplete: () => {
-          isDisplacing = false;
-        }
+    if (btnTriggerTeleport) {
+      btnTriggerTeleport.addEventListener('click', triggerTeleport);
+    }
+
+    const btnFloatTeleport = document.getElementById('btnFloatTeleport');
+    if (btnFloatTeleport) {
+      btnFloatTeleport.addEventListener('click', () => {
+        triggerTeleport();
+        document.getElementById('stageTeleport')?.scrollIntoView({ behavior: 'smooth' });
       });
-
-      displaceTl
-        .to(canvas, {
-          scale: 0.96,
-          rotationY: 6,
-          duration: 0.32,
-          ease: 'power3.inOut'
-        })
-        .to(overlay, {
-          opacity: 1,
-          duration: 0.22,
-          ease: 'power2.out'
-        }, '<')
-        .to(overlay, {
-          opacity: 0,
-          duration: 0.28,
-          delay: 0.18,
-          ease: 'power2.in'
-        })
-        .to(canvas, {
-          scale: 1,
-          rotationY: 0,
-          duration: 0.38,
-          ease: 'power3.out'
-        }, '-=0.15');
     }
 
-    if (teleportBtn) {
-      teleportBtn.addEventListener('click', triggerSpatialDisplacement);
-    }
+    // 8. STAGE 6: SPATIAL CONVERGENCE RENTAL CHAMBER
+    let chamberBasePrice = 1899;
+    let chamberAdder = 0;
+    let chamberEvent = 'FESTIVAL';
+    let chamberDuration = '03 DAYS';
+    let chamberFit = 'UK 8 [S] + SISTER UK 10 [SEALED]';
 
-    // 8. SPATIAL RENTAL CONVERGENCE CHAMBER INTERACTION
-    let currentChamberBase = 1899;
-    let currentChamberAdder = 0;
-    let selectedChamberCoord = 'X: 142.8 // Y: 891.2 // Z: 04.0';
-    let selectedChamberEvent = 'FESTIVAL';
-    let selectedChamberDuration = '03 DAYS';
-    let selectedChamberSize = 'UK 8';
-    let selectedChamberBackup = 'UK 10';
+    const chamberOccasionBtns = document.querySelectorAll('#chamberOccasionNodes .spatial-node-pill');
+    const chamberDurationBtns = document.querySelectorAll('#chamberDurationNodes .spatial-node-pill');
+    const chamberSizeBtns = document.querySelectorAll('#chamberSizeNodes .spatial-node-pill');
 
-    const chamberOccasionNodes = document.querySelectorAll('#chamberOccasionNodes .spatial-node-pill');
-    const chamberDurationNodes = document.querySelectorAll('#chamberDurationNodes .spatial-node-pill');
-    const chamberSizeNodes = document.querySelectorAll('#chamberSizeNodes .spatial-node-pill');
-
-    const chamberCoordDisplay = document.getElementById('chamberCoordDisplay');
-    const chamberPriceDisplay = document.getElementById('chamberPriceDisplay');
-    const telemetryEvent = document.getElementById('telemetryEvent');
-    const telemetryDuration = document.getElementById('telemetryDuration');
-    const telemetryFit = document.getElementById('telemetryFit');
-    const garmentMonolith = document.getElementById('garmentMonolith');
-    const monolithImg = document.getElementById('monolithImg');
-    const monolithLookTitle = document.getElementById('monolithLookTitle');
-    const collapseDimensionBtn = document.getElementById('collapseDimensionBtn');
-    const collapsedManifestBadge = document.getElementById('collapsedManifestBadge');
+    const chamberActiveVectorDisplay = document.getElementById('chamberActiveVectorDisplay');
+    const chamberLivePrice = document.getElementById('chamberLivePrice');
+    const telemEvent = document.getElementById('telemEvent');
+    const telemDuration = document.getElementById('telemDuration');
+    const telemFit = document.getElementById('telemFit');
+    const chamberGarmentBox = document.getElementById('chamberGarmentBox');
+    const chamberGarmentImg = document.getElementById('chamberGarmentImg');
+    const chamberGarmentTitle = document.getElementById('chamberGarmentTitle');
+    const chamberGarmentCode = document.getElementById('chamberGarmentCode');
+    const btnCommitConvergence = document.getElementById('btnCommitConvergence');
+    const chamberLockedManifest = document.getElementById('chamberLockedManifest');
 
     function updateChamberPrice() {
-      const total = currentChamberBase + currentChamberAdder;
-      if (chamberPriceDisplay) chamberPriceDisplay.textContent = `₹${total.toLocaleString('en-IN')}`;
+      const total = chamberBasePrice + chamberAdder;
+      if (chamberLivePrice) chamberLivePrice.textContent = `₹${total.toLocaleString('en-IN')}`;
     }
 
-    // Occasion node selection
-    chamberOccasionNodes.forEach((btn) => {
+    function syncToChamber(eventKey, price, look, img, coord) {
+      chamberEvent = eventKey;
+      chamberBasePrice = price;
+
+      chamberOccasionBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.event === eventKey);
+      });
+
+      if (chamberActiveVectorDisplay && coord) chamberActiveVectorDisplay.textContent = coord;
+      if (telemEvent) telemEvent.textContent = eventKey;
+      if (chamberGarmentTitle) chamberGarmentTitle.textContent = look;
+      if (chamberGarmentImg) chamberGarmentImg.src = img;
+
+      updateChamberPrice();
+
+      if (!prefersReducedMotion && chamberGarmentBox) {
+        gsap.fromTo(chamberGarmentBox,
+          { rotateY: 14, scale: 0.95 },
+          { rotateY: -6, scale: 1, duration: 0.45, ease: 'power3.out' }
+        );
+      }
+    }
+
+    // Occasion pill click
+    chamberOccasionBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        chamberOccasionNodes.forEach(b => b.classList.remove('active'));
+        chamberOccasionBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        selectedChamberEvent = btn.dataset.event;
-        selectedChamberCoord = btn.dataset.coord;
-        currentChamberBase = parseInt(btn.dataset.price, 10);
-        const rot = parseFloat(btn.dataset.rot);
+        chamberEvent = btn.dataset.event;
+        chamberBasePrice = parseInt(btn.dataset.price, 10);
         const look = btn.dataset.look;
         const img = btn.dataset.img;
+        const coord = btn.dataset.coord;
+        const rot = parseFloat(btn.dataset.rot);
 
-        if (chamberCoordDisplay) chamberCoordDisplay.textContent = selectedChamberCoord;
-        if (telemetryEvent) telemetryEvent.textContent = selectedChamberEvent;
-        if (monolithLookTitle) monolithLookTitle.textContent = look;
+        if (chamberActiveVectorDisplay) chamberActiveVectorDisplay.textContent = coord;
+        if (telemEvent) telemEvent.textContent = chamberEvent;
+        if (chamberGarmentTitle) chamberGarmentTitle.textContent = look;
+        if (chamberGarmentImg) chamberGarmentImg.src = img;
 
-        if (monolithImg) {
-          if (!prefersReducedMotion) {
-            gsap.to(monolithImg, {
-              opacity: 0.25,
-              duration: 0.15,
-              onComplete: () => {
-                monolithImg.src = img;
-                gsap.to(monolithImg, { opacity: 1, duration: 0.3 });
-              }
-            });
-          } else {
-            monolithImg.src = img;
-          }
-        }
-
-        if (garmentMonolith && !prefersReducedMotion) {
-          gsap.to(garmentMonolith, {
-            rotateY: rot,
-            rotateX: 3,
-            scale: 1.02,
-            duration: 0.45,
-            ease: 'power3.out'
-          });
+        if (!prefersReducedMotion && chamberGarmentBox) {
+          gsap.to(chamberGarmentBox, { rotateY: rot, scale: 1.02, duration: 0.4, ease: 'power2.out' });
         }
         updateChamberPrice();
       });
     });
 
-    // Duration node selection
-    chamberDurationNodes.forEach((btn) => {
+    // Duration pill click
+    chamberDurationBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        chamberDurationNodes.forEach(b => b.classList.remove('active'));
+        chamberDurationBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        selectedChamberDuration = `${btn.dataset.days} DAYS`;
-        currentChamberAdder = parseInt(btn.dataset.adder, 10);
-        if (telemetryDuration) telemetryDuration.textContent = selectedChamberDuration;
+        chamberDuration = `${btn.dataset.days} DAYS`;
+        chamberAdder = parseInt(btn.dataset.adder, 10);
+        if (telemDuration) telemDuration.textContent = chamberDuration;
         updateChamberPrice();
       });
     });
 
-    // Size node selection
-    chamberSizeNodes.forEach((btn) => {
+    // Size pill click
+    chamberSizeBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        chamberSizeNodes.forEach(b => b.classList.remove('active'));
+        chamberSizeBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        selectedChamberSize = btn.dataset.size;
-        selectedChamberBackup = btn.dataset.backup;
-        if (telemetryFit) telemetryFit.textContent = `${selectedChamberSize} + SISTER ${selectedChamberBackup} [SEALED]`;
+        chamberFit = `${btn.dataset.size} + SISTER ${btn.dataset.backup} [SEALED]`;
+        if (telemFit) telemFit.textContent = chamberFit;
       });
     });
 
-    // Collapse coordinate action
-    let isCollapsed = false;
-    if (collapseDimensionBtn && garmentMonolith) {
-      collapseDimensionBtn.addEventListener('click', () => {
-        if (isCollapsed) return;
-        isCollapsed = true;
+    // Signature Convergence Animation
+    let isChamberLocked = false;
+    if (btnCommitConvergence) {
+      btnCommitConvergence.addEventListener('click', () => {
+        if (isChamberLocked) return;
+        isChamberLocked = true;
 
         if (!prefersReducedMotion) {
           gsap.timeline()
-            .to('.chamber-controls-cluster .spatial-node-pill', {
-              scale: 0.95,
-              opacity: 0.5,
-              duration: 0.25
-            })
-            .to(garmentMonolith, {
+            .to('.chamber-axes-cluster .spatial-node-pill', { scale: 0.94, opacity: 0.45, duration: 0.25 })
+            .to('#chamberGarmentBox', {
               rotateY: 0,
               rotateX: 0,
               scale: 1.05,
               borderColor: '#0f38ff',
-              boxShadow: '0 0 50px rgba(15, 56, 255, 0.45)',
-              duration: 0.4,
+              boxShadow: '0 0 50px rgba(15, 56, 255, 0.5)',
+              duration: 0.45,
               ease: 'back.out(2)'
             }, '-=0.15')
             .call(() => {
-              collapseDimensionBtn.style.background = '#276749';
-              collapseDimensionBtn.style.borderColor = '#276749';
-              collapseDimensionBtn.innerHTML = `
+              btnCommitConvergence.style.background = '#059669';
+              btnCommitConvergence.style.borderColor = '#059669';
+              btnCommitConvergence.innerHTML = `
                 <span>✓ COORDINATES COLLAPSED // TEMPORARY POSSESSION LOCKED</span>
-                <span style="font-size: 0.62rem; color: #a3e635; letter-spacing: 0.15em;">ENTRY VECTOR CONFIRMED</span>
+                <span style="font-size: 0.62rem; color: #a7f3d0; letter-spacing: 0.15em;">ENTRY VECTOR CONFIRMED</span>
               `;
-              if (collapsedManifestBadge) {
-                collapsedManifestBadge.style.display = 'block';
-                gsap.from(collapsedManifestBadge, { opacity: 0, y: 8, duration: 0.3 });
+              if (chamberLockedManifest) {
+                chamberLockedManifest.style.display = 'block';
+                gsap.from(chamberLockedManifest, { opacity: 0, y: 10, duration: 0.35 });
               }
             });
         } else {
-          collapseDimensionBtn.style.background = '#276749';
-          collapseDimensionBtn.style.borderColor = '#276749';
-          collapseDimensionBtn.textContent = '✓ COORDINATES COLLAPSED // TEMPORARY POSSESSION LOCKED';
-          if (collapsedManifestBadge) collapsedManifestBadge.style.display = 'block';
+          btnCommitConvergence.style.background = '#059669';
+          btnCommitConvergence.style.borderColor = '#059669';
+          btnCommitConvergence.textContent = '✓ COORDINATES COLLAPSED // TEMPORARY POSSESSION LOCKED';
+          if (chamberLockedManifest) chamberLockedManifest.style.display = 'block';
         }
       });
+    }
+
+    // 9. STAGE 7: DIRECTORY ROW HOVER & COLOPHON TRACKING
+    const dirEntries = document.querySelectorAll('.spatial-directory-entry');
+    const dirStatusIndicator = document.getElementById('directoryStatusIndicator');
+
+    dirEntries.forEach(entry => {
+      entry.addEventListener('mouseenter', () => {
+        const coord = entry.dataset.coord;
+        const campus = entry.dataset.campus;
+        if (coordStamp) {
+          coordStamp.textContent = `TARGET // ${coord}`;
+          gsap.fromTo(coordStamp, { color: '#ffffff' }, { color: '#7a7974', duration: 0.4 });
+        }
+        if (dirStatusIndicator) dirStatusIndicator.textContent = `LOCKED // ${campus}`;
+      });
+
+      entry.addEventListener('mouseleave', () => {
+        if (dirStatusIndicator) dirStatusIndicator.textContent = 'RAIL BUS: SYNCHRONIZED';
+      });
+    });
+
+    if (!prefersReducedMotion) {
+      gsap.fromTo('#colophonTitle',
+        { letterSpacing: '-0.04em' },
+        {
+          letterSpacing: '0.06em',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#stageExit',
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 1
+          }
+        }
+      );
     }
   </script>
 </body>
