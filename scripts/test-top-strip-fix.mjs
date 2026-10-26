@@ -24,8 +24,8 @@ async function run() {
   const browser = await Browser.launch({ width: 1440, height: 900 });
   let overallPass = true;
 
-  for (const pageName of ['03-red-black-tokyo.html', '10-the-strange-one.html']) {
-    const prefix = pageName.startsWith('03') ? '03-chase' : '10-navigate';
+  for (const pageName of ['03-red-black-tokyo.html', '04-vertical-japanese-poster.html', '10-the-strange-one.html']) {
+    const prefix = pageName.startsWith('03') ? '03-chase' : (pageName.startsWith('04') ? '04-contemplate' : '10-navigate');
     console.log(`--- Testing ${pageName} ---`);
 
     for (const vp of viewports) {
@@ -43,7 +43,7 @@ async function run() {
         const overflowPx = Math.max(0, Math.max(scrollW, bodyScrollW) - docW);
 
         // Get all visible interactive links and text labels in nav
-        const items = Array.from(nav.querySelectorAll('a, span:not(.live-drop-dot):not(.spatial-node-dot)'))
+        const items = Array.from(nav.querySelectorAll('a, span:not(.live-drop-dot):not(.spatial-node-dot):not(.vermilion-dot)'))
           .filter(el => {
             const style = window.getComputedStyle(el);
             return style.display !== 'none' && style.visibility !== 'hidden' && el.offsetParent !== null;

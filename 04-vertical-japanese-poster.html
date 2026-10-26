@@ -70,100 +70,155 @@
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
       z-index: 9999;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
       padding: 0 1.5rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
+      box-sizing: border-box;
     }
 
-    .nav-left {
+    .nav-cluster-left {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 0.6rem;
+      white-space: nowrap;
+    }
+
+    .vermilion-seal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--vermilion);
+      color: var(--vermilion);
+      background: var(--vermilion-soft);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      line-height: 1;
+      border-radius: 1px;
+      flex-shrink: 0;
     }
 
     .exhibit-brand {
       font-family: 'Shippori Mincho', serif;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       color: var(--fg);
       text-decoration: none;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
+      white-space: nowrap;
     }
 
-    .exhibit-curator-mark {
+    .exhibit-world-tag {
+      font-family: 'Space Mono', monospace;
       font-size: 0.62rem;
       color: var(--ink-muted);
       letter-spacing: 0.08em;
-      border-left: 1px solid var(--line);
-      padding-left: 1rem;
+      border: 1px solid var(--line);
+      padding: 0.1rem 0.35rem;
+      background: rgba(255, 255, 255, 0.45);
+      white-space: nowrap;
+    }
+
+    .nav-cluster-center {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.64rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      padding: 0 1rem;
     }
 
     .vermilion-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       background: var(--vermilion);
       border-radius: 50%;
       display: inline-block;
+      flex-shrink: 0;
     }
 
-    .nav-itinerary {
-      display: none;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.62rem;
-      color: var(--ink-muted);
-      letter-spacing: 0.06em;
+    .exhibit-sep {
+      color: var(--line);
     }
 
-    @media (min-width: 1100px) {
-      .nav-itinerary {
-        display: flex;
-      }
-    }
-
-    .itinerary-step {
-      text-decoration: none;
-      color: var(--ink-muted);
-      transition: color 0.2s ease;
-    }
-
-    .itinerary-step:hover, .itinerary-step.active {
+    .exhibit-state-room {
       color: var(--fg);
       font-weight: 700;
     }
 
-    .switch-pills {
+    .nav-cluster-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      white-space: nowrap;
+    }
+
+    .nav-text-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 0.55rem;
+      height: 24px;
+      border: 1px solid var(--line);
+      color: var(--ink-muted);
+      background: rgba(255, 255, 255, 0.5);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-text-link:hover {
+      border-color: var(--vermilion);
+      color: var(--vermilion);
+      background: var(--vermilion-soft);
+    }
+
+    .nav-zone-group {
       display: flex;
       align-items: center;
       gap: 0.35rem;
     }
 
     .rooms-label {
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       color: var(--ink-muted);
-      margin-right: 0.35rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-zone-pills {
+      display: flex;
+      align-items: center;
+      gap: 3px;
     }
 
     .switch-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border: 1px solid var(--line);
       color: var(--ink-muted);
-      background: transparent;
-      font-size: 0.65rem;
+      background: rgba(255, 255, 255, 0.45);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
       border-radius: 1px;
       text-decoration: none;
       transition: all 0.2s ease;
+      flex-shrink: 0;
     }
 
     .switch-pill:hover {
@@ -172,16 +227,108 @@
     }
 
     .switch-pill.active {
-      background: var(--fg);
-      color: var(--bg);
+      background: var(--vermilion);
+      color: #ffffff;
       font-weight: 700;
-      border-color: var(--fg);
+      border-color: var(--vermilion);
+      box-shadow: 0 0 8px rgba(184, 58, 45, 0.3);
     }
 
+    /* Tablet breakpoint (769px to 1023px) */
+    @media (min-width: 769px) and (max-width: 1023px) {
+      .switch-nav {
+        padding: 0 1rem;
+      }
+      .nav-cluster-center {
+        padding: 0 0.5rem;
+        font-size: 0.6rem;
+      }
+      .nav-link-occasions {
+        display: none;
+      }
+      .rooms-label {
+        display: none;
+      }
+      .switch-pill {
+        width: 22px;
+        height: 22px;
+        font-size: 0.58rem;
+      }
+    }
+
+    /* Mobile breakpoint (<= 768px): Intentionally recomposed into clean 2-tier washi strip */
     @media (max-width: 768px) {
-      .exhibit-curator-mark { display: none; }
-      .switch-nav { padding: 0 0.85rem; }
-      .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
+      body {
+        padding-top: 68px !important;
+      }
+      .switch-nav {
+        height: 68px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 34px 34px;
+        padding: 0 0.85rem;
+      }
+      .nav-cluster-left {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .nav-cluster-left .exhibit-brand {
+        font-size: 0.72rem;
+      }
+      .nav-cluster-left .exhibit-world-tag {
+        font-size: 0.58rem;
+        padding: 0.05rem 0.25rem;
+      }
+      .nav-cluster-right {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .nav-link-occasions {
+        display: none;
+      }
+      .nav-text-link {
+        height: 22px;
+        font-size: 0.58rem;
+        padding: 0 0.45rem;
+      }
+      .nav-zone-group {
+        display: contents;
+      }
+      .rooms-label {
+        display: none;
+      }
+      .nav-cluster-center {
+        grid-column: 1;
+        grid-row: 2;
+        border-top: 1px solid var(--line-subtle);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.35rem;
+        padding: 0;
+        font-size: 0.58rem;
+      }
+      .nav-zone-pills {
+        grid-column: 2;
+        grid-row: 2;
+        border-top: 1px solid var(--line-subtle);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 3px;
+        height: 34px;
+      }
+      .switch-pill {
+        width: 22px;
+        height: 22px;
+        font-size: 0.58rem;
+      }
     }
 
     /* Gallery Exhibition Canvas */
@@ -1831,40 +1978,43 @@
 
   <!-- Curatorial Exhibition Header & Itinerary Tracker -->
   <nav class="switch-nav">
-    <div class="nav-left">
-      <a href="index.html" class="exhibit-brand">国立意匠展覧会 // WEDELIA</a>
-      <div class="exhibit-curator-mark">
-        <span class="vermilion-dot"></span>
-        <span>GALLERY IV: 墨黒と生絹 // TOKYO–DELHI REPOSITORY</span>
-      </div>
+    <div class="nav-cluster-left">
+      <span class="vermilion-seal">印</span>
+      <a href="index.html" class="exhibit-brand">国立意匠 // WEDELIA</a>
+      <span class="exhibit-world-tag">#04 CONTEMPLATE</span>
     </div>
 
-    <!-- Gallery Itinerary Steps -->
-    <div class="nav-itinerary">
+    <div class="nav-cluster-center">
+      <span class="vermilion-dot"></span>
+      <span class="exhibit-state-room" id="exhibitCuratorialState">ROOM 001 // ENTRANCE</span>
+      <span class="exhibit-sep">//</span>
+      <span>TEMPORARY CUSTODY</span>
+    </div>
+
+    <!-- Hidden itinerary anchors for script compatibility -->
+    <div class="nav-itinerary" style="display: none;" aria-hidden="true">
       <a href="#chamberEntrance" class="itinerary-step active">001 // ENTRANCE</a>
-      <span>·</span>
       <a href="#chamberKakemono" class="itinerary-step">002 // KAKEMONO</a>
-      <span>·</span>
       <a href="#chamberTextiles" class="itinerary-step">003 // TEXTILES</a>
-      <span>·</span>
       <a href="#chamberGarments" class="itinerary-step">004 // GARMENTS</a>
-      <span>·</span>
       <a href="#chamberArchive" class="itinerary-step">005 // ARCHIVE</a>
-      <span>·</span>
       <a href="#chamberCustody" class="itinerary-step">006 // CUSTODY</a>
-      <span>·</span>
-      <a href="#chamberCorridor" class="itinerary-step">007 // CORRIDOR & EXIT</a>
+      <a href="#chamberCorridor" class="itinerary-step">007 // CORRIDOR</a>
     </div>
 
-    <div class="switch-pills">
-      <a href="wardrobe.html" class="switch-pill" title="Shared Wardrobe">WARDROBE</a>
-      <a href="wardrobe.html#occasions" class="switch-pill" title="Occasions">OCCASIONS</a>
-      <span class="rooms-label">WORLDS:</span>
-      <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
-      <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
-      <a href="03-red-black-tokyo.html" class="switch-pill" title="Red / Black Tokyo">03</a>
-      <a href="04-vertical-japanese-poster.html" class="switch-pill active" title="Vertical Poster">04</a>
-      <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
+    <div class="nav-cluster-right">
+      <a href="wardrobe.html" class="nav-text-link" title="Shared Wardrobe">WARDROBE</a>
+      <a href="wardrobe.html#occasions" class="nav-text-link nav-link-occasions" title="Occasions">OCCASIONS</a>
+      <div class="nav-zone-group">
+        <span class="rooms-label">ROOMS:</span>
+        <div class="nav-zone-pills">
+          <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
+          <a href="02-brutalist-fashion-index.html" class="switch-pill" title="Brutalist Index">02</a>
+          <a href="03-red-black-tokyo.html" class="switch-pill" title="Red / Black Tokyo">03</a>
+          <a href="04-vertical-japanese-poster.html" class="switch-pill active" title="Vertical Poster">04</a>
+          <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -2578,6 +2728,17 @@
     // 1. Curatorial Itinerary Tracker (Room ScrollSpy)
     const navSections = document.querySelectorAll('section[id], div[id="chamberCorridor"]');
     const navLinks = document.querySelectorAll('.nav-itinerary .itinerary-step');
+    const curatorialStateEl = document.getElementById('exhibitCuratorialState');
+
+    const roomNames = {
+      chamberEntrance: 'ROOM 001 // ENTRANCE',
+      chamberKakemono: 'ROOM 002 // KAKEMONO',
+      chamberTextiles: 'ROOM 003 // TEXTILES',
+      chamberGarments: 'ROOM 004 // GARMENTS',
+      chamberArchive: 'ROOM 005 // ARCHIVE',
+      chamberCustody: 'ROOM 006 // CUSTODY',
+      chamberCorridor: 'ROOM 007 // CORRIDOR'
+    };
 
     window.addEventListener('scroll', () => {
       let currentId = '';
@@ -2595,8 +2756,11 @@
         navLinks.forEach(link => {
           link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
         });
+        if (curatorialStateEl && roomNames[currentId]) {
+          curatorialStateEl.textContent = roomNames[currentId];
+        }
       }
-    });
+    }, { passive: true });
 
     // 2. Room 001 Entrance Choreography (Depth Layers & Cables)
     if (!prefersReducedMotion) {
