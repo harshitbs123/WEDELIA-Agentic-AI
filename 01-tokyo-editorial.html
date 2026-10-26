@@ -532,74 +532,74 @@
       text-align: right;
     }
 
-    /* OCCASION HOVER IMAGE PREVIEW (JAPANESE EDITORIAL ANNOTATION) */
-    .occasion-float-preview {
+    /* CURSOR-FOLLOWING EDITORIAL IMAGE PREVIEW (JAPANESE EDITORIAL MARGINALIA) */
+    .cursor-preview {
       position: fixed;
       top: 0;
       left: 0;
       width: 160px;
+      height: 160px;
       pointer-events: none;
-      z-index: 1000;
+      z-index: 9999;
       opacity: 0;
       visibility: hidden;
+      transform-origin: center center;
       will-change: transform, opacity;
-      transform: translate3d(-9999px, -9999px, 0);
     }
-    .preview-inner-card {
-      background: #fdfcf9;
-      border: 1px solid var(--fg);
-      padding: 0.35rem 0.35rem 0.45rem;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16), 0 3px 8px rgba(0, 0, 0, 0.08);
+    .cursor-preview-frame {
       position: relative;
-    }
-    .preview-img-frame {
-      width: 100%;
-      height: 140px;
-      overflow: hidden;
-      position: relative;
-      background: #e8e4dc;
-      border: 1px solid rgba(0, 0, 0, 0.15);
-    }
-    .preview-img-frame img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      padding: 7px;
+      background: #f2eee5;
+      border: 1px solid rgba(20, 18, 15, 0.85);
+      box-shadow: 0 14px 28px rgba(20, 18, 15, 0.16), 0 3px 8px rgba(20, 18, 15, 0.08);
+      box-sizing: border-box;
+    }
+    .cursor-preview img {
+      width: 100%;
+      height: 100%;
       display: block;
-      filter: contrast(103%) saturate(96%);
+      object-fit: cover;
+      filter: contrast(102%) saturate(96%);
+      background: #dfdacd;
     }
-    .preview-vermilion-stamp {
+    .cursor-preview-seal {
       position: absolute;
-      top: 0.25rem;
-      right: 0.25rem;
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.58rem;
-      font-weight: 900;
-      color: #b32d20;
-      background: rgba(253, 252, 249, 0.94);
-      border: 1px solid #b32d20;
-      padding: 0 0.2rem;
-      line-height: 1.1;
-      letter-spacing: 0;
-    }
-    .preview-caption {
+      right: -8px;
+      bottom: -8px;
+      width: 26px;
+      height: 26px;
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding-top: 0.35rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      margin-top: 0.3rem;
-    }
-    .preview-kanji {
+      align-items: center;
+      justify-content: center;
+      background: #b51f25;
+      color: #f2eee5;
       font-family: 'Shippori Mincho', serif;
-      font-size: 0.65rem;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--fg);
+      border: 1px solid rgba(20, 18, 15, 0.85);
+      line-height: 1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      user-select: none;
     }
-    .preview-ref {
-      color: var(--muted);
-      letter-spacing: 0.05em;
+    .cursor-preview-code {
+      position: absolute;
+      left: 7px;
+      top: -18px;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      color: #171513;
+      white-space: nowrap;
+      font-weight: 700;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    @media (max-width: 768px) {
+      .cursor-preview {
+        display: none !important;
+      }
     }
 
     /* COMPOSITION 3: EDITOR'S NOTE & CULTURAL ESSAY */
@@ -1730,7 +1730,9 @@
       </div>
 
       <div class="giant-index-grid">
-        <a href="#fest" class="index-row"
+        <a href="#fest" class="index-row occasion-link"
+           data-preview="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg"
+           data-preview-code="WD / 01 // FESTIVAL"
            data-preview-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg"
            data-preview-pos="center 20%"
            data-preview-kanji="祝祭の夜"
@@ -1744,7 +1746,9 @@
           <div class="index-tariff">₹1,699 / 3D</div>
         </a>
 
-        <a href="#freshers" class="index-row"
+        <a href="#freshers" class="index-row occasion-link"
+           data-preview="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg"
+           data-preview-code="WD / 02 // FRESHERS"
            data-preview-img="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg"
            data-preview-pos="center 25%"
            data-preview-kanji="新歓の儀"
@@ -1758,7 +1762,9 @@
           <div class="index-tariff">₹1,299 / 3D</div>
         </a>
 
-        <a href="#farewell" class="index-row"
+        <a href="#farewell" class="index-row occasion-link"
+           data-preview="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg"
+           data-preview-code="WD / 03 // FAREWELL"
            data-preview-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg"
            data-preview-pos="center 15%"
            data-preview-kanji="門出の舞"
@@ -1772,7 +1778,9 @@
           <div class="index-tariff">₹2,899 / 3D</div>
         </a>
 
-        <a href="#concert" class="index-row"
+        <a href="#concert" class="index-row occasion-link"
+           data-preview="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg"
+           data-preview-code="WD / 04 // CONCERT"
            data-preview-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg"
            data-preview-pos="center 25%"
            data-preview-kanji="響宴の刻"
@@ -1786,7 +1794,9 @@
           <div class="index-tariff">₹1,499 / 3D</div>
         </a>
 
-        <a href="#date" class="index-row"
+        <a href="#date" class="index-row occasion-link"
+           data-preview="/assets/editorial/robe-longue-1983-12-1-1.jpg"
+           data-preview-code="WD / 05 // DATE NIGHT"
            data-preview-img="/assets/editorial/robe-longue-1983-12-1-1.jpg"
            data-preview-pos="center 15%"
            data-preview-kanji="密会の席"
@@ -2209,20 +2219,6 @@
       <span class="folio-kanji">次頁</span>
     </button>
 
-    <!-- Floating Japanese Editorial Occasion Hover Preview -->
-    <div class="occasion-float-preview" id="occasionFloatPreview" aria-hidden="true">
-      <div class="preview-inner-card">
-        <div class="preview-img-frame">
-          <img id="previewImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Occasion Look Preview">
-          <span class="preview-vermilion-stamp">印</span>
-        </div>
-        <div class="preview-caption">
-          <span class="preview-kanji" id="previewKanji">祝祭の夜</span>
-          <span class="preview-ref" id="previewRef">MOMENT 01 // FESTIVAL</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <script type="module">
@@ -2612,110 +2608,124 @@
       });
     }
 
-    // 5.5 OCCASION HOVER IMAGE PREVIEW INTERACTION (EDITORIAL PHOTO ANNOTATION)
-    const previewEl = document.getElementById('occasionFloatPreview');
-    const previewImg = document.getElementById('previewImg');
-    const previewKanji = document.getElementById('previewKanji');
-    const previewRef = document.getElementById('previewRef');
-    const indexRows = document.querySelectorAll('.index-row');
+    // 5.5 CURSOR-FOLLOWING OCCASION PROOF PREVIEW INTERACTION (JAPANESE EDITORIAL MARGINALIA)
+    const previewEl = document.getElementById('cursorPreview') || document.querySelector('.cursor-preview');
+    const previewImg = document.getElementById('cursorPreviewImg') || previewEl?.querySelector('img');
+    const previewCode = document.getElementById('cursorPreviewCode') || previewEl?.querySelector('.cursor-preview-code');
+    const occasionLinks = document.querySelectorAll('.occasion-link');
 
-    if (previewEl && indexRows.length > 0 && !prefersReducedMotion) {
-      const xTo = gsap.quickTo(previewEl, 'x', { duration: 0.22, ease: 'power2.out' });
-      const yTo = gsap.quickTo(previewEl, 'y', { duration: 0.22, ease: 'power2.out' });
+    if (previewEl && occasionLinks.length > 0 && !prefersReducedMotion) {
+      if (previewEl.parentElement !== document.body) {
+        document.body.appendChild(previewEl);
+      }
+      const PREVIEW_WIDTH = 160;
+      const PREVIEW_HEIGHT = 160;
+      const OFFSET = 18;
 
-      indexRows.forEach(row => {
-        // Desktop fine pointer hover
-        row.addEventListener('mouseenter', (e) => {
+      const xTo = gsap.quickTo(previewEl, 'x', {
+        duration: 0.35,
+        ease: 'power3.out'
+      });
+
+      const yTo = gsap.quickTo(previewEl, 'y', {
+        duration: 0.35,
+        ease: 'power3.out'
+      });
+
+      function calcCoordinates(e) {
+        // Dynamically flip offset if approaching right or bottom edge
+        const flipX = (e.clientX + OFFSET + PREVIEW_WIDTH > window.innerWidth - 10);
+        const flipY = (e.clientY + OFFSET + PREVIEW_HEIGHT > window.innerHeight - 10);
+
+        let targetX = flipX ? (e.clientX - PREVIEW_WIDTH - OFFSET) : (e.clientX + OFFSET);
+        let targetY = flipY ? (e.clientY - PREVIEW_HEIGHT - OFFSET) : (e.clientY + OFFSET);
+
+        // Clamping to stay safely within viewport bounds
+        targetX = Math.max(10, Math.min(window.innerWidth - PREVIEW_WIDTH - 10, targetX));
+        targetY = Math.max(10, Math.min(window.innerHeight - PREVIEW_HEIGHT - 10, targetY));
+
+        return { x: targetX, y: targetY };
+      }
+
+      occasionLinks.forEach(link => {
+        link.addEventListener('mouseenter', (e) => {
           if (window.innerWidth <= 768) return;
-          const imgSrc = row.dataset.previewImg;
-          const imgPos = row.dataset.previewPos || 'center center';
-          const kanji = row.dataset.previewKanji || '';
-          const ref = row.dataset.previewRef || '';
+
+          const image = link.dataset.preview || link.dataset.previewImg;
+          if (!image) return;
 
           if (previewImg) {
-            previewImg.src = imgSrc;
-            previewImg.style.objectPosition = imgPos;
+            previewImg.src = image;
+            if (link.dataset.previewPos) {
+              previewImg.style.objectPosition = link.dataset.previewPos;
+            }
           }
-          if (previewKanji) previewKanji.textContent = kanji;
-          if (previewRef) previewRef.textContent = ref;
+          if (previewCode && link.dataset.previewCode) {
+            previewCode.textContent = link.dataset.previewCode;
+          }
 
           previewEl.style.visibility = 'visible';
 
-          const targetX = Math.min(Math.max(e.clientX + 24, 16), window.innerWidth - 180);
-          const targetY = Math.min(Math.max(e.clientY - 75, 16), window.innerHeight - 190);
-
+          const coords = calcCoordinates(e);
           gsap.killTweensOf(previewEl);
-          gsap.set(previewEl, { x: targetX, y: targetY });
-          gsap.fromTo(previewEl,
-            { opacity: 0, scale: 0.88, rotation: -2 },
-            { opacity: 1, scale: 1, rotation: 0, duration: 0.28, ease: 'power2.out' }
+          xTo(coords.x);
+          yTo(coords.y);
+
+          gsap.fromTo(
+            previewEl,
+            {
+              opacity: 0,
+              scale: 0.82,
+              rotate: -3,
+              x: coords.x,
+              y: coords.y
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              rotate: 0,
+              x: coords.x,
+              y: coords.y,
+              duration: 0.28,
+              ease: 'power3.out'
+            }
           );
         });
 
-        row.addEventListener('mousemove', (e) => {
+        link.addEventListener('mousemove', (e) => {
           if (window.innerWidth <= 768) return;
-          const targetX = Math.min(Math.max(e.clientX + 24, 16), window.innerWidth - 180);
-          const targetY = Math.min(Math.max(e.clientY - 75, 16), window.innerHeight - 190);
-          xTo(targetX);
-          yTo(targetY);
+          const coords = calcCoordinates(e);
+          xTo(coords.x);
+          yTo(coords.y);
         });
 
-        row.addEventListener('mouseleave', () => {
+        link.addEventListener('mouseleave', () => {
           if (window.innerWidth <= 768) return;
+          gsap.killTweensOf(previewEl);
           gsap.to(previewEl, {
             opacity: 0,
-            scale: 0.94,
+            scale: 0.82,
+            rotate: -3,
             duration: 0.2,
-            ease: 'power2.in',
+            ease: 'power2.out',
             onComplete: () => {
               previewEl.style.visibility = 'hidden';
             }
           });
         });
-
-        // Mobile tap interaction
-        let mobileTimeout = null;
-        row.addEventListener('click', () => {
-          if (window.innerWidth <= 768) {
-            const rect = row.getBoundingClientRect();
-            if (previewImg) {
-              previewImg.src = row.dataset.previewImg;
-              previewImg.style.objectPosition = row.dataset.previewPos || 'center center';
-            }
-            if (previewKanji) previewKanji.textContent = row.dataset.previewKanji || '';
-            if (previewRef) previewRef.textContent = row.dataset.previewRef || '';
-
-            previewEl.style.visibility = 'visible';
-            const targetX = Math.max(16, window.innerWidth - 180);
-            const targetY = Math.min(Math.max(rect.top - 10, 16), window.innerHeight - 190);
-
-            gsap.killTweensOf(previewEl);
-            gsap.set(previewEl, { x: targetX, y: targetY });
-            gsap.fromTo(previewEl,
-              { opacity: 0, scale: 0.9, rotation: 1 },
-              { opacity: 1, scale: 1, rotation: 0, duration: 0.25, ease: 'power2.out' }
-            );
-
-            clearTimeout(mobileTimeout);
-            mobileTimeout = setTimeout(() => {
-              gsap.to(previewEl, {
-                opacity: 0,
-                scale: 0.95,
-                duration: 0.22,
-                ease: 'power2.in',
-                onComplete: () => {
-                  previewEl.style.visibility = 'hidden';
-                }
-              });
-            }, 2200);
-          }
-        });
       });
 
-      // Hide preview on mobile scroll immediately
+      // Hide preview if user scrolls away rapidly
       window.addEventListener('scroll', () => {
-        if (window.innerWidth <= 768 && previewEl.style.visibility === 'visible') {
-          gsap.set(previewEl, { opacity: 0, visibility: 'hidden' });
+        if (previewEl.style.visibility === 'visible') {
+          gsap.to(previewEl, {
+            opacity: 0,
+            duration: 0.15,
+            ease: 'power2.out',
+            onComplete: () => {
+              previewEl.style.visibility = 'hidden';
+            }
+          });
         }
       }, { passive: true });
     }
@@ -3163,6 +3173,15 @@
     });
   </script>
   <script type="module" src="/src/shared/rental-modal.js"></script>
+
+  <!-- Cursor-Following Japanese Editorial Occasion Proof Preview (Direct child of body to guarantee viewport coordinate mapping) -->
+  <div class="cursor-preview" id="cursorPreview" aria-hidden="true">
+    <div class="cursor-preview-frame">
+      <span class="cursor-preview-code" id="cursorPreviewCode">WD / 01 // FESTIVAL</span>
+      <img id="cursorPreviewImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Editorial Preview">
+      <span class="cursor-preview-seal">印</span>
+    </div>
+  </div>
 
 </body>
 </html>
