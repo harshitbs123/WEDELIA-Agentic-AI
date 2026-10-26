@@ -44,52 +44,249 @@
       color: #ffffff;
       border-bottom: 2px solid var(--border);
       z-index: 9999;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 1rem;
+      padding: 0 1.25rem;
       font-size: 0.68rem;
       letter-spacing: 0.06em;
+      font-family: 'Space Mono', monospace;
+      box-sizing: border-box;
     }
     .switch-nav a { color: #ffffff; text-decoration: none; }
+
+    .nav-cluster-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
     .terminal-tag {
       font-weight: 700;
       color: #ffffff;
-      background: #222222;
-      padding: 0.2rem 0.4rem;
-      border: 1px solid #444444;
-      margin-right: 0.5rem;
+      background: #1a1a1a;
+      padding: 0.15rem 0.4rem;
+      border: 1px solid #333333;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      border-radius: 0;
+      flex-shrink: 0;
     }
-    .terminal-sub {
+    .terminal-brand {
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      font-size: 0.72rem;
+      white-space: nowrap;
+    }
+    .terminal-world-code {
       color: #888888;
       font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      border: 1px solid #222222;
+      padding: 0.1rem 0.35rem;
+      background: #0a0a0a;
+      white-space: nowrap;
     }
-    .switch-pills { display: flex; align-items: center; gap: 0.25rem; }
+
+    .nav-cluster-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.64rem;
+      color: #888888;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      padding: 0 1rem;
+    }
+    .terminal-led-dot {
+      width: 6px;
+      height: 6px;
+      background: #00ff66;
+      box-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
+      border-radius: 0;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .terminal-state-text {
+      color: #cccccc;
+      font-weight: 700;
+    }
+    .terminal-state-sep {
+      color: #444444;
+    }
+    .terminal-protocol-text {
+      color: #777777;
+    }
+
+    .nav-cluster-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      white-space: nowrap;
+    }
+    .nav-text-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 0.55rem;
+      height: 24px;
+      border: 1px solid #333333;
+      color: #cccccc;
+      background: #111111;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border-radius: 0;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .nav-text-link:hover {
+      border-color: #ffffff;
+      color: #ffffff;
+      background: #222222;
+    }
+    .nav-zone-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
     .terminal-sector-label {
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       color: #666666;
-      margin-right: 0.35rem;
+      letter-spacing: 0.08em;
+    }
+    .nav-zone-pills {
+      display: flex;
+      align-items: center;
+      gap: 3px;
     }
     .switch-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border: 1px solid #333333;
       color: #888888;
       background: #111111;
       font-weight: 700;
+      font-size: 0.62rem;
       border-radius: 0;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
     }
-    .switch-pill:hover { border-color: #888888; color: #ffffff; }
-    .switch-pill.active { background: #ffffff; color: #000000; font-weight: 800; border-color: #ffffff; }
+    .switch-pill:hover {
+      border-color: #888888;
+      color: #ffffff;
+    }
+    .switch-pill.active {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 800;
+      border-color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Tablet breakpoint (769px to 1023px) */
+    @media (min-width: 769px) and (max-width: 1023px) {
+      .switch-nav {
+        padding: 0 1rem;
+      }
+      .nav-cluster-center {
+        padding: 0 0.5rem;
+        font-size: 0.6rem;
+      }
+      .nav-link-occasions {
+        display: none;
+      }
+      .terminal-sector-label {
+        display: none;
+      }
+      .switch-pill {
+        width: 22px;
+        height: 22px;
+        font-size: 0.58rem;
+      }
+    }
+
+    /* Mobile breakpoint (<= 768px): Proven 2-tier institutional strip */
     @media (max-width: 768px) {
-      .switch-nav .terminal-sub { display: none; }
-      .switch-nav .terminal-sector-label { display: none; }
-      .switch-nav { padding: 0 0.5rem; }
-      .switch-pills { gap: 2px; }
-      .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
+      body {
+        padding-top: 68px !important;
+      }
+      .switch-nav {
+        height: 68px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 34px 34px;
+        padding: 0 0.85rem;
+      }
+      .nav-cluster-left {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .nav-cluster-left .terminal-brand {
+        font-size: 0.68rem;
+      }
+      .nav-cluster-left .terminal-world-code {
+        font-size: 0.58rem;
+        padding: 0.05rem 0.25rem;
+      }
+      .nav-cluster-right {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .nav-link-occasions {
+        display: none;
+      }
+      .nav-text-link {
+        height: 22px;
+        font-size: 0.58rem;
+        padding: 0 0.45rem;
+      }
+      .nav-zone-group {
+        display: contents;
+      }
+      .terminal-sector-label {
+        display: none;
+      }
+      .nav-cluster-center {
+        grid-column: 1;
+        grid-row: 2;
+        border-top: 1px solid #222222;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.35rem;
+        padding: 0;
+        font-size: 0.58rem;
+      }
+      .nav-zone-pills {
+        grid-column: 2;
+        grid-row: 2;
+        border-top: 1px solid #222222;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 3px;
+        height: 34px;
+      }
+      .switch-pill {
+        width: 22px;
+        height: 22px;
+        font-size: 0.58rem;
+      }
     }
 
     /* Index Register Direct Jump Links */
@@ -1648,13 +1845,21 @@
 
   <!-- Institutional Archive Terminal Status Bar -->
   <nav class="switch-nav">
-    <div style="display: flex; align-items: center;">
-      <a href="index.html" class="terminal-tag">SYS.REGISTRY // WDL-02</a>
-      <span class="terminal-sub">ARCHIVE MACHINE PROTOCOL ISO-9042 // INVENTORY 2026</span>
+    <div class="nav-cluster-left">
+      <span class="terminal-tag">SYS.REG</span>
+      <a href="index.html" class="terminal-brand">WEDELIA // FASHION INDEX</a>
+      <span class="terminal-world-code">#02</span>
     </div>
 
-    <!-- Direct Index Register Jump Points -->
-    <div class="index-jump-nav">
+    <div class="nav-cluster-center">
+      <span class="terminal-led-dot"></span>
+      <span class="terminal-state-text">REGISTRY: ACTIVE</span>
+      <span class="terminal-state-sep">//</span>
+      <span class="terminal-protocol-text">ISO-9042 ARCHIVE</span>
+    </div>
+
+    <!-- Hidden jump anchors for semantic navigation -->
+    <div class="index-jump-nav" style="display: none;" aria-hidden="true">
       <a href="#activeArchiveIndex" class="index-jump-link">[0001] SPECIMEN</a>
       <a href="#masterOccasionMatrix" class="index-jump-link">[0002] MATRIX</a>
       <a href="#masterSpecimenInspector" class="index-jump-link">[0003] INSPECTION</a>
@@ -1662,15 +1867,19 @@
       <a href="#documentSection" class="index-jump-link">[0005] VOUCHER</a>
     </div>
 
-    <div class="switch-pills">
-      <a href="wardrobe.html" class="switch-pill" title="Shared Wardrobe">WARDROBE</a>
-      <a href="wardrobe.html#occasions" class="switch-pill" title="Occasions">OCCASIONS</a>
-      <span class="terminal-sector-label">SYSTEM NODES:</span>
-      <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
-      <a href="02-brutalist-fashion-index.html" class="switch-pill active" title="Brutalist Index">02</a>
-      <a href="03-red-black-tokyo.html" class="switch-pill" title="Red / Black Tokyo">03</a>
-      <a href="04-vertical-japanese-poster.html" class="switch-pill" title="Vertical Poster">04</a>
-      <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
+    <div class="nav-cluster-right">
+      <a href="wardrobe.html" class="nav-text-link" title="Shared Wardrobe">WARDROBE</a>
+      <a href="wardrobe.html#occasions" class="nav-text-link nav-link-occasions" title="Occasions">OCCASIONS</a>
+      <div class="nav-zone-group">
+        <span class="terminal-sector-label">NODES:</span>
+        <div class="nav-zone-pills">
+          <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
+          <a href="02-brutalist-fashion-index.html" class="switch-pill active" title="Brutalist Index">02</a>
+          <a href="03-red-black-tokyo.html" class="switch-pill" title="Red / Black Tokyo">03</a>
+          <a href="04-vertical-japanese-poster.html" class="switch-pill" title="Vertical Poster">04</a>
+          <a href="10-the-strange-one.html" class="switch-pill" title="The Strange One">10</a>
+        </div>
+      </div>
     </div>
   </nav>
 
