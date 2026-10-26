@@ -17,7 +17,7 @@ async function run() {
     {
       name: 'FESTIVAL',
       selector: '.occasion-link[href="#fest"]',
-      expectedImg: 'festival.jpg'
+      expectedImg: 'festival.webp'
     },
     {
       name: 'FRESHERS',
@@ -27,7 +27,7 @@ async function run() {
     {
       name: 'FAREWELL',
       selector: '.occasion-link[href="#farewell"]',
-      expectedImg: 'farewell.jpg'
+      expectedImg: 'farewell.webp'
     },
     {
       name: 'CONCERT',
@@ -37,7 +37,7 @@ async function run() {
     {
       name: 'DATE NIGHT',
       selector: '.occasion-link[href="#date"]',
-      expectedImg: 'date-night.jpg'
+      expectedImg: 'date'
     }
   ];
 
@@ -48,6 +48,24 @@ async function run() {
     console.log('\n[1] Testing Desktop 1440x900 Minimal Photographic Preview...');
     const page = await browser.newPage({ width: 1440, height: 900, mobile: false });
     await page.goto('http://127.0.0.1:5173/01-tokyo-editorial.html', { settleMs: 1200 });
+
+    // Verify maxi dress replacement
+    const maxiDressState = await page.eval(`(() => {
+      const img = document.querySelector('.monument-photo-stage img');
+      return {
+        src: img?.src,
+        naturalWidth: img?.naturalWidth,
+        loaded: img ? img.naturalWidth > 0 : false
+      };
+    })()`);
+    console.log('Maxi dress monument plate state:', maxiDressState);
+    if (!maxiDressState.src || !maxiDressState.src.includes('maxi-dress-with-a-japanese-floral-print')) {
+      throw new Error(`Maxi dress not found in monument photo stage! src: ${maxiDressState.src}`);
+    }
+    if (!maxiDressState.loaded) {
+      throw new Error(`Maxi dress image failed to load! naturalWidth: ${maxiDressState.naturalWidth}`);
+    }
+    console.log('✓ Maxi dress replaced Christian Dior gown in monument stage and loaded successfully!');
 
     // Scroll to occasion index
     await page.eval(`(() => {
