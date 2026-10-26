@@ -10,39 +10,34 @@ async function sleep(ms) {
 }
 
 async function run() {
-  console.log('=== WEDELIA #01: CURSOR-FOLLOWING EDITORIAL IMAGE PREVIEW VERIFICATION ===');
+  console.log('=== WEDELIA #01: RADICAL MINIMAL CURSOR IMAGE PREVIEW VERIFICATION ===');
   const browser = await Browser.launch({ width: 1440, height: 900 });
 
   const occasions = [
     {
       name: 'FESTIVAL',
       selector: '.occasion-link[href="#fest"]',
-      expectedImg: 'custo-barcelona-at-the-brandery-summer-edition.jpg',
-      expectedCode: 'WD / 01 // FESTIVAL'
+      expectedImg: 'festival.jpg'
     },
     {
       name: 'FRESHERS',
       selector: '.occasion-link[href="#freshers"]',
-      expectedImg: 'strapless-evening-dresses-with-hoop-skirt-rear.jpg',
-      expectedCode: 'WD / 02 // FRESHERS'
+      expectedImg: 'freshers.jpg'
     },
     {
       name: 'FAREWELL',
       selector: '.occasion-link[href="#farewell"]',
-      expectedImg: 'christian-dior-evening-gown-called-zemire-fall.jpg',
-      expectedCode: 'WD / 03 // FAREWELL'
+      expectedImg: 'farewell.jpg'
     },
     {
       name: 'CONCERT',
       selector: '.occasion-link[href="#concert"]',
-      expectedImg: 'two-jean-desses-evening-gowns-1951.jpg',
-      expectedCode: 'WD / 04 // CONCERT'
+      expectedImg: 'concert.jpg'
     },
     {
       name: 'DATE NIGHT',
       selector: '.occasion-link[href="#date"]',
-      expectedImg: 'robe-longue-1983-12-1-1.jpg',
-      expectedCode: 'WD / 05 // DATE NIGHT'
+      expectedImg: 'date-night.jpg'
     }
   ];
 
@@ -50,7 +45,7 @@ async function run() {
     // -------------------------------------------------------------
     // 1. DESKTOP 1440px INTERACTION & MOTION CHECKS
     // -------------------------------------------------------------
-    console.log('\n[1] Testing Desktop 1440x900...');
+    console.log('\n[1] Testing Desktop 1440x900 Minimal Photographic Preview...');
     const page = await browser.newPage({ width: 1440, height: 900, mobile: false });
     await page.goto('http://127.0.0.1:5173/01-tokyo-editorial.html', { settleMs: 1200 });
 
@@ -87,11 +82,13 @@ async function run() {
       const state = await page.eval(`(() => {
         const preview = document.getElementById('cursorPreview');
         const img = document.getElementById('cursorPreviewImg');
-        const code = document.getElementById('cursorPreviewCode');
+        const frame = preview?.querySelector('.cursor-preview-frame');
+        const code = preview?.querySelector('.cursor-preview-code') || document.getElementById('cursorPreviewCode');
         const seal = preview?.querySelector('.cursor-preview-seal');
         if (!preview || !img) return { error: 'Preview elements missing' };
         const cs = window.getComputedStyle(preview);
-        const rect = preview.getBoundingClientRect();
+        const imgCs = window.getComputedStyle(img);
+        const b = preview.getBoundingClientRect();
         return {
           visibility: preview.style.visibility || cs.visibility,
           opacity: parseFloat(cs.opacity),
@@ -100,9 +97,13 @@ async function run() {
           imgSrc: img.currentSrc || img.src,
           imgLoaded: img.naturalWidth > 0,
           imgNaturalWidth: img.naturalWidth,
-          codeText: code?.textContent?.trim(),
-          sealText: seal?.textContent?.trim(),
-          rect: { top: rect.top, left: rect.left, right: rect.right, bottom: rect.bottom, width: rect.width, height: rect.height },
+          imgNaturalHeight: img.naturalHeight,
+          hasFrame: !!frame,
+          hasCode: !!code,
+          hasSeal: !!seal,
+          previewWidth: Math.round(b.width),
+          previewHeight: Math.round(b.height),
+          rect: { top: b.top, left: b.left, right: b.right, bottom: b.bottom, width: b.width, height: b.height },
           viewport: { width: window.innerWidth, height: window.innerHeight }
         };
       })()`);
@@ -112,8 +113,11 @@ async function run() {
         opacity: state.opacity,
         imgSrc: state.imgSrc.split('/').pop(),
         imgLoaded: state.imgLoaded,
-        codeText: state.codeText,
-        sealText: state.sealText,
+        dims: `${state.imgNaturalWidth}x${state.imgNaturalHeight}`,
+        previewSize: `${state.previewWidth}x${state.previewHeight}`,
+        hasFrame: state.hasFrame,
+        hasCode: state.hasCode,
+        hasSeal: state.hasSeal,
         pointerEvents: state.pointerEvents,
         previewPosition: { left: Math.round(state.rect.left), top: Math.round(state.rect.top) }
       });
@@ -127,11 +131,15 @@ async function run() {
       if (!state.imgLoaded) {
         throw new Error(`Image failed to load for ${occ.name}! naturalWidth = 0`);
       }
-      if (state.codeText !== occ.expectedCode) {
-        throw new Error(`Expected code "${occ.expectedCode}", got "${state.codeText}"`);
+      if (state.hasFrame || state.hasCode || state.hasSeal) {
+        throw new Error(`Violates minimal photographic object rule! Card frame: ${state.hasFrame}, Code: ${state.hasCode}, Seal: ${state.hasSeal}`);
       }
       if (state.pointerEvents !== 'none') {
         throw new Error(`Preview pointer-events must be 'none' to avoid blocking clicks! Got: ${state.pointerEvents}`);
+      }
+      // Check portrait proportions (~170x225)
+      if (Math.abs(state.previewWidth - 170) > 10 || Math.abs(state.previewHeight - 225) > 10) {
+        throw new Error(`Expected portrait preview ~170x225, got ${state.previewWidth}x${state.previewHeight}`);
       }
 
       // Capture screenshot of each hovered occasion
@@ -319,7 +327,7 @@ async function run() {
     }
 
     console.log('\n=============================================================');
-    console.log('✓ ALL 14 VERIFICATION CRITERIA PASSED FLAWLESSLY!');
+    console.log('✓ ALL RADICAL MINIMAL PREVIEW VERIFICATION CRITERIA PASSED FLAWLESSLY!');
     console.log('=============================================================');
 
   } finally {

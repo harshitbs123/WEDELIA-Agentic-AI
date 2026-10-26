@@ -8,6 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/shared/rental-modal.css">
+  <link rel="preload" as="image" href="/assets/occasion/festival.jpg">
+  <link rel="preload" as="image" href="/assets/occasion/freshers.jpg">
+  <link rel="preload" as="image" href="/assets/occasion/farewell.jpg">
+  <link rel="preload" as="image" href="/assets/occasion/concert.jpg">
+  <link rel="preload" as="image" href="/assets/occasion/date-night.jpg">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
@@ -532,69 +537,35 @@
       text-align: right;
     }
 
-    /* CURSOR-FOLLOWING EDITORIAL IMAGE PREVIEW (JAPANESE EDITORIAL MARGINALIA) */
+    /* CURSOR-FOLLOWING EDITORIAL IMAGE PREVIEW (MINIMAL PHOTOGRAPHIC OBJECT) */
     .cursor-preview {
       position: fixed;
       top: 0;
       left: 0;
-      width: 160px;
-      height: 160px;
+      width: 170px;
+      height: 225px;
       pointer-events: none;
       z-index: 9999;
       opacity: 0;
       visibility: hidden;
+      overflow: hidden;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      margin: 0;
       transform-origin: center center;
       will-change: transform, opacity;
-    }
-    .cursor-preview-frame {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      padding: 7px;
-      background: #f2eee5;
-      border: 1px solid rgba(20, 18, 15, 0.85);
-      box-shadow: 0 14px 28px rgba(20, 18, 15, 0.16), 0 3px 8px rgba(20, 18, 15, 0.08);
-      box-sizing: border-box;
     }
     .cursor-preview img {
       width: 100%;
       height: 100%;
       display: block;
       object-fit: cover;
-      filter: contrast(102%) saturate(96%);
-      background: #dfdacd;
-    }
-    .cursor-preview-seal {
-      position: absolute;
-      right: -8px;
-      bottom: -8px;
-      width: 26px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #b51f25;
-      color: #f2eee5;
-      font-family: 'Shippori Mincho', serif;
-      font-size: 13px;
-      font-weight: 700;
-      border: 1px solid rgba(20, 18, 15, 0.85);
-      line-height: 1;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      user-select: none;
-    }
-    .cursor-preview-code {
-      position: absolute;
-      left: 7px;
-      top: -18px;
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.12em;
-      color: #171513;
-      white-space: nowrap;
-      font-weight: 700;
-      text-transform: uppercase;
-      user-select: none;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      filter: contrast(102%) saturate(98%);
     }
     @media (max-width: 768px) {
       .cursor-preview {
@@ -1731,12 +1702,9 @@
 
       <div class="giant-index-grid">
         <a href="#fest" class="index-row occasion-link"
-           data-preview="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg"
-           data-preview-code="WD / 01 // FESTIVAL"
-           data-preview-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg"
-           data-preview-pos="center 20%"
-           data-preview-kanji="祝祭の夜"
-           data-preview-ref="MOMENT 01 // FESTIVAL">
+           data-preview="/assets/occasion/festival.jpg"
+           data-preview-img="/assets/occasion/festival.jpg"
+           data-preview-pos="center 20%">
           <div class="index-serial">01</div>
           <div class="index-title-group">
             <span class="index-name-en">FESTIVAL</span>
@@ -1747,12 +1715,9 @@
         </a>
 
         <a href="#freshers" class="index-row occasion-link"
-           data-preview="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg"
-           data-preview-code="WD / 02 // FRESHERS"
-           data-preview-img="/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg"
-           data-preview-pos="center 25%"
-           data-preview-kanji="新歓の儀"
-           data-preview-ref="MOMENT 02 // FRESHERS">
+           data-preview="/assets/occasion/freshers.jpg"
+           data-preview-img="/assets/occasion/freshers.jpg"
+           data-preview-pos="center 25%">
           <div class="index-serial">02</div>
           <div class="index-title-group">
             <span class="index-name-en">FRESHERS</span>
@@ -1763,12 +1728,9 @@
         </a>
 
         <a href="#farewell" class="index-row occasion-link"
-           data-preview="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg"
-           data-preview-code="WD / 03 // FAREWELL"
-           data-preview-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg"
-           data-preview-pos="center 15%"
-           data-preview-kanji="門出の舞"
-           data-preview-ref="MOMENT 03 // FAREWELL">
+           data-preview="/assets/occasion/farewell.jpg"
+           data-preview-img="/assets/occasion/farewell.jpg"
+           data-preview-pos="center 15%">
           <div class="index-serial">03</div>
           <div class="index-title-group">
             <span class="index-name-en">FAREWELL</span>
@@ -1779,12 +1741,9 @@
         </a>
 
         <a href="#concert" class="index-row occasion-link"
-           data-preview="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg"
-           data-preview-code="WD / 04 // CONCERT"
-           data-preview-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg"
-           data-preview-pos="center 25%"
-           data-preview-kanji="響宴の刻"
-           data-preview-ref="MOMENT 04 // CONCERT">
+           data-preview="/assets/occasion/concert.jpg"
+           data-preview-img="/assets/occasion/concert.jpg"
+           data-preview-pos="center 25%">
           <div class="index-serial">04</div>
           <div class="index-title-group">
             <span class="index-name-en">CONCERT</span>
@@ -1795,12 +1754,9 @@
         </a>
 
         <a href="#date" class="index-row occasion-link"
-           data-preview="/assets/editorial/robe-longue-1983-12-1-1.jpg"
-           data-preview-code="WD / 05 // DATE NIGHT"
-           data-preview-img="/assets/editorial/robe-longue-1983-12-1-1.jpg"
-           data-preview-pos="center 15%"
-           data-preview-kanji="密会の席"
-           data-preview-ref="MOMENT 05 // DATE NIGHT">
+           data-preview="/assets/occasion/date-night.jpg"
+           data-preview-img="/assets/occasion/date-night.jpg"
+           data-preview-pos="center 15%">
           <div class="index-serial">05</div>
           <div class="index-title-group">
             <span class="index-name-en">DATE NIGHT</span>
@@ -2608,27 +2564,39 @@
       });
     }
 
-    // 5.5 CURSOR-FOLLOWING OCCASION PROOF PREVIEW INTERACTION (JAPANESE EDITORIAL MARGINALIA)
+    // 5.5 CURSOR-FOLLOWING OCCASION PHOTOGRAPHIC PREVIEW (MINIMAL ART-DIRECTED FLOATING OBJECT)
     const previewEl = document.getElementById('cursorPreview') || document.querySelector('.cursor-preview');
     const previewImg = document.getElementById('cursorPreviewImg') || previewEl?.querySelector('img');
-    const previewCode = document.getElementById('cursorPreviewCode') || previewEl?.querySelector('.cursor-preview-code');
     const occasionLinks = document.querySelectorAll('.occasion-link');
 
     if (previewEl && occasionLinks.length > 0 && !prefersReducedMotion) {
       if (previewEl.parentElement !== document.body) {
         document.body.appendChild(previewEl);
       }
-      const PREVIEW_WIDTH = 160;
-      const PREVIEW_HEIGHT = 160;
-      const OFFSET = 18;
+      const PREVIEW_WIDTH = 170;
+      const PREVIEW_HEIGHT = 225;
+      const OFFSET = 20;
+
+      // Preload occasion campaign imagery for instant responsive hover
+      const occasionImgs = [
+        '/assets/occasion/festival.jpg',
+        '/assets/occasion/freshers.jpg',
+        '/assets/occasion/farewell.jpg',
+        '/assets/occasion/concert.jpg',
+        '/assets/occasion/date-night.jpg'
+      ];
+      occasionImgs.forEach(src => {
+        const im = new Image();
+        im.src = src;
+      });
 
       const xTo = gsap.quickTo(previewEl, 'x', {
-        duration: 0.35,
+        duration: 0.32,
         ease: 'power3.out'
       });
 
       const yTo = gsap.quickTo(previewEl, 'y', {
-        duration: 0.35,
+        duration: 0.32,
         ease: 'power3.out'
       });
 
@@ -2641,11 +2609,14 @@
         let targetY = flipY ? (e.clientY - PREVIEW_HEIGHT - OFFSET) : (e.clientY + OFFSET);
 
         // Clamping to stay safely within viewport bounds
-        targetX = Math.max(10, Math.min(window.innerWidth - PREVIEW_WIDTH - 10, targetX));
-        targetY = Math.max(10, Math.min(window.innerHeight - PREVIEW_HEIGHT - 10, targetY));
+        targetX = Math.max(8, Math.min(window.innerWidth - PREVIEW_WIDTH - 8, targetX));
+        targetY = Math.max(8, Math.min(window.innerHeight - PREVIEW_HEIGHT - 8, targetY));
 
         return { x: targetX, y: targetY };
       }
+
+      let isPreviewActive = false;
+      let currentActiveLink = null;
 
       occasionLinks.forEach(link => {
         link.addEventListener('mouseenter', (e) => {
@@ -2654,62 +2625,88 @@
           const image = link.dataset.preview || link.dataset.previewImg;
           if (!image) return;
 
-          if (previewImg) {
-            previewImg.src = image;
-            if (link.dataset.previewPos) {
-              previewImg.style.objectPosition = link.dataset.previewPos;
-            }
-          }
-          if (previewCode && link.dataset.previewCode) {
-            previewCode.textContent = link.dataset.previewCode;
-          }
-
-          previewEl.style.visibility = 'visible';
-
           const coords = calcCoordinates(e);
-          gsap.killTweensOf(previewEl);
-          xTo(coords.x);
-          yTo(coords.y);
 
-          gsap.fromTo(
-            previewEl,
-            {
-              opacity: 0,
-              scale: 0.82,
-              rotate: -3,
-              x: coords.x,
-              y: coords.y
-            },
-            {
-              opacity: 1,
-              scale: 1,
-              rotate: 0,
-              x: coords.x,
-              y: coords.y,
-              duration: 0.28,
-              ease: 'power3.out'
+          if (!isPreviewActive) {
+            isPreviewActive = true;
+            currentActiveLink = link;
+
+            if (previewImg) {
+              previewImg.src = image;
+              previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
             }
-          );
+
+            previewEl.style.visibility = 'visible';
+
+            gsap.killTweensOf(previewEl);
+            gsap.set(previewEl, { x: coords.x, y: coords.y });
+            xTo(coords.x);
+            yTo(coords.y);
+
+            gsap.fromTo(
+              previewEl,
+              {
+                opacity: 0,
+                scale: 0.9,
+                x: coords.x,
+                y: coords.y
+              },
+              {
+                opacity: 1,
+                scale: 1,
+                x: coords.x,
+                y: coords.y,
+                duration: 0.22,
+                ease: 'power3.out'
+              }
+            );
+          } else {
+            // Direct transfer between occasion links
+            currentActiveLink = link;
+            if (previewImg) {
+              const currentSrc = previewImg.getAttribute('src');
+              if (currentSrc !== image) {
+                previewImg.src = image;
+                previewImg.style.objectPosition = link.dataset.previewPos || 'center center';
+                gsap.fromTo(
+                  previewImg,
+                  { opacity: 0.45 },
+                  { opacity: 1, duration: 0.18, ease: 'power2.out' }
+                );
+              }
+            }
+            xTo(coords.x);
+            yTo(coords.y);
+          }
         });
 
         link.addEventListener('mousemove', (e) => {
-          if (window.innerWidth <= 768) return;
+          if (window.innerWidth <= 768 || !isPreviewActive) return;
           const coords = calcCoordinates(e);
           xTo(coords.x);
           yTo(coords.y);
         });
 
-        link.addEventListener('mouseleave', () => {
+        link.addEventListener('mouseleave', (e) => {
           if (window.innerWidth <= 768) return;
+          const nextTarget = e.relatedTarget;
+          if (nextTarget && nextTarget.closest && nextTarget.closest('.occasion-link')) {
+            return;
+          }
+
+          isPreviewActive = false;
+          currentActiveLink = null;
+
           gsap.killTweensOf(previewEl);
           gsap.to(previewEl, {
             opacity: 0,
-            scale: 0.82,
-            rotate: -3,
-            duration: 0.2,
+            scale: 0.94,
+            duration: 0.18,
             ease: 'power2.out',
             onComplete: () => {
-              previewEl.style.visibility = 'hidden';
+              if (!isPreviewActive) {
+                previewEl.style.visibility = 'hidden';
+              }
             }
           });
         });
@@ -2717,13 +2714,18 @@
 
       // Hide preview if user scrolls away rapidly
       window.addEventListener('scroll', () => {
-        if (previewEl.style.visibility === 'visible') {
+        if (isPreviewActive && previewEl.style.visibility === 'visible') {
+          isPreviewActive = false;
+          currentActiveLink = null;
           gsap.to(previewEl, {
             opacity: 0,
+            scale: 0.94,
             duration: 0.15,
             ease: 'power2.out',
             onComplete: () => {
-              previewEl.style.visibility = 'hidden';
+              if (!isPreviewActive) {
+                previewEl.style.visibility = 'hidden';
+              }
             }
           });
         }
@@ -3174,13 +3176,9 @@
   </script>
   <script type="module" src="/src/shared/rental-modal.js"></script>
 
-  <!-- Cursor-Following Japanese Editorial Occasion Proof Preview (Direct child of body to guarantee viewport coordinate mapping) -->
+  <!-- Cursor-Following Fashion Photographic Preview (Direct child of body to guarantee viewport coordinate mapping) -->
   <div class="cursor-preview" id="cursorPreview" aria-hidden="true">
-    <div class="cursor-preview-frame">
-      <span class="cursor-preview-code" id="cursorPreviewCode">WD / 01 // FESTIVAL</span>
-      <img id="cursorPreviewImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Editorial Preview">
-      <span class="cursor-preview-seal">印</span>
-    </div>
+    <img id="cursorPreviewImg" src="/assets/occasion/festival.jpg" alt="Occasion Editorial Preview">
   </div>
 
 </body>
