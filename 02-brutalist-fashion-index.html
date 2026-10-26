@@ -91,6 +91,32 @@
       .switch-pill { width: 22px; height: 22px; font-size: 0.6rem; }
     }
 
+    /* Index Register Direct Jump Links */
+    .index-jump-nav {
+      display: none;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    @media (min-width: 1024px) {
+      .index-jump-nav {
+        display: flex;
+      }
+    }
+    .index-jump-link {
+      color: #888888;
+      text-decoration: none;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.4rem;
+      border: 1px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .index-jump-link:hover {
+      color: #ffffff;
+      border-color: #444444;
+      background: #111111;
+    }
+
     /* Layout Wrapper */
     .index-container {
       border-left: 2px solid var(--border);
@@ -101,126 +127,544 @@
       overflow-x: hidden;
     }
 
-    /* Top Grid Header */
-    .header-grid {
-      display: grid;
-      grid-template-columns: 1fr;
+    /* ========================================================
+       COMPOSITION 1: ACTIVE INSTITUTIONAL ARCHIVE INDEX APPARATUS
+       ======================================================== */
+    .archive-index-stage {
+      position: relative;
       border-bottom: 2px solid var(--border);
-    }
-    @media (min-width: 768px) {
-      .header-grid {
-        grid-template-columns: 2fr 1.2fr 1fr;
-      }
-    }
-    .h-cell {
-      padding: 1.25rem;
-      border-bottom: 1px solid var(--border);
-    }
-    @media (min-width: 768px) {
-      .h-cell {
-        border-bottom: none;
-        border-right: 1px solid var(--border);
-      }
-      .h-cell:last-child { border-right: none; }
-    }
-    .brand-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 800;
-      letter-spacing: -0.05em;
-      line-height: 0.85;
-      text-transform: uppercase;
-    }
-    .kanji-header {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      margin-top: 0.5rem;
+      background: var(--bg);
     }
 
-    /* Hero Catalog Row */
-    .hero-catalog-row {
+    /* Machine Telemetry Running Header Banner */
+    .index-telemetry-banner {
+      background: #000000;
+      color: #ffffff;
+      padding: 0.65rem 1.25rem;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .telemetry-node {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+    .telemetry-led {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      display: inline-block;
+      box-shadow: 0 0 6px #4ade80;
+    }
+    .telemetry-led.busy {
+      background: #f59e0b;
+      box-shadow: 0 0 6px #f59e0b;
+    }
+    .telemetry-sep {
+      color: #555555;
+    }
+    .registry-pill-badge {
+      background: #222222;
+      border: 1px solid #444444;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.6rem;
+      color: #4ade80;
+      letter-spacing: 0.08em;
+    }
+
+    /* Multi-Column Machine Apparatus Grid */
+    .registry-machine-apparatus {
       display: grid;
       grid-template-columns: 1fr;
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .registry-machine-apparatus {
+        grid-template-columns: 60px 1.28fr 1fr;
+      }
+    }
+
+    /* Left Running Spine Axis */
+    .registry-spine-col {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .registry-spine-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        border-right: 2px solid var(--border);
+        background: #eae8e1;
+        padding: 1.25rem 0.4rem;
+        user-select: none;
+      }
+      .spine-serial-box {
+        text-align: center;
+        border: 1px solid var(--border);
+        background: #ffffff;
+        padding: 0.4rem 0.2rem;
+        width: 100%;
+      }
+      .spine-lbl {
+        display: block;
+        font-size: 0.52rem;
+        color: #777777;
+        letter-spacing: 0.08em;
+      }
+      .spine-val {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #000000;
+      }
+      .spine-vertical-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+        color: #555555;
+        white-space: nowrap;
+      }
+      .spine-footer-meta {
+        font-size: 0.55rem;
+        color: #777777;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+    }
+
+    /* Center-Left Master Index Core */
+    .registry-main-core {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: none;
       border-bottom: 2px solid var(--border);
     }
     @media (min-width: 1024px) {
-      .hero-catalog-row {
-        grid-template-columns: 70px 1.25fr 1fr;
+      .registry-main-core {
+        padding: 2.25rem 2.5rem 2rem;
+        border-right: 2px solid var(--border);
+        border-bottom: none;
       }
     }
-    .index-sidebar-num {
-      padding: 1.5rem 0.5rem;
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      writing-mode: vertical-rl;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      background: var(--surface);
-    }
-    .hero-text-block {
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border-right: 1px solid var(--border);
-    }
-    .hero-big-statement {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.2rem, 4.2vw, 4rem);
-      font-weight: 800;
-      line-height: 0.92;
-      letter-spacing: -0.04em;
-      text-transform: uppercase;
+
+    /* Core Index Header & Monumental Serial Numeral */
+    .registry-core-header {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
       margin-bottom: 1.5rem;
     }
-    .spec-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 2rem;
+    @media (min-width: 768px) {
+      .registry-core-header {
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 2.5rem;
+      }
     }
-    .spec-table td {
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--hairline);
-      font-size: 0.72rem;
-    }
-    .spec-table td.key {
-      font-weight: 700;
-      width: 42%;
-      color: var(--fg);
-    }
-    .hero-crop-frame {
-      padding: 2rem;
-      background: #f0f0f0;
-      position: relative;
+    .core-index-headline {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
-    .hero-crop-frame img {
+    .core-sub-tag {
+      font-size: 0.65rem;
+      color: #666666;
+      letter-spacing: 0.18em;
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+    .giant-serial-numeral {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.8rem, 11vw, 8.5rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      color: #000000;
+      display: flex;
+      align-items: baseline;
+      user-select: none;
+      margin-bottom: 0.75rem;
+    }
+    .giant-serial-numeral .num-digit {
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+
+    /* Core Status Box */
+    .core-status-box {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+    }
+    .status-indicator-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      border-bottom: 1px dashed #dcdcd8;
+      padding-bottom: 0.35rem;
+    }
+    .status-indicator-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .status-key {
+      color: #666666;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+    }
+    .status-val {
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: 0.04em;
+    }
+    .status-val.active {
+      color: #15803d;
+    }
+    .status-val.highlight {
+      font-size: 0.82rem;
+      color: #000000;
+      background: #eae8e1;
+      padding: 0.15rem 0.4rem;
+    }
+
+    /* Active Specimen Title Strip */
+    .specimen-title-strip {
+      margin-bottom: 1.5rem;
+    }
+    .specimen-monument-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 0.65rem;
+    }
+    .specimen-atelier-line {
+      font-size: 0.76rem;
+      color: #444444;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Technical Specimen Specification 4-Cell Matrix */
+    .registry-spec-matrix {
+      display: grid;
+      grid-template-columns: 1fr;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      margin-bottom: 1.75rem;
+    }
+    @media (min-width: 640px) {
+      .registry-spec-matrix {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .spec-matrix-cell {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (min-width: 640px) {
+      .spec-matrix-cell:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+      .spec-matrix-cell:nth-last-child(-n+2) {
+        border-bottom: none;
+      }
+    }
+    @media (max-width: 639px) {
+      .spec-matrix-cell:last-child {
+        border-bottom: none;
+      }
+    }
+    .spec-matrix-cell .cell-k {
+      display: block;
+      font-size: 0.6rem;
+      color: #777777;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+    }
+    .spec-matrix-cell .cell-v {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #000000;
+      line-height: 1.3;
+    }
+
+    /* Interactive Machine Action Bar */
+    .registry-action-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .registry-action-bar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .reindex-selector-group {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      background: #ffffff;
+    }
+    .index-nav-step-btn {
+      background: transparent;
+      border: none;
+      padding: 0.75rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #000000;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+      letter-spacing: 0.08em;
+    }
+    .index-nav-step-btn:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+    .specimen-step-counter {
+      padding: 0.75rem 1rem;
+      font-size: 0.7rem;
+      color: #555555;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      background: #f7f6f2;
+      user-select: none;
+    }
+    .specimen-step-counter strong {
+      color: #000000;
+    }
+    .registry-issue-btn {
+      background: #000000;
+      color: #ffffff;
+      border: 2px solid #000000;
+      padding: 0.85rem 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .registry-issue-btn:hover {
+      background: #222222;
+      border-color: #222222;
+    }
+    .registry-issue-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Right Column: Oversized Archival Specimen Plate */
+    .registry-specimen-plate-col {
+      padding: 1.5rem;
+      background: #edebe4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .registry-specimen-plate-col {
+        padding: 2.25rem 2rem;
+      }
+    }
+    .specimen-plate-container {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
+      padding: 1.25rem 1.25rem 1rem;
+    }
+    .specimen-crosshair {
+      position: absolute;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: #000000;
+      line-height: 1;
+      pointer-events: none;
+      font-weight: 700;
+    }
+    .specimen-crosshair.tl { top: -6px; left: -6px; }
+    .specimen-crosshair.tr { top: -6px; right: -6px; }
+    .specimen-crosshair.bl { bottom: -6px; left: -6px; }
+    .specimen-crosshair.br { bottom: -6px; right: -6px; }
+
+    .plate-telemetry-tag {
+      position: absolute;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      background: #000000;
+      color: #ffffff;
+      padding: 0.2rem 0.45rem;
+      letter-spacing: 0.08em;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .plate-telemetry-tag.top-left { top: 6px; left: 6px; }
+    .plate-telemetry-tag.top-right { top: 6px; right: 6px; background: #222222; color: #4ade80; }
+    .plate-telemetry-tag.btm-left { bottom: 35px; left: 6px; }
+
+    .specimen-photo-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5.2;
+      max-height: 520px;
+      overflow: hidden;
+      background: #111111;
+      border: 1px solid var(--border);
+    }
+    .specimen-photo-viewport img {
       width: 100%;
       height: 100%;
-      max-height: 520px;
       object-fit: cover;
       object-position: center 15%;
       display: block;
-      border: 1px solid var(--border);
-      filter: contrast(108%) saturate(92%);
+      filter: contrast(106%) saturate(92%);
+      transition: filter 0.3s ease;
     }
-    .crop-meta-tag {
+
+    /* Mechanical Scanline */
+    .specimen-scanline {
       position: absolute;
-      top: 2.75rem;
-      right: 2.75rem;
+      left: 1.25rem;
+      right: 1.25rem;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+      top: 1.25rem;
+      z-index: 6;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Architectural Specimen Callout Flags */
+    .specimen-callout-flag {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.88);
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.25rem 0.5rem;
+      letter-spacing: 0.08em;
+      z-index: 7;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid #444444;
+      pointer-events: none;
+      box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+    }
+    .specimen-callout-flag .flag-num {
+      color: #4ade80;
+      font-weight: 700;
+    }
+    .specimen-callout-flag.flag-1 {
+      top: 25%;
+      left: -10px;
+    }
+    .specimen-callout-flag.flag-2 {
+      top: 55%;
+      right: -10px;
+    }
+    @media (max-width: 640px) {
+      .specimen-callout-flag { display: none; }
+    }
+
+    /* Specimen Calibration Scale */
+    .specimen-calibration-scale {
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.55rem;
+      color: #666666;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.08em;
+    }
+    .calib-ticks {
+      display: flex;
+      gap: 3px;
+      color: #999999;
+      font-size: 0.5rem;
+    }
+    .calib-ticks .mid-tick {
+      color: #000000;
+      font-weight: 700;
+    }
+
+    /* Bottom Roster Specimen Tape */
+    .registry-roster-tape {
+      background: #eae8e1;
+      border-top: 2px solid var(--border);
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    .roster-tape-lbl {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #666666;
+      letter-spacing: 0.1em;
+      margin-right: 0.35rem;
+    }
+    .roster-specimen-btn {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: #222222;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.35rem 0.65rem;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    .roster-specimen-btn:hover {
+      background: #dddbd2;
+      color: #000000;
+    }
+    .roster-specimen-btn.active {
       background: #000000;
       color: #ffffff;
-      padding: 0.25rem 0.6rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
+      border-color: #000000;
+      font-weight: 700;
     }
 
     /* Section Division Bar */
@@ -1203,10 +1647,20 @@
 
   <!-- Institutional Archive Terminal Status Bar -->
   <nav class="switch-nav">
-    <div>
+    <div style="display: flex; align-items: center;">
       <a href="index.html" class="terminal-tag">SYS.REGISTRY // WDL-02</a>
-      <span class="terminal-sub">SECTOR: ARCHIVE MACHINE // PROTOCOL ISO-9042 // INVENTORY 2026</span>
+      <span class="terminal-sub">ARCHIVE MACHINE PROTOCOL ISO-9042 // INVENTORY 2026</span>
     </div>
+
+    <!-- Direct Index Register Jump Points -->
+    <div class="index-jump-nav">
+      <a href="#activeArchiveIndex" class="index-jump-link">[0001] SPECIMEN</a>
+      <a href="#masterOccasionMatrix" class="index-jump-link">[0002] MATRIX</a>
+      <a href="#masterSpecimenInspector" class="index-jump-link">[0003] INSPECTION</a>
+      <a href="#masterLookLedger" class="index-jump-link">[0004] CATALOG</a>
+      <a href="#documentSection" class="index-jump-link">[0005] VOUCHER</a>
+    </div>
+
     <div class="switch-pills">
       <span class="terminal-sector-label">SYSTEM NODES:</span>
       <a href="01-tokyo-editorial.html" class="switch-pill" title="Tokyo Editorial">01</a>
@@ -1219,71 +1673,188 @@
 
   <div class="index-container">
     
-    <!-- Header Grid Cell Structure -->
-    <header class="header-grid">
-      <div class="h-cell">
-        <h1 class="brand-title">WEDELIA</h1>
-        <div class="kanji-header">瞬間貸出仕様技術目録 // 2026 ARCHIVE</div>
+    <!-- ========================================================
+         COMPOSITION 1: ACTIVE INSTITUTIONAL ARCHIVE INDEX APPARATUS
+         ======================================================== -->
+    <section class="archive-index-stage" id="activeArchiveIndex">
+      
+      <!-- Institutional Machine Telemetry Banner -->
+      <div class="index-telemetry-banner">
+        <div class="telemetry-node">
+          <span class="telemetry-led live"></span>
+          <span>SYS.INDEX // ACTIVE ARCHIVE MACHINE</span>
+          <span class="telemetry-sep">•</span>
+          <span>PROTOCOL WDL-ISO-9042</span>
+          <span class="telemetry-sep">•</span>
+          <span>NODE: DELHI NCR COURIER TRANSIT</span>
+        </div>
+        <div class="telemetry-node">
+          <span id="activeMachineTime">INDEXATION CLK: 00:00:00</span>
+          <span class="telemetry-sep">•</span>
+          <span class="registry-pill-badge">REGISTRY BUS: ONLINE</span>
+        </div>
       </div>
-      <div class="h-cell">
-        <strong>ARCHIVE_PROTOCOL</strong><br>
-        TYPE: HAUTE RENTAL LEDGER<br>
-        TIER: CAMPUS NIGHTLIFE ACCESS<br>
-        NODES: DELHI NCR / TOKYO CENTRAL
-      </div>
-      <div class="h-cell">
-        <strong>OPERATIONAL_SPECS</strong><br>
-        LEDGER STATUS: 100% OPERATIONAL<br>
-        FIBER INSPECTION: STERILIZED<br>
-        ESCROW: ₹1,500 REFUNDABLE
-      </div>
-    </header>
 
-    <!-- Brutalist Hero Row -->
-    <section class="hero-catalog-row">
-      <aside class="index-sidebar-num">
-        <span>ARCHIVE_SERIES_2026</span>
-        <span>SECTION_A // FORMAL_CATALOGUE</span>
-      </aside>
-
-      <div class="hero-text-block">
-        <div>
-          <div style="font-size: 0.7rem; color: var(--muted); margin-bottom: 0.75rem;">
-            [ CATALOGUE MANIFESTO // WDL-SYS-01 ]
+      <!-- Monumental Archival Registry Deck -->
+      <div class="registry-machine-apparatus">
+        
+        <!-- Left Axis: Accession Code Column & Running Spine -->
+        <aside class="registry-spine-col">
+          <div class="spine-serial-box">
+            <span class="spine-lbl">INDEX REF</span>
+            <strong class="spine-val" id="activeSpineIndex">0001</strong>
           </div>
-          <h2 class="hero-big-statement">
-            SYSTEMATIC INVENTORY<br>
-            OF RUNWAY ARCHIVES.
-          </h2>
-          <p style="font-size: 0.85rem; color: #222222; max-width: 520px; line-height: 1.65;">
-            Fast fashion retail is an unindexed liability. WEDELIA operates a calibrated registry of museum-tier and runway silhouettes leased for 3, 5, or 7 days. Dual sizes dispatched. Tamper-sealed. Zero dry cleaning.
-          </p>
+          <div class="spine-vertical-text">
+            WEDELIA INSTITUTIONAL RUNWAY LEDGER // AUTUMN 2026
+          </div>
+          <div class="spine-footer-meta">
+            <span>BAY: A-01</span>
+            <span>DRAWER: 14</span>
+          </div>
+        </aside>
+
+        <!-- Center Master Column: Giant Serial Numeral & Classification Architecture -->
+        <div class="registry-main-core">
+          
+          <!-- Master Archival Title & Serial Deck -->
+          <div class="registry-core-header">
+            <div class="core-index-headline">
+              <span class="core-sub-tag">ARCHIVAL SPECIMEN NO.</span>
+              <div class="giant-serial-numeral" id="giantSerialNumeral">
+                <span class="num-digit">0</span><span class="num-digit">0</span><span class="num-digit" id="liveActiveDigit">1</span>
+              </div>
+            </div>
+            <div class="core-status-box">
+              <div class="status-indicator-row">
+                <span class="status-key">INDEX STATUS:</span>
+                <span class="status-val active" id="heroIndexStatus">[LOCKED // READY]</span>
+              </div>
+              <div class="status-indicator-row">
+                <span class="status-key">CLASSIFICATION:</span>
+                <span class="status-val" id="heroClassification">HAUTE COUTURE EVENING</span>
+              </div>
+              <div class="status-indicator-row">
+                <span class="status-key">OCCASION SPHERE:</span>
+                <span class="status-val" id="heroOccasionSphere">SENIOR FAREWELL & GALA</span>
+              </div>
+              <div class="status-indicator-row">
+                <span class="status-key">TARIFF (3D / 5D):</span>
+                <span class="status-val highlight" id="heroTariffVal">₹2,999 / 4 NIGHTS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Specimen Garment Banner -->
+          <div class="specimen-title-strip">
+            <h1 class="specimen-monument-title" id="heroSpecimenName">
+              ZEMIRE EVENING FAILLE GOWN
+            </h1>
+            <div class="specimen-atelier-line" id="heroAtelierLine">
+              ATELIER: CHRISTIAN DIOR PARIS // AUTUMN-WINTER 1954
+            </div>
+          </div>
+
+          <!-- Technical Specimen Specifications Matrix -->
+          <div class="registry-spec-matrix">
+            <div class="spec-matrix-cell">
+              <span class="cell-k">PROVENANCE / ERA</span>
+              <strong class="cell-v" id="heroProvenance">DIOR ARCHIVE (1954)</strong>
+            </div>
+            <div class="spec-matrix-cell">
+              <span class="cell-k">MATERIAL / STRUCTURE</span>
+              <strong class="cell-v" id="heroMaterial">OBSIDIAN SILK FAILLE</strong>
+            </div>
+            <div class="spec-matrix-cell">
+              <span class="cell-k">DISPATCH REDUNDANCY</span>
+              <strong class="cell-v">DUAL SIZES DISPATCHED</strong>
+            </div>
+            <div class="spec-matrix-cell">
+              <span class="cell-k">CARE PROTOCOL</span>
+              <strong class="cell-v">ZERO-LAUNDRY RULE (SEALED)</strong>
+            </div>
+          </div>
+
+          <!-- Interactive Machine Action Bar -->
+          <div class="registry-action-bar">
+            <div class="reindex-selector-group">
+              <button class="index-nav-step-btn" id="heroPrevSpecimenBtn" title="Previous Specimen">◄ PREV [INDEX]</button>
+              <div class="specimen-step-counter" id="specimenStepCounter">
+                SPECIMEN <strong>01</strong> / <strong>06</strong>
+              </div>
+              <button class="index-nav-step-btn" id="heroNextSpecimenBtn" title="Next Specimen">NEXT [INDEX] ►</button>
+            </div>
+            <button class="registry-issue-btn" id="heroIssueAccessBtn">
+              <span>REQUEST ACCESS // ISSUE SPECIMEN</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
         </div>
 
-        <table class="spec-table">
-          <tr>
-            <td class="key">SECTOR COVERAGE</td>
-            <td>DU NORTH, DU SOUTH, IIT DELHI, NIFT, ASHOKA, ST. XAVIER'S</td>
-          </tr>
-          <tr>
-            <td class="key">SIZE REDUNDANCY</td>
-            <td>PRIMARY CHOICE + COMPLIMENTARY ADJACENT BACKUP SIZE</td>
-          </tr>
-          <tr>
-            <td class="key">DAMAGE LIABILITY</td>
-            <td>₹0 SHIELD EMBEDDED (SPILLS, BEAD LOSS, NORMAL TENSION)</td>
-          </tr>
-          <tr>
-            <td class="key">RETURN CONDITION</td>
-            <td>STRICT ZERO-LAUNDRY RULE (DISPATCH BACK UNWASHED IN ODOR-LOCK POUCH)</td>
-          </tr>
-        </table>
+        <!-- Right Crossing Column: Oversized Archival Specimen Plate -->
+        <div class="registry-specimen-plate-col">
+          <div class="specimen-plate-container" id="heroSpecimenPlate">
+            <!-- Archival Corner Crosshairs -->
+            <span class="specimen-crosshair tl">+</span>
+            <span class="specimen-crosshair tr">+</span>
+            <span class="specimen-crosshair bl">+</span>
+            <span class="specimen-crosshair br">+</span>
+
+            <!-- Technical Coordinate Tags -->
+            <div class="plate-telemetry-tag top-left" id="heroPlateIdTag">
+              ACCN: WDL-SPECIMEN-01
+            </div>
+            <div class="plate-telemetry-tag top-right" id="heroScanlineTag">
+              SCAN: OPTICAL 1.0X
+            </div>
+            <div class="plate-telemetry-tag btm-left" id="heroGridCoord">
+              COORD: 28.5450°N 77.1926°E
+            </div>
+
+            <!-- Optical Specimen Scanline -->
+            <div class="specimen-scanline" id="heroScanline" aria-hidden="true"></div>
+
+            <!-- Architectural Specimen Measurement Annotations -->
+            <div class="specimen-callout-flag flag-1" id="heroCallout1">
+              <span class="flag-num">01</span>
+              <span>SCULPTURAL PEPLUM</span>
+            </div>
+            <div class="specimen-callout-flag flag-2" id="heroCallout2">
+              <span class="flag-num">02</span>
+              <span>OBSIDIAN SILK FAILLE</span>
+            </div>
+
+            <!-- Specimen Photo Frame -->
+            <div class="specimen-photo-viewport">
+              <img id="heroSpecimenImg" src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Active Archive Specimen">
+            </div>
+
+            <!-- Specimen Calibration Scale Strip -->
+            <div class="specimen-calibration-scale">
+              <span>0% CALIB</span>
+              <div class="calib-ticks">
+                <span>|</span><span>|</span><span>|</span><span>|</span><span>|</span>
+                <span class="mid-tick">|</span>
+                <span>|</span><span>|</span><span>|</span><span>|</span><span>|</span>
+              </div>
+              <span>100% FOCUS</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="hero-crop-frame">
-        <div class="crop-meta-tag">PLATE_01 // ARCHIVE SPECIMEN</div>
-        <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Zemire Obsidian Faille Silhouette">
+      <!-- Quick Registry Specimen Roster Bar -->
+      <div class="registry-roster-tape" id="registryRosterTape">
+        <span class="roster-tape-lbl">SELECT SPECIMEN TO RE-INDEX:</span>
+        <button class="roster-specimen-btn active" data-index="0">[001] DIOR ZEMIRE (1954)</button>
+        <button class="roster-specimen-btn" data-index="1">[002] JEAN DESSÈS (1951)</button>
+        <button class="roster-specimen-btn" data-index="2">[003] PAUL POIRET (1983)</button>
+        <button class="roster-specimen-btn" data-index="3">[004] CUSTO BARCELONA (2010)</button>
+        <button class="roster-specimen-btn" data-index="4">[005] HOOP ARCHITECTURE (1955)</button>
+        <button class="roster-specimen-btn" data-index="5">[006] GILDED COURT ROBE (1750)</button>
       </div>
+
     </section>
 
     <!-- Section Bar: Master Occasion Matrix -->
@@ -1428,7 +1999,7 @@
     </div>
 
     <!-- Master Numbered Quick Directory -->
-    <div class="master-numbered-ledger">
+    <div class="master-numbered-ledger" id="masterLookLedger">
       <div class="ledger-row" data-sector="FAREWELL" data-shelf="01" data-bay="A">
         <span class="ledger-serial">001</span>
         <div class="ledger-name">ZEMIRE EVENING FAILLE <span class="sub">1952 PARIS ATELIER // WDL-01-DOR</span></div>
@@ -1491,7 +2062,7 @@
             <button class="lens-mode-btn" data-scale="1.45" data-y="20%">SECTOR 02: STRUCTURAL SEAM</button>
             <button class="lens-mode-btn" data-scale="1.85" data-y="-15%">SECTOR 03: MATRIX DENSITY</button>
           </div>
-          <span id="inspectorFiberWeight">1,480g/m² DENSITY</span>
+          <span id="inspectorFiberWeight">ARCHIVAL FAILLE</span>
         </div>
       </div>
 
@@ -1514,16 +2085,16 @@
               <td class="val" id="dossierProvenanceVal">CHRISTIAN DIOR HAUTE COUTURE (FALL 1954)</td>
             </tr>
             <tr>
-              <td class="prop">FIBER SPECIFICATION</td>
-              <td class="val" id="dossierFiberVal">100% PURE SILK FAILLE HEAVY WEFT (1,480g)</td>
+              <td class="prop">MATERIAL ARCHITECTURE</td>
+              <td class="val" id="dossierFiberVal">OBSIDIAN ARCHIVAL SILK FAILLE // SCULPTURAL PEPLUM</td>
             </tr>
             <tr>
-              <td class="prop">PRESERVATION GRADE</td>
-              <td class="val" id="dossierConditionVal">GRADE A+ (MUSEUM ATELIER RESTORED)</td>
+              <td class="prop">ARCHIVE CONDITION</td>
+              <td class="val" id="dossierConditionVal">GRADE A // ATELIER VERIFIED & TAMPER-SEALED</td>
             </tr>
             <tr>
-              <td class="prop">RETAIL VALUATION</td>
-              <td class="val" id="dossierValuationVal">₹48,000 ARCHIVAL RECORD BENCHMARK</td>
+              <td class="prop">RENTAL SPECIFICATION</td>
+              <td class="val" id="dossierValuationVal">CAMPUS DISPATCH TIER // 4 NIGHT RESERVATION</td>
             </tr>
             <tr>
               <td class="prop">DUAL-SIZE PROTOCOL</td>
@@ -1860,7 +2431,7 @@
     </div>
 
     <!-- Brutalist Rental Record Document -->
-    <section class="document-section">
+    <section class="document-section" id="documentSection">
       <div class="document-card">
         <div class="doc-top-bar">
           <span>WEDELIA DISPATCH DOCUMENT // REF #WDL-REQ-8891-NCR</span>
@@ -2047,41 +2618,66 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. MECHANICAL ENTRANCE SEQUENCE
+    // 1. MECHANICAL ARCHIVE ENTRANCE SEQUENCE
     if (!prefersReducedMotion) {
       const enterTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
       enterTl
-        .from('.header-grid .h-cell', {
-          opacity: 0,
+        .from('.index-telemetry-banner', {
           y: -15,
-          duration: 0.4,
-          stagger: 0.08
+          opacity: 0,
+          duration: 0.4
         })
-        .from('.brand-title', {
-          yPercent: 100,
-          duration: 0.6,
-          ease: 'power4.out'
-        }, '-=0.2')
-        .from('.spec-table tr', {
-          x: -20,
-          opacity: 0,
-          duration: 0.35,
-          stagger: 0.04
-        }, '-=0.3')
-        .from('.hero-crop-frame', {
-          scaleX: 0.95,
-          opacity: 0,
+        .from('.registry-spine-col', {
+          scaleY: 0,
+          transformOrigin: 'top center',
           duration: 0.5,
+          ease: 'power3.inOut'
+        }, '-=0.2')
+        .from('.giant-serial-numeral .num-digit', {
+          y: 35,
+          opacity: 0,
+          stagger: 0.06,
+          duration: 0.4,
           ease: 'steps(3)'
         }, '-=0.3')
-        .from('.ledger-row', {
-          xPercent: -6,
+        .from('.core-status-box', {
+          x: 20,
           opacity: 0,
-          duration: 0.4,
-          stagger: 0.04,
+          duration: 0.35,
           ease: 'power3.out'
-        }, '-=0.2');
+        }, '-=0.25')
+        .from('.specimen-monument-title, .specimen-atelier-line', {
+          x: -25,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 0.4,
+          ease: 'power3.out'
+        }, '-=0.3')
+        .from('.spec-matrix-cell', {
+          opacity: 0,
+          duration: 0.3,
+          stagger: 0.04,
+          ease: 'steps(2)'
+        }, '-=0.2')
+        .from('.specimen-plate-container', {
+          scale: 0.96,
+          opacity: 0,
+          duration: 0.45,
+          ease: 'power3.out'
+        }, '-=0.35')
+        .from('.specimen-callout-flag', {
+          scale: 0.8,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.3,
+          ease: 'back.out(2)'
+        }, '-=0.2')
+        .from('.registry-roster-tape', {
+          y: 10,
+          opacity: 0,
+          duration: 0.3
+        }, '-=0.1');
     }
 
     // 2. MECHANICAL TYPOGRAPHY & SERIAL NUMBER MOVEMENT
@@ -2182,7 +2778,320 @@
       });
     });
 
-    // 5. EXPERIMENT 02-A: SCANNER CURSOR BAR TELEMETRY
+    // 5. ARCHIVAL SPECIMEN REPOSITORY DATA
+    const archiveSpecimens = [
+      {
+        id: 'WDL-SPECIMEN-01',
+        name: 'Zemire Evening Faille Gown',
+        classification: 'HAUTE COUTURE EVENING',
+        occasionShort: 'SENIOR FAREWELL & GALA',
+        occasion: 'OCCASION // SENIOR FAREWELL & FORMAL VALEDICTORY BALL',
+        atelierLine: 'ATELIER: CHRISTIAN DIOR PARIS // AUTUMN-WINTER 1954',
+        provenance: 'CHRISTIAN DIOR PARIS (1954)',
+        material: 'OBSIDIAN SILK FAILLE',
+        fiber: 'ARCHIVAL SILK FAILLE // SCULPTURAL PEPLUM',
+        condition: 'GRADE A // ATELIER VERIFIED & TAMPER-SEALED',
+        valuation: 'CAMPUS DISPATCH TIER // 4 NIGHT RESERVATION',
+        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
+        basePrice: 2999,
+        adders: { '3': 0, '5': 800, '7': 1500 },
+        fiberTag: 'ARCHIVE SILK FAILLE',
+        coord: '28.5450°N 77.1926°E',
+        callout1: 'SCULPTURAL PEPLUM',
+        callout2: 'OBSIDIAN SILK FAILLE',
+        img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg'
+      },
+      {
+        id: 'WDL-SPECIMEN-02',
+        name: 'Pleated Duet Chiffon Gown',
+        classification: 'ATELIER RUNWAY DRAPERY',
+        occasionShort: 'COLLEGE FESTIVAL & CONCERT',
+        occasion: 'OCCASION // COLLEGE FESTIVAL & STADIUM NIGHT CONCERT',
+        atelierLine: 'ATELIER: JEAN DESSÈS PARIS // SPRING 1951',
+        provenance: 'JEAN DESSÈS PARIS (1951)',
+        material: 'FLUTED SILK CHIFFON',
+        fiber: 'FLUID SILK CHIFFON DRAPERY // RADIAL PLEAT',
+        condition: 'GRADE A // RUNWAY ARCHIVE PRESERVED',
+        valuation: 'CAMPUS DISPATCH TIER // 4 NIGHT RESERVATION',
+        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
+        basePrice: 2899,
+        adders: { '3': 0, '5': 800, '7': 1400 },
+        fiberTag: 'FLUTED CHIFFON',
+        coord: '28.6139°N 77.2090°E',
+        callout1: 'RADIAL ATELIER PLEATING',
+        callout2: 'FLOATING CORSET DRAPE',
+        img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg'
+      },
+      {
+        id: 'WDL-SPECIMEN-03',
+        name: 'Sculptural Longue Column',
+        classification: 'HISTORIC ATELIER RE-EDITION',
+        occasionShort: 'DEBATING SOCIETY GALA',
+        occasion: 'OCCASION // DEBATING SOCIETY GALA & SENIOR BANQUET',
+        atelierLine: 'ATELIER: PAUL POIRET PARIS // 1983 RE-EDITION',
+        provenance: 'PAUL POIRET PARIS (1983)',
+        material: 'SILK CRÊPE DE CHINE',
+        fiber: 'PURE SILK CRÊPE DE CHINE // BIAS CUT',
+        condition: 'GRADE A // ARCHIVE PRESERVED',
+        valuation: 'CAMPUS DISPATCH TIER // 4 NIGHT RESERVATION',
+        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
+        basePrice: 2499,
+        adders: { '3': 0, '5': 700, '7': 1300 },
+        fiberTag: 'BIAS SILK CRÊPE',
+        coord: '28.7041°N 77.1025°E',
+        callout1: 'BIAS-CUT SPINE AXIS',
+        callout2: 'MINIMALIST SHEATH SILHOUETTE',
+        img: '/assets/editorial/robe-longue-1983-12-1-1.jpg'
+      },
+      {
+        id: 'WDL-SPECIMEN-04',
+        name: 'Kinetic Shift & Draped Wrap',
+        classification: 'GRAPHIC RUNWAY SILK KNIT',
+        occasionShort: 'ARENA FESTIVAL & CONCERT',
+        occasion: 'OCCASION // CAMPUS FESTIVAL ARENA & CONCERT STAGE',
+        atelierLine: 'ATELIER: CUSTO BARCELONA // SUMMER 2010',
+        provenance: 'CUSTO BARCELONA (2010)',
+        material: 'STRUCTURED RUNWAY JACQUARD',
+        fiber: 'STRUCTURED RUNWAY JACQUARD & SILK KNIT',
+        condition: 'GRADE A // RUNWAY ARCHIVE MINT',
+        valuation: 'CAMPUS DISPATCH TIER // 4 NIGHT RESERVATION',
+        dualSize: 'PRIMARY UK 6 + COMPLIMENTARY UK 8 [SEALED]',
+        basePrice: 1699,
+        adders: { '3': 0, '5': 500, '7': 1000 },
+        fiberTag: 'RUNWAY JACQUARD',
+        coord: '28.5355°N 77.3910°E',
+        callout1: 'OPTICAL RUNWAY JACQUARD',
+        callout2: 'KINETIC DRAPE HEM',
+        img: '/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg'
+      },
+      {
+        id: 'WDL-SPECIMEN-05',
+        name: 'Strapless Hoop Skirt Architecture',
+        classification: 'MID-CENTURY COUTURE ARCHITECTURE',
+        occasionShort: 'THEATRICAL GALA & BALL',
+        occasion: 'OCCASION // THEATRICAL GALA & PORTFOLIO SHOOT',
+        atelierLine: 'ATELIER: MID-CENTURY COUTURE // CA. 1955',
+        provenance: 'MID-CENTURY COUTURE (1955)',
+        material: 'STRUCTURAL FAILLE & HOOP CAGE',
+        fiber: 'STRUCTURAL FAILLE & STEEL HOOP CORSET',
+        condition: 'GRADE A // ARCHIVE RESTORED',
+        valuation: 'CAMPUS DISPATCH TIER // 4 NIGHT RESERVATION',
+        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
+        basePrice: 3199,
+        adders: { '3': 0, '5': 800, '7': 1600 },
+        fiberTag: 'HOOP CRINOLINE',
+        coord: '28.4595°N 77.0266°E',
+        callout1: 'STRUCTURAL CRINOLINE CAGE',
+        callout2: 'DUCHESSE PLEATED HEM',
+        img: '/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg'
+      },
+      {
+        id: 'WDL-SPECIMEN-06',
+        name: 'Gilded Court Brocade Robe',
+        classification: 'METALLIC BROCADE HISTORIC ROBE',
+        occasionShort: 'VALEDICTORY DINNER & GALA',
+        occasion: 'OCCASION // SOCIETY CONVOCATION & VALEDICTORY DINNER',
+        atelierLine: 'ATELIER: HISTORIC ATELIER // CA. 1750',
+        provenance: 'HISTORIC ATELIER ARCHIVE (1750)',
+        material: 'METALLIC GOLD BROCADE',
+        fiber: 'METALLIC GOLD BROCADE & SILK TAFFETA',
+        condition: 'HISTORIC ATELIER GRADE A',
+        valuation: 'CAMPUS DISPATCH TIER // 4 NIGHT RESERVATION',
+        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
+        basePrice: 3899,
+        adders: { '3': 0, '5': 1000, '7': 1900 },
+        fiberTag: 'GILDED BROCADE',
+        coord: '28.9931°N 77.0151°E',
+        callout1: 'EMBOSSED GILDED WEFT',
+        callout2: 'REGAL SPREAD PANIERS',
+        img: '/assets/editorial/court-dress.jpg'
+      }
+    ];
+
+    // 6. ACTIVE ARCHIVE INDEXING APPARATUS & MECHANICAL RE-INDEX ACTION
+    let currentHeroSpecimenIndex = 0;
+    let isReindexing = false;
+
+    // Real-time Indexation Clock
+    function updateMachineClock() {
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      const clkEl = document.getElementById('activeMachineTime');
+      if (clkEl) clkEl.textContent = `INDEXATION CLK: ${timeStr}`;
+    }
+    setInterval(updateMachineClock, 1000);
+    updateMachineClock();
+
+    function updateHeroSpecimenContent(sp, index) {
+      const nameEl = document.getElementById('heroSpecimenName');
+      const atelierEl = document.getElementById('heroAtelierLine');
+      const classEl = document.getElementById('heroClassification');
+      const occEl = document.getElementById('heroOccasionSphere');
+      const tariffEl = document.getElementById('heroTariffVal');
+      const provEl = document.getElementById('heroProvenance');
+      const matEl = document.getElementById('heroMaterial');
+      const imgEl = document.getElementById('heroSpecimenImg');
+      const plateIdTag = document.getElementById('heroPlateIdTag');
+      const gridCoord = document.getElementById('heroGridCoord');
+      const callout1 = document.getElementById('heroCallout1');
+      const callout2 = document.getElementById('heroCallout2');
+
+      if (nameEl) nameEl.textContent = sp.name.toUpperCase();
+      if (atelierEl) atelierEl.textContent = sp.atelierLine;
+      if (classEl) classEl.textContent = sp.classification;
+      if (occEl) occEl.textContent = sp.occasionShort;
+      if (tariffEl) tariffEl.textContent = `₹${sp.basePrice.toLocaleString('en-IN')} / 4 NIGHTS`;
+      if (provEl) provEl.textContent = sp.provenance;
+      if (matEl) matEl.textContent = sp.material;
+      if (imgEl) imgEl.src = sp.img;
+      if (plateIdTag) plateIdTag.textContent = `ACCN: ${sp.id}`;
+      if (gridCoord) gridCoord.textContent = `COORD: ${sp.coord}`;
+      if (callout1) callout1.innerHTML = `<span class="flag-num">01</span><span>${sp.callout1}</span>`;
+      if (callout2) callout2.innerHTML = `<span class="flag-num">02</span><span>${sp.callout2}</span>`;
+    }
+
+    function reindexArchiveHero(index) {
+      if (isReindexing) return;
+      isReindexing = true;
+
+      const sp = archiveSpecimens[index];
+      if (!sp) {
+        isReindexing = false;
+        return;
+      }
+
+      currentHeroSpecimenIndex = index;
+
+      // Update Roster Buttons
+      document.querySelectorAll('.roster-specimen-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+
+      const led = document.querySelector('.telemetry-led');
+      const statusVal = document.getElementById('heroIndexStatus');
+      const scanline = document.getElementById('heroScanline');
+      const plateTag = document.getElementById('heroScanlineTag');
+      const spineVal = document.getElementById('activeSpineIndex');
+      const counterVal = document.getElementById('specimenStepCounter');
+
+      if (led) { led.classList.remove('live'); led.classList.add('busy'); }
+      if (statusVal) {
+        statusVal.textContent = '[RE-INDEXING...]';
+        statusVal.classList.remove('active');
+        statusVal.style.color = '#f59e0b';
+      }
+      if (plateTag) plateTag.textContent = 'SCAN: RE-CALIBRATING';
+
+      if (!prefersReducedMotion) {
+        const reindexTl = gsap.timeline({
+          onComplete: () => {
+            if (led) { led.classList.remove('busy'); led.classList.add('live'); }
+            if (statusVal) {
+              statusVal.textContent = '[LOCKED // READY]';
+              statusVal.classList.add('active');
+              statusVal.style.color = '#15803d';
+            }
+            if (plateTag) plateTag.textContent = 'SCAN: OPTICAL 1.0X';
+            isReindexing = false;
+          }
+        });
+
+        // Scanline sweep
+        reindexTl
+          .set(scanline, { opacity: 1, top: '0%' })
+          .to(scanline, { top: '100%', duration: 0.28, ease: 'linear' })
+          .set(scanline, { opacity: 0 });
+
+        // Digit spin
+        const digitEl = document.getElementById('liveActiveDigit');
+        const targetDigit = (index + 1).toString();
+        reindexTl.to(digitEl, {
+          y: -15,
+          opacity: 0,
+          duration: 0.1,
+          ease: 'steps(2)',
+          onComplete: () => {
+            digitEl.textContent = targetDigit;
+            if (spineVal) spineVal.textContent = `000${index + 1}`;
+            if (counterVal) counterVal.innerHTML = `SPECIMEN <strong>0${index + 1}</strong> / <strong>06</strong>`;
+          }
+        }, '-=0.25')
+        .to(digitEl, { y: 0, opacity: 1, duration: 0.12, ease: 'steps(2)' });
+
+        // Content swap
+        reindexTl.call(() => {
+          updateHeroSpecimenContent(sp, index);
+        }, null, '-=0.15');
+
+        // Image optical lock
+        const heroImg = document.getElementById('heroSpecimenImg');
+        if (heroImg) {
+          reindexTl.fromTo(heroImg,
+            { filter: 'contrast(135%) brightness(1.15)', scale: 1.02 },
+            { filter: 'contrast(106%) saturate(92%) brightness(1)', scale: 1, duration: 0.25, ease: 'steps(3)' },
+            '-=0.1'
+          );
+        }
+      } else {
+        updateHeroSpecimenContent(sp, index);
+        const digitEl = document.getElementById('liveActiveDigit');
+        if (digitEl) digitEl.textContent = (index + 1).toString();
+        if (spineVal) spineVal.textContent = `000${index + 1}`;
+        if (counterVal) counterVal.innerHTML = `SPECIMEN <strong>0${index + 1}</strong> / <strong>06</strong>`;
+        if (led) { led.classList.remove('busy'); led.classList.add('live'); }
+        if (statusVal) {
+          statusVal.textContent = '[LOCKED // READY]';
+          statusVal.classList.add('active');
+          statusVal.style.color = '#15803d';
+        }
+        if (plateTag) plateTag.textContent = 'SCAN: OPTICAL 1.0X';
+        isReindexing = false;
+      }
+    }
+
+    // Step Nav Buttons
+    const prevBtn = document.getElementById('heroPrevSpecimenBtn');
+    const nextBtn = document.getElementById('heroNextSpecimenBtn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const nextIdx = (currentHeroSpecimenIndex - 1 + archiveSpecimens.length) % archiveSpecimens.length;
+        reindexArchiveHero(nextIdx);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const nextIdx = (currentHeroSpecimenIndex + 1) % archiveSpecimens.length;
+        reindexArchiveHero(nextIdx);
+      });
+    }
+
+    // Roster buttons click
+    const rosterBtns = document.querySelectorAll('.roster-specimen-btn');
+    rosterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index, 10);
+        reindexArchiveHero(idx);
+      });
+    });
+
+    // Request Access CTA Button
+    const heroIssueAccessBtn = document.getElementById('heroIssueAccessBtn');
+    if (heroIssueAccessBtn) {
+      heroIssueAccessBtn.addEventListener('click', () => {
+        const sp = archiveSpecimens[currentHeroSpecimenIndex];
+        const voucherSpecimenEl = document.querySelector('.doc-col .doc-field-group:nth-of-type(3) .doc-value');
+        if (voucherSpecimenEl) {
+          voucherSpecimenEl.textContent = `LOOK ${sp.id}: ${sp.name.toUpperCase()}`;
+        }
+        const docCard = document.querySelector('.document-card');
+        if (docCard) {
+          docCard.scrollIntoView({ behavior: 'smooth' });
+          gsap.fromTo(docCard, { outline: '4px solid #ffffff' }, { outline: '1px solid #000000', duration: 0.8, ease: 'steps(3)' });
+        }
+      });
+    }
+
+    // 7. EXPERIMENT 02-A: SCANNER CURSOR BAR TELEMETRY
     const scannerCoordinates = document.getElementById('scannerCoordinates');
     const scannerStatus = document.getElementById('scannerStatus');
     const ledgerRows = document.querySelectorAll('.ledger-row');
@@ -2211,94 +3120,6 @@
         }
       });
     });
-
-    // 5. ARCHIVAL SPECIMEN DEEP INSPECTOR LOGIC
-    const archiveSpecimens = [
-      {
-        id: 'WDL-SPECIMEN-01',
-        name: 'Zemire Evening Faille Gown',
-        occasion: 'OCCASION // SENIOR FAREWELL & FORMAL VALEDICTORY BALL',
-        provenance: 'CHRISTIAN DIOR HAUTE COUTURE (FALL 1954)',
-        fiber: '100% PURE SILK FAILLE HEAVY WEFT (1,480g)',
-        condition: 'GRADE A+ (MUSEUM ATELIER RESTORED)',
-        valuation: '₹48,000 ARCHIVAL RECORD BENCHMARK',
-        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
-        basePrice: 2999,
-        adders: { '3': 0, '5': 800, '7': 1500 },
-        fiberTag: '1,480g/m² DENSITY',
-        img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg'
-      },
-      {
-        id: 'WDL-SPECIMEN-02',
-        name: 'Pleated Duet Chiffon Gown',
-        occasion: 'OCCASION // COLLEGE FESTIVAL & STADIUM NIGHT CONCERT',
-        provenance: 'JEAN DESSÈS PARIS ATELIER (SPRING 1951)',
-        fiber: 'FLUID SILK CHIFFON DRAPERY (1,140g)',
-        condition: 'GRADE A (ATELIER PRESERVED)',
-        valuation: '₹54,000 ARCHIVAL RECORD BENCHMARK',
-        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
-        basePrice: 2899,
-        adders: { '3': 0, '5': 800, '7': 1400 },
-        fiberTag: '1,140g/m² DENSITY',
-        img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg'
-      },
-      {
-        id: 'WDL-SPECIMEN-03',
-        name: 'Sculptural Longue Column',
-        occasion: 'OCCASION // DEBATING SOCIETY GALA & SENIOR BANQUET',
-        provenance: 'PAUL POIRET PARIS ATELIER (1983 RE-EDITION)',
-        fiber: 'PURE SILK CRÊPE DE CHINE BIAS CUT (890g)',
-        condition: 'GRADE A+ (EXCELLENT ATELIER TIER)',
-        valuation: '₹38,000 ARCHIVAL RECORD BENCHMARK',
-        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
-        basePrice: 2499,
-        adders: { '3': 0, '5': 700, '7': 1300 },
-        fiberTag: '890g/m² DENSITY',
-        img: '/assets/editorial/robe-longue-1983-12-1-1.jpg'
-      },
-      {
-        id: 'WDL-SPECIMEN-04',
-        name: 'Kinetic Shift & Draped Wrap',
-        occasion: 'OCCASION // CAMPUS FESTIVAL ARENA & CONCERT STAGE',
-        provenance: 'CUSTO BARCELONA SUMMER RUNWAY (2010)',
-        fiber: 'STRUCTURED POLYMER & SILK KNIT (920g)',
-        condition: 'GRADE A (RUNWAY ARCHIVE MINT)',
-        valuation: '₹28,000 ARCHIVAL RECORD BENCHMARK',
-        dualSize: 'PRIMARY UK 6 + COMPLIMENTARY UK 8 [SEALED]',
-        basePrice: 1699,
-        adders: { '3': 0, '5': 500, '7': 1000 },
-        fiberTag: '920g/m² DENSITY',
-        img: '/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg'
-      },
-      {
-        id: 'WDL-SPECIMEN-05',
-        name: 'Strapless Hoop Skirt Architecture',
-        occasion: 'OCCASION // THEATRICAL GALA & PORTFOLIO SHOOT',
-        provenance: 'MID-CENTURY COUTURE ARCHIVE (CA. 1955)',
-        fiber: 'STRUCTURAL FAILLE & STEEL HOOP CORSET (1,780g)',
-        condition: 'GRADE A+ (MUSEUM RESTORED)',
-        valuation: '₹52,000 ARCHIVAL RECORD BENCHMARK',
-        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
-        basePrice: 3199,
-        adders: { '3': 0, '5': 800, '7': 1600 },
-        fiberTag: '1,780g/m² DENSITY',
-        img: '/assets/editorial/strapless-evening-dresses-with-hoop-skirt-rear.jpg'
-      },
-      {
-        id: 'WDL-SPECIMEN-06',
-        name: 'Gilded Court Brocade Robe',
-        occasion: 'OCCASION // SOCIETY CONVOCATION & VALEDICTORY DINNER',
-        provenance: 'BRITISH COURT MAKER (MET COLLECTION CA. 1750)',
-        fiber: 'METALLIC GOLD BROCADE & SILK TAFFETA (1,620g)',
-        condition: 'HISTORIC RE-EDITION GRADE A+',
-        valuation: '₹65,000 ARCHIVAL RECORD BENCHMARK',
-        dualSize: 'PRIMARY UK 8 + COMPLIMENTARY UK 10 [SEALED]',
-        basePrice: 3899,
-        adders: { '3': 0, '5': 1000, '7': 1900 },
-        fiberTag: '1,620g/m² DENSITY',
-        img: '/assets/editorial/court-dress.jpg'
-      }
-    ];
 
     let currentSpecimenIndex = 0;
     let currentSpecimenDays = '3';
