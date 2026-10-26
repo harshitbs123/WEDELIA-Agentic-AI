@@ -1248,11 +1248,11 @@
             [ CATALOGUE MANIFESTO // WDL-SYS-01 ]
           </div>
           <h2 class="hero-big-statement">
-            RENT THE LOOK<br>
-            FOR THE MOMENT.
+            SYSTEMATIC INVENTORY<br>
+            OF RUNWAY ARCHIVES.
           </h2>
           <p style="font-size: 0.85rem; color: #222222; max-width: 520px; line-height: 1.65;">
-            A rigorous technical index of museum-tier and runway evening garments available for 3-day, 5-day, and 7-day college moments. Zero permanent ownership. Two complementary sizes dispatched directly to student residential corridors 24 hours prior to call time.
+            Fast fashion retail is an unindexed liability. WEDELIA operates a calibrated registry of museum-tier and runway silhouettes leased for 3, 5, or 7 days. Dual sizes dispatched. Tamper-sealed. Zero dry cleaning.
           </p>
         </div>
 
@@ -2409,10 +2409,15 @@
         if (voucherSpecimenEl) {
           voucherSpecimenEl.textContent = `LOOK ${sp.id}: ${sp.name.toUpperCase()}`;
         }
+        if (!prefersReducedMotion) {
+          gsap.timeline()
+            .to(dossierPunchBtn, { scale: 0.96, duration: 0.08, ease: 'steps(2)' })
+            .to(dossierPunchBtn, { scale: 1, duration: 0.12, ease: 'steps(2)' });
+        }
         const docCard = document.querySelector('.document-card');
         if (docCard) {
           docCard.scrollIntoView({ behavior: 'smooth' });
-          gsap.fromTo(docCard, { outline: '4px solid #ffffff' }, { outline: '1px solid #000000', duration: 1.2 });
+          gsap.fromTo(docCard, { outline: '4px solid #ffffff' }, { outline: '1px solid #000000', duration: 0.8, ease: 'steps(3)' });
         }
       });
     }
@@ -2430,7 +2435,7 @@
           if (filterVal === 'ALL' || rowSector === filterVal) {
             row.style.display = 'flex';
             if (!prefersReducedMotion) {
-              gsap.fromTo(row, { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.25, ease: 'power2.out' });
+              gsap.fromTo(row, { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.18, ease: 'steps(3)' });
             }
           } else {
             row.style.display = 'none';
@@ -2449,7 +2454,7 @@
           if (match) {
             cell.style.display = 'flex';
             if (!prefersReducedMotion) {
-              gsap.fromTo(cell, { opacity: 0.3 }, { opacity: 1, duration: 0.2 });
+              gsap.fromTo(cell, { opacity: 0.3 }, { opacity: 1, duration: 0.18, ease: 'steps(2)' });
             }
           } else {
             cell.style.display = 'none';

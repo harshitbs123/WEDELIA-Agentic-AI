@@ -653,6 +653,8 @@
       padding: 1.5rem;
       position: relative;
       overflow: hidden;
+      perspective: 1200px;
+      transform-style: preserve-3d;
     }
     @media (min-width: 900px) {
       .fashion-plate-stage {
@@ -663,9 +665,10 @@
     }
     .plate-visual-box {
       position: relative;
-      background: var(--paper);
-      border: 1px solid var(--fg);
-      padding: 1rem;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 1.25rem 1.25rem 1rem;
+      box-shadow: 4px 6px 20px rgba(0, 0, 0, 0.07);
     }
     .plate-img-frame {
       width: 100%;
@@ -769,10 +772,30 @@
       letter-spacing: 0.05em;
     }
     .plate-prose {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: #3f3c36;
       line-height: 1.8;
       margin-bottom: 2rem;
+      column-count: 2;
+      column-gap: 2rem;
+      column-rule: 1px solid rgba(0, 0, 0, 0.08);
+      text-align: justify;
+    }
+    .plate-prose::first-letter {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 2.2rem;
+      float: left;
+      line-height: 0.85;
+      padding-right: 0.45rem;
+      padding-top: 0.1rem;
+      font-weight: 700;
+      color: #7a1f18;
+    }
+    @media (max-width: 600px) {
+      .plate-prose {
+        column-count: 1;
+        text-align: left;
+      }
     }
     .plate-specs-ledger {
       border-top: 1px solid var(--fg);
@@ -1536,10 +1559,10 @@
           </span>
           <h1 class="cover-title">
             WEDELIA
-            <span class="subtitle-italic">Rent the Look for the Moment.</span>
+            <span class="subtitle-italic">The Art of Leased Couture.</span>
           </h1>
           <p class="manifesto-col">
-            You don't need a larger wardrobe. You need access to more moments. High-fashion archives leased for 3, 5, or 7 days, dispatched directly to student residential corridors 24 hours prior to entrance.
+            We do not believe in wardrobe archives that sleep in dark closets. We believe in the sovereign poise of pure silk faille and atelier tailoring, worn for one unforgettable valedictory evening and returned unwashed to our archive curators.
           </p>
         </div>
 
@@ -2420,7 +2443,7 @@
 
       if (!prefersReducedMotion) {
         gsap.timeline()
-          .to('#fashionPlateStage', { opacity: 0.3, x: -16, duration: 0.18, ease: 'power2.in' })
+          .to('#fashionPlateStage', { rotateY: -6, opacity: 0.35, x: -20, duration: 0.2, ease: 'power2.in' })
           .call(() => {
             if (plateLookStamp) plateLookStamp.textContent = data.lookNum;
             if (plateAtelierRef) plateAtelierRef.textContent = data.atelierRef;
@@ -2440,8 +2463,8 @@
             }
           })
           .fromTo('#fashionPlateStage',
-            { opacity: 0.3, x: 20 },
-            { opacity: 1, x: 0, duration: 0.38, ease: 'power2.out' }
+            { rotateY: 8, opacity: 0.35, x: 25 },
+            { rotateY: 0, opacity: 1, x: 0, duration: 0.42, ease: 'power3.out' }
           );
       } else {
         if (plateLookStamp) plateLookStamp.textContent = data.lookNum;

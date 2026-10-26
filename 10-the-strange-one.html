@@ -521,6 +521,11 @@
       border: 1px solid var(--electric-blue);
       box-shadow: 0 0 35px rgba(0, 102, 255, 0.2);
       padding: 1rem;
+      transform: perspective(1000px) rotateY(-3deg) rotateX(2deg);
+      transition: transform 0.4s ease;
+    }
+    .spatial-monolith-frame:hover {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
     }
     .spatial-monolith-img-wrap {
       width: 100%;
@@ -1855,6 +1860,7 @@
       orbitalCards.forEach((c, i) => c.classList.toggle('active', i === idx));
 
       if (!prefersReducedMotion) {
+        gsap.killTweensOf('#spatialObjectStage');
         gsap.timeline()
           .to('#spatialObjectStage', { opacity: 0.2, rotateY: 12, scale: 0.95, duration: 0.18, ease: 'power2.in' })
           .call(() => {
