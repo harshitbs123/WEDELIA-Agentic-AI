@@ -11,12 +11,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #ffffff;
-      --fg: #0d0d0d;
-      --red: #e60012; /* Pure Tokyo Vermilion Editorial Red */
-      --muted: #666666;
-      --dark-surface: #0a0a0c;
-      --hairline: #e5e5e5;
+      --bg: #070708;
+      --fg: #f5f5f7;
+      --red: #ff1f00; /* Pure Tokyo Vermilion Razor Red */
+      --red-glow: rgba(255, 31, 0, 0.45);
+      --muted: #88888e;
+      --dark-surface: #0e0e12;
+      --dark-card: #0f0f13;
+      --hairline: #1c1c22;
+      --hairline-bright: #33333d;
     }
 
     html, body {
@@ -28,6 +31,32 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       max-width: 100vw;
+      position: relative;
+    }
+
+    /* Environmental Two-Speed Ambient Watermark Typography */
+    .environmental-bleed-wrap {
+      position: absolute;
+      top: 5rem;
+      left: 0;
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+    .environmental-bleed-word {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(6.5rem, 18vw, 15rem);
+      line-height: 0.82;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.04);
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.07);
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
     }
 
     /* Underground Nightfile Marquee / Live Ticker */
@@ -128,22 +157,27 @@
       margin-bottom: 3rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
-      border-bottom: 2px solid var(--fg);
+      border-bottom: 1px solid var(--hairline-bright);
       padding-bottom: 1rem;
+      color: #cccccc;
+      position: relative;
+      z-index: 2;
     }
     .red-marker {
       display: inline-block;
       width: 9px;
       height: 9px;
       background: var(--red);
+      box-shadow: 0 0 8px var(--red);
       margin-right: 0.5rem;
     }
     .red-stamp {
       display: inline-block;
-      border: 2px solid var(--red);
+      border: 1px solid var(--red);
       color: var(--red);
+      background: rgba(255, 31, 0, 0.08);
       font-weight: 700;
-      padding: 0.25rem 0.6rem;
+      padding: 0.25rem 0.65rem;
       font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -160,13 +194,15 @@
       grid-template-columns: 1fr;
       gap: 3rem;
       margin-bottom: 6rem;
-      border-bottom: 2px solid var(--fg);
+      border-bottom: 1px solid var(--hairline-bright);
       padding-bottom: 5rem;
+      position: relative;
+      z-index: 2;
     }
     @media (min-width: 1024px) {
       .poster-hero {
         grid-template-columns: 1.15fr 1fr;
-        gap: 5rem;
+        gap: 4.5rem;
         align-items: start;
       }
     }
@@ -176,18 +212,22 @@
       line-height: 0.82;
       letter-spacing: -0.03em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.12);
     }
     .tokyo-sub {
       font-family: 'Anton', sans-serif;
       font-size: clamp(2.2rem, 5.5vw, 4.5rem);
       line-height: 0.92;
-      color: var(--fg);
+      color: #ffffff;
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
+      letter-spacing: -0.02em;
     }
     .tokyo-sub span.red-text {
       color: var(--red);
+      text-shadow: 0 0 20px rgba(255, 31, 0, 0.4);
     }
     .japanese-lead {
       font-family: 'Shippori Mincho', serif;
@@ -197,11 +237,12 @@
       margin-bottom: 2rem;
       padding-left: 1.25rem;
       border-left: 4px solid var(--red);
+      color: #e4e4ec;
     }
     .body-copy {
       font-size: 0.98rem;
       line-height: 1.75;
-      color: #333333;
+      color: #b2b2bc;
       max-width: 520px;
       margin-bottom: 2.5rem;
     }
@@ -213,10 +254,11 @@
     .monument-image-frame {
       position: relative;
       background: #0d0d0d;
-      border: 2px solid var(--fg);
+      border: 2px solid var(--red);
       overflow: hidden;
       max-width: 100%;
       box-sizing: border-box;
+      box-shadow: 0 0 35px rgba(255, 31, 0, 0.22);
     }
     .monument-image-frame img {
       width: 100%;
@@ -225,18 +267,36 @@
       object-fit: cover;
       object-position: center 15%;
       display: block;
-      filter: contrast(118%) saturate(108%) brightness(102%);
+      filter: contrast(116%) saturate(108%) brightness(102%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
     }
-    .monument-image-frame::after {
-      content: '03 // NIGHT';
+    .monument-image-frame .corner-tick {
       position: absolute;
-      bottom: 1.5rem;
-      left: 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--red);
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 12;
+    }
+    .corner-tick.tl { top: 0.5rem; left: 0.5rem; }
+    .corner-tick.tr { top: 0.5rem; right: 0.5rem; }
+    .corner-tick.bl { bottom: 0.5rem; left: 0.5rem; }
+    .corner-tick.br { bottom: 0.5rem; right: 0.5rem; }
+    .monument-image-frame::after {
+      content: '03 // NIGHT DROP';
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
       font-family: 'Anton', sans-serif;
-      font-size: 2.8rem;
+      font-size: clamp(2rem, 4vw, 3rem);
       color: #ffffff;
       line-height: 1;
       letter-spacing: 0.05em;
+      text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+      pointer-events: none;
+      z-index: 10;
     }
     .photo-red-annotation {
       position: absolute;
@@ -250,7 +310,8 @@
       padding: 0.4rem 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      z-index: 10;
+      z-index: 15;
+      box-shadow: 0 0 15px var(--red-glow);
     }
 
     /* Experiment 03-A: Interactive Campaign Poster Flyer Swapper */
@@ -262,20 +323,22 @@
       font-family: 'Space Mono', monospace;
     }
     .flyer-tab-btn {
-      background: #ffffff;
-      color: var(--fg);
-      border: 1px solid var(--fg);
-      padding: 0.35rem 0.65rem;
+      background: #101015;
+      color: #bbbbcc;
+      border: 1px solid var(--hairline-bright);
+      padding: 0.38rem 0.75rem;
       font-family: 'Space Mono', monospace;
       font-weight: 700;
       cursor: pointer;
       font-size: 0.68rem;
+      letter-spacing: 0.08em;
       transition: none;
     }
     .flyer-tab-btn:hover, .flyer-tab-btn.active {
       background: var(--red);
       color: #ffffff;
       border-color: var(--red);
+      box-shadow: 0 0 15px var(--red-glow);
     }
     .poster-razor-wipe {
       position: absolute;
@@ -395,16 +458,18 @@
     }
     .night-photo-box {
       position: relative;
-      border: 2px solid #ffffff;
+      border: 2px solid var(--red);
       overflow: hidden;
+      background: #000000;
+      box-shadow: 0 0 30px rgba(255, 31, 0, 0.28);
     }
     .night-photo-box img {
       width: 100%;
       aspect-ratio: 1/1.25;
       object-fit: cover;
-      object-position: center 15%;
+      object-position: center 38%;
       display: block;
-      filter: contrast(118%) saturate(108%) brightness(102%);
+      filter: contrast(116%) saturate(108%) brightness(102%);
     }
     .night-photo-tag {
       position: absolute;
@@ -669,19 +734,23 @@
       }
     }
     .campaign-poster-card {
-      border: 2px solid var(--fg);
-      background: #ffffff;
+      border: 1px solid var(--hairline-bright);
+      background: var(--dark-card);
+      color: #ffffff;
       padding: 2.25rem 1.75rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
-      transition: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+      cursor: pointer;
     }
     .campaign-poster-card:hover {
       border-color: var(--red);
-      background: #0d0d0d;
+      background: #140507;
       color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(255, 31, 0, 0.25);
     }
     .campaign-poster-card:hover .poster-huge-name {
       color: var(--red) !important;
@@ -690,14 +759,15 @@
       color: #ffffff !important;
     }
     .campaign-poster-card:hover .poster-desc-text {
-      color: #cccccc !important;
+      color: #dddddd !important;
     }
     .campaign-poster-card:hover .poster-bottom-rate {
-      border-top-color: #333333;
-      color: #aaaaaa;
+      border-top-color: var(--red);
+      color: #bbbbbb;
     }
     .campaign-poster-card:hover .poster-bottom-rate .price {
       color: #ffffff;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
     }
     .poster-red-tag {
       font-family: 'Space Mono', monospace;
@@ -714,28 +784,30 @@
       line-height: 0.95;
       text-transform: uppercase;
       margin-bottom: 0.35rem;
+      color: #ffffff;
     }
     .poster-kanji-sub {
       font-family: 'Shippori Mincho', serif;
       font-size: 1rem;
-      color: var(--muted);
+      color: #888898;
       margin-bottom: 1.5rem;
       font-weight: 700;
     }
     .poster-desc-text {
       font-size: 0.88rem;
       line-height: 1.6;
-      color: #333333;
+      color: #a0a0ae;
       margin-bottom: 2rem;
     }
     .poster-bottom-rate {
-      border-top: 2px solid var(--fg);
+      border-top: 1px solid var(--hairline-bright);
       padding-top: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
+      color: #888894;
     }
     .poster-bottom-rate .price {
       font-family: 'Anton', sans-serif;
@@ -866,15 +938,18 @@
       }
     }
     .archive-specimen-poster {
-      border: 2px solid var(--fg);
+      border: 1px solid var(--hairline-bright);
       display: flex;
       flex-direction: column;
       position: relative;
-      background: #ffffff;
+      background: var(--dark-card);
+      color: #ffffff;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
     }
     .archive-poster-img-wrap {
       position: relative;
-      border-bottom: 2px solid var(--fg);
+      border-bottom: 1px solid var(--hairline-bright);
+      background: #000000;
     }
     .archive-poster-img-wrap img {
       width: 100%;
@@ -882,7 +957,7 @@
       object-fit: cover;
       object-position: center 15%;
       display: block;
-      filter: contrast(118%) saturate(108%) brightness(102%);
+      filter: contrast(116%) saturate(108%) brightness(102%);
     }
     .archive-red-pen {
       position: absolute;
@@ -896,6 +971,7 @@
       padding: 0.35rem 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      box-shadow: 0 0 10px var(--red-glow);
     }
     .archive-poster-meta {
       padding: 1.75rem;
@@ -910,7 +986,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 3rem;
-      border-top: 2px solid var(--fg);
+      border-top: 1px solid var(--hairline-bright);
       padding-top: 4rem;
       margin-bottom: 7rem;
     }
@@ -939,16 +1015,17 @@
       line-height: 0.95;
       letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
+      color: #ffffff;
     }
     .story-body {
       font-size: 0.92rem;
       line-height: 1.75;
-      color: #333333;
+      color: #a6a6b4;
     }
 
     /* COMPOSITION 7: FINAL MONUMENTAL CLOSING STATEMENT */
     .closing-monument {
-      border-top: 3px solid var(--fg);
+      border-top: 1px solid var(--hairline-bright);
       padding-top: 4rem;
       margin-bottom: 4rem;
       text-align: center;
@@ -960,6 +1037,7 @@
       text-transform: uppercase;
       letter-spacing: -0.03em;
       margin-bottom: 2rem;
+      color: #ffffff;
     }
     .closing-huge-type span.red {
       background: var(--red);
@@ -968,6 +1046,7 @@
       display: inline-block;
       letter-spacing: -0.01em;
       margin-top: 0.25rem;
+      box-shadow: 0 0 25px var(--red-glow);
     }
     .closing-jp {
       font-family: 'Shippori Mincho', serif;
@@ -975,18 +1054,19 @@
       font-weight: 900;
       letter-spacing: 0.15em;
       margin-bottom: 2.5rem;
+      color: #bbbbcc;
     }
 
     /* Footer */
     footer.red-footer {
-      border-top: 2px solid var(--fg);
+      border-top: 1px solid var(--hairline-bright);
       padding-top: 2rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.72rem;
-      color: var(--muted);
+      color: #777785;
     }
     @media (min-width: 768px) {
       footer.red-footer {
@@ -1369,6 +1449,11 @@
 
   <div class="editorial-wrap">
     
+    <!-- Environmental Two-Speed Ambient Typography -->
+    <div class="environmental-bleed-wrap">
+      <div class="environmental-bleed-word" id="bgChaseWord">CHASE // TOKYO AFTER DARK // 23:47 SHIBUYA // NIGHT DROP // CHASE</div>
+    </div>
+
     <!-- Top Lead Strip -->
     <header class="top-lead">
       <div>
@@ -1400,20 +1485,20 @@
         </p>
 
         <!-- Red Accent Occasion List -->
-        <ul style="list-style: none; border-top: 2px solid var(--fg); padding-top: 1.5rem;">
-          <li style="display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid #eeeeee; font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase;">
+        <ul style="list-style: none; border-top: 1px solid var(--hairline-bright); padding-top: 1.5rem;">
+          <li style="display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid var(--hairline); font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase;">
             <span>01 // FESTIVAL STAR NIGHT</span>
             <span style="font-family: 'Shippori Mincho', serif; font-size: 0.85rem; color: var(--muted);">祝祭の夜</span>
           </li>
-          <li style="display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid #eeeeee; font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase; color: var(--red);">
+          <li style="display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid var(--hairline); font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase; color: var(--red);">
             <span>02 // SENIOR FAREWELL BALL</span>
             <span style="font-family: 'Shippori Mincho', serif; font-size: 0.85rem; color: var(--red);">門出の儀</span>
           </li>
-          <li style="display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid #eeeeee; font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase;">
+          <li style="display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid var(--hairline); font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase;">
             <span>03 // CONCERT STROBE CIRCUIT</span>
             <span style="font-family: 'Shippori Mincho', serif; font-size: 0.85rem; color: var(--muted);">響宴の刻</span>
           </li>
-          <li style="display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid #eeeeee; font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase;">
+          <li style="display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid var(--hairline); font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase;">
             <span>04 // FRESHERS INDUCTION</span>
             <span style="font-family: 'Shippori Mincho', serif; font-size: 0.85rem; color: var(--muted);">新歓の宴</span>
           </li>
@@ -1423,11 +1508,15 @@
       <div class="poster-right">
         <!-- Flyer Tabs (Experiment 03-A) -->
         <div class="poster-flyer-tabs" id="flyerTabs">
-          <button class="flyer-tab-btn active" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" data-tag="PLATE 03: DIOR ATELIER ZEMIRE FAILLE" data-price="VALUATION: ₹48,000 // RENT: ₹2,999" data-callout="03 // NIGHT">01 DIOR FAILLE</button>
-          <button class="flyer-tab-btn" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" data-tag="PLATE 04: JEAN DESSÈS PLEATED CHIFFON" data-price="VALUATION: ₹42,000 // RENT: ₹2,899" data-callout="04 // DUET">02 DESSÈS CHIFFON</button>
-          <button class="flyer-tab-btn" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" data-tag="PLATE 05: RUNWAY KINETIC WRAP" data-price="VALUATION: ₹26,000 // RENT: ₹1,699" data-callout="05 // KINETIC">03 RUNWAY WRAP</button>
+          <button class="flyer-tab-btn active" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" data-tag="PLATE 03: DIOR ATELIER ZEMIRE FAILLE" data-price="ARCHIVE SPECIMEN // RENT: ₹2,999" data-callout="03 // NIGHT">01 DIOR FAILLE</button>
+          <button class="flyer-tab-btn" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" data-tag="PLATE 04: JEAN DESSÈS PLEATED CHIFFON" data-price="ARCHIVE SPECIMEN // RENT: ₹2,899" data-callout="04 // DUET">02 DESSÈS CHIFFON</button>
+          <button class="flyer-tab-btn" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" data-tag="PLATE 05: RUNWAY KINETIC WRAP" data-price="ARCHIVE SPECIMEN // RENT: ₹1,699" data-callout="05 // KINETIC">03 RUNWAY WRAP</button>
         </div>
         <div class="monument-image-frame" id="heroMonumentFrame">
+          <span class="corner-tick tl">⌜</span>
+          <span class="corner-tick tr">⌝</span>
+          <span class="corner-tick bl">⌞</span>
+          <span class="corner-tick br">⌟</span>
           <div class="photo-red-annotation">DISPATCH STATUS: ACTIVE</div>
           <div class="poster-razor-wipe" id="posterRazorWipe"></div>
           <div class="laser-reticle" id="laserReticle"></div>
@@ -1436,7 +1525,7 @@
         </div>
         <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted);">
           <span id="heroPlateTag">PLATE 03: DIOR ATELIER ZEMIRE FAILLE</span>
-          <span id="heroPriceTag">VALUATION: ₹48,000 // RENT: ₹2,999</span>
+          <span id="heroPriceTag">ARCHIVE SPECIMEN // RENT: ₹2,999</span>
         </div>
       </div>
     </section>
@@ -1457,7 +1546,7 @@
             STREET RECORD // SHIBUYA CROSSING × NORTH CAMPUS DEL
           </div>
           <p style="font-size: 0.92rem; line-height: 1.75; color: #cccccc;" id="nightStoryText">
-            The clock hits 23:47. The festival headline act just concluded at the college sports grounds. The entire crowd floods the streets, catching late-night autos toward Hudson Lane and Majnu ka Tilla. You are not wearing an ordinary Zara polyester slip that tears at the seam. You are wearing a sculpted runway silhouette with 1,200 grams of structured faille drape.
+            The clock hits 23:47. The festival headline act just concluded at the college sports grounds. The entire crowd floods the streets, catching late-night autos toward Hudson Lane and Majnu ka Tilla. You are not wearing an ordinary Zara polyester slip that tears at the seam. You are wearing a sculpted runway silhouette in heavy architectural silk faille with sculptured peplum lines.
           </p>
           <!-- Experiment 03-D: Tokyo Night Time-Lapse Clock Pills -->
           <div class="night-time-pills" id="nightTimePills">
@@ -1468,14 +1557,14 @@
         </div>
 
         <div class="night-photo-box">
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Runway Kinetic Shift">
+          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Nocturnal Haute Couture Peplum Silhouette">
           <div class="night-photo-tag">CAMERA: TOKYO FLASH 35MM</div>
         </div>
 
         <div>
           <div style="font-size: 0.92rem; line-height: 1.75; color: #cccccc;">
             <strong style="color: #ffffff; font-family: 'Space Mono', monospace; display: block; margin-bottom: 0.5rem; font-size: 0.82rem; letter-spacing: 0.08em;">THE REVOLUTION OF LEASED LUXURY</strong>
-            When you own a ₹40,000 dress, you treat it like a fragile heirloom. You sit carefully, you stress about stains, you hesitate to dance. When WEDELIA leases you an archival piece with a ₹0 liability shield, you own the energy of the night completely. Spill mocktails, dance through fog machines, jump to bass drops. We absorb the wear.
+            When you purchase a ₹30,000 gown for a single night, you treat it like a fragile heirloom. You sit carefully, you stress about stains, you hesitate to dance. When WEDELIA leases you an archival piece with a ₹0 liability shield, you own the energy of the night completely. Spill mocktails, dance through fog machines, jump to bass drops. We absorb the wear.
           </div>
         </div>
       </div>
@@ -1713,15 +1802,15 @@
             <h3 style="font-family: 'Anton', sans-serif; font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
               PLEATED DUET GOWN (1951)
             </h3>
-            <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem;">
-              ARCHIVE: JEAN DESSES PARIS ATELIER<br>
+            <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #888899; line-height: 1.6; margin-bottom: 1.5rem;">
+              ARCHIVE: JEAN DESSÈS PARIS ATELIER<br>
               FABRIC: HAND-PLEATED SILK CHIFFON<br>
-              RETAIL VALUE: ₹42,000<br>
+              PROVENANCE: CERTIFIED HAUTE COUTURE PATRIMONY<br>
               INCLUDES: PRIMARY + COMPLIMENTARY BACKUP
             </p>
           </div>
-          <div style="border-top: 2px solid var(--fg); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem;">RENTAL (3 DAYS)</span>
+          <div style="border-top: 1px solid var(--hairline-bright); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #888899;">RENTAL (3 DAYS)</span>
             <span style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: var(--red);">₹2,899</span>
           </div>
         </div>
@@ -1737,15 +1826,15 @@
             <h3 style="font-family: 'Anton', sans-serif; font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
               KINETIC SHIFT & WRAP
             </h3>
-            <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem;">
+            <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #888899; line-height: 1.6; margin-bottom: 1.5rem;">
               ARCHIVE: RUNWAY SUMMER EDITION<br>
               FABRIC: METALLIC REFLECTIVE KNIT<br>
-              RETAIL VALUE: ₹22,000<br>
+              PROVENANCE: ACTIVE RUNWAY SPECIMEN DISPATCH<br>
               INCLUDES: PRIMARY + COMPLIMENTARY BACKUP
             </p>
           </div>
-          <div style="border-top: 2px solid var(--fg); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem;">RENTAL (3 DAYS)</span>
+          <div style="border-top: 1px solid var(--hairline-bright); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #888899;">RENTAL (3 DAYS)</span>
             <span style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: var(--red);">₹1,699</span>
           </div>
         </div>
@@ -2014,6 +2103,18 @@
 
     // 2. TYPOGRAPHY COLLISION MOVEMENT SYSTEMS (Experiment 03-B)
     if (!prefersReducedMotion) {
+      // Two-speed background chase typography
+      gsap.to('#bgChaseWord', {
+        x: -260,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.editorial-wrap',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.6
+        }
+      });
+
       // Two-speed counter-directional scrub collision on hero typography
       gsap.to('.brand-name', {
         x: -45,
@@ -2214,9 +2315,9 @@
 
       // Night file photo scale on scroll
       gsap.from('.night-photo-box img', {
-        scale: 1.15,
-        filter: 'contrast(130%) brightness(0.85)',
-        duration: 1,
+        scale: 1.12,
+        opacity: 0.75,
+        duration: 0.9,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.night-file-section',
@@ -2300,7 +2401,7 @@
         clock: 'CALL TIME // 19:30 IST • MIRANDA / STEPHENS / LSR PORCH',
         heroName: 'Zemire Obsidian Silk Faille',
         heroSub: '門出 // MONUMENTAL VALEDICTORY ARCHITECTURE',
-        story: 'Cut on sovereign lines from 1,480g pure silk faille. A sculptural peplum silhouette designed for senior farewell banquets and departmental red carpets where you permanently author the photographic record of your graduation night.',
+        story: 'Cut on sovereign lines from pure archival silk faille. A sculptural peplum silhouette designed for senior farewell banquets and departmental red carpets where you permanently author the photographic record of your graduation night.',
         occasion: 'SENIOR FAREWELL BALL & VALEDICTORY GALA',
         hub: 'MIRANDA / STEPHENS (24 MIN)',
         sizing: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
