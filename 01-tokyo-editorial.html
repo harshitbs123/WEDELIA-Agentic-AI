@@ -564,6 +564,7 @@
       background: var(--paper);
       border-left: 3px solid var(--fg);
       margin-bottom: 1.5rem;
+      will-change: transform, opacity;
     }
     .letter-body {
       font-size: 1.05rem;
@@ -629,6 +630,7 @@
       border: 1px solid var(--line);
       background: var(--paper);
       padding: 1.5rem;
+      overflow: hidden;
     }
     .issue-feature-visual img {
       width: 100%;
@@ -637,6 +639,7 @@
       object-position: center 15%;
       display: block;
       filter: contrast(104%) saturate(96%);
+      will-change: transform;
     }
     .feature-side-dossier {
       display: flex;
@@ -648,152 +651,6 @@
       line-height: 1.85;
       color: #3b3935;
       margin-bottom: 2rem;
-    }
-
-    /* COMPOSITION 5: FASHION SPECIMEN STUDY (Museum Documentation) */
-    .specimen-study-section {
-      margin-bottom: 8rem;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 5rem;
-    }
-    .specimen-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      background: #faf9f5;
-      border: 1px solid var(--line);
-      padding: 2.5rem 1.5rem;
-      max-width: 100%;
-      overflow: hidden;
-    }
-    @media (min-width: 1024px) {
-      .specimen-grid {
-        grid-template-columns: 1fr 1.2fr;
-        padding: 3.5rem 3rem;
-        gap: 4rem;
-      }
-    }
-    .specimen-img-col {
-      position: relative;
-      border: 1px solid var(--line);
-      background: #ffffff;
-      padding: 1.25rem;
-      max-width: 100%;
-      overflow: hidden;
-      touch-action: pan-y;
-    }
-    .specimen-img-col img {
-      width: 100%;
-      max-height: 580px;
-      object-fit: cover;
-      object-position: center 15%;
-      display: block;
-      filter: contrast(104%) saturate(96%);
-      transition: object-position 0.4s ease;
-    }
-    .specimen-registration-mark {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      z-index: 10;
-    }
-    .mobile-touch-inspector-hint {
-      display: none;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-    @media (max-width: 768px) {
-      .mobile-touch-inspector-hint {
-        display: block;
-      }
-      .specimen-grid {
-        padding: 1.5rem 1rem;
-        gap: 2rem;
-      }
-      .specimen-img-col {
-        padding: 0.75rem;
-      }
-      .specimen-crop-toolbar {
-        bottom: 0.75rem;
-        left: 0.75rem;
-        right: 0.75rem;
-        display: flex;
-        justify-content: center;
-        gap: 0.25rem;
-      }
-      .crop-toggle-btn {
-        padding: 0.35rem 0.5rem;
-        font-size: 0.62rem;
-        flex: 1;
-        text-align: center;
-      }
-      .specimen-data-table {
-        font-size: 0.75rem;
-      }
-      .specimen-data-table td {
-        padding: 0.45rem 0;
-      }
-    }
-    .specimen-sheet {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .specimen-plate-id {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-    .specimen-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-    .specimen-data-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 2rem;
-      font-size: 0.82rem;
-    }
-    .specimen-data-table td {
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .specimen-data-table td.label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      width: 42%;
-    }
-    .specimen-pricing-bar {
-      border-top: 2px solid var(--fg);
-      padding-top: 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    .specimen-pricing-bar .val-col {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .specimen-pricing-bar .rent-col {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--fg);
     }
 
     /* COMPOSITION 6: THE EDITORIAL FASHION PLATE (OVERSIZED MAGAZINE SPREAD REVEAL) */
@@ -1640,28 +1497,6 @@
       font-weight: 700;
     }
 
-    /* Experiment 5: Archival Fashion Plate Crop Selector */
-    .specimen-crop-toolbar {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-    }
-    .crop-toggle-btn {
-      background: var(--bg);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      padding: 0.35rem 0.65rem;
-      cursor: pointer;
-      letter-spacing: 0.08em;
-      transition: all 0.2s ease;
-    }
-    .crop-toggle-btn:hover, .crop-toggle-btn.active {
-      background: var(--fg);
-      color: var(--bg);
-      border-color: var(--fg);
-    }
   </style>
 </head>
 <body data-world="read">
@@ -1871,24 +1706,24 @@
     </section>
 
     <!-- COMPOSITION 3: EDITOR'S NOTE & CULTURAL ESSAY -->
-    <section class="editors-letter-spread" id="folioEditorsLetterSpread">
+    <section class="editors-letter-spread" id="folioEditorsLetterSpread" data-aos="fade-up">
       <div class="letter-sidebar">
         <div>
-          <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.1em;">
+          <div class="letter-kicker" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.1em;">
             EDITOR'S NOTE // ESSAY NO. 14
           </div>
-          <div class="letter-sidebar-quote">
+          <div class="letter-sidebar-quote" data-aos="fade-right">
             "You spend four thousand rupees on a fast-fashion dress to attend one college fest, post three photos, and bury it in your hostel cupboard forever. This is madness."
           </div>
         </div>
 
-        <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem;">
+        <div class="letter-dispatch-colophon" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem;">
           SHIBUYA BUREAU × DELHI NORTH CAMPUS<br>
           PUBLISHED: AUTUMN 2026
         </div>
       </div>
 
-      <div class="letter-body">
+      <div class="letter-body" data-aos="fade-left">
         <p>
           <span class="drop-letter">W</span>hen we examine university life through the lens of aesthetic consumption, we uncover an absurd paradox. A student's social calendar is punctuated by rare, unforgettable peaks: Freshers Induction, the Annual Cultural Fest, the Department Farewell, and society balls. Each event commands a singular visual statement. Yet traditional fashion retail demands that you purchase ownership of these garments permanently.
         </p>
@@ -1902,7 +1737,7 @@
     </section>
 
     <!-- COMPOSITION 4: MAGAZINE ISSUE SPREAD (Crossing headline) -->
-    <section class="issue-spread-feature">
+    <section class="issue-spread-feature" id="issueSpreadFeature" data-aos="fade-up">
       <div class="issue-feature-header">
         <span>EDITORIAL SPREAD // ATELIER ANATOMY</span>
         <span>ISSUE 26 FEATURE STORY</span>
@@ -1915,17 +1750,17 @@
       </div>
 
       <div class="issue-feature-stage">
-        <div class="issue-feature-visual">
+        <div class="issue-feature-visual" data-aos="fade-right">
           <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Runway Kinetic Shift">
-          <div style="display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 1rem;">
+          <div class="issue-feature-visual-meta" style="display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 1rem;">
             <span>FIGURE 02: KINETIC REFLECTIVE KNIT</span>
             <span>RUNWAY ARCHIVE // SUMMER EDITION</span>
           </div>
         </div>
 
-        <div class="feature-side-dossier">
+        <div class="feature-side-dossier" data-aos="fade-left">
           <div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.75rem; letter-spacing: 0.1em;">
+            <div class="dossier-kicker" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.75rem; letter-spacing: 0.1em;">
               THE POWER OF LEASED LUXURY
             </div>
             <p class="feature-dossier-prose">
@@ -1936,7 +1771,7 @@
             </p>
           </div>
 
-          <div style="border-top: 1px solid var(--line); padding-top: 1.5rem; font-family: 'Space Mono', monospace; font-size: 0.75rem;">
+          <div class="dossier-dispatch-protocol" style="border-top: 1px solid var(--line); padding-top: 1.5rem; font-family: 'Space Mono', monospace; font-size: 0.75rem;">
             DISPATCH PROTOCOL: SEALED DUAL-SIZE CARTON<br>
             CAMPUS NODES: MIRANDA HOUSE • LSR • ST. STEPHEN'S • IIT • NIFT
           </div>
@@ -1944,71 +1779,8 @@
       </div>
     </section>
 
-    <!-- COMPOSITION 5: FASHION SPECIMEN STUDY (Museum Documentation) -->
-    <section class="specimen-study-section">
-      <div class="mobile-touch-inspector-hint">TOUCH SPECIMEN TO PAN LOUPE // EXAMINE DRAPE & WEAVE</div>
-      <div class="specimen-grid">
-        <div class="specimen-img-col" id="specimenImgContainer">
-          <span class="specimen-registration-mark">[SPECIMEN REF: WDL-014]</span>
-          <div class="print-loupe-marker" id="loupeMarker">
-            <span class="crosshair">+</span>
-            <span class="loupe-readout">PROOF 014 // <span id="loupeCoords">X:00 Y:00</span></span>
-          </div>
-          <img id="specimenImage" src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Sculptural Longue Column Specimen">
-          <div class="specimen-crop-toolbar">
-            <button class="crop-toggle-btn active" data-crop="full">01 SILHOUETTE</button>
-            <button class="crop-toggle-btn" data-crop="detail">02 DRAPE DETAIL</button>
-            <button class="crop-toggle-btn" data-crop="tag">03 ATELIER ARCHIVE</button>
-          </div>
-        </div>
-
-        <div class="specimen-sheet">
-          <div>
-            <div class="specimen-plate-id">ARCHIVE SPECIMEN NO. 067 // HISTORICAL RECORD</div>
-            <h3 class="specimen-title">Sculptural Longue Column</h3>
-            <p style="font-size: 0.92rem; color: #44413b; line-height: 1.7; margin-bottom: 1.75rem;">
-              Crafted in Paris atelier archives, 1983. A sovereign floor-length evening column cut on the bias from heavy silk crêpe de chine. Designed for institutional formals, senior valedictories, and black-tie society banquets.
-            </p>
-
-            <table class="specimen-data-table">
-              <tr>
-                <td class="label">FIBER COMPOSITION</td>
-                <td>PURE SILK CRÊPE DE CHINE BIAS CUT</td>
-              </tr>
-              <tr>
-                <td class="label">FIT TOLERANCE</td>
-                <td>BUST 34" // WAIST 26" // LENGTH 57"</td>
-              </tr>
-              <tr>
-                <td class="label">DUAL-SIZE PROTOCOL</td>
-                <td>UK 8 (PRIMARY) + UK 10 (COMPLIMENTARY BACKUP)</td>
-              </tr>
-              <tr>
-                <td class="label">RECOMMENDED MOMENT</td>
-                <td>SENIOR FAREWELL BALL & DEBATING SOCIETY GALA</td>
-              </tr>
-              <tr>
-                <td class="label">DAMAGE SHIELD</td>
-                <td>₹0 LIABILITY (FULL ACCIDENTAL SPILL COVERAGE)</td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="specimen-pricing-bar">
-            <div class="val-col">
-              RESERVATION WINDOW<br>
-              <strong>EDITORIAL ARCHIVE // OPEN</strong>
-            </div>
-            <div class="rent-col">
-              ₹2,499 / 4 NIGHTS
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- COMPOSITION 6: THE EDITORIAL FASHION PLATE (OVERSIZED MAGAZINE SPREAD REVEAL) -->
-    <section class="revolving-archive-section" id="editorialFashionPlateSection">
+    <section class="revolving-archive-section" id="editorialFashionPlateSection" data-aos="fade-up">
       <div class="fashion-plate-nav-bar">
         <div>
           <span style="font-weight: 700;">FOLIO P. 42–47 // 意匠図版 LOOKBOOK PLATES</span>
@@ -2018,6 +1790,7 @@
           <button class="plate-tab-btn active" data-index="0">01 // LOOK 014 (FAILLE)</button>
           <button class="plate-tab-btn" data-index="1">02 // LOOK 029 (DUET)</button>
           <button class="plate-tab-btn" data-index="2">03 // LOOK 053 (BROCADE)</button>
+          <button class="plate-tab-btn" data-index="3">04 // LOOK 067 (COLUMN)</button>
         </div>
       </div>
 
@@ -2404,34 +2177,8 @@
         }, '-=0.3');
     }
 
-    // 2. TYPOGRAPHY MOVEMENT SYSTEMS
+    // 2. OCCASION INDEX & SPREAD CHOREOGRAPHY
     if (!prefersReducedMotion) {
-      // Split/horizontal drift on oversized crossing headline
-      gsap.to('.crossing-headline', {
-        xPercent: -5,
-        letterSpacing: '0.03em',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.spread-hero-frame',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.2
-        }
-      });
-
-      // Editorial pullquote horizontal drift
-      gsap.from('.essay-pullquote', {
-        x: -40,
-        autoAlpha: 0.3,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.essay-spread',
-          start: 'top 85%',
-          end: 'top 45%',
-          scrub: 1
-        }
-      });
-
       // Occasion rows reveal with deliberate staggering
       gsap.utils.toArray('.occasion-row').forEach((row, i) => {
         gsap.from(row, {
@@ -2448,6 +2195,207 @@
         });
       });
 
+      // COMPOSITION 3: EDITOR'S NOTE // ESSAY NO. 14 CHOREOGRAPHY
+      const editorsSpread = document.getElementById('folioEditorsLetterSpread');
+      if (editorsSpread) {
+        const edTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: editorsSpread,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          },
+          defaults: { ease: 'power3.out' }
+        });
+
+        edTl
+          .from('.letter-sidebar', {
+            y: 26,
+            opacity: 0,
+            duration: 0.85
+          })
+          .from('.letter-sidebar-quote', {
+            x: -20,
+            y: 10,
+            opacity: 0,
+            duration: 0.85,
+            ease: 'power2.out'
+          }, '-=0.45')
+          .from('.letter-body .drop-letter', {
+            scale: 1.16,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'back.out(1.6)'
+          }, '-=0.5')
+          .from('.letter-body p', {
+            y: 20,
+            opacity: 0,
+            duration: 0.75,
+            stagger: 0.14,
+            ease: 'power2.out'
+          }, '-=0.45')
+          .from('.letter-dispatch-colophon', {
+            y: 12,
+            opacity: 0,
+            duration: 0.6
+          }, '-=0.35');
+
+        // Continuous editorial page depth drift across scroll
+        gsap.to('.letter-sidebar-quote', {
+          yPercent: -5,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: editorsSpread,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        });
+
+        gsap.to('.letter-body', {
+          yPercent: 3,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: editorsSpread,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        });
+      }
+
+      // COMPOSITION 4: MAGAZINE ISSUE SPREAD // ATELIER ANATOMY CHOREOGRAPHY
+      const issueFeature = document.querySelector('.issue-spread-feature');
+      if (issueFeature) {
+        const featTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: issueFeature,
+            start: 'top 78%',
+            toggleActions: 'play none none none'
+          },
+          defaults: { ease: 'power3.out' }
+        });
+
+        featTl
+          .from('.issue-feature-header', {
+            y: -12,
+            opacity: 0,
+            duration: 0.6
+          })
+          .from('.crossing-headline', {
+            y: 30,
+            opacity: 0,
+            duration: 0.9,
+            ease: 'power3.out'
+          }, '-=0.35')
+          .from('.issue-feature-visual', {
+            y: 25,
+            opacity: 0,
+            scale: 0.98,
+            duration: 0.85,
+            ease: 'power3.out'
+          }, '-=0.55')
+          .from('.issue-feature-visual img', {
+            clipPath: 'inset(10% 0 10% 0)',
+            scale: 1.05,
+            duration: 1.1,
+            ease: 'power3.inOut'
+          }, '-=0.65')
+          .from('.feature-side-dossier > div > *', {
+            y: 18,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 0.7,
+            ease: 'power2.out'
+          }, '-=0.55')
+          .from('.dossier-dispatch-protocol', {
+            y: 12,
+            opacity: 0,
+            duration: 0.6
+          }, '-=0.3');
+
+        // Continuous scrub: crossing headline tracks across print spread
+        gsap.to('.crossing-headline', {
+          xPercent: -4,
+          letterSpacing: '0.015em',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: issueFeature,
+            start: 'top 85%',
+            end: 'bottom 15%',
+            scrub: 1.2
+          }
+        });
+
+        // Continuous scrub: runway photograph vertical parallax drift inside frame
+        gsap.to('.issue-feature-visual img', {
+          yPercent: -6,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: issueFeature,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.4
+          }
+        });
+
+        // Subtle counter-drift on side dossier for depth
+        gsap.to('.feature-side-dossier', {
+          yPercent: 3,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: issueFeature,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.3
+          }
+        });
+      }
+
+      // COMPOSITION 6: PUBLISHED ROTATION STAGE REVEAL & PARALLAX
+      const plateSection = document.getElementById('editorialFashionPlateSection');
+      if (plateSection) {
+        const plateTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: plateSection,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          },
+          defaults: { ease: 'power3.out' }
+        });
+
+        plateTl
+          .from('.fashion-plate-nav-bar', {
+            y: 15,
+            opacity: 0,
+            duration: 0.65
+          })
+          .from('#fashionPlateStage', {
+            y: 28,
+            opacity: 0,
+            scale: 0.985,
+            duration: 0.9,
+            ease: 'power3.out'
+          }, '-=0.4')
+          .from('.plate-look-num-stamp', {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.5,
+            ease: 'back.out(1.8)'
+          }, '-=0.5');
+
+        // Continuous scrub on active plate image inside frame
+        gsap.to('#plateActiveImg', {
+          yPercent: -5,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: plateSection,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        });
+      }
+
       // Asymmetric Japanese Covenant Folio Clauses
       gsap.utils.toArray('.covenant-clause-item').forEach((item, i) => {
         gsap.from(item, {
@@ -2459,35 +2407,6 @@
           scrollTrigger: {
             trigger: item,
             start: 'top 88%'
-          }
-        });
-      });
-    }
-
-    // 3. IMAGE MOVEMENT & PHOTOGRAPHIC REVEALS
-    if (!prefersReducedMotion) {
-      // Museum specimen card image unmask
-      gsap.from('.specimen-img-col img', {
-        clipPath: 'inset(100% 0 0 0)',
-        scale: 1.1,
-        duration: 1.4,
-        ease: 'power3.inOut',
-        scrollTrigger: {
-          trigger: '.specimen-study-card',
-          start: 'top 75%'
-        }
-      });
-
-      // Look duo subtle vertical parallax
-      gsap.utils.toArray('.look-frame img').forEach(img => {
-        gsap.to(img, {
-          yPercent: -6,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: img.closest('.look-frame'),
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.5
           }
         });
       });
@@ -2534,73 +2453,7 @@
       });
     }
 
-    // 6. ART DIRECTOR REGISTRATION LOUPE (EXPERIMENT 01-C & MOBILE TOUCH INSPECTION)
-    const specimenContainer = document.getElementById('specimenImgContainer');
-    const loupe = document.getElementById('loupeMarker');
-    const loupeCoords = document.getElementById('loupeCoords');
-    if (specimenContainer && loupe) {
-      specimenContainer.addEventListener('mouseenter', () => { loupe.style.opacity = '1'; });
-      specimenContainer.addEventListener('mouseleave', () => { loupe.style.opacity = '0'; });
-      specimenContainer.addEventListener('mousemove', (e) => {
-        const rect = specimenContainer.getBoundingClientRect();
-        const x = Math.round(e.clientX - rect.left);
-        const y = Math.round(e.clientY - rect.top);
-        loupe.style.transform = `translate(${x + 12}px, ${y + 12}px)`;
-        if (loupeCoords) loupeCoords.textContent = `X:${x} Y:${y}`;
-      });
-
-      // Mobile Touch Handling for Loupe
-      specimenContainer.addEventListener('touchstart', (e) => {
-        loupe.style.opacity = '1';
-        const touch = e.touches[0];
-        const rect = specimenContainer.getBoundingClientRect();
-        const x = Math.round(touch.clientX - rect.left);
-        const y = Math.round(touch.clientY - rect.top);
-        loupe.style.transform = `translate(${x}px, ${y}px)`;
-        if (loupeCoords) loupeCoords.textContent = `X:${x} Y:${y}`;
-      }, { passive: true });
-
-      specimenContainer.addEventListener('touchmove', (e) => {
-        const touch = e.touches[0];
-        const rect = specimenContainer.getBoundingClientRect();
-        const x = Math.round(touch.clientX - rect.left);
-        const y = Math.round(touch.clientY - rect.top);
-        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-          loupe.style.transform = `translate(${x}px, ${y}px)`;
-          if (loupeCoords) loupeCoords.textContent = `X:${x} Y:${y}`;
-        }
-      }, { passive: true });
-
-      specimenContainer.addEventListener('touchend', () => {
-        setTimeout(() => { loupe.style.opacity = '0'; }, 1000);
-      }, { passive: true });
-    }
-
-    // 7. ARCHIVAL FASHION PLATE CROP SELECTOR (EXPERIMENT 01-E)
-    const cropBtns = document.querySelectorAll('.crop-toggle-btn');
-    const specImg = document.getElementById('specimenImage');
-    const cropStates = {
-      full: { scale: 1, objectPosition: 'center center' },
-      detail: { scale: 1.45, objectPosition: 'center 30%' },
-      tag: { scale: 2.1, objectPosition: 'center 15%' }
-    };
-    cropBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        cropBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const crop = btn.dataset.crop;
-        if (specImg && cropStates[crop]) {
-          gsap.to(specImg, {
-            scale: cropStates[crop].scale,
-            objectPosition: cropStates[crop].objectPosition,
-            duration: 0.7,
-            ease: 'power3.inOut'
-          });
-        }
-      });
-    });
-
-    // 7.5 THE EDITORIAL FASHION PLATE INTERACTIVE SYSTEM
+    // 6. THE EDITORIAL FASHION PLATE INTERACTIVE SYSTEM (4 ROTATION ENTRIES)
     const platesData = [
       {
         lookNum: 'LOOK 014',
@@ -2617,6 +2470,7 @@
         valuation: 'ARCHIVE NO. 014 // PARIS ATELIER',
         tariff: '₹2,999 / 4 NIGHTS (DUAL-SIZE)',
         price: 2999,
+        garmentId: 'WD-005',
         slipName: 'LOOK 014: DIOR ZEMIRE FAILLE',
         nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 029)'
       },
@@ -2635,6 +2489,7 @@
         valuation: 'ARCHIVE NO. 029 // PARIS ATELIER',
         tariff: '₹2,899 / 4 NIGHTS (DUAL-SIZE)',
         price: 2899,
+        garmentId: 'WD-001',
         slipName: 'LOOK 029: JEAN DESSES PLEATED DUET',
         nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 053)'
       },
@@ -2653,7 +2508,27 @@
         valuation: 'ARCHIVE NO. 053 // ROYAL HISTORIC',
         tariff: '₹3,899 / 4 NIGHTS (DUAL-SIZE)',
         price: 3899,
+        garmentId: 'WD-003',
         slipName: 'LOOK 053: GILDED COURT BROCADE',
+        nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 067)'
+      },
+      {
+        lookNum: 'LOOK 067',
+        atelierRef: 'PARIS ATELIER ARCHIVE // SPRING 1983',
+        dualNotice: '✦ DUAL-SIZE (UK 8 + UK 10 COMPLIMENTARY)',
+        img: '/assets/editorial/robe-longue-1983-12-1-1.jpg',
+        objectPosition: 'center 15%',
+        kanjiRubi: '静寂の夜を支配する、彫刻的ロングコラム。',
+        titleEn: 'Sculptural Longue Silk Column',
+        occasionBadge: 'OCCASION: SENIOR FAREWELL BALL & DEBATING SOCIETY GALA',
+        prose: "Crafted in Paris atelier archives, 1983. A sovereign floor-length evening column cut on the bias from heavy silk crêpe de chine. Designed for institutional formals, senior valedictories, and black-tie society banquets where pure sculptural restraint commands the room.",
+        fiber: 'PURE SILK CRÊPE DE CHINE BIAS CUT',
+        timing: 'CEREMONY CALL TIME // 19:00 IST',
+        valuation: 'ARCHIVE NO. 067 // PARIS ARCHIVE',
+        tariff: '₹2,499 / 4 NIGHTS (DUAL-SIZE)',
+        price: 2499,
+        garmentId: 'WD-002',
+        slipName: 'LOOK 067: SCULPTURAL LONGUE COLUMN',
         nextLabel: 'TURN THE PAGE // 次の図版 (LOOK 014)'
       }
     ];
@@ -2710,6 +2585,9 @@
               const labelEl = turnPlateBtn.querySelector('span:first-child');
               if (labelEl) labelEl.textContent = data.nextLabel;
             }
+            if (pinToSlipBtn && data.garmentId) {
+              pinToSlipBtn.setAttribute('data-rent-garment', data.garmentId);
+            }
           })
           .fromTo('#fashionPlateStage',
             { rotateY: 8, opacity: 0.35, x: 25 },
@@ -2734,6 +2612,9 @@
         if (turnPlateBtn) {
           const labelEl = turnPlateBtn.querySelector('span:first-child');
           if (labelEl) labelEl.textContent = data.nextLabel;
+        }
+        if (pinToSlipBtn && data.garmentId) {
+          pinToSlipBtn.setAttribute('data-rent-garment', data.garmentId);
         }
       }
     }
@@ -3000,6 +2881,19 @@
         });
       });
     }
+
+    // 10. REFRESH SCROLLTRIGGER AFTER FONTS & IMAGES LOAD
+    function refreshScrollTriggers() {
+      ScrollTrigger.refresh();
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        refreshScrollTriggers();
+      });
+    }
+    window.addEventListener('load', () => {
+      refreshScrollTriggers();
+    });
   </script>
   <script type="module" src="/src/shared/rental-modal.js"></script>
 
