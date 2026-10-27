@@ -77,22 +77,22 @@ async function run() {
       console.error(`🚨 BROKEN IMAGES DETECTED:`, brokenImgs);
     }
 
-    // 3. Check presence of all 11 user-selected images (red1 to red11) in the DOM
+    // 3. Check presence of selected editorial images in the DOM
     const presentSrcs = imgAudit.map(i => i.src);
     const requiredImages = [
-      'red1.webp', 'red2.avif', 'red3.avif', 'red4.avif', 'red5.avif',
+      'red1.webp', 'red2.avif', 'red3.avif', 'red4.avif', 'red4-alt.avif', 'red5.avif',
       'red6.avif', 'red7.avif', 'red8.avif', 'red9.avif', 'red10.avif', 'red11.avif'
     ];
 
     const missingImages = requiredImages.filter(req => !presentSrcs.some(src => src.includes(req)));
-    console.log(`[${vp.name}] Required 11 images verified. Missing count: ${missingImages.length}`);
+    console.log(`[${vp.name}] Required images verified. Missing count: ${missingImages.length}`);
     if (missingImages.length > 0) {
       console.error(`🚨 MISSING REQUIRED IMAGES:`, missingImages);
     }
 
-    // 4. Check Night Archive Photoshoot specimens count
+    // 4. Check Night Archive Photoshoot specimens count (9 specimens after removing Split-Tone & Wet-Look)
     const dossierCount = await page.eval(`document.querySelectorAll('.night-archive-photoshoot .dossier-frame').length`);
-    console.log(`[${vp.name}] Dossier items in Night Archive photoshoot: ${dossierCount} / 11`);
+    console.log(`[${vp.name}] Dossier items in Night Archive photoshoot: ${dossierCount} / 9`);
 
     // Take screenshot of hero
     await page.eval(`window.scrollTo(0, 0)`);
@@ -171,12 +171,12 @@ async function run() {
   console.log('========================================');
   console.table(results);
 
-  const anyFailures = results.some(r => r.overflow > 0 || r.brokenImages > 0 || r.missingRequired > 0 || r.dossierCount !== 11);
+  const anyFailures = results.some(r => r.overflow > 0 || r.brokenImages > 0 || r.missingRequired > 0 || r.dossierCount !== 9);
   if (anyFailures) {
     console.error('❌ VERIFICATION FAILED: Review table above.');
     process.exit(1);
   } else {
-    console.log('✅ ALL TESTS PASSED: All 11 images verified cleanly across all 5 viewports with 0 overflow and 0 broken images.');
+    console.log('✅ ALL TESTS PASSED: All editorial images verified cleanly across all 5 viewports with 0 overflow and 0 broken images.');
   }
 }
 

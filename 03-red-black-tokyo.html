@@ -645,7 +645,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding: 4rem 1.5rem;
+      padding: 4rem 2rem 4rem clamp(2rem, 5vw, 4rem);
       box-sizing: border-box;
       border-top: 2px solid var(--red);
       border-bottom: 2px solid var(--hairline-bright);
@@ -654,7 +654,17 @@
     @media (min-width: 1024px) {
       .cinematic-campaign-moment {
         min-height: 95vh;
-        padding: 5rem 6rem;
+        padding: 5.5rem 4rem 5.5rem clamp(4rem, 8vw, 8.5rem);
+      }
+    }
+    @media (max-width: 768px) {
+      .cinematic-campaign-moment {
+        padding: 4rem 1.5rem 4rem 2rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .cinematic-campaign-moment {
+        padding: 3.5rem 1.25rem 3.5rem 1.5rem;
       }
     }
     .cinematic-bg-photo {
@@ -667,26 +677,27 @@
     }
     .cinematic-bg-photo img {
       width: 100%;
-      height: 125%;
+      height: 120%;
       object-fit: cover;
-      object-position: 72% 20%;
+      object-position: 75% 20%;
       display: block;
-      filter: contrast(116%) saturate(106%) brightness(95%);
-      transform: translate3d(0, -6%, 0);
+      filter: contrast(114%) saturate(106%) brightness(95%);
+      transform: translate3d(0, -5%, 0);
       will-change: transform;
     }
     .cinematic-vignette-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(5,5,7,0.92) 0%, rgba(5,5,7,0.7) 45%, rgba(5,5,7,0.2) 80%, rgba(5,5,7,0.85) 100%),
-                  linear-gradient(180deg, rgba(5,5,7,0.6) 0%, transparent 20%, transparent 80%, rgba(5,5,7,0.85) 100%);
+      background: linear-gradient(90deg, rgba(5,5,7,0.95) 0%, rgba(5,5,7,0.78) 40%, rgba(5,5,7,0.3) 72%, rgba(5,5,7,0.85) 100%),
+                  linear-gradient(180deg, rgba(5,5,7,0.6) 0%, transparent 20%, transparent 80%, rgba(5,5,7,0.9) 100%);
       z-index: 2;
       pointer-events: none;
     }
     .cinematic-headline-wrap {
       position: relative;
       z-index: 3;
-      max-width: 900px;
+      max-width: 1100px;
+      width: 100%;
     }
     .cinematic-eyebrow {
       font-family: 'Space Mono', monospace;
@@ -709,14 +720,21 @@
     }
     .cinematic-monument-title {
       font-family: 'Anton', sans-serif;
-      font-size: clamp(4.5rem, 13vw, 11rem);
-      line-height: 0.86;
-      letter-spacing: -0.03em;
+      font-size: clamp(3.75rem, 10.5vw, 9.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
       text-transform: uppercase;
       color: #ffffff;
       margin-bottom: 2rem;
       text-shadow: 0 0 40px rgba(0,0,0,0.8);
       will-change: transform;
+    }
+    @media (max-width: 768px) {
+      .cinematic-monument-title {
+        font-size: clamp(3.25rem, 13vw, 4.5rem);
+        line-height: 0.92;
+        margin-bottom: 1.5rem;
+      }
     }
     .cinematic-vermilion-intervention {
       display: inline-flex;
@@ -734,7 +752,7 @@
     .cinematic-corner-annotation {
       position: absolute;
       bottom: 2.5rem;
-      left: 2rem;
+      left: clamp(2rem, 5vw, 4rem);
       z-index: 3;
       font-family: 'Space Mono', monospace;
       font-size: 0.7rem;
@@ -747,20 +765,25 @@
     }
     @media (min-width: 1024px) {
       .cinematic-corner-annotation {
-        left: 6rem;
+        left: clamp(4rem, 8vw, 8.5rem);
       }
     }
     @media (max-width: 768px) {
       .cinematic-bg-photo img {
-        object-position: 50% 20%;
+        object-position: 65% 22%;
       }
       .cinematic-vignette-overlay {
-        background: linear-gradient(180deg, rgba(5,5,7,0.7) 0%, rgba(5,5,7,0.4) 40%, rgba(5,5,7,0.92) 100%);
+        background: linear-gradient(180deg, rgba(5,5,7,0.82) 0%, rgba(5,5,7,0.55) 45%, rgba(5,5,7,0.94) 100%);
       }
       .cinematic-corner-annotation {
         bottom: 1.5rem;
-        right: 1.5rem;
+        left: 2rem;
         font-size: 0.6rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .cinematic-corner-annotation {
+        left: 1.5rem;
       }
     }
 
@@ -1522,20 +1545,6 @@
       aspect-ratio: 3/4;
     }
 
-    /* Act V */
-    .dossier-act5-duo1 {
-      grid-column: span 6;
-    }
-    .dossier-act5-duo1 .dossier-img-wrap {
-      aspect-ratio: 4/5;
-    }
-    .dossier-act5-duo2 {
-      grid-column: span 6;
-    }
-    .dossier-act5-duo2 .dossier-img-wrap {
-      aspect-ratio: 4/5;
-    }
-
     /* Responsive adjustments */
     @media (max-width: 1024px) {
       .night-archive-photoshoot {
@@ -1551,8 +1560,6 @@
       .dossier-act4-col1 { grid-column: span 3; }
       .dossier-act4-col2 { grid-column: span 3; margin-top: 0; }
       .dossier-act4-col3 { grid-column: span 6; }
-      .dossier-act5-duo1 { grid-column: span 3; }
-      .dossier-act5-duo2 { grid-column: span 3; }
     }
     @media (max-width: 768px) {
       .night-archive-photoshoot {
@@ -1568,9 +1575,7 @@
       .dossier-act3-wide,
       .dossier-act4-col1,
       .dossier-act4-col2,
-      .dossier-act4-col3,
-      .dossier-act5-duo1,
-      .dossier-act5-duo2 {
+      .dossier-act4-col3 {
         grid-column: span 1;
         margin-top: 0;
       }
@@ -2357,7 +2362,7 @@
     <!-- COMPOSITION 3.5: FULL-VIEWPORT CINEMATIC CAMPAIGN MOMENT -->
     <section class="cinematic-campaign-moment" id="cinematicMoment">
       <div class="cinematic-bg-photo">
-        <img src="/assets/editorial/red8.avif" alt="Nocturnal Haute Couture Monument" id="cinematicPhoto" loading="lazy" decoding="async">
+        <img src="/assets/editorial/red4-alt.avif" alt="Tokyo Night Protocol Monument Specimen" id="cinematicPhoto" loading="lazy" decoding="async">
       </div>
       <div class="cinematic-vignette-overlay"></div>
       <div class="cinematic-headline-wrap">
@@ -2369,7 +2374,7 @@
       </div>
       <div class="cinematic-corner-annotation">
         <span style="color: #ffffff; font-weight: 700;">WEDELIA TOKYO NOIR 2026</span>
-        <span>SPECIMEN 08 // CHECKERBOARD RACING LEATHER BOMBER</span>
+        <span>SPECIMEN // HARAJUKU SUBCULTURE TULLE ENSEMBLE [ALT]</span>
       </div>
     </section>
 
@@ -2427,11 +2432,11 @@
       </div>
     </section>
 
-    <!-- COMPOSITION 5: COMPLETE 11-LOOK NIGHT ARCHIVE PHOTOSHOOT -->
+    <!-- COMPOSITION 5: COMPLETE NIGHT ARCHIVE PHOTOSHOOT -->
     <div class="section-title-strip">
       <h2>NIGHT ARCHIVE // FULL-SUITE FASHION DOSSIERS</h2>
       <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red);">
-        COMPLETE 11-LOOK TOKYO NOIR EDITORIAL // READY FOR CAMPUS DISPATCH
+        COMPLETE TOKYO NOIR EDITORIAL ARCHIVE // READY FOR CAMPUS DISPATCH
       </div>
     </div>
 
@@ -2700,65 +2705,6 @@
           </div>
         </div>
       </article>
-
-      <!-- ACT V: THE NOIR CLIMAX -->
-      <!-- Specimen 10: SPLIT-TONE MIDNIGHT FLIGHT BOMBER -->
-      <article class="dossier-frame dossier-act5-duo1">
-        <div class="dossier-img-wrap">
-          <div class="dossier-specimen-pill">SPECIMEN 10 // IGNITION POINT</div>
-          <div class="dossier-provenance-stamp">NIGHTLINE // 35MM MATCH FLAME</div>
-          <img src="/assets/editorial/red10.avif" alt="Split-Tone Midnight Flight Bomber" loading="lazy" decoding="async">
-        </div>
-        <div class="dossier-meta">
-          <div>
-            <h3 class="dossier-title">SPLIT-TONE MIDNIGHT FLIGHT BOMBER</h3>
-            <p class="dossier-specs">
-              PROVENANCE: SHIBUYA UNDERGROUND SOUNDSTAGE<br>
-              FABRIC: DUAL-SHEEN HIGH CONTRAST FLIGHT NYLON<br>
-              ENERGY: MATCH-FLAME ATTITUDE & THERMAL RIBBING<br>
-              INCLUDES: PRIMARY + COMPLIMENTARY SISTER BACKUP
-            </p>
-          </div>
-          <div class="dossier-bottom-bar">
-            <div>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
-              <span class="dossier-price-tag">₹1,899</span>
-            </div>
-            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
-              <span>LEASE LOOK</span> <span>⟶</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Specimen 11: WET-LOOK HIGH-GLOSS LEATHER TRENCH -->
-      <article class="dossier-frame dossier-act5-duo2">
-        <div class="dossier-img-wrap">
-          <div class="dossier-specimen-pill">SPECIMEN 11 // MIDNIGHT RAIN PROTOCOL</div>
-          <div class="dossier-provenance-stamp">GLOSS // LOW-ANGLE VERMILION WASH</div>
-          <img src="/assets/editorial/red11.avif" alt="Wet-Look High-Gloss Leather Trench" loading="lazy" decoding="async">
-        </div>
-        <div class="dossier-meta">
-          <div>
-            <h3 class="dossier-title">WET-LOOK HIGH-GLOSS LEATHER TRENCH</h3>
-            <p class="dossier-specs">
-              PROVENANCE: ROPPONGI NOIR ATELIER<br>
-              FABRIC: HIGH-GLOSS LACQUERED COWHIDE<br>
-              DETAIL: BELTED MOTORCYCLE SILHOUETTE & LEATHER GLOVES<br>
-              INCLUDES: PRIMARY + COMPLIMENTARY SISTER BACKUP
-            </p>
-          </div>
-          <div class="dossier-bottom-bar">
-            <div>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
-              <span class="dossier-price-tag">₹2,999</span>
-            </div>
-            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
-              <span>LEASE LOOK</span> <span>⟶</span>
-            </button>
-          </div>
-        </div>
-      </article>
     </section>
 
     <!-- COMPOSITION 6: COLLEGIATE CULTURE STORIES -->
@@ -2806,7 +2752,7 @@
           <button class="drop-trigger-btn" data-event="FESTIVAL" data-look="VERMILION SILK KIMONO WRAP" data-price="2699" data-img="/assets/editorial/red1.webp" data-curator="TOKYO STREETWEAR ARCHIVE">FESTIVAL</button>
           <button class="drop-trigger-btn" data-event="FAREWELL" data-look="WET-LOOK LEATHER NOIR TRENCH" data-price="2999" data-img="/assets/editorial/red11.avif" data-curator="ROPPONGI NOIR ATELIER">FAREWELL</button>
           <button class="drop-trigger-btn" data-event="FRESHERS" data-look="DECONSTRUCTED MOTO LEATHER" data-price="1999" data-img="/assets/editorial/red7.avif" data-curator="HARAJUKU NOIR ATELIER">FRESHERS</button>
-          <button class="drop-trigger-btn" data-event="AFTER-PARTY" data-look="MIDNIGHT CHECKERBOARD BOMBER" data-price="2499" data-img="/assets/editorial/red8.avif" data-curator="SHINJUKU BRUTALIST APEX">AFTER-PARTY</button>
+          <button class="drop-trigger-btn" data-event="AFTER-PARTY" data-look="CAMELLIA SILK & BUTTERFLY OBI" data-price="2799" data-img="/assets/editorial/red5.avif" data-curator="TWILIGHT SALON ARCHIVE">AFTER-PARTY</button>
         </div>
       </div>
 
@@ -3146,9 +3092,8 @@
       });
 
       gsap.fromTo('#cinematicTitle',
-        { x: -50, letterSpacing: '-0.04em' },
+        { letterSpacing: '-0.035em' },
         {
-          x: 35,
           letterSpacing: '-0.01em',
           ease: 'none',
           scrollTrigger: {
