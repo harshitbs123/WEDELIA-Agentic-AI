@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Shippori+Mincho:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/shared/rental-modal.css">
+  <link rel="preload" as="image" href="/assets/editorial/red8.avif" type="image/avif">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1305,61 +1306,281 @@
       display: block;
     }
 
-    /* COMPOSITION 5: DENSE NIGHT ARCHIVE WALL */
-    .night-archive-wall {
+    /* COMPOSITION 5: COMPLETE 11-LOOK NIGHT ARCHIVE PHOTOSHOOT */
+    .night-archive-photoshoot {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2rem;
       margin-bottom: 8rem;
     }
-    @media (min-width: 768px) {
-      .night-archive-wall {
-        grid-template-columns: 1.3fr 1fr;
-        align-items: stretch;
-      }
-    }
-    .archive-specimen-poster {
+
+    .dossier-frame {
       border: 1px solid var(--hairline-bright);
+      background: var(--dark-card);
       display: flex;
       flex-direction: column;
       position: relative;
-      background: var(--dark-card);
-      color: #ffffff;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+      transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .archive-poster-img-wrap {
+    .dossier-frame:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(255, 31, 0, 0.18);
+    }
+
+    .dossier-img-wrap {
       position: relative;
-      border-bottom: 1px solid var(--hairline-bright);
-      background: #000000;
+      overflow: hidden;
+      background: #050507;
+      border-bottom: 1px solid var(--hairline);
     }
-    .archive-poster-img-wrap img {
+    .dossier-img-wrap img {
       width: 100%;
-      aspect-ratio: 1/1.2;
+      height: 100%;
       object-fit: cover;
-      object-position: center 15%;
       display: block;
-      filter: contrast(116%) saturate(108%) brightness(102%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+      filter: contrast(110%) brightness(98%);
     }
-    .archive-red-pen {
+    .dossier-frame:hover .dossier-img-wrap img {
+      transform: scale(1.04);
+      filter: contrast(115%) brightness(105%);
+    }
+
+    .dossier-specimen-pill {
       position: absolute;
       top: 1rem;
       left: 1rem;
-      background: var(--red);
+      background: rgba(7, 7, 8, 0.9);
       color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.62rem;
       font-weight: 700;
-      padding: 0.35rem 0.75rem;
+      padding: 0.3rem 0.6rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      box-shadow: 0 0 10px var(--red-glow);
+      z-index: 2;
+      backdrop-filter: blur(4px);
     }
-    .archive-poster-meta {
-      padding: 1.75rem;
+    .dossier-frame.monolith-specimen .dossier-specimen-pill {
+      background: var(--red);
+      border-color: var(--red);
+      box-shadow: 0 0 14px var(--red-glow);
+    }
+
+    .dossier-provenance-stamp {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      color: #999999;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #222228;
+      z-index: 2;
+    }
+
+    .dossier-meta {
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       flex: 1;
+      gap: 1rem;
+    }
+    .dossier-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+    .dossier-frame.monolith-specimen .dossier-title {
+      font-size: 2.1rem;
+    }
+    .dossier-specs {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: #888899;
+      line-height: 1.6;
+    }
+    .dossier-bottom-bar {
+      border-top: 1px solid var(--hairline-bright);
+      padding-top: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    .dossier-price-tag {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.5rem;
+      color: var(--red);
+      letter-spacing: 0.02em;
+    }
+    .dossier-dispatch-btn {
+      background: #14141a;
+      border: 1px solid #33333d;
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.45rem 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+    .dossier-dispatch-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: #ffffff;
+    }
+
+    /* Asymmetric Column Spans across the 12-column Grid */
+    /* Act I */
+    .dossier-act1-monolith {
+      grid-column: span 7;
+    }
+    .dossier-act1-monolith .dossier-img-wrap {
+      aspect-ratio: 16/17;
+    }
+    .dossier-act1-offset {
+      grid-column: span 5;
+      margin-top: 2rem;
+    }
+    .dossier-act1-offset .dossier-img-wrap {
+      aspect-ratio: 4/5;
+    }
+
+    /* Act II */
+    .dossier-act2-tall {
+      grid-column: span 5;
+    }
+    .dossier-act2-tall .dossier-img-wrap {
+      aspect-ratio: 3/4;
+    }
+    .dossier-act2-mid {
+      grid-column: span 4;
+    }
+    .dossier-act2-mid .dossier-img-wrap {
+      aspect-ratio: 3/4;
+    }
+    .dossier-act2-compact {
+      grid-column: span 3;
+    }
+    .dossier-act2-compact .dossier-img-wrap {
+      aspect-ratio: 3/4;
+    }
+
+    /* Act III - Panoramic Bleed */
+    .dossier-act3-wide {
+      grid-column: span 12;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px) {
+      .dossier-act3-wide {
+        grid-template-columns: 1.6fr 1fr;
+      }
+      .dossier-act3-wide .dossier-img-wrap {
+        border-bottom: none;
+        border-right: 1px solid var(--hairline);
+      }
+    }
+    .dossier-act3-wide .dossier-img-wrap {
+      aspect-ratio: 16/10;
+    }
+
+    /* Act IV */
+    .dossier-act4-col1 {
+      grid-column: span 4;
+    }
+    .dossier-act4-col1 .dossier-img-wrap {
+      aspect-ratio: 3/4;
+    }
+    .dossier-act4-col2 {
+      grid-column: span 4;
+      margin-top: 1.5rem;
+    }
+    .dossier-act4-col2 .dossier-img-wrap {
+      aspect-ratio: 3/4;
+    }
+    .dossier-act4-col3 {
+      grid-column: span 4;
+    }
+    .dossier-act4-col3 .dossier-img-wrap {
+      aspect-ratio: 3/4;
+    }
+
+    /* Act V */
+    .dossier-act5-duo1 {
+      grid-column: span 6;
+    }
+    .dossier-act5-duo1 .dossier-img-wrap {
+      aspect-ratio: 4/5;
+    }
+    .dossier-act5-duo2 {
+      grid-column: span 6;
+    }
+    .dossier-act5-duo2 .dossier-img-wrap {
+      aspect-ratio: 4/5;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .night-archive-photoshoot {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.5rem;
+      }
+      .dossier-act1-monolith { grid-column: span 6; }
+      .dossier-act1-offset { grid-column: span 6; margin-top: 0; }
+      .dossier-act2-tall { grid-column: span 3; }
+      .dossier-act2-mid { grid-column: span 3; }
+      .dossier-act2-compact { grid-column: span 6; }
+      .dossier-act3-wide { grid-column: span 6; }
+      .dossier-act4-col1 { grid-column: span 3; }
+      .dossier-act4-col2 { grid-column: span 3; margin-top: 0; }
+      .dossier-act4-col3 { grid-column: span 6; }
+      .dossier-act5-duo1 { grid-column: span 3; }
+      .dossier-act5-duo2 { grid-column: span 3; }
+    }
+    @media (max-width: 768px) {
+      .night-archive-photoshoot {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+      }
+      .dossier-act1-monolith,
+      .dossier-act1-offset,
+      .dossier-act2-tall,
+      .dossier-act2-mid,
+      .dossier-act2-compact,
+      .dossier-act3-wide,
+      .dossier-act4-col1,
+      .dossier-act4-col2,
+      .dossier-act4-col3,
+      .dossier-act5-duo1,
+      .dossier-act5-duo2 {
+        grid-column: span 1;
+        margin-top: 0;
+      }
+      .dossier-act3-wide {
+        grid-template-columns: 1fr;
+      }
+      .dossier-act3-wide .dossier-img-wrap {
+        border-right: none;
+        border-bottom: 1px solid var(--hairline);
+      }
     }
 
     /* COMPOSITION 6: COLLEGIATE CULTURE STORIES */
@@ -1900,9 +2121,9 @@
       <div class="poster-right">
         <!-- Flyer Tabs (Experiment 03-A) -->
         <div class="poster-flyer-tabs" id="flyerTabs">
-          <button class="flyer-tab-btn active" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" data-tag="PLATE 03: DIOR ATELIER ZEMIRE FAILLE" data-price="ARCHIVE SPECIMEN // RENT: ₹2,999" data-callout="03 // NIGHT">01 DIOR FAILLE</button>
-          <button class="flyer-tab-btn" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" data-tag="PLATE 04: JEAN DESSÈS PLEATED CHIFFON" data-price="ARCHIVE SPECIMEN // RENT: ₹2,899" data-callout="04 // DUET">02 DESSÈS CHIFFON</button>
-          <button class="flyer-tab-btn" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" data-tag="PLATE 05: RUNWAY KINETIC WRAP" data-price="ARCHIVE SPECIMEN // RENT: ₹1,699" data-callout="05 // KINETIC">03 RUNWAY WRAP</button>
+          <button class="flyer-tab-btn active" data-img="/assets/editorial/red8.avif" data-tag="PLATE 01: CHECKERBOARD RACING LEATHER BOMBER" data-price="ARCHIVE SPECIMEN // RENT: ₹2,499" data-callout="01 // MONUMENT">01 RACING BOMBER</button>
+          <button class="flyer-tab-btn" data-img="/assets/editorial/red1.webp" data-tag="PLATE 02: SCARLET SILK WRAP COAT" data-price="ARCHIVE SPECIMEN // RENT: ₹2,699" data-callout="02 // VERMILION">02 VERMILION COAT</button>
+          <button class="flyer-tab-btn" data-img="/assets/editorial/red10.avif" data-tag="PLATE 03: SPLIT-TONE MIDNIGHT BOMBER" data-price="ARCHIVE SPECIMEN // RENT: ₹1,899" data-callout="03 // VELOCITY">03 FLIGHT BOMBER</button>
         </div>
         <div class="monument-image-frame" id="heroMonumentFrame">
           <span class="corner-tick tl">⌜</span>
@@ -1913,11 +2134,11 @@
           <div class="poster-razor-wipe" id="posterRazorWipe"></div>
           <div class="laser-reticle" id="laserReticle"></div>
           <div class="laser-telemetry-badge" id="laserTelemetry">35MM FLASH // 1/250s f/2.8 // SHIBUYA 23:47</div>
-          <img id="heroMonumentImg" src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Dior Zemire Evening Faille">
+          <img id="heroMonumentImg" src="/assets/editorial/red8.avif" alt="Checkerboard Racing Leather Bomber">
         </div>
         <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted);">
-          <span id="heroPlateTag">PLATE 03: DIOR ATELIER ZEMIRE FAILLE</span>
-          <span id="heroPriceTag">ARCHIVE SPECIMEN // RENT: ₹2,999</span>
+          <span id="heroPlateTag">PLATE 01: CHECKERBOARD RACING LEATHER BOMBER</span>
+          <span id="heroPriceTag">ARCHIVE SPECIMEN // RENT: ₹2,499</span>
         </div>
       </div>
     </section>
@@ -1956,7 +2177,7 @@
         </div>
 
         <div class="night-photo-box">
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Nocturnal Haute Couture Peplum Silhouette">
+          <img src="/assets/editorial/red2.avif" alt="Tokyo Shibuya Yokocho Midnight Alleyway Telemetry" loading="lazy" decoding="async">
           <div class="night-photo-tag">CAMERA: TOKYO FLASH 35MM</div>
         </div>
 
@@ -1992,7 +2213,7 @@
           <span>✦ DUAL-SIZE DISPATCH PROTOCOL</span>
         </div>
         <div class="night-drop-img-box">
-          <img id="featuredDropActiveImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Featured Midnight Fashion Drop">
+          <img id="featuredDropActiveImg" src="/assets/editorial/red10.avif" alt="Featured Midnight Fashion Drop">
         </div>
         <div class="night-drop-control-strip">
           <div class="drop-dispatch-indicator">
@@ -2013,13 +2234,13 @@
             CALL TIME // 22:45 IST • IIT ARENA / NIFT HAUZ KHAS
           </div>
           <h3 class="night-drop-hero-name" id="nightDropHeroName">
-            Strobe Kinetic Multi-Pocket Wrap
+            Split-Tone Midnight Racing Bomber
           </h3>
           <div class="night-drop-hero-sub" id="nightDropHeroSub">
             響宴 // HIGH-VOLTAGE SOUNDSTAGE ARMOR
           </div>
           <p class="night-drop-story" id="nightDropStory">
-            Built for arena soundstages and blinding strobe frequencies. Tailored from high-sheen polymer metallic knit with functional cargo drapery that reflects flash photography from 50 yards across the stadium mosh pit. When you step into the venue at midnight, you become the visual epicenter of the crowd.
+            Built for arena soundstages and blinding strobe frequencies. Tailored from dual-sheen flight nylon in high-contrast vermilion and obsidian with functional thermal ribbing that reflects flash photography across the stadium mosh pit. When you step into the venue at midnight, you become the visual epicenter of the crowd.
           </p>
 
           <div class="night-drop-meta-grid">
@@ -2037,7 +2258,7 @@
             </div>
             <div class="night-meta-cell">
               <strong>DISPATCH TARIFF:</strong>
-              <span id="nightTariffVal" style="font-weight: 700; color: var(--red);">₹1,699 / 3 NIGHTS</span>
+              <span id="nightTariffVal" style="font-weight: 700; color: var(--red);">₹1,899 / 3 NIGHTS</span>
             </div>
           </div>
         </div>
@@ -2057,35 +2278,35 @@
     <!-- 4 CAMPAIGN POSTER CARDS -->
     <div class="occasion-posters-stack" id="occasionPostersStack">
       <!-- Poster 1: CONCERT -->
-      <div class="campaign-poster-card active-drop" data-index="0" data-event="CONCERT" data-price="1699" data-look="KINETIC MULTI-POCKET WRAP" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg">
+      <div class="campaign-poster-card active-drop" data-index="0" data-event="CONCERT" data-price="1899" data-look="SPLIT-TONE RACING BOMBER" data-img="/assets/editorial/red10.avif">
         <div class="card-thumb-wrap">
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Concert Drop">
+          <img src="/assets/editorial/red10.avif" alt="Concert Drop">
         </div>
         <div>
           <div class="poster-red-tag">NIGHT DROP // 01</div>
           <h3 class="poster-huge-name">CONCERT</h3>
           <div class="poster-kanji-sub">響宴 (ARENA CIRCUIT)</div>
           <p class="poster-desc-text">
-            Strobe-reactive kinetic wraps reflecting concert stadium spotlights. Includes sister backup size.
+            Split-tone midnight bomber with dual-sheen flight nylon. Includes backup size.
           </p>
         </div>
         <div class="poster-bottom-rate">
           <span>LEASE TARIFF</span>
-          <span class="price">₹1,699 / 3D</span>
+          <span class="price">₹1,899 / 3D</span>
         </div>
       </div>
 
       <!-- Poster 2: FAREWELL -->
-      <div class="campaign-poster-card" data-index="1" data-event="FAREWELL" data-price="2999" data-look="ZEMIRE OBSIDIAN FAILLE" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg">
+      <div class="campaign-poster-card" data-index="1" data-event="FAREWELL" data-price="2999" data-look="WET-LOOK LEATHER NOIR TRENCH" data-img="/assets/editorial/red11.avif">
         <div class="card-thumb-wrap">
-          <img src="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" alt="Farewell Drop">
+          <img src="/assets/editorial/red11.avif" alt="Farewell Drop">
         </div>
         <div>
           <div class="poster-red-tag" style="color: var(--red);">NIGHT DROP // 02</div>
           <h3 class="poster-huge-name" style="color: var(--red);">FAREWELL</h3>
           <div class="poster-kanji-sub" style="color: var(--red);">門出 (SENIOR BALL)</div>
           <p class="poster-desc-text">
-            Heavy black silk faille peplum gown commanding departmental auditoriums.
+            Belted wet-look black leather trench commanding midnight valedictory galas.
           </p>
         </div>
         <div class="poster-bottom-rate">
@@ -2095,40 +2316,40 @@
       </div>
 
       <!-- Poster 3: FESTIVAL -->
-      <div class="campaign-poster-card" data-index="2" data-event="FESTIVAL" data-price="2899" data-look="PLEATED DUET GOWN" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg">
+      <div class="campaign-poster-card" data-index="2" data-event="FESTIVAL" data-price="2699" data-look="VERMILION SILK KIMONO WRAP" data-img="/assets/editorial/red1.webp">
         <div class="card-thumb-wrap">
-          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Festival Drop">
+          <img src="/assets/editorial/red1.webp" alt="Festival Drop">
         </div>
         <div>
           <div class="poster-red-tag">NIGHT DROP // 03</div>
           <h3 class="poster-huge-name">FESTIVAL</h3>
           <div class="poster-kanji-sub">祝祭 (CAMPUS FEST)</div>
           <p class="poster-desc-text">
-            Fluid hand-pleated silk chiffon catching terrace winds under twilight lanterns.
+            Fluid scarlet silk kimono wrap catching festival winds under twilight lanterns.
           </p>
         </div>
         <div class="poster-bottom-rate">
           <span>LEASE TARIFF</span>
-          <span class="price">₹2,899 / 3D</span>
+          <span class="price">₹2,699 / 3D</span>
         </div>
       </div>
 
       <!-- Poster 4: FRESHERS -->
-      <div class="campaign-poster-card" data-index="3" data-event="FRESHERS" data-price="2499" data-look="ROBE LONGUE COLUMN" data-img="/assets/editorial/robe-longue-1983-12-1-1.jpg">
+      <div class="campaign-poster-card" data-index="3" data-event="FRESHERS" data-price="1999" data-look="DECONSTRUCTED MOTO LEATHER" data-img="/assets/editorial/red7.avif">
         <div class="card-thumb-wrap">
-          <img src="/assets/editorial/robe-longue-1983-12-1-1.jpg" alt="Freshers Drop">
+          <img src="/assets/editorial/red7.avif" alt="Freshers Drop">
         </div>
         <div>
           <div class="poster-red-tag">NIGHT DROP // 04</div>
           <h3 class="poster-huge-name">FRESHERS</h3>
           <div class="poster-kanji-sub">新歓 (INDUCTION)</div>
           <p class="poster-desc-text">
-            Architectural bias-cut column establishing your arrival standard with zero polyester noise.
+            Architectural deconstructed red moto jacket establishing your arrival standard.
           </p>
         </div>
         <div class="poster-bottom-rate">
           <span>LEASE TARIFF</span>
-          <span class="price">₹2,499 / 3D</span>
+          <span class="price">₹1,999 / 3D</span>
         </div>
       </div>
     </div>
@@ -2136,7 +2357,7 @@
     <!-- COMPOSITION 3.5: FULL-VIEWPORT CINEMATIC CAMPAIGN MOMENT -->
     <section class="cinematic-campaign-moment" id="cinematicMoment">
       <div class="cinematic-bg-photo">
-        <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Nocturnal Haute Couture Duet" id="cinematicPhoto">
+        <img src="/assets/editorial/red8.avif" alt="Nocturnal Haute Couture Monument" id="cinematicPhoto" loading="lazy" decoding="async">
       </div>
       <div class="cinematic-vignette-overlay"></div>
       <div class="cinematic-headline-wrap">
@@ -2147,8 +2368,8 @@
         </div>
       </div>
       <div class="cinematic-corner-annotation">
-        <span style="color: #ffffff; font-weight: 700;">JEAN DESSÈS PARIS 1951</span>
-        <span>ARCHIVE SPECIMEN 04 // PLEATED SILK CHIFFON</span>
+        <span style="color: #ffffff; font-weight: 700;">WEDELIA TOKYO NOIR 2026</span>
+        <span>SPECIMEN 08 // CHECKERBOARD RACING LEATHER BOMBER</span>
       </div>
     </section>
 
@@ -2206,59 +2427,335 @@
       </div>
     </section>
 
-    <!-- COMPOSITION 5: DENSE NIGHT ARCHIVE WALL -->
+    <!-- COMPOSITION 5: COMPLETE 11-LOOK NIGHT ARCHIVE PHOTOSHOOT -->
     <div class="section-title-strip">
-      <h2>NIGHT ARCHIVE // SPECIMEN DOSSIERS</h2>
-      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem;">
-        READY FOR CAMPUS DISPATCH
+      <h2>NIGHT ARCHIVE // FULL-SUITE FASHION DOSSIERS</h2>
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red);">
+        COMPLETE 11-LOOK TOKYO NOIR EDITORIAL // READY FOR CAMPUS DISPATCH
       </div>
     </div>
 
-    <section class="night-archive-wall">
-      <article class="archive-specimen-poster">
-        <div class="archive-poster-img-wrap">
-          <div class="archive-red-pen">SENIOR FAREWELL APEX</div>
-          <img src="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" alt="Jean Desses Duet Gown">
+    <section class="night-archive-photoshoot" id="nightArchivePhotoshoot">
+      <!-- ACT I: THE MONUMENT & THE URBAN GROUND -->
+      <!-- Specimen 08: MONOLITH ANCHOR -->
+      <article class="dossier-frame monolith-specimen dossier-act1-monolith">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 08 // MONUMENT APEX</div>
+          <div class="dossier-provenance-stamp">TOKYO 35MM FLASH // SHINJUKU 23:47</div>
+          <img src="/assets/editorial/red8.avif" alt="Checkerboard Racing Leather Bomber" loading="lazy" decoding="async">
         </div>
-        <div class="archive-poster-meta">
+        <div class="dossier-meta">
           <div>
-            <h3 style="font-family: 'Anton', sans-serif; font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
-              PLEATED DUET GOWN (1951)
-            </h3>
-            <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #888899; line-height: 1.6; margin-bottom: 1.5rem;">
-              ARCHIVE: JEAN DESSÈS PARIS ATELIER<br>
-              FABRIC: HAND-PLEATED SILK CHIFFON<br>
-              PROVENANCE: CERTIFIED HAUTE COUTURE PATRIMONY<br>
-              INCLUDES: PRIMARY + COMPLIMENTARY BACKUP
+            <h3 class="dossier-title">CHECKERBOARD RACING LEATHER BOMBER</h3>
+            <p class="dossier-specs">
+              PROVENANCE: TOKYO NOIR BRUTALIST APEX<br>
+              FABRIC: HEAVY GRAIN LEATHER & DUAL-SHEEN RACING NYLON<br>
+              LIGHTING: NEON VERMILION × CYAN GREEN RIM LIGHT<br>
+              INCLUDES: PRIMARY + COMPLIMENTARY SISTER BACKUP
             </p>
           </div>
-          <div style="border-top: 1px solid var(--hairline-bright); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #888899;">RENTAL (3 DAYS)</span>
-            <span style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: var(--red);">₹2,899</span>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹2,499</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
           </div>
         </div>
       </article>
 
-      <article class="archive-specimen-poster">
-        <div class="archive-poster-img-wrap">
-          <div class="archive-red-pen">FESTIVAL HEADLINER</div>
-          <img src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Kinetic Shift Gown">
+      <!-- Specimen 02: YOKOCHO ALLEYWAY -->
+      <article class="dossier-frame dossier-act1-offset">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 02 // YOKOCHO AMBIENT</div>
+          <div class="dossier-provenance-stamp">TELEMETRY // SHIBUYA ALLEYWAY</div>
+          <img src="/assets/editorial/red2.avif" alt="Tokyo Shibuya Yokocho Midnight Alleyway" loading="lazy" decoding="async">
         </div>
-        <div class="archive-poster-meta">
+        <div class="dossier-meta">
           <div>
-            <h3 style="font-family: 'Anton', sans-serif; font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
-              KINETIC SHIFT & WRAP
-            </h3>
-            <p style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #888899; line-height: 1.6; margin-bottom: 1.5rem;">
-              ARCHIVE: RUNWAY SUMMER EDITION<br>
-              FABRIC: METALLIC REFLECTIVE KNIT<br>
-              PROVENANCE: ACTIVE RUNWAY SPECIMEN DISPATCH<br>
-              INCLUDES: PRIMARY + COMPLIMENTARY BACKUP
+            <h3 class="dossier-title">YOKOCHO LANTERN ALLEY ARCHIVE</h3>
+            <p class="dossier-specs">
+              PROVENANCE: SHIBUYA 23:47 STREET CHRONICLE<br>
+              ENVIRONMENT: RED/WHITE PAPER LANTERNS & GLOWING SUN SIGN<br>
+              AESTHETIC: NOCTURNAL TOKYO VELOCITY<br>
+              PROTOCOL: ₹0 DAMAGE SPILL SHIELD INCLUDED
             </p>
           </div>
-          <div style="border-top: 1px solid var(--hairline-bright); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #888899;">RENTAL (3 DAYS)</span>
-            <span style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: var(--red);">₹1,699</span>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹1,899</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ACT II: THE KIMONO COUTURE TRIO -->
+      <!-- Specimen 01: VERMILION SILK KIMONO WRAP -->
+      <article class="dossier-frame dossier-act2-tall">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 01 // VERMILION RUNWAY</div>
+          <div class="dossier-provenance-stamp">FLASH 35MM // SHIBUYA CROSSING</div>
+          <img src="/assets/editorial/red1.webp" alt="Vermilion Silk Kimono Wrap-Coat" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">VERMILION SILK KIMONO WRAP-COAT</h3>
+            <p class="dossier-specs">
+              PROVENANCE: TOKYO STREET ATELIER EDITION<br>
+              FABRIC: PURE SCARLET HABOTAI SILK<br>
+              SILHOUETTE: OVERSIZED KIMONO LAPEL WITH BLACK TURTLENECK<br>
+              INCLUDES: PRIMARY + COMPLIMENTARY SISTER BACKUP
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹2,699</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Specimen 03: OBSIDIAN ROSE BROCADE KIMONO -->
+      <article class="dossier-frame dossier-act2-mid">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 03 // IMPERIAL ATELIER</div>
+          <div class="dossier-provenance-stamp">ARCHIVE // CEREMONIAL PATRIMONY</div>
+          <img src="/assets/editorial/red3.avif" alt="Obsidian Gold Rose Brocade Kimono" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">OBSIDIAN ROSE BROCADE KIMONO</h3>
+            <p class="dossier-specs">
+              PROVENANCE: CEREMONIAL EVENING ARCHIVE<br>
+              FABRIC: HEAVYWEIGHT BLACK MATTE SILK<br>
+              DETAIL: GOLD-LEAF EMBROIDERY & CRIMSON ROSES<br>
+              INCLUDES: COMPLIMENTARY GOLD BROCADE OBI
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹3,299</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Specimen 05: CAMELLIA TWILIGHT SILK & BUTTERFLY OBI -->
+      <article class="dossier-frame dossier-act2-compact">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 05 // TWILIGHT PROFILE</div>
+          <div class="dossier-provenance-stamp">ARCHIVE // AOYAMA DAWN CALL</div>
+          <img src="/assets/editorial/red5.avif" alt="Camellia Twilight Silk Kimono" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">CAMELLIA SILK & BUTTERFLY OBI</h3>
+            <p class="dossier-specs">
+              PROVENANCE: TWILIGHT SALON ARCHIVE<br>
+              FABRIC: HAND-PAINTED CAMELLIA PRINT CREPE<br>
+              DETAIL: SCULPTURAL BUTTERFLY BROCADE OBI IN GOLD/TURQUOISE<br>
+              PROTOCOL: DAWN DESK DISPATCH COMPATIBLE
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹2,799</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ACT III: THE WIDE HORIZON PANORAMIC BLEED -->
+      <!-- Specimen 06: WAVE-PATTERN RETRO HAORI -->
+      <article class="dossier-frame dossier-act3-wide">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 06 // WIDE HORIZON CINEMATIC</div>
+          <div class="dossier-provenance-stamp">LOCATION // SHIBUYA RETRO STOREFRONT</div>
+          <img src="/assets/editorial/red6.avif" alt="Wave-Pattern Retro Sailor Haori" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">WAVE-PATTERN RETRO HAORI // TIMBER RUNWAY</h3>
+            <p class="dossier-specs">
+              PROVENANCE: ARCHIVAL JAPANESE UKIYO-E WAVE PRINT<br>
+              FABRIC: HEAVY INDIGO WEAVE HAORI WITH CONTRAST SAILOR COLLAR<br>
+              ENVIRONMENT: VINTAGE TOBACCO SHOP TIMBER FACADE WITH RED ENAMEL SIGN<br>
+              TAILORING: RELAXED UNISEX DRAPED CUT // ₹0 DAMAGE SPILL SHIELD INCLUDED
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹2,199</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ACT IV: DECONSTRUCTED NOIR COLLISION -->
+      <!-- Specimen 07: RAZOR RED LEATHER MOTO -->
+      <article class="dossier-frame dossier-act4-col1">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 07 // DECONSTRUCTED MOTO</div>
+          <div class="dossier-provenance-stamp">STUDIO // STAIRWELL NOIR</div>
+          <img src="/assets/editorial/red7.avif" alt="Razor Red Leather Moto Jacket" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">RAZOR RED LEATHER MOTO JACKET</h3>
+            <p class="dossier-specs">
+              PROVENANCE: HARAJUKU ATELIER<br>
+              FABRIC: DECONSTRUCTED SCARLET LAMBSKIN<br>
+              DETAIL: ASYMMETRIC CHROME HARDWARE & COLLAR<br>
+              INCLUDES: PRIMARY + COMPLIMENTARY SISTER BACKUP
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹1,999</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Specimen 09: MINIMAL OBSIDIAN OVERCOAT -->
+      <article class="dossier-frame dossier-act4-col2">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 09 // GRAPHIC INTERVENTION</div>
+          <div class="dossier-provenance-stamp">EXPOSURE // VERMILION WALL NOIR</div>
+          <img src="/assets/editorial/red9.avif" alt="Minimal Obsidian Overcoat" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">MINIMAL OBSIDIAN OVERCOAT</h3>
+            <p class="dossier-specs">
+              PROVENANCE: ARCHITECTURAL CASHMERE-WOOL BLEND<br>
+              FABRIC: DEEP OBSIDIAN MATTE TEXTILE<br>
+              BACKGROUND: TOKYO BRUTALIST VERMILION GRAFFITI<br>
+              PROTOCOL: PRE-STEAMED & HANGER DISPATCHED
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹2,499</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Specimen 04: LAYERED TULLE HARAJUKU ENSEMBLE -->
+      <article class="dossier-frame dossier-act4-col3">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 04 // SUBCULTURE DISRUPTION</div>
+          <div class="dossier-provenance-stamp">REBEL // HARAJUKU ALLEY</div>
+          <img src="/assets/editorial/red4.avif" alt="Layered Tulle Harajuku Ensemble" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">LAYERED TULLE SUBCULTURE ENSEMBLE</h3>
+            <p class="dossier-specs">
+              PROVENANCE: TOKYO UNDERGROUND RAVE CIRCUIT<br>
+              FABRIC: DECONSTRUCTED TULLE OVER-LAY & COTTON JERSEY<br>
+              STYLE: HIGH-LOW CONTRAST GRAPHIC TAILORING<br>
+              INCLUDES: SISTER BACKUP SIZING
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹1,599</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ACT V: THE NOIR CLIMAX -->
+      <!-- Specimen 10: SPLIT-TONE MIDNIGHT FLIGHT BOMBER -->
+      <article class="dossier-frame dossier-act5-duo1">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 10 // IGNITION POINT</div>
+          <div class="dossier-provenance-stamp">NIGHTLINE // 35MM MATCH FLAME</div>
+          <img src="/assets/editorial/red10.avif" alt="Split-Tone Midnight Flight Bomber" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">SPLIT-TONE MIDNIGHT FLIGHT BOMBER</h3>
+            <p class="dossier-specs">
+              PROVENANCE: SHIBUYA UNDERGROUND SOUNDSTAGE<br>
+              FABRIC: DUAL-SHEEN HIGH CONTRAST FLIGHT NYLON<br>
+              ENERGY: MATCH-FLAME ATTITUDE & THERMAL RIBBING<br>
+              INCLUDES: PRIMARY + COMPLIMENTARY SISTER BACKUP
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹1,899</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Specimen 11: WET-LOOK HIGH-GLOSS LEATHER TRENCH -->
+      <article class="dossier-frame dossier-act5-duo2">
+        <div class="dossier-img-wrap">
+          <div class="dossier-specimen-pill">SPECIMEN 11 // MIDNIGHT RAIN PROTOCOL</div>
+          <div class="dossier-provenance-stamp">GLOSS // LOW-ANGLE VERMILION WASH</div>
+          <img src="/assets/editorial/red11.avif" alt="Wet-Look High-Gloss Leather Trench" loading="lazy" decoding="async">
+        </div>
+        <div class="dossier-meta">
+          <div>
+            <h3 class="dossier-title">WET-LOOK HIGH-GLOSS LEATHER TRENCH</h3>
+            <p class="dossier-specs">
+              PROVENANCE: ROPPONGI NOIR ATELIER<br>
+              FABRIC: HIGH-GLOSS LACQUERED COWHIDE<br>
+              DETAIL: BELTED MOTORCYCLE SILHOUETTE & LEATHER GLOVES<br>
+              INCLUDES: PRIMARY + COMPLIMENTARY SISTER BACKUP
+            </p>
+          </div>
+          <div class="dossier-bottom-bar">
+            <div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #888899; display: block;">RENTAL (3 DAYS)</span>
+              <span class="dossier-price-tag">₹2,999</span>
+            </div>
+            <button class="dossier-dispatch-btn open-rental-btn" data-rent-garment="WD-003" data-rent-world="chase">
+              <span>LEASE LOOK</span> <span>⟶</span>
+            </button>
           </div>
         </div>
       </article>
@@ -2305,11 +2802,11 @@
         </div>
 
         <div class="night-drop-triggers" id="nightDropTriggers">
-          <button class="drop-trigger-btn active" data-event="CONCERT" data-look="STROBE-REACTIVE METALLIC KNIT" data-price="1699" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" data-curator="SUMMER RUNWAY EDITION">CONCERT</button>
-          <button class="drop-trigger-btn" data-event="FESTIVAL" data-look="KINETIC MULTI-POCKET WRAP GOWN" data-price="1899" data-img="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" data-curator="TOKYO TECHNO RUNWAY">FESTIVAL</button>
-          <button class="drop-trigger-btn" data-event="FAREWELL" data-look="JEAN DESSES PLEATED CHIFFON" data-price="2899" data-img="/assets/editorial/two-jean-desses-evening-gowns-1951.jpg" data-curator="1951 PARIS ATELIER">FAREWELL</button>
-          <button class="drop-trigger-btn" data-event="FRESHERS" data-look="ASYMMETRIC SCULPTED HALTER" data-price="1499" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" data-curator="MINIMALIST SCULPTED CREPE">FRESHERS</button>
-          <button class="drop-trigger-btn" data-event="AFTER-PARTY" data-look="OBSIDIAN LIQUID VISCOSE" data-price="1799" data-img="/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg" data-curator="MIDNIGHT CORSET DRAPE">AFTER-PARTY</button>
+          <button class="drop-trigger-btn active" data-event="CONCERT" data-look="SPLIT-TONE RACING BOMBER" data-price="1899" data-img="/assets/editorial/red10.avif" data-curator="SHIBUYA UNDERGROUND SOUND">CONCERT</button>
+          <button class="drop-trigger-btn" data-event="FESTIVAL" data-look="VERMILION SILK KIMONO WRAP" data-price="2699" data-img="/assets/editorial/red1.webp" data-curator="TOKYO STREETWEAR ARCHIVE">FESTIVAL</button>
+          <button class="drop-trigger-btn" data-event="FAREWELL" data-look="WET-LOOK LEATHER NOIR TRENCH" data-price="2999" data-img="/assets/editorial/red11.avif" data-curator="ROPPONGI NOIR ATELIER">FAREWELL</button>
+          <button class="drop-trigger-btn" data-event="FRESHERS" data-look="DECONSTRUCTED MOTO LEATHER" data-price="1999" data-img="/assets/editorial/red7.avif" data-curator="HARAJUKU NOIR ATELIER">FRESHERS</button>
+          <button class="drop-trigger-btn" data-event="AFTER-PARTY" data-look="MIDNIGHT CHECKERBOARD BOMBER" data-price="2499" data-img="/assets/editorial/red8.avif" data-curator="SHINJUKU BRUTALIST APEX">AFTER-PARTY</button>
         </div>
       </div>
 
@@ -2317,14 +2814,14 @@
         <!-- Recommended Look Visual Preview -->
         <div class="drop-look-preview">
           <div class="drop-look-img-frame">
-            <img id="nightDropImg" src="/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg" alt="Selected Night Silhouette">
+            <img id="nightDropImg" src="/assets/editorial/red10.avif" alt="Selected Night Silhouette" loading="lazy" decoding="async">
           </div>
           <div>
             <div style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--red); letter-spacing: 0.1em;" id="nightCuratorTag">
-              ARCHIVE // SUMMER RUNWAY EDITION
+              ARCHIVE // SHIBUYA UNDERGROUND SOUND
             </div>
             <h3 id="nightLookTitle" style="font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase; margin: 0.35rem 0;">
-              STROBE-REACTIVE METALLIC KNIT
+              SPLIT-TONE RACING BOMBER
             </h3>
             <div style="font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #888888;">
               ₹0 DAMAGE SHIELD PRE-LOADED • RETURN STRICTLY UNWASHED
@@ -2881,6 +3378,25 @@
           start: 'top 70%'
         }
       });
+
+      // Night archive photoshoot dossier frames stagger reveal
+      gsap.utils.toArray('.dossier-frame').forEach((frame) => {
+        gsap.fromTo(frame,
+          { opacity: 0, y: 36 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: frame,
+              start: 'top 88%',
+              toggleActions: 'play none none none',
+              once: true
+            }
+          }
+        );
+      });
     }
 
     // 7. INTERACTIVE REDLINE PROTOCOL TERMINAL (CLAUSE ISOLATION & EXPERIENCE)
@@ -2937,70 +3453,70 @@
       {
         badge: 'DROP 01 // CONCERT',
         code: 'STREET ARCHIVE // WDL-DROP-CONCERT',
-        img: '/assets/editorial/custo-barcelona-at-the-brandery-summer-edition.jpg',
+        img: '/assets/editorial/red10.avif',
         clock: 'CALL TIME // 22:45 IST • IIT ARENA / NIFT HAUZ KHAS',
-        heroName: 'Strobe Kinetic Multi-Pocket Wrap',
+        heroName: 'Split-Tone Midnight Racing Bomber',
         heroSub: '響宴 // HIGH-VOLTAGE SOUNDSTAGE ARMOR',
-        story: 'Built for arena soundstages and blinding strobe frequencies. Tailored from high-sheen polymer metallic knit with functional cargo drapery that reflects flash photography from 50 yards across the stadium mosh pit. When you step into the venue at midnight, you become the visual epicenter of the crowd.',
+        story: 'Built for arena soundstages and blinding strobe frequencies. Tailored from dual-sheen flight nylon in high-contrast vermilion and obsidian with functional thermal ribbing that reflects flash photography across the stadium mosh pit.',
         occasion: 'CAMPUS CONCERT & ARENA TOUR',
         hub: 'NORTH CAMPUS / HAUZ KHAS (32 MIN)',
         sizing: 'UK 6 (PRIMARY) + UK 8 (SEALED SISTER)',
-        tariff: '₹1,699 / 3 NIGHTS',
-        price: 1699,
+        tariff: '₹1,899 / 3 NIGHTS',
+        price: 1899,
         eventKey: 'CONCERT',
-        lookTitle: 'KINETIC MULTI-POCKET WRAP',
-        curator: 'TOKYO STREETWEAR ARCHIVE'
+        lookTitle: 'SPLIT-TONE RACING BOMBER',
+        curator: 'SHIBUYA UNDERGROUND ARCHIVE'
       },
       {
         badge: 'DROP 02 // FAREWELL',
         code: 'ATELIER PATRIMONY // WDL-DROP-FAREWELL',
-        img: '/assets/editorial/christian-dior-evening-gown-called-zemire-fall.jpg',
+        img: '/assets/editorial/red11.avif',
         clock: 'CALL TIME // 19:30 IST • MIRANDA / STEPHENS / LSR PORCH',
-        heroName: 'Zemire Obsidian Silk Faille',
+        heroName: 'Wet-Look High-Gloss Noir Trench',
         heroSub: '門出 // MONUMENTAL VALEDICTORY ARCHITECTURE',
-        story: 'Cut on sovereign lines from pure archival silk faille. A sculptural peplum silhouette designed for senior farewell banquets and departmental red carpets where you permanently author the photographic record of your graduation night.',
+        story: 'Cut on sovereign lines from high-gloss wet-look black leather. A belted motorcycle trench silhouette designed for senior farewell banquets and departmental red carpets where you permanently author the photographic record of your graduation night.',
         occasion: 'SENIOR FAREWELL BALL & VALEDICTORY GALA',
         hub: 'MIRANDA / STEPHENS (24 MIN)',
         sizing: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
         tariff: '₹2,999 / 3 NIGHTS',
         price: 2999,
         eventKey: 'FAREWELL',
-        lookTitle: 'ZEMIRE OBSIDIAN FAILLE',
-        curator: 'PARIS HAUTE COUTURE 1954'
+        lookTitle: 'WET-LOOK LEATHER NOIR TRENCH',
+        curator: 'ROPPONGI NOIR ATELIER'
       },
       {
         badge: 'DROP 03 // FESTIVAL',
         code: 'FLUID CHREIA // WDL-DROP-FESTIVAL',
-        img: '/assets/editorial/two-jean-desses-evening-gowns-1951.jpg',
+        img: '/assets/editorial/red1.webp',
         clock: 'CALL TIME // 20:15 IST • UNIVERSITY LAWNS & STAGE',
-        heroName: 'Pleated Duet Chiffon Gown',
+        heroName: 'Scarlet Silk Kimono Wrap-Coat',
         heroSub: '祝祭 // TERRACE WINDBLOWN SCULPTURE',
-        story: 'Hand-pleated silk chiffon drape from the Jean Dessès Paris atelier. Under twilight fest lanterns and outdoor college amphitheaters, this gown catches every ambient draft, creating fluid sculptural lines that make fast fashion look cheap and disposable.',
+        story: 'Tailored from pure scarlet silk habotai with water-repellent finishing. Under twilight fest lanterns and outdoor amphitheaters, this flowing kimono wrap catches every ambient draft, creating vivid red architectural lines that make fast fashion look cheap and disposable.',
         occasion: 'COLLEGE ANNUAL FESTIVAL & NIGHT LAWNS',
         hub: 'SOUTH CAMPUS / LSR ARCH (38 MIN)',
         sizing: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
-        tariff: '₹2,899 / 3 NIGHTS',
-        price: 2899,
+        tariff: '₹2,699 / 3 NIGHTS',
+        price: 2699,
         eventKey: 'FESTIVAL',
-        lookTitle: 'PLEATED DUET GOWN',
-        curator: 'JEAN DESSÈS PARIS 1951'
+        lookTitle: 'VERMILION SILK KIMONO WRAP',
+        curator: 'TOKYO STREETWEAR ARCHIVE'
       },
       {
         badge: 'DROP 04 // FRESHERS',
         code: 'ARCHIVE COLUMN // WDL-DROP-FRESHERS',
-        img: '/assets/editorial/robe-longue-1983-12-1-1.jpg',
+        img: '/assets/editorial/red7.avif',
         clock: 'CALL TIME // 18:00 IST • INDUCTION SOCIAL & NIGHT',
-        heroName: 'Sculptural Longue Silk Column',
+        heroName: 'Deconstructed Razor Red Leather Moto',
         heroSub: '新歓 // MINIMALIST ARRIVAL DOMINANCE',
-        story: 'Pure bias-cut silk crêpe de chine designed by Paul Poiret atelier archives. Establishes your aesthetic authority on day one of university life without shouting. Seamless flow, zero synthetic noise, completely immune to drink spills under our ₹0 protection shield.',
+        story: 'Sovereign deconstructed lambskin leather moto jacket with stark asymmetric hardware. Establishes your aesthetic authority on day one of university life without shouting. Seamless flow, zero synthetic noise, completely immune to drink spills under our ₹0 protection shield.',
         occasion: 'COLLEGE INDUCTION & FRESHERS SOCIAL',
         hub: 'ASHOKA RESIDENCE / DU NORTH (42 MIN)',
         sizing: 'UK 8 (PRIMARY) + UK 10 (SEALED SISTER)',
-        tariff: '₹2,499 / 3 NIGHTS',
-        price: 2499,
+        tariff: '₹1,999 / 3 NIGHTS',
+        price: 1999,
         eventKey: 'FRESHERS',
-        lookTitle: 'ROBE LONGUE COLUMN',
-        curator: 'PAUL POIRET 1983 RE-EDITION'
+        lookTitle: 'DECONSTRUCTED MOTO LEATHER',
+        curator: 'HARAJUKU NOIR ATELIER'
       }
     ];
 

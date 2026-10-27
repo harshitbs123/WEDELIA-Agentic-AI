@@ -45,6 +45,7 @@ async function run() {
 
           // Broken images
           const imgs = Array.from(document.querySelectorAll('img'));
+          imgs.forEach(img => { if (img.loading === 'lazy') img.loading = 'eager'; });
           await Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(r => { img.onload = img.onerror = r; })));
           const brokenImgs = imgs.filter(img => img.naturalWidth === 0).map(img => img.src);
 
