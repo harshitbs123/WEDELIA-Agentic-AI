@@ -868,6 +868,18 @@
       background: #000000;
       box-shadow: 0 0 30px rgba(255, 31, 0, 0.28);
     }
+    .night-shutter-beam {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--red);
+      box-shadow: 0 0 16px var(--red), 0 0 32px var(--red);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 5;
+    }
     .night-photo-box img {
       width: 100%;
       aspect-ratio: 1/1.25;
@@ -1122,20 +1134,111 @@
       box-shadow: 0 0 25px rgba(255, 42, 20, 0.35);
     }
 
+    /* COMPOSITION 3: OCCASION ROUTE & STREET-POSTER TRAVERSE */
+    .occasion-traverse-section {
+      position: relative;
+      margin-bottom: 7rem;
+      width: 100%;
+    }
+    .occasion-route-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #333333;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .route-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--fg);
+    }
+    .route-pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--red);
+      display: inline-block;
+      animation: pulse-dot 1.5s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+    .route-telemetry-status {
+      color: var(--red);
+      font-weight: 700;
+    }
+    .night-route-track {
+      position: relative;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      height: 2px;
+      margin-bottom: 2rem;
+    }
+    .night-route-progress-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--red);
+      box-shadow: 0 0 12px var(--red);
+      transform-origin: left center;
+      transform: scaleX(0.25);
+    }
+    .route-waypoints {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: #666666;
+      letter-spacing: 0.1em;
+    }
+    .waypoint-node.active {
+      color: var(--red);
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(255, 42, 20, 0.4);
+    }
+    .occasion-posters-viewport {
+      width: 100%;
+      overflow: visible;
+      position: relative;
+    }
+
     .occasion-posters-stack {
       display: grid;
       grid-template-columns: 1fr;
       gap: 3.5rem;
-      margin-bottom: 7rem;
+      margin-bottom: 2rem;
     }
     @media (min-width: 768px) {
       .occasion-posters-stack {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    @media (min-width: 1200px) {
-      .occasion-posters-stack {
-        grid-template-columns: repeat(4, 1fr);
+    @media (min-width: 1024px) {
+      .occasion-posters-viewport {
+        overflow: hidden;
+      }
+      .occasion-posters-stack.traverse-track {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 2.75rem;
+        width: max-content;
+      }
+      .occasion-posters-stack.traverse-track .campaign-poster-card {
+        width: 380px;
+        flex-shrink: 0;
       }
     }
     .campaign-poster-card {
@@ -1228,6 +1331,31 @@
       padding: 3.5rem 1.5rem;
       margin-bottom: 7rem;
       position: relative;
+      overflow: hidden;
+    }
+    .manifesto-strike-rule {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--red);
+      box-shadow: 0 0 15px var(--red);
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+    .manifesto-watermark-track {
+      position: absolute;
+      bottom: 0.5rem;
+      right: -5%;
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(4rem, 10vw, 8.5rem);
+      color: rgba(255, 42, 20, 0.05);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
     }
     @media (min-width: 1024px) {
       .redline-manifesto-block {
@@ -1335,6 +1463,49 @@
       grid-template-columns: repeat(12, 1fr);
       gap: 2rem;
       margin-bottom: 8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .archive-ambient-watermark {
+      position: absolute;
+      top: 10%;
+      left: 0;
+      white-space: nowrap;
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(5rem, 12vw, 12rem);
+      color: rgba(255, 42, 20, 0.04);
+      pointer-events: none;
+      z-index: 0;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .pause-moment-stamp {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.5rem;
+      background: rgba(10, 10, 12, 0.94);
+      border: 1px solid var(--red);
+      color: #ffffff;
+      padding: 0.4rem 0.85rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 5;
+      opacity: 0;
+      box-shadow: 0 0 15px rgba(255, 42, 20, 0.4);
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+    .pause-record-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--red);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--red);
+      animation: pulse-dot 1.2s infinite;
     }
 
     .dossier-frame {
@@ -1596,6 +1767,7 @@
       border-top: 1px solid var(--hairline-bright);
       padding-top: 4rem;
       margin-bottom: 7rem;
+      position: relative;
     }
     @media (min-width: 1024px) {
       .stories-row {
@@ -1606,6 +1778,19 @@
     .story-card {
       display: flex;
       flex-direction: column;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .story-draw-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--red);
+      box-shadow: 0 0 10px rgba(255, 42, 20, 0.3);
+      transform-origin: top center;
+      transform: scaleY(0);
     }
     .story-code {
       font-family: 'Space Mono', monospace;
@@ -1636,6 +1821,8 @@
       padding-top: 4rem;
       margin-bottom: 4rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
     .closing-huge-type {
       font-family: 'Anton', sans-serif;
@@ -1643,8 +1830,21 @@
       line-height: 0.9;
       text-transform: uppercase;
       letter-spacing: -0.03em;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       color: #ffffff;
+    }
+    .closing-line {
+      display: inline-block;
+      transition: transform 0.1s linear;
+    }
+    .closing-redline-strike {
+      width: 140px;
+      height: 3px;
+      background: var(--red);
+      margin: 1.25rem auto 2rem;
+      box-shadow: 0 0 18px var(--red);
+      transform-origin: center center;
+      transform: scaleX(0);
     }
     .closing-huge-type span.red {
       background: var(--red);
@@ -1791,6 +1991,18 @@
       overflow: hidden;
       box-sizing: border-box;
       max-width: 100%;
+    }
+    .dispatch-scan-beam {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--red);
+      box-shadow: 0 0 15px var(--red);
+      opacity: 0;
+      z-index: 5;
+      pointer-events: none;
     }
     .night-drop-header {
       max-width: 1200px;
@@ -2165,7 +2377,7 @@
       </div>
 
       <div class="night-grid">
-        <div>
+        <div class="night-dossier-col" id="nightDossierCol">
           <div class="time-stamp-monument" id="nightTimeMonument">23:47</div>
           <div style="font-family: 'Space Mono', monospace; font-size: 0.85rem; margin-bottom: 1.5rem; color: #ffffff;" id="nightLocationTag">
             STREET RECORD // SHIBUYA CROSSING × NORTH CAMPUS DEL
@@ -2181,12 +2393,13 @@
           </div>
         </div>
 
-        <div class="night-photo-box">
+        <div class="night-photo-box" id="nightPhotoBox">
+          <div class="night-shutter-beam" id="nightShutterBeam"></div>
           <img src="/assets/editorial/red2.avif" alt="Tokyo Shibuya Yokocho Midnight Alleyway Telemetry" loading="lazy" decoding="async">
           <div class="night-photo-tag">CAMERA: TOKYO FLASH 35MM</div>
         </div>
 
-        <div>
+        <div class="night-telemetry-col" id="nightTelemetryCol">
           <div style="font-size: 0.92rem; line-height: 1.75; color: #cccccc;">
             <strong style="color: #ffffff; font-family: 'Space Mono', monospace; display: block; margin-bottom: 0.5rem; font-size: 0.82rem; letter-spacing: 0.08em;">THE REVOLUTION OF LEASED LUXURY</strong>
             When you purchase a ₹30,000 gown for a single night, you treat it like a fragile heirloom. You sit carefully, you stress about stains, you hesitate to dance. When WEDELIA leases you an archival piece with a ₹0 liability shield, you own the energy of the night completely. Spill mocktails, dance through fog machines, jump to bass drops. We absorb the wear.
@@ -2280,81 +2493,103 @@
       </div>
     </section>
 
-    <!-- 4 CAMPAIGN POSTER CARDS -->
-    <div class="occasion-posters-stack" id="occasionPostersStack">
-      <!-- Poster 1: CONCERT -->
-      <div class="campaign-poster-card active-drop" data-index="0" data-event="CONCERT" data-price="1899" data-look="SPLIT-TONE RACING BOMBER" data-img="/assets/editorial/red10.avif">
-        <div class="card-thumb-wrap">
-          <img src="/assets/editorial/red10.avif" alt="Concert Drop">
+    <!-- OCCASION ROUTE HORIZONTAL TRAVERSE (Section 12 & 9) -->
+    <div class="occasion-traverse-section" id="occasionTraverseSection">
+      <div class="occasion-route-header">
+        <div class="route-header-left">
+          <span class="route-pulse-dot"></span>
+          <span class="route-title-text">TOKYO OCCASION ROUTE // 4-DROP HORIZONTAL TRAVERSE</span>
         </div>
-        <div>
-          <div class="poster-red-tag">NIGHT DROP // 01</div>
-          <h3 class="poster-huge-name">CONCERT</h3>
-          <div class="poster-kanji-sub">響宴 (ARENA CIRCUIT)</div>
-          <p class="poster-desc-text">
-            Split-tone midnight bomber with dual-sheen flight nylon. Includes backup size.
-          </p>
-        </div>
-        <div class="poster-bottom-rate">
-          <span>LEASE TARIFF</span>
-          <span class="price">₹1,899 / 3D</span>
+        <div class="route-telemetry-status" id="routeTelemetryStatus">WAYPOINT 01 // CONCERT (響宴) ACTIVE</div>
+      </div>
+      <div class="night-route-track">
+        <div class="night-route-progress-line" id="nightRouteProgressLine"></div>
+        <div class="route-waypoints">
+          <span class="waypoint-node active" data-wp="0">01 CONCERT</span>
+          <span class="waypoint-node" data-wp="1">02 FAREWELL</span>
+          <span class="waypoint-node" data-wp="2">03 FESTIVAL</span>
+          <span class="waypoint-node" data-wp="3">04 FRESHERS</span>
         </div>
       </div>
 
-      <!-- Poster 2: FAREWELL -->
-      <div class="campaign-poster-card" data-index="1" data-event="FAREWELL" data-price="2999" data-look="WET-LOOK LEATHER NOIR TRENCH" data-img="/assets/editorial/red11.avif">
-        <div class="card-thumb-wrap">
-          <img src="/assets/editorial/red11.avif" alt="Farewell Drop">
-        </div>
-        <div>
-          <div class="poster-red-tag" style="color: var(--red);">NIGHT DROP // 02</div>
-          <h3 class="poster-huge-name" style="color: var(--red);">FAREWELL</h3>
-          <div class="poster-kanji-sub" style="color: var(--red);">門出 (SENIOR BALL)</div>
-          <p class="poster-desc-text">
-            Belted wet-look black leather trench commanding midnight valedictory galas.
-          </p>
-        </div>
-        <div class="poster-bottom-rate">
-          <span>LEASE TARIFF</span>
-          <span class="price">₹2,999 / 3D</span>
-        </div>
-      </div>
+      <div class="occasion-posters-viewport" id="occasionPostersViewport">
+        <!-- 4 CAMPAIGN POSTER CARDS -->
+        <div class="occasion-posters-stack" id="occasionPostersStack">
+          <!-- Poster 1: CONCERT -->
+          <div class="campaign-poster-card active-drop" data-index="0" data-event="CONCERT" data-price="1899" data-look="SPLIT-TONE RACING BOMBER" data-img="/assets/editorial/red10.avif">
+            <div class="card-thumb-wrap">
+              <img src="/assets/editorial/red10.avif" alt="Concert Drop">
+            </div>
+            <div>
+              <div class="poster-red-tag">NIGHT DROP // 01</div>
+              <h3 class="poster-huge-name">CONCERT</h3>
+              <div class="poster-kanji-sub">響宴 (ARENA CIRCUIT)</div>
+              <p class="poster-desc-text">
+                Split-tone midnight bomber with dual-sheen flight nylon. Includes backup size.
+              </p>
+            </div>
+            <div class="poster-bottom-rate">
+              <span>LEASE TARIFF</span>
+              <span class="price">₹1,899 / 3D</span>
+            </div>
+          </div>
 
-      <!-- Poster 3: FESTIVAL -->
-      <div class="campaign-poster-card" data-index="2" data-event="FESTIVAL" data-price="2699" data-look="VERMILION SILK KIMONO WRAP" data-img="/assets/editorial/red1.webp">
-        <div class="card-thumb-wrap">
-          <img src="/assets/editorial/red1.webp" alt="Festival Drop">
-        </div>
-        <div>
-          <div class="poster-red-tag">NIGHT DROP // 03</div>
-          <h3 class="poster-huge-name">FESTIVAL</h3>
-          <div class="poster-kanji-sub">祝祭 (CAMPUS FEST)</div>
-          <p class="poster-desc-text">
-            Fluid scarlet silk kimono wrap catching festival winds under twilight lanterns.
-          </p>
-        </div>
-        <div class="poster-bottom-rate">
-          <span>LEASE TARIFF</span>
-          <span class="price">₹2,699 / 3D</span>
-        </div>
-      </div>
+          <!-- Poster 2: FAREWELL -->
+          <div class="campaign-poster-card" data-index="1" data-event="FAREWELL" data-price="2999" data-look="WET-LOOK LEATHER NOIR TRENCH" data-img="/assets/editorial/red11.avif">
+            <div class="card-thumb-wrap">
+              <img src="/assets/editorial/red11.avif" alt="Farewell Drop">
+            </div>
+            <div>
+              <div class="poster-red-tag" style="color: var(--red);">NIGHT DROP // 02</div>
+              <h3 class="poster-huge-name" style="color: var(--red);">FAREWELL</h3>
+              <div class="poster-kanji-sub" style="color: var(--red);">門出 (SENIOR BALL)</div>
+              <p class="poster-desc-text">
+                Belted wet-look black leather trench commanding midnight valedictory galas.
+              </p>
+            </div>
+            <div class="poster-bottom-rate">
+              <span>LEASE TARIFF</span>
+              <span class="price">₹2,999 / 3D</span>
+            </div>
+          </div>
 
-      <!-- Poster 4: FRESHERS -->
-      <div class="campaign-poster-card" data-index="3" data-event="FRESHERS" data-price="1999" data-look="DECONSTRUCTED MOTO LEATHER" data-img="/assets/editorial/red7.avif">
-        <div class="card-thumb-wrap">
-          <img src="/assets/editorial/red7.avif" alt="Freshers Drop">
-        </div>
-        <div>
-          <div class="poster-red-tag">NIGHT DROP // 04</div>
-          <h3 class="poster-huge-name">FRESHERS</h3>
-          <div class="poster-kanji-sub">新歓 (INDUCTION)</div>
-          <p class="poster-desc-text">
-            Architectural deconstructed red moto jacket establishing your arrival standard.
-          </p>
-        </div>
-        <div class="poster-bottom-rate">
-          <span>LEASE TARIFF</span>
-          <span class="price">₹1,999 / 3D</span>
+          <!-- Poster 3: FESTIVAL -->
+          <div class="campaign-poster-card" data-index="2" data-event="FESTIVAL" data-price="2699" data-look="VERMILION SILK KIMONO WRAP" data-img="/assets/editorial/red1.webp">
+            <div class="card-thumb-wrap">
+              <img src="/assets/editorial/red1.webp" alt="Festival Drop">
+            </div>
+            <div>
+              <div class="poster-red-tag">NIGHT DROP // 03</div>
+              <h3 class="poster-huge-name">FESTIVAL</h3>
+              <div class="poster-kanji-sub">祝祭 (CAMPUS FEST)</div>
+              <p class="poster-desc-text">
+                Fluid scarlet silk kimono wrap catching festival winds under twilight lanterns.
+              </p>
+            </div>
+            <div class="poster-bottom-rate">
+              <span>LEASE TARIFF</span>
+              <span class="price">₹2,699 / 3D</span>
+            </div>
+          </div>
+
+          <!-- Poster 4: FRESHERS -->
+          <div class="campaign-poster-card" data-index="3" data-event="FRESHERS" data-price="1999" data-look="DECONSTRUCTED MOTO LEATHER" data-img="/assets/editorial/red7.avif">
+            <div class="card-thumb-wrap">
+              <img src="/assets/editorial/red7.avif" alt="Freshers Drop">
+            </div>
+            <div>
+              <div class="poster-red-tag">NIGHT DROP // 04</div>
+              <h3 class="poster-huge-name">FRESHERS</h3>
+              <div class="poster-kanji-sub">新歓 (INDUCTION)</div>
+              <p class="poster-desc-text">
+                Architectural deconstructed red moto jacket establishing your arrival standard.
+              </p>
+            </div>
+            <div class="poster-bottom-rate">
+              <span>LEASE TARIFF</span>
+              <span class="price">₹1,999 / 3D</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2380,6 +2615,8 @@
 
     <!-- COMPOSITION 4: REDLINE PROTOCOL MANIFESTO -->
     <section class="redline-manifesto-block" id="redlineManifesto">
+      <div class="manifesto-strike-rule" id="manifestoStrikeRule"></div>
+      <div class="manifesto-watermark-track" id="manifestoWatermark">REDLINE // PROTOCOL // FOUR TENETS OF LEASED LUXURY</div>
       <div class="manifesto-header-row">
         <div>
           <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red); font-weight: 700; letter-spacing: 0.15em;">
@@ -2441,6 +2678,7 @@
     </div>
 
     <section class="night-archive-photoshoot" id="nightArchivePhotoshoot">
+      <div class="archive-ambient-watermark" id="archiveAmbientWatermark">TOKYO NOIR DOSSIER // SHIBUYA 23:47 ARCHIVE</div>
       <!-- ACT I: THE MONUMENT & THE URBAN GROUND -->
       <!-- Specimen 08: MONOLITH ANCHOR -->
       <article class="dossier-frame monolith-specimen dossier-act1-monolith">
@@ -2589,12 +2827,16 @@
       </article>
 
       <!-- ACT III: THE WIDE HORIZON PANORAMIC BLEED -->
-      <!-- Specimen 06: WAVE-PATTERN RETRO HAORI -->
-      <article class="dossier-frame dossier-act3-wide">
+      <!-- Specimen 06: WAVE-PATTERN RETRO HAORI (ONE PAUSE MOMENT) -->
+      <article class="dossier-frame dossier-act3-wide" id="specimen06Frame">
         <div class="dossier-img-wrap">
           <div class="dossier-specimen-pill">SPECIMEN 06 // WIDE HORIZON CINEMATIC</div>
           <div class="dossier-provenance-stamp">LOCATION // SHIBUYA RETRO STOREFRONT</div>
           <img src="/assets/editorial/red6.avif" alt="Wave-Pattern Retro Sailor Haori" loading="lazy" decoding="async">
+          <div class="pause-moment-stamp" id="pauseMomentStamp">
+            <span class="pause-record-dot"></span>
+            <span>CAMPAIGN PAUSE // LINGERING FOCUS: WAVE-PATTERN RETRO HAORI // TOKYO 23:47</span>
+          </div>
         </div>
         <div class="dossier-meta">
           <div>
@@ -2708,8 +2950,9 @@
     </section>
 
     <!-- COMPOSITION 6: COLLEGIATE CULTURE STORIES -->
-    <div class="stories-row">
+    <div class="stories-row" id="collegiateStoriesRow">
       <div class="story-card">
+        <div class="story-draw-line"></div>
         <div class="story-code">CHRONICLE 01 // FIRST FEST</div>
         <h3 class="story-headline">THE ENTRANCE AT THE SPORTS ARENA.</h3>
         <p class="story-body">
@@ -2718,6 +2961,7 @@
       </div>
 
       <div class="story-card">
+        <div class="story-draw-line"></div>
         <div class="story-code">CHRONICLE 02 // FAREWELL NIGHT</div>
         <h3 class="story-headline">THE LAST DANCE ON THE ROOFTOP.</h3>
         <p class="story-body">
@@ -2726,6 +2970,7 @@
       </div>
 
       <div class="story-card">
+        <div class="story-draw-line"></div>
         <div class="story-code">CHRONICLE 03 // THE SOCIETY BALL</div>
         <h3 class="story-headline">MUN BANQUETS & BLACK-TIE GALAS.</h3>
         <p class="story-body">
@@ -2736,6 +2981,7 @@
 
     <!-- COMPOSITION 6.5: THE NIGHT-DROP DISPATCH TERMINAL // SECURE THE MOMENT -->
     <section class="night-drop-section" id="nightDropSection">
+      <div class="dispatch-scan-beam" id="dispatchScanBeam"></div>
       <div class="night-drop-header">
         <div style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--red); letter-spacing: 0.15em; margin-bottom: 0.5rem;">
           // DISPATCH PROTOCOL: SAME-NIGHT CAMPUS DROP
@@ -2859,12 +3105,13 @@
     </section>
 
     <!-- COMPOSITION 7: FINAL MONUMENTAL TYPOGRAPHIC STATEMENT -->
-    <section class="closing-monument">
+    <section class="closing-monument" id="closingMonument">
       <div class="closing-huge-type">
-        ONE NIGHT.<br>
-        ONE LOOK.<br>
-        <span class="red">NO REGRETS.</span>
+        <span class="closing-line closing-line-1">ONE NIGHT.</span><br>
+        <span class="closing-line closing-line-2">ONE LOOK.</span><br>
+        <span class="red closing-line closing-line-3">NO REGRETS.</span>
       </div>
+      <div class="closing-redline-strike" id="closingRedlineStrike"></div>
       <div class="closing-jp">
         「記憶に残る一度きりの夜に、知的な選択を。」
       </div>
@@ -3120,21 +3367,7 @@
         }
       );
 
-      // Slogan items in Redline Protocol
-      gsap.utils.toArray('.protocol-item').forEach((item, i) => {
-        gsap.from(item, {
-          y: 35,
-          opacity: 0,
-          duration: 0.6,
-          delay: (i % 2) * 0.1,
-          ease: 'expo.out',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 88%',
-            toggleActions: 'play none none none'
-          }
-        });
-      });
+
     }
 
     // 3. PHYSICAL MOMENTUM RAZOR-WIPE (Experiment 03-A)
@@ -3288,22 +3521,175 @@
       });
     });
 
-    // 6. OCCASION POSTER CHOREOGRAPHY (Experiment 03-E: Contrast Slam)
+    // 6. EXPERIMENTAL SCROLLTRIGGER & CHOREOGRAPHY SUITE
     if (!prefersReducedMotion) {
-      gsap.utils.toArray('.campaign-poster-card').forEach((card, i) => {
-        gsap.from(card, {
-          y: 40,
-          opacity: 0,
-          duration: 0.6,
-          delay: (i % 2) * 0.12,
-          ease: 'power4.out',
+      const mm = gsap.matchMedia();
+
+      // 6A. COMP 2: TOKYO NIGHT FILE (23:47 SHIBUYA) // APERTURE SHUTTER SCAN & TELEMETRY
+      const nightPhotoBox = document.getElementById('nightPhotoBox');
+      const nightPhotoImg = nightPhotoBox ? nightPhotoBox.querySelector('img') : null;
+      const nightShutterBeam = document.getElementById('nightShutterBeam');
+      const nightTimeMonument = document.getElementById('nightTimeMonument');
+      const nightDossierCol = document.getElementById('nightDossierCol');
+      const nightTelemetryCol = document.getElementById('nightTelemetryCol');
+
+      if (nightPhotoBox && nightPhotoImg) {
+        const shutterTl = gsap.timeline({
           scrollTrigger: {
-            trigger: card,
-            start: 'top 85%'
+            trigger: '#nightFileSection',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
           }
         });
 
-        // Tactile flash & invert slam on hover
+        // Focal-plane camera aperture unmasking
+        shutterTl
+          .fromTo(nightPhotoBox,
+            { clipPath: 'polygon(0 20%, 100% 20%, 100% 80%, 0 80%)' },
+            { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', duration: 0.85, ease: 'power3.inOut' }
+          )
+          .fromTo(nightPhotoImg,
+            { scale: 1.14 },
+            { scale: 1.0, duration: 1.1, ease: 'power2.out' },
+            '<0.05'
+          );
+
+        // Laser aperture beam sweeps across the unmasked film frame
+        if (nightShutterBeam) {
+          shutterTl
+            .fromTo(nightShutterBeam,
+              { top: '0%', opacity: 1 },
+              { top: '100%', opacity: 1, duration: 0.65, ease: 'power2.inOut' },
+              '<0.1'
+            )
+            .to(nightShutterBeam, { opacity: 0, duration: 0.2 }, '-=0.1');
+        }
+
+        // Digital clock settle
+        if (nightTimeMonument) {
+          shutterTl.fromTo(nightTimeMonument,
+            { letterSpacing: '-0.08em', filter: 'brightness(180%)' },
+            { letterSpacing: '-0.04em', filter: 'brightness(100%)', duration: 0.6, ease: 'expo.out' },
+            '<0.15'
+          );
+        }
+
+        // Opposing spatial momentum on columns
+        if (nightDossierCol) {
+          gsap.to(nightDossierCol, {
+            yPercent: -4,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '#nightFileSection',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.6
+            }
+          });
+        }
+        if (nightTelemetryCol) {
+          gsap.to(nightTelemetryCol, {
+            yPercent: 4,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '#nightFileSection',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.6
+            }
+          });
+        }
+      }
+
+      // 6B. COMP 3: OCCASION ROUTE HORIZONTAL TRAVERSE (Section 12 & 9)
+      const traverseSection = document.getElementById('occasionTraverseSection');
+      const postersViewport = document.getElementById('occasionPostersViewport');
+      const postersStack = document.getElementById('occasionPostersStack');
+      const routeProgressLine = document.getElementById('nightRouteProgressLine');
+      const routeTelemetryStatus = document.getElementById('routeTelemetryStatus');
+      const waypointNodes = document.querySelectorAll('.waypoint-node');
+
+      const waypointLabels = [
+        'WAYPOINT 01 // CONCERT (響宴) ACTIVE',
+        'WAYPOINT 02 // FAREWELL (門出) ACTIVE',
+        'WAYPOINT 03 // FESTIVAL (祝祭) ACTIVE',
+        'WAYPOINT 04 // FRESHERS (新歓) ACTIVE'
+      ];
+
+      // DESKTOP (>= 1024px): Horizontal Street Poster Traverse Pinned
+      mm.add('(min-width: 1024px)', () => {
+        if (traverseSection && postersStack && postersViewport) {
+          postersStack.classList.add('traverse-track');
+          traverseSection.classList.add('is-horizontal-pinned');
+
+          const getScrollDistance = () => postersStack.scrollWidth - postersViewport.clientWidth + 40;
+
+          const traverseTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: traverseSection,
+              start: 'top 12%',
+              end: () => `+=${getScrollDistance() + 250}`,
+              pin: true,
+              scrub: 0.8,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const prog = self.progress;
+                // Update thin vermilion route indicator bar
+                if (routeProgressLine) {
+                  gsap.set(routeProgressLine, { scaleX: Math.max(0.25, prog) });
+                }
+                // Update active waypoint
+                const activeIndex = Math.min(3, Math.floor(prog * 4));
+                waypointNodes.forEach((node, idx) => {
+                  node.classList.toggle('active', idx === activeIndex);
+                });
+                if (routeTelemetryStatus) {
+                  routeTelemetryStatus.textContent = waypointLabels[activeIndex];
+                }
+                // Highlight corresponding poster card
+                const cards = postersStack.querySelectorAll('.campaign-poster-card');
+                cards.forEach((card, idx) => {
+                  card.classList.toggle('active-drop', idx === activeIndex);
+                });
+              }
+            }
+          });
+
+          traverseTl.to(postersStack, {
+            x: () => -getScrollDistance(),
+            ease: 'none'
+          });
+        }
+      });
+
+      // MOBILE & TABLET (< 1024px): Clean Vertical Reveal (NO PINNING / NO HORIZONTAL OVERFLOW)
+      mm.add('(max-width: 1023px)', () => {
+        if (postersStack) {
+          postersStack.classList.remove('traverse-track');
+          if (traverseSection) traverseSection.classList.remove('is-horizontal-pinned');
+
+          const cards = postersStack.querySelectorAll('.campaign-poster-card');
+          cards.forEach((card) => {
+            gsap.fromTo(card,
+              { opacity: 0, y: 35 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power3.out',
+                scrollTrigger: {
+                  trigger: card,
+                  start: 'top 88%',
+                  toggleActions: 'play none none none'
+                }
+              }
+            );
+          });
+        }
+      });
+
+      // Hover invert slam on campaign cards
+      document.querySelectorAll('.campaign-poster-card').forEach((card) => {
         card.addEventListener('mouseenter', () => {
           gsap.fromTo(card, 
             { filter: 'invert(100%)' },
@@ -3312,36 +3698,364 @@
         });
       });
 
-      // Night file photo scale on scroll
-      gsap.from('.night-photo-box img', {
-        scale: 1.12,
-        opacity: 0.75,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.night-file-section',
-          start: 'top 70%'
-        }
-      });
+      // 6C. COMP 4: REDLINE PROTOCOL MANIFESTO (WATERMARK SCRUB & SEQUENTIAL CLAUSE ISOLATION)
+      const manifestoBlock = document.getElementById('redlineManifesto');
+      const manifestoWatermark = document.getElementById('manifestoWatermark');
+      const manifestoStrikeRule = document.getElementById('manifestoStrikeRule');
 
-      // Night archive photoshoot dossier frames stagger reveal
-      gsap.utils.toArray('.dossier-frame').forEach((frame) => {
-        gsap.fromTo(frame,
-          { opacity: 0, y: 36 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power3.out',
+      if (manifestoBlock) {
+        if (manifestoWatermark) {
+          gsap.to(manifestoWatermark, {
+            x: -240,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: manifestoBlock,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.7
+            }
+          });
+        }
+
+        if (manifestoStrikeRule) {
+          gsap.to(manifestoStrikeRule, {
+            scaleX: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: manifestoBlock,
+              start: 'top 75%',
+              end: 'top 45%',
+              scrub: true
+            }
+          });
+        }
+
+        // Sequential clause isolation on scroll
+        ScrollTrigger.create({
+          trigger: '.manifesto-monument-grid',
+          start: 'top 75%',
+          end: 'bottom 35%',
+          onUpdate: (self) => {
+            const step = Math.min(3, Math.floor(self.progress * 4));
+            isolateClause(step);
+          }
+        });
+      }
+
+      // 6D. COMP 5: NIGHT ARCHIVE // MULTI-PLANE PHOTOGRAPHIC CHOREOGRAPHY & PRINT REVEALS
+      const archivePhotoshoot = document.getElementById('nightArchivePhotoshoot');
+      const archiveWatermark = document.getElementById('archiveAmbientWatermark');
+
+      if (archivePhotoshoot) {
+        // Watermark typography collision behind the grid
+        if (archiveWatermark) {
+          gsap.to(archiveWatermark, {
+            x: -320,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: archivePhotoshoot,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.8
+            }
+          });
+        }
+
+        // Camera Track: subtle differential parallax on dossier images
+        gsap.utils.toArray('#nightArchivePhotoshoot .dossier-img-wrap img').forEach((img, i) => {
+          const shift = (i % 2 === 0) ? 6 : -6;
+          gsap.fromTo(img,
+            { yPercent: -shift },
+            {
+              yPercent: shift,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: img.closest('.dossier-frame'),
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 0.8
+              }
+            }
+          );
+        });
+
+        // Varied Physical Print Releases by Act
+        // Act I: Vertical Shutter Aperture Unmasking (Specimens 08 & 02)
+        gsap.utils.toArray('.dossier-act1-monolith, .dossier-act1-offset').forEach((frame) => {
+          const imgWrap = frame.querySelector('.dossier-img-wrap');
+          const pill = frame.querySelector('.dossier-specimen-pill');
+          const stamp = frame.querySelector('.dossier-provenance-stamp');
+
+          const act1Tl = gsap.timeline({
             scrollTrigger: {
               trigger: frame,
-              start: 'top 88%',
-              toggleActions: 'play none none none',
-              once: true
+              start: 'top 85%',
+              toggleActions: 'play none none none'
             }
+          });
+
+          act1Tl
+            .fromTo(imgWrap,
+              { clipPath: 'polygon(0 16%, 100% 16%, 100% 84%, 0 84%)', opacity: 0.6 },
+              { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', opacity: 1, duration: 0.85, ease: 'power3.out' }
+            )
+            .from([pill, stamp],
+              { y: -10, opacity: 0, duration: 0.35, stagger: 0.08, ease: 'power2.out' },
+              '-=0.45'
+            );
+        });
+
+        // Act II: Angled Razor Wipes (Specimens 01, 03, 05)
+        gsap.utils.toArray('.dossier-act2-tall, .dossier-act2-mid, .dossier-act2-compact').forEach((frame, idx) => {
+          const imgWrap = frame.querySelector('.dossier-img-wrap');
+          const pill = frame.querySelector('.dossier-specimen-pill');
+
+          const act2Tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: frame,
+              start: 'top 86%',
+              toggleActions: 'play none none none'
+            }
+          });
+
+          act2Tl
+            .fromTo(imgWrap,
+              { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)', opacity: 0.4 },
+              { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', opacity: 1, duration: 0.75, delay: idx * 0.08, ease: 'power3.inOut' }
+            )
+            .from(pill,
+              { x: -14, opacity: 0, duration: 0.3, ease: 'power2.out' },
+              '-=0.3'
+            );
+        });
+
+        // Act III: Specimen 06 // THE ONE PAUSE MOMENT (WIDE HORIZON HAORI)
+        const specimen06Frame = document.getElementById('specimen06Frame');
+        const pauseStamp = document.getElementById('pauseMomentStamp');
+        const specimen06Img = specimen06Frame ? specimen06Frame.querySelector('img') : null;
+
+        // Desktop Pause Moment (min-width: 1024px)
+        mm.add('(min-width: 1024px)', () => {
+          if (specimen06Frame && specimen06Img && pauseStamp) {
+            gsap.timeline({
+              scrollTrigger: {
+                trigger: specimen06Frame,
+                start: 'center center',
+                end: '+=480',
+                pin: true,
+                scrub: 0.7,
+                onUpdate: (self) => {
+                  const p = self.progress;
+                  // Breathing zoom 1.0 -> 1.07
+                  gsap.set(specimen06Img, { scale: 1 + p * 0.07 });
+                  // Stamp appears smoothly during pause and glides across
+                  if (p > 0.08 && p < 0.92) {
+                    gsap.set(pauseStamp, { opacity: 1, x: p * 20 });
+                  } else {
+                    gsap.set(pauseStamp, { opacity: 0 });
+                  }
+                }
+              }
+            });
           }
-        );
-      });
+        });
+
+        // Mobile fallback for Specimen 06 (no pinning)
+        mm.add('(max-width: 1023px)', () => {
+          if (specimen06Frame) {
+            gsap.fromTo(specimen06Frame,
+              { opacity: 0, y: 30 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: 'power3.out',
+                scrollTrigger: {
+                  trigger: specimen06Frame,
+                  start: 'top 85%',
+                  toggleActions: 'play none none none'
+                }
+              }
+            );
+          }
+        });
+
+        // Act IV: Razor Diagonal Print Releases (Specimens 07, 09, 04)
+        gsap.utils.toArray('.dossier-act4-col1, .dossier-act4-col2, .dossier-act4-col3').forEach((frame, idx) => {
+          const imgWrap = frame.querySelector('.dossier-img-wrap');
+          const pill = frame.querySelector('.dossier-specimen-pill');
+          const stamp = frame.querySelector('.dossier-provenance-stamp');
+
+          const act4Tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: frame,
+              start: 'top 87%',
+              toggleActions: 'play none none none'
+            }
+          });
+
+          act4Tl
+            .fromTo(imgWrap,
+              { clipPath: 'polygon(0 0, 100% 0, 88% 100%, 0 100%)', opacity: 0.5 },
+              { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', opacity: 1, duration: 0.75, delay: idx * 0.09, ease: 'power4.out' }
+            )
+            .from([pill, stamp],
+              { y: 8, opacity: 0, duration: 0.3, stagger: 0.06, ease: 'power2.out' },
+              '-=0.35'
+            );
+        });
+      }
+
+      // 6E. COMP 6: COLLEGIATE CULTURE STORIES // EDITORIAL COLUMN ASSEMBLY
+      const collegiateRow = document.getElementById('collegiateStoriesRow');
+      if (collegiateRow) {
+        // Vertical divider lines draw down
+        gsap.utils.toArray('#collegiateStoriesRow .story-draw-line').forEach((line, i) => {
+          gsap.to(line, {
+            scaleY: 1,
+            duration: 0.75,
+            delay: i * 0.14,
+            ease: 'power3.inOut',
+            scrollTrigger: {
+              trigger: collegiateRow,
+              start: 'top 82%',
+              toggleActions: 'play none none none'
+            }
+          });
+        });
+
+        // Staggered column copy reveal
+        gsap.utils.toArray('#collegiateStoriesRow .story-card').forEach((card) => {
+          const code = card.querySelector('.story-code');
+          const h3 = card.querySelector('.story-headline');
+          const body = card.querySelector('.story-body');
+
+          const colTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 84%',
+              toggleActions: 'play none none none'
+            }
+          });
+
+          colTl
+            .from(code, { x: -14, opacity: 0, duration: 0.35, ease: 'power2.out' })
+            .from(h3, { y: 18, opacity: 0, duration: 0.45, ease: 'power3.out' }, '-=0.2')
+            .from(body, { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
+        });
+      }
+
+      // 6F. COMP 6.5: NIGHT-DROP DISPATCH TERMINAL // 5-PHASE FASHION REVEAL SEQUENCE
+      const dispatchSection = document.getElementById('nightDropSection');
+      const dispatchBeam = document.getElementById('dispatchScanBeam');
+      const previewImg = document.getElementById('nightDropImg');
+      const lookPreviewBox = document.querySelector('.drop-look-preview');
+
+      if (dispatchSection) {
+        const dispatchTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: dispatchSection,
+            start: 'top 78%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        // Phase 1: Header scan line sweep
+        if (dispatchBeam) {
+          dispatchTl
+            .fromTo(dispatchBeam,
+              { left: '0%', width: '0%', opacity: 1 },
+              { left: '0%', width: '100%', opacity: 1, duration: 0.55, ease: 'expo.out' }
+            )
+            .to(dispatchBeam, { opacity: 0, duration: 0.25 });
+        }
+
+        // Phase 2: Occasion trigger buttons stagger entrance
+        dispatchTl.from('.drop-trigger-btn', {
+          y: 12,
+          opacity: 0,
+          duration: 0.35,
+          stagger: 0.06,
+          ease: 'power2.out'
+        }, '-=0.2');
+
+        // Phase 3: Preview garment frame enlargement and vermilion rim flash
+        if (lookPreviewBox && previewImg) {
+          dispatchTl
+            .fromTo(lookPreviewBox,
+              { borderColor: '#222222' },
+              { borderColor: 'var(--red)', duration: 0.4, ease: 'power2.out' },
+              '-=0.15'
+            )
+            .fromTo(previewImg,
+              { scale: 1.08, opacity: 0.7 },
+              { scale: 1, opacity: 1, duration: 0.65, ease: 'power3.out' },
+              '<'
+            );
+        }
+
+        // Phase 4: Curator and Look title lock
+        dispatchTl.from(['#nightCuratorTag', '#nightLookTitle'], {
+          x: -12,
+          opacity: 0,
+          duration: 0.3,
+          stagger: 0.08,
+          ease: 'power2.out'
+        }, '-=0.3');
+
+        // Phase 5: Backstage dispatch ticket card settles
+        dispatchTl.from('#nightTicketCard', {
+          y: 20,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power3.out'
+        }, '-=0.25');
+      }
+
+      // 6G. COMP 7: CLOSING MONUMENT // MOMENTUM DRIFT & REDLINE STRIKE
+      const closingSection = document.getElementById('closingMonument');
+      const closingStrike = document.getElementById('closingRedlineStrike');
+
+      if (closingSection) {
+        // Redline strike rule draws across
+        if (closingStrike) {
+          gsap.fromTo(closingStrike,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: closingSection,
+                start: 'top 80%',
+                end: 'center center',
+                scrub: 0.8
+              }
+            }
+          );
+        }
+
+        // Counter-directional subtle drift between lines
+        gsap.to('.closing-line-1', {
+          x: -24,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: closingSection,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.8
+          }
+        });
+        gsap.to('.closing-line-2', {
+          x: 24,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: closingSection,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.8
+          }
+        });
+      }
     }
 
     // 7. INTERACTIVE REDLINE PROTOCOL TERMINAL (CLAUSE ISOLATION & EXPERIENCE)
